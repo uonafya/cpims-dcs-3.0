@@ -1,5 +1,5 @@
-Django==1.8.15
-django-crispy-forms==1.6.0
+Django==4.0.2
+django-crispy-forms==4.0.2
 jellyfish==0.5.4
 pillow==2.4.0
 psycopg2
