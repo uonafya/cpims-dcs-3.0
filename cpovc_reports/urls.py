@@ -1,5 +1,5 @@
 """Urls for reports."""
-from django.conf.urls import patterns, url
+from django.urls import patterns, path
 
 # This should contain urls related to reports ONLY
 urlpatterns = patterns(
