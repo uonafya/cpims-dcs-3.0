@@ -1,7 +1,7 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from django.forms.widgets import RadioFieldRenderer
-from django.utils.encoding import force_unicode
+from django.utils.translation import gettext_lazy as _ # changed from ugettext_lazy
+from django.forms.widgets import RadioFieldRenderer # this function is not found in version 4.0.2
+from django.utils.encoding import force_str # changed from force_unicode
 from django.utils.safestring import mark_safe
 
 from cpovc_main.functions import get_list, get_org_units_list
@@ -113,6 +113,7 @@ caseoutcome_list = get_list('closure_outcome_id', 'Please Select')
 si_services_list = get_list(
     'si_services_id', 'Please Select Service')
 
+
 # ----------------------------------OLMIS-------------------------------------~
 csi_grade_list = get_list('csi_grade_id', 'Please Select')
 olmis_domain_list = get_list('olmis_domain_id', 'Please Select')
@@ -149,39 +150,7 @@ olmis_ha29_list = get_list('olmis_ha29_id', 'Please Select')
 olmis_ha30_list = get_list('olmis_ha30_id', 'Please Select')
 olmis_ha31_list = get_list('olmis_ha31_id', 'Please Select')
 
-class OVCSchoolForm(forms.Form):
-    school_name = forms.CharField(widget=forms.TextInput(
-        attrs={'placeholder': _('Name of School'),
-               'class': 'form-control',
-               'id': 'school_name',
-               'data-parsley-required': "true",
-               'data-parsley-group': 'group0'
-               }))
-
-    type_of_school = forms.ChoiceField(choices=school_type_list,
-                                       initial='0',
-                                       widget=forms.Select(
-                                           attrs={'class': 'form-control',
-                                                  'id': 'type_of_school',
-                                                  'data-parsley-required': "true",
-                                                  'data-parsley-group': 'group0'
-                                                  }))
-    school_subcounty = forms.ChoiceField(
-        choices=sub_county_list,
-        initial='0',
-        widget=forms.Select(
-            attrs={'class': 'form-control',
-                   'id': 'school_subcounty',
-                   'data-parsley-required': "true",
-                   'data-parsley-group': "group0"}))
-    school_ward = forms.ChoiceField(
-        choices=ward_list, label=_('Select ward'),
-        initial='',
-        widget=forms.Select(
-            attrs={'id': 'school_ward',
-                   'class': 'form-control',
-                   'data-parsley-required': "true",
-                   'data-parsley-group': "group0"}))
+# -----------------------------------------------------------------------#
 
 
 class OVCBursaryForm(forms.Form):
@@ -242,6 +211,9 @@ class OVCBursaryForm(forms.Form):
                'id': 'operation_mode',
                'type': 'hidden'
                }))
+
+
+# ------------------------------------------------------------------------#
 
 
 class BackgroundDetailsForm(forms.Form):
@@ -348,6 +320,9 @@ class BackgroundDetailsForm(forms.Form):
                }))
 
 
+# ---------------------------------------------------------------------------#
+
+
 class DocumentsManager(forms.Form):
     document_type = forms.ChoiceField(choices=document_type_list,
                                       initial='0',
@@ -388,6 +363,11 @@ class DocumentsManager(forms.Form):
                'data-parsley-group': 'group0'
                }))
 
+
+
+
+
+# ---------------------------------------------------------------------------#
 
 class SearchForm(forms.Form):
     form_type = forms.ChoiceField(choices=form_type_list,
@@ -448,6 +428,7 @@ class OVCSearchForm(forms.Form):
                                                     'data-parsley-required': 'true'})
                                          )
 
+# -------------------------------------------------------------------------------#
 
 class ResidentialFollowupForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -1014,6 +995,8 @@ class ResidentialForm(forms.Form):
                'type': 'hidden'
                }))
 
+
+# ---------------------------------------------------------------------------------#
 
 class ResidentialSearchForm(forms.Form):
     person_type = forms.ChoiceField(choices=person_type_list,
@@ -2096,6 +2079,7 @@ class OVC_FTFCForm(forms.Form):
                }))
 
 
+
 # Demo API
 class OVCSchoolForm(forms.Form):
     school_name = forms.CharField(widget=forms.TextInput(
@@ -2918,7 +2902,7 @@ class RadioCustomRenderer(RadioFieldRenderer):
     def render(self):
         """Renderer override method."""
         return mark_safe(u'%s' % u'\n'.join(
-            [u'%s' % force_unicode(w) for w in self]))
+            [u'%s' % force_str(w) for w in self]))
 
 
 class GOKBursaryForm(forms.Form):
@@ -3505,7 +3489,6 @@ class GOKBursaryForm(forms.Form):
 
 emergency_list = get_questions(set_id=1, default_txt=None)
 
-
 class CaseInfoForm(forms.Form):
     # Additional case information
     emergency_detail = forms.CharField(widget=forms.TextInput(
@@ -3526,3 +3509,4 @@ class CaseInfoForm(forms.Form):
                'class': 'form-control',
                'id': 'case_narration',
                'rows': '5'}))
+
