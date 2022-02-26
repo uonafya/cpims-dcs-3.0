@@ -1,5 +1,6 @@
 from django.test import TestCase
 from datetime import datetime
+from . import views
 
 # Create your tests here.
 
@@ -9,4 +10,4 @@ fmt = '%Y-%m-%d'
 new_date = datetime.strptime(start_date, fmt)
 todate = datetime.now()
 
-print new_date
+print (new_date)
