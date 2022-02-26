@@ -7,7 +7,12 @@ import itertools
 import jellyfish
 import traceback
 import operator
+from geolocation import geocode as GeoLocation
 from functools import reduce
+
+from numpy.core.defchararray import strip
+from xlwt.compat import unicode
+
 from .models import SetupList, SetupGeography, SchoolList
 from django.core.cache import cache
 from django.core.exceptions import FieldError
@@ -64,7 +69,7 @@ class Persons:
         parent_org_change_date=None, work_locations_change_date=None,
         date_of_death=None, org_data_hidden=None, primary_org_id=None,
         wards_string=None, org_units_string=None, communities_string=None
-    ):
+    , matches_for_display=None, fielddictionary=None):
 
         if workforce_id == fielddictionary.empty_workforce_id:
             self.user_id = 'N/A'
@@ -127,6 +132,7 @@ class Persons:
         self.locations_unique_readable = []
 
         for loc in _distrcits_wards:
+            # FIXME Probably used the wrong package of geolocation geocode
             self.locations_unique_readable.append(GeoLocation(loc).geo_name)
         if _communities:
             for comm in communities:
@@ -136,7 +142,7 @@ class Persons:
     def __unicode__(self):
         return '%s %s' % (self.first_name, self.surname)
 
-    def sex(self):
+    def sex(self, list_provider=None):
         self.sex = list_provider.get_description_for_item_id(self.sex_id)
         # self.sex = list_provider.get_item_desc_for_order_and_category(
         # self.sex_id, fielddictionary.sex)
@@ -596,7 +602,9 @@ def rank_results(results_dict, required_fields, rank_order):
     return ranked_results
 
 
-def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
+def load_wfc_from_id(wfc_pk, user=None, include_dead=False, pers_count=None, OrganisationUnit=None, list_provider=None,
+                     reconstruct_org_text=None, WorkforceMember=None, ovc_id=None, man_id=None, ts_id=None,
+                     sing_id=None, get_obj_strings=None):
     print('include_dead', include_dead)
     if RegPerson.objects.filter(pk=wfc_pk, is_void=False).count() > 0:
         tmp_wfc = None
@@ -622,6 +630,7 @@ def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
 
         pcount = RegPersonsOrgUnits.objects.filter(
             person=tmp_wfc, date_delinked=None, is_void=False).count()
+        # FIXME : Mitigated this with creating a parameter but this needs some api work
         if pers_count > 0:
             try:
                 tmp_org_unit = RegPersonsOrgUnits.objects.get(
@@ -639,6 +648,8 @@ def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
                 for org in tmp_org_units:
                     org_model = org.org_unit
 
+                    # FIXME Satisfied this class by using a parameter but a model needs to be created for
+                    #  Organizational unit
                     org_unit = OrganisationUnit(
                         org_id_int=org_model.pk,
                         org_id=org_model.org_unit_id_vis,
@@ -652,6 +663,7 @@ def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
         person_type_desc = ''
         if person_type:
             person_type_id = person_type.person_type_id
+            # FIXME Replaced with list_provider parameter
             wfc_type_tpl = list_provider.get_description_for_item_id(
                 person_type.person_type_id)
             if(len(wfc_type_tpl) > 0):
@@ -675,8 +687,10 @@ def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
         if geos and 'GWRD'.strip() in geos:
             wards = geos['GWRD', strip()]
 
+        # FIXME Stud parameter for reconstruct_org_text
         org_data_hidden = reconstruct_org_text(org_units)
 
+        # FIXME Needs Model for WorkforceMember default to using parameters
         wfc = WorkforceMember(
             workforce_id=tmp_wfc.workforce_id,
             national_id=tmp_wfc.national_id,
