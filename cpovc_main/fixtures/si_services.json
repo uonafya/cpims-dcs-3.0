@@ -1,0 +1,18 @@
+[
+    {
+        "pk": 1145, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "si_services", 
+            "item_id": "SPOS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other Services", 
+            "sms_keyword": "False", 
+            "item_description": "Other Services", 
+            "item_category": "SI Services"
+        }
+    }
+]

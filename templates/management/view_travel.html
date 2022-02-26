@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Non Objection to Travel - Edit {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<link href="{% static 'css/print.css' %}" rel="stylesheet" />
+<style type="text/css">
+.dialog_paragraph {
+  color: #f00;
+}
+@media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+}
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Travel Authorization</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CPIMS Non Objection to Travel <small>View details</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>REPUBLIC OF KENYA <br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+    <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DEPARTMENT OF CHILDREN'S SERVICES <br/><br/><b>NON OBJECTION TO TRAVEL</b></div>
+        <div class="invoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">                    
+                    {% if travel.status == 1 %}
+                        <button class="btn btn-sm btn-success m-b-10">Finalized</button>
+                    {% else %}
+                        <button class="btn btn-sm btn-danger m-b-10">Pending</button>
+                    {% endif %}
+                    <a href="{% url 'edit_travel' id=travel.id %}" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                    <a href="{% url 'travel_report' id=travel.id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-file-pdf-o m-r-5"></i> Export as PDF</a>
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
+                    </span>
+                    TRAVEL ID. {{ travel.id|stringformat:"05d" }}
+                </div>
+                <div class="invoice-header">
+                    <strong>TRAVEL DETAILS</strong>
+                </div>
+                <div class="invoice-content">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr><td width="20%">Institution Name</td><td colspan="3">{{ travel.institution_name }} </td></tr>
+                                <tr><td>Country of Travel</td><td colspan="3">{{ travel.country_name }}</td></tr>
+                                <tr><td>Travel Date</td><td>{{ travel.travel_date }}</td><td>Return Date</td><td>{{ travel.return_date }}</td></tr>
+                                <tr><td>Reason of Travel</td><td>{{ travel.reason }}</td><td>Sponsor</td><td>{{ travel.sponsor }}</td></tr>
+                                <tr><td>Numbers</td><td>Applied ({{ travel.no_applied }}), Cleared ({{ travel.no_cleared }}), Returned ({{ travel.no_returned }})</td>
+                                <td>Contacts</td><td>{{ travel.contacts }}</td></tr>
+                                <tr><td>Comments</td><td colspan="3">{{ travel.comments }}</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="invoice-header">
+                    <strong>CHAPERON DETAILS</strong>
+                </div>
+                <div class="invoice-content">
+                    <div class="table-responsive">
+                        <table class="table table-invoice">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="30%">Name</th>
+                                    <th width="10%">Sex</th>
+                                    <th>Passport Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for chaperon in chaperons %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ chaperon.other_person }}</td>
+                                    <td>{% if chaperon.other_person.person_sex  == 'SFEM' %} Female {% else %} Male {% endif %}</td>
+                                    <td>{{ chaperon.other_person.person_identifier }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="invoice-header">
+                    <strong>CHILDREN DETAILS</strong>
+                </div>
+                <div class="invoice-content">
+                    <div class="table-responsive">
+                        <table class="table table-invoice">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="30%">Name</th>
+                                    <th width="10%">Sex</th>
+                                    <th>Passport Number</th>
+                                    <th>Cleared</th>
+                                    <th>Returned</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for child in children %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ child.person }}</td>
+                                    <td>{% if child.person.sex_id  == 'SFEM' %} Female {% else %} Male {% endif %}</td>
+                                    <td>{{ child.passport }}</td>
+                                    <td>{% if child.cleared %} Yes {% else %} No {% endif %}</td>
+                                    <td>{% if child.returned %} Yes {% else %} No {% endif %}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#data-table').DataTable( {
+        "order": [[ 0, "asc" ]]
+    } );
+
+    $('.ddash').on('click', function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var cname = $(this).attr('rel');
+        var cdate = $(this).attr('rel1');
+        $('#cname').html(cname);
+        $('#cdate').html(cdate);
+        $('#item_cid').val(id);
+        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+        $.ajax({
+           type: "POST",
+           url: "{{ request.get_full_path }}",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           success: function(response)
+           {
+               var msg = response.message;
+               var status_id = response.status;
+               var cdates = response.dates;
+               if (status_id == 0){
+                   $("#report_"+ id).remove();
+               }
+               $('#mng_messages').html(msg);
+               var dt = '';
+               var tchildren = 0;
+               var tcases = 0;
+               var trpts = 0;
+               $.each(response.data, function(key, val) {
+                    dt += '<tr><td></td><td>'+ key +'</td><td>';
+                    dt += val + '</td></tr>';
+                });
+               $('#mywork > tbody').html(dt);
+           },
+            error: function(){
+                $('#mng_messages').html("Error removing report")
+            }
+         });
+        $('#modal-details').modal('show');
+        ev.preventDefault();
+    });
+} );
+</script>
+{% endblock %}

@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} CPIMS Staff Establishment {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/select2/dist/css/select2.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+    
+table.display {
+    width: 100%;
+    margin: 0;
+}
+
+
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Staff Establishment</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CPIMS Management <small> Staff Establishment</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Staff Establishment</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+                <form id="dqcases" method="POST" action=".">
+                    {% csrf_token %}
+                    
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="age">Organization Unit</label>
+                        {{ form.org_unit }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="age">County</label>
+                        {{ form.county }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-sm btn-primary m-r-5 ddash"> Filter </button>
+                        <button type="reset" class="btn btn-sm btn-default"> Reset </button>
+                        <span id="mng_messages">Pick None of the Organization unit or County to use ALL.</span>
+                    </div>
+                </div>
+                </form>
+                <hr>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <table id="data-table" class="table table-striped table-bordered table-td-valign-middle" width="100%">
+                        <thead>
+                        <tr>
+                        <th>CPIMS ID</th>
+                        <th>Names of Officer</th>
+                        <th>DOB</th>
+                        <th>Sex</th>
+                        <th>Age</th>
+                        <th>Designation</th>
+                        <th>County</th>
+                        <th>Org Unit / Station</th>                        
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/select2/dist/js/select2.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'js/buttons.html5.min.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#from_date, #to_date').datepicker({
+        dateFormat: 'yy-mm-dd', format: 'dd-M-yyyy',
+        endDate: '+0d', enddate: '+0d', autoclose: true
+    });
+
+    $("#id_org_unit, #county").select2();
+
+
+    $('.ddash').on('click', function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var org_unit = $( "#id_org_unit" ).val();
+        var county = $( "#county" ).val();
+        $('#data-table > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+
+        var buttonCommon = {
+            exportOptions: {
+                format: {
+                    body: function ( data, row, column, node ) {
+                        return data;
+                    }
+                }
+            }
+        };
+        console.log('proceed');
+
+        $('#data-table').DataTable( {
+            ajax:{"url": "{% url 'se_data' %}",
+                  "data": function ( d ) {
+                        d.org_unit = org_unit;
+                        d.county = county;
+                 }
+             },
+            columns: [
+                { data: 'cpims_id' },
+                { data: 'names' },
+                { data: 'dob' },
+                { data: 'sex' },
+                { data: 'age' },
+                { data: 'designation' },                
+                { data: 'county' },
+                { data: 'org_unit' }
+            ],
+            dom: 'Bfrtip',
+            destroy: true,
+            buttons: [
+                $.extend( true, {}, buttonCommon, {
+                    extend: 'copyHtml5'
+                } ),
+                $.extend( true, {}, buttonCommon, {
+                    extend: 'excelHtml5'
+                } ),
+                $.extend( true, {}, buttonCommon, {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    watermark: { text: 'test watermark', angle: 70 },
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    customize: function (doc) {
+                        doc.pageMargins = [15, 30, 15, 30 ];
+                        doc.content[1].table.widths = 
+                            Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+
+                        doc['footer']=(function(page, pages) {
+                        return {
+                            columns: [
+                                'Child Protection Information Management System (CPIMS)',
+                                {
+                                    // This is the right column
+                                    alignment: 'right',
+                                    text: ['Page ', { text: page.toString() },  ' of ', { text: pages.toString() }]
+                                }
+                            ],
+                            margin: [15, 0]
+                        }
+                    });
+                        
+                      }
+                } )
+            ]
+        } );
+           return false;
+
+    });
+} );
+</script>
+{% endblock %}

@@ -1,0 +1,18 @@
+[
+    {
+        "pk": 30833, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 40, 
+            "user_configurable": "False", 
+            "field_name": "case_category_id", 
+            "item_id": "CCMO", 
+            "is_void": "False", 
+            "item_sub_category": "mother_offer_id", 
+            "item_description_short": "Mother Offer", 
+            "sms_keyword": "False", 
+            "item_description": "Mother Offer", 
+            "item_category": "Case Category"
+        }
+    }
+]

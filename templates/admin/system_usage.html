@@ -1,0 +1,46 @@
+{% extends "admin/change_list.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load tz %}
+
+{% block content_title %}
+    <h1> {% trans 'System Usage Summary' %} </h1>
+{% endblock %}
+
+
+{% block result_list %}
+
+<div class="results">
+    <table>
+        <thead>
+            <tr>
+                <th> <div class="text"> <a href="#">Name </a> </div> </th>
+                <th> <div class="text"> <a href="#">Active </a> </div> </th>
+                <th> <div class="text"> <a href="#">Created Date </a> </div> </th>
+                <th> <div class="text"> <a href="#">Inactive Days </a> </div> </th>
+                <th> <div class="text"> <a href="#"><strong>Last Login</strong></a> </div> </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in summary %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <td> {{ row.name }} </td>
+                <td> {{ row.active }}</td>
+                <td> {{ row.date_created }} </td>
+                <td> {{ row.boys | default:0 }} </td>
+                <td><strong> {{ row.last_login }} </strong> </td>
+            </tr>
+            {% endfor %}
+            <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+                <td> Total </td>
+                <td> {{ summary_total.girls | default:0 }} </td>
+                <td> {{ summary_total.boys | default:0 }} </td>
+                <td> {{ summary_total.totals | default:0 }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block pagination %} {% endblock %}

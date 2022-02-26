@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Notifications and Referrals {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">OVC Care</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CPIMS Integrations <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Notifications and Referrals</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+              <form id="icases" name="icases" method="POST" action=".">
+               {% csrf_token %}
+               <div class="row">
+                  <div class="col-md-3">
+                      <div class="form-group">
+                      <label for="aspect">Source</label>
+                      <select class="form-control" id="q_aspect" name="q_aspect" />
+                         <option value="">All</option>
+                         <option value="1"> Helpline 116</option>
+                         <option value="2"> Vurugu Mapper</option>
+
+                      </select>
+                      </div>
+                  </div>                  
+                  
+                  <div class="col-md-3">
+                      <div class="form-group">
+                      <label for="age">Date from </label>
+                      {{ form.report_from_date }}
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group">
+                      <label for="age">To date</label>
+                      {{ form.report_to_date }}
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="aspect">Status</label>
+                      <select class="form-control" id="q_aspect" name="q_aspect" />
+                         <option value="">All</option>
+                         <option value="1"> New Cases</option>
+                         <option value="2"> Processed</option>
+
+                      </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">                    
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-sm btn-primary m-r-5 ddash"> Search Cases </button>
+                        <button type="reset" class="btn btn-sm btn-default"> Reset Form </button>
+                        <span id="mng_messages">Pick None of the filters to use ALL.</span>
+                    </div>
+                </div>
+            </form>
+            <hr>
+                <table id="data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Origin</th>
+                            <th>County</th>
+                            <th>Constituency</th>
+                            <th>Case Reporter</th>
+                            <th>Telephone</th>                           
+                            <th>Case Category</th>
+                            <th>Child Name</th>
+                            <th>Child Sex</th>
+                            <th>Child DOB</th>
+                            <th>Case Date</th>
+                            <th>Timestamp</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for case in cases %}
+                           <tr>
+                           <td>{{ forloop.counter }}</td>
+                           <td>{% if case.account.username == 'helplinekenya' %} HL {% elif case.account.username == 'vurugumapper' %} VM {% else %} App {% endif %} </td>
+                           <td>{{ case.county }}</td>
+                           <td>{{ case.constituency }}</td>
+                           <td>{{ case.case_reporter|gen_value:vals }}</td>
+                           <td>{{ case.reporter_telephone }}</td>
+                           <td>{{ case.category.case_category|gen_value:vals }}</td>
+                           <td>{{ case.child.first_name }} {{ case.child.surname }} </td>
+                           <td>{{ case.child.sex|gen_value:vals }}</td>
+                           <td>{{ case.child.dob }}</td>
+                           <td>{{ case.case_date }} </td>
+                           <td>{{ case.timestamp_created }}</td>
+                           <td>{% if case.status == 0 %} Pending {% else %} Processed {% endif %}</td>
+                           <td>
+                               <a href="#" id="{{ case.case_id }}" class="ddash" rel="{% if case.child.first_name %}{{ case.child.first_name }} {{ case.child.surname }}{% else %}Unavailable{% endif %}" rel1="{{ case.timestamp_created }}">
+                                <button type="button" class="btn btn-primary"> <i class="fa fa-binoculars"></i> Details </button>
+                               </a>
+                               <a href="{% url 'process_integration' case_id=case.case_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-cogs"></i> Process </button></a>
+                           </td>
+                           </tr>
+                        {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+<!-- #modal-dialog -->
+              <div class="modal fade" id="modal-details">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Case Details - Case submitted from Integration</h4>
+                    </div>
+                    <div class="modal-body">
+                    <input type="hidden" name="item_cid" id="item_cid">
+                    <div id="user_actions"></div>
+                    <table width="100%" class="table table-profile">
+                    <tbody>
+                        <tr>
+                            <td class="field" width="40%">Child Name</td>
+                            <td><span id="cname"></span></td>
+                        </tr>
+                            <td class="field">Timestamp</td>
+                            <td><span id="cdate"></span></td>
+                            
+                        </tr>
+                    <table id="mywork" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th  class="text-right"></th>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#" class="btn btn-sm btn-primary cc_acc" id="1">Take Up Case</a>
+                      <a href="#" class="btn btn-sm btn-danger cc_acc" id="3">Dismiss Case</a>
+                      <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           <!-- end modal -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#data-table').DataTable( {
+        "order": [[ 0, "asc" ]]
+    } );
+
+    $('.ddash').live( "click", function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var cname = $(this).attr('rel');
+        var cdate = $(this).attr('rel1');
+        $('#cname').html(cname);
+        $('#cdate').html(cdate);
+        $('#item_cid').val(id);
+        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+        $.ajax({
+           type: "POST",
+           url: "{{ request.get_full_path }}",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           success: function(response)
+           {
+               var msg = response.message;
+               var status_id = response.status;
+               var cdates = response.dates;
+               if (status_id == 0){
+                   $("#report_"+ id).remove();
+               }
+               $('#mng_messages').html(msg);
+               var dt = '';
+               var tchildren = 0;
+               var tcases = 0;
+               var trpts = 0;
+               $.each(response.data, function(key, val) {
+                    dt += '<tr><td></td><td>'+ key +'</td><td>';
+                    dt += val + '</td></tr>';
+                });
+               $('#mywork > tbody').html(dt);
+           },
+            error: function(){
+                $('#mng_messages').html("Error removing report")
+            }
+         });
+        $('#modal-details').modal('show');
+        ev.preventDefault();
+    });
+} );
+</script>
+{% endblock %}

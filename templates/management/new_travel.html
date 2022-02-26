@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Non Objection to Travel {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Travel Authorization</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CPIMS Non Objection to Travel <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Travel Authorizations</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+              <form id="icases" name="icases" method="POST" action=".">
+                 {% csrf_token %}
+              </form>
+                <table id="data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Institution</th>
+                            <th>Country</th>
+                            <th width="10%">Travel Date</th>
+                            <th width="10%">Return Date</th>
+                            <th>Reason</th>
+                            <th width="15%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for case in cases %}
+                           <tr>
+                           <td>{{ forloop.counter }}</td>
+                           <td>{{ case.institution_name }}</td>
+                           <td>{{ case.country_name }}</td>
+                           <td>{{ case.travel_date }} </td>
+                           <td>{{ case.return_date }} </td>
+                           <td>{{ case.reason }} </td>
+                           <td>
+                               <a href="#" id="{{ case.id }}" class="ddash" rel="{{ case.institution_name }}" rel1="{{ case.travel_date }}">
+                                <button type="button" class="btn btn-primary"> <i class="fa fa-binoculars"></i> View </button>
+                               </a>
+                               <a href="{% url 'edit_travel' id=case.id %}" class="btn btn-primary"><i class="fa fa-binoculars"></i> Details </a>
+                           </td>
+                           </tr>
+                        {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+<!-- #modal-dialog -->
+              <div class="modal fade" id="modal-details">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Non Objection to Travel Details</h4>
+                    </div>
+                    <div class="modal-body">
+                    <input type="hidden" name="item_cid" id="item_cid">
+                    <div id="user_actions"></div>
+                    <table width="100%" class="table table-profile">
+                    <tbody>
+                        <tr>
+                            <td class="field" width="40%">Travel</td>
+                            <td><span id="cname"></span></td>
+                        </tr>
+                            <td class="field">Travel Date</td>
+                            <td><span id="cdate"></span></td>
+                            
+                        </tr>
+                    <table id="mywork" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th  class="text-right"></th>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#" class="btn btn-sm btn-primary cc_acc" id="1">Edit Application</a>
+                      <a href="#" class="btn btn-sm btn-primary cc_acc" id="3">Manage Application</a>
+                      <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           <!-- end modal -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#data-table').DataTable( {
+        "order": [[ 0, "asc" ]]
+    } );
+
+    $('.ddash').on('click', function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var cname = $(this).attr('rel');
+        var cdate = $(this).attr('rel1');
+        $('#cname').html(cname);
+        $('#cdate').html(cdate);
+        $('#item_cid').val(id);
+        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+        $.ajax({
+           type: "POST",
+           url: "{{ request.get_full_path }}",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           success: function(response)
+           {
+               var msg = response.message;
+               var status_id = response.status;
+               var cdates = response.dates;
+               if (status_id == 0){
+                   $("#report_"+ id).remove();
+               }
+               $('#mng_messages').html(msg);
+               var dt = '';
+               var tchildren = 0;
+               var tcases = 0;
+               var trpts = 0;
+               $.each(response.data, function(key, val) {
+                    dt += '<tr><td></td><td>'+ key +'</td><td>';
+                    dt += val + '</td></tr>';
+                });
+               $('#mywork > tbody').html(dt);
+           },
+            error: function(){
+                $('#mng_messages').html("Error removing report")
+            }
+         });
+        $('#modal-details').modal('show');
+        ev.preventDefault();
+    });
+} );
+</script>
+{% endblock %}
