@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Case Information {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+{% endblock %}
+{% load app_filters %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Forms</a></li>
+	<li class="active">Case Information</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Additional Case Information <small>Management</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Additional Case Information </h4>
+            </div>
+            <div class="alert alert-warning fade in">
+                <span class="close" data-dismiss="alert">×</span>
+                <i class="fa fa-check fa-2x pull-left"></i>
+                <span id="infomessage">This page allows to provide more information for specific cases. Emergency Case details, Missing Children cases and cases from Integrations (Vurugu Mapper and Helpline 116).</span>
+            </div>
+            <!-- start panel body -->            
+            <div class="invoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print"> 
+                        <a href="/" class="btn btn-sm btn-primary m-r-5 m-b-5"><i class="fa fa-arrow-left m-r-5"></i> To Dashboard</a>                  
+                        <a href="{% url 'cpims_document' doc_id='CRS' case_id=case.case_id %}" class="btn btn-sm btn-danger m-r-5 m-b-5"><i class="fa fa-file-pdf-o m-r-5"></i> Export as PDF</a>
+                        <div class="btn-group m-r-5 m-b-5">
+                            <a href="#" class="btn btn-success">Case Actions</a>
+                            <a href="javascript:;" data-toggle="dropdown" class="btn btn-success dropdown-toggle">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="{% url 'view_case_record_sheet' id=case_id %}"><i class="fa fa-gears"></i> View Case Record Sheet</a></li>
+                                 <li><a href="{% url 'edit_case_record_sheet' id=case_id %}"><i class="fa fa-pencil"></i> Edit Case Record Sheet</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'case_events' id=case_id %}"><i class="fa fa-legal"></i> Case Follow up</a></li>
+                            </ul>
+                        </div>
+                    </span>
+                    Case No. {{ case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+            <form class="form-horizontal" id="formCaseinfo" data-parsley-validate="true">
+                {% csrf_token %}
+                <ul class="nav nav-pills">
+                        <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">Case Information</a></li>
+                        <li><a href="#nav-pills-tab-2" data-toggle="tab">Emergency Cases</a></li>
+                        <li><a href="#nav-pills-tab-3" data-toggle="tab">Missing Children</a></li>
+                        <li><a href="#nav-pills-tab-4" data-toggle="tab">Case Integration</a></li>
+                        <li><a href="#nav-pills-tab-5" data-toggle="tab">Other Information</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="nav-pills-tab-1">
+                            <h3 class="m-t-10">General case details</h3>
+                            <table class="table table-profile">
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {{ case.person.other_names }}</td>
+                                        <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
+                                        <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
+                                        <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Category</td>
+                                        <td colspan="5">Case Category</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <div class="tab-pane fade" id="nav-pills-tab-2">
+                            <h3 class="m-t-10">Emergency case details</h3>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Select Emergency</label>
+                                <div class="col-md-10">
+                                    {{ form.emergency }}
+                                </div>
+                            </div>
+                            <div class="form-group" id="div_em_detail">
+                                <label class="col-md-2 control-label">Other Emergency details</label>
+                                <div class="col-md-10">
+                                    {{ form.emergency_detail }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <button type="button" id="tab-2" class="btn btn-sm btn-success btnCaseinfo">Update Emergency Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-pills-tab-3">
+                            <h3 class="m-t-10">Missing Children</h3>
+                           
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-pills-tab-4">
+                            <h3 class="m-t-10">Case Integration</h3>
+                           
+                        </div>
+                        <div class="tab-pane fade" id="nav-pills-tab-5">
+                            <h3 class="m-t-10">Other Information</h3>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Case Narration</label>
+                                <div class="col-md-10">
+                                    {{ form.case_narration }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <button type="button" id="tab-5" class="btn btn-sm btn-success btnCaseinfo">Update Other Information</button>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>               
+                
+            </form>
+                
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".btnCaseinfo").click(function(event) {
+            var id = $(this).attr('id');
+            console.log(id);
+            $('#emergency_detail').attr('data-parsley-required', 'false');
+            $('#case_narration').attr('data-parsley-required', 'false');
+            $('#div_em_detail').hide();
+            if(id == 'tab-2'){
+                var em = $('#emergency').val();
+                if (em == 'OE0001'){
+                   $('#emergency_detail').attr('data-parsley-required', 'true');
+                   $('#div_em_detail').show();   
+                }              
+            }else if(id == 'tab-5'){
+                $('#case_narration').attr('data-parsley-required', 'true');
+            }
+            $("#formCaseinfo").parsley().validate();
+            if ($("#formCaseinfo").parsley().isValid() ) {
+                console.log('Is Valid');
+                 $.ajax({
+                    url: '{% url 'case_info' case_id=case.case_id %}',
+                    method: 'POST',
+                    data: $("#formCaseinfo").serialize() + '&tab-id='+id,
+                    success: function(data)
+                    {
+                        $("#infomessage").html(data.message);
+                        //$( ".nav" ).tabs({ 'active': '#nav-pills-tab-1' });
+                        $('.nav a[href="#nav-pills-tab-1"]').tab('show');
+                    },
+                   error: function()
+                    {
+                        $("#infomessage").html('Error Saving Additional Case Information.');
+                    }
+                }); 
+            }else{
+                console.log('Not Valid');
+            }
+        });
+    });
+</script>
+{% endblock %}

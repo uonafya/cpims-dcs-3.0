@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block page_title %} Server error{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Error page</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Error page <small>header small text goes here...</small></h1>
+<!-- end page-header -->
+
+<!-- begin row -->
+<div class="row">
+    <!-- Start content area -->
+    
+	<!-- End content area -->
+</div>
+<!-- end row -->
+{% endblock %}

@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Case Integration Validation {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/select2/dist/css/select2.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">OVC Care</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CPIMS Integrations <small>Case Validation</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Case Integration Validation - From Helpline 116, Vurugu Mapper and CPIMS Mobile App</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+            <form id="icases" name="icases" method="POST" action="." class="form-horizontal" data-parsley-validate="true">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Integration Source</label>
+                    <div class="col-md-9"> <label class="control-label"> {% if case.account.username == 'helplinekenya' %} Helpline 116 {% elif case.account.username == 'vurugumapper' %} Vurugu Mapper {% else %} Mobile App {% endif %} </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Case ID</label>
+                    <div class="col-md-9"> <label class="control-label"> {{ case.case_id }} </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Case Details</label>
+                    <div class="col-md-9">                      
+                      <table class="table">
+                        <tr>
+                          <thead>
+                            <tr><th width="30%">Item</th><th>Details</th></tr>
+                          </thead>
+                          <tbody>
+                            {% for child in person %}
+                            {% if child.person_type == 'PTCH' %}
+                            <tr>
+                              <td>Child Names</td><td>{{ child.first_name }} {{ child.surname }} ({{ child.sex|gen_value:vals }}, {{ child.dob }})</td>
+                            </tr>
+                            {% elif child.person_type == 'PTCG' %}
+                            <tr>
+                              <td>Caregiver / Guardian </td><td>{{ child.first_name }} {{ child.surname }} ({{ child.sex|gen_value:vals }}, {{ child.dob }})</td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <tr><td>County / Constituency</td><td>{{ case.county }} / {{ case.constituency }}</td></tr>
+                            <tr><td>Date</td><td>{{ case.case_date }}</td></tr>
+                            <tr><td>Description</td><td>{{ case.case_narration }}</td></tr>
+                          </tbody>
+                        </tr>
+                      </table>
+                    </div>
+                </div>
+                {% if case.status == 0 %}
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Reporting County</label>
+                    <div class="col-md-3">
+                        <select class="default-select2 form-control" name="case_county" id="case_county" required="">
+                            <option value="">Please Select</option>
+                            {% for geo in counties %}
+                            {% if geo.area_id == county_id %}
+                            <option value="{{ geo.area_id }}" selected="">{{ geo.area_name }}</option>
+                            {% else %}
+                            <option value="{{ geo.area_id }}">{{ geo.area_name }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2"><label class="control-label">Sub-County / Constituency</label></div>
+                    <div class="col-md-4">
+                      <select class="default-select2 form-control" name="case_sub_county" id="case_sub_county" required="">
+                            <option value="">Please Select</option>
+                            {% for geo in geos %}
+                            {% if geo.area_id == const_id %}
+                            <option value="{{ geo.area_id }}" selected="">{{ geo.area_name }}</option>
+                            {% else %}
+                            <option value="{{ geo.area_id }}">{{ geo.area_name }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Reporting Organization Unit</label>
+                    <div class="col-md-9">
+                        <select class="default-select2 form-control" name="case_org_unit" id="case_org_unit" required="">
+                            <option value="">Please Select</option>
+                            {% for ou in ous %}
+                            <option value="{{ ou.id }}">{{ ou.org_unit_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Case Status</label>
+                    <div class="col-md-9">
+                        <select class="default-select2 form-control" name="case_status" id="case_status" required="">
+                            <option value="">Please Select</option>
+                            <option value="AYES">Take up Case</option>
+                            <option value="ANNO">Discard Case</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Comments (Children Officer 1<sup>st</sup> follow up)</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control" placeholder="Comments" rows="5" name="case_comments" id="case_comments" required=""></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        <button type="submit" class="btn btn-sm btn-success">Update Case</button>
+                    </div>
+                </div>
+                {% endif %}
+                </form>
+                {% if case.status > 0 %}
+                <div class="form-groups">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        Case Status: {% if case.status == 1 %} Approved {% elif case.status == 2 %} Rejected {% else %} Closed {% endif %}<br><br>
+                        <p>{{ case.case_comments }}</p>
+                    <hr>
+                    <p>
+                      <a href="{% url 'integration_home' %}" class="btn btn-success m-r-5"><i class="fa fa-list"></i> Case Listing</a>
+                      {% if case.status == 1 %}
+                      {% if case.case_serial and case.case_serial != 'XXXX' %}
+                      <a href="{% url 'view_case_record_sheet' id=crs_id %}" class="btn btn-success m-r-5"><i class="fa fa-cogs"></i> View CRS ({{ case.case_serial }})</a>
+                      {% else %}
+                      <a href="{% url 'get_document' doc_id=1 case_id=case.case_id %}" class="btn btn-danger m-r-5"><i class="fa fa-file-pdf-o"></i> Referral Form</a>
+                      {% endif %}
+                      {% endif %}
+                      <a href="#" id="{{ case.case_id }}" class="ddash" rel="{% for child in person %}{% if child.person_type == 'PTCH' %}{{ child.first_name }} {{ child.surname }}{% endif %}{% endfor %}" rel1="{{ case.timestamp_created }}">
+                      <button type="button" class="btn btn-primary"> <i class="fa fa-binoculars"></i> View Details {{ case.case_serial }}</button>
+                     </a>
+                    </p>
+                    </div>
+                </div>
+                {% endif %}   
+              <hr>
+                <p>All Case Parameters</p>
+                <pre><code> {{ case.case_params }} </code></pre>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+<!-- #modal-dialog -->
+<div class="modal fade" id="modal-details">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Case Details - Case submitted from Integration</h4>
+      </div>
+      <div class="modal-body">
+      <input type="hidden" name="item_cid" id="item_cid">
+      <div id="user_actions"></div>
+      <table width="100%" class="table table-profile">
+      <tbody>
+          <tr>
+              <td class="field" width="40%">Child Name</td>
+              <td><span id="cname"></span></td>
+          </tr>
+              <td class="field">Timestamp</td>
+              <td><span id="cdate"></span></td>
+              
+          </tr>
+          <table id="mywork" class="table table-striped table-bordered">
+              <thead>
+                  <tr>
+                      <th  class="text-right"></th>
+                      <th>Item</th>
+                      <th>Value</th>
+                  </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>      
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/select2/dist/js/select2.min.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#data-table').DataTable( {
+        "order": [[ 0, "asc" ]]
+    } );
+
+    $(".default-select2").select2();
+
+    $('.ddash').live( "click", function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var cname = $(this).attr('rel');
+        var cdate = $(this).attr('rel1');
+        $('#cname').html(cname);
+        $('#cdate').html(cdate);
+        $('#item_cid').val(id);
+        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+        $.ajax({
+           type: "POST",
+           url: "{% url 'integration_home' %}",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           success: function(response)
+           {
+               var msg = response.message;
+               var status_id = response.status;
+               var cdates = response.dates;
+               if (status_id == 0){
+                   $("#report_"+ id).remove();
+               }
+               $('#mng_messages').html(msg);
+               var dt = '';
+               var tchildren = 0;
+               var tcases = 0;
+               var trpts = 0;
+               $.each(response.data, function(key, val) {
+                    dt += '<tr><td></td><td>'+ key +'</td><td>';
+                    dt += val + '</td></tr>';
+                });
+               $('#mywork > tbody').html(dt);
+           },
+            error: function(){
+                $('#mng_messages').html("Error removing report")
+            }
+         });
+        $('#modal-details').modal('show');
+        ev.preventDefault();
+    });
+} );
+</script>
+{% endblock %}

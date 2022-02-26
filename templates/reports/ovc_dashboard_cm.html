@@ -1,0 +1,540 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>CPIMS Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style-responsive.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/theme/default.css' %}" rel="stylesheet" id="theme" />
+    <link href="{% static 'css/jquery.tagit.css' %}" rel="stylesheet">
+    <style type="text/css">
+        #container {
+            height: 400px; 
+        }
+
+        .highcharts-figure, .highcharts-data-table table {
+            min-width: 310px; 
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #EBEBEB;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+        .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+        .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+        .page_loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #89cff0; /* Baby Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .alert {
+            padding:8px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        @media print {
+          body {
+            margin: 0;
+            color: #000;
+            background-color: #fff;
+          }           
+            .cont
+            {
+                width: 100%;
+                height: 5%;
+                margin: 5px;
+                padding-right: 10px;
+                overflow: hidden;
+                border: 1px solid red;
+            }
+            .highcharts-container {
+              width: 100% !important;
+            }
+            .foot, .breadcrumb, #hashes, #filters{
+                display: none;
+            }
+
+        }
+    </style>
+    <!-- ================== END BASE CSS STYLE ================== -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+</head>
+<body>
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-without-sidebar page-header-fixed">
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand"><span class="navbar-logo"></span> CPIMS OVC dashboard</a>
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+                
+                <!-- begin header navigation right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'ovc_dashboard' %}" id="main_url"><ul>Registrations</ul></a></li>
+                    <li><a href="{% url 'hivstat_dash' %}" id="hivstat_url">HIVSTAT & VL</a></li>
+                    <li><a href="{% url 'services_dash' %}" id="services_url">Services</a></li>
+                    <li><a href="{% url 'cm_dash' %}" id="cm_url">Case Management</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="dropdown" id="session_status"></li>
+                    <li class="dropdown navbar-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{% static 'img/user-2.jpg' %}" alt="" /> 
+                            <span class="hidden-xs">
+                            {% if request.session.names %}
+                                {{ request.session.names }}
+                            {% else %}
+                                {{ request.user.username }}
+                            {% endif %}
+                            </span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInLeft">
+                            <li class="arrow"></li>
+                            <li><a href="{% url 'view_person' id=request.user.reg_person_id %}">View My Profile</a></li>
+                            <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                            <li><a href="#"><span class="badge badge-danger pull-right">2</span> Messages</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'cluster' %}">Clusters</a></li>
+                            <li class="divider"></li>
+                            {% if request.user.is_staff %}
+                                <li><a href="/admin/">Administration</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'logout' %}" id="logout_button">Log Out</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="dropdown navbar-user online_mode">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{% static 'img/user-2.jpg' %}" alt="" /> 
+                            <span class="hidden-xs">CPMIS Guest</span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInLeft">
+                            <li class="arrow"></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'login' %}">Log in</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    <li class="dropdown"><a href="#modal-dialog" data-toggle="modal" title="Click for Date Filters"><i class="fa fa-filter"></i></a></li>
+                    <li class="dropdown"><a href="#" title="Click to Print Page" onclick="printChart(); return false;"><i class="fa fa-print"></i></a></li>
+                </ul>
+                <!-- end header navigation right -->
+                
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        
+        <!-- begin #content -->
+        <div id="content" class="content">
+            <!-- Filters -->
+            <div class="panel panel-default">
+                <div class="panel-body p-5">
+                    <form name="case_data" method="POST" action=".">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="uX3atezvGwuWEUJekjL3Net8LytDjilegIjR0eyTZ0lpyXxsWda8ycCIff71toXu">
+                        <input type="hidden" name="cur_year" id="cur_year" value="2021">
+                        <div class="row" id="filters">
+                            <div class="col-md-2">
+                                {{ form.sel_county }}
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ form.sel_constituency }}
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ form.sel_ward }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ form.sel_funding }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ form.sel_ip }}
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ form.sel_lip }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- begin breadcrumb -->
+            <ol class="breadcrumb pull-right">
+                <li><a href="javascript:;">Home</a></li>
+                <li><a href="javascript:;">Case Management</a></li>
+                <li class="active" id=ipt></li>
+                <li class="active" id=lpt></li>
+            </ol>
+            <!-- end breadcrumb -->
+            <!-- begin page-header -->
+            <h1 class="page-header"><span id="at">National </span> / <span id="bt"></span> / <span id="ct"></span> <small id="hashes"> Options ...</small></h1>
+            <!-- end page-header -->
+
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-6 -->
+                <div class="col-md-6">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <div id="container-4A"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+                <!-- begin col-6 -->
+                <div class="col-md-6">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <div id="container-4B"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+            </div>
+            <!-- end row -->
+
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-12 -->
+                <div class="col-md-12">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <p><b>NOTE: </b> Case Management data has period limitations. <b>Timestamp: </b> {% now "jS F Y H:i" %}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+            <p class="foot">
+                <a href="/" class="btn btn-success">
+                    <i class="fa fa-arrow-circle-left"></i> Back to Home
+                </a>
+                &nbsp; &nbsp; &copy; {% now "Y" %}. All Rights Reserved. Version : 2.0.0
+            </p>
+        </div>
+        <!-- end #content -->
+        <!-- #modal-dialog -->
+        <div class="modal fade" id="modal-dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Date Filters</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Reporting Period</label>
+                                <div class="col-md-9">
+                                    {{ form.sel_period }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Financial Year</label>
+                                <div class="col-md-9">
+                                    {{ form.sel_year }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Date From</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Disabled input date" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Date To</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Disabled input date" disabled />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                        <a href="javascript:;" class="btn btn-sm btn-success">Apply Filter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #modal-dialog -->  
+        
+        
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--[if lt IE 9]>
+        <script src="{% static 'xbrowserjs/html5shiv.js' %}"></script>
+        <script src="{% static 'xbrowserjs/respond.min.js' %}"></script>
+        <script src="{% static 'xbrowserjs/excanvas.min.js' %}"></script>
+    <![endif]-->
+    <script src="{% static 'plugins/highcharts/highcharts.js' %}"></script>
+    <script src="{% static 'plugins/highcharts/modules/exporting.js' %}"></script>
+    <script src="{% static 'plugins/highcharts/modules/export-data.js' %}"></script>
+    <script src="{% static 'plugins/highcharts/modules/accessibility.js' %}"></script>
+    <!-- ================== END BASE JS ================== -->
+    
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{% static 'js/apps.js' %}"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+    
+    <script>
+        function printChart() {
+              //Print Chart
+              //var mapContainer;
+              //var body = $('body');                  
+
+              window.print();
+            }
+        $(document).ready(function() {
+           App.init();
+
+           // Dynamically load Charts
+           var chartlists = ['4A', '4B'];
+
+           var colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9",
+                         "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"];
+           var hashes = window.location.hash.substr(1);
+           var fields = hashes.split('/');
+           $('#hashes').html(hashes);
+           var cn = fields[0];
+           var con = fields[1];
+           var wd = fields[2];
+           var ipv = fields[3];
+           var lipv = fields[4];
+           $( "#sel-county" ).val(cn);
+           $( "#sel-ip" ).val(ipv);
+           var ipv_id = parseInt(ipv);
+           var cn_id = parseInt(cn);
+           var con_id = parseInt(con);
+           var wid = parseInt(wd);
+           if (ipv_id > 0){ 
+             getLIP(ipv_id, lipv);
+           }
+
+           if (cn_id > 0){ 
+             getConstituency(cn_id, con);
+           }
+
+           if (cn_id > 0 && con_id > 0){ 
+             getWard(con_id, wid);
+           }
+
+
+           reloadVars();
+
+           $("#sel-county").change(function(){
+               var county_id = $(this).val();
+               reloadVars();
+               getConstituency(county_id, '');
+            });
+
+           $("#sel-constituency").change(function(){
+               var const_id = $(this).val();
+               reloadVars();
+               getWard(const_id, '');
+            });
+
+           $("#sel-ward, #sel-lip").change(function(){
+               reloadVars();
+            });
+
+           $("#sel-period, #sel-year").change(function(){
+               reloadVars();
+            });
+
+           $("#sel-ip").change(function(){
+               var ip_id = $(this).val();
+               reloadVars();
+               getLIP(ip_id, '');
+            });
+
+           function createPage(county_id, const_id, ward_id, ip, lip, prd, yr){
+                var cid = (county_id == '' ? "000" : county_id);
+                var ctid = (const_id == '' ? "000" : const_id);
+                var wid = (ward_id == '' ? "000" : ward_id);
+                var ipd = (ip == '' ? "0" : ip);
+                var lipd = (lip == '' ? "0" : lip);
+                var geo_uri = cid + '/' + ctid + '/' + wid;
+                var ip_uri = ipd + '/' + lipd;
+                var dt_uri = prd+ '/' + yr;
+                window.location.hash = geo_uri + '/' + ip_uri + '/' + dt_uri;
+                var hashes = window.location.hash.substr(1);
+                $( "#hashes" ).html('#' + hashes);
+            }
+
+            function reloadVars(){
+               var county_id = $( "#sel-county" ).val();
+               var const_id = $( "#sel-constituency" ).val();
+               var ward_id = $( "#sel-ward" ).val();
+               var ip = $( "#sel-ip" ).val();
+               var lip = $( "#sel-lip" ).val();
+               var prd = $( "#sel-period" ).val();
+               var yr = $( "#sel-year" ).val();
+               createPage(county_id, const_id, ward_id, ip, lip, prd, yr);
+               // Current selections text for UI
+               var county_name = $("#sel-county option:selected").text();
+               var const_name = $( "#sel-constituency option:selected").text();
+               var ward_name = $( "#sel-ward option:selected").text();
+               var ip_name = $( "#sel-ip option:selected").text();
+               var lip_name = $( "#sel-lip option:selected").text();
+               $( "#at" ).html(county_name);
+               $( "#bt" ).html(const_name);
+               $( "#ct" ).html(ward_name);
+               $( "#ipt" ).html(ip_name);
+               $( "#lpt" ).html(lip_name);
+               $( "#prip" ).html(ip_name);
+               $( "#prlip" ).html(lip_name);
+               // Chart URLS
+               var hashes = window.location.hash.substr(1);
+               
+               chartlists.forEach(function (itm, idx) {
+                  var url = "/api/v2/"+ itm +"/"+ hashes;
+                  // Page Loader
+                  $("#container-"+ itm).html("<center><div class='page_loader'></div></center>");
+                  // Load Data
+                  $("#container-"+ itm).load(url);
+               });
+               // Change URLS to pick current page selections
+               $("a#main_url").prop("href", "/d/#"+ hashes)
+               $("a#hivstat_url").prop("href", "/d/hivstat/#"+ hashes)
+               $("a#services_url").prop("href", "/d/services/#"+ hashes)
+               $("a#cm_url").prop("href", "/d/cm/#"+ hashes)
+            }
+
+
+           function getConstituency(cou_id, sel_cn){
+                var curl = "{% url 'get_constituency' area_id=0 %}"
+                var url = curl.replace('0', cou_id.toString());
+                $.ajax({
+                    type: "GET",
+                    url: url, 
+                    contentType: "application/json; charset-utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                      $('#sel-constituency').empty();
+                      $('#sel-constituency').append("<option value=''> All Constituencies </option>");
+                      $.each(data, function(i, item){
+                        var sel = (sel_cn == data[i].id) ? 'selected="selected"' : ''; 
+                        $('#sel-constituency').append('<option value="'+data[i].id+'" '+ sel +'>'+data[i].name+'</option>');
+                      });
+                    }, 
+                    complete: function() {}
+                  });
+           }
+
+           function getWard(const_id, sel_con){
+                var curl = "{% url 'get_ward' area_id=0 %}"
+                var url = curl.replace('0', const_id.toString());
+                $.ajax({
+                    type: "GET",
+                    url: url, 
+                    contentType: "application/json; charset-utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                      $('#sel-ward').empty();
+                      $('#sel-ward').append("<option value=''> All Wards </option>");
+                      $.each(data, function(i, item){
+                        var sel = (sel_con == data[i].id) ? 'selected="selected"' : ''; 
+                        $('#sel-ward').append('<option value="'+data[i].id+'" '+ sel +'>'+data[i].name+'</option>');
+                      });
+                    }, 
+                    complete: function() {}
+                  });
+           }
+
+           function getLIP(ip_id, sel_lip){
+                var curl = "{% url 'get_lip' ip_id=0 %}"
+                var url = curl.replace('0', ip_id.toString());
+                $.ajax({
+                    type: "GET",
+                    url: url, 
+                    contentType: "application/json; charset-utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                      $('#sel-lip').empty();
+                      $('#sel-lip').append("<option value=''> All LIPs </option>");
+                      $.each(data, function(i, item){
+                        var sel = (sel_lip == data[i].id) ? 'selected="selected"' : ''; 
+                        $('#sel-lip').append('<option value="'+data[i].id+'" '+ sel +'>'+data[i].name+'</option>');
+                      });
+                    }, 
+                    complete: function() {}
+                  });
+           }
+
+        });
+
+    </script>
+</body>
+</html>

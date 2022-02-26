@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Non Objection to Travel - Edit {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Travel Authorization</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CPIMS Non Objection to Travel <small>Edit details</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Travel Authorization - {{ travel.institution_name }}</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+              <form id="icases" name="icases" method="POST" action="." class="form-horizontal" data-parsley-validate="true">
+                 {% csrf_token %}
+                 <div id="wizard">
+                  <ol>
+                    <li>
+                        Travel Details 
+                        <small>Institution details, country, reason, sponsor and dates of travel..</small>
+                    </li>
+                    <li>
+                        Chaperon Details
+                        <small>Full Names, sex and passport numbers.</small>
+                    </li>
+                    <li>
+                        Children Details
+                        <small>Full Names, sex and passport numbers.</small>
+                    </li>
+
+                  </ol>
+                  <!-- begin wizard step-1 -->
+                  <div>
+                      <fieldset>
+                          <legend class="pull-left width-full">Travel Details</legend>
+                          <!-- begin row -->
+                          <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Institution / School Name</label>
+                                <div class="col-md-9">
+                                    {{ form.institution_name }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Countries</label>
+                                <div class="col-md-9">
+                                    {{ form.country_name }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Reason for Travel</label>
+                                <div class="col-md-9">
+                                    {{ form.reason }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Sponsor</label>
+                                <div class="col-md-9">
+                                    {{ form.sponsor }}
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label class="col-md-2 control-label">Travel Date</label>
+                                <div class="col-md-2">
+                                    {{ form.travel_date }}
+                                </div>
+                                <label class="col-md-1 control-label">Return Date</label>
+                                <div class="col-md-2">
+                                    {{ form.return_date }}
+                                </div>
+                                <label class="col-md-2 control-label">Status (Tick if Return report filed)</label>
+                                <div class="col-md-2">
+                                    {{ form.status }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Number Applied</label>
+                                <div class="col-md-2">
+                                    {{ form.no_applied }}
+                                </div>
+                                <label class="col-md-1 control-label">No. Cleared</label>
+                                <div class="col-md-2">
+                                    {{ form.no_cleared }}
+                                </div>
+                                <label class="col-md-2 control-label">No. Returned</label>
+                                <div class="col-md-2">
+                                    {{ form.no_returned }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Comments</label>
+                                <div class="col-md-9">
+                                    {{ form.comments }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Contacts</label>
+                                <div class="col-md-9">
+                                    {{ form.contacts }}
+                                </div>
+                            </div>
+                          </div>
+                          <!-- end row -->
+                    </fieldset>
+                  </div>
+                  <!-- end wizard step-1 -->
+                  <!-- begin wizard step-2 -->
+                  <div>
+                    <fieldset>
+                      <legend class="pull-left width-full">Chaperon Details</legend>
+                          <!-- begin row -->
+                          <div class="row">
+                            <table class="table">
+                               <thead>
+                                   <tr>
+                                       <th>#</th>
+                                       <th width="20%">First Name</th>
+                                       <th width="20%">Surname</th>
+                                       <th width="20%">Other Names</th>
+                                       <th width="10%">Sex</th>
+                                       <th width="20%">Passport Number</th>
+                                       <th></th>                                 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ chap_formset.management_form }}
+                                    {% for form in chap_formset %}
+                                    <tr>
+                                       <td>{{ forloop.counter }}{{ form.person_id }}{{ form.chaperon_id }}</td>
+                                       <td>{{ form.first_name }}</td>
+                                       <td>{{ form.surname }}</td>
+                                       <td>{{ form.other_names }}</td>
+                                       <td>{{ form.sex }}</td>
+                                       <td>{{ form.passport_no }}</td>                                                                              
+                                       <td><div class="input-group-append"><button class="btn btn-success add-form-row">+</button></div></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>                            
+                            
+                          </div>
+                          <!-- end row -->
+                    </fieldset>
+                  </div>
+                  <!-- end wizard step-2 -->
+                   <!-- begin wizard step-3 -->
+                  <div>
+                    <fieldset>
+                      <legend class="pull-left width-full">Children Details</legend>
+                          <!-- begin row -->
+                          <div class="row">
+
+                            <table class="table">
+                               <thead>
+                                   <tr>
+                                       <th>#</th>
+                                       <th width="18%">First Name</th>
+                                       <th width="18%">Surname</th>
+                                       <th width="20%">Other Names</th>
+                                       <th width="10%">Sex</th>
+                                       <th width="14%">Passport Number</th>
+                                       <th width="5%">Cleared</th>
+                                       <th width="5%">Returned</th>
+                                       <th></th>                                 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ child_formset.management_form }}
+                                    {% for form in child_formset %}
+                                    <tr id="tr_child_{{ form.person_id.value }}">
+                                       <td>{{ forloop.counter }}{{ form.person_id }}{{ form.child_id }}</td>
+                                       <td>{{ form.first_name }}</td>
+                                       <td>{{ form.surname }}</td>
+                                       <td>{{ form.other_names }}</td>
+                                       <td>{{ form.sex }}</td>
+                                       <td>{{ form.passport_no }}</td>
+                                       <td>{{ form.cleared }}</td> 
+                                       <td>{{ form.returned }}</td>                                     
+                                       <td><div class="input-group-append"><button class="btn btn-danger btn-sm add-form-row">-</button></div></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                          </div>
+                          <!-- end row -->
+                    </fieldset>
+                  </div>
+                  <!-- end wizard step-3 -->
+                </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-9">
+                            <button type="submit" class="btn btn-sm btn-success">Update Details</button>
+                            <a href="{% url 'view_travel' id=travel.id %}" class="btn btn-sm btn-default">Cancel </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+<!-- #modal-dialog -->
+              <div class="modal fade" id="modal-details">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Non Objection to Travel Details</h4>
+                    </div>
+                    <div class="modal-body">
+                    <input type="hidden" name="item_cid" id="item_cid">
+                    <div id="user_actions"></div>
+                    <table width="100%" class="table table-profile">
+                    <tbody>
+                        <tr>
+                            <td class="field" width="40%">Travel</td>
+                            <td><span id="cname"></span></td>
+                        </tr>
+                            <td class="field">Travel Date</td>
+                            <td><span id="cdate"></span></td>
+                            
+                        </tr>
+                    <table id="mywork" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th  class="text-right"></th>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           <!-- end modal -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'js/form-wizards.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+
+    $("#wizard").bwizard();
+
+    $('#travel_date, #return_date').datepicker({ format: 'dd-M-yyyy' });
+
+    $('.ddash').on('click', function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var cname = $(this).attr('rel');
+        var cdate = $(this).attr('rel1');
+        $('#cname').html(cname);
+        $('#cdate').html(cdate);
+        $('#item_cid').val(id);
+        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+        $.ajax({
+           type: "POST",
+           url: "{{ request.get_full_path }}",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           success: function(response)
+           {
+               var msg = response.message;
+               var status_id = response.status;
+               var cdates = response.dates;
+               if (status_id == 0){
+                   $("#report_"+ id).remove();
+               }
+               $('#mng_messages').html(msg);
+               var dt = '';
+               var tchildren = 0;
+               var tcases = 0;
+               var trpts = 0;
+               $.each(response.data, function(key, val) {
+                    dt += '<tr><td></td><td>'+ key +'</td><td>';
+                    dt += val + '</td></tr>';
+                });
+               $('#mywork > tbody').html(dt);
+           },
+            error: function(){
+                $('#mng_messages').html("Error removing report")
+            }
+         });
+        $('#modal-details').modal('show');
+        ev.preventDefault();
+    });
+} );
+</script>
+{% endblock %}

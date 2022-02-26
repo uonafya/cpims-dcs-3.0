@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Deduplication {% endblock %}
+{% load app_filters %}
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/datatables.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'plugins/datatables/css/responsive.dataTables.min.css' %}">
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Settings</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"><i class="fa fa-angle-double-right"></i> Deduplication <small>Cases and Children</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-success fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title"> Duplicates by Case Record sheet and Person details </h4>
+            </div>
+            <div class="alert alert-info fade in">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div id="mng_messages">
+                Please delete records with the least interventions / follow ups. Please note this is a two step action and is not reversible even from Admin.
+                </div>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+                <table class="table" id="dupsTable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Serial Number</th>
+                            <th>Case Date</th>
+                            <th>Organization Unit</th>
+                            <th>Case Category</th>
+                            <th>Child Name</th>
+                            <th>Sex</th>
+                            <th>DOB</th>
+                            <th>Follow ups</th>
+                            <th>Reporting Date / Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr id="row_{{ result.case_id }}">
+                            <td></td>
+                            <td>{{ result.case.case_serial }}</td>
+                            <td>{{ result.case.date_case_opened }}</td>
+                            <td>{{ result.organization_unit.org_unit_name }}</td>
+                            <td>{{ result.case_category_id|gen_value:vals }}</td>
+                            <td>{{ result.person.first_name }} {{ result.person.surname }}</td>
+                            <td>{{ result.person.sex_id|gen_value:vals }} </td>
+                            <td>{{ result.person.date_of_birth }} </td>
+                            <td>
+                                {% if result.interventions > 1 %}
+                                <span class="label label-primary">
+                                {% else %}
+                                <span class="label label-success">
+                                {% endif %}
+                                {{ result.interventions }}</span></td>
+                                
+                            <td> {{ result.created_at }} / 
+                                <button duid="{{ result.duplicate_id }}" id="{{ result.case_id }}" type="button" class="btn btn-xs btn-danger delRecord">Delete</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+                
+
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.responsive.min.js' %}"></script>
+<script type="text/javascript">   
+    $(document).ready( function () {
+       $('#dupsTable')
+        .addClass( 'nowrap' )
+        .dataTable( {
+            responsive: true,
+            columnDefs: [
+                { targets: [-1, -2], className: 'dt-body-right' }
+            ]
+        } );
+
+        $("#dupsTable").on("click", ".delRecord", function(){
+            $('#messages').show();
+            var case_id = $(this).attr("id");
+            var duplicate_id = $(this).attr("duid");
+            // $('#message').html("Delete Case ID "+ id);
+            var data = { action_id: 2, case_id: case_id,
+                         duplicate_id: duplicate_id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}' }
+            $.post( "{{ request.get_full_path }}", data)
+              .done(function( data ) {
+                var status = data.status;
+                var msg = data.message;
+                $('#message').html(msg);
+                //$("#row_" + case_id).remove();
+            });
+        });
+} );
+</script>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block page_title %} {{block.super}} Persons timeline details {% endblock page_title%}
+
+{% load staticfiles %}
+
+{% load app_filters %}
+
+{% block style_code %}
+    <link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+{% endblock %}
+    
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Home</a></li>
+    <li class="active">Registry</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h3 class="page-header">Person Timeline <small>CPIMS Interactions</small></h3>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<div id="messages" class="alert alert-success fade in" style="display: none;">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <p class="invalid-form-message"></p>
+</div>
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-8 -->
+    <div class="col-md-12">
+        <div class="panel panel-default" data-sortable-id="index-1">
+            <div class="panel-body p-t-0">
+                <div id="container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{% endblock %}
+
+
+{% block lazy_javascript_code %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/timeline.js"></script>
+<script>
+    $(document).ready(function() {       
+
+      Highcharts.chart('container', {
+        chart: {
+            zoomType: 'x',
+            type: 'timeline',
+        },
+        xAxis: {
+            type: 'datetime',
+            visible: false
+        },
+        yAxis: {
+            gridLineWidth: 1,
+            title: null,
+            labels: {
+                enabled: false
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        title: {
+            text: 'Timeline of Child Registrations and services'
+        },
+        subtitle: {
+            text: 'Registrations and services provided at any point'
+        },
+        tooltip: {
+            style: {
+                width: 300
+            }
+        },
+        series: [{
+            dataLabels: {
+                allowOverlap: false,
+                format: '<span style="color:{point.color}">● </span><span style="font-weight: bold;" > ' +
+                    '{point.x:%d %b %Y}</span><br/>{point.label}'
+            },
+            marker: {
+                symbol: 'circle'
+            },
+            data: [{
+                x: Date.UTC(2019, 9, 1),
+                name: 'Registration',
+                label: 'Registration',
+                description: "Test."
+            }, {
+                x: Date.UTC(2019, 9, 5),
+                name: 'First Summon',
+                label: 'First Summon',
+                description: "Test."
+            }]
+        }]
+    });
+
+});
+</script>
+{% endblock lazy_javascript_code %}

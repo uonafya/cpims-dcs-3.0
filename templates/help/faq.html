@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Help and Documentation {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Help</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"><i class="fa fa-question-circle"></i> Help and Documentation <small> Frequently Asked Questions (FAQ)</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-primary">
+            <!-- start panel body -->
+            <div class="panel-body">
+
+                <div class="panel-group" id="accordion">
+                    {% for faq in faqs %}
+                        <div class="panel panel-default overflow-hidden">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion" href="#collapseT{{ forloop.counter }}">
+                                        <i class="fa fa-plus-circle pull-right"></i> 
+                                        #{{ forloop.counter }} {{ faq.faq_title }}
+                                    </a>
+                                </h3>
+                            </div>
+                            <div id="collapseT{{ forloop.counter }}" class="panel-collapse collapse {% if forloop.counter == 1 %}in{% endif %}">
+                                <div class="panel-body">
+                                    {{ faq.faq_details|safe }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                       
+                    </div>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+{% endblock %}

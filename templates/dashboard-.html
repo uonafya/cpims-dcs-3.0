@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %} Dashboard {% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Dashboard</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">
+{% if request.session.ou_primary_name %}
+{{ request.session.ou_primary_name }}
+{% else %} 
+National
+{% endif %} - Dashboard <small>Application data and usage summary</small>
+ </h1>
+<!-- end page-header -->
+<!-- begin row -->
+<div class="row">
+{% if messages %}
+    {% for message in messages %}
+    {% if 'error' in message.tags %}
+        <div id="messages" class="alert alert-danger fade in">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-info fa-2x pull-left"></i>
+    {% else %}
+        <div id="messages" class="alert alert-success fade in">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-check fa-2x pull-left"></i>
+    {% endif %}
+        
+    	<p>{{ message }}</p>
+    </div>
+   {% endfor %}
+{% endif %}
+{% if message %}
+	<div id="messages" class="alert alert-success fade in">
+	    <span class="close" data-dismiss="alert">×</span>
+	    <i class="fa fa-check fa-2x pull-left"></i>
+	    <p class="invalid-form-message"> {{ message }}</p>
+	</div>
+{% endif %}
+<!-- Start content area -->
+<!-- begin row -->
+    {% if request.session.reg_ovc %}
+    <div class="row">
+		<!-- begin col-3 -->
+		<div class="col-md-3 col-sm-4">
+			<div class="widget widget-stats bg-green">
+				<div class="stats-icon"><i class="fa fa-child"></i></div>
+				<div class="stats-info">
+					<h4 id="rpt_1">OVC - ACTIVE / EVER REGISTERED</h4>
+					<p>{{ ovc.children }} / {{ ovc.children_all }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="#" class="dash_details" id="dt_1">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-blue">
+				<div class="stats-icon"><i class="fa fa-users"></i></div>
+				<div class="stats-info">
+					<h4 id="rpt_2">CAREGIVER / GUARDIAN</h4>
+					<p>{{ ovc.guardians }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="#" class="dash_details" id="dt_2">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-purple">
+				<div class="stats-icon"><i class="fa fa-user"></i></div>
+				<div class="stats-info">
+					<h4 id="rpt_3">WORKFORCE MEMBERS</h4>
+					<p>{{ ovc.workforce }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="#" class="dash_details" id="dt_3">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-aqua">
+				<div class="stats-icon"><i class="fa fa-institution"></i></div>
+				<div class="stats-info">
+					<h4 id="rpt_4">ORG UNITS / CBOs</h4>
+					<p>{{ ovc.org_units }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="#" class="dash_details" id="dt_4">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-3 col-sm-4">
+			<div class="widget widget-stats bg-red">
+				<div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
+				<div class="stats-info">
+					<h4 id="rpt_5">HOUSEHOLDS</h4>
+					<p>{{ ovc.household }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="#" class="dash_details" id="dt_5">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+
+	</div>
+	<!-- end row -->
+
+    {% else %}
+	<div class="row">
+		{% if request.session.ou_type in inst_list %}
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-aqua">
+				<div class="stats-icon"><i class="fa fa-institution"></i></div>
+				<div class="stats-info">
+					<h4>POPULATION (GIRLS / BOYS)</h4>
+					<p>{{ data.inst_girls }} / {{ data.inst_boys }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='IP' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		{% endif %}
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-green">
+				<div class="stats-icon"><i class="fa fa-child"></i></div>
+				<div class="stats-info">
+					<h4>CHILDREN / OVC</h4>
+					<p>{{ data.children }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='CH' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-blue">
+				<div class="stats-icon"><i class="fa fa-users"></i></div>
+				<div class="stats-info">
+					<h4>CAREGIVER / GUARDIAN</h4>
+					<p>{{ data.guardians }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='CG' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-purple">
+				<div class="stats-icon"><i class="fa fa-user"></i></div>
+				<div class="stats-info">
+					<h4>WORKFORCE MEMBERS</h4>
+					<p>{{ data.workforce }}
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='WF' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		{% if request.session.ou_type not in inst_list %}
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-aqua">
+				<div class="stats-icon"><i class="fa fa-institution"></i></div>
+				<div class="stats-info">
+					<h4>ORGANISATION UNITS</h4>
+					<p>{{ data.org_units }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='OU' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		{% endif %}
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-red">
+				<div class="stats-icon"><i class="fa fa-chain-broken"></i></div>
+				<div class="stats-info">
+					<h4>CASE RECORDS</h4>
+					<p>{{ data.cases }}</p>
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='CR' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col-md-2 col-sm-3">
+			<div class="widget widget-stats bg-grey">
+				<div class="stats-icon"><i class="fa fa-clock-o"></i></div>
+				<div class="stats-info">
+					<h4>PENDING CASES</h4>
+					<p>{{ data.pending }} / {{ data.interven }}%</p>
+				</div>
+				<div class="stats-link">
+					<a href="{% url 'dashboard' did='PC' %}">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+	</div>
+	<!-- end row -->
+	<!-- end row -->
+	{% endif %}
+	{% if request.session.user_level == 1  and request.session.section_id %}
+	<!-- begin row -->
+	<div class="row">
+	    <!-- begin col-8 -->
+	    <div class="col-md-8">
+	        <div class="panel panel-default" data-sortable-id="index-6">
+	            <div class="panel-body p-t-0">
+	            	<h2>{{ section }}</h2>
+	            	<hr>
+	                <div id="section_container" style="min-height: 10px;"><center><div class="page_loader"></div></center></div>
+	            </div>
+	        </div>
+		</div>
+		<!-- begin col-4 -->
+	    <div class="col-md-4">
+	        <div class="panel panel-default" data-sortable-id="index-6">
+	            <div class="panel-body p-t-0">
+	                <div id="links_container" style="min-height: 100px;">
+	                	<br>
+	                	<ul>
+	                		{% if request.session.section_id == 'SCPD' %}
+							<li><a href="/reports/caseload/">Case Load Reports</a></li>
+							<li><a href="/admin/cpovc_auth/appuser/">User Management</a></li>
+							<li><a href="/admin/cpovc_access/accessattempt/">Accounts Management (Locked)</a></li>
+							<li><a href="/dashboard/SS/">Section Specific Dashboard</a></li>
+							{% else %}
+							<li><a href="/dashboard/SS/">Section Specific Dashboard</a></li>
+							{% endif %}
+						</ul>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	{% endif %}
+	<!-- begin row -->
+	<div class="row">
+		<!-- begin col-8 -->
+		<div class="col-md-8">
+			<div class="panel panel-inverse" data-sortable-id="index-1">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+					</div>
+					<h4 class="panel-title">Case Management (Last 21 Days)</h4>
+				</div>
+				<div class="panel-body">
+					<div id="interactive-chart" class="height-sm"></div>
+				</div>
+			</div>
+        </div>
+        <div class="col-md-4">
+	        <div class="panel panel-inverse" data-sortable-id="index-7">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+					</div>
+					<h4 class="panel-title">Case categories (Top 5)</h4>
+				</div>
+				<div class="panel-body">
+					<div id="donut-chart" class="height-sm"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+    
+	<!-- End content area -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+    <script src="{% static 'plugins/flot/jquery.flot.min.js' %}"></script>
+    <script src="{% static 'plugins/flot/jquery.flot.pie.min.js' %}"></script>
+    <script src="{% static 'js/curvedLines.js' %}"></script>
+    <script>
+        var Kdata = [{% autoescape off %}{{ kvals }}{% endautoescape %}];
+        var Cdata = [{% autoescape off %}{{ cvals }}{% endautoescape %}];
+        var Odata = [{% autoescape off %}{{ ovals }}{% endautoescape %}];
+        var xLabel = [{% autoescape off %}{{ dates }}{% endautoescape %}];
+        var dData = [{% autoescape off %}{{ dvals }}{% endautoescape %}];
+    </script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+	<script>
+		$(document).ready(function() {
+			Dashboard.init();
+			$('a.dash_details').click(function() {
+
+		       var rid = $(this).attr('id');
+		       var rrid = rid.replace('dt_', '');
+		       var rname = $('#rpt_'+rrid).html();
+		       {% if request.session.ou_primary_name %}
+				    var heading = '{{ request.session.ou_primary_name }} - ';
+				{% else %} 
+				    var heading = 'National - ';
+				{% endif %}
+		       $('#modal-reports').modal('show');
+		       $(document).prop('title', 'CPIMS Dashboard - '+ heading + rname);
+		       $('#sdetails').html(heading + rname);
+
+		       var buttonCommon = {
+		        exportOptions: {
+		            format: {
+		                body: function ( data, row, column, node ) {
+		                    // Strip $ from salary column to make it numeric
+		                    return data;
+		                }
+		            }
+		        }
+		    };
+		    $('#mydata').DataTable( {
+		        ajax:{"url": "{% url 'dashboard_details' %}",
+			          "data": function ( d ) {
+			                d.report_id = rrid;
+			         }
+			     },
+		        columns: [
+		            { data: 'id' },
+		            { data: 'name' },
+		            { data: 'create_date' },
+		            { data: 'action' }
+		        ],
+		        dom: 'Bfrtip',
+		        destroy: true,
+		        buttons: [
+		            $.extend( true, {}, buttonCommon, {
+		                extend: 'copyHtml5'
+		            } ),
+		            $.extend( true, {}, buttonCommon, {
+		                extend: 'excelHtml5'
+		            } ),
+		            $.extend( true, {}, buttonCommon, {
+		                extend: 'pdfHtml5'
+		            } )
+		        ]
+		    } );
+		       return false;
+		    });
+		});
+	</script>
+{% endblock %}
