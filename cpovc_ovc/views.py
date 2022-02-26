@@ -1,7 +1,7 @@
 """OVC Care views."""
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
@@ -51,16 +51,16 @@ def ovc_home(request):
                            'vals': vals})
         form = OVCSearchForm()
         return render(request, 'ovc/home.html', {'form': form, 'status': 200})
-    except Exception, e:
-        raise e
+    except Exception as e:
+        raise e2to2
 
 
 def ovc_search(request):
     """Method to do ovc search."""
     try:
         results = search_master(request)
-    except Exception, e:
-        print 'error with search - %s' % (str(e))
+    except Exception as e:
+        print('error with search - %s' % (str(e)))
         return JsonResponse(results, content_type='application/json',
                             safe=False)
     else:
@@ -85,7 +85,7 @@ def ovc_register(request, id):
         # Get siblings
         siblings = RegPersonsSiblings.objects.filter(
             is_void=False, child_person_id=child.id)
-        print 'p', params, 'gp', gparams
+        print('p', params, 'gp', gparams)
         guids, chids = [], []
         for guardian in guardians:
             guids.append(guardian.guardian_person_id)
@@ -93,7 +93,7 @@ def ovc_register(request, id):
         for sibling in siblings:
             chids.append(sibling.sibling_person_id)
         pids = {'guids': guids, 'chids': chids}
-        print pids
+        print(pids)
         # Existing
         extids = RegPersonsExternalIds.objects.filter(
             person_id__in=guids)
@@ -105,7 +105,7 @@ def ovc_register(request, id):
                 gparams[gkey] = extid.identifier
         if request.method == 'POST':
             form = OVCRegistrationForm(guids=pids, data=request.POST)
-            print request.POST
+            print(request.POST)
             ovc_registration(request, ovc_id)
             msg = "OVC Registration completed successfully"
             messages.info(request, msg)
@@ -151,8 +151,8 @@ def ovc_register(request, id):
                        'guardians': guardians, 'siblings': siblings,
                        'vals': vals, 'extids': gparams, 'ovc': ovc,
                        'levels': levels})
-    except Exception, e:
-        print "error with OVC registration - %s" % (str(e))
+    except Exception as e:
+        print("error with OVC registration - %s" % (str(e)))
         raise e
 
 
@@ -284,8 +284,8 @@ def ovc_edit(request, id):
                        'hhmembers': hhmembers, 'levels': levels,
                        'sch_class': sch_class, 'siblings': siblings,
                        'ctaker': ctaker})
-    except Exception, e:
-        print "error with OVC editing - %s" % (str(e))
+    except Exception as e:
+        print("error with OVC editing - %s" % (str(e)))
         raise e
 
 
@@ -315,7 +315,7 @@ def ovc_view(request, id):
             edate = creg.exit_date
             tdate = date.today()
             days = (tdate - edate).days
-        print 'exit days', days
+        print('exit days', days)
         allow_edit = False if days > 90 else True
         params = {}
         gparams = {}
@@ -380,8 +380,8 @@ def ovc_view(request, id):
                        'extids': gparams, 'health': health,
                        'hhmembers': hhmembers, 'school': school,
                        'services': services, 'allow_edit': allow_edit})
-    except Exception, e:
-        print "error with OVC viewing - %s" % (str(e))
+    except Exception as e:
+        print("error with OVC viewing - %s" % (str(e)))
         raise e
 
 
@@ -396,6 +396,6 @@ def hh_manage(request, hhid):
         return render(request, 'ovc/household.html',
                       {'status': 200, 'hhmembers': hhmembers,
                        'vals': vals})
-    except Exception, e:
-        print "error getting hh members - %s" % (str(e))
+    except Exception as e:
+        print("error getting hh members - %s" % (str(e)))
         raise e
