@@ -2,7 +2,10 @@
 """Registry views for CPIMS."""
 import uuid
 from datetime import datetime, timedelta
-from django.core.url import reverse
+
+#from django.core.urls import reversese
+from django.urls import reverse
+
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
@@ -62,8 +65,8 @@ def home(request):
             form = FormRegistry(data=request.POST)
             search_string = request.POST.get('org_unit_name')
             org_type = request.POST.get('org_type')
-            org_category = request.POST.get('org_category')
-            org_closed = request.POST.get('org_closed')
+            org_category = request.POST.get('org_categ_clory')
+            org_closed = request.POST.get('orgosed')
 
             closed_org = True if org_closed == 'on' else False
             unit_type = [org_type] if org_type else []
@@ -111,7 +114,9 @@ def home(request):
         return render(request, 'registry/org_units_index.html',
                       {'form': form, 'orgs': orgs})
     except Exception as e:
-        print(str(e))
+
+        print (str(e))
+
         raise e
 
 
@@ -835,7 +840,9 @@ def view_person(request, id):
             child_person=person, is_void=False, date_delinked=None)
         # Household - Introduced in V2
         child_index, members = get_household(person.id)
-        print ('HH'), child_index, members
+
+        print ('HH', child_index, members)
+
         child_id = child_index if child_index else person.id
         siblings = RegPersonsSiblings.objects.select_related().filter(
             child_person_id=child_id, is_void=False,
@@ -1083,7 +1090,9 @@ def edit_person(request, id):
                 for new_ptype in person_types:
                     if new_ptype not in type_check_list:
                         new_ptypes.append(new_ptype)
-                print ('add'), new_ptypes, 'remove', remove_ptypes
+
+                print ('add', new_ptypes, 'remove', remove_ptypes)
+
                 save_person_type(new_ptypes, eperson_id)
                 remove_person_type(remove_ptypes, eperson_id)
 
@@ -1096,7 +1105,9 @@ def edit_person(request, id):
                         'identifier_type_id', flat=True)
 
                 if child_services and 'IWKF' not in personids:
-                    print ('Create WF'), child_services
+
+                    print ('Create WF', child_services)
+
                     if child_services == 'AYES':
                         workforce_id = workforce_id_generator(eperson_id)
                 if 'TBGR' in person_types and 'ISCG' not in personids:
@@ -1131,7 +1142,9 @@ def edit_person(request, id):
                 reg_ovc = request.session.get('reg_ovc', False)
                 ovc_cbos = ['TBGR', 'TWVL', 'TBVC']
                 ovc_type = str(person_type)
-                print ('ptypes'), ovc_type
+
+                print ('ptypes', ovc_type)
+
                 if reg_ovc and ovc_type in ovc_cbos:
                     cbo_id = request.POST.get('cbo_unit_id')
                     org, created = RegPersonsOrgUnits.objects.update_or_create(
@@ -1146,7 +1159,9 @@ def edit_person(request, id):
                         person_id=eperson_id, is_void=False).exclude(
                         org_unit_id=cbo_id)
                     for op in ops:
-                        print ('delink'), op.id
+
+                        print ('delink', op.id)
+
                         op.is_void = True
                         op.date_delinked = now
                         op.save()
@@ -1154,7 +1169,9 @@ def edit_person(request, id):
                 # For households
                 attached_cg = extract_post_params(request, naming='cc_')
                 attached_sb = extract_post_params(request, naming='sb_')
-                print ('SB'), attached_cg, attached_sb
+
+                print ('SB', attached_cg, attached_sb)
+
                 members = [eperson_id]
                 for acg in attached_cg:
                     members.append(acg)
@@ -1218,7 +1235,9 @@ def edit_person(request, id):
             # These are for children household - Introduced in V2
             child_index, members = get_household(person.id)
             child_id = child_index if child_index else person.id
-            print ('HH'), child_index, members
+
+            print ('HH', child_index, members)
+
             siblings = RegPersonsSiblings.objects.select_related().filter(
                 child_person_id=child_id, is_void=False,
                 date_delinked=None).exclude(sibling_person_id=id)
@@ -1257,7 +1276,9 @@ def edit_person(request, id):
                 area_id = pgeo.area_id
                 area_type = pgeo.area.area_type_id
                 geo_type = pgeo.area_type
-                print('IN'), area_id
+
+                print ('IN', area_id)
+
                 if geo_type == 'GLTW':
                     if area_type == 'GPRV' and area_id:
                         working_in_county.append(area_id)
@@ -1275,8 +1296,10 @@ def edit_person(request, id):
                         if area_id:
                             living_in_ward = area_id
             # Hack to remove sub_county and ward ids
-            print ('LIVIN IN'), living_in_county, area_id
-            # Get extid values
+
+            print ('LIVIN IN', living_in_county, area_id)
+         
+        # Get extid values
             id_map = {'INTL': 'national_id', 'IMAN': 'staff_id',
                       'IWKF': 'is_workforce', 'ISCG': 'caregiver_id',
                       'ISOV': 'birth_reg_id', 'CPHM': 'other_phone_number',
@@ -1334,7 +1357,9 @@ def edit_person(request, id):
                 work_region = '1'
             else:
                 working_in_county = counties_from_aids(working_in_subcounty)
-                print ('CNT'), working_in_county, working_in_subcounty
+
+                print ('CNT', working_in_county, working_in_subcounty)
+
                 work_region = '2'
             # Living in county
             list_subcounties = []
@@ -1517,7 +1542,9 @@ def registry_look(request):
                 if national == 0:
                     filters = False
             filter_id = request.user if filters and not su else False
-            print ('PPS'), datas, extras, filter_id
+
+            print ('PPS', datas, extras, filter_id)
+
             results = get_geo_selected(results, datas, extras, filter_id)
             res_extras = map(str, extras)
             if res_extras:
@@ -1583,7 +1610,9 @@ def person_actions(request):
                 attached_cg = extract_post_params(request, naming='cc_')
                 # This will be a single record - Re-used method
                 cpims_id = request.POST.get('caregiver_cpims_id')
-                print ('CHK'), attached_cg
+
+                print ('CHK', attached_cg)
+
                 for ncg in attached_cg:
                     dob = None
                     if len(attached_cg[ncg]) > 2:
@@ -1598,8 +1627,10 @@ def person_actions(request):
                         idno = cgobj['idno'] if 'idno' in cgobj else None
                         tel_no = cgobj['tel'] if 'tel' in cgobj else None
                         tel = tel_no if tel_no else None
-                        print ('obj'), cgobj
-                        print ('tel'), tel
+
+                        print ('obj', cgobj)
+                        print ('tel', tel)
+
                         if caregiver_id == 0:
                             if date_of_birth:
                                 dob = convert_date(date_of_birth)
@@ -1700,7 +1731,9 @@ def person_actions(request):
         return JsonResponse(results, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print('Error on persons query - %s' % (str(e)))
+
+        print ('Error on persons query - %s' % (str(e)))
+
         raise e
 
 
