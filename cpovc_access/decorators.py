@@ -8,17 +8,16 @@ from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 from django.utils import timezone as datetime
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
+from urllib3.packages import six
 
 from cpovc_access.models import AccessLog
 from cpovc_access.models import AccessAttempt
 from cpovc_access.signals import user_locked_out
 import cpovc_access
-from django.utils import six
-
 
 PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', '127.')
 
@@ -68,6 +67,7 @@ def should_lock_out_by_combination_user_and_ip():
     """Handling user and ip combinations."""
     return getattr(settings, 'AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP', False)
 
+
 COOLOFF_TIME = getattr(settings, 'AXES_COOLOFF_TIME', None)
 if (isinstance(COOLOFF_TIME, int) or isinstance(COOLOFF_TIME, float)):
     COOLOFF_TIME = timedelta(hours=COOLOFF_TIME)
@@ -84,15 +84,13 @@ ONLY_WHITELIST = getattr(settings, 'AXES_ONLY_ALLOW_WHITELIST', False)
 IP_WHITELIST = getattr(settings, 'AXES_IP_WHITELIST', None)
 IP_BLACKLIST = getattr(settings, 'AXES_IP_BLACKLIST', None)
 
-ERROR_MESSAGE = ugettext_lazy("Please enter a correct username and password. "
-                              "Note that both fields are case-sensitive.")
-
+ERROR_MESSAGE = gettext_lazy("Please enter a correct username and password. "
+                             "Note that both fields are case-sensitive.")
 
 log = logging.getLogger(LOGGER)
 if VERBOSE:
     log.info('AXES: BEGIN LOG')
     log.info('Using django-axes ' + cpovc_access.get_version())
-
 
 if BEHIND_REVERSE_PROXY:
     log.debug('Axes is configured to be behind reverse proxy...'
@@ -146,7 +144,7 @@ def get_ip_address_from_request(request):
             if remote_ip and is_valid_ip(remote_addr):
                 ip_address = remote_addr.strip()
     if not ip_address:
-            ip_address = '127.0.0.1'
+        ip_address = '127.0.0.1'
     return ip_address
 
 
@@ -305,6 +303,7 @@ def get_user_attempts(request):
 
 def watch_login(func):
     """Used to decorate the django.contrib.admin.site.login method."""
+
     def decorated_login(request, *args, **kwargs):
         # share some useful information
         if func.__name__ != 'decorated_login' and VERBOSE:
@@ -343,9 +342,9 @@ def watch_login(func):
             # see if the login was successful
 
             login_unsuccessful = (
-                response and
-                not response.has_header('location') and
-                response.status_code != 302
+                    response and
+                    not response.has_header('location') and
+                    response.status_code != 302
             )
 
             AccessLog.objects.create(
@@ -375,8 +374,7 @@ def lockout_response(request):
             'failure_limit': FAILURE_LIMIT,
             'username': request.POST.get(USERNAME_FORM_FIELD, '')
         }
-        return render_to_response(LOCKOUT_TEMPLATE, context,
-                                  context_instance=RequestContext(request))
+        return render(template_name=LOCKOUT_TEMPLATE, context=context, request=request)
 
     lockout_url = get_lockout_url()
     if lockout_url:

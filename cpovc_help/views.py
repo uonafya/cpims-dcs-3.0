@@ -15,7 +15,7 @@ def help_home(request):
     """Method to do pivot reports."""
     try:
         return render(request, 'help/home.html', {'form': {}})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -28,7 +28,7 @@ def help_downloads(request):
         docs = OVCDownloads.objects.filter(is_void=False)
         return render(request, 'help/downloads.html',
                       {'docs': docs, 'form': {}})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -40,7 +40,7 @@ def help_faq(request):
     try:
         faqs = OVCFAQ.objects.filter(is_void=False)
         return render(request, 'help/faq.html', {'form': {}, 'faqs': faqs})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -86,7 +86,7 @@ def doc_download(request, name):
             file_header = urllib.quote(name.encode('utf-8'))
             fheader = 'filename*=UTF-8\'\'%s' % file_header
         response['Content-Disposition'] = 'attachment; ' + fheader
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         return response

@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.utils.module_loading import import_string
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from xlwt.compat import unicode
 
 from cpovc_access.models import PasswordChange, LoginAttempt
 

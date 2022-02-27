@@ -2,9 +2,9 @@
 import logging
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.views import password_change
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
 
 from cpovc_access.forms import StrictPasswordChangeForm
@@ -208,6 +208,6 @@ def admin_password_change(request):
     }
     if admin.site.password_change_template is not None:
         defaults['template_name'] = admin.site.password_change_template
-    return password_change(request, **defaults)
+    return PasswordChangeView(request, **defaults)
 
 admin.site.password_change = admin_password_change

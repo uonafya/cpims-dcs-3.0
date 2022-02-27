@@ -1,12 +1,12 @@
 """URLs for authentication module."""
-from django.conf.urls import patterns, url
+from django.urls import include, path
 
 # This should contain urls related to auth app ONLY
-urlpatterns = patterns('cpovc_auth.views',
-                       url(r'^$', 'home'),
-                       url(r'^register/$', 'register'),
-                       url(r'^ping/$', 'user_ping', name='user_ping'),
-                       url(r'^roles/$', 'roles_home', name='roles_home'),
-                       url(r'^roles/edit/(?P<user_id>\d+)/$', 'roles_edit',
+urlpatterns = include('cpovc_auth.views',
+                       path(r'^$', 'home'),
+                       path(r'^register/$', 'register'),
+                       path(r'^ping/$', 'user_ping', name='user_ping'),
+                       path(r'^roles/$', 'roles_home', name='roles_home'),
+                       path(r'^roles/edit/(?P<user_id>\d+)/$', 'roles_edit',
                            name='roles_edit'),
                        )

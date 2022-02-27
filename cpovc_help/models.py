@@ -12,7 +12,7 @@ class OVCDownloads(models.Model):
     downloads = models.BigIntegerField(default=0)
     doc_tags = models.CharField(max_length=255)
     document = models.FileField(upload_to='documents')
-    person = models.ForeignKey(RegPerson, null=True)
+    person = models.ForeignKey(RegPerson, null=True, on_delete=models.CASCADE)
     is_public = models.BooleanField(default=False)
     is_void = models.BooleanField(default=False)
 
@@ -32,7 +32,7 @@ class OVCDownloads(models.Model):
         verbose_name = 'DCS / OVC Document'
         verbose_name_plural = 'DCS / OVC Documents'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.name
 
@@ -51,6 +51,6 @@ class OVCFAQ(models.Model):
         verbose_name = 'FAQ Detail'
         verbose_name_plural = 'FAQ Details'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.faq_title

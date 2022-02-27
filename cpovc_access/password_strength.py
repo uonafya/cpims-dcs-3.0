@@ -4,7 +4,8 @@ import unicodedata
 
 from django.contrib.auth.hashers import check_password
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+from xlwt.compat import unicode
 
 from cpovc_access import BasePolicy
 from cpovc_access.models import PasswordChange

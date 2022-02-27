@@ -341,7 +341,7 @@ function fnSaveSchool()
                 if(school_ward)
                 {
                     $.ajax({
-                        url: '{% url 'new_school' %}',
+                        url: "{% url 'new_school' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -425,7 +425,7 @@ function LoadSchools()
 
     var multiselect_data = [];
     $.ajax({
-                url: '{% url 'manage_schools' %}',
+                url: "{% url 'manage_schools' %}",
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
