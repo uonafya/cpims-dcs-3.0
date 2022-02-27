@@ -7,4 +7,8 @@
 
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9 (cpims-dcs-3.0)" project-jdk-type="Python SDK" />
 
+  <component name="PyCharmProfessionalAdvertiser">
+    <option name="shown" value="true" />
+  </component>
+
 </project>

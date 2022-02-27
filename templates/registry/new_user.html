@@ -18,7 +18,9 @@
     <i class="fa fa-check fa-2x pull-left"></i>
     <ul class="messages">
         {% for message in messages %}
-        <li{% if message.error %} class="{{ message.danger }}"{% endif %}>{{ message }}</li>
+
+        <li>{% if message.error %} class="{{ message.danger }}"{% endif %}>{{ message }}</li>
+
         {% endfor %}
     </ul>
 </div>
@@ -70,7 +72,13 @@
                         
                             {% if error_msg %}
                             <p>
+
+
                                 <div class="alert alert-danger fade in m-b-15"><b>{{ error_msg }}</b></div>
+
+                                
+                                <div class="alert alert-danger fade in m-b-15"><b>{{ error_msg }}</b></div>
+
                             </p>
                             {% endif %}
 

@@ -26,7 +26,7 @@
     <i class="fa fa-check fa-2x pull-left"></i>
     <ul class="messages">
         {% for message in messages %}
-        <li{% if message.info %} class="{{ message.info }}"{% endif %}><b>{{ message }}</b></li>
+        <li>{% if message.info %} class="{{ message.info }}"{% endif %}><b>{{ message }}</b></li>
         {% endfor %}
     </ul>
 </div>
