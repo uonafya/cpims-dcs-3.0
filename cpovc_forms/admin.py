@@ -58,7 +58,7 @@ def export_xls(modeladmin, request, queryset):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    for col_num in xrange(len(columns)):
+    for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num][0], font_style)
         # set column width
         ws.col(col_num).width = columns[col_num][1]
@@ -72,7 +72,7 @@ def export_xls(modeladmin, request, queryset):
             obj.area_name,
             obj.parent_area_id,
         ]
-        for col_num in xrange(len(row)):
+        for col_num in range(len(row)):
             ws.write(row_num, col_num, row[col_num], font_style)
     wb.save(response)
     return response
@@ -100,7 +100,7 @@ def export_xlsx(modeladmin, request, queryset):
         (u"Parent", 70),
     ]
 
-    for col_num in xrange(len(columns)):
+    for col_num in range(len(columns)):
         c = ws.cell(row=row_num + 1, column=col_num + 1)
         c.value = columns[col_num][0]
         c.style.font.bold = True
@@ -115,7 +115,7 @@ def export_xlsx(modeladmin, request, queryset):
             obj.area_name,
             obj.parent_area_id,
         ]
-        for col_num in xrange(len(row)):
+        for col_num in range(len(row)):
             c = ws.cell(row=row_num + 1, column=col_num + 1)
             c.value = row[col_num]
             c.style.alignment.wrap_text = True
