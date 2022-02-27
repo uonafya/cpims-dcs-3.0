@@ -19,12 +19,20 @@
 <h1 class="page-header">Registry <small>Organizational Unit Details</small></h1>
 <!-- end page-header -->
 {% if messages %}
+<<<<<<< HEAD
+<div id="message" class="alert alert-success fade in">
+=======
 <div id="messages" class="alert alert-success fade in">
+>>>>>>> origin/main
     <span class="close" data-dismiss="alert">×</span>
     <i class="fa fa-check fa-2x pull-left"></i>
 	<ul class="messages">
 	    {% for message in messages %}
+<<<<<<< HEAD
+	    <li>{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+=======
 	    <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+>>>>>>> origin/main
 	    {% endfor %}
 	</ul>
 </div>

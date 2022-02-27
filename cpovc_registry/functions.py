@@ -475,8 +475,10 @@ def get_chvs(person_id):
         for person in persons:
             cbo_detail[person.person_id] = person.person.full_name
         chvs = cbo_detail.items()
+
     except Exception as e:
         print ("error getting CHV - %s" % (str(e)))
+
         return ()
     else:
         return chvs
@@ -594,6 +596,7 @@ def get_list_types(list_type=['organisation_type_id']):
                 org_id = orgs[org]
                 orgs_dict[org_id] = []
         return orgs_dict
+
     except Exception as e:
         print ('error - %s' % (str(e)))
         pass
@@ -607,7 +610,9 @@ def get_user_geos(user):
         results = {'sub_counties': [], 'counties': [], 'wards': []}
         user_geos = CPOVCUserRoleGeoOrg.objects.select_related().filter(
             is_void=False, user_id=user_id, area_id__isnull=False)
+
         print ("CHECK", user_geos, user_id)
+
         for user_geo in user_geos:
             geo_id = user_geo.area_id
             sub_counties.append(geo_id)
@@ -631,8 +636,10 @@ def get_user_details(person):
     try:
         person_appuser = AppUser.objects.get(reg_person=person)
         return person_appuser
+
     except Exception as e:
         print ("Get user details error - %s" % (str(e)))
+
         return None
 
 
@@ -644,8 +651,10 @@ def counties_from_aids(area_list, area_type='GDIS'):
             geos = SetupGeography.objects.filter(
                 area_id__in=area_list, area_type_id=area_type,
                 is_void=False).values_list('parent_area_id', flat=True)
+
     except Exception as e:
         print ('Error getting county list from area ids - %s' % (str(e)))
+
         return []
     else:
         return geos
@@ -657,8 +666,10 @@ def geos_from_aids(area_list, area_type='GWRD'):
         geos = SetupGeography.objects.filter(
             parent_area_id__in=area_list, area_type_id=area_type,
             is_void=False).values_list('area_id', flat=True)
+
     except Exception as e:
         print ('Error getting geo list from area ids - %s' % (str(e)))
+
         return []
     else:
         return geos
@@ -671,8 +682,10 @@ def create_geo_list(geo_dict, form_items, geo_type='GLTW'):
             for geo_item in form_items:
                 if geo_item:
                     geo_dict[int(geo_item)] = geo_type
+
     except Exception as e:
         print ('Error creating persons geos - %s' % (str(e)))
+
         return geo_dict
     else:
         return geo_dict
@@ -716,8 +729,10 @@ def save_audit_trail(request, params, audit_type='Person'):
                 ip_address=ip_address,
                 meta_data=meta_data,
                 app_user_id=user_id).save()
+
     except Exception as e:
         print ('Error saving audit - %s' % (str(e)))
+
         pass
     else:
         pass
@@ -795,8 +810,10 @@ def save_sibling(request, attached_sb, person_id):
                 params['paper_person_id'] = None
                 params['person_id'] = int(sibling_id)
                 save_audit_trail(request, params)
+
     except Exception as e:
         print ('Error attaching sibling - ', str(e))
+
         pass
     else:
         return new_sib_ids
@@ -1046,7 +1063,9 @@ def auto_suggest_person(request, query, qid=0):
                 if case_ids:
                     # Now filter only cases handled by this org unit
                     my_org_id = request.session.get('ou_primary')
+
                     print ('PERMS', my_org_id, case_ids)
+
                     all_cids = OVCCaseGeo.objects.filter(
                         is_void=False, case_id_id__in=case_ids,
                         report_orgunit_id=my_org_id)
@@ -1063,8 +1082,10 @@ def auto_suggest_person(request, query, qid=0):
                         val['cases'] = cases
                 val['label'] = '%s (%s)' % (name, len(cases))
             results.append(val)
+
     except Exception as e:
         print ('error checking persons - %s' % (str(e)))
+
         return []
     else:
         return results
@@ -1091,7 +1112,9 @@ def extract_post_params(request, naming='cc_'):
                     cid = vals[1]
                     req_vals[cid] = val.split(',')
         return req_vals
+
     except Exception as e:
+
         raise e
 
 
@@ -1125,7 +1148,9 @@ def create_olists(org_lists, org_detail, org_ids, ltype=0, i_type=0):
                         org_ids.append(unit_id)
                 else:
                     org_ids.append(unit_id)
+
     except Exception as e:
+
         raise e
     else:
         return org_detail, org_ids
@@ -1154,9 +1179,11 @@ def get_specific_orgs(user_id, i_type=0):
                     org_detail, ssub_org_ids = create_olists(
                         ssub_results, org_detail, org_ids, 2, i_type)
         result = org_detail.items()
+
     except Exception as e:
         error = 'Error getting specific orgs - %s' % (str(e))
         print (error)
+
         return result
     else:
         return result
@@ -1229,9 +1256,11 @@ def get_specific_geos(list_ids, registry='orgs', reg_type=[]):
                         orgs[org_id] = [area_name]
                     else:
                         orgs[org_id].append(area_name)
+
     except Exception as e:
         error = 'Error getting geos - %s' % (str(e))
         print (error)
+
     else:
         return orgs
 
@@ -1241,9 +1270,11 @@ def get_specific_units(org_ids):
     try:
         result = RegOrgUnitGeography.objects.select_related().filter(
             org_unit_id__in=org_ids, is_void=False)
+
     except Exception as e:
         error = 'Error getting geos - %s' % (str(e))
         print (error)
+
     else:
         return result
 
@@ -1288,7 +1319,9 @@ def get_all_geo_list(filters=False):
         geo_lists = geo_lists.values(
             'area_id', 'area_type_id', 'area_name', 'parent_area_id')
         # .exclude(area_type_id='GPRV')
+
     except Exception as e:
+
         raise e
     else:
         return geo_lists
@@ -1312,7 +1345,9 @@ def get_geo_list(geo_lists, geo_filter, add_select=False, user_filter=[]):
                     else:
                         area_detail[area_id] = area_name
             result = area_detail.items()
+
     except Exception as e:
+
         raise e
     else:
         return result
@@ -1335,9 +1370,11 @@ def search_org_units(unit_types, is_closed):
         if unit_types:
             # org_units = org_unit_type_filter(org_units, unit_types)
             org_units = org_units.filter(org_unit_type_id__in=unit_types)
+
     except Exception as e:
         error = "Error searching org units - %s" % (str(e))
         print (error)
+
         return {}
     else:
         return org_units
@@ -1348,9 +1385,11 @@ def get_all_org_units():
     try:
         org_units = RegOrgUnit.objects.all().values(
             'id', 'org_unit_id_vis', 'org_unit_name')
+
     except Exception as e:
         error = "Error getting org units - %s" % (str(e))
         print (error)
+
         return None
     else:
         return org_units
@@ -1365,8 +1404,10 @@ def get_org_units(initial="Select unit"):
             unit_vis = unit['org_unit_id_vis']
             unit_name = unit['org_unit_name']
             unit_detail[unit['id']] = '%s %s' % (unit_vis, unit_name)
+
     except Exception as e:
         print ("error - %s" % (str(e)))
+
         return {}
     else:
         return unit_detail.items()
@@ -1380,9 +1421,11 @@ def save_contacts(contact_id, contact_value, org_unit):
             defaults={'contact_detail_type_id': contact_id,
                       'contact_detail': contact_value,
                       'org_unit_id': org_unit, 'is_void': False},)
+
     except Exception as e:
         error = 'Error searching org unit -%s' % (str(e))
         print (error)
+
         return None
     else:
         return contact, created
@@ -1398,9 +1441,11 @@ def get_contacts(org_id):
         for contact in contacts:
             contact_type = 'contact_%s' % (contact['contact_detail_type_id'])
             contact_dict[contact_type] = contact['contact_detail']
+
     except Exception as e:
         error = 'Error searching org unit -%s' % (str(e))
         print (error)
+
         return None
     else:
         return contact_dict
@@ -1414,9 +1459,11 @@ def save_external_ids(identifier_id, identifier_value, org_unit):
             defaults={'identifier_type_id': identifier_id,
                       'identifier_value': identifier_value,
                       'org_unit_id': org_unit, 'is_void': False},)
+
     except Exception as e:
         error = 'Error searching org unit -%s' % (str(e))
         print (error)
+
         return None
     else:
         return contact, created
@@ -1490,7 +1537,9 @@ def close_org_unit(close_date, org_unit_id):
         org_unit = get_object_or_404(RegOrgUnit, pk=org_unit_id)
         org_unit.date_closed = close_date
         org_unit.save(update_fields=["date_closed"])
+
     except Exception as e:
+
         raise e
     else:
         pass
@@ -1504,7 +1553,9 @@ def set_person_dead(date_of_death, person_id):
         person_detail = get_object_or_404(RegPerson, pk=person_id)
         person_detail.date_of_death = date_of_death
         person_detail.save(update_fields=["date_of_death"])
+
     except Exception as e:
+
         raise e
 
 
@@ -1514,7 +1565,9 @@ def delete_org_unit(org_unit_id):
         org_unit = get_object_or_404(RegOrgUnit, pk=org_unit_id)
         org_unit.is_void = True
         org_unit.save(update_fields=["is_void"])
+
     except Exception as e:
+
         raise e
 
 
@@ -1524,7 +1577,9 @@ def delete_person(person_id):
         person_detail = get_object_or_404(RegPerson, pk=person_id)
         person_detail.is_void = True
         person_detail.save(update_fields=["is_void"])
+
     except Exception as e:
+
         raise e
 
 
@@ -1594,7 +1649,9 @@ def check_duplicate(person_uid):
         person = PersonsMaster(id=person_uid)
         person.save()
     except Exception as e:
+
         print ('error in duplicate page check - %s' % (str(e)))
+
         return None
     else:
         return person
@@ -1617,7 +1674,9 @@ def search_person_name(request, name, person_type=''):
             row = cursor.fetchall()
             cids = [r[0] for r in row]
     except Exception as e:
+
         print ('Error querying person - %s' % (str(e)))
+
         return []
     else:
         return cids
@@ -1890,7 +1949,9 @@ def get_dashboards(request, did, org_ids):
                        'count': 'N/A', 'item_id': case.pk}
                 res.append(vls)
     except Exception as e:
+
         print('error - %s' % (str(e)))
+
         return []
     else:
         return res
