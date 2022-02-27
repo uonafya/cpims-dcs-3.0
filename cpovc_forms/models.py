@@ -859,7 +859,7 @@ class ListBanks(models.Model):
         verbose_name = 'Bank'
         verbose_name_plural = 'Banks'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.bank_name
 
@@ -957,7 +957,7 @@ class OVCGokBursary(models.Model):
         verbose_name = 'GoK Bursary'
         verbose_name_plural = 'GoK Bursaries'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.application_id)
 
@@ -991,7 +991,7 @@ class OVCBasicCRS(models.Model):
         verbose_name = 'Basic Case Record'
         verbose_name_plural = 'Basic Case Records'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s' % (self.case_serial)
 '''
@@ -1042,7 +1042,7 @@ class OVCBasicCRS(models.Model):
         verbose_name = 'Basic Case Record'
         verbose_name_plural = 'Basic Case Records'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s' % (self.case_serial)
 
@@ -1069,7 +1069,7 @@ class OVCBasicPerson(models.Model):
         verbose_name = 'Basic Person'
         verbose_name_plural = 'Basic Persons'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s - %s %s' % (
             self.get_person_type_display(), self.first_name, self.surname)
@@ -1092,7 +1092,7 @@ class OVCBasicCategory(models.Model):
         verbose_name = 'Basic Category'
         verbose_name_plural = 'Basic Category'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s' % (self.case_category)
 
@@ -1120,7 +1120,7 @@ class OvcCasePersons(models.Model):
         verbose_name = 'Case Other Person'
         verbose_name_plural = 'Case Other Persons'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s %s' % (self.person_first_name, self.person_surname)
 
@@ -1142,7 +1142,7 @@ class OvcCaseInformation(models.Model):
         verbose_name = 'Case Information'
         verbose_name_plural = 'Case Information'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s' % (self.info_type)
 
@@ -1163,6 +1163,6 @@ class OVCCaseLocation(models.Model):
         verbose_name = 'Case Area Location'
         verbose_name_plural = 'Case Area Locations'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return '%s' % (str(self.case))
