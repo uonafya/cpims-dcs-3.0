@@ -2,6 +2,8 @@ import csv
 import time
 from django.contrib import admin
 from django.http import HttpResponse
+from xlwt.compat import xrange, unicode
+
 from .models import (
     OVCCaseGeo, OVCCaseCategory, OVCBasicCRS, OVCBasicPerson, OVCBasicCategory,
     OVCPlacement, OVCDischargeFollowUp, OVCCaseRecord)
@@ -84,7 +86,7 @@ export_xls.short_description = u"Export XLS"
 def export_xlsx(modeladmin, request, queryset):
     """Export as xlsx."""
     import openpyxl
-    from openpyxl.cell import get_column_letter
+    from openpyxl.utils import get_column_letter
     fmt = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     response = HttpResponse(content_type=fmt)
     response['Content-Disposition'] = 'attachment; filename=mymodel.xlsx'
