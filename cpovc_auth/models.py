@@ -154,7 +154,7 @@ class CPOVCRole(Group):
 
 
 class CPOVCProfile(models.Model):
-    user = models.ForeignKey(AppUser)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     details = models.TextField(default="{}")
     is_void = models.BooleanField(default=False)
     timestamp_updated = models.DateTimeField(default=timezone.now)
@@ -166,10 +166,10 @@ class CPOVCProfile(models.Model):
 class CPOVCUserRoleGeoOrg(models.Model):
     # Put here to avoid cyclic imports because of User model
     # from cpovc_registry.models import RegPersonsGeo, RegOrgUnit
-    user = models.ForeignKey(AppUser)
-    group = models.ForeignKey(CPOVCRole)
-    org_unit = models.ForeignKey('cpovc_registry.RegOrgUnit', null=True)
-    area = models.ForeignKey('cpovc_main.SetupGeography', null=True)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    group = models.ForeignKey(CPOVCRole, on_delete=models.CASCADE)
+    org_unit = models.ForeignKey('cpovc_registry.RegOrgUnit', null=True, on_delete=models.CASCADE)
+    area = models.ForeignKey('cpovc_main.SetupGeography', null=True, on_delete=models.CASCADE)
     timestamp_modified = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
 

@@ -14,6 +14,8 @@ from django.db.models.query import QuerySet
 from django.utils import timezone
 from jsonfield.fields import JSONField
 from model_utils import Choices
+from urllib3.packages.six import text_type
+
 from notifications import settings as notifications_settings
 from notifications.signals import notify
 from notifications.utils import id2slug
@@ -222,7 +224,7 @@ class Notification(models.Model):
         ordering = ('-timestamp',)
         app_label = 'notifications'
 
-    def __unicode__(self):
+    def __str__(self):
         ctx = {
             'actor': self.actor,
             'verb': self.verb,
@@ -239,7 +241,7 @@ class Notification(models.Model):
         return u'%(actor)s %(verb)s %(timesince)s ago' % ctx
 
     def __str__(self):  # Adds support for Python 3
-        return self.__unicode__()
+        return self.__str__()
 
     def timesince(self, now=None):
         """
