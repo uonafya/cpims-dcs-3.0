@@ -2,7 +2,7 @@
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} Residential Placement {% endblock %}
 
@@ -19,6 +19,7 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -158,6 +159,7 @@
     </div>
 {% endblock %}
 
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
@@ -171,15 +173,15 @@ function ResidentialPlacementFollowup(person_id, placement_id)
     var id = person_id
     //console.log(person_id);
     //console.log(placement_id);
-    return window.location.href='{% url 'placement_followup' id=0 %}'.replace("0", id); 
+    return window.location.href="{% url 'placement_followup' id=0 %}".replace("0", id); 
 }
 function ResidentialPlacement(placement_type, person_id)
 {
-	return window.location.href='{% url 'placement' id=0 %}'.replace("0", person_id);
+	return window.location.href="{% url 'placement' id=0 %}".replace("0", person_id);
 }
 function CaseRecordSheet(person_id)
 {
-    return window.location.href='{% url 'new_case_record_sheet' id=0 %}'.replace("0", person_id);
+    return window.location.href="{% url 'new_case_record_sheet' id=0 %}".replace("0", person_id);
 }
 </script>
 <script>
@@ -229,4 +231,4 @@ $(document).ready(function()
 </script>
 {% endblock %}
 
-
+<!-- -------------------------updated-------------------------------- -->

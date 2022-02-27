@@ -2,7 +2,7 @@
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} Forms Registry {% endblock %}
 
@@ -26,6 +26,7 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -144,13 +145,13 @@
                             <td>{{ result.timestamp_created }}</td>
                             <td>
                                 <div class="pull-right">
-                                <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick="window.location.href='{% url 'view_case_record_sheet' id=result.form_id %}'">
+                                <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick='window.location.href="{% url 'view_case_record_sheet' id=result.form_id %}"'>
                                 <b>View</b>&nbsp;&nbsp;<i class="fa fa-binoculars"></i></a>
 
-                                <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick="window.location.href='{% url 'edit_case_record_sheet' id=result.form_id %}'">
+                                <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick='window.location.href="{% url 'edit_case_record_sheet' id=result.form_id %}"'>
                                 <b>Edit</b>&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
                                 
-                               <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick="window.location.href='{% url 'case_events' id=result.form_id %}'">
+                               <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick='window.location.href="{% url 'case_events' id=result.form_id %}"'>
                                 <b>Follow-up</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
                             </div>
                            </td>
@@ -213,17 +214,17 @@
                            </td>
                             
                             <td>
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'view_placement' id=result.form_id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "view_placement" id=result.form_id %}'">
                             <b>View</b>&nbsp;&nbsp;<i class="fa fa-binoculars"></i></a>
                             
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'edit_placement' id=result.form_id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "edit_placement" id=result.form_id %}'">
                             <b>Edit</b>&nbsp;&nbsp;<i class="fa fa-edit"></i></a>   
 
                             {% if result.discharged or result.dead %}
                                 <a href="#" class="btn  btn-sm btn-danger m-r-5">
                                 <b>No Follow-ups !</b></a>                              
                             {% else %} 
-                                <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'placement_followup' id=result.id %}'">
+                                <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "placement_followup" id=result.id %}'">
                                 <b>Follow-up</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
                             {% endif %} 
                             </td>
@@ -264,10 +265,10 @@
                             <td>{{ result.timestamp_created }}</td>
                             
                             <td>
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'view_alternative_family_care' id=result.form_id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "view_alternative_family_care" id=result.form_id %}'">
                             <b>View</b>&nbsp;&nbsp;<i class="fa fa-binoculars"></i></a>
                             
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'edit_alternative_family_care' id=result.form_id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "edit_alternative_family_care" id=result.form_id %}'">
                             <b>Edit</b>&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
                             </td>
                         </tr>
@@ -306,10 +307,7 @@
                     {% for results in resultsets %}
                         {% for result in results %}
                         <tr>
-                            <!--
-                            <td style="display:none;">{{ result.education_followup_id }}</td>
-                            <td style="display:none;">{{ result.bursary_id }}</td>
-                            -->
+
                             <td>{{ result.id }}</td>
                             <td>{{ result.first_name }}</td>
                             <td>{{ result.surname }}</td>
@@ -319,24 +317,22 @@
                             <td>{{ result.timestamp_created }}</td>
                             
                             <td>
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'view_education_info' id=result.education_followup_id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "view_education_info" id=result.education_followup_id %}'">
                             <b>View</b>&nbsp;&nbsp;<i class="fa fa-binoculars"></i></a>
                             
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'edit_education_info' id=result.education_followup_id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "edit_education_info" id=result.education_followup_id %}'">
                             <b>Edit</b>&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
 
-                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'bursary_followup' id=result.id %}'">
+                            <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url "bursary_followup"id=result.id %}'">
                             <b> Followup</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
                             </td>
 
                             <!--
-
                             {% if result.has_bursary %}
                             <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'bursary_followup' id=result.bursary_id %}'">
                             <b> Followup Bursary</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
                             </td>
                             {% endif %}
-
                             -->
                         </tr>
                         {% endfor %}
@@ -563,7 +559,7 @@ function loadFormTypes()
     var values = { 'csrfmiddlewaretoken': csrftoken };
 
     $.ajax({            
-                url: '{% url 'manage_form_type' %}',
+                url: "{% url 'manage_form_type' %}",
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -594,4 +590,6 @@ function loadFormTypes()
 }
 </script>
 {% endblock %}
+
+
 

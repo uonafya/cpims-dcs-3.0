@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Case Information {% endblock %}
 
 {% load crispy_forms_tags %}
@@ -8,6 +8,7 @@
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
 {% endblock %}
 {% load app_filters %}
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -157,6 +158,8 @@
 <!-- end row -->
 {% endblock %}
 
+<!-- --------------------------------------------------------------------------- -->
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script type="text/javascript">
@@ -180,13 +183,13 @@
             if ($("#formCaseinfo").parsley().isValid() ) {
                 console.log('Is Valid');
                  $.ajax({
-                    url: '{% url 'case_info' case_id=case.case_id %}',
+                    url: "{% url 'case_info' case_id=case.case_id %}",
                     method: 'POST',
                     data: $("#formCaseinfo").serialize() + '&tab-id='+id,
                     success: function(data)
                     {
                         $("#infomessage").html(data.message);
-                        //$( ".nav" ).tabs({ 'active': '#nav-pills-tab-1' });
+
                         $('.nav a[href="#nav-pills-tab-1"]').tab('show');
                     },
                    error: function()

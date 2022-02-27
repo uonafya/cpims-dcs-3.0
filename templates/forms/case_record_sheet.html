@@ -1,8 +1,8 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} Case Record Sheet {% endblock %}
 
@@ -117,13 +117,13 @@
                         <td>No OrgUnit Info</td>
                         <td>{{ result.ovc_persongeos }}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form(2, {{result.id}})" >
+                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form(2, {{ result.id }})" >
                                 <b>{{ result.case_count }}</b>                         
                             </button>
                         </td>
                      
                         <td>                                  
-                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form(1, {{result.id}})" >
+                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form(1, {{ result.id }})" >
                                 <b>New Case Record Sheet</b>&nbsp;&nbsp;<i class="fa fa-file"></i>                          
                             </button>
                         </td>
@@ -144,6 +144,7 @@
 
 {% endblock %}
 
+<!-- ------------------------------------------------------------------------ -->
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
@@ -151,14 +152,14 @@
 <script>
 function register_new()
 {
-    return window.location.href='{% url 'new_person' %}'; 
+    return window.location.href="{% url 'new_person' %}"; 
 }
 function open_form(x, id)
 {
     if(x==1)
     {
         // redirect to new_case_record_sheet 
-        return window.location.href='{% url 'new_case_record_sheet' id=0 %}'.replace("0", id);
+        return window.location.href="{% url 'new_case_record_sheet' id=0 %}".replace("0", id);
     }
     if(x==2)
     {
@@ -171,7 +172,7 @@ function open_form(x, id)
                         'csrfmiddlewaretoken': csrftoken
                      };
         $.ajax({            
-                    url: '{% url 'manage_casehistory' %}',
+                    url: "{% url 'manage_casehistory' %}",
                     dataType: 'json',
                     method: 'POST',
                     contentType: 'application/x-www-form-urlencoded',
@@ -241,5 +242,5 @@ $(document).ready(function()
     });
 });
 </script>
-<!--<script src="{% static 'js/apps.js' %}"></script>-->
+
 {% endblock %}
