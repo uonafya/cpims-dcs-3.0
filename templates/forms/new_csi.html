@@ -548,7 +548,7 @@ function loadMultiselect(x)
 	                    'index': index
 	                 };
     	$.ajax({
-				url: '{% url 'manage_service_category' %}',
+				url: "{% url 'manage_service_category' %}"
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',
@@ -614,7 +614,7 @@ function getServices(x, domain)
 
     // do an ajax_call
     $.ajax({
-				url: '{% url 'manage_service_category' %}',
+				url: "{% url 'manage_service_category' %}",
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',

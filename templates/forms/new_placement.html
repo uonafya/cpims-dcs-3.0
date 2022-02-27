@@ -456,7 +456,7 @@ function getUserOrgUnits()
                     'csrfmiddlewaretoken': csrftoken
                  }; 
     $.ajax({
-            url: '{% url 'userorgunits_lookup' %}',
+            url: "{% url 'userorgunits_lookup' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
