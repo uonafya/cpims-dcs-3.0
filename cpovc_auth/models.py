@@ -1,14 +1,14 @@
-from django.db import models
-from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
-from django.core.mail import send_mail
+from datetime import datetime
+
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin, Group, Permission)
-from datetime import datetime
+from django.core.mail import send_mail
+from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
-from django.db.models.signals import post_save
 from notifications.signals import notify
 
 
@@ -47,7 +47,7 @@ class CPOVCUserManager(BaseUserManager):
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
-    reg_person = models.OneToOneField('cpovc_registry.RegPerson', null=False)
+    reg_person = models.OneToOneField('cpovc_registry.RegPerson', null=False, on_delete=models.CASCADE)
     role = models.CharField(max_length=20, unique=False, default='Public')
     username = models.CharField(max_length=20, unique=True)
     is_staff = models.BooleanField(default=False)
