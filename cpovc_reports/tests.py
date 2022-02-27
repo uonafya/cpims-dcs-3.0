@@ -1,4 +1,7 @@
+from urllib import response
 import pandas as pd
+
+from django.test import TestCase
 
 
 writer = pd.ExcelWriter('sales_summary.xlsx', engine='xlsxwriter')
@@ -10,3 +13,8 @@ workbook.add_vba_project('vbaProject.bin')
 writer.save()
 
 # Create your tests here.
+
+class URLTests(TestCase):
+    def test_reports(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
