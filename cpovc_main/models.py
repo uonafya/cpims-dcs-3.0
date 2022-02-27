@@ -1,11 +1,11 @@
 """Main CPIMS models."""
 import base64
+import uuid
+
 from django.db import models
 from django.utils import timezone
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 from cpovc_registry.models import RegPerson
-import uuid
 
 
 class SchoolList(models.Model):
