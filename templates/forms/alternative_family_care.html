@@ -1,8 +1,8 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} OVC Search {% endblock %}
 
@@ -89,7 +89,7 @@
                         <td><button class="btn  btn-sm btn-link m-r-5" >{{ result.case_count }}</button></td>
                      
                         <td>                                  
-                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form({{result.id}})" >
+                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form({{ result.id }})" >
                                 <b>New Alternative Family Care Form</b>&nbsp;&nbsp;<i class="fa fa-file"></i>                          
                             </button>
                         </td>
@@ -106,6 +106,8 @@
 
 {% endblock %}
 
+
+<!-- --------------------------------------------------------------- -->
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
@@ -113,7 +115,7 @@
 <script>
 function open_form(id)
 {
-    return window.location.href='{% url 'new_alternative_family_care' id=0 %}'.replace("0", id);       
+    return window.location.href='{% url "new_alternative_family_care" id=0 %}'.replace("0", id);       
 }
 </script>
 <script>
@@ -152,3 +154,5 @@ $(document).ready(function()
 </script>
 <!--<script src="{% static 'js/apps.js' %}"></script>-->
 {% endblock %}
+
+<!-- updated to latest -->

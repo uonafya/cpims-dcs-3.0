@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Alternative Family Care {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -16,6 +16,7 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -305,3 +306,5 @@ jQuery(document).ready(function()
 });
 </script>
 {% endblock %}
+
+<!-- ---------------------------------------------- -->

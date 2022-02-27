@@ -4,11 +4,10 @@ from django.utils import timezone
 from cpovc_registry.models import RegOrgUnit, RegPersonsTypes, RegPerson
 from cpovc_forms.models import OVCCaseRecord, OVCPlacement
 
-
 class RPTCaseLoad(models.Model):
     """Model for Case Load Report."""
 
-    case = models.ForeignKey(OVCCaseRecord)
+    case = models.ForeignKey(OVCCaseRecord, on_delete=models.CASCADE)
     case_serial = models.CharField(max_length=40, null=False)
     case_reporter_id = models.CharField(max_length=4)
     case_reporter = models.CharField(max_length=250)
@@ -26,7 +25,7 @@ class RPTCaseLoad(models.Model):
     county = models.CharField(max_length=250, null=True)
     sub_county_id = models.IntegerField(default=0)
     sub_county = models.CharField(max_length=250, null=True)
-    org_unit = models.ForeignKey(RegOrgUnit)
+    org_unit = models.ForeignKey(RegOrgUnit, on_delete=models.CASCADE)
     org_unit_name = models.CharField(max_length=250, null=True)
     case_status = models.IntegerField(null=False)
     intervention_id = models.CharField(max_length=4, null=True)
@@ -49,7 +48,7 @@ class RPTCaseLoad(models.Model):
         verbose_name = 'Protection Case data'
         verbose_name_plural = 'Protection Cases data'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.case_serial
 
@@ -68,6 +67,8 @@ class CCIPopulation(OVCPlacement):
         verbose_name_plural = 'CCI Populations'
 
 
+# -------------------------------------------------------------#
+
 class SystemUsage(RegPersonsTypes):
     class Meta:
         proxy = True
@@ -80,9 +81,9 @@ class RPTIPopulation(models.Model):
 
     case = models.ForeignKey(OVCCaseRecord)
     case_serial = models.CharField(max_length=40, null=False)
-    person = models.ForeignKey(RegPerson)
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     admission_number = models.CharField(max_length=40, null=False)
-    org_unit = models.ForeignKey(RegOrgUnit)
+    org_unit = models.ForeignKey(RegOrgUnit, on_delete=models.CASCADE)
     org_unit_name = models.CharField(max_length=250, null=True)
     org_unit_type_id = models.CharField(max_length=4, null=True)
     org_unit_type = models.CharField(max_length=250, null=True)
@@ -122,6 +123,9 @@ class RPTIPopulation(models.Model):
         verbose_name = 'Population Report'
         verbose_name_plural = 'Population Reports'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.case_serial
+
+
+# updated  

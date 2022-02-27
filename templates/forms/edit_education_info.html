@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Child Background Details {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -163,6 +163,7 @@
 {% endblock %}
 <!-- End content area -->
 
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>   
@@ -248,6 +249,7 @@ jQuery(document).ready(function()
     FormWizardValidation.init();
 });
 </script>
+
 <script type="text/javascript">
 $("#admmitted_to_school").change(function(event) 
 { 
@@ -320,13 +322,13 @@ function displayVals(value)
     var selections = [];
     $("#" + value + " option:selected").each(function () 
     {
-       var $this = $(this);
-       if ($this.length)
-       {
+        var $this = $(this);
+        if ($this.length)
+        {
             var selText = $this.text();
             selections.push(selText);
             //console.log(selText);
-       }
+        }
     });
     $( "#sel_"+value ).html(selections.join( ", " ) );
 }
@@ -338,7 +340,7 @@ function LoadSchools()
 
     var multiselect_data = [];
     $.ajax({
-                url: '{% url 'manage_schools' %}',
+                url: "{% url 'manage_schools' %}",
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',

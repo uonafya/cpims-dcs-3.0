@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Residential Placement Followup {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -719,6 +719,7 @@
 {% endblock %}
 <!-- End content area -->
 
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>   
@@ -909,7 +910,7 @@ function fnSaveSchool()
                 if(school_ward)
                 {
                     $.ajax({
-                        url: '{% url 'new_school' %}',
+                        url: "{% url 'new_school' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -996,7 +997,7 @@ function LoadSchools()
 
     var multiselect_data = [];
     $.ajax({
-                url: '{% url 'manage_schools' %}',
+                url: '{% url "manage_schools" %}',
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -1104,7 +1105,7 @@ function LoadPlacementEvents()
                     'csrfmiddlewaretoken': csrftoken
                  };
     $.ajax({
-                url: '{% url 'manage_placementfollowup' %}',
+                url: "{% url 'manage_placementfollowup' %}",
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -1193,7 +1194,7 @@ function deleteFunction(followup_type, value)
     
 
     $.ajax({
-        url: '{% url 'delete_placementfollowup' %}',
+        url: "{% url 'delete_placementfollowup' %}",
         dataType: 'text',
         method: 'POST',
         contentType: 'application/x-www-form-urlencoded',
@@ -1261,7 +1262,7 @@ function updateFunction(followup_type)
                         values['action'] = action;  
                         
                         $.ajax({
-                            url: '{% url 'edit_placementfollowup' %}',
+                            url: "{% url 'edit_placementfollowup' %}",
                             dataType: 'text',
                             method: 'POST',
                             contentType: 'application/x-www-form-urlencoded',
@@ -1368,7 +1369,7 @@ function updateFunction(followup_type)
                         values['action'] = action;
 
                         $.ajax({
-                            url: '{% url 'edit_placementfollowup' %}',
+                            url: "{% url 'edit_placementfollowup' %}",
                             dataType: 'text',
                             method: 'POST',
                             contentType: 'application/x-www-form-urlencoded',
@@ -1416,7 +1417,7 @@ function updateFunction(followup_type)
 
             // Update Education
             $.ajax({
-                        url: '{% url 'edit_placementfollowup' %}',
+                        url: "{% url 'edit_placementfollowup' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -1518,7 +1519,7 @@ function updateFunction(followup_type)
 
                 // Save Adverse Events
                 $.ajax({
-                        url: '{% url 'edit_placementfollowup' %}',
+                        url: "{% url 'edit_placementfollowup' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -1609,7 +1610,7 @@ function updateFunction(followup_type)
                 values['discharge_comments'] = discharge_comments;
 
                 $.ajax({
-                    url: '{% url 'edit_placementfollowup' %}',
+                    url: "{% url 'edit_placementfollowup' %}",
                     dataType: 'text',
                     method: 'POST',
                     contentType: 'application/x-www-form-urlencoded',
@@ -1827,7 +1828,7 @@ function updateFunction(followup_type)
 
         // Edit Placement
         $.ajax({
-                url: '{% url 'edit_placementfollowup' %}',
+                url: "{% url 'edit_placementfollowup' %}",
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -1896,7 +1897,7 @@ function saveFunction(value)
                     values['action'] = action;  
                     
                     $.ajax({
-                        url: '{% url 'save_placementfollowup' %}',
+                        url: "{% url 'save_placementfollowup' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -1959,7 +1960,7 @@ function saveFunction(value)
             values['action'] = action;  
             
             $.ajax({
-                url: '{% url 'save_placementfollowup' %}',
+                url: "{% url 'save_placementfollowup' %}",
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -2107,7 +2108,7 @@ function saveFunction(value)
 
             // Save Education
             $.ajax({
-                url: '{% url 'save_placementfollowup' %}',
+                url: "{% url 'save_placementfollowup' %}",
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -2318,7 +2319,7 @@ function saveFunction(value)
         
         // Save Court
         $.ajax({
-                url: '{% url 'save_placementfollowup' %}',
+                url: "{% url 'save_placementfollowup' %}",
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -2415,7 +2416,7 @@ function saveFunction(value)
 
                 // Save Adverse Events
                 $.ajax({
-                        url: '{% url 'save_placementfollowup' %}',
+                        url: "{% url 'save_placementfollowup' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -2506,7 +2507,7 @@ function saveFunction(value)
                 values['discharge_comments'] = discharge_comments;
 
                 $.ajax({
-                    url: '{% url 'save_placementfollowup' %}',
+                    url: "{% url 'save_placementfollowup' %}",
                     dataType: 'text',
                     method: 'POST',
                     contentType: 'application/x-www-form-urlencoded',
@@ -2566,7 +2567,7 @@ function viewFunction(followup_type, value)
     {
         values['followup_type'] = 'FFFF';
         $.ajax({
-            url: '{% url 'view_placementfollowup' %}',
+            url: "{% url 'view_placementfollowup' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -2608,7 +2609,7 @@ function viewFunction(followup_type, value)
         {
             // $("#wizard_placementfollowup").bwizard({ ui.index = 0; })
             $.ajax({
-                url: '{% url 'view_placementfollowup' %}',
+                url: "{% url 'view_placementfollowup' %}",
                 dataType: 'json',
                 method: 'POST',
                 data: values,
@@ -2677,7 +2678,7 @@ function viewFunction(followup_type, value)
         if(followup_type == 'Adverse Events')
         {
             $.ajax({
-                url: '{% url 'view_placementfollowup' %}',
+                url: "{% url 'view_placementfollowup' %}",
                 dataType: 'json',
                 method: 'POST',
                 data: values,
@@ -2731,7 +2732,7 @@ function viewFunction(followup_type, value)
         if(found > -1)
         {
             $.ajax({
-                url: '{% url 'view_placementfollowup' %}',
+                url: "{% url 'view_placementfollowup' %}",
                 dataType: 'json',
                 method: 'POST',
                 data: values,
@@ -2834,7 +2835,7 @@ function viewFunction(followup_type, value)
         if(followup_type == 'Discharge')
         {
             $.ajax({
-                url: '{% url 'view_placementfollowup' %}',
+                url: "{% url 'view_placementfollowup' %}",
                 dataType: 'json',
                 method: 'POST',
                 data: values,
@@ -2897,7 +2898,7 @@ function editFunction(value)
     };
 
     $.ajax({
-        url: '{% url 'view_placementfollowup' %}',
+        url: "{% url 'view_placementfollowup' %}",
         dataType: 'json',
         method: 'POST',
         data: values,
@@ -3096,7 +3097,7 @@ function getJsonObject001()
                     'action': action
                  };
      $.ajax({
-            url: '{% url 'getJsonObject001' %}',
+            url: "{% url 'getJsonObject001' %}",
             dataType: 'json',
             method: 'POST',
             data: values,

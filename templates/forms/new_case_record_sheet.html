@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} New Case Record Sheet {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -120,7 +120,6 @@ td.td_style {
 							    Referrals / Interventions
 							    <small>Case referrals/interventions and additional details.</small>
 							</li>							</li>
-
 							-->
 						</ol>
 
@@ -761,6 +760,8 @@ td.td_style {
 
 {% endblock %}
 
+
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>	
@@ -1276,7 +1277,7 @@ function getCaseSubCategories(case_category_id)
 	
 
     $.ajax({
-				url: '{% url 'manage_casecategory001' %}',
+				url: "{% url 'manage_casecategory001' %}",
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',
@@ -1577,7 +1578,6 @@ jQuery(document).ready(function()
     	$('#refferal_destination_description').attr('disabled', 'disabled');
     	$('#refferal_destination_description').val('');
     	$('#referralactors_list').val('');
-
     	$('#btn_save_referralactor').attr('disabled', 'disabled');
     	$('#refferal_present').val('AYES')
     	$('#refferal_present').trigger('change');
@@ -1750,7 +1750,7 @@ function getUserOrgUnits()
                     'csrfmiddlewaretoken': csrftoken
                  }; 
     $.ajax({
-            url: '{% url 'userorgunits_lookup' %}',
+            url: "{% url 'userorgunits_lookup' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -2467,3 +2467,5 @@ $('#perp_relation').change(function () {
 });
 </script>
 {% endblock %}
+
+
