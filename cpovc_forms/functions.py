@@ -102,7 +102,7 @@ def create_fields(field_name=[], default_txt=False):
                 dict_val[item_cat].append(items)
     except Exception as e:
         error = 'Error getting list - %s' % (str(e))
-        print error
+        print( error)
         return {}
     else:
         return dict_val
@@ -111,7 +111,7 @@ def create_fields(field_name=[], default_txt=False):
 def create_form_fields(data):
     """Method to create fields."""
     try:
-        print data
+        print( data)
         dms = {'HG': ['1a', '1s'], 'SC': ['2a', '2s'], 'PG': ['3a', '3s'],
                'PSG': ['4a', '4s'], 'EG': ['5a', '5s'], 'HE': ['6a', '6s']}
         domains = {'HG': {}, 'SC': {}, 'PG': {}, 'PSG': {}, 'EG': {}, 'HE': {}}
@@ -124,7 +124,7 @@ def create_form_fields(data):
                 else:
                     domains[domain][itd] = []
     except Exception as e:
-        print 'error with domains - %s' % (str(e))
+        print( 'error with domains - %s' % (str(e)))
         return {}
     else:
         return domains
@@ -137,12 +137,12 @@ def save_form1b(request, person_id, edit=0):
         domains = {'SC': 'DSHC', 'PS': 'DPSS', 'PG': 'DPRO',
                    'HE': 'DHES', 'HG': 'DHNU', 'EG': 'DEDU'}
         if edit:
-            print 'F1B edit'
+            print( 'F1B edit')
         else:
             f1b_date = request.POST.get('olmis_service_date')
             caretaker_id = request.POST.get('caretaker_id')
             f1bs = request.POST.getlist('f1b[]')
-            print 'save', f1b_date, f1bs
+            print( 'save', f1b_date, f1bs)
             hh = get_house_hold(caretaker_id)
             hhid = hh.id if hh else None
             event_date = convert_date(f1b_date)
@@ -160,7 +160,7 @@ def save_form1b(request, person_id, edit=0):
                            entity=f1b).save()
 
     except Exception as e:
-        print 'error saving form 1B - %s' % (str(e))
+        print( 'error saving form 1B - %s' % (str(e)))
         return None
     else:
         return True
@@ -436,7 +436,7 @@ def save_bursary(request, person_id):
             status_of_student=status_of_student)
         gok_bursary.save()
     except Exception as e:
-        print 'Error saving bursary - %s' % (str(e))
+        print( 'Error saving bursary - %s' % (str(e)))
 
 
 def get_placement(request, ou_id, person_id):

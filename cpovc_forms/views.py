@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib import messages
@@ -83,7 +83,7 @@ def validate_serialnumber(person_id, subcounty, serial_number):
             serial_number = 'CCO/' + \
                 str(county) + '/' + str(subcounty_code) + \
                 '/5/29/' + str(index) + '/' + str(year)
-    except Exception, e:
+    except Exception as e:
         raise e
     return str(serial_number)
 
@@ -118,7 +118,7 @@ def generate_serialnumber(request):
 
             # print 'serial_number >> %s' % serial_number
 
-    except Exception, e:
+    except Exception as e:
         raise e
     return JsonResponse(jsonCaseSerialNumber, content_type='application/json',
                         safe=False)
@@ -194,7 +194,7 @@ def userorgunits_lookup(request):
                         area_ids.append(regpersongeo.area_id)
 
                 if area_ids:
-                    print 'Non-national users ..'
+                    print( 'Non-national users ..')
                     # Get RegPersonsOrgUnits
                     regpersonorgunits = RegPersonsOrgUnits.objects.filter(
                         person=appuser.reg_person.id, is_void=False)
@@ -212,7 +212,7 @@ def userorgunits_lookup(request):
                             {'id': regorgunit.id,
                              'org_unit_name': str(regorgunit.org_unit_name)})
                 else:
-                    print 'National users (DCS) ..'
+                    print ('National users (DCS) ..')
                     # Get RegPersonsOrgUnits  - ALL
                     regpersonorgunits = RegPersonsOrgUnits.objects.filter(
                         is_void=False)
@@ -253,7 +253,7 @@ def userorgunits_lookup(request):
                 print('AREAS', area_ids, appuser.reg_person.id)
 
                 if area_ids:
-                    print 'Non-national users ..'
+                    print('Non-national users ..')
                     # Get RegPersonsOrgUnits
                     regpersonorgunits = RegPersonsOrgUnits.objects.filter(
                         person=appuser.reg_person.id, is_void=False)
@@ -272,7 +272,7 @@ def userorgunits_lookup(request):
                             {'id': regorgunit.id,
                              'org_unit_name': str(regorgunit.org_unit_name)})
                 else:
-                    print 'National users (DCS) ..'
+                    print( 'National users (DCS) ..')
                     regorgunits = RegOrgUnit.objects.filter(
                         org_unit_type_id__in=ou_types, is_void=False)
 
@@ -298,7 +298,7 @@ def userorgunits_lookup(request):
                         area_ids.append(regpersongeo.area_id)
 
                 if area_ids:
-                    print 'Non-national users ..'
+                    print( 'Non-national users ..')
                     # Get RegPersonsOrgUnits
                     regpersonorgunits = RegPersonsOrgUnits.objects.filter(
                         person=appuser.reg_person.id, is_void=False)
@@ -315,7 +315,7 @@ def userorgunits_lookup(request):
                         jsonOrgUnitsResults.append({'id': regorgunit.id,
                                                     'org_unit_name': str(regorgunit.org_unit_name)})
                 else:
-                    print 'National users (DCS) ..'
+                    print( 'National users (DCS) ..')
                     # Get RegPersonsOrgUnits  - ALL
                     regpersonorgunits = RegPersonsOrgUnits.objects.filter(
                         is_void=False)
@@ -340,7 +340,7 @@ def userorgunits_lookup(request):
                         jsonOrgUnitsResults.append({'id': regorgunit.id,
                                                     'org_unit_name': str(regorgunit.org_unit_name)})
 
-    except Exception, e:
+    except Exception as e:
         raise e
     return JsonResponse(jsonOrgUnitsResults, content_type='application/json',
                         safe=False)
@@ -371,7 +371,7 @@ def usersubcounty_lookup(request):
             for subcounty_id in subcounty_ids:
                 jsonSubcountyResults.append({'area_id': subcounty_id,
                                              'area_name': translate_geo(subcounty_id)})
-    except Exception, e:
+    except Exception as e:
         raise e
     return JsonResponse(jsonSubcountyResults, content_type='application/json',
                         safe=False)
@@ -390,7 +390,7 @@ def userward_lookup(request):
             for user_geoloc in user_geolocs:
                 jsonWardResults.append({'area_id': user_geoloc.area_id,
                                         'area_name': translate_geo(user_geoloc.area_id)})
-    except Exception, e:
+    except Exception as e:
         raise e
     return JsonResponse(jsonWardResults, content_type='application/json',
                         safe=False)
@@ -407,7 +407,7 @@ def forms_home(request):
         return render(request, 'forms/forms_index.html',
                       {'status': 200,
                        'form': form})
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -466,7 +466,7 @@ def forms_registry(request):
                 else:
                     for person in personsets:
                         person_ids.append(int(person.id))
-                print 'Get Person IDs (%s)... ' % person_ids
+                print( 'Get Person IDs (%s)... ' % person_ids)
                 ovccaserecords_queryset = OVCCaseRecord.objects.filter(
                     person_id__in=person_ids, is_void=False)
                 if case_serial:
@@ -500,7 +500,7 @@ def forms_registry(request):
                         for ovccasegeo in ovccasegeos:
                             case_ids.append(str(ovccasegeo.case_id_id))
                             # userorgunit_reported_caseids.append(str(ovccasegeo.case_id_id))
-                    print 'Get Cases from OrgUnit(s) of Logged User ... '
+                    print ('Get Cases from OrgUnit(s) of Logged User ... ')
 
                     # 3. Get Cases Transfered to Logged User OrgUnits
                     transfer_to_orgunits = []
@@ -523,7 +523,7 @@ def forms_registry(request):
                                                 case_ids.append(
                                                     str(ovccaserecord.case_id))
                                             # userorgunit_transfered_caseids.append(str(ovccaserecord.case_id))
-                    print 'Get Cases Transfered to Logged User OrgUnits ... '
+                    print( 'Get Cases Transfered to Logged User OrgUnits ... ')
                 else:
                     '''
                     cases = []
@@ -537,7 +537,7 @@ def forms_registry(request):
                     for ovccase in cases:
                         case_ids.append(str(ovccase.case_id))
 
-                    print 'Get All Case for SuperUsers/Administrator/National Level WFC ... '
+                    print('Get All Case for SuperUsers/Administrator/National Level WFC ... ')
                 # Get case categories and geo locations
                 case_cats = {}
                 case_locs = {}
@@ -561,7 +561,7 @@ def forms_registry(request):
                     case_locs[cc_id] = cloc.occurence_subcounty.area_name
 
                 # 4. Generate Case Status - TRANSFERRED/ACTIVE
-                print 'Next step'
+                print ( 'Next step')
                 # 5. Exclude cases transferred from logged user org_unit
                 transfered_caseids = []
                 transfer_ids = []
@@ -589,16 +589,16 @@ def forms_registry(request):
                             case_ids.remove(transfered_caseid)
 
                 # 6. Generate resultsets
-                print 'Next Step 1'
+                print ('Next Step 1')
                 creators = []
                 rs_sets = []
                 for person in person_ids:
-                    print 'PERS', person, case_ids
+                    print( 'PERS', person, case_ids)
                     ovc_caserecords = ovccaserecords_queryset.filter(
                         case_id__in=case_ids, is_void=False, person=person)
                     if ovc_caserecords:
                         for ovc_caserecord in ovc_caserecords:
-                            print 'Found case', ovc_caserecord.person_id
+                            print( 'Found case', ovc_caserecord.person_id)
                             regperson = ovc_caserecord.person
                             creator_id = ovc_caserecord.created_by
                             if creator_id not in creators:
@@ -619,7 +619,7 @@ def forms_registry(request):
                                 ovc_caserecord.case_id).replace('-', ''))
                         rs_sets.append(ovc_caserecords)
                 all_users = {}
-                print 'Next Step 2'
+                print( 'Next Step 2')
                 app_users = AppUser.objects.filter(id__in=creators)
                 for app_user in app_users:
                     fname = app_user.reg_person.first_name
@@ -812,8 +812,8 @@ def forms_registry(request):
                             caretaker_id = ovcreg.caretaker_id if ovcreg else None
                             ovchh = get_object_or_404(OVCHouseHold, head_person=caretaker_id, is_void=False)
                             household_id = ovchh.id if ovchh else None
-                    except Exception, e:
-                        print str(e)
+                    except Exception as e:
+                        print( str(e))
                     
                     hhva_data = OVCCareEvents.objects.filter(house_hold=household_id, event_type_id='FHSA', is_void=False)
                     if hhva_data:
@@ -827,7 +827,7 @@ def forms_registry(request):
                             setattr(hhva, 'form_id', str(hhva.event).replace('-', ''))
                             setattr(hhva, 'date_of_hhva', hhva.date_of_event)
                     resultsets.append(hhva_data)
-                print 'resultsets : %s' %resultsets
+                print ('resultsets : %s' %resultsets)
 
             else:
                 msg = 'No ' + \
@@ -843,7 +843,7 @@ def forms_registry(request):
             return render(request, 'forms/forms_registry.html',
                           {'form': form, 'resultsets': resultsets, 'vals': vals, 'form_type': form_type})
 
-    except Exception, e:
+    except Exception as e:
         msg = 'Forms Search error - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
 
@@ -922,8 +922,8 @@ def documents_manager_search(request):
             return render(request, 'forms/documents_manager.html',
                           {'form': form, 'resultsets': resultsets, 'vals': vals, 'person_type': person_type})
         else:
-            print 'Not $POST'
-    except Exception, e:
+            print ('Not $POST')
+    except Exception as e:
         msg = 'DocumentsManager Child/Person Search Error - %s' % (str(e))
         messages.add_message(request, messages.INFO, msg)
         return HttpResponseRedirect(reverse(ovc_search))
@@ -975,8 +975,8 @@ def documents_manager(request):
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(reverse(documents_manager))
         else:
-            print 'Not $POST'
-    except Exception, e:
+            print ('Not $POST')
+    except Exception as e:
         msg = 'Document(s) Save Error - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(documents_manager))
@@ -1056,7 +1056,7 @@ def case_record_sheet(request):
             else:
                 msg = 'No results for (%s).Name does not exist in database.' % search_string
                 messages.add_message(request, messages.ERROR, msg)
-        except Exception, e:
+        except Exception as e:
             msg = 'OVC search error - %s' % (str(e))
             messages.add_message(request, messages.INFO, msg)
         return HttpResponseRedirect(reverse(case_record_sheet))
@@ -1302,7 +1302,7 @@ def edit_case_record_sheet(request, id):
             ovcgeo = get_case_geo(request, id)
             if ovcgeo:
                 # ovcgeo = OVCCaseGeo.objects.get(case_id=id)
-                print 'Update case Geo'
+                print( 'Update case Geo')
                 ovcgeo.report_subcounty = SetupGeography.objects.get(
                     pk=int(report_subcounty))
                 ovcgeo.report_ward = report_ward
@@ -1324,7 +1324,7 @@ def edit_case_record_sheet(request, id):
                                            'occurence_ward',
                                            'occurence_village'])
             else:
-                print 'New case Geo'
+                print( 'New case Geo')
                 OVCCaseGeo(
                     case_id=OVCCaseRecord.objects.get(pk=id),
                     report_subcounty=SetupGeography.objects.get(
@@ -1856,7 +1856,7 @@ def edit_case_record_sheet(request, id):
                               'resultsets': resultsets,
                               'resultsets2': resultsets2
                           })
-    except Exception, e:
+    except Exception as e:
         msg = 'An error occured trying to Edit OVCCaseRecord - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         redirect_url = reverse(forms_registry)
@@ -2036,7 +2036,7 @@ def view_case_record_sheet(request, id):
                        'resultsets': resultsets,
                        'resultsets2': resultsets2
                        })
-    except Exception, e:
+    except Exception as e:
         msg = 'An error occured trying to view OVCCaseRecord - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
     redirect_url = reverse(forms_registry)
@@ -2110,7 +2110,7 @@ def delete_case_record_sheet(request, id):
         f.is_void = True
         f.save(update_fields=['is_void'])
 
-    except Exception, e:
+    except Exception as e:
         msg = 'Form delete error (%s).' % str(e)
         messages.add_message(request, messages.INFO, msg)
 
@@ -2598,7 +2598,7 @@ def new_case_record_sheet(request, id):
                           {'form': form, 'init_data': init_data,
                            'vals': vals, 'guardians': guardians_all})
 
-    except Exception, e:
+    except Exception as e:
         msg = msg + 'Case record sheet save error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
 
@@ -2730,7 +2730,7 @@ def residential_placement(request):
             else:
                 msg = 'No results for (%s).Name does not exist in database.' % search_string
                 messages.add_message(request, messages.ERROR, msg)
-        except Exception, e:
+        except Exception as e:
             msg = 'Search error - %s' % (str(e))
             messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(residential_placement))
@@ -2786,7 +2786,7 @@ def ovc_search(request):
             else:
                 msg = 'No results for (%s).Name does not exist in database.' % search_string
                 messages.add_message(request, messages.ERROR, msg)
-        except Exception, e:
+        except Exception as e:
             msg = 'OVC search error - %s' % (str(e))
             messages.add_message(request, messages.INFO, msg)
         return HttpResponseRedirect(reverse(ovc_search))
@@ -2853,7 +2853,7 @@ def alternative_family_care(request):
             else:
                 msg = 'No results for (%s).Name does not exist in database.' % search_string
                 messages.add_message(request, messages.ERROR, msg)
-        except Exception, e:
+        except Exception as e:
             msg = 'Search error - %s' % (str(e))
             messages.add_message(request, messages.INFO, msg)
         return HttpResponseRedirect(reverse(alternative_family_care))
@@ -2999,7 +2999,7 @@ def new_alternative_family_care(request, id):
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(reverse(alternative_family_care))
         else:
-            print 'Not a POST'
+            print( 'Not a POST')
             """
             # Init data
             check_fields = ['sex_id']
@@ -3013,7 +3013,7 @@ def new_alternative_family_care(request, id):
                            'vals': vals,
                            'person_id': id})
             """
-    except Exception, e:
+    except Exception as e:
         msg = 'Alternative Family Care Save Error - %s' % str(e)
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(alternative_family_care))
@@ -3228,7 +3228,7 @@ def edit_alternative_family_care(request, id):
                            'init_data': init_data,
                            'vals': vals,
                            'adoption_country': ovc_familycare_results.adoption_country})
-    except Exception, e:
+    except Exception as e:
         msg = 'Alternative Family Care Edit Error - %s' % str(e)
         messages.add_message(request, messages.ERROR, msg)
         redirect_url = reverse(forms_registry)
@@ -3254,14 +3254,14 @@ def view_alternative_family_care(request, id):
             'adoption_id',
             'parental_status_id',
             'alternative_family_care_type_id']
-        print 'ovc_familycare_results ---------  %s' % ovc_familycare_results
+        print( 'ovc_familycare_results ---------  %s' % ovc_familycare_results)
         vals = get_dict(field_name=check_fields)
         return render(request,
                       'forms/view_alternative_family_care.html',
                       {'ovc_familycare_results': ovc_familycare_results,
                        'vals': vals,
                        'init_data': init_data})
-    except Exception, e:
+    except Exception as e:
         msg = 'Alternative Family Care View Error - %s' % str(e)
         messages.add_message(request, messages.ERROR, msg)
         redirect_url = reverse(forms_registry)
@@ -3419,8 +3419,8 @@ def save_encounter(request):
             ovcr.case_stage = 1
             ovcr.save(update_fields=['summon_status', 'case_stage'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         return HttpResponse('Error saving Encounters/Services - %s ' % str(e))
     return HttpResponse('Encounter Saved')
 
@@ -3482,8 +3482,8 @@ def view_encounter(request):
                                    'resultsets': resultsets
                                    })
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error viewing Encounters/Services - %s ' % str(e))
     return JsonResponse(jsonCeData, content_type='application/json',
                         safe=False)
@@ -3551,8 +3551,8 @@ def edit_encounter(request):
                 ovc_service.save(
                     update_fields=['case_category'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error updating Encounters/Services - %s ' % str(e))
     return HttpResponse('Encounter Updated')
 
@@ -3571,7 +3571,7 @@ def delete_encounter(request):
             if service_id:
                 ovccaseeventservices = OVCCaseEventServices.objects.filter(
                     case_event_id=case_event_id).count()
-                print 'ovccaseeventservices --- %s' % ovccaseeventservices
+                print( 'ovccaseeventservices --- %s' % ovccaseeventservices)
                 if ovccaseeventservices > 1:
                     OVCCaseEventServices.objects.filter(
                         service_id=service_id).update(is_void=True)
@@ -3590,8 +3590,8 @@ def delete_encounter(request):
                     ovc_service.is_void = True
                     ovc_service.save(update_fields=['is_void'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         return HttpResponse('Error deleting Encounters/Services - %s ' % str(e))
     # return HttpResponseRedirect(reverse(ovc_search))
     return HttpResponse('Encounter Deleted')
@@ -3666,8 +3666,8 @@ def save_court(request):
                         pk=case_event_id),
                     case_category=OVCCaseCategory.objects.get(pk=case_category_id)).save()
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error saving Court Sessions - %s ' % str(e))
     return HttpResponse('Court Session Saved')
 
@@ -3730,10 +3730,10 @@ def view_court(request):
                                       'ovc_category_ids': ovc_category_ids[0]
                                       })
 
-                print 'jsonCourtData - %s' % jsonCourtData
+                print( 'jsonCourtData - %s' % jsonCourtData)
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error viewing Court Sessions - %s ' % str(e))
     return JsonResponse(jsonCourtData, content_type='application/json',
                         safe=False)
@@ -3748,7 +3748,6 @@ def edit_court(request):
         if request.method == 'POST':
             case_id = request.POST.get('case_id')
             case_event_id = request.POST.get('case_event_id')
-
             case_category_id = request.POST.get('court_session_case')
             court_session_type = request.POST.get('court_session_type')
             date_of_court_event = request.POST.get('date_of_court_event')
@@ -3835,15 +3834,15 @@ def edit_court(request):
             else:
                 ovccourtsessions = OVCCaseEventCourt.objects.filter(
                     case_event_id=case_event_id, court_order=None, is_void=False).update(is_void=True)
-                print ' hapa'
+                print (' hapa')
                 OVCCaseEventCourt(
                     court_order=None,
                     case_event_id=OVCCaseEvents.objects.get(
                         pk=case_event_ids[0]),
                     case_category=OVCCaseCategory.objects.get(pk=case_category_id)).save()
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error editing Court Sessions - %s ' % str(e))
     return HttpResponse('Court Sessions Updated')
 
@@ -3869,8 +3868,8 @@ def delete_court(request):
                 ovc_court_order.is_void = True
                 ovc_court_order.save(update_fields=['is_void'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error deleting Court Sessions - %s ' % str(e))
     return HttpResponse('Court Orders Deleted')
 
@@ -3973,8 +3972,8 @@ def save_closure(request):
             # jsonClosureData.append({'closure_status': closure_status, 'case_status': ovccr.case_status})
             jsonClosureData.append({'closure_msg': 'Case closure successful'})
         else:
-            print 'Not a POST $'
-    except Exception, e:
+            print ('Not a POST $')
+    except Exception as e:
         # print 'Case Close Error: %s' % str(e)
         jsonClosureData.append(
             {'closure_msg': 'Error closing case (%s) - ' + str(e)})
@@ -4057,8 +4056,8 @@ def edit_closure(request):
             jsonClosureData.append(
                 {'closure_msg': 'Success updating closed case.'})
         else:
-            print 'Not a POST $'
-    except Exception, e:
+            print( 'Not a POST $')
+    except Exception as e:
         jsonClosureData.append(
             {'closure_msg': 'Error updating closed case (%s) - ' + str(e)})
     return JsonResponse(jsonClosureData, content_type='application/json',
@@ -4152,10 +4151,10 @@ def view_closure(request):
                                         'case_closure_notes': ovc_closure_event.case_closure_notes,
                                         'resultsets': jsonCeData
                                         })
-            print 'jsonClosureData .... %s' % jsonClosureData
+            print( 'jsonClosureData .... %s' % jsonClosureData)
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         return HttpResponse('Error viewing Case Closures - %s ' % str(e))
     return JsonResponse(jsonClosureData, content_type='application/json',
                         safe=False)
@@ -4189,8 +4188,8 @@ def delete_closure(request):
             case_record.save(update_fields=['case_status'])
 
         else:
-            print 'Not a POST $'
-    except Exception, e:
+            print( 'Not a POST $')
+    except Exception as e:
         return HttpResponse('Delete case closure error - %s' % str(e))
     return HttpResponse('Delete case closure success.')
 
@@ -4259,8 +4258,8 @@ def save_summon(request):
             results = {"summon_count": summon_count,
                        "message": "Save Summons OK"}
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         # return HttpResponse('Error saving Summons - %s ' % str(e))
         results = {"summon_count": 0,
                    "message": "Error saving Summons - %s " % str(e)}
@@ -4320,8 +4319,8 @@ def edit_summon(request):
                                                    #'visit_date',
                                                    'summon_note'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         return HttpResponse('Error editing sUMMON Sessions - %s ' % str(e))
     return HttpResponse('Summons Updated')
 
@@ -4355,8 +4354,8 @@ def view_summon(request):
                 'summon_note': ovc_event.case_event_notes
             })
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         return HttpResponse('Error viewing Summons - %s ' % str(e))
     return JsonResponse(jsonSummonData, content_type='application/json',
                         safe=False)
@@ -4381,8 +4380,8 @@ def delete_summon(request):
                 ovc_summon.is_void = True
                 ovc_summon.save(update_fields=['is_void'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print( 'Not POST')
+    except Exception as e:
         return HttpResponse('Error deleting Summons - %s ' % str(e))
     return HttpResponse('Summons deleted')
 
@@ -4394,15 +4393,15 @@ def delete_referral(request):
         if request.method == 'POST':
             referral_id = request.POST.get('referral_id')
 
-            print 'referral_id >> %s' % referral_id
+            print( 'referral_id >> %s' % referral_id)
 
             # Update OVCReferral
             ovc_ref = OVCReferral.objects.get(pk=referral_id)
             ovc_ref.is_void = True
             ovc_ref.save(update_fields=['is_void'])
         else:
-            print 'Not POST'
-    except Exception, e:
+            print ('Not POST')
+    except Exception as e:
         return HttpResponse('Error deleting Referral - %s ' % str(e))
     return HttpResponse('Referral deleted')
 
@@ -4425,8 +4424,8 @@ def placement(request, id):
                       {'form': form, 'cases': cases,
                        'init_data': init_data,
                        'vals': vals})
-    except Exception, e:
-        print 'Load placement error - %s' % str(e)
+    except Exception as e:
+        print ('Load placement error - %s' % str(e))
     form = ResidentialForm()
     return render(request, 'forms/new_placement.html', {'form': form})
 
@@ -4457,7 +4456,7 @@ def placement_followup(request, id):
                       'forms/placement_followup.html',
                       {'form': form, 'placement': placementdata,
                        'init_data': init_data, 'vals': vals})
-    except Exception, e:
+    except Exception as e:
         err = 'This child may have been discharged'
         msg = 'Follow-up error - (%s). %s.' % (str(e), err)
         print(msg)
@@ -4684,7 +4683,7 @@ def save_placementfollowup(request):
                     # If this adverse event is abduction, Escape or Death do Discharge
                     adv_events = {'AEAB': 'Abducted', 'AEDE': 'Died', 'AEES': 'Escaped'}
                     if adverse_event_id in ['AEAB', 'AEDE', 'AEES']:
-                        print 'Adverse Event for Discharge %s' % (adverse_event_id)
+                        print( 'Adverse Event for Discharge %s' % (adverse_event_id))
                         disc_reason = 'Child %s' % (adv_events[adverse_event_id])                    
                         pobj = RegPerson.objects.get(pk=int(person))
                         placement_obj = OVCPlacement.objects.get(pk=placement_id)
@@ -4801,9 +4800,9 @@ def save_placementfollowup(request):
                             pk=case_event_id),
                         case_category=OVCCaseCategory.objects.get(pk=case_category_id)).save()
 
-    except Exception, e:
+    except Exception as e:
         return HttpResponse('(%s)' % str(e))
-        print 'Error saving Court Sessions - %s' % str(e)
+        print ('Error saving Court Sessions - %s' % str(e))
     return HttpResponse(placementfollowup_type)
 
 
@@ -5000,8 +4999,8 @@ def view_placementfollowup(request):
                     'actual_return_date': ovcdischargefollowup.actual_return_date,
                     'discharge_comments': ovcdischargefollowup.discharge_comments
                 })
-    except Exception, e:
-        print 'Residential Placement Followup View Error: %s' % str(e)
+    except Exception as e:
+        print ('Residential Placement Followup View Error: %s' % str(e))
     return JsonResponse(jsonPlacementEventsData,
                         content_type='application/json',
                         safe=False)
@@ -5103,8 +5102,8 @@ def edit_placementfollowup(request):
                                 OVCEducationLevelFollowUp.objects.filter(
                                     education_followup_id=followup_id, admission_level=eadmissionlevels).update(is_void=True)
 
-                    print 'new_educationlevels - %s' % new_educationlevels
-                    print 'existing_educationlevels - %s' % existing_educationlevels
+                    print( 'new_educationlevels - %s' % new_educationlevels)
+                    print ('existing_educationlevels - %s' % existing_educationlevels)
 
                     """ Cater for new selected admission_levels  """
                     ACVT_levels = ['TVC1', 'TVC2', 'TVC3', 'TVC4', 'TVC5']
@@ -5340,9 +5339,9 @@ def edit_placementfollowup(request):
                                                          'reason_of_discharge',
                                                          'expected_return_date',
                                                          'discharge_comments'])
-    except Exception, e:
+    except Exception as e:
         return HttpResponse('(%s)' % str(e))
-        print e
+        print( e)
     return HttpResponse(placementfollowup_type)
 
 
@@ -5413,7 +5412,7 @@ def delete_placementfollowup(request):
                 # Activate OVCPlacement Entries
                 OVCPlacement.objects.filter(
                     person=person).update(is_active=True)
-    except Exception, e:
+    except Exception as e:
         return HttpResponse('Error - %s ' % str(e))
     return HttpResponse(placementfollowup_type + ' follow-up ')
 
@@ -5533,8 +5532,8 @@ def save_placement(request):
                 person=RegPerson.objects.get(pk=int(reg_person_pk))).save()
 
         else:
-            print 'Not POST'
-    except Exception, e:
+            print('Not POST')
+    except Exception as e:
         msg = 'Residential Placement Save Error: %s' % str(e)
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -5602,7 +5601,7 @@ def view_placement(request, id):
         stay = get_stay(com_adm, exit_date)
         exits = '%s %s' % (days, ck)
         # print 'vals ---------- %s' % vals
-    except Exception, e:
+    except Exception as e:
         msg = 'Residential Placement View Error: %s' % str(e)
         messages.add_message(request, messages.ERROR, msg)
         redirect_url = reverse(forms_registry)
@@ -5743,7 +5742,7 @@ def edit_placement(request, id):
             redirect_url = reverse(forms_registry)
             return HttpResponseRedirect(redirect_url)
 
-    except Exception, e:
+    except Exception as e:
         msg = 'Residential Placement Edit Error: %s' % str(e)
         messages.add_message(request, messages.ERROR, msg)
         redirect_url = reverse(forms_registry)
@@ -5769,8 +5768,8 @@ def edit_placement(request, id):
     if court_order_issue_date:
         court_order_issue_date = court_order_issue_date.strftime('%d-%b-%Y')
 
-    print 'ovcplacement.residential_institution_name ... %s' % ovcplacement.residential_institution_name
-    print 'period', ovcplacement.committing_period_units
+    print( 'ovcplacement.residential_institution_name ... %s' % ovcplacement.residential_institution_name)
+    print ('period', ovcplacement.committing_period_units)
     try:
         inst_id = int(ovcplacement.residential_institution_name)
     except Exception as e:
@@ -5829,9 +5828,9 @@ def delete_placement(request):
                 ovc_plcmnt.is_void = True
                 ovc_plcmnt.save(update_fields=['is_void'])
         else:
-            print 'Not POST'
-    except Exception, e:
-        print 'Court Orders Delete Error: %s' % str(e)
+            print( 'Not POST')
+    except Exception as e:
+        print ('Court Orders Delete Error: %s' % str(e))
     # return HttpResponseRedirect(reverse(ovc_search))
     return HttpResponse('Court Orders Deleted')
 
@@ -6016,8 +6015,8 @@ def manage_placementfollowup(request):
                         'followup_outcome': translate(followup5data.type_of_discharge)
                     })
 
-    except Exception, e:
-        print 'Load ResidentialPlacementFollowup Events Error -  %s' % str(e)
+    except Exception as e:
+        print ('Load ResidentialPlacementFollowup Events Error -  %s' % str(e))
     return JsonResponse(jsonPlacementEventsData,
                         content_type='application/json',
                         safe=False)
@@ -6080,7 +6079,7 @@ def background_details(request):
                                 setattr(result, 'schooled', 'SCHOOLED')
                                 setattr(result, 'classform', classform)
                             else:
-                                print 'found nothin'
+                                print( 'found nothin')
                                 setattr(result, 'schoolname', 'No School Info')
                                 setattr(result, 'schooled', None)
                                 setattr(result, 'classform', 'No Class Info')
@@ -6099,10 +6098,10 @@ def background_details(request):
             else:
                 msg = 'No results for (%s).Name does not exist in database.' % search_string
                 messages.add_message(request, messages.ERROR, msg)
-    except Exception, e:
+    except Exception as e:
         msg = 'OVC search error - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
-        print 'exception'
+        print ('exception')
     form = OVCSearchForm()
     return render(request, 'forms/background_details.html', {'form': form})
 
@@ -6194,7 +6193,7 @@ def new_education_info(request, id):
                 init_data.first_name, init_data.surname)
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(reverse(forms_registry))
-    except Exception, e:
+    except Exception as e:
         msg = 'Education Details Save Error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -6294,7 +6293,7 @@ def edit_education_info(request, id):
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(reverse(forms_registry))
 
-    except Exception, e:
+    except Exception as e:
         msg = 'Education Details Update Error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -6372,7 +6371,7 @@ def view_education_info(request, id):
                           'ovceducationfollowup': ovceducationfollowup,
                           'ovceducationlevelfollowup': ovceducationlevelfollowup
                       })
-    except Exception, e:
+    except Exception as e:
         msg = 'Education Details View Error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -6427,7 +6426,7 @@ def new_bursary_info(request):
             else:
                 jsonBursaryResponse.append({'msg': 'You cannot issue the same bursary type for the same child in the same period.',
                                             'status': 'Issue'})
-    except Exception, e:
+    except Exception as e:
         msg = 'Bursary save error: (%s)' % (str(e))
         jsonBursaryResponse.append({'msg': msg,
                                     'status': 'Error'})
@@ -6480,7 +6479,7 @@ def edit_bursary_info(request):
             else:
                 jsonBursaryResponse.append({'msg': 'You cannot issue the same bursary type for the same child in the same period.',
                                             'status': 'Issue'})
-    except Exception, e:
+    except Exception as e:
         msg = 'Bursary update error: (%s)' % (str(e))
         jsonBursaryResponse.append({'msg': msg,
                                     'status': 'Error'})
@@ -6511,8 +6510,8 @@ def view_bursary_info(request):
                         'term': bursarydata.term
                     })
 
-    except Exception, e:
-        print 'Load Bursary Information Error: %s' % str(e)
+    except Exception as e:
+        print ('Load Bursary Information Error: %s' % str(e))
     return JsonResponse(jsonBursaryData,
                         content_type='application/json',
                         safe=False)
@@ -6524,14 +6523,14 @@ def delete_bursary_info(request):
     try:
         if request.method == 'POST':
             bursary_id = request.POST.get('bursary_id')
-            print 'bursary_id >> %s' % bursary_id
+            print ('bursary_id >> %s' % bursary_id)
             ovcbursary = OVCBursary.objects.get(pk=bursary_id, is_void=False)
             ovcbursary.is_void = True
             ovcbursary.save(update_fields=['is_void'])
 
             msg = 'Bursary Details Delete Successful'
             return HttpResponse(msg)
-    except Exception, e:
+    except Exception as e:
         msg = 'Bursary Details Delete Error: (%s)' % (str(e))
         return HttpResponse(msg)
     return HttpResponse('Delete Bursary Info')
@@ -6569,8 +6568,8 @@ def new_school(request):
             messages.add_message(request, messages.INFO, msg)
             redirect_url = reverse(background_details)
             return HttpResponseRedirect(redirect_url)
-    except Exception, e:
-        print 'An error occured while saving - %s' % str(e)
+    except Exception as e:
+        print( 'An error occured while saving - %s' % str(e))
         msg = 'Error saving School.'
         messages.add_message(request, messages.ERROR, msg)
         redirect_url = reverse(background_details)
@@ -6611,7 +6610,7 @@ def bursary_followup(request, id):
             messages.add_message(request, messages.ERROR, msg)
             redirect_url = reverse(forms_registry)
             return HttpResponseRedirect(redirect_url)
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -6681,7 +6680,7 @@ def csi(request):
             else:
                 msg = 'No results for (%s).Name does not exist in database.' % search_string
                 messages.add_message(request, messages.ERROR, msg)
-        except Exception, e:
+        except Exception as e:
             msg = 'OVC search error - %s' % (str(e))
             messages.add_message(request, messages.INFO, msg)
         return HttpResponseRedirect(reverse(ovc_registry))
@@ -6689,6 +6688,11 @@ def csi(request):
         form = OVCCareSearchForm()
         return render(request, 'forms/csi.html',
                       {'form': form})
+
+
+def ovc_registry(request):
+    pass
+
 
 
 @login_required
@@ -6801,7 +6805,7 @@ def new_csi(request, id):
             url = reverse('ovc_view', kwargs={'id': id})
             # return HttpResponseRedirect(reverse(forms_registry))
             return HttpResponseRedirect(url)
-    except Exception, e:
+    except Exception as e:
         msg = 'CSI Needs Assessment save error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -6888,7 +6892,7 @@ def edit_csi(request, id):
 
                 olmis_priority_data = json.loads(olmis_priority_service_provided_list)
                 for priority_data in olmis_priority_data:
-                    print 'olmis_priority_data : %s' % olmis_priority_data
+                    print( 'olmis_priority_data : %s' % olmis_priority_data)
                     if priority_data:
                         olmis_priority_service_grouping_id = priority_data['olmis_service_grouping_id']
                         olmis_priority_domain = priority_data['olmis_priority_domain']
@@ -6931,7 +6935,7 @@ def edit_csi(request, id):
                     eservice_grouping_id = existing_priority['service_grouping_id']
                     if (eservice not in nservices):
                         ### delete service
-                        print 'eservice (%s), service_grouping_id (%s)' %(eservice,service_grouping_id)
+                        print( 'eservice (%s), service_grouping_id (%s)' %(eservice,service_grouping_id))
                         ovcexistingservices = OVCCarePriority.objects.filter(service=eservice, service_grouping_id=eservice_grouping_id)
                         for ovcexistingservice in ovcexistingservices:
                             ovcexistingservice.is_void = True
@@ -6959,7 +6963,7 @@ def edit_csi(request, id):
             url = reverse('ovc_view', kwargs={'id': id})
             # return HttpResponseRedirect(reverse(forms_registry))
             return HttpResponseRedirect(url)
-    except Exception, e:
+    except Exception as e:
         msg = 'CSI Needs Assessment edit error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -6974,7 +6978,7 @@ def edit_csi(request, id):
         eavdata.append(str(d['value']))
 
     # get priority data
-    print 'EDTs', eavdata
+    print ('EDTs', eavdata)
     csi_priority_data = OVCCarePriority.objects.filter(event=id, is_void=False)
     jsonPrData = []
     resultsetspr = []
@@ -6998,7 +7002,7 @@ def edit_csi(request, id):
             "service": services,
             "service_grouping_id": pr_grouping_id
             })
-    print 'jsonPrData : %s' %jsonPrData
+    print( 'jsonPrData : %s' %jsonPrData)
     resultsetspr.append(jsonPrData)
 
     # get services data
@@ -7030,7 +7034,7 @@ def edit_csi(request, id):
                 })
     resultsetssvc.append(jsonSvcData)
 
-    print 'nnnn', eavdata
+    print('nnnn', eavdata)
     date_of_csi = (csi_events_data.date_of_event).strftime('%d-%b-%Y')
     form = OVCCsiForm({
         # Domain Evaluation
@@ -7094,7 +7098,7 @@ def view_csi(request, id):
         csi_eav_data = OVCCareEAV.objects.filter(event=id, is_void=False).values('entity', 'value').order_by('entity')
         eavs, eavdata = {}, {}
         for d in csi_eav_data:
-            print d
+            print (d)
             eavs[str(d['entity'])] = str(d['value'])
         for csi in csis:
             eavdata[csi] = eavs[csi] if csi in eavs else None
@@ -7155,7 +7159,7 @@ def view_csi(request, id):
 
         date_of_csi = (csi_events_data.date_of_event).strftime('%d-%b-%Y')
         form = OVCCsiForm()
-        print 'uat', eavdata
+        print( 'uat', eavdata)
         return render(request,
                     'forms/view_csi.html',
                     {
@@ -7179,7 +7183,7 @@ def view_csi(request, id):
                         'resultsetspr': resultsetspr,
                         'resultsetssvc': resultsetssvc
                     })
-    except Exception, e:
+    except Exception as e:
         msg = 'CSI Needs Assessment view error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -7197,7 +7201,7 @@ def delete_csi(request, id):
         msg = 'CSI Needs Assessment delete successful'
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
-    except Exception, e:
+    except Exception as e:
         msg = 'CSI Needs Assessment view error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
@@ -7396,7 +7400,7 @@ def save_form1a(request):
                 olmis_service_provided_list = request.POST.get('olmis_service_provided_list')
                 if olmis_service_provided_list:
                     olmis_service_data = json.loads(olmis_service_provided_list)
-                    print 'olmis_service_data >> %s' %olmis_service_data
+                    print ('olmis_service_data >> %s' %olmis_service_data)
                     org_unit = ou_primary if ou_primary else ou_attached[0]
 
                     for service_data in olmis_service_data:
@@ -7405,7 +7409,7 @@ def save_form1a(request):
                         olmis_service_date = service_data['olmis_service_date']
                         olmis_service_date = convert_date(olmis_service_date) if olmis_service_date != 'None' else None   
                         olmis_service = service_data['olmis_service']
-                        print 'olmis_service: %s' %olmis_service
+                        print('olmis_service: %s' %olmis_service)
                         services = olmis_service.split(',')
                         for service in services:
                             OVCCareServices(                    
@@ -7419,7 +7423,7 @@ def save_form1a(request):
 
             msg = 'Save Successful'
             jsonResponse.append({'msg': msg})
-    except Exception, e:
+    except Exception as e:
         msg = 'Save Error: (%s)' % (str(e))
     jsonResponse.append({'msg': msg})
     return JsonResponse(jsonResponse, content_type='application/json', safe=False)
@@ -7430,9 +7434,9 @@ def edit_form1a(request):
     jsonForm1AData = []
     try:
         msg = 'The page you are looking for is under construction!'        
-    except Exception, e:
+    except Exception as e:
         msg = 'An error occured : %s' %str(e)
-        print str(e)
+        print( str(e))
     jsonForm1AData.append({ 'msg': msg })
     return JsonResponse(jsonForm1AData,
                         content_type='application/json',
@@ -7444,9 +7448,9 @@ def view_form1a(request):
     jsonForm1AData = []
     try:
         msg = 'The page you are looking for is under construction!'        
-    except Exception, e:
+    except Exception as e:
         msg = 'An error occured : %s' %str(e)
-        print str(e)
+        print (str(e))
     jsonForm1AData.append({ 'msg': msg })
     return JsonResponse(jsonForm1AData,
                         content_type='application/json',
@@ -7458,9 +7462,9 @@ def delete_form1a(request):
     jsonForm1AData = []
     try:
         msg = 'The page you are looking for is under construction!'        
-    except Exception, e:
+    except Exception as e:
         msg = 'An error occured : %s' %str(e)
-        print str(e)
+        print (str(e))
     jsonForm1AData.append({ 'msg': msg })
     return JsonResponse(jsonForm1AData,
                         content_type='application/json',
@@ -7525,13 +7529,13 @@ def manage_form1a_events(request):
                             'event_details': event_details,
                             'event_date': event_date.strftime('%d-%b-%Y')
                         }) 
-        print jsonForm1AEventsData
+        print (jsonForm1AEventsData)
         return JsonResponse(jsonForm1AEventsData,
                             content_type='application/json',
                             safe=False)     
-    except Exception, e:
+    except Exception as e:
         msg = 'An error occured : %s' %str(e)
-        print str(e)
+        print( str(e))
         jsonForm1AEventsData.append({ 'msg': msg })
         return JsonResponse(jsonForm1AEventsData,
                             content_type='application/json',
@@ -7698,7 +7702,7 @@ def new_hhva(request, id):
                     for value in ha31:
                         my_kvals.append({ "entity": "HA31", "attribute": "HA31", "value": value, "value_for": '' })
 
-            print 'my_kvals : %s' %my_kvals
+            print( 'my_kvals : %s' %my_kvals)
             for kvals in my_kvals:
                 key = kvals["entity"]
                 attribute = kvals["attribute"]
@@ -7717,10 +7721,10 @@ def new_hhva(request, id):
             url = reverse('ovc_view', kwargs={'id': id})
             # return HttpResponseRedirect(reverse(forms_registry))
             return HttpResponseRedirect(url)
-    except Exception, e:
+    except Exception as e:
         msg = 'Household Vulnerability Assessment save error: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
-        print 'Error saving HHVA : %s' % str(e)
+        print( 'Error saving HHVA : %s' % str(e))
         return HttpResponseRedirect(reverse(forms_registry))
 
 
@@ -7731,8 +7735,8 @@ def new_hhva(request, id):
         caretaker_id = ovcreg.caretaker_id if ovcreg else None
         ovchh = get_object_or_404(OVCHouseHold, head_person=caretaker_id, is_void=False)
         household_id = ovchh.id if ovchh else None
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (str(e))
         msg = 'Error getting household identifier: (%s)' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))  
@@ -7773,7 +7777,7 @@ def edit_hhva(request, id):
         msg = 'The page you are looking for is under construction!'
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
-    except Exception, e:
+    except Exception as e:
         raise e
 
 @login_required
@@ -7783,7 +7787,7 @@ def view_hhva(request, id):
         msg = 'The page you are looking for is under construction!'
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
-    except Exception, e:
+    except Exception as e:
         raise e
 
 @login_required
@@ -7793,7 +7797,7 @@ def delete_hhva(request, id):
         msg = 'The page you are looking for is under construction!'
         messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse(forms_registry))
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -7826,8 +7830,8 @@ def manage_bursary(request):
                         'term': translate(bursarydata.term)
                     })
 
-    except Exception, e:
-        print 'Load Bursary Information Error: %s' % str(e)
+    except Exception as e:
+        print( 'Load Bursary Information Error: %s' % str(e))
     return JsonResponse(jsonBursaryData,
                         content_type='application/json',
                         safe=False)
@@ -7839,13 +7843,13 @@ def manage_countries(request):
     try:
         jsonCountriesData = []
         for country_code, country_name in COUNTRIES.items():
-            print country_code, country_name
+            print( country_code, country_name)
             jsonCountriesData.append({
                 'country_code': country_code,
                 'country_name': country_name
             })
-    except Exception, e:
-        print 'Load Countries Information Error: %s' % str(e)
+    except Exception as e:
+        print ('Load Countries Information Error: %s' % str(e))
     return JsonResponse(jsonCountriesData,
                         content_type='application/json',
                         safe=False)
@@ -7880,10 +7884,10 @@ def manage_casehistory(request):
             jsonCaseHistoryData.append({
                 'case_serial': ''
             })
-        print 'jsonCaseHistoryData: %s' % jsonCaseHistoryData
+        print ('jsonCaseHistoryData: %s' % jsonCaseHistoryData)
 
-    except Exception, e:
-        print 'Load Case History Information Error: %s' % str(e)
+    except Exception as e:
+        print( 'Load Case History Information Error: %s' % str(e))
     return JsonResponse(jsonCaseHistoryData,
                         content_type='application/json',
                         safe=False)
@@ -7905,8 +7909,8 @@ def manage_schools(request):
                     'school_ward': translate_geo(schooldata.school_ward_id)
                 })
 
-    except Exception, e:
-        print 'Load Schools Information Error: %s' % str(e)
+    except Exception as e:
+        print ('Load Schools Information Error: %s' % str(e))
     return JsonResponse(jsonSchoolsData,
                         content_type='application/json',
                         safe=False)
@@ -7963,7 +7967,7 @@ def manage_case_events(request):
                                     translate(courtData.court_order))
                             case_event_category = translate(
                                 translate_case(str(courtData.case_category_id)))
-                        print 'case_event_category - %s' % case_event_category
+                        print( 'case_event_category - %s' % case_event_category)
                         event_description = ''
                         if courtorders:
                             event_description = ','.join(courtorders)
@@ -8051,8 +8055,8 @@ def manage_case_events(request):
                         'case_event_date': refferal_enddate
                     })
 
-    except Exception, e:
-        print 'Load Case Events Error: %s' % str(e)
+    except Exception as e:
+        print ('Load Case Events Error: %s' % str(e))
     return JsonResponse(jsonCaseEventsData,
                         content_type='application/json',
                         safe=False)
@@ -8088,8 +8092,8 @@ def manage_refferal(request):
                     person=RegPerson.objects.get(pk=int(ovccr.person_id))).save()
             jsonManageReferralData.append(
                 {'referral_grouping_id': referral_grouping_id})
-    except Exception, e:
-        print 'Save/Manage Referral Error: %s' % str(e)
+    except Exception as e:
+        print ('Save/Manage Referral Error: %s' % str(e))
     return JsonResponse(jsonManageReferralData,
                         content_type='application/json',
                         safe=False)
@@ -8102,9 +8106,9 @@ def manage_refferal001(request):
             referral_grouping_id = request.POST.get('referral_grouping_id')
             OVCReferral.objects.filter(
                 referral_grouping_id=referral_grouping_id).update(is_void=True)
-    except Exception, e:
+    except Exception as e:
 
-        print 'Manage Referral001 Error: %s' % str(e)
+        print( 'Manage Referral001 Error: %s' % str(e))
     return HttpResponse('Manage Encounter001 Success : List.Append()')
 
 
@@ -8124,8 +8128,8 @@ def manage_refferal002(request):
                     'refferal_status': ovcreferral.refferal_status,
                     'refferal_enddate': ovcreferral.refferal_enddate,
                     'refferal_case_category': str(ovcreferral.case_category_id)})
-    except Exception, e:
-        print 'Manage Referral002 Error: %s' % str(e)
+    except Exception as e:
+        print('(Manage Referral002 Error: %s' % str(e))
     return JsonResponse(jsonReferralData,
                         content_type='application/json',
                         safe=False)
@@ -8170,23 +8174,25 @@ def manage_refferal003(request):
                         'case_category',
                         'refferal_status'
                     ])
-    except Exception, e:
-        print 'Manage Referral003 Error: %s' % str(e)
+    except Exception as e:
+        print( 'Manage Referral003 Error: %s' % str(e))
     return JsonResponse(jsonReferralData,
                         content_type='application/json',
                         safe=False)
 
 
 def manage_encounters001(request):
+
     try:
         if request.method == 'POST':
+            jsonObjectArrayServices = []
             jsonObject = request.POST.get('EncountersData')
             data = json.loads(jsonObject)
             jsonObjectArrayServices.append(data)
         else:
-            print 'Not POST'
-    except Exception, e:
-        print 'Manage Encounter001 Error: %s' % str(e)
+            print ('Not POST')
+    except Exception as e:
+        print( 'Manage Encounter001 Error: %s' % str(e))
     return HttpResponse('Manage Encounter001 Success : List.Append()')
 
 
@@ -8214,9 +8220,9 @@ def manage_encounters004(request):
                                      'date_of_encounter_event_list': date_of_encounter_event_list
                                      })
         else:
-            print 'Not POST'
-    except Exception, e:
-        print 'Pull Encounters From Db on Edit: %s' % str(e)
+            print ('Not POST')
+    except Exception as e:
+        print ('Pull Encounters From Db on Edit: %s' % str(e))
     return JsonResponse(jsonServicesData, content_type='application/json',
                         safe=False)
 
@@ -8244,8 +8250,8 @@ def manage_casecategory001(request):
                         jsonCaseSubCategoriesData.append({'item_sub_category': casesubcategory.item_description,
                                                           'item_sub_category_id': casesubcategory.item_id,
                                                           'status': 1})
-    except Exception, e:
-        print 'Error >>  %s' % str(e)
+    except Exception as e:
+        print( 'Error >>  %s' % str(e))
     return JsonResponse(jsonCaseSubCategoriesData, content_type='application/json',
                         safe=False)
 
@@ -8256,9 +8262,9 @@ def manage_casecategory002(request):
             index = int(request.POST.get('index'))
             jsonObjectArray.pop(index - 1)
         else:
-            print 'Not POST'
-    except Exception, e:
-        print 'Manage Referral002 Error: %s' % str(e)
+            print( 'Not POST')
+    except Exception as e:
+        print( 'Manage Referral002 Error: %s' % str(e))
     return HttpResponse('Manage Referral002 Success : List.Remove()')
 
 
@@ -8290,9 +8296,9 @@ def manage_casecategory004(request):
                                           })
 
         else:
-            print 'Not POST'
-    except Exception, e:
-        print 'Pull Case Categories From Db on Edit: %s' % str(e)
+            print ('Not POST')
+    except Exception as e:
+        print('Pull Case Categories From Db on Edit: %s' % str(e))
     return JsonResponse(jsonCaseCategorysData, content_type='application/json',
                         safe=False)
 
@@ -8328,7 +8334,7 @@ def manage_service_category(request):
                     assessmentcategory = SetupList.objects.get(
                         field_name='olmis_assessment_domain_id', item_id=domain_id)
                     assessment_sub_category = assessmentcategory.item_sub_category
-                    print 'assessmentcategory.item_sub_category -- %s' % assessmentcategory.item_sub_category
+                    print ('assessmentcategory.item_sub_category -- %s' % assessmentcategory.item_sub_category)
 
                     if not assessment_sub_category:
                         jsonServiceCategoriesData.append({'item_sub_category': assessmentcategory.item_description,
@@ -8377,8 +8383,8 @@ def manage_service_category(request):
                                 jsonServiceCategoriesData.append({'item_sub_category': s.item_description,
                                                                   'item_sub_category_id': str(s.item_id),
                                                                   'status': 1})
-    except Exception, e:
-        print 'Error >>  %s' % str(e)
+    except Exception as e:
+        print ('Error >>  %s' % str(e))
         raise e
     return JsonResponse(jsonServiceCategoriesData, content_type='application/json',
                         safe=False)
@@ -8397,7 +8403,7 @@ def manage_form_type(request):
         else:
             d = dict(cpims_forms)
             jsonFormTypeData = [{"value": i, "label": j} for i,j in d.items()]
-    except Exception, e:
+    except Exception as e:
         raise e
     return JsonResponse(jsonFormTypeData, content_type='application/json',
                         safe=False)
@@ -8428,9 +8434,9 @@ def getJsonObject001(request):
                         jsonCaseCategories.append({'case_category_id': str(ovcccat.case_category_id),
                                                    'case_category': translate(ovcccat.case_category)})
         else:
-            print 'getJsonObject001 - Not a POST'
-    except Exception, e:
-        print '  Error: %s' % str(e)
+            print ('getJsonObject001 - Not a POST')
+    except Exception as e:
+        print( '  Error: %s' % str(e))
     return JsonResponse(jsonCaseCategories, content_type='application/json',
                         safe=False)
 

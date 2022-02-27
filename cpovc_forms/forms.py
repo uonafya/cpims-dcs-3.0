@@ -1,7 +1,7 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from django.forms.widgets import RadioFieldRenderer
-from django.utils.encoding import force_unicode
+from django.utils.translation import gettext_lazy as _
+from django.forms.widgets import RadioSelect
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 
 from cpovc_main.functions import get_list, get_org_units_list
@@ -2912,13 +2912,13 @@ class OVCHHVAForm(forms.Form):
                }))
 
 
-class RadioCustomRenderer(RadioFieldRenderer):
+class RadioCustomRenderer(RadioSelect):
     """Custom radio button renderer class."""
 
     def render(self):
         """Renderer override method."""
         return mark_safe(u'%s' % u'\n'.join(
-            [u'%s' % force_unicode(w) for w in self]))
+            [u'%s' % force_str(w) for w in self]))
 
 
 class GOKBursaryForm(forms.Form):
