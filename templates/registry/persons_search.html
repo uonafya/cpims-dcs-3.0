@@ -108,7 +108,7 @@
                                 {% for resultset in resultsets %}
                                     {% for result in resultset %}
                                     <tr>                                        
-                                        <td style="display:none;">{{ result.id }}</a></td>
+                                        <td style="display:none;"><a>{{ result.id }}</a></td>
                                         <td>{{ result.first_name }}</td>
                                         <td>{{ result.surname }}</td>
                                         <td>{{ result.sex_id|gen_value:vals }}</td>

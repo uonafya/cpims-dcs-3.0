@@ -35,7 +35,7 @@
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 </div>                        
-                <h4 class="panel-title">Create User Profile | {{ names }}</span></h4>
+                <h4 class="panel-title"><span>Create User Profile | {{ names }}</span></h4>
             </div>
             <div class="panel-body panel-form">
                 <form class="form-horizontal form-bordered" action="." method="POST" data-parsley-validate="true" name="demo-form" >
@@ -70,7 +70,7 @@
                         
                             {% if error_msg %}
                             <p>
-                                <div class="alert alert-danger fade in m-b-15"><b>{{ error_msg }}<b></div> 
+                                <div class="alert alert-danger fade in m-b-15"><b>{{ error_msg }}</b></div>
                             </p>
                             {% endif %}
 
