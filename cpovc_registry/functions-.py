@@ -76,7 +76,11 @@ def dashboard(request):
             # Org units
             cbo_id = request.session.get('ou_primary', 0)
             cbo_ids = request.session.get('ou_attached', [])
+<<<<<<< HEAD
             print (cbo_ids)
+=======
+            print cbo_ids
+>>>>>>> origin/main
             org_id = int(cbo_id)
             org_ids = get_orgs_child(org_id)
             # Workforce members using Appuser
@@ -86,7 +90,11 @@ def dashboard(request):
             users = AppUser.objects.filter(
                 reg_person_id__in=person_orgs)
             user_ids = users.values_list('id', flat=True)
+<<<<<<< HEAD
             print ('user ids', user_ids)
+=======
+            print 'user ids', user_ids
+>>>>>>> origin/main
             users_count = users.count()
             dash['workforce_members'] = users_count
             person_types = RegPersonsTypes.objects.filter(
@@ -181,8 +189,13 @@ def dashboard(request):
         dash['ovc_regs'] = ovc_regs
         dash['case_regs'] = case_regs
         dash['case_cats'] = case_categories
+<<<<<<< HEAD
     except Exception as e:
         print ('error with dash - %s' % (str(e)))
+=======
+    except Exception, e:
+        print 'error with dash - %s' % (str(e))
+>>>>>>> origin/main
         dash = {}
         dash['children'] = 0
         dash['guardian'] = 0
@@ -239,10 +252,17 @@ def ovc_dashboard(request):
         # OVC
         cbo_id = request.session.get('ou_primary', 0)
         cbo_ids = request.session.get('ou_attached', [])
+<<<<<<< HEAD
         print (cbo_ids)
         org_id = int(cbo_id)
         org_ids = get_orgs_child(org_id)
         print ('dash orgs', org_ids)
+=======
+        print cbo_ids
+        org_id = int(cbo_id)
+        org_ids = get_orgs_child(org_id)
+        print 'dash orgs', org_ids
+>>>>>>> origin/main
         # Get org units
         orgs_count = len(org_ids) - 1 if len(org_ids) > 1 else 1
         dash['org_units'] = orgs_count
@@ -312,8 +332,13 @@ def ovc_dashboard(request):
         dash['case_regs'] = case_regs
         dash['case_cats'] = {}
         dash['criteria'] = case_criteria
+<<<<<<< HEAD
     except Exception as e:
         print ('error - %s' % (str(e)))
+=======
+    except Exception, e:
+        print 'error - %s' % (str(e))
+>>>>>>> origin/main
         dash = {}
         dash['children'] = 0
         dash['children_all'] = 0
@@ -338,7 +363,11 @@ def ovc_dashboard(request):
 def get_unit_parent(org_ids):
     """Method to do the organisation tree."""
     try:
+<<<<<<< HEAD
         print (org_ids)
+=======
+        print org_ids
+>>>>>>> origin/main
         orgs = []
         orgs_qs = RegOrgUnit.objects.filter(
             is_void=False,
