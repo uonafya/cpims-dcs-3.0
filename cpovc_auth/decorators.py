@@ -1,13 +1,14 @@
 """Decorator to handle permissions."""
 from functools import wraps
+
 from django.db import connection
 from django.shortcuts import render, get_object_or_404
-from django.utils.decorators import available_attrs
+
+from cpovc_forms.models import OVCCaseGeo
+from cpovc_ovc.models import OVCRegistration
 from cpovc_registry.models import (
     RegPersonsAuditTrail, RegOrgUnitsAuditTrail, RegPersonsGeo,
     RegPersonsOrgUnits, RegOrgUnit, RegPerson)
-from cpovc_ovc.models import OVCRegistration
-from cpovc_forms.models import OVCCaseGeo
 from .models import AppUser
 from .perms import PERM
 
@@ -22,7 +23,7 @@ def is_allowed_groups(allowed_groups, page=11):
     """Method for checking roles and permissions."""
 
     def decorator(check_func):
-        @wraps(check_func, assigned=available_attrs(check_func))
+        @wraps(check_func)
         def _wrapped_view(request, *args, **kwargs):
             # If active super user lets just proceed
             url_parts = request.path_info.split('/')

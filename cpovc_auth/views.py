@@ -1,7 +1,7 @@
 """CPIMS authentication views."""
-import urlparse
+from urllib.parse import urlparse
 from django.shortcuts import render
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from cpovc_auth.forms import LoginForm
@@ -28,11 +28,11 @@ from cpovc_registry.views import persons_search
 from cpovc_access.decorators import watch_login
 from cpovc_access.forms import StrictAuthenticationForm
 
-from django.contrib.auth.views import password_reset_confirm
+from django.contrib.auth.views import PasswordResetConfirmView
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.tokens import default_token_generator
 from django.template.response import TemplateResponse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.shortcuts import resolve_url
 
 
@@ -441,7 +441,7 @@ def roles_edit(request, user_id):
 
 def reset_confirm(request, uidb64=None, token=None):
     """Method for confirm password reset."""
-    return password_reset_confirm(
+    return PasswordResetConfirmView(
         request, template_name='registration/password_reset_confirm.html',
         uidb64=uidb64, token=token, post_reset_redirect=reverse(log_in))
 

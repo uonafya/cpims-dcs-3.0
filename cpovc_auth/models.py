@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin, Group, Permission)
@@ -15,7 +15,6 @@ from notifications.signals import notify
 class CPOVCUserManager(BaseUserManager):
 
     def create_user(self, username, reg_person, password=None):
-
         from cpovc_registry.models import RegPerson
         if not username:
             raise ValueError('The given username must be set')
@@ -184,11 +183,11 @@ def update_change(sender, instance, **kwargs):
     try:
         user = sender.objects.get(pk=instance.pk)
     except sender.DoesNotExist:
-        print "User does not exist"
+        print("User does not exist")
         pass
     else:
         if user.password != instance.password:
-            print "Password changed so update date."
+            print("Password changed so update date.")
             import inspect
             uname = 'Administrator'
             for frame_record in inspect.stack():
@@ -202,15 +201,14 @@ def update_change(sender, instance, **kwargs):
             notify.send(instance, recipient=user, description=details,
                         verb='User password changed')
         else:
-            print "Password NOT changed so NO update."
+            print("Password NOT changed so NO update.")
 
 
 def my_handler(sender, instance, created, **kwargs):
     user = sender.objects.get(pk=instance.pk)
     # user = obj.reg_person
     pwd = instance._password
-    print 'password change', pwd
+    print('password change', pwd)
     notify.send(instance, recipient=user, verb='User account changed')
-
 
 # post_save.connect(my_handler, sender=AppUser)
