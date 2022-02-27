@@ -22,7 +22,6 @@ class TestViews(TestCase):
                                      })
          self.assertEqual(response.status_code, 200)
          self.assertTemplateUsed(response, 'forms/forms_registry.html')
-     def test_forms_delete_case_POST(self):
 
 
 
