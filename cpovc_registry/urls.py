@@ -1,25 +1,26 @@
 """Registry section urls."""
-from django.conf.urls import patterns, url
+from django.urls import include, path
+import views
 
 # This should contain urls related to registry ONLY
-urlpatterns = patterns(
+urlpatterns = include(
     'cpovc_registry.views',
-    url(r'^ou/$', 'home', name='registry'),
-    url(r'^ou/new/$', 'register_new', name='registry_new'),
-    url(r'^ou/view/(?P<org_id>\d+)/$', 'register_details',
-        name='register_details'),
-    url(r'^ou/edit/(?P<org_id>\d+)/$', 'register_edit', name='registry_edit'),
-    url(r'^person/search/$', 'persons_search', name='search_persons'),
-    url(r'^person/user/(?P<id>\d+)/$', 'new_user', name='new_user'),
-    url(r'^person/$', 'person_actions', name='person_actions'),
-    url(r'^person/new/$', 'new_person', name='new_person'),
-    url(r'^person/edit/(?P<id>\d+)/$', 'edit_person', name='edit_person'),
-    url(r'^person/view/(?P<id>\d+)/$', 'view_person', name='view_person'),
-    url(r'^person/delete/(?P<id>\d+)/$', 'delete_person',
-        name='delete_person'),
-    url(r'^lookup/$', 'registry_look', name='reg_lookup'),
-    url(r'^person/api/$', 'person_api', name='person_api'),
-    url(r'^person/profile/$', 'person_profile', name='person_profile'),
-    url(r'^person/tl/(?P<id>\d+)/$', 'person_timeline',
-        name='person_timeline'),)
-# {% url 'view_person' id=result.id %}
+    path('ou/$', views.home, name='registry'),
+    path('ou/new/$', views.register_new, name='registry_new'),
+    path('ou/view/<int:org_id>/$', views.register_details,
+         name='register_details'),
+    path('ou/edit/<int:org_id>/$', views.register_edit, name='registry_edit'),
+    path('person/search/$', views.persons_search, name='search_persons'),
+    path('person/user/<int:id>/$', views.new_user, name='new_user'),
+    path('person/$', views.person_actions, name='person_actions'),
+    path('person/new/$', views.new_person, name='new_person'),
+    path('person/edit/<int:id>/$', views.edit_person, name='edit_person'),
+    path('person/view/<int:id>/$', views.view_person, name='view_person'),
+    path('person/delete/<int:id>/$', views.delete_person,
+         name='delete_person'),
+    path('lookup/$', views.registry_look, name='reg_lookup'),
+    path('person/api/$', views.person_api, name='person_api'),
+    path('person/profile/$', views.person_profile, name='person_profile'),
+    path('person/tl/<int:id>/$', views.person_timeline,
+         name='person_timeline'), )
+# {% path 'view_person' id=result.id %}

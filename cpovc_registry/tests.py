@@ -9,4 +9,4 @@ fmt = '%Y-%m-%d'
 new_date = datetime.strptime(start_date, fmt)
 todate = datetime.now()
 
-print new_date
+print (new_date)

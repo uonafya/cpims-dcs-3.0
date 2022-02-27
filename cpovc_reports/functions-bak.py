@@ -34,6 +34,7 @@ import openpyxl
 import pandas as pd
 import numpy as np
 from openpyxl.styles import colors, PatternFill
+from xlwt.compat import unicode
 
 from cpovc_main.functions import (
     get_general_list, get_dict, get_mapped, convert_date)
@@ -431,7 +432,7 @@ def simple_document(params, document_name='CPIMS', report_name='letter'):
         siblings = params['siblings']
         parents = params['guardians']
         p_count = len(parents)
-        print "guardians count", p_count, parents
+        print ("guardians count", p_count, parents)
         p_counts = p_count if p_count >= 2 else 3
 
         for field in fields:
@@ -498,7 +499,7 @@ def simple_document(params, document_name='CPIMS', report_name='letter'):
 
         canvas.save()
     except Exception as e:
-        print 'error - %s' % (str(e))
+        print ('error - %s' % (str(e)))
         pass
 
 
@@ -515,7 +516,7 @@ def paginate(row_num, canvas, myfont, height):
 def word_document(params, name):
     """Method to write to word - .docx."""
     try:
-        from docx import Document
+        from  docx import Document
         from docx.shared import Inches
 
         document = Document()
@@ -611,7 +612,7 @@ def get_sub_county_info(sub_county_ids, a_type='GDIS', icounty=None):
                                          'sub_county_id': area_id,
                                          'sub_county': area_name}
     except Exception as e:
-        print 'error getting sub-county ids - %s' % (str(e))
+        print ('error getting sub-county ids - %s' % (str(e)))
         return []
     else:
         return area_ids
@@ -642,7 +643,7 @@ def get_period(report_type='M', month='', year='', period='F'):
     period should be a calculated month range given an end date.
     """
     try:
-        print 'TYPE', report_type, 'MON', month, 'YR', year, 'PERIOD', period,
+        print ('TYPE', report_type, 'MON', month, 'YR', year, 'PERIOD', period,)
         days = 30
         reports_qs = {'Q1': 9, 'Q2': 12, 'Q3': 3, 'Q4': 6}
         other_yr = ['Q3', 'Q4', 'Y']
@@ -715,7 +716,7 @@ def get_period(report_type='M', month='', year='', period='F'):
         print('BBBBBBBBBBBBBBBBBBBBBBB', params)
         return params
     except Exception as e:
-        print 'error getting date - %s' % (str(e))
+        print ('error getting date - %s' % (str(e)))
         raise e
 
 
@@ -808,19 +809,19 @@ def filter_org_unit(params, sub_county_case_ids):
         org_unit_ids = []
         if 'org_unit_tree' in params:
             org_unit_tree = params['org_unit_tree']
-            print 'tquery', org_unit_tree
+            print ('tquery', org_unit_tree)
             if len(org_unit_tree) > 1:
                 org_unit_ids = org_unit_tree
         if 'org_unit' in params:
             org_unit = params['org_unit']
             if org_unit and len(org_unit_ids) == 0:
-                print 'for one', org_unit
+                print ('for one', org_unit)
                 org_unit_ids = [int(org_unit)]
         if org_unit_ids:
             sub_county_case_ids = sub_county_case_ids.filter(
                 report_orgunit_id__in=org_unit_ids)
     except Exception as e:
-        print "could not filter by OU - %s" % (str(e))
+        print ("could not filter by OU - %s" % (str(e)))
         return sub_county_case_ids
     else:
         return sub_county_case_ids
@@ -834,7 +835,7 @@ def get_data(params, report='CASE_LOAD'):
     """
     try:
         data = []
-        print 'Case Load params', params
+        print ('Case Load params', params)
         print('\n\n')
         cl_queryset = OVCCaseCategory.objects.all()
         cl_queryset = cl_queryset.filter(is_void=False).exclude(
@@ -857,7 +858,7 @@ def get_data(params, report='CASE_LOAD'):
             sub_county_case_ids = OVCCaseGeo.objects.filter(
                 is_void=False).values_list('case_id_id', flat=True)
             if org_unit:
-                print 'by ou', org_unit
+                print ('by ou', org_unit)
                 sub_county_case_ids = filter_org_unit(params,
                                                       sub_county_case_ids)
         cl_queryset = cl_queryset.filter(
@@ -882,7 +883,7 @@ def get_data(params, report='CASE_LOAD'):
                     'interventions': raw_interven, 'itv': intvs}
         return raw_vals
     except Exception as e:
-        print 'Get data error - %s' % (str(e))
+        print ('Get data error - %s' % (str(e)))
         raise e
 
 
@@ -900,11 +901,11 @@ def filter_by_date(params, queryset, field='date_of_event'):
         if 'start_date' in params and 'end_date' in params:
             start_date = params['start_date']
             end_date = params['end_date']
-            print "Filter by dates", str(start_date), str(end_date)
+            print ("Filter by dates", str(start_date), str(end_date))
             kwargs = {'{0}__range'.format(field): (start_date, end_date)}
             queryset = queryset.filter(**kwargs)
     except Exception as e:
-        print "Error applying date filter - %s" % (str(e))
+        print ("Error applying date filter - %s" % (str(e)))
         return queryset
     else:
         return queryset
@@ -953,7 +954,7 @@ def get_pending(params):
             data.append(item)
         return data
     except Exception as e:
-        print 'Get pending error - %s' % (str(e))
+        print ('Get pending error - %s' % (str(e)))
         raise e
 
 
@@ -963,10 +964,10 @@ def get_case_ids(params):
         period_qs = OVCCaseRecord.objects.filter(is_void=False)
         period_qs = filter_by_date(params, period_qs, 'date_case_opened')
         period_qs = period_qs.values_list('case_id', flat=True)
-        print "case filters for ids by date"
+        print ("case filters for ids by date")
         return period_qs
     except Exception as e:
-        print "Error getting case -%s" % (str(e))
+        print ("Error getting case -%s" % (str(e)))
         return []
 
 
@@ -1014,7 +1015,7 @@ def get_intervention(params, pending=False):
             data.append(item)
         return data
     except Exception as e:
-        print 'Get intervention error - %s' % (str(e))
+        print ('Get intervention error - %s' % (str(e)))
         raise e
 
 
@@ -1084,7 +1085,7 @@ def child_data(data):
             data[ffv_key] = c_data
         return data
     except Exception as e:
-        print 'Error getting child - %s' % (str(e))
+        print ('Error getting child - %s' % (str(e)))
         data['siblings'] = {}
         return data
 
@@ -1413,7 +1414,7 @@ def get_ovc_values(params, data_type=1):
     ovc_filters = {'YEAR': 'ANNUAL', 'Qtr1': 'QUARTER1',
                    'Qtr3': 'QUARTER3', 'SemiAnnual': 'SEMIANNUAL'}
     try:
-        print params
+        print (params)
         rhead = ['OVCCount', 'Age', 'Agebracket', 'Domain', 'Gender',
                  'CBO', 'District', 'County', 'Ward']
         period = str(params['label'])
@@ -1453,7 +1454,7 @@ def get_raw_values(params, data_type=1):
         dt = ''
         adhoc_type = int(params["adhoc_type"])
         if adhoc_type:
-            print 'Run raw sql'
+            print ('Run raw sql')
             adhoc_name = 'GOK_%s' % (adhoc_type)
             params['other_params'] = ''
             report_region = params['report_region']
@@ -1479,7 +1480,7 @@ def get_raw_values(params, data_type=1):
                     titles.append(res)
             columns = [col.lower() for col in titles]
             data = [columns]
-            print 'Results count - ', len(results)
+            print ('Results count - ', len(results))
             for res in results:
                 vals = []
                 for n, i in enumerate(titles):
@@ -1504,7 +1505,7 @@ def get_institution_data(params, report_id=4):
         elif report_id == 3:
             data = get_population_data(params)
     except Exception as e:
-        print "Error getting institution data - %s" % (str(e))
+        print ("Error getting institution data - %s" % (str(e)))
         return {}
     else:
         return data
@@ -1615,7 +1616,7 @@ def get_population_data(params):
                     'ddata': raw_dis, 'death': raw_death}
         return raw_vals
     except Exception as e:
-        print 'Get institution data error - %s' % (str(e))
+        print ('Get institution data error - %s' % (str(e)))
         raise e
 
 
@@ -1644,7 +1645,7 @@ def get_health_data(params):
             org_qs = RegOrgUnit.objects.filter(
                 is_void=False, org_unit_type_id__in=inst_list)
             if report_region in [2, 3]:
-                print 'Filter further by county / sub-county'
+                print ('Filter further by county / sub-county')
                 sub_ids = params['sub_county_id']
                 orgs_geos = RegOrgUnitGeography.objects.filter(
                     is_void=False, area_id__in=sub_ids)
@@ -1682,7 +1683,7 @@ def get_health_data(params):
         raw_vals = {'data': raw_data}
         return raw_vals
     except Exception as e:
-        print 'Get institution data error - %s' % (str(e))
+        print ('Get institution data error - %s' % (str(e)))
         raise e
 
 
@@ -1764,7 +1765,7 @@ def col_totals(flist):
             ttotals = ttls + [0] * 13
         return ttotals
     except Exception as e:
-        print 'Error get totals - %s' % (str(e))
+        print ('Error get totals - %s' % (str(e)))
         return ttls + [0] * 13
 
 
@@ -1827,7 +1828,7 @@ def get_others(ddata, evals, new_key=7, is_sum=False):
         cal_sum[0] = new_key
         return cal_sum
     except Exception as e:
-        print "error flattening other -%s" % (str(e))
+        print ("error flattening other -%s" % (str(e)))
         return []
 
 
@@ -1848,7 +1849,7 @@ def write_row(data, is_raw=False):
                 row_dict[cat_id] = table_string.replace(tmp_td, '')
         return row_dict
     except Exception as e:
-        print 'Row error - %s' % (str(e))
+        print ('Row error - %s' % (str(e)))
         return {}
 
 
@@ -1879,7 +1880,7 @@ def get_categories(ids=True):
                 categories[case_id] = case_name
         return categories
     except Exception as e:
-        print 'Error getting category - %s' % (str(e))
+        print ('Error getting category - %s' % (str(e)))
         return {}
 
 
@@ -1896,7 +1897,7 @@ def get_case_data(params):
             case_info['case_serial'] = case_report.case_id.case_serial
         return case_info
     except Exception as e:
-        print 'Get case error - %s' % (str(e))
+        print ('Get case error - %s' % (str(e)))
         raise {}
 
 
@@ -1921,7 +1922,7 @@ def org_unit_tree(org_unit_id):
             ou_ids.append(ou_id)
             # org_unit_tree(ou_id, ou_ids)
     except Exception as e:
-        print "Error getting units tree - %s" % (str(e))
+        print ("Error getting units tree - %s" % (str(e)))
     else:
         return list(set(ou_ids))
 
@@ -1955,7 +1956,7 @@ def get_performance(request):
                 cases[pd] = 0
 
     except Exception as e:
-        print 'error with dashboard - %s' % (str(e))
+        print ('error with dashboard - %s' % (str(e)))
     else:
         return persons, punits, cases
 
@@ -1983,7 +1984,7 @@ def get_performance_detail(request, user_id=0, params={}):
             'date_case_opened').annotate(case_report=Count('date_case_opened'))
 
     except Exception as e:
-        print 'error with performance - %s' % (str(e))
+        print ('error with performance - %s' % (str(e)))
     else:
         return persons, cases, reports
 
@@ -1991,7 +1992,7 @@ def get_performance_detail(request, user_id=0, params={}):
 def get_variables(request):
     """Method to prepare all the variables for reporting."""
     try:
-        print request.POST
+        print (request.POST)
         dates = {v: k for k, v in enumerate(calendar.month_abbr)}
         sub_county_ids = request.POST.getlist('sub_county[]')
         sub_counties = request.POST.get('sub_county')
