@@ -1890,7 +1890,7 @@ def get_dashboards(request, did, org_ids):
                        'count': 'N/A', 'item_id': case.pk}
                 res.append(vls)
     except Exception as e:
-        print ('error - %s' % (str(e)))
+        print('error - %s' % (str(e)))
         return []
     else:
         return res
