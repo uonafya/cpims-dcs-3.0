@@ -2,7 +2,7 @@
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} CSI {% endblock %}
 
@@ -17,6 +17,7 @@
 }
 </style>
 {% endblock %}
+
 
 {% block javascript_code%}
 {% endblock javascript_code%}
@@ -125,7 +126,7 @@
                         </td>
                      
                         <td> 
-                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form({{result.id}})" >
+                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form({{ result.id }})" >
                                 <b>New</b>&nbsp;&nbsp;<i class="fa fa-file"></i>                          
                             </button>
 
@@ -148,6 +149,8 @@
 
 
 {% endblock %}
+<!-- ---------------------------------------------------------------------- -->
+
 <!-- End content area -->
 
 {% block lazy_javascript_code %}

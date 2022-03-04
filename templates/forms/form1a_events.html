@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Form 1A {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -32,6 +32,7 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 
@@ -335,8 +336,7 @@
                                             <th width="15%"><h6><b>Domain</b></h6></th>
                                             <th width="20%"><h6><b>Service(s)</b></h6></th>
                                             <th width="15%"><h6><b>Date Of Service</b></h6></th>
-                                            <!-- <th width="20%"><h6><b>Service(s) Provider</b></h6></th> 
-                                            <th width="20%"><h6><b>Place Of Service</b></h6></th>-->
+
                                             <th width="5%"><h6><b>Actions</b></h6></th>
                                         </tr>
                                     </thead>
@@ -472,6 +472,7 @@
 
 {% endblock %}
 
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>	
@@ -532,7 +533,7 @@ function loadForm1aEvents()
                  }; 
 
     $.ajax({
-                url: '{% url 'manage_form1a_events' %}',
+                url: "{% url 'manage_form1a_events' %}",
                 dataType: 'json',
                 method: 'POST',
                 data: values,
@@ -667,7 +668,7 @@ function saveForm1A(x)
             {
                 values['date_of_assessment'] = date_of_assessment;
                 $.ajax({
-                    url: '{% url 'save_form1a' %}',
+                    url: "{% url 'save_form1a' %}",
                     dataType: 'json',
                     method: 'POST',
                     data: values,
@@ -723,7 +724,7 @@ function saveForm1A(x)
             {
                 values['date_of_cevent'] = date_of_cevent;
                 $.ajax({
-                    url: '{% url 'save_form1a' %}',
+                    url: "{% url 'save_form1a' %}",
                     dataType: 'json',
                     method: 'POST',
                     data: values,
@@ -780,7 +781,7 @@ function saveForm1A(x)
             {
                 values['date_of_priority'] = date_of_priority;
                 $.ajax({
-                    url: '{% url 'save_form1a' %}',
+                    url: "{% url 'save_form1a' %}",
                     dataType: 'json',
                     method: 'POST',
                     data: values,
@@ -837,7 +838,7 @@ function saveForm1A(x)
             {
                 values['date_of_service'] = date_of_service;
                 $.ajax({
-                    url: '{% url 'save_form1a' %}',
+                    url: "{% url 'save_form1a' %}",
                     dataType: 'json',
                     method: 'POST',
                     data: values,
@@ -929,7 +930,7 @@ function getServices(x, domain)
 
     // do an ajax_call
     $.ajax({
-				url: '{% url 'manage_service_category' %}',
+				url: "{% url 'manage_service_category' %}",
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',
@@ -1760,3 +1761,5 @@ $("#olmis_priority_hes").change(function(event)
 });
 </script>	
 {% endblock %}
+
+

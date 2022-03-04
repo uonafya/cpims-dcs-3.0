@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Form 1A {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -29,6 +29,7 @@
 }
 </style>
 {% endblock %}
+
 
 {% block javascript_code%}
 {% endblock javascript_code%}
@@ -311,6 +312,8 @@
 
 {% endblock %}
 
+
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>	
@@ -400,7 +403,7 @@ function getServices(x, domain)
 
     // do an ajax_call
     $.ajax({
-				url: '{% url 'manage_service_category' %}',
+				url: "{% url 'manage_service_category' %}",
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',
