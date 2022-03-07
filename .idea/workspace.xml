@@ -2,34 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25dc0983-ab91-4443-a37b-7950789cf27d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/cpims-dcs-3.0.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpovc_registry/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpovc_registry/functions-.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/functions-.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpovc_registry/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cpovc_registry/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reqs/all.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reqs/all.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/delete_person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/delete_person.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/edit_person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/edit_person.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/new_person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/new_person.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/new_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/new_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/person_edit-bak.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_edit-bak.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/person_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/person_new-bak.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_new-bak.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/person_new.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/persons_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/persons_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/roles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/roles.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/roles_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/roles_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registry/workforce_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/workforce_search.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunManager" selected="Python.tests">
     <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -120,6 +95,12 @@
       <workItem from="1645883966420" duration="757000" />
       <workItem from="1645885038496" duration="22665000" />
       <workItem from="1645912779807" duration="5142000" />
+      <workItem from="1646335377647" duration="2943000" />
+      <workItem from="1646385698277" duration="10346000" />
+      <workItem from="1646465176864" duration="14625000" />
+      <workItem from="1646593295437" duration="3546000" />
+      <workItem from="1646633636036" duration="251000" />
+      <workItem from="1646646992765" duration="1822000" />
     </task>
     <servers />
   </component>
