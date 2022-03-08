@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25dc0983-ab91-4443-a37b-7950789cf27d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cpims-dcs-3.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cpims-dcs-3.0.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpovc_registry/templatetags/git_version.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/templatetags/git_version.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cpovc_registry/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpovc_registry/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
