@@ -1,8 +1,8 @@
 """Forms for Registry sections of CPIMS."""
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from django.forms.widgets import RadioFieldRenderer
-from django.utils.encoding import force_unicode
+from django.utils.translation import gettext as _
+from django.forms.widgets import get_default_renderer as  RadioFieldRenderer
+from django.utils.encoding import force_str as force_unicode
 from django.utils.safestring import mark_safe
 
 from crispy_forms.helper import FormHelper
@@ -127,7 +127,7 @@ class RegistrationForm(forms.Form):
 
         # All working in selections need to be tied to currently logged in user
         user_geos = get_user_geos(self.user)
-        print user_geos
+        print (user_geos)
         county_filter = [] if user.is_superuser else user_geos['counties']
         scounty_filter = [] if user.is_superuser else user_geos['sub_counties']
         ward_filter = [] if user.is_superuser else user_geos['wards']

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="25dc0983-ab91-4443-a37b-7950789cf27d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/cpims-dcs-3.0.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpovc_registry/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpovc_registry/functions-.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/functions-.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpovc_registry/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpovc_registry/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reqs/all.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reqs/all.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/delete_person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/delete_person.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/edit_person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/edit_person.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/new_person.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/new_person.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/new_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/new_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/person_edit-bak.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_edit-bak.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/person_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/person_new-bak.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_new-bak.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/person_new.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/person_new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/persons_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/persons_search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/roles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/roles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/roles_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/roles_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registry/workforce_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registry/workforce_search.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="25eOD5IJbm9EEQWkrBCRUNnVeDM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.tests">
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="cpims-dcs-3.0" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cpovc_registry" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cpovc_registry/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cpims-dcs-3.0" type="Python.DjangoServer" factoryName="Django server">
+      <module name="cpims-dcs-3.0" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.tests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25dc0983-ab91-4443-a37b-7950789cf27d" name="Changes" comment="" />
+      <created>1645883963821</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645883963821</updated>
+      <workItem from="1645883966420" duration="757000" />
+      <workItem from="1645885038496" duration="22665000" />
+      <workItem from="1645912779807" duration="5142000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpovc_registry/forms.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/cpims_dcs_3_0$tests.coverage" NAME="tests Coverage Results" MODIFIED="1645917761711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cpovc_registry" />
+  </component>
+</project>
