@@ -1,6 +1,6 @@
 from django.test import TestCase
 from datetime import datetime
-import unittest
+
 
 # Create your tests here.
  ###Complete Url test Cases;;
@@ -121,24 +121,3 @@ class RegPerson(TestCase):
         regpersonsgeo = Author.objects.get(id=1)
         field_label = refpersonsgeo._meta.get_field('area').verbose_name
         self.assertEqual(field_label, 'area')
-
-    def test_area_type_length(self):
-        regpersonsgeo = RegPersonsGeo.objects.get(id=1)
-        max_length = regpersonsgeo._meta.get_field('are_type').max_length
-        self.assertEqual(max_length, 4)
-
-    def test_object_name_is_last_name_comma_first_name(self):
-        regpersonsgeo = RegPersonGeo.objects.get(id=1)
-        expected_object_name = f'{regpersongeo.last_name}, {regpersonsgeo.first_name}'
-        self.assertEqual(str(regpersonsgeo), expected_object_name)
-
-    def test_get_absolute_url(self):
-        regpersonsgeo = RegPersonsGeo.objects.get(id=1)
-        # This will also fail if the urlconf is not defined.
-        self.assertEqual(author.get_absolute_url(), 'path to reg personsgeo')
-
-
-
-        
-        
-        
