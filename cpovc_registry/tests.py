@@ -170,6 +170,47 @@ class RegPersonsGeo (TestCase):
 
 
 
+#Testing models
+from .models import *
+
+class RegOrgUnit(TestCase):
+
+    def Create_RegOrgUnit(self, org_unit_id_vis="01", org_unit_name="Kabu Registry", org_unit_type_id="c01", parent_org_unit_id=1,):
+        return RegOrgUnit.objects.create(org_unit_id_vis=org_unit_id_vis, org_unit_name=org_unit_name, org_unit_type_id=org_unit_type_id, parent_org_unit_id=parent_org_unit_id, created_at=timezone.now())
+
+    def test_RegOrgUnit_Creation(self):
+        R = self.Create_RegOrgUnit()
+        self.assertTrue(isinstance(R, RegOrgUnit))
+        self.assertEqual(R.__unicode__(), R.org_unit_id_vis)
+
+
+class RegOrgUnitContactTestCase(TestCase):
+
+    def setUpTestData(cls):
+        RegOrgUnitContact.objects.create(contact_detail_type_id="DS01", contact_detail="0758008788")
+
+    def test_string_method(self):
+        Contact = RegOrgUnitContact.objects.get(id=1)
+        expected_string = f"ContactID: {RegOrgUnitContact.contact_detail_type_id} {RegOrgUnitContact.contact_detail}"
+        self.assertEqual(str(RegOrgUnitContact), expected_string)
+
+class RegOrgUnitExternalIDTestCase(TestCase):
+
+    def setUpTestData(cls):
+        RegOrgUnitExternalID.objects.create(identifier_type_id="001", identifier_value="NationalID")
+
+    def test_string_method(self):
+        ExternalId = RegOrgUnitExternalID.objects.get(id=1)
+        expected_output = f"IdentifierType: {RegOrgUnitExternalID.identifier_type_id} {RegOrgUnitExternalID.identifier_value}"
+        self.assertEqual(str(RegOrgUnitExternalID), expected_output)
+
+class RegPersonsSiblingsTestCase(TestCase):
+
+    def setUpTestData(cls):
+        RegPersonsSiblings.objects.create()
+
+
+
 start_date = '2002-01-01'
 fmt = '%Y-%m-%d'
 

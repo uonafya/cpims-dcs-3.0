@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25dc0983-ab91-4443-a37b-7950789cf27d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cpims-dcs-3.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cpims-dcs-3.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpovc_registry/templatetags/git_version.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/templatetags/git_version.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cpovc_registry/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpovc_registry/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cpovc_registry/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +28,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portfolio-master" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunManager" selected="Python.tests">
@@ -105,6 +100,10 @@
       <workItem from="1646593295437" duration="3546000" />
       <workItem from="1646633636036" duration="251000" />
       <workItem from="1646646992765" duration="1822000" />
+      <workItem from="1647081041423" duration="624000" />
+      <workItem from="1647676468591" duration="188000" />
+      <workItem from="1647688304991" duration="120000" />
+      <workItem from="1647689502079" duration="1598000" />
     </task>
     <servers />
   </component>
