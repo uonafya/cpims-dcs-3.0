@@ -30,6 +30,16 @@
 <div class="row">
     <!-- Start content area -->
     	<!-- begin row -->
+<<<<<<< HEAD
+		<div class="row"></div>
+            <!-- begin col-6 -->
+		    <div class="col-12"></div>
+		        <!-- begin panel -->
+		        <form> class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form" id="edit_org_unit" method="post"></form>
+		        {% csrf_token %}
+		        <input type='radio' class="edit_org" name='edit_org' value="1" checked="checked" Update Organization Unit registration details></input>
+		        <div class="separator">
+=======
 		<div class="row">
             <!-- begin col-6 -->
 		    <div class="col-12">
@@ -38,6 +48,7 @@
 		        {% csrf_token %}
 		        <input type='radio' class="edit_org" name='edit_org' value="1" checked="checked"> Update Organization Unit registration details
 		        <div class="separator"></div>
+>>>>>>> origin/main
 		        <div id="edit_part">
                 <div class="panel panel-inverse" data-sortable-id="form-validation-1">
                     <div class="panel-heading">
@@ -49,7 +60,11 @@
                     </div>
                     <div class="panel-body panel-form">
 						<div class="form-group">
+<<<<<<< HEAD
+							<label class="control-label col-md-4 col-sm-4" for="org_unit_name">Name of Organisation Unit * :></label>
+=======
 							<label class="control-label col-md-4 col-sm-4" for="org_unit_name">Name of Organisation Unit * :</label>
+>>>>>>> origin/main
 							<div class="col-md-6 col-sm-6">
 									{{ form.org_unit_name }}
 							</div>
@@ -73,8 +88,13 @@
                         <h4 class="panel-title">Organisation Type</h4>
                     </div>
                     <div class="panel-body panel-form">
+<<<<<<< HEAD
+						<div class="form_group">
+							<label class="control.label col.md.4 col.sm_4" for="org_unit_type">Type of organisation Unit :</label>
+=======
 						<div class="form-group">
 							<label class="control-label col-md-4 col-sm-4" for="org_unit_type">Type of organisation Unit :</label>
+>>>>>>> origin/main
 							<div class="col-md-6 col-sm-6">
 								{{ form.org_unit_type }}
 							</div>
@@ -111,7 +131,11 @@
                     </div>
                     <div class="panel-body panel-form">
 						<div class="form-group">
+<<<<<<< HEAD
+							<label class="control-label" col-md-4 col-sm-4 for="Sub_County">Sub County :</label>
+=======
 							<label class="control-label col-md-4 col-sm-4" for="sub_county">Sub County :</label>
+>>>>>>> origin/main
 							<div class="col-md-6 col-sm-6">
 								{{ form.sub_county }}
 							</div>
