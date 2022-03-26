@@ -23,4 +23,14 @@
  * added tests for views in test.py
  
  * addd tests for forms in test.py
+ 
+ > HTMX syntax
+ 
+ 	- Added plugin folder for htmx framework in static/plugins/htmx
+ 	- made changes to base.html :
+ 		- Added script tag linking base.html to htmx framework in static files
+ 	- refactored the cpovc_ovc code of all templates to htmx syntax :
+ 		- Major changes to href -> hx-get for django url and hx-target for html target element(id)
+ 		 
+ 		
 
