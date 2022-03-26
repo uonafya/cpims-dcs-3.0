@@ -174,3 +174,4 @@ class AuthenticationPolicyMiddleware(object):
         messages.info(request, 'Please relogin')
         view_func, args, kwargs = resolve(self.logout_path)
         return view_func(request, *args, **kwargs)
+

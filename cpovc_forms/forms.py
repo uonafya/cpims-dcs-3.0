@@ -11,7 +11,6 @@ from cpovc_registry.functions import (
 from cpovc_registry.models import RegOrgUnit
 from .functions import get_questions
 
-
 YESNO_CHOICES = (('AYES', 'Yes'), ('ANNO', 'No'))
 bursary_school_type_list = (('STPR', 'Private'), ('STPU', 'Public'))
 bursary_school_category_list = (('SCNA', 'National'), ('SCCT', 'County'),
@@ -70,7 +69,7 @@ document_type_list = get_list('document_tag_id', 'Please Select Document')
 all_list = get_all_geo_list()
 county_list = [('', 'Please Select')] + list(get_geo_list(all_list, 'GPRV'))
 sub_county_list = [('', 'Please Select')] + \
-    list(get_geo_list(all_list, 'GDIS'))
+                  list(get_geo_list(all_list, 'GDIS'))
 ward_list = [('', 'Please Select')] + list(get_geo_list(all_list, 'GWRD'))
 institution_type_list = get_list('institution_type_id', 'Please Select')
 admission_type_list = get_list('admission_type_id', 'Please Select')
@@ -149,6 +148,7 @@ olmis_ha29_list = get_list('olmis_ha29_id', 'Please Select')
 olmis_ha30_list = get_list('olmis_ha30_id', 'Please Select')
 olmis_ha31_list = get_list('olmis_ha31_id', 'Please Select')
 
+
 class OVCSchoolForm(forms.Form):
     school_name = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': _('Name of School'),
@@ -213,11 +213,11 @@ class OVCBursaryForm(forms.Form):
 
     year = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Year Awarded(YYYY)'),
-                           'class': 'form-control',
-                           'id': 'year',
-                           'data-parsley-required': "true",
-                           'data-parsley-group': 'group0'
-                           }))
+               'class': 'form-control',
+               'id': 'year',
+               'data-parsley-required': "true",
+               'data-parsley-group': 'group0'
+               }))
 
     term = forms.ChoiceField(choices=term_list,
                              initial='0',
@@ -251,11 +251,12 @@ class BackgroundDetailsForm(forms.Form):
         name_of_school = forms.ChoiceField(choices=(),
                                            initial='0',
                                            widget=forms.Select(
-            attrs={'class': 'form-control',
-                   'id': 'name_of_school',
-                   'data-parsley-required': "true",
-                   'data-parsley-group': 'group0'}))
+                                               attrs={'class': 'form-control',
+                                                      'id': 'name_of_school',
+                                                      'data-parsley-required': "true",
+                                                      'data-parsley-group': 'group0'}))
         self.fields['name_of_school'] = name_of_school
+
     admmitted_to_school = forms.ChoiceField(choices=yesno_list,
                                             initial='0',
                                             widget=forms.Select(
@@ -467,26 +468,26 @@ class ResidentialFollowupForm(forms.Form):
         name_of_school = forms.ChoiceField(choices=(),
                                            initial='0',
                                            widget=forms.Select(
-            attrs={'class': 'form-control',
-                   'id': 'name_of_school'
-                   # 'data-parsley-required': "true",
-                   # 'data-parsley-group': 'group0'
-                   }))
+                                               attrs={'class': 'form-control',
+                                                      'id': 'name_of_school'
+                                                      # 'data-parsley-required': "true",
+                                                      # 'data-parsley-group': 'group0'
+                                                      }))
         self.fields['name_of_school'] = name_of_school
 
     casecategorys = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control',
                'id': 'casecategorys',
                'type': 'hidden'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     person = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control',
                'id': 'person',
                'type': 'hidden'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     child_age = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control',
@@ -530,99 +531,99 @@ class ResidentialFollowupForm(forms.Form):
                                        widget=forms.Select(
                                            attrs={'class': 'form-control',
                                                   'id': 'adverse_events'
-                                                  #'data-parsley-required': "true",
-                                                  #'data-parsley-group': 'group0'
+                                                  # 'data-parsley-required': "true",
+                                                  # 'data-parsley-group': 'group0'
                                                   }))
     adverse_event_date = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Date Of Adverse Event'),
                'class': 'form-control',
                'id': 'adverse_event_date'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     adverse_medical_events = forms.ChoiceField(choices=adverse_medical_list,
                                                initial='0',
                                                widget=forms.SelectMultiple(
                                                    attrs={'class': 'form-control',
                                                           'id': 'adverse_medical_events'
-                                                          #'data-parsley-required': "true",
-                                                          #'data-parsley-group': 'group0'
+                                                          # 'data-parsley-required': "true",
+                                                          # 'data-parsley-group': 'group0'
                                                           }))
     attendance_type = forms.ChoiceField(choices=attendance_type_list,
                                         initial='0',
                                         widget=forms.Select(
                                             attrs={'class': 'form-control',
                                                    'id': 'attendance_type'
-                                                   #'data-parsley-required': "true",
-                                                   #'data-parsley-group': 'group0'
+                                                   # 'data-parsley-required': "true",
+                                                   # 'data-parsley-group': 'group0'
                                                    }))
     hospital_referral_type = forms.ChoiceField(choices=hospital_referral_type_list,
                                                initial='0',
                                                widget=forms.Select(
                                                    attrs={'class': 'form-control',
                                                           'id': 'hospital_referral_type'
-                                                          #'data-parsley-required': "true",
-                                                          #'data-parsley-group': 'group0'
+                                                          # 'data-parsley-required': "true",
+                                                          # 'data-parsley-group': 'group0'
                                                           }))
     adverse_offences = forms.ChoiceField(choices=adverse_offence_list,
                                          initial='0',
                                          widget=forms.SelectMultiple(
                                              attrs={'class': 'form-control',
                                                     'id': 'adverse_offences'
-                                                    #'data-parsley-required': "true",
-                                                    #'data-parsley-group': 'group0'
+                                                    # 'data-parsley-required': "true",
+                                                    # 'data-parsley-group': 'group0'
                                                     }))
     discharge_date = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Date Of Discharge'),
                'class': 'form-control',
                'id': 'discharge_date'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     expected_return_date = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Expected Return Date'),
                'class': 'form-control',
                'id': 'expected_return_date'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     actual_return_date = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Actual Return Date'),
                'class': 'form-control',
                'id': 'actual_return_date'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     discharge_type = forms.ChoiceField(choices=discharge_type_list,
                                        initial='0',
                                        widget=forms.Select(
                                            attrs={'class': 'form-control',
                                                   'id': 'discharge_type'
-                                                  #'data-parsley-required': "true",
-                                                  #'data-parsley-group': 'group0'
+                                                  # 'data-parsley-required': "true",
+                                                  # 'data-parsley-group': 'group0'
                                                   }))
 
     discharge_reason = forms.CharField(widget=forms.Textarea(
         attrs={'placeholder': _('Discharge Reason'),
                'class': 'form-control',
                'id': 'discharge_reason',
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0',
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0',
                'rows': '2'}))
     discharge_comments = forms.CharField(widget=forms.Textarea(
         attrs={'placeholder': _('Discharge Comments'),
                'class': 'form-control',
                'id': 'discharge_comments',
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0',
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0',
                'rows': '2'}))
     admmitted_to_school = forms.ChoiceField(choices=yesno_list,
                                             initial='0',
                                             widget=forms.Select(
                                                 attrs={'class': 'form-control',
                                                        'id': 'admmitted_to_school'
-                                                       #'data-parsley-required': "true",
-                                                       #'data-parsley-group': 'group0'
+                                                       # 'data-parsley-required': "true",
+                                                       # 'data-parsley-group': 'group0'
                                                        }))
 
     school_name = forms.CharField(widget=forms.TextInput(
@@ -672,16 +673,16 @@ class ResidentialFollowupForm(forms.Form):
                                          widget=forms.SelectMultiple(
                                              attrs={'class': 'form-control',
                                                     'id': 'admmission_class'
-                                                    #'data-parsley-required': "true",
-                                                    #'data-parsley-group': 'group0'
+                                                    # 'data-parsley-required': "true",
+                                                    # 'data-parsley-group': 'group0'
                                                     }))
     admmission_subclass = forms.ChoiceField(choices=vocational_training_list,
                                             initial='0',
                                             widget=forms.Select(
                                                 attrs={'class': 'form-control',
                                                        'id': 'admmission_subclass'
-                                                       #'data-parsley-required': "true",
-                                                       #'data-parsley-group': 'group0'
+                                                       # 'data-parsley-required': "true",
+                                                       # 'data-parsley-group': 'group0'
                                                        }))
     admmission_subclass_other = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': _('Other Vocational'),
@@ -691,15 +692,15 @@ class ResidentialFollowupForm(forms.Form):
         attrs={'placeholder': _('Date Of Admission'),
                'class': 'form-control',
                'id': 'admmission_to_school_date'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0'
                }))
     education_comments = forms.CharField(widget=forms.Textarea(
         attrs={'placeholder': _('Education Comments'),
                'class': 'form-control',
                'id': 'education_comments',
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group0',
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group0',
                'rows': '2'}))
 
     # Court Session
@@ -1006,7 +1007,7 @@ class ResidentialForm(forms.Form):
                'class': 'form-control',
                'rows': '2',
                'id': 'placement_notes',
-               #'data-parsley-required': "true",
+               # 'data-parsley-required': "true",
                'data-parsley-group': 'group2'}))
     user_id = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control',
@@ -1126,7 +1127,7 @@ class OVC_FT3hForm(forms.Form):
                'class': 'form-control',
                'id': 'case_reporter_contacts',
                'data-parsley-pattern': '/^[0-9\+]{1,}[0-9\-]{3,15}$/',
-               #'data-parsley-required': "true",
+               # 'data-parsley-required': "true",
                'data-parsley-group': "group0"}))
     case_reporter_relationship_to_child = forms.ChoiceField(
         choices=relationship_type_list,
@@ -1151,7 +1152,7 @@ class OVC_FT3hForm(forms.Form):
         widget=forms.Select(
             attrs={'id': 'report_ward',
                    'class': 'form-control',
-                   #'data-parsley-required': "true",
+                   # 'data-parsley-required': "true",
                    'data-parsley-group': "group0"}))
     report_village = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': _('Village/Estate'),
@@ -1172,6 +1173,7 @@ class OVC_FT3hForm(forms.Form):
                        'data-parsley-required': "true",
                        'data-parsley-group': "group0"}))
         self.fields['report_orgunit'] = report_orgunit
+
     occurence_county = forms.ChoiceField(
         choices=county_list,
         initial='0',
@@ -1195,7 +1197,7 @@ class OVC_FT3hForm(forms.Form):
         widget=forms.Select(
             attrs={'id': 'occurence_ward',
                    'class': 'form-control',
-                   #'data-parsley-required': "true",
+                   # 'data-parsley-required': "true",
                    'data-parsley-group': "group0"}))
     occurence_village = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': _('Village/Estate'),
@@ -1288,7 +1290,7 @@ class OVC_FT3hForm(forms.Form):
                                             widget=forms.SelectMultiple(
                                                 attrs={'class': 'form-control',
                                                        'id': 'mental_subcondition',
-                                                       #'data-parsley-required': "true",
+                                                       # 'data-parsley-required': "true",
                                                        'data-parsley-group': 'group2'})
                                             )
     physical_condition = forms.ChoiceField(choices=physical_condition_list,
@@ -1306,7 +1308,7 @@ class OVC_FT3hForm(forms.Form):
                                               widget=forms.SelectMultiple(
                                                   attrs={'class': 'form-control',
                                                          'id': 'physical_subcondition',
-                                                         #'data-parsley-required': "true",
+                                                         # 'data-parsley-required': "true",
                                                          'data-parsley-group': 'group2'})
                                               )
     other_condition = forms.ChoiceField(choices=other_condition_list,
@@ -1324,7 +1326,7 @@ class OVC_FT3hForm(forms.Form):
                                            widget=forms.SelectMultiple(
                                                attrs={'class': 'form-control',
                                                       'id': 'other_subcondition',
-                                                      #'data-parsley-required': "true",
+                                                      # 'data-parsley-required': "true",
                                                       'data-parsley-group': 'group2'})
                                            )
 
@@ -1393,16 +1395,16 @@ class OVC_FT3hForm(forms.Form):
                                        widget=forms.Select(
                                            attrs={'class': 'form-control',
                                                   'id': 'place_of_event'
-                                                  #'data-parsley-required': "true",
-                                                  #'data-parsley-group': "group3"
+                                                  # 'data-parsley-required': "true",
+                                                  # 'data-parsley-group': "group3"
                                                   }))
     case_nature = forms.ChoiceField(choices=case_nature_list,
                                     initial='0',
                                     widget=forms.Select(
                                         attrs={'class': 'form-control',
                                                'id': 'case_nature'
-                                               #'data-parsley-required': "true",
-                                               #'data-parsley-group': "group3"
+                                               # 'data-parsley-required': "true",
+                                               # 'data-parsley-group': "group3"
                                                }))
     risk_level = forms.ChoiceField(choices=risk_level_list,
                                    initial='0',
@@ -1418,7 +1420,7 @@ class OVC_FT3hForm(forms.Form):
                                         widget=forms.SelectMultiple(
                                             attrs={  # 'class': 'form-control',
                                                 'id': 'immediate_needs',
-                                                #'data-parsley-required': "true",
+                                                # 'data-parsley-required': "true",
                                                 'data-parsley-group': 'group3'})
                                         )
     future_needs = forms.ChoiceField(choices=longterm_needs_list,
@@ -1427,7 +1429,7 @@ class OVC_FT3hForm(forms.Form):
                                      widget=forms.SelectMultiple(
                                          attrs={'class': 'form-control',
                                                 'id': 'future_needs',
-                                                #'data-parsley-required': "true",
+                                                # 'data-parsley-required': "true",
                                                 'data-parsley-group': 'group3'})
                                      )
     case_remarks = forms.CharField(widget=forms.Textarea(
@@ -1490,7 +1492,7 @@ class OVC_FT3hForm(forms.Form):
         attrs={'placeholder': _('Date'),
                'class': 'form-control',
                'id': 'date_of_event',
-               #'data-parsley-required': "true",
+               # 'data-parsley-required': "true",
                'data-parsley-group': "group3"
                }))
     case_category = forms.ChoiceField(choices=case_category_list,
@@ -1498,19 +1500,19 @@ class OVC_FT3hForm(forms.Form):
                                       widget=forms.Select(
                                           attrs={'class': 'form-control',
                                                  'id': 'case_category',
-                                                 #'multiple': 'multiple',
-                                                 #'data-parsley-required': "true",
+                                                 # 'multiple': 'multiple',
+                                                 # 'data-parsley-required': "true",
                                                  'data-parsley-group': "group3"
                                                  }))
     case_subcategory = forms.MultipleChoiceField(choices=(),
                                                  initial='',
                                                  widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'case_subcategory',
-               #'multiple': 'multiple',
-               #'data-parsley-required': "true",
-               'data-parsley-group': "group3"
-               }))
+                                                     attrs={'class': 'form-control',
+                                                            'id': 'case_subcategory',
+                                                            # 'multiple': 'multiple',
+                                                            # 'data-parsley-required': "true",
+                                                            'data-parsley-group': "group3"
+                                                            }))
     case_category_list = forms.CharField(widget=forms.TextInput(
         attrs={'id': 'case_category_list',
                'type': 'hidden'
@@ -1529,7 +1531,7 @@ class OVC_FT3hForm(forms.Form):
                                          attrs={'class': 'form-control',
                                                 'id': 'intervention',
                                                 'multiple': 'multiple',
-                                                #'data-parsley-required': "true",
+                                                # 'data-parsley-required': "true",
                                                 'data-parsley-group': "group3"
                                                 }))
 
@@ -1805,7 +1807,7 @@ class OVC_CaseEventForm(forms.Form):
         self.fields['residential_institution'] = residential_institution
 
         org_units_list = [('', 'Please Select')] + \
-            list(RegOrgUnit.objects.all().values_list('id', 'org_unit_name'))
+                         list(RegOrgUnit.objects.all().values_list('id', 'org_unit_name'))
         transfered_to = forms.ChoiceField(choices=org_units_list,
                                           initial='0',
                                           widget=forms.Select(
@@ -1969,11 +1971,11 @@ class OVC_FTFCForm(forms.Form):
     adoption_country = forms.ChoiceField(choices=(),
                                          initial='0',
                                          widget=forms.Select(
-        attrs={'class': 'form-control',
-               'id': 'adoption_country',
-               'data-parsley-required': "true",
-               'data-parsley-group': "group0"
-               }))
+                                             attrs={'class': 'form-control',
+                                                    'id': 'adoption_country',
+                                                    'data-parsley-required': "true",
+                                                    'data-parsley-group': "group0"
+                                                    }))
     court_name = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': _('Court Name'),
                'class': 'form-control',
@@ -2132,7 +2134,7 @@ class OVCSchoolForm(forms.Form):
                    'data-parsley-group': "group0"}))
 
 
-#------------------------------------------- OVCCare --------#
+# ------------------------------------------- OVCCare --------#
 class OVCCareSearchForm(forms.Form):
     search_name = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': _('Enter Child / Household'),
@@ -2205,9 +2207,9 @@ class OVCCsiForm(forms.Form):
                                 required=True,
                                 widget=forms.Select(
                                     attrs={'class': 'form-control',
-                                                    'id': 'shelter',
-                                                    'data-parsley-required': 'true',
-                                                    'data-parsley-group': 'group0'})
+                                           'id': 'shelter',
+                                           'data-parsley-required': 'true',
+                                           'data-parsley-group': 'group0'})
                                 )
     care = forms.ChoiceField(choices=csi_grade_list,
                              initial='0',
@@ -2260,8 +2262,8 @@ class OVCCsiForm(forms.Form):
                                    widget=forms.Select(
                                        attrs={'class': 'form-control',
                                               'id': 'perfomance',
-                                                    'data-parsley-required': 'true',
-                                                    'data-parsley-group': 'group0'})
+                                              'data-parsley-required': 'true',
+                                              'data-parsley-group': 'group0'})
                                    )
     education_work = forms.ChoiceField(choices=csi_grade_list,
                                        initial='0',
@@ -2286,8 +2288,8 @@ class OVCCsiForm(forms.Form):
                                      initial='0',
                                      required=True,
                                      widget=forms.Select(
-                                             attrs={'class': 'form-control',
-                                                    'id': 'olmis_domain'})
+                                         attrs={'class': 'form-control',
+                                                'id': 'olmis_domain'})
                                      )
     olmis_subdomain = forms.ChoiceField(choices=olmis_domain_list,
                                         initial='0',
@@ -2299,9 +2301,9 @@ class OVCCsiForm(forms.Form):
     olmis_service = forms.MultipleChoiceField(choices=(),
                                               initial='',
                                               widget=forms.Select(
-        attrs={'class': 'form-control',
-               'id': 'olmis_service'
-               }))
+                                                  attrs={'class': 'form-control',
+                                                         'id': 'olmis_service'
+                                                         }))
     olmis_service_provider = forms.ChoiceField(choices=olmis_service_provider_list,
                                                initial='0',
                                                required=True,
@@ -2332,9 +2334,9 @@ class OVCCsiForm(forms.Form):
     olmis_priority_service = forms.ChoiceField(choices=(),
                                                initial='',
                                                widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_service'
-               }))
+                                                   attrs={'class': 'form-control',
+                                                          'id': 'olmis_priority_service'
+                                                          }))
     olmis_priority_service_provided_list = forms.CharField(widget=forms.TextInput(
         attrs={'type': 'hidden',
                'id': 'olmis_priority_service_provided_list'}))
@@ -2365,15 +2367,15 @@ class OVCF1AForm(forms.Form):
     olmis_assessment_coreservice = forms.ChoiceField(choices=(),
                                                      initial='0',
                                                      widget=forms.Select(
-        attrs={'class': 'form-control',
-               'id': 'olmis_assessment_coreservice'})
-    )
+                                                         attrs={'class': 'form-control',
+                                                                'id': 'olmis_assessment_coreservice'})
+                                                     )
     olmis_assessment_coreservice_status = forms.ChoiceField(choices=(),
                                                             initial='0',
                                                             widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_assessment_coreservice_status'})
-    )
+                                                                attrs={'class': 'form-control',
+                                                                       'id': 'olmis_assessment_coreservice_status'})
+                                                            )
     olmis_assessment_provided_list = forms.CharField(widget=forms.TextInput(
         attrs={'type': 'hidden',
                'id': 'olmis_assessment_provided_list'}))
@@ -2383,8 +2385,8 @@ class OVCF1AForm(forms.Form):
                                      initial='0',
                                      required=True,
                                      widget=forms.Select(
-                                             attrs={'class': 'form-control',
-                                                    'id': 'olmis_domain'})
+                                         attrs={'class': 'form-control',
+                                                'id': 'olmis_domain'})
                                      )
     olmis_subdomain = forms.ChoiceField(choices=olmis_domain_list,
                                         initial='0',
@@ -2394,11 +2396,11 @@ class OVCF1AForm(forms.Form):
                                                    'id': 'olmis_subdomain'})
                                         )
     olmis_service = forms.ChoiceField(choices=(),
-                                              initial='',
-                                              widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_service'
-               }))
+                                      initial='',
+                                      widget=forms.SelectMultiple(
+                                          attrs={'class': 'form-control',
+                                                 'id': 'olmis_service'
+                                                 }))
     olmis_service_provider = forms.ChoiceField(choices=olmis_service_provider_list,
                                                initial='0',
                                                required=True,
@@ -2428,69 +2430,69 @@ class OVCF1AForm(forms.Form):
     olmis_priority_service = forms.MultipleChoiceField(choices=(),
                                                        initial='',
                                                        widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_service'
-               }))
+                                                           attrs={'class': 'form-control',
+                                                                  'id': 'olmis_priority_service'
+                                                                  }))
     olmis_priority_service_provided_list = forms.CharField(widget=forms.TextInput(
         attrs={'type': 'hidden',
                'id': 'olmis_priority_service_provided_list'}))
     olmis_priority_health = forms.ChoiceField(choices=(),
                                               initial='0',
                                               widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_health',
-               'data-parsley-required': "true",
-               'data-parsley-group': 'group2'})
-    )
+                                                  attrs={'class': 'form-control',
+                                                         'id': 'olmis_priority_health',
+                                                         'data-parsley-required': "true",
+                                                         'data-parsley-group': 'group2'})
+                                              )
     olmis_priority_shelter = forms.ChoiceField(choices=(),
                                                initial='0',
                                                widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_shelter',
-               'data-parsley-required': "true",
-               'data-parsley-group': 'group2'})
-    )
+                                                   attrs={'class': 'form-control',
+                                                          'id': 'olmis_priority_shelter',
+                                                          'data-parsley-required': "true",
+                                                          'data-parsley-group': 'group2'})
+                                               )
     olmis_priority_education = forms.ChoiceField(choices=(),
                                                  initial='0',
                                                  widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_education',
-               'data-parsley-required': "true",
-               'data-parsley-group': 'group2'})
-    )
+                                                     attrs={'class': 'form-control',
+                                                            'id': 'olmis_priority_education',
+                                                            'data-parsley-required': "true",
+                                                            'data-parsley-group': 'group2'})
+                                                 )
     olmis_priority_protection = forms.ChoiceField(choices=(),
                                                   initial='0',
                                                   widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_protection',
-               'data-parsley-required': "true",
-               'data-parsley-group': 'group2'})
-    )
+                                                      attrs={'class': 'form-control',
+                                                             'id': 'olmis_priority_protection',
+                                                             'data-parsley-required': "true",
+                                                             'data-parsley-group': 'group2'})
+                                                  )
     olmis_priority_pss = forms.ChoiceField(choices=(),
                                            initial='0',
                                            widget=forms.SelectMultiple(
-        attrs={'class': 'form-control',
-               'id': 'olmis_priority_pss',
-               'data-parsley-required': "true",
-               'data-parsley-group': 'group2'})
-    )
+                                               attrs={'class': 'form-control',
+                                                      'id': 'olmis_priority_pss',
+                                                      'data-parsley-required': "true",
+                                                      'data-parsley-group': 'group2'})
+                                           )
     olmis_priority_hes = forms.ChoiceField(choices=(),
                                            initial='0',
                                            widget=forms.SelectMultiple(
-        attrs={
-            #'class': 'form-control',
-            'id': 'olmis_priority_hes',
-            'data-parsley-required': "true",
-            'data-parsley-group': 'group2'})
-    )
+                                               attrs={
+                                                   # 'class': 'form-control',
+                                                   'id': 'olmis_priority_hes',
+                                                   'data-parsley-required': "true",
+                                                   'data-parsley-group': 'group2'})
+                                           )
     ## OLMIS CRITICAL EVENTS ##
     olmis_critical_event = forms.ChoiceField(choices=olmis_critical_events_list,
                                              initial='0',
                                              widget=forms.SelectMultiple(
                                                  attrs={'class': 'form-control',
                                                         'id': 'olmis_critical_event'
-                                                        #'data-parsley-required': "true",
-                                                        #'data-parsley-group': 'group3'
+                                                        # 'data-parsley-required': "true",
+                                                        # 'data-parsley-group': 'group3'
                                                         })
                                              )
 
@@ -2499,39 +2501,39 @@ class OVCF1AForm(forms.Form):
                'class': 'form-control',
                'name': 'date_of_assessment',
                'id': 'date_of_assessment'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group3'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group3'
                }))
     date_of_service = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Date of Event'),
                'class': 'form-control',
                'name': 'date_of_service',
                'id': 'date_of_service'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group3'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group3'
                }))
     date_of_cevent = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Date of Event'),
                'class': 'form-control',
                'name': 'date_of_cevent',
                'id': 'date_of_cevent'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group3'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group3'
                }))
     date_of_priority = forms.DateField(widget=forms.TextInput(
         attrs={'placeholder': _('Date of Event'),
                'class': 'form-control',
                'name': 'date_of_priority',
                'id': 'date_of_priority'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group3'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group3'
                }))
     person = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control',
                'id': 'person',
                'type': 'hidden'
-               #'data-parsley-required': "true",
-               #'data-parsley-group': 'group3'
+               # 'data-parsley-required': "true",
+               # 'data-parsley-group': 'group3'
                }))
     caretaker_id = forms.CharField(widget=forms.HiddenInput(
         attrs={'id': 'caretaker_id'}))

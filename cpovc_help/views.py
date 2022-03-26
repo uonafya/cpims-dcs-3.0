@@ -1,5 +1,5 @@
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import mimetypes
 
 from django.shortcuts import render
@@ -15,7 +15,7 @@ def help_home(request):
     """Method to do pivot reports."""
     try:
         return render(request, 'help/home.html', {'form': {}})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -28,7 +28,7 @@ def help_downloads(request):
         docs = OVCDownloads.objects.filter(is_void=False)
         return render(request, 'help/downloads.html',
                       {'docs': docs, 'form': {}})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -40,7 +40,7 @@ def help_faq(request):
     try:
         faqs = OVCFAQ.objects.filter(is_void=False)
         return render(request, 'help/faq.html', {'form': {}, 'faqs': faqs})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -71,11 +71,11 @@ def doc_download(request, name):
         # new_name = uuid.uuid3(uuid.NAMESPACE_DNS, file_name)
         # To inspect details for the below code, see
         # http://greenbytes.de/tech/tc2231/
-        if u'WebKit' in request.META['HTTP_USER_AGENT']:
+        if 'WebKit' in request.META['HTTP_USER_AGENT']:
             # Safari 3.0 and Chrome 2.0 accepts UTF-8 encoded string
             # directly.
             fheader = 'filename=%s' % name.encode('utf-8')
-        elif u'MSIE' in request.META['HTTP_USER_AGENT']:
+        elif 'MSIE' in request.META['HTTP_USER_AGENT']:
             # IE does not support internationalized filename at all.
             # It can only recognize internationalized URL, so we do the
             # trick via routing rules.
@@ -83,10 +83,11 @@ def doc_download(request, name):
         else:
             # For others like Firefox, we follow RFC2231 (encoding
             # extension in HTTP headers).
-            file_header = urllib.quote(name.encode('utf-8'))
+            file_header = urllib.parse.quote(name.encode('utf-8'))
             fheader = 'filename*=UTF-8\'\'%s' % file_header
         response['Content-Disposition'] = 'attachment; ' + fheader
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         return response
+

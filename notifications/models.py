@@ -11,10 +11,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.db.models.query import QuerySet
+# from django.forms import JSONField
 from django.utils import timezone
-from django.utils.six import text_type
+# from django.utils.six import text_type
 from jsonfield.fields import JSONField
 from model_utils import Choices
+
+from six import text_type
+
 from notifications import settings as notifications_settings
 from notifications.signals import notify
 from notifications.utils import id2slug

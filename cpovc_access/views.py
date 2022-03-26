@@ -18,7 +18,7 @@ def terms(request, id):
         return render(request, 'terms.html',
                       {'term_title': pages[term_id],
                        'term_detail': term_detail})
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -31,3 +31,4 @@ def open_terms(fname='terms'):
             return data
     except Exception:
         return ''
+

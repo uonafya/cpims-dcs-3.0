@@ -114,7 +114,7 @@ def home(request):
                        'section': section, 'xmax': xmax,
                        'alt_phone': alt_phone})
     except Exception as e:
-        print('dashboard error - %s' % (str(e)))
+        print(('dashboard error - %s' % (str(e))))
         raise e
 
 
@@ -160,3 +160,4 @@ def csrf_failure(request):
         return render(request, 'csrf.html', {'status': 500})
     except Exception as e:
         raise e
+

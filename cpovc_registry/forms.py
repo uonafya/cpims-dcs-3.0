@@ -1,8 +1,8 @@
 """Forms for Registry sections of CPIMS."""
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.forms.widgets import RadioFieldRenderer
-from django.utils.encoding import force_unicode
+# from django.forms.widgets import RadioFieldRenderer
+from django.utils.encoding import  force_str
 from django.utils.safestring import mark_safe
 
 from crispy_forms.helper import FormHelper
@@ -82,13 +82,13 @@ class RegistrationSearchForm(forms.Form):
             attrs={'id': 'person_deceased'}))
 
 
-class RadioCustomRenderer(RadioFieldRenderer):
+class RadioCustomRenderer(forms.RadioSelect):
     """Custom radio button renderer class."""
 
     def render(self):
         """Renderer override method."""
-        return mark_safe(u'%s' % u'\n'.join(
-            [u'%s' % force_unicode(w) for w in self]))
+        return mark_safe('%s' % '\n'.join(
+            ['%s' % force_str(w) for w in self]))
 
 
 class RegistrationForm(forms.Form):
@@ -127,7 +127,7 @@ class RegistrationForm(forms.Form):
 
         # All working in selections need to be tied to currently logged in user
         user_geos = get_user_geos(self.user)
-        print user_geos
+        print(user_geos)
         county_filter = [] if user.is_superuser else user_geos['counties']
         scounty_filter = [] if user.is_superuser else user_geos['sub_counties']
         ward_filter = [] if user.is_superuser else user_geos['wards']
@@ -173,7 +173,7 @@ class RegistrationForm(forms.Form):
     working_in_region = forms.ChoiceField(
         choices=REGION_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'id': 'working_in_region',
                    'data-parsley-required': 'true',
                    'class': 'working_region',
@@ -199,7 +199,7 @@ class RegistrationForm(forms.Form):
     child_services = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'id': 'child_services',
                    'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#services_error"}))
@@ -207,7 +207,7 @@ class RegistrationForm(forms.Form):
     child_ovc = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'id': 'child_ovc',
                    'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#child_ovc_error"}))
@@ -215,13 +215,13 @@ class RegistrationForm(forms.Form):
     unit_parent = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'autofocus': 'false'}))
 
     unit_reg_assistant = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'autofocus': 'false'}))
 
     title_type = forms.ChoiceField(
@@ -558,7 +558,7 @@ class FormRegistry(forms.Form):
     handle_ovc = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'id': 'handle_ovc',
                    'data-parsley-required': 'true',
                    'data-parsley-group': 'primary1',
@@ -616,7 +616,7 @@ class FormRegistryNew(forms.Form):
     handle_ovc = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'id': 'handle_ovc',
                    'data-parsley-required': 'true',
                    'data-parsley-group': 'primary1',
@@ -777,8 +777,9 @@ class FormContact(forms.Form):
 
     def extra_contacts(self):
         """Method for extracting dynamically generated contact fields."""
-        for name, value in self.cleaned_data.items():
+        for name, value in list(self.cleaned_data.items()):
             if name.startswith('contact'):
                 field_name = name.replace('contact_', '')
                 # field_label = self.fields[name].label
                 yield (field_name, value)
+
