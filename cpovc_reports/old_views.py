@@ -67,7 +67,7 @@ def reports_home(request):
                                 safe=False)
         return render(request, 'reports/reports_index.html',
                       {'form': form, 'status': 200})
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -84,7 +84,7 @@ def write_xls(data, file_name):
                 row.write(index, col)
         xls_name = '%s/%s.xls' % (MEDIA_ROOT, file_name)
         book.save(xls_name)
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -121,11 +121,11 @@ def write_xlsx(data, file_name):
                 value = cell.value
                 if value and "Jul-15'!" in value:
                     new_value = value.replace("Jul-15'!", "Jul-17'!")
-                    print new_value
+                    print (new_value)
                     cell.value = new_value
         xlsm_name = '%s/%s.xlsm' % (MEDIA_ROOT, file_name)
         wb1.save(xlsm_name)
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -156,7 +156,7 @@ def write_pdf(data, file_name):
         elements.append(t)
         doc.build(elements, onFirstPage=draw_page, onLaterPages=draw_page)
 
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -263,7 +263,7 @@ def reports_caseload(request):
         return render(request, 'reports/case_load.html',
                       {'form': form, 'results': results,
                        'report': html, 'file_name': file_name})
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -300,7 +300,7 @@ def reports_download(request, file_name):
             filename_header = 'filename*=UTF-8\'\'%s' % urllib.quote(
                 file_name.encode('utf-8'))
         response['Content-Disposition'] = 'attachment; ' + filename_header
-    except Exception, e:
+    except Exception as e:
         msg = 'Error getting file - %s' % (str(e))
         messages.info(request, msg)
         results, html, file_name = {}, None, None
