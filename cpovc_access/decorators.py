@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import timezone as datetime
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 from cpovc_access.models import AccessLog
 from cpovc_access.models import AccessAttempt
@@ -84,7 +84,7 @@ ONLY_WHITELIST = getattr(settings, 'AXES_ONLY_ALLOW_WHITELIST', False)
 IP_WHITELIST = getattr(settings, 'AXES_IP_WHITELIST', None)
 IP_BLACKLIST = getattr(settings, 'AXES_IP_BLACKLIST', None)
 
-ERROR_MESSAGE = ugettext_lazy("Please enter a correct username and password. "
+ERROR_MESSAGE = gettext_lazy("Please enter a correct username and password. "
                               "Note that both fields are case-sensitive.")
 
 

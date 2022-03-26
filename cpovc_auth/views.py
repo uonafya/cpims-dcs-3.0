@@ -32,7 +32,7 @@ from django.contrib.auth.views import password_reset_confirm
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.tokens import default_token_generator
 from django.template.response import TemplateResponse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.shortcuts import resolve_url
 
 

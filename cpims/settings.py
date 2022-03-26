@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims',
-        'USER': 'cpimsdbuser',
-        'PASSWORD': 'Xaen!ee8',
+        'NAME': 'cpims2',
+        'USER': 'bowen2',
+        'PASSWORD': 'secret2',
         'HOST': '127.0.0.1',
-        'PORT': '5435', }
+        'PORT': '5432', }
 }
 
 LANGUAGE_CODE = 'en-us'
