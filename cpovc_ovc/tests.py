@@ -2,7 +2,7 @@ from django.test import TestCase,Client,SimpleTestCase
 from django.urls import reverse
 import uuid
 from .functions import ovc_registration
-from .models import VCUpload,OVCRegistration,OVCAggregate,OVCHouseHold,OVCHHMembers,OVCFacility,OVCSchool,OVCCluster,OVCClusterCBO,OVCEligibility,OVCEducation,OVCHealth
+from .models import OVCUpload,OVCRegistration,OVCAggregate,OVCHouseHold,OVCHHMembers,OVCFacility,OVCSchool,OVCCluster,OVCClusterCBO,OVCEligibility,OVCEducation,OVCHealth
 from .forms import OVCRegistrationForm,OVCSearchForm
 
 class TestViews(TestCase):
@@ -152,7 +152,26 @@ class TestModels(TestCase):
             ovc_filename="accounts",
             created_at="15/09/2009"
         )
-        #self.ovcregistraion1 = OVCRegistration.objects.create()
+        self.ovcregistraion1 = OVCRegistration.objects.create(
+        id=uuid.uuid4,
+        person="", #need a foreign key
+        registration_date="22/09/2009",
+        has_bcert=False,
+        is_disabled=False,
+        hiv_status="",
+        school_level="",
+        immunization_status="",
+        org_unique_id="",
+        caretaker="",
+        child_cbo="",#need foreign key
+        child_chv ="",#need foreign key
+        exit_reason="",
+        exit_date="",
+        create_at="22/09/2009",
+        is_active=True, 
+        is_void=False
+
+        )
         self.ovceligibility1 = OVCEligibility.objects.create(
             id=uuid.uuid4,
             person="",#need a foreign key
@@ -167,7 +186,18 @@ class TestModels(TestCase):
             created_at="15/09/2002",
             is_void=False
         )
-        #self.ovchhmembers1
+        self.ovchhmembers1 = OVCHHMembers.objects.create(
+            id=uuid.uuid4,
+            house_hold_id=uuid.uuid4,
+            person="",#need a foreign key
+            hh_head= True,
+            member_type="",#need sample data
+            member_alive="AYES",
+            death_cause="",
+            hiv_status="",
+            date_linked="22/09/2009",
+            is_void=False
+        )
         self.ovcfacility1 = OVCFacility.objects.create(
             sub_county="",#need sample data
             facility_code="",#need sample data
@@ -223,9 +253,10 @@ class TestModels(TestCase):
     
     def test_unicode_OVCUpload(self):
         self.assertEqual(str(self.ovcupload1.ovc_filename,"accounts"))
-
-    #def test_unicode_OVCRegistration(self):
-        #self.assertEqual(str(self.ovcregistraion1.org_unique_id),22)
+    def test_unicode_OVCHHMembers(self):
+        self.assertEqual(self.ovchhmembers1.id,uuid.uuid4)
+    def test_unicode_OVCRegistration(self):
+        self.assertEqual(str(self.ovcregistraion1.org_unique_id),22)
     def test_unicode_OVCEligibility(self):
         self.assertEqual(str(self.ovceligibility1.id,uuid.uuid4))
     def test_unicode_OVCHousehold(self):
