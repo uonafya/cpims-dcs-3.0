@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Alternative Family Care {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -244,6 +244,7 @@
 
 {% endblock %}
 <!-- End content area -->
+
 
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
@@ -818,7 +819,7 @@ function getCountries()
                     'csrfmiddlewaretoken': csrftoken
                  }; 
     $.ajax({
-            url: '{% url 'manage_countries' %}',
+            url: "{% url 'manage_countries' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -872,7 +873,7 @@ function getUserOrgUnits()
                     'csrfmiddlewaretoken': csrftoken
                  }; 
     $.ajax({
-            url: '{% url 'userorgunits_lookup' %}',
+            url: "{% url 'userorgunits_lookup' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -922,3 +923,5 @@ $("#adoption_country").change(function(event)
 });
 </script>
 {% endblock %}
+
+

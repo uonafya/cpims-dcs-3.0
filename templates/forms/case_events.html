@@ -2,7 +2,7 @@
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} Case Events {% endblock %}
 
@@ -31,6 +31,9 @@
 }
 </style>
 {% endblock %}
+
+<!-- ------------------------------------------------------------------------------ -->
+
 
 {% block javascript_code%}
 {% endblock javascript_code%}
@@ -572,15 +575,7 @@
                                             <small><p></p></small>
                                         </ul>
                                     </div>
-                                <!--
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Total Number Of Summons :</label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        <h6><b> 0 </b></h6>
-                                    </div>
-                                </div>
-                                <br><br>
-                                -->
+
                                 {{ form.case_event_id_summon }}
 
                                 {{ form.reported_date }}
@@ -593,18 +588,6 @@
                                     <input type="hidden" id="summon_count" name="summon_count" value="{{ summon_count }}">
                                 </div>
 
-                                <!--
-                                <br><br>
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Date Of Visit:<span class="asteriskField"> *</span></label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        {{ form.visit_date }}
-                                        <div id="summons_msgs5" style="display:none;">
-                                            <small><span><p class="dialog_paragraph">This value is required</p></span></small>
-                                        </div>
-                                    </div>
-                                </div>
-                                -->
                                 <br><br> 
                                 <div id="div_honoured_date" class="form-group">
                                     <h6><label class="control-label col-md-4 col-sm-4">Date Of Visit:<span class="asteriskField"> *</span></label></h6>
@@ -785,7 +768,6 @@
                                 </div>
                                 <div class="modal-footer" >
                                     <button class="btn btn-sm btn-white" data-dismiss="modal">Close</button>
-                                    <!-- <button class="btn btn-sm btn-success" onClick="fnManageReferral()">Save</button> -->
                                 </div>
                             </div>
                         </div>
@@ -810,18 +792,7 @@
                                         </ul>
                                     </div>
 
-                                        <!--
-                                        <div class="form-group">
-                                            <h6><label class="control-label col-md-4 col-sm-4">Close Case? :<span class="asteriskField"> *</span></label></h6>
-                                            <div class="col-md-7 col-sm-7">
-                                                    {{ form.case_status }}
-                                                    <div id="closure_msgs1" style="display:none;">
-                                                        <span><p class="dialog_paragraph">This value is required</p></span>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        -->
+
                                         {{ form.case_event_id_closure }}
 
                                         <div class="row">
@@ -921,13 +892,9 @@
             </div>
             <!-- End OVC Results Row -->  
 
-        <!--<div class="row" align="center"> -->
+
         <div align="center">
-            <!--
-            <a href="#services-dialog" class="btn  btn-sm btn-inverse m-r-5"  data-toggle="modal">
-                <b>Add Encounter / Services</b>&nbsp;&nbsp;<i class="fa fa-gears"></i>
-            </a>
-            -->
+
             <button class="btn  btn-sm btn-inverse m-r-5" onClick="fnOpenDialog('Services')">
                 <b>Manage Encounter / Services</b>&nbsp;&nbsp;<i class="fa fa-gears"></i>
             </button>
@@ -956,6 +923,8 @@
 
 <!-- End content area -->
 {% endblock %}
+
+<!-- -------------------------------------------------------------------- -->
 
 {% block lazy_javascript_code %}
 <script src="/static/plugins/parsley/dist/parsley.js"></script>
@@ -1045,7 +1014,7 @@ function ResetEventsDialog(event_type)
 }
 function fnNavigateBack()
 {
-    return window.location.href='{% url 'forms_registry' %}';
+    return window.location.href="{% url 'forms_registry' %}";
 }
 function fnOpenDialog(dialog_type)
 {
@@ -1108,7 +1077,7 @@ function LoadCaseEvents()
                     'csrfmiddlewaretoken': csrftoken
                  };
     $.ajax({
-                url: '{% url 'manage_case_events' %}',
+                url: "{% url 'manage_case_events' %}",
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -1201,7 +1170,7 @@ function LoadReferrals()
                     'csrfmiddlewaretoken': csrftoken
                  };
     $.ajax({
-                url: '{% url 'manage_refferal002' %}',
+                url: "{% url 'manage_refferal002' %}",
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -1283,7 +1252,7 @@ function LoadReferrals()
                         var multiselect_data = [];
                         values['action'] = 1;
                         $.ajax({
-                            url: '{% url 'getJsonObject001' %}',
+                            url: "{% url 'getJsonObject001' %}",
                             dataType: 'json',
                             method: 'POST',
                             data: values,
@@ -1411,7 +1380,7 @@ function LoadReferrals()
                                 };
 
                                 $.ajax({
-                                    url: '{% url 'manage_refferal003' %}',
+                                    url: "{% url 'manage_refferal003' %}",
                                     dataType: 'json',
                                     method: 'POST',
                                     contentType: 'application/x-www-form-urlencoded',
@@ -1522,7 +1491,7 @@ function AddRow(x)
 
                         values['ReferralsData'] = ReferralsData;
                         $.ajax({
-                                    url: '{% url 'manage_refferal' %}',
+                                    url: "{% url 'manage_refferal' %}",
                                     dataType: 'json',
                                     method: 'POST',
                                     contentType: 'application/x-www-form-urlencoded',
@@ -1875,7 +1844,7 @@ function EditRow(x, id)
                         'service_grouping_id': service_grouping_id
                      };
         $.ajax({
-            url: '{% url 'manage_encounters004' %}',
+            url: "{% url 'manage_encounters004' %}",
             dataType: "json",
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded',
@@ -1956,8 +1925,7 @@ function RemoveRow(index, uuid, tr_id)
                             'csrfmiddlewaretoken': csrftoken
                          };
             $.ajax({
-                        // url: '{% url 'manage_casecategory001' %}',
-                        url: '{% url 'manage_refferal001' %}',
+                        url: "{% url 'manage_refferal001' %}",
                         dataType: 'text',
                         method: 'POST',
                         contentType: 'application/x-www-form-urlencoded',
@@ -2043,7 +2011,7 @@ function edit_view_delete_CaseEvent(event_type, event_id, action)
         var services_array = new Array();
 
         $.ajax({
-            url: '{% url 'view_encounter' %}',
+            url: '{% url "view_encounter" %}',
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -2131,7 +2099,7 @@ function edit_view_delete_CaseEvent(event_type, event_id, action)
         var court_sessions_array = new Array();
 
         $.ajax({
-                url: '{% url 'view_court' %}',
+                url: '{% url "view_court" %}',
                 dataType: 'json',
                 method: 'POST',
                 data: values,
@@ -2227,7 +2195,7 @@ function getJsonObject001()
     };
 
     $.ajax({
-            url: '{% url 'getJsonObject001' %}',
+            url: '{% url "getJsonObject001" %}',
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -2324,7 +2292,7 @@ function deleteCaseEvent(event_type, event_id)
         };
 
         $.ajax({
-            url: '{% url 'delete_encounter' %}',
+            url: "{% url 'delete_encounter' %}",
             dataType: 'text',
             method: 'POST',
             data: values,
@@ -2355,7 +2323,7 @@ function deleteCaseEvent(event_type, event_id)
         };
 
         $.ajax({
-            url: '{% url 'delete_court' %}',
+            url: "{% url 'delete_court' %}",
             dataType: 'text',
             method: 'POST',
             data: values,
@@ -2447,7 +2415,7 @@ function fnSaveClosure()
         values['case_closure_notes'] = case_closure_notes;
 
         $.ajax({
-                    url: '{% url 'save_closure' %}',
+                    url: '{% url "save_closure" %}',
                     dataType: 'json',
                     method: 'POST',
                     data: values,
@@ -2457,7 +2425,6 @@ function fnSaveClosure()
                             /*
                             var closure_status = val.closure_status;
                             var case_status = val.case_status;
-
                             if(closure_status == 'CLOSED')
                             {
                                 crudMsg = 'Case Already Closed!';
@@ -2526,7 +2493,7 @@ function fnViewClosure(case_event_id)
     $('#case_event_id_closure').val(event_id);
 
     $.ajax({
-        url: '{% url 'view_closure' %}',
+        url: "{% url 'view_closure' %}",
         dataType: 'json',
         method: 'POST',
         data: values,
@@ -2665,7 +2632,7 @@ function fnUpdateClosure()
         values['case_closure_notes'] = case_closure_notes;
 
         $.ajax({
-                    url: '{% url 'edit_closure' %}',
+                    url: '{% url "edit_closure" %}',
                     dataType: 'json',
                     method: 'POST',
                     data: values,
@@ -2733,7 +2700,7 @@ function fnDeleteClosure(case_event_id)
                  };
 
     $.ajax({
-                url: '{% url 'delete_closure' %}',
+                url: "{% url 'delete_closure' %}",
                 dataType: 'text',
                 method: 'POST',
                 data: values,
@@ -2941,11 +2908,11 @@ function fnSaveCourtSession(){
         return false;
     }
 
-    
+    // ---------------------------------------------------------------------------------
 
-    // Save Court
-    $.ajax({
-            url: '{% url 'save_court' %}',
+   // Save Court
+   $.ajax({
+            url: "{% url 'save_court' %}",
             dataType: 'text',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded',
@@ -2982,7 +2949,7 @@ function fnViewCourtSession(case_event_id){
     $('#case_event_id_court').val(event_id);
 
     $.ajax({
-        url: '{% url 'view_court' %}',
+        url: "{% url 'view_court' %}",
         dataType: 'json',
         method: 'POST',
         data: values,
@@ -3285,7 +3252,7 @@ function fnUpdateCourtSession(){
 
     // Update Court
     $.ajax({
-            url: '{% url 'edit_court' %}',
+            url: "{% url 'edit_court' %}",
             dataType: 'text',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded',
@@ -3323,7 +3290,7 @@ function fnDeleteCourtSession(case_event_id){
     };
 
     $.ajax({
-        url: '{% url 'delete_court' %}',
+        url: "{% url 'delete_court' %}",
         dataType: 'text',
         method: 'POST',
         data: values,
@@ -3374,7 +3341,7 @@ function fnSaveEncounter(){
             values['encounter_notes'] = encounter_notes;
 
              $.ajax({
-                url: '{% url 'save_encounter' %}',
+                url: "{% url 'save_encounter' %}",
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -3425,7 +3392,7 @@ function fnViewEncounter(case_event_id){
     $('#case_event_id_svc').val(event_id);
 
     $.ajax({
-            url: '{% url 'view_encounter' %}',
+            url: "{% url 'view_encounter' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -3521,7 +3488,7 @@ function fnUpdateEncounter(){
             values['encounter_notes'] = encounter_notes;
 
              $.ajax({
-                url: '{% url 'edit_encounter' %}',
+                url: "{% url 'edit_encounter' %}",
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -3571,7 +3538,7 @@ function fnDeleteEncounter(case_event_id, service_id, row){
     };
 
     $.ajax({
-        url: '{% url 'delete_encounter' %}',
+        url: "{% url 'delete_encounter' %}",
         dataType: 'text',
         method: 'POST',
         data: values,
@@ -3676,7 +3643,7 @@ function fnSaveSummons(){
 
     // Save Summons
     $.ajax({
-            url: '{% url 'save_summon' %}',
+            url: "{% url 'save_summon' %}",
             dataType: 'json',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded',
@@ -3722,7 +3689,7 @@ function fnViewSummon(case_event_id){
     $('#case_event_id_summon').val(event_id);
 
     $.ajax({
-            url: '{% url 'view_summon' %}',
+            url: "{% url 'view_summon' %}",
             dataType: 'json',
             method: 'POST',
             data: values,
@@ -3838,10 +3805,11 @@ function fnUpdateSummons(case_event_id){
         return false;
     }     
 
+// ---------------------------------------------------------------------------------
 
     // Update Summons
     $.ajax({
-            url: '{% url 'edit_summon' %}',
+            url: "{% url 'edit_summon' %}",
             dataType: 'text',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded',
@@ -3876,7 +3844,7 @@ function fnDeleteSummon(case_event_id){
     };
 
     $.ajax({
-        url: '{% url 'delete_summon' %}',
+        url: "{% url 'delete_summon' %}",
         dataType: 'text',
         method: 'POST',
         data: values,
@@ -3904,7 +3872,7 @@ function fnDeleteReferral(referral_id){
     };
 
     $.ajax({
-        url: '{% url 'delete_referral' %}',
+        url: "{% url 'delete_referral' %}",
         dataType: 'text',
         method: 'POST',
         data: values,
@@ -4005,25 +3973,7 @@ $(document).ready(function()
         }
     }); 
 
-    /**    
 
-    // Bootstrap Table
-    $('#old_refferals_table').bootstrapTable(
-    { 
-        toggle: 'table', 
-        search: 'true',
-        locale: 'en-US',
-        pagination: 'true',
-        pageNumber: 1,
-        pageSize: 10,
-        //showRefresh: true,
-        showToggle: true,
-        //showColumns: true,
-        singleSelect: true,
-        clickToSelect:true,
-        maintainSelected: true
-    });
-    **/
 
 
     var court_outcome = $('#court_outcome').val();
@@ -4110,12 +4060,11 @@ $("#honoured").change(function(event)
     if(honoured == 'AYES')
     {
         $('#div_summon_date').css({'display': 'none'});
-        // $('#div_honoured_date').css({'display': 'block'});       
+     
     }
     else if(honoured == 'ANNO')
     {
-        // $('#div_honoured_date').css({'display': 'none'});
-        // $('#honoured_date').val('');
+
 
         var summon_count = parseInt($('#summon_count').val());
         if(summon_count >= 2)
@@ -4491,14 +4440,6 @@ $("#refferals_actor_specify").change(function(event)
     displayVals('refferals_actor_specify');
 });
 
-/*
-$('#refferals_actor_specify').keyup(function() {
-    if($(this).val()) // get the current value of the input field    
-    {
-        $("#refferals_actor_specify_errormsg").css({ 'display': "none" }); 
-    }
-});
-**/
 
 $("#refferals_made").change(function(event) 
 { 

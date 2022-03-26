@@ -107,7 +107,7 @@
                                                         </div>
                                                     </td>
                                                     <td width="15%">
-                                                        {{ form.disbursement_date}}
+                                                        {{ form.disbursement_date }}
                                                         <div id="bursary_msgs2" style="display: none;">
                                                             <span><p class="dialog_paragraph">This value is required</p></span>
                                                         </div>
@@ -175,6 +175,9 @@
 </div>
 
 {% endblock %}
+
+<!-- -------------------------------------------------------- -->
+
 <!-- End content area -->
 
 {% block lazy_javascript_code %}
@@ -279,7 +282,7 @@ function fnSaveBursary()
     }
 
     $.ajax({
-                url: '{% url 'new_bursary_info' %}',
+                url: '{% url "new_bursary_info" %}',
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -391,7 +394,7 @@ function fnUpdateBursary()
     }
 
     $.ajax({
-                url: '{% url 'edit_bursary_info' %}',
+                url: '{% url "edit_bursary_info" %}',
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -441,7 +444,7 @@ function fnViewBursary(bursary_id)
                  };
 
         $.ajax({
-                url: '{% url 'view_bursary_info' %}',
+                url: '{% url "view_bursary_info" %}',
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -493,7 +496,7 @@ function fnDeleteBursary(bursary_id)
                  };
 
     $.ajax({
-                url: '{% url 'delete_bursary_info' %}',
+                url: '{% url "delete_bursary_info" %}',
                 dataType: 'text',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -545,7 +548,7 @@ function LoadBursary()
                     'csrfmiddlewaretoken': csrftoken
                  };
     $.ajax({
-                url: '{% url 'manage_bursary' %}',
+                url: '{% url "manage_bursary" %}',
                 dataType: 'json',
                 method: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
@@ -638,3 +641,5 @@ $("#term").change(function(event)
 });
 </script>
 {% endblock %}
+
+<!-- ------------------------------------------------ -->

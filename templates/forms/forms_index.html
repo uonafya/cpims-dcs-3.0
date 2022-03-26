@@ -1,8 +1,8 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} OVC Search {% endblock %}
 
@@ -12,6 +12,7 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 <h1 class="page-header">Forms <small>Search Child</small></h1>
@@ -92,7 +93,7 @@
                         <td><h6>{{ result.case_count }}</h6></td>
                      
                         <td>                                  
-                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form({{result.id}})" >
+                            <button class="btn  btn-sm btn-primary m-r-5" onClick="open_form( {{result.id }})" >
                                 <b>New Case Record Sheet</b>&nbsp;&nbsp;<i class="fa fa-file"></i>                          
                             </button>
                         </td>
@@ -116,11 +117,11 @@
 <script>
 function register_new()
 {
-    return window.location.href='{% url 'new_person' %}'; 
+    return window.location.href="{% url 'new_person' %}"; 
 }
 function open_form(id)
 {
-    return window.location.href='{% url 'new_case_record_sheet' id=0 %}'.replace("0", id);       
+    return window.location.href="{% url 'new_case_record_sheet' id=0 %}".replace("0", id);       
 }
 </script>
 <script>
@@ -157,5 +158,6 @@ $(document).ready(function()
     });
 });
 </script>
-<!--<script src="{% static 'js/apps.js' %}"></script>-->
+
 {% endblock %}
+

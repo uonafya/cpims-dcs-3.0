@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Residential Placement {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -16,6 +16,8 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -256,6 +258,7 @@
 {% endblock %}
 <!-- End content area -->
 
+
 {% block lazy_javascript_code %}
 <script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>   
@@ -422,3 +425,4 @@ $("#admission_type").change(function(event)
 });
 </script>
 {% endblock %}
+

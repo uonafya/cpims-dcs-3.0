@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %}  Child In Residential Institution {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -32,8 +32,11 @@
 </style>
 {% endblock %}
 
+
+
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -340,3 +343,5 @@
     });
     </script>
 {% endblock %}
+
+

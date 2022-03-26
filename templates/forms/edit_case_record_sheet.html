@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} Case Record Sheet {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -26,6 +26,7 @@
 
 {% block javascript_code%}
 {% endblock javascript_code%}
+
 
 {% block primary %}
 <!-- begin breadcrumb -->
@@ -88,12 +89,7 @@
 							    Case Data
 							    <small>Case type and additional details.</small>
 							</li>
-							<!--
-							<li>
-							    Referrals / Interventions
-							    <small>Case referrals/interventions and additional details.</small>
-							</li>
-							-->
+
 						</ol>
 
 						<!-- begin wizard step-1 -->
@@ -846,6 +842,8 @@
 <!-- End content area -->
 {% endblock %}
 
+
+<!-- =--------------------------------------------------------------- -->
 {% block lazy_javascript_code %}
 	<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
 	<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>	
@@ -1220,7 +1218,7 @@
 		
 
         $.ajax({
-					url: '{% url 'manage_casecategory003' %}',
+					url: "{% url 'manage_casecategory003' %}",
 					dataType: 'text',
 					method: 'POST',
 					contentType: 'application/x-www-form-urlencoded',
@@ -1238,7 +1236,7 @@
 	}
 	function fnCancel()
 	{
-		return window.location.href='{% url 'forms_registry' %}';
+		return window.location.href="{% url 'forms_registry' %}";
 	}
 
 	function generateSerialNumber(subcounty)
@@ -1364,7 +1362,7 @@
 		
 
 	    $.ajax({
-					url: '{% url 'manage_casecategory001' %}',
+					url: "{% url 'manage_casecategory001' %}",
 					dataType: 'json',
 					method: 'POST',
 					contentType: 'application/x-www-form-urlencoded',
@@ -1375,8 +1373,7 @@
 						var item_sub_category_id;
 						var item_sub_category;
 						var multiselect_dict = {};
-			            // var multiselect_dict_initial = { label:'Please Select', value:'' };  
-			            // multiselect_data.push(multiselect_dict_initial);     
+   
 			            $.each(result, function(i, val) 
 			            {
 			                item_sub_category_id = val.item_sub_category_id;
@@ -2411,3 +2408,4 @@ $('#add_perp_btn').click(function (e) {
 </script>
 
 {% endblock %}
+

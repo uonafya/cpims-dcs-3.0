@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load app_filters %}
-{% load staticfiles %}
+{% load static %}
 {% block page_title %} CSI {% endblock %}
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
@@ -646,7 +646,7 @@ function loadMultiselect(x)
 	                    'index': index
 	                 };
     	$.ajax({
-				url: '{% url 'manage_service_category' %}',
+				url: "{% url 'manage_service_category' %}",
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',
@@ -712,7 +712,7 @@ function getServices(x, domain)
 
     // do an ajax_call
     $.ajax({
-				url: '{% url 'manage_service_category' %}',
+				url: "{% url 'manage_service_category' %}",
 				dataType: 'json',
 				method: 'POST',
 				contentType: 'application/x-www-form-urlencoded',
@@ -1356,3 +1356,4 @@ $('#new_csi').submit(function(e) {
 });
 </script>	
 {% endblock %}
+

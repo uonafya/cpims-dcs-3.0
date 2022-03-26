@@ -1,8 +1,8 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% load app_filters %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block page_title %} Documents Manager {% endblock %}
 
@@ -170,18 +170,7 @@
                                 <button id="mysubmit3" type="submit" class="btn btn-primary">Save Document</button>
                             </div>
                         </div> 
-                        <!--
-                        <div class="form-group">
-                            <h1><p align="center">OR</p></h1>
-                        </div>                       
-                        <div class="form-group">
-                            <label class="control-label col-md-4 col-sm-4">Click To Generate Template:</label>
-                            <div class="col-md-6 col-sm-6">
-                                {{ form.document_type }} <br>
-                                <button type="button" class="btn btn-white m-r-5 m-b-5 col-md-6 col-sm-6"><b>GENERATE TEMPLATE</b></button>
-                            </div>
-                        </div>
-                        -->
+
                     </fieldset>
                 </form>
             </div>              
@@ -205,55 +194,7 @@
 <script src="{% static 'js/jquery.fileupload.js' %}"></script>
 <script src="{% static 'js/jquery.fileupload-process.js' %}"></script>
 <script type="text/javascript">
-/*
-// Check for the various File API support.
-if (window.File && window.FileReader && window.FileList && window.Blob)
-{
-    function readSingleFile(evt)
-    {
-        //Retrieve the first (and only!) File from the FileList object
-        var f = evt.target.files[0]; 
 
-        if (f)
-        {
-            var r = new FileReader();
-            r.onload = function(e)
-            { 
-                var contents = e.target.result;
-                alert( "Got the file.n" 
-                +"name: " + f.name + "n"
-                +"type: " + f.type + "n"
-                +"size: " + f.size + " bytesn"
-                + "starts with: " + contents.substr(1, contents.indexOf("n"))
-                );  
-            }
-            r.readAsText(f);
-        } 
-        else 
-        { 
-          alert("Failed to load file");
-        }
-    }
-
-    document.getElementById('file_browser').addEventListener('change', readSingleFile, false);
-    
-    // #file_browser change() event
-    $('#file_browser').change(function()
-    {
-        //Get FileName
-        var filename = $('input[type=file]').val();
-        $('#file_name').val(filename);
-
-        //Read Content
-        readSingleFile(false);
-    });
-    
-}
-else
-{
-  alert('The File APIs are not fully supported by your browser.');
-}
-*/
 // #file_browser change() event
 $('#file_browser').change(function()
 {
