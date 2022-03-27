@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse, resolve
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import SettingsForm

@@ -60,7 +60,7 @@ class PasswordChangePolicyHandler(object):
         try:
             self.validate(user)
         except ValidationError as exc:
-            change_msg = unicode(exc.message)
+            change_msg = str(exc.message)
             request.session['password_change_enforce'] = exc.code
             request.session['password_change_enforce_msg'] = change_msg
         else:

@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse, resolve
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib import messages
@@ -2626,7 +2626,7 @@ def new_case_record_sheet(request, id):
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-@is_allowed_groups(['RGM', 'RGU', 'DSU', 'STD'])
+# @is_allowed_groups(['RGM', 'RGU', 'DSU', 'STD'])
 def residential_placement(request):
     if request.method == 'POST':
         resultsets = None

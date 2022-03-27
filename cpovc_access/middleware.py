@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth import views as auth_views
-from django.core.urlresolvers import resolve, reverse
+from django.urls import reverse, resolve
 from django.views.decorators.csrf import requires_csrf_token
 
 from cpovc_access.handlers import PasswordChangePolicyHandler

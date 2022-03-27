@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block page_title %} {{block.super}} Search Persons registry {% endblock page_title%}
 
-{% load staticfiles %}
+{% load static %}
 
 {% load app_filters %}
 
@@ -121,11 +121,11 @@
                             {% endif %}
                             </td>
                             <td>
-                            {% ifequal result.id|gen_value:app_user result.id %}
+                            {% if result.id|gen_value:app_user == result.id %}
                             No
                             {% else %}
                             Yes
-                            {% endifequal %}
+                            {% endif %}
                             <td>
                             <button id="btn_view_details_{ result.id }}" onClick="window.location.href='{% url 'view_person' id=result.id %}'" class="btn  btn-sm btn-primary m-r-5">
                             View&nbsp&nbsp;<i class="fa fa-binoculars"></i>

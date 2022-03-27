@@ -1,7 +1,7 @@
 """OVC Care views."""
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse, resolve
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q

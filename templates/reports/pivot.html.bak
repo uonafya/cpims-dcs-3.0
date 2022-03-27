@@ -4,7 +4,7 @@
 {{block.super}} CPIMS reports 
 {% endblock page_title%}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block style_code%}
 <link href="{% static 'plugins/pivot-table/dist/pivot.css' %}" rel="stylesheet" >

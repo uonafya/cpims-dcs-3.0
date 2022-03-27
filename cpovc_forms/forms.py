@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.forms.widgets import RadioFieldRenderer
-from django.utils.encoding import force_unicode
+# from django.forms.widgets import RadioFieldRenderer
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 
 from cpovc_main.functions import get_list, get_org_units_list
@@ -2914,13 +2914,13 @@ class OVCHHVAForm(forms.Form):
                }))
 
 
-class RadioCustomRenderer(RadioFieldRenderer):
+class RadioCustomRenderer(forms.RadioSelect):
     """Custom radio button renderer class."""
 
     def render(self):
         """Renderer override method."""
         return mark_safe(u'%s' % u'\n'.join(
-            [u'%s' % force_unicode(w) for w in self]))
+            [u'%s' % force_str(w) for w in self]))
 
 
 class GOKBursaryForm(forms.Form):
@@ -3013,7 +3013,7 @@ class GOKBursaryForm(forms.Form):
     in_school = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#in_school_error"})
     )
@@ -3058,7 +3058,7 @@ class GOKBursaryForm(forms.Form):
     father_alive = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#father_alive_error"}))
 
@@ -3117,7 +3117,7 @@ class GOKBursaryForm(forms.Form):
     mother_alive = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#mother_alive_error"}))
 
@@ -3131,21 +3131,21 @@ class GOKBursaryForm(forms.Form):
     living_with = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#living_with_error"}))
 
     father_ill = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#father_ill_error"}))
 
     mother_ill = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#mother_ill_error"}))
     father_illness = forms.CharField(widget=forms.TextInput(
@@ -3201,14 +3201,14 @@ class GOKBursaryForm(forms.Form):
     father_disabled = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#father_disabled_error"}))
 
     mother_disabled = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#mother_disabled_error"}))
     father_disability = forms.CharField(widget=forms.TextInput(
@@ -3234,7 +3234,7 @@ class GOKBursaryForm(forms.Form):
     father_pension = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#father_pension_error"}))
 
@@ -3248,7 +3248,7 @@ class GOKBursaryForm(forms.Form):
     mother_pension = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#mother_pension_error"}))
 
@@ -3348,7 +3348,7 @@ class GOKBursaryForm(forms.Form):
     school_type = forms.ChoiceField(
         choices=bursary_school_type_list,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-maxlength': "5",
                    'data-parsley-errors-container': "#school_type_error"}))
@@ -3356,7 +3356,7 @@ class GOKBursaryForm(forms.Form):
     school_category = forms.ChoiceField(
         choices=bursary_school_category_list,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-maxlength': "5",
                    'data-parsley-errors-container': "#school_category_error"}))
@@ -3364,7 +3364,7 @@ class GOKBursaryForm(forms.Form):
     status_of_student = forms.ChoiceField(
         choices=status_of_student_list,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#status_of_student_error"
                    }))
@@ -3372,7 +3372,7 @@ class GOKBursaryForm(forms.Form):
     school_enrolled = forms.ChoiceField(
         choices=bursary_school_enrolled_list,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-maxlength': "5",
                    'data-parsley-errors-container': "#school_enrolled_error"}))
@@ -3400,7 +3400,7 @@ class GOKBursaryForm(forms.Form):
     approved_csac = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#approved_csac_error"}))
 
@@ -3416,14 +3416,14 @@ class GOKBursaryForm(forms.Form):
     signed_scco = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#signed_scco_error"}))
 
     signed_csac = forms.ChoiceField(
         choices=YESNO_CHOICES,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#signed_csac_error"}))
 
@@ -3447,7 +3447,7 @@ class GOKBursaryForm(forms.Form):
     recommend_principal = forms.ChoiceField(
         choices=principal_list,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-maxlength': "5",
                    error_container: "#recommend_principal_error"
@@ -3456,7 +3456,7 @@ class GOKBursaryForm(forms.Form):
     recommend_chief = forms.ChoiceField(
         choices=chief_list,
         widget=forms.RadioSelect(
-            renderer=RadioCustomRenderer,
+            # renderer=RadioCustomRenderer,
             attrs={'data-parsley-required': 'true',
                    'data-parsley-maxlength': "5",
                    error_container: "#recommend_chief_error"}))

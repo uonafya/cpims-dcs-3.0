@@ -83,7 +83,7 @@ class OVCCaseRecord(models.Model):
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     case_remarks = models.TextField(null=True)
     date_of_summon = models.DateField(null=True)
-    summon_status = models.NullBooleanField(null=True, default=None)
+    summon_status = models.BooleanField(null=True, default=None)
     case_stage = models.IntegerField(default=0)
 
     class Meta:
@@ -380,7 +380,7 @@ class OVCPlacement(models.Model):
         max_length=10, default='Normal', blank=True)  # Emergency/Normal
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     transfer_to_institution = models.ForeignKey(
-        RegOrgUnit, blank=True, related_name='ou_', null=True, on_delete=models.CASCADE)
+        RegOrgUnit, blank=True, related_name='ou_tti', null=True, on_delete=models.CASCADE)
     case_record = models.ForeignKey(OVCCaseRecord, blank=True, null=True, on_delete=models.CASCADE)
     created_by = models.IntegerField(null=True, default=404)
     is_active = models.BooleanField(default=True)

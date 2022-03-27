@@ -2,7 +2,7 @@
 """Registry views for CPIMS."""
 import uuid
 from datetime import datetime, timedelta
-from django.core.urlresolvers import reverse
+from django.urls import reverse, resolve
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone

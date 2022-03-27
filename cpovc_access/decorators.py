@@ -8,7 +8,7 @@ from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 from django.utils import timezone as datetime
 from django.utils.translation import gettext_lazy
@@ -17,7 +17,7 @@ from cpovc_access.models import AccessLog
 from cpovc_access.models import AccessAttempt
 from cpovc_access.signals import user_locked_out
 import cpovc_access
-from django.utils import six
+import six
 
 
 PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', '127.')
@@ -375,7 +375,7 @@ def lockout_response(request):
             'failure_limit': FAILURE_LIMIT,
             'username': request.POST.get(USERNAME_FORM_FIELD, '')
         }
-        return render_to_response(LOCKOUT_TEMPLATE, context,
+        return render(LOCKOUT_TEMPLATE, context,
                                   context_instance=RequestContext(request))
 
     lockout_url = get_lockout_url()
