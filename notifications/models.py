@@ -15,6 +15,7 @@ from django.db.models.query import QuerySet
 from django.utils import timezone
 # from django.utils.six import text_type
 from jsonfield.fields import JSONField
+
 from model_utils import Choices
 
 from six import text_type

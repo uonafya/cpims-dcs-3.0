@@ -8,7 +8,7 @@ from django import get_version
 from . import views
 
 if StrictVersion(get_version()) >= StrictVersion('2.0'):
-    from django.urls import re_path as pattern
+    from django.urls import path, include, re_path
 else:
     from django.conf.urls import url as pattern
 
