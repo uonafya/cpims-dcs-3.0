@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse, resolve
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import SettingsForm
@@ -192,12 +192,12 @@ def qstorows(desc, rows):
             vals = []
             for n, i in enumerate(columns):
                 val = res[i]
-                if type(val) is unicode:
+                if type(val) is str:
                     val = val.encode('ascii', 'ignore').decode('ascii')
                 vals.append(val)
             data.append(vals)
     except Exception as e:
-        print('error getting rows - %s' % (str(e)))
+        print(('error getting rows - %s' % (str(e))))
         return []
     else:
         return data
@@ -235,7 +235,7 @@ def settings_rawdata(request):
         if request.method == 'POST':
             form = SettingsForm(request.user, data=request.POST)
             params = get_variables(request)
-            print('PARAMS', params)
+            print(('PARAMS', params))
             raw_data = request.POST.get('raw_data')
             org_unit = request.POST.get('org_unit')
             cluster = request.POST.get('cluster')
@@ -287,3 +287,4 @@ def change_notes(request):
         raise e
     else:
         pass
+

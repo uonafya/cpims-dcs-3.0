@@ -36,7 +36,7 @@ def get_checkins(user_id):
                    'ovc_name': checkin.person.full_name, 'caction': chs}
             cins.append(chd)
     except Exception as e:
-        print 'error getting checkins - %s' % (str(e))
+        print('error getting checkins - %s' % (str(e)))
         return "", 0
     else:
         return cins, cnt
@@ -47,7 +47,7 @@ def get_school(ovc_id):
     try:
         school = OVCEducation.objects.get(person_id=ovc_id)
     except Exception as e:
-        print 'No school details - %s' % (str(e))
+        print('No school details - %s' % (str(e)))
         return None
     else:
         return school
@@ -58,7 +58,7 @@ def get_health(ovc_id):
     try:
         health = OVCHealth.objects.get(person_id=ovc_id)
     except Exception as e:
-        print 'No health details - %s' % (str(e))
+        print('No health details - %s' % (str(e)))
         return None
     else:
         return health
@@ -102,7 +102,7 @@ def search_ovc(request):
             # " OFFSET 10 LIMIT 10")
             vals = ' & '.join(names)
             sql = query % (vals)
-            print sql
+            print(sql)
             with connection.cursor() as cursor:
                 cursor.execute(sql)
                 row = cursor.fetchall()
@@ -162,8 +162,8 @@ def search_ovc(request):
             ovcs = qs.filter(caretaker_id__in=cids)[pst:plen]
         else:
             ovcs = qs.filter(person_id__in=pids)[pst:plen]
-    except Exception, e:
-        print 'Error searching for OVC - %s' % (str(e))
+    except Exception as e:
+        print('Error searching for OVC - %s' % (str(e)))
         return {}
     else:
         return ovcs
@@ -196,8 +196,8 @@ def search_master(request):
                 val = {'id': agent_id, 'label': name,
                        'value': name}
                 results.append(val)
-    except Exception, e:
-        print 'error searching master list - %s' % (str(e))
+    except Exception as e:
+        print('error searching master list - %s' % (str(e)))
         return []
     else:
         return results
@@ -208,8 +208,8 @@ def get_hh_members(ovc_id):
     try:
         ovc_detail = get_object_or_404(
             OVCHHMembers, person_id=ovc_id, is_void=False)
-    except Exception, e:
-        print 'error getting ovc hh members - %s' % (str(e))
+    except Exception as e:
+        print('error getting ovc hh members - %s' % (str(e)))
         return {}
     else:
         return ovc_detail
@@ -220,8 +220,8 @@ def get_ovcdetails(ovc_id):
     try:
         ovc_detail = get_object_or_404(
             OVCRegistration, person_id=ovc_id, is_void=False)
-    except Exception, e:
-        print 'error getting ovc details - %s' % (str(e))
+    except Exception as e:
+        print('error getting ovc details - %s' % (str(e)))
         return {}
     else:
         return ovc_detail
@@ -385,7 +385,7 @@ def ovc_registration(request, ovc_id, edit=0):
                               'death_cause': hh_death,
                               'member_alive': hh_alive,
                               'date_linked': todate, 'hiv_status': hh_hiv},)
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -424,7 +424,7 @@ def gen_cbo_id(cbo_id, ovc_id):
             else:
                 '0000X'
         return new_id
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -436,7 +436,7 @@ def get_house_hold(person_id):
         hh_detail = get_object_or_404(
             OVCHouseHold, head_person_id=person_id)
     except Exception as e:
-        print 'error getting hh - %s' % (str(e))
+        print('error getting hh - %s' % (str(e)))
         return None
     else:
         return hh_detail
@@ -480,7 +480,8 @@ def manage_checkins(request, gid=0):
                 ovc.delete()
             msg = 'OVC checked out successfully.'
     except Exception as e:
-        print 'error handling checkins - %s' % (str(e))
+        print('error handling checkins - %s' % (str(e)))
         return msg, 0
     else:
         return msg, chs
+

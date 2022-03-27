@@ -5,7 +5,7 @@ import csv
 import time
 import uuid
 import base64
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import string
 import mimetypes
 import calendar
@@ -121,7 +121,7 @@ def reports_home(request):
         return render(request, 'reports/reports_forms.html',
                       {'form': form, 'status': 200})
     except Exception as e:
-        print('Error writing report - %s' % (str(e)))
+        print(('Error writing report - %s' % (str(e))))
         raise e
 
 
@@ -146,7 +146,7 @@ def cpims_document(request, doc_id, case_id):
             return render(request, 'reports/reports_forms.html',
                           {'form': form, 'status': 200})
     except Exception as e:
-        print('Error writing report - %s' % (str(e)))
+        print(('Error writing report - %s' % (str(e))))
         raise e
 
 
@@ -207,7 +207,7 @@ def reports_home_old(request):
         return render(request, 'reports/reports_documents.html',
                       {'form': form, 'status': 200})
     except Exception as e:
-        print('Error writing report - %s' % (str(e)))
+        print(('Error writing report - %s' % (str(e))))
         raise e
 
 
@@ -272,7 +272,7 @@ def write_xlsx(data, file_name, params):
         xls_name = '%s/xlsx/%s%s' % (MEDIA_ROOT, file_name, file_ext)
         wb.save(xls_name)
     except Exception as e:
-        print("error writing excel - %s" % (str(e)))
+        print(("error writing excel - %s" % (str(e))))
         raise e
 
 
@@ -369,7 +369,7 @@ def reports_caseload(request):
             period_params = get_period(
                 report_type=report_type, year=year, month=month)
             report_variables = merge_two_dicts(variables, period_params)
-            print("CASE load params ", report_variables)
+            print(("CASE load params ", report_variables))
             # -----------------------------------------------
             ou_ids = org_unit_tree(report_unit)
             report_variables['org_unit_tree'] = ou_ids
@@ -464,7 +464,7 @@ def reports_caseload(request):
                       {'form': form, 'results': results,
                        'report': html})
     except Exception as e:
-        print('Case load report error - %s' % (str(e)))
+        print(('Case load report error - %s' % (str(e))))
         raise e
 
 
@@ -491,7 +491,7 @@ def get_interventions(data_itv, dval, bn, kl, itvs):
                     itvs[knt].append(dts)
         # return itvs
     except Exception as e:
-        print('Error getting intervention', str(e))
+        print(('Error getting intervention', str(e)))
         pass
 
 
@@ -534,7 +534,7 @@ def get_interven_perc(case_data):
             intp = interven * 100.0 / case if case > 0 else 0
             int_perc.append(round(intp, 1))
     except Exception as e:
-        print('Error calculating inteven percentage %s' % (str(e)))
+        print(('Error calculating inteven percentage %s' % (str(e))))
         return []
     else:
         return int_perc
@@ -559,7 +559,7 @@ def reports_generate(request):
             report_region = int(request.POST.get('report_region'))
             report_variables = get_variables(request)
             # all_datas = get_data(report_variables)
-            print('VARS', report_variables)
+            print(('VARS', report_variables))
             # all_data = all_datas['data']
             all_data, raw_data = get_raw_data(report_variables)
             if not raw_data:
@@ -606,7 +606,7 @@ def reports_generate(request):
             return JsonResponse(results, content_type='application/json',
                                 safe=False)
     except Exception as e:
-        print('Error generating report - %s' % (str(e)))
+        print(('Error generating report - %s' % (str(e))))
         raise e
 
 
@@ -633,12 +633,12 @@ def reports_download(request, file_name):
         # new_name = uuid.uuid3(uuid.NAMESPACE_DNS, file_name)
         # To inspect details for the below code, see
         # http://greenbytes.de/tech/tc2231/
-        if u'WebKit' in request.META['HTTP_USER_AGENT']:
+        if 'WebKit' in request.META['HTTP_USER_AGENT']:
             # Safari 3.0 and Chrome 2.0 accepts UTF-8 encoded string
             # directly.
             filename_header = 'filename=%s' % file_name.encode(
                 'utf-8')
-        elif u'MSIE' in request.META['HTTP_USER_AGENT']:
+        elif 'MSIE' in request.META['HTTP_USER_AGENT']:
             # IE does not support internationalized filename at all.
             # It can only recognize internationalized URL, so we do the
             # trick via routing rules.
@@ -646,11 +646,11 @@ def reports_download(request, file_name):
         else:
             # For others like Firefox, we follow RFC2231 (encoding
             # extension in HTTP headers).
-            filename_header = 'filename*=UTF-8\'\'%s' % urllib.quote(
+            filename_header = 'filename*=UTF-8\'\'%s' % urllib.parse.quote(
                 file_name.encode('utf-8'))
         response['Content-Disposition'] = 'attachment; ' + filename_header
     except Exception as e:
-        print("Error downloading file - %s" % (str(e)))
+        print(("Error downloading file - %s" % (str(e))))
         msg = 'Error downloading file. Please contact your administrator.'
         messages.info(request, msg)
         results, html, file_name = {}, None, None
@@ -806,7 +806,7 @@ def manage_dashboard(request):
                       {'persons': persons, 'units': units,
                        'cases': cases})
     except Exception as e:
-        print('error - %s' % (str(e)))
+        print(('error - %s' % (str(e))))
         raise e
     else:
         pass
@@ -820,7 +820,7 @@ def clean_reports(report_id):
         os.remove(file_name)
         return 0, 'File removed successfully.'
     except Exception as e:
-        print("Delete error - %s" % (str(e)))
+        print(("Delete error - %s" % (str(e))))
         return 99, 'File removal error. Please contact Administrator.'
 
 
@@ -883,7 +883,7 @@ def reports_ovc_list(request):
                                 safe=False)
         return render(request, 'reports/pivot_listing.html', {'form': form})
     except Exception as e:
-        print('Error response - %s' % (str(e)))
+        print(('Error response - %s' % (str(e))))
         raise e
     else:
         pass
@@ -912,7 +912,7 @@ def reports_rawdata(request):
         return JsonResponse(data, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print('error getting raw data 2 - %s' % (str(e)))
+        print(('error getting raw data 2 - %s' % (str(e))))
         return JsonResponse([], content_type='application/json',
                             safe=False)
 
@@ -944,15 +944,15 @@ def reports_ovc_rawdata(request):
         if results:
             for res in results[0]:
                 titles.append(res)
-        print('RID', report_ovc_id, report_id)
+        print(('RID', report_ovc_id, report_id))
         columns = [col.lower() for col in titles]
         data = [columns]
-        print('Results count - ', len(results))
+        print(('Results count - ', len(results)))
         for res in results:
             vals = []
             for n, i in enumerate(titles):
                 val = res[i]
-                if type(val) is unicode:
+                if type(val) is str:
                     val = val.encode('ascii', 'ignore').decode('ascii')
                 vals.append(val)
             data.append(vals)
@@ -975,11 +975,11 @@ def reports_ovc_rawdata(request):
             '''
         datas = {'file_name': fid, 'data': results,
                  'status': status, 'message': message, 'xls': xls_name}
-        print('Results', message)
+        print(('Results', message))
         return JsonResponse(datas, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print('error getting raw data - %s' % (str(e)))
+        print(('error getting raw data - %s' % (str(e))))
         return JsonResponse([], content_type='application/json',
                             safe=False)
 
@@ -1070,7 +1070,7 @@ def dashboard_details(request):
         ous = request.session.get('ou_attached', False)
         report_id = request.GET.get('report_id', 0)
         rid = int(report_id) if report_id else 0
-        print('OUs', ous)
+        print(('OUs', ous))
         if rid > 10:
             # This is for GoK
             datas = get_dashboard_summary(request, rid)
@@ -1081,7 +1081,7 @@ def dashboard_details(request):
         return JsonResponse(results, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print('Error getting dasboard details - %s' % (str(e)))
+        print(('Error getting dasboard details - %s' % (str(e))))
         return JsonResponse({}, content_type='application/json',
                             safe=False)
     else:
@@ -1101,7 +1101,7 @@ def raw_data(request, sql):
         zf.write(os.path.join(dirname, filename))
         zf.close()
     except Exception as e:
-        print('Error getting Raw data - %s' % (str(e)))
+        print(('Error getting Raw data - %s' % (str(e))))
         return 0
     else:
         return res
@@ -1136,7 +1136,7 @@ def reports_bursary(request):
                                 safe=False)
         return render(request, 'reports/bursary.html', {'form': form})
     except Exception as e:
-        print('error on bursary report - %s' % (str(e)))
+        print(('error on bursary report - %s' % (str(e))))
         raise e
     else:
         pass
@@ -1162,10 +1162,10 @@ def get_docs(request, id=4):
     params = {'name': report_name, 'ou_id': ou_id,
               'ou_name': ou_name}
     if rid <= 5:
-        print('Write Document', rid)
+        print(('Write Document', rid))
         write_document(response, f_name, params)
     else:
-        print('Write Register', rid)
+        print(('Write Register', rid))
         start_date = request.GET.get('start_date', False)
         end_date = request.GET.get('end_date', False)
         if start_date and end_date:
@@ -1178,3 +1178,4 @@ def get_docs(request, id=4):
         write_register(response, f_name, params)
 
     return response
+

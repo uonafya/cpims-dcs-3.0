@@ -5,7 +5,7 @@ import datetime
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cpovc_access import signals
 from cpovc_access import BasePolicy
@@ -52,13 +52,13 @@ class AuthenticationBasicChecks(AuthenticationPolicy):
     def pre_auth_check(self, loginattempt, password):
         """Pre check."""
         if not loginattempt.username:
-            logger.info(u'Authentication failure, address=%s, '
+            logger.info('Authentication failure, address=%s, '
                         'no username supplied.',
                         loginattempt.source_address)
             raise ValidationError(self.text, code='invalid_login')
 
         if not password:
-            logger.info(u'Authentication failure, username=%s, '
+            logger.info('Authentication failure, username=%s, '
                         'address=%s, no password supplied.',
                         loginattempt.username,
                         loginattempt.source_address)
@@ -67,13 +67,13 @@ class AuthenticationBasicChecks(AuthenticationPolicy):
     def post_auth_check(self, loginattempt):
         """Post login check."""
         if loginattempt.user is None:
-            logger.info(u'Authentication failure, username=%s, '
+            logger.info('Authentication failure, username=%s, '
                         'address=%s, invalid authentication.',
                         loginattempt.username, loginattempt.source_address)
             raise ValidationError(self.text, code='invalid_login')
 
         if not loginattempt.user.is_active:
-            logger.info(u'Authentication failure, username=%s, '
+            logger.info('Authentication failure, username=%s, '
                         'address=%s, user inactive.',
                         loginattempt.username, loginattempt.source_address)
             raise ValidationError(self.text, code='inactive')
@@ -101,9 +101,10 @@ class AuthenticationDisableExpiredUsers(AuthenticationPolicy):
             is_active=True, last_login__lt=expire_at, is_staff=False)
 
         for user in expired:
-            logger.info(u'User %s disabled because last login was at %s',
-                        unicode(user), user.last_login)
+            logger.info('User %s disabled because last login was at %s',
+                        str(user), user.last_login)
             # Send signal to be used to alert admins
             signals.user_expired.send(sender=user, user=user)
 
         expired.update(is_active=False)
+

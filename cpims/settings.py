@@ -39,20 +39,20 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'cpovc_access.middleware.AuthenticationPolicyMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'cpovc_access.middleware.AuthenticationPolicyMiddleware',
     # 'cpovc_main.middleware.SqlPrintingMiddleware',
-    'cpovc_auth.middleware.UserRestrictMiddleware',
-    'cpovc_access.middleware.FailedLoginMiddleware',
-)
+    # 'cpovc_auth.middleware.UserRestrictMiddleware',
+    # 'cpovc_access.middleware.FailedLoginMiddleware',
+]
 
 ROOT_URLCONF = 'cpims.urls'
 
@@ -72,16 +72,18 @@ TEMPLATES = [
     },
 ]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 WSGI_APPLICATION = 'cpims.wsgi.application'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims',
-        'USER': 'cpimsdbuser',
-        'PASSWORD': 'Xaen!ee8',
+        'NAME': 'cpims2',
+        'USER': 'bowen2',
+        'PASSWORD': 'secret2',
         'HOST': '127.0.0.1',
-        'PORT': '5435', }
+        'PORT': '5432', }
 }
 
 LANGUAGE_CODE = 'en-us'
@@ -104,7 +106,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 
 AUTH_USER_MODEL = 'cpovc_auth.AppUser'
 
-AUTHENTICATION_BACKENDS = ('cpovc_auth.backends.CPOVCAuthenticationBackend',)
+# AUTHENTICATION_BACKENDS = ('cpovc_auth.backends.CPOVCAuthenticationBackend',)
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 ALLOW_NATIONAL_ID_LOGIN = True
 
@@ -176,4 +179,4 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-CSRF_FAILURE_VIEW = 'cpims.views.csrf_failure'
+# CSRF_FAILURE_VIEW = 'cpims.views.csrf_failure'

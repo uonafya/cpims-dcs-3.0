@@ -1,6 +1,6 @@
 """Forms for Registry sections of CPIMS."""
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from cpovc_main.functions import get_list
 
 person_type_list = ()

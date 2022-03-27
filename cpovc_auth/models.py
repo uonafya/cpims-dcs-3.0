@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin, Group, Permission)
@@ -48,7 +48,7 @@ class CPOVCUserManager(BaseUserManager):
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
-    reg_person = models.OneToOneField('cpovc_registry.RegPerson', null=False)
+    reg_person = models.ForeignKey(to='cpovc_registry.RegPerson', on_delete=models.CASCADE, null=False)
     role = models.CharField(max_length=20, unique=False, default='Public')
     username = models.CharField(max_length=20, unique=True)
     is_staff = models.BooleanField(default=False)
@@ -155,7 +155,7 @@ class CPOVCRole(Group):
 
 
 class CPOVCProfile(models.Model):
-    user = models.ForeignKey(AppUser)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     details = models.TextField(default="{}")
     is_void = models.BooleanField(default=False)
     timestamp_updated = models.DateTimeField(default=timezone.now)
@@ -167,10 +167,10 @@ class CPOVCProfile(models.Model):
 class CPOVCUserRoleGeoOrg(models.Model):
     # Put here to avoid cyclic imports because of User model
     # from cpovc_registry.models import RegPersonsGeo, RegOrgUnit
-    user = models.ForeignKey(AppUser)
-    group = models.ForeignKey(CPOVCRole)
-    org_unit = models.ForeignKey('cpovc_registry.RegOrgUnit', null=True)
-    area = models.ForeignKey('cpovc_main.SetupGeography', null=True)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    group = models.ForeignKey(CPOVCRole, on_delete=models.CASCADE)
+    org_unit = models.ForeignKey('cpovc_registry.RegOrgUnit', null=True, on_delete=models.CASCADE)
+    area = models.ForeignKey('cpovc_main.SetupGeography', null=True, on_delete=models.CASCADE)
     timestamp_modified = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
 
@@ -184,11 +184,11 @@ def update_change(sender, instance, **kwargs):
     try:
         user = sender.objects.get(pk=instance.pk)
     except sender.DoesNotExist:
-        print "User does not exist"
+        print("User does not exist")
         pass
     else:
         if user.password != instance.password:
-            print "Password changed so update date."
+            print("Password changed so update date.")
             import inspect
             uname = 'Administrator'
             for frame_record in inspect.stack():
@@ -202,15 +202,16 @@ def update_change(sender, instance, **kwargs):
             notify.send(instance, recipient=user, description=details,
                         verb='User password changed')
         else:
-            print "Password NOT changed so NO update."
+            print("Password NOT changed so NO update.")
 
 
 def my_handler(sender, instance, created, **kwargs):
     user = sender.objects.get(pk=instance.pk)
     # user = obj.reg_person
     pwd = instance._password
-    print 'password change', pwd
+    print('password change', pwd)
     notify.send(instance, recipient=user, verb='User account changed')
 
 
 # post_save.connect(my_handler, sender=AppUser)
+

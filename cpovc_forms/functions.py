@@ -47,7 +47,7 @@ def get_case_geo(request, case_id):
     try:
         case_geo = OVCCaseGeo.objects.get(case_id=case_id, is_void=False)
     except Exception as e:
-        print('error getting case geo - %s' % (str(e)))
+        print(('error getting case geo - %s' % (str(e))))
         return None
     else:
         return case_geo
@@ -64,7 +64,7 @@ def save_audit_trail(request, params, audit_type):
         interface_id = params['interface_id']
         meta_data = get_meta_data(request)
 
-        print('Audit Trail', params)
+        print(('Audit Trail', params))
 
         FormsAuditTrail(
             transaction_type_id=transaction_type_id,
@@ -77,7 +77,7 @@ def save_audit_trail(request, params, audit_type):
             app_user_id=user_id).save()
 
     except Exception as e:
-        print('Error saving audit - %s' % (str(e)))
+        print(('Error saving audit - %s' % (str(e))))
         pass
     else:
         pass
@@ -102,7 +102,7 @@ def create_fields(field_name=[], default_txt=False):
                 dict_val[item_cat].append(items)
     except Exception as e:
         error = 'Error getting list - %s' % (str(e))
-        print error
+        print(error)
         return {}
     else:
         return dict_val
@@ -111,7 +111,7 @@ def create_fields(field_name=[], default_txt=False):
 def create_form_fields(data):
     """Method to create fields."""
     try:
-        print data
+        print(data)
         dms = {'HG': ['1a', '1s'], 'SC': ['2a', '2s'], 'PG': ['3a', '3s'],
                'PSG': ['4a', '4s'], 'EG': ['5a', '5s'], 'HE': ['6a', '6s']}
         domains = {'HG': {}, 'SC': {}, 'PG': {}, 'PSG': {}, 'EG': {}, 'HE': {}}
@@ -124,7 +124,7 @@ def create_form_fields(data):
                 else:
                     domains[domain][itd] = []
     except Exception as e:
-        print 'error with domains - %s' % (str(e))
+        print('error with domains - %s' % (str(e)))
         return {}
     else:
         return domains
@@ -137,12 +137,12 @@ def save_form1b(request, person_id, edit=0):
         domains = {'SC': 'DSHC', 'PS': 'DPSS', 'PG': 'DPRO',
                    'HE': 'DHES', 'HG': 'DHNU', 'EG': 'DEDU'}
         if edit:
-            print 'F1B edit'
+            print('F1B edit')
         else:
             f1b_date = request.POST.get('olmis_service_date')
             caretaker_id = request.POST.get('caretaker_id')
             f1bs = request.POST.getlist('f1b[]')
-            print 'save', f1b_date, f1bs
+            print('save', f1b_date, f1bs)
             hh = get_house_hold(caretaker_id)
             hhid = hh.id if hh else None
             event_date = convert_date(f1b_date)
@@ -160,7 +160,7 @@ def save_form1b(request, person_id, edit=0):
                            entity=f1b).save()
 
     except Exception as e:
-        print 'error saving form 1B - %s' % (str(e))
+        print('error saving form 1B - %s' % (str(e)))
         return None
     else:
         return True
@@ -190,7 +190,7 @@ def get_person_ids(request, name):
             row = cursor.fetchall()
             pids = [r[0] for r in row]
     except Exception as e:
-        print('Error getting results - %s' % (str(e)))
+        print(('Error getting results - %s' % (str(e))))
         return []
     else:
         print(pids)
@@ -203,13 +203,13 @@ def update_case_stage(request, case, stage=1):
         case.case_stage = stage
         case.save()
     except Exception as e:
-        print("Error changing case stage - %s" % str(e))
+        print(("Error changing case stage - %s" % str(e)))
 
 
 def get_exit(period, units, start_date, e_date):
     """Method to get exit date."""
     try:
-        print(period, units, start_date, e_date)
+        print((period, units, start_date, e_date))
         periods = {}
         periods['CPYR'] = {'name': 'Years', 'units': 365}
         periods['CPMN'] = {'name': 'Months', 'units': 30}
@@ -229,7 +229,7 @@ def get_exit(period, units, start_date, e_date):
         if dys < 0:
             ck = 'after committal expiry'
             no_days = today - exit_date
-        print('exit', total_days, start_date, exit_date, dys)
+        print(('exit', total_days, start_date, exit_date, dys))
         # Get More
         years = ((no_days.total_seconds()) / (365.242 * 24 * 3600))
         years_int = int(years)
@@ -244,7 +244,7 @@ def get_exit(period, units, start_date, e_date):
         months_val = '%s months ' % (months_int) if mon_check else ''
         pds = '%s%s%s days' % (years_val, months_val, days_int)
     except Exception as e:
-        print('Error calculating exit - %s' % str(e))
+        print(('Error calculating exit - %s' % str(e)))
         return 'No committal info', ''
     else:
         return pds, ck
@@ -270,7 +270,7 @@ def get_stay(admission_date, exit_date):
         months_val = '%s months ' % (months_int) if mon_check else ''
         pds = '%s%s%s days' % (years_val, months_val, days_int)
     except Exception as e:
-        print('Error calculating exit - %s' % str(e))
+        print(('Error calculating exit - %s' % str(e)))
         return None
     else:
         return pds
@@ -436,7 +436,7 @@ def save_bursary(request, person_id):
             status_of_student=status_of_student)
         gok_bursary.save()
     except Exception as e:
-        print 'Error saving bursary - %s' % (str(e))
+        print('Error saving bursary - %s' % (str(e)))
 
 
 def get_placement(request, ou_id, person_id):
@@ -446,7 +446,7 @@ def get_placement(request, ou_id, person_id):
             residential_institution_id=ou_id,
             person_id=person_id, is_active=True)
     except Exception as e:
-        print('Child has not been placed - %s' % e)
+        print(('Child has not been placed - %s' % e))
         return None
     else:
         return placement
@@ -459,7 +459,7 @@ def get_questions(set_id, default_txt=None):
         cache_list = cache.get(cache_key)
         if cache_list:
             v_list = cache_list
-            print('FROM Cache %s' % (cache_key))
+            print(('FROM Cache %s' % (cache_key)))
         else:
             v_list = ListAnswers.objects.filter(
                 answer_set_id=set_id, is_void=False)
@@ -471,7 +471,7 @@ def get_questions(set_id, default_txt=None):
             final_list = [initial_list] + list(my_list)
             return final_list
     except Exception as e:
-        print('error - %s' % (e))
+        print(('error - %s' % (e)))
         return ()
     else:
         return my_list
@@ -487,9 +487,9 @@ def save_case_info(request, case, item_type, item_id, item_detail):
             is_void=False,
             defaults={'info_item': item_id, 'info_detail': item_detail},
         )
-        print('Saved', obj, created)
+        print(('Saved', obj, created))
     except Exception as e:
-        print('Error saving case info - %s' % (e))
+        print(('Error saving case info - %s' % (e)))
         raise e
     else:
         return obj
@@ -504,3 +504,4 @@ def get_case_info(request, case_id):
         raise e
     else:
         return case_infos
+

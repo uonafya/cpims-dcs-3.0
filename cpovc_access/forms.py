@@ -5,7 +5,7 @@ from collections import OrderedDict
 from django import forms
 from django.utils import timezone
 from django.utils.text import capfirst
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate, get_user_model
 
 from cpovc_access.models import PasswordChange

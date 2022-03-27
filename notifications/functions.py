@@ -16,7 +16,7 @@ def send_notification(request, type_id, receipient, message):
                 notify.send(user, recipient=user, verb=title,
                             description=message)
     except Exception as e:
-        print ('Error sending notifications - %s' % (str(e)))
+        print('Error sending notifications - %s' % (str(e)))
         pass
 
 
@@ -29,7 +29,7 @@ def get_organization_persons(org_ids):
         for org_person in org_persons:
             person_ids.append(org_person.person_id)
     except Exception as e:
-        print ('Error getting person ids - %s' % (str(e)))
+        print('Error getting person ids - %s' % (str(e)))
         return []
     else:
         return person_ids
@@ -41,7 +41,7 @@ def get_users(person_ids):
         users = AppUser.objects.filter(
             reg_person_id__in=person_ids, is_active=True)
     except Exception as e:
-        print ('Error getting users - %s' % (str(e)))
+        print('Error getting users - %s' % (str(e)))
         return []
     else:
         return users

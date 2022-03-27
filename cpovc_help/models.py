@@ -12,7 +12,7 @@ class OVCDownloads(models.Model):
     downloads = models.BigIntegerField(default=0)
     doc_tags = models.CharField(max_length=255)
     document = models.FileField(upload_to='documents')
-    person = models.ForeignKey(RegPerson, null=True)
+    person = models.ForeignKey(RegPerson, null=True, on_delete=models.CASCADE)
     is_public = models.BooleanField(default=False)
     is_void = models.BooleanField(default=False)
 

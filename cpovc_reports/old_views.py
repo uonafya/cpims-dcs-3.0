@@ -1,7 +1,7 @@
 """Views for all reports."""
 import os
 import csv
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import string
 import mimetypes
 import xlwt
@@ -67,7 +67,7 @@ def reports_home(request):
                                 safe=False)
         return render(request, 'reports/reports_index.html',
                       {'form': form, 'status': 200})
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -84,7 +84,7 @@ def write_xls(data, file_name):
                 row.write(index, col)
         xls_name = '%s/%s.xls' % (MEDIA_ROOT, file_name)
         book.save(xls_name)
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -121,11 +121,11 @@ def write_xlsx(data, file_name):
                 value = cell.value
                 if value and "Jul-15'!" in value:
                     new_value = value.replace("Jul-15'!", "Jul-17'!")
-                    print new_value
+                    print(new_value)
                     cell.value = new_value
         xlsm_name = '%s/%s.xlsm' % (MEDIA_ROOT, file_name)
         wb1.save(xlsm_name)
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -156,7 +156,7 @@ def write_pdf(data, file_name):
         elements.append(t)
         doc.build(elements, onFirstPage=draw_page, onLaterPages=draw_page)
 
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -263,7 +263,7 @@ def reports_caseload(request):
         return render(request, 'reports/case_load.html',
                       {'form': form, 'results': results,
                        'report': html, 'file_name': file_name})
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -284,12 +284,12 @@ def reports_download(request, file_name):
 
         # To inspect details for the below code, see
         # http://greenbytes.de/tech/tc2231/
-        if u'WebKit' in request.META['HTTP_USER_AGENT']:
+        if 'WebKit' in request.META['HTTP_USER_AGENT']:
             # Safari 3.0 and Chrome 2.0 accepts UTF-8 encoded string
             # directly.
             filename_header = 'filename=%s' % file_name.encode(
                 'utf-8')
-        elif u'MSIE' in request.META['HTTP_USER_AGENT']:
+        elif 'MSIE' in request.META['HTTP_USER_AGENT']:
             # IE does not support internationalized filename at all.
             # It can only recognize internationalized URL, so we do the
             # trick via routing rules.
@@ -297,10 +297,10 @@ def reports_download(request, file_name):
         else:
             # For others like Firefox, we follow RFC2231 (encoding
             # extension in HTTP headers).
-            filename_header = 'filename*=UTF-8\'\'%s' % urllib.quote(
+            filename_header = 'filename*=UTF-8\'\'%s' % urllib.parse.quote(
                 file_name.encode('utf-8'))
         response['Content-Disposition'] = 'attachment; ' + filename_header
-    except Exception, e:
+    except Exception as e:
         msg = 'Error getting file - %s' % (str(e))
         messages.info(request, msg)
         results, html, file_name = {}, None, None

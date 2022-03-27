@@ -4,7 +4,7 @@ import unicodedata
 
 from django.contrib.auth.hashers import check_password
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cpovc_access import BasePolicy
 from cpovc_access.models import PasswordChange
@@ -12,7 +12,7 @@ from cpovc_access.models import PasswordChange
 
 def _normalize_unicode(value):
     try:
-        value = unicodedata.normalize('NFKD', unicode(value))
+        value = unicodedata.normalize('NFKD', str(value))
         return value.encode('ascii', 'ignore').strip().lower()
     except UnicodeDecodeError:
         return value
@@ -223,13 +223,13 @@ class PasswordDisallowedTerms(PasswordStrengthPolicy):
                 found.append(term)
 
         if found:
-            msg = self.text.format(terms=u', '.join(found))
+            msg = self.text.format(terms=', '.join(found))
             raise ValidationError(msg, 'password_disallowed_terms')
 
     @property
     def policy_text(self):
         """For users not to disobet terms."""
-        return self.text.format(terms=u', '.join(self.terms))
+        return self.text.format(terms=', '.join(self.terms))
 
 
 class PasswordLimitReuse(PasswordStrengthPolicy):
@@ -262,3 +262,4 @@ class PasswordLimitReuse(PasswordStrengthPolicy):
             return self.plural_text.format(max_pw_history=self.max_pw_history)
         else:
             return self.text.format(max_pw_history=self.max_pw_history)
+

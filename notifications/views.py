@@ -261,7 +261,7 @@ def notifications_home(request):
     """Method to do pivot reports."""
     try:
         return render(request, 'notifications/home.html', {'form': {}})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
@@ -275,7 +275,8 @@ def notifications_read(request, id):
             Notification, recipient=request.user, id=id)
         return render(request, 'notifications/details.html',
                       {'form': {}, 'notification': notification})
-    except Exception, e:
+    except Exception as e:
         raise e
     else:
         pass
+

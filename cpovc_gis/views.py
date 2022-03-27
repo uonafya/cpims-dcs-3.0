@@ -10,7 +10,7 @@ def gis_home(request):
     """Method for gis."""
     try:
         return render(request, 'gis/gis_home.html')
-    except Exception, e:
+    except Exception as e:
         raise e
 
 
@@ -52,5 +52,6 @@ def gis_data(request):
                 results.append(cp_val)
         return JsonResponse(results, content_type='application/json',
                             safe=False)
-    except Exception, e:
+    except Exception as e:
         raise e
+
