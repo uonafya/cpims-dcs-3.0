@@ -1,15 +1,15 @@
 # cpims-dcs-3.0
 CPIMS DCS upgrade
 
-cpovc_registry
+# cpovc_registry
 
-CODE BASE
+## CODE BASE
 Refactored all the code base for cpovc_registry to python 2.7 compatible.
 
-URLS
+# URLS
 Complete tests for urls.
 
-MODELS
+# MODELS
 we wrote test for models.
 Here you will see that we first imported TestCase and derived our test classes from it, using descriptive names so that we can easily identify any failing tests in the test output. We then call setUpTestData() to create objects that we will use but not modify in any of the test methods.
 
@@ -22,14 +22,14 @@ The field tests check that the values of the field labels (verbose_name) and tha
         # Compare the value to the expected result
         self.assertEqual(field_label, 'org unit id vis')
 
-FORMS
+# FORMS
 Tests for forms are also written
 currently tests for user login forms are done.
 
-HTML
+# HTML
 Ensured all htmls unclosed tags are closed
 
-VIEWS
+# VIEWS
 Complete tests for views
 
         # When retrieving pages, remember to specify the path of the URL, not the whole domain.
@@ -39,7 +39,7 @@ Complete tests for views
         # Test that a given request is rendered by a given Django template.
         self.assertTemplateUsed(response, 'registry/org_units_details.html')
 
-GROUP MEMEBER
+## GROUP MEMEBERS
 1. DAVID SARUNI, 0796789225, sarunidavid11126@gmail.com, https://github.com/DavidSaruni
 2. MICHOMA PETER, 0710174169, michomapeter67@gmail.com, github.com/Michomapeter
 3. SHARON JEPNGETICH, 0729258337, jepngetichs65@gmail.com, https://github.com/Sharonjep 
