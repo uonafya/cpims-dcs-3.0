@@ -48,5 +48,5 @@ class SqlPrintingMiddleware(object):
                     sql = sql[width - indent:]
                 print ("%s%s\n" % (" " * indent, sql))
             replace_tuple = (" " * indent, str(total_time))
-            print ("%s[TOTAL PAGE LOAD TIME: %s seconds]" % replace_tuple
+            print ("%s[TOTAL PAGE LOAD TIME: %s seconds]" % replace_tuple)
         return response
