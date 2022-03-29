@@ -14,29 +14,34 @@
 
 ### 📝 Tasks done by incognito
 
-- python 2.7 to 3.10.0 
+1. python 2.7 to 3.10.0 
 > we used an online python 2 to o 3 converter [python2to3.com](https://www.python2to3.com) for every python file it converted the .py files to python3 syntax
-- django 1.8 to 4.0.2 <br />
+2. django 1.8 to 4.0.2 <br />
 > we used ```django-upgrade``` library for converting files from django 1.8 to 4.0.2 here is a link to [django-upgrade](https://github.com/adamchainz/django-upgrade) with detailed instructions
-- Added ``on_delete=models.CASCADE`` to ``ForeignKey`` and ``OneToOneField`` and used pycharm's ReGex capabilities for faster lookup:
+3. Added ``on_delete=models.CASCADE`` to ``ForeignKey`` and ``OneToOneField`` and used pycharm's ReGex capabilities for faster lookup:
 
-
+```sh 
     -models.ForeignKey("auth.User")
     +models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
     -models.OneToOneField("auth.User")
     +models.OneToOneField("auth.User", on_delete=models.CASCADE)
-- changed templates staticfiles to static <br />
+```
+    
+4. changed templates staticfiles to static <br />
 
-
+```sh
     -{% load staticfiles %}
     +{% load static %}
-- commented is_allowed_groups due to complexity of decorators.py <br />
-- used default django backends auth instead of the cpims middleware <br />
+```
+5. commented is_allowed_groups due to complexity of decorators.py <br />
+6. used default django backends auth instead of the cpims middleware <br />
     
-
+```sh
     -AUTHENTICATION_BACKENDS = ['cpovc_auth.backends.CPOVCAuthenticationBackend']
     +AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+
+```
 - updated requirements.txt
 ```sh 
 pip freeze
