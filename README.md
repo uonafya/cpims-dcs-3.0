@@ -42,12 +42,12 @@
     +AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 ```
-- updated requirements.txt
+7. updated requirements.txt
 ```sh 
 pip freeze
 ```
 
-- wrote tests for cpovc_offline_mode and used ```coverage``` to see the percentage coverage of our tests
+8. wrote tests for cpovc_offline_mode and used ```coverage``` to see the percentage coverage of our tests
 ```shell
 pip install coverage
 coverage run manage.py test cpims.tests.tests_urls -v 3
