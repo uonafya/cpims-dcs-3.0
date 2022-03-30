@@ -12,7 +12,7 @@
 {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-    <li><a href="#">Home</a></li>
+    <li><a hx-target="#">Home</a></li>
     <li class="active">OVC Care</li>
 </ol>
 <!-- end breadcrumb -->
@@ -55,8 +55,8 @@ Registration details | {{ child.first_name }} {{ child.surname }} | {{ child.age
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a hx-target="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a hx-target"#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>  
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-success btn-xs">Action</button>
@@ -64,9 +64,9 @@ Registration details | {{ child.first_name }} {{ child.surname }} | {{ child.age
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#" id="checkin">Check in</a></li>
+                        <li><a hx-target="#" id="checkin">Check in</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" id="checkins">My Check ins</a></li>
+                        <li><a hx-target="#" id="checkins">My Check ins</a></li>
                     </ul>
                 </div>                    
                 <h4 class="panel-title">Registration details &nbsp; </h4>
@@ -267,23 +267,23 @@ Registration details | {{ child.first_name }} {{ child.surname }} | {{ child.age
 
                         {% if allow_edit %}
 
-                        <a href="{% url 'ovc_edit' id=creg.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-child"></i> Edit OVC</button></a>
+                        <a hx-get="{% url 'ovc_edit' id=creg.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-child"></i> Edit OVC</button></a>
                         
-                        <a href="{% url 'new_csi' id=creg.person_id %}">
+                        <a hx-get="{% url 'new_csi' id=creg.person_id %}">
                         <button type="button" class="btn btn-primary" value="submit"> <i class="fa fa-file-text"></i> CSI </button>
                         </a>
 
-                        <a href="{% url 'new_hhva' id=creg.person_id %}">
+                        <a hx-get="{% url 'new_hhva' id=creg.person_id %}">
                         <button type="button" class="btn btn-primary" value="submit"> <i class="fa fa-file-text-o"></i> HHVA </button></a>
 
-                        <a href="{% url 'form1a_events' id=creg.person_id %}">
+                        <a hx-get="{% url 'form1a_events' id=creg.person_id %}">
                         <button type="button" class="btn btn-primary" value="submit"> <i class="fa fa-file-text"></i> Form 1A</button>
                         </a>
 
-                        <a href="{% url 'new_form1b' id=creg.person_id %}">
+                        <a hx-get="{% url 'new_form1b' id=creg.person_id %}">
                         <button type="button" class="btn btn-primary" value="submit"> <i class="fa fa-file-text-o"></i> Form 1B </button></a>
 
-                        <a href="{% url 'hh_manage' hhid=hhold.house_hold.id %}">
+                        <a hx-get="{% url 'hh_manage' hhid=hhold.house_hold.id %}">
                         <button type="button" class="btn btn-primary"> <i class="fa fa-users"></i> Manage HH </button>
                         </a>
                         {% endif %}
@@ -317,7 +317,7 @@ Registration details | {{ child.first_name }} {{ child.surname }} | {{ child.age
                 </div>  
             </div>
             <div class="modal-footer">
-              <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+              <a hx-target="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
             </div>
           </div>
         </div>

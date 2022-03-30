@@ -13,7 +13,7 @@
 {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-    <li><a href="#">Home</a></li>
+    <li><a hx-target="#">Home</a></li>
     <li class="active">OVC Care</li>
 </ol>
 <!-- end breadcrumb -->
@@ -49,8 +49,8 @@
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a hx-target="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a hx-target="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>                      
                 <h4 class="panel-title">Registration details &nbsp;</h4>
             </div>
@@ -437,7 +437,7 @@
                     <label class="control-label col-md-4 col-sm-4"></label>
                     <div class="col-md-6 col-sm-6">
                         <button type="submit" class="btn btn-primary" value="submit" id="s1">Update</button>
-                        <a href="{% url 'ovc_home' %}">
+                        <a hx-get="{% url 'ovc_home' %}">
                         <button type="button" class="btn btn-default">Cancel</button>
                         </a>
                     </div>

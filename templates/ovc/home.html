@@ -12,7 +12,7 @@
 {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-    <li><a href="#">Home</a></li>
+    <li><a hx-get="#">Home</a></li>
     <li class="active">OVC Care</li>
 </ol>
 <!-- end breadcrumb -->
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                <a hx-target="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
             </div>
         </div>
     </div>
@@ -67,8 +67,8 @@
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    <a hx-target="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a hx-target="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-success btn-xs">Action</button>
@@ -76,16 +76,16 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#" id="checkin">Check in selected</a></li>
+                        <li><a hx-target="#" id="checkin">Check in selected</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" id="checkins">My Check ins</a></li>
+                        <li><a hx-target="#" id="checkins">My Check ins</a></li>
                     </ul>
                 </div>                    
                 <h4 class="panel-title">OVC search</h4>
             </div>
             <!-- start panel body -->
             <div class="panel-body">
-               <form class="form-inline" action="{% url 'ovc_home' %}" method="POST"  data-parsley-validate="true">
+               <form class="form-inline" hx-post="{% url 'ovc_home' %}"   data-parsley-validate="true">
                    {% csrf_token %}
                     <div class="form-group m-r-10">
                         {{ form.search_name }}
@@ -99,7 +99,7 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-search"></i>&nbsp;Search</button>
-                    <a href="{% url 'new_person' %}">
+                    <a hx-get="{% url 'new_person' %}">
                        <button type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-plus"></i>&nbsp;Register New</button>
                     </a>
                 </form>
@@ -147,11 +147,11 @@
                              </td>
                              <td>
                              {% if ovc.registration_date.year == 1900 %}
-                             <a href="{% url 'ovc_register' id=ovc.person.id %}"><button type="button" class="btn btn-sm btn-danger m-r-5"><i class="fa fa-pencil"></i>&nbsp;Finish Registration</button></a>
+                             <a hx-get="{% url 'ovc_register' id=ovc.person.id %}"><button type="button" class="btn btn-sm btn-danger m-r-5"><i class="fa fa-pencil"></i>&nbsp;Finish Registration</button></a>
                              {% else %}
-                             <a href="{% url 'ovc_view' id=ovc.person.id %}"><button type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-binoculars"></i>&nbsp;View OVC</button></a>
+                             <a hx-get="{% url 'ovc_view' id=ovc.person.id %}"><button type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-binoculars"></i>&nbsp;View OVC</button></a>
 
-                             <a href="{% url 'ovc_edit' id=ovc.person.id %}"><button type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-pencil"></i>&nbsp;Edit OVC</button></a>
+                             <a hx-get="{% url 'ovc_edit' id=ovc.person.id %}"><button type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-pencil"></i>&nbsp;Edit OVC</button></a>
 
                              <button type="button" class="btn btn-sm btn-primary m-r-5" onClick="OpenForm({{ ovc.person.id }})"><i class="fa fa-check-square-o"></i>&nbsp;Fill Forms</button>
                              {% endif %}
@@ -190,7 +190,7 @@
                 </div>  
             </div>
             <div class="modal-footer">
-              <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+              <a hx-target="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
             </div>
           </div>
         </div>

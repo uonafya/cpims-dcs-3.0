@@ -11,7 +11,7 @@
 {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-	<li><a href="#">Home</a></li>
+	<li><a hx-target="#">Home</a></li>
 	<li class="active">OVC Care</li>
 </ol>
 <!-- end breadcrumb -->
@@ -95,12 +95,12 @@
                                 <td>
                                 {% if hhmember.member_type == 'TBVC' %}
                                 {% if hhmember.hiv_status %}
-                                <a href="{% url 'ovc_view' id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> View</button></a>
+                                <a hx-get="{% url 'ovc_view' id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> View</button></a>
                                 {% else %}
-                                <a href="{% url 'ovc_register' id=hhmember.person_id %}"><button type="button" class="btn btn-danger m-r-5"> <i class="fa fa-pencil"></i> Finish Registration</button></a>
+                                <a hx-get="{% url 'ovc_register' id=hhmember.person_id %}"><button type="button" class="btn btn-danger m-r-5"> <i class="fa fa-pencil"></i> Finish Registration</button></a>
                                 {% endif %}
                                 {% elif hhmember.member_type == 'TOVC' %}
-                                <a href="{% url 'ovc_view' id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> View</button></a>
+                                <a hx-get="{% url 'ovc_view' id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> View</button></a>
                                 {% endif %}
                                 </td>
                             </tr>
