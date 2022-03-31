@@ -573,3 +573,139 @@ class RPTIPopulation(TestCase):
         caseload = RPTCaseLoad.objects.get(id=1)
         max_length = caseload._meta.get_field('sub_county').max_length
         self.assertEqual(max_length, 0)    
+         from cpovc_registry.forms import org_units, org_inst, document_type,org_type
+    from cpovc_reports.forms import  CaseLoad,document_type,report_type
+    
+    ### forms tests
+    class Testforms(TestCase):
+        def express_valid_data_FORM(self):
+            form = CaseLoad(data={
+
+                'org_unit':forms.ChoiceField(
+                choices=org_units,
+                initial='',
+                widget=forms.Select(
+                attrs={'class': 'form-control',
+                       'autofocus': 'true'})),
+
+                'org_inst':forms.ChoiceField(
+                choices=org_inst,
+                initial='',
+                widget=forms.Select(
+                    attrs={'class': 'form-control',
+                           'autofocus': 'true',
+                           'id': 'id_org_unit'})),
+                'cluster': forms.ChoiceField(
+                    choices=cluster_list,
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'false',
+                               'autofocus': 'true'})),
+                'sub_county': forms.ChoiceField(
+                    choices=sub_county_list,
+                    initial='',
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'true',
+                               'data-parsley-errors-container': "#sub_county_error",
+                               'id': 'sub_county'}),
+                 'document_type' : forms.ChoiceField(
+                    choices=document_type,
+                    initial='',
+                    widget=forms.Select(
+                    attrs={'class': 'form-control',
+                        'data-parsley-required': 'true',
+                        'autofocus': 'true'}))
+
+                'report_type': forms.ChoiceField(
+                    choices=report_types,
+                    initial='',
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'report_type_datim': forms.ChoiceField(
+                    choices=report_types_datim,
+                    initial='',
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'id': 'id_report_type',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'report_type_other': forms.ChoiceField(
+                    choices=report_types_other,
+                    initial='',
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'id': 'id_report_type',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'report_type_others': forms.ChoiceField(
+
+                    choices=report_types_others,
+                    initial='',
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'id': 'id_report_type',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'report_year': forms.ChoiceField(
+                    choices=YEAR_CHOICES,
+                    initial='',
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'report_period': forms.ChoiceField(
+                choices=report_period,
+                initial='',
+                widget=forms.Select(
+                    attrs={'class': 'form-control',
+                           'data-parsley-required': 'true',
+                           'autofocus': 'true'})),
+                'child': forms.IntegerField(widget=forms.TextInput(
+                    attrs={'class': 'form-control',
+                           'data-parsley-required': 'true',
+                           'id': 'child_id'})),
+                'cpims_child': forms.CharField(widget=forms.HiddenInput(
+                    attrs={'id': 'cpims_child_id'})),
+            'report_vars'= forms.ChoiceField(
+                choices=report_vars,
+                widget=forms.Select(
+                    attrs={'class': 'form-control',
+                           'data-parsley-required': 'true',
+                           'autofocus': 'true'}))
+
+            'institution_type': forms.ChoiceField(
+                    choices=inst_vars,
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'org_type': forms.ChoiceField(
+                    choices=(),
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'false',
+                               'autofocus': 'true'})),
+                'report_ovc': forms.ChoiceField(
+                    choices=usg_reports,
+                    widget=forms.Select(
+                        attrs={'class': 'form-control',
+                               'data-parsley-required': 'true',
+                               'autofocus': 'true'})),
+                'report_to_date':forms.CharField(
+                    widget=forms.TextInput(
+                    attrs={'class': 'form-control',
+                           'data-parsley-required': 'true',
+                           'id': 'to_date'}));
+            }
+
+        self.assertTrue(forms.is_valid())
+
+    def test_form_no_data(self):
+        form=CaseLoad(data={})}
+
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors),3)
+
