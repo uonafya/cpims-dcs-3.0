@@ -107,7 +107,7 @@ This upgrade exists thanks to the people who contributed.
 👤 **Shem Miriam Wanjiru**
 
 - Phone: +254714660411
-- Gmail: shemmiriam@gmail.com
+- Gmail: shemmiriam93@gmail.com
 - Github: [Shem Miriam](https://github.com/shemmiriam)
 
 👤 **Rebecca Cheptoek Kibet**
