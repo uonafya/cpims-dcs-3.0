@@ -1,6 +1,8 @@
 """Registry section urls."""
-from django.urls import re_path, path
+from django.urls import re_path, path, include
 from . import views
+from rest_framework.urlpatterns import format_suffix_patterns
+
 # This should contain urls related to registry ONLY
 urlpatterns = [
     # 'cpovc_registry.views',
@@ -20,5 +22,10 @@ urlpatterns = [
     re_path(r'^person/api/$', views.person_api, name='person_api'),
     re_path(r'^person/profile/$', views.person_profile, name='person_profile'),
     re_path(r'^person/tl/(?P<id>\d+)/$', views.person_timeline, name='person_timeline'),
+    path('person/view/api/', views.RegPersonList.as_view()),
+    path('person/view/api/<int:pk>/', views.RegPersonDetail.as_view()),
+    # path('api-auth/', include('rest_framework.urls')),
 ]
 # {% url 'view_person' id=result.id %}
+
+urlpatterns = format_suffix_patterns(urlpatterns)
