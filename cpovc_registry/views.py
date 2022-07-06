@@ -49,6 +49,9 @@ from cpovc_forms.models import OVCCaseGeo, OVCCaseEvents
 
 from cpovc_reports.forms import CaseLoad
 
+from .serializers import RegPersonSerializer
+from rest_framework import generics
+
 now = timezone.now()
 
 
@@ -637,7 +640,7 @@ def new_person(request):
                 if child_services == 'AYES':
                     workforce_id = workforce_id_generator(reg_person_pk)
             if 'TBGR' in person_types:
-                    beneficiary_id = beneficiary_id_generator(reg_person_pk)
+                beneficiary_id = beneficiary_id_generator(reg_person_pk)
             if national_id:
                 identifier_types['INTL'] = national_id
             if passport_no:
@@ -659,9 +662,9 @@ def new_person(request):
             if religion and person_type == 'TBVC':
                 identifier_types['IREL'] = religion
             if country and person_type == 'TBVC':
-                    identifier_types['ICOU'] = country
+                identifier_types['ICOU'] = country
             if given_name and person_type == 'TBVC':
-                    identifier_types['IGNM'] = given_name
+                identifier_types['IGNM'] = given_name
 
             save_person_extids(identifier_types, int(reg_person_pk))
 
@@ -802,6 +805,20 @@ def persons_search(request):
         raise e
 
 
+# api endpoint to retrieve all RegPersons
+
+class RegPersonList(generics.ListAPIView):
+    queryset = RegPerson.objects.all()
+    serializer_class = RegPersonSerializer
+
+
+# api endpoint to retrieve a single RegPerson
+
+class RegPersonDetail(generics.RetrieveUpdateAPIView):
+    queryset = RegPerson.objects.all()
+    serializer_class = RegPersonSerializer
+
+
 @login_required
 @is_allowed_groups(['RGM', 'RGU', 'DSU', 'STD'])
 def view_person(request, id):
@@ -809,7 +826,7 @@ def view_person(request, id):
     try:
         if request.method == 'POST':
             action = request.POST.get('action', 0)
-            print (action)
+            print(action)
             msg = "Profile updated to customize data to selected DCS Sections"
             results = {"status": 0, "message": msg}
             return JsonResponse(results, content_type='application/json',
@@ -1036,7 +1053,7 @@ def edit_person(request, id):
                 person_geos_all = RegPersonsGeo.objects.filter(
                     person_id=eperson_id, is_void=False,
                     date_delinked=None).values(
-                        'id', 'area_id', 'area_type')
+                    'id', 'area_id', 'area_type')
 
                 area_ids, area_ids_remove = {}, {}
                 check_list, new_list = [], {}
@@ -1093,14 +1110,14 @@ def edit_person(request, id):
                 identifier_types = {}
                 personids = RegPersonsExternalIds.objects.filter(
                     person_id=eperson_id, is_void=False).values_list(
-                        'identifier_type_id', flat=True)
+                    'identifier_type_id', flat=True)
 
                 if child_services and 'IWKF' not in personids:
                     print('Create WF', child_services)
                     if child_services == 'AYES':
                         workforce_id = workforce_id_generator(eperson_id)
                 if 'TBGR' in person_types and 'ISCG' not in personids:
-                        beneficiary_id = beneficiary_id_generator(eperson_id)
+                    beneficiary_id = beneficiary_id_generator(eperson_id)
                 if national_id:
                     identifier_types['INTL'] = national_id
                 if passport_no:
@@ -1140,7 +1157,7 @@ def edit_person(request, id):
                         defaults={'person_id': eperson_id,
                                   'date_linked': now, 'date_delinked': None,
                                   'primary_unit': True, 'reg_assistant': False,
-                                  'org_unit_id': cbo_id, 'is_void': False},)
+                                  'org_unit_id': cbo_id, 'is_void': False}, )
                     print('Delink all the old regions')
                     ops = RegPersonsOrgUnits.objects.filter(
                         person_id=eperson_id, is_void=False).exclude(
@@ -1208,7 +1225,7 @@ def edit_person(request, id):
                 return HttpResponseRedirect(reverse(persons_search))
             person_types = RegPersonsTypes.objects.filter(
                 person=person, is_void=False, date_ended=None).values_list(
-                    'person_type_id', flat=True)
+                'person_type_id', flat=True)
             person_geos = RegPersonsGeo.objects.select_related().filter(
                 person=person, is_void=False, date_delinked=None)
             person_orgs = RegPersonsOrgUnits.objects.select_related().filter(
@@ -1395,9 +1412,9 @@ def edit_person(request, id):
                            'child_ovc': child_ovc, 'osiblings': osiblings,
                            'oguardians': oguardians})
     except RegPerson.DoesNotExist:
-            form = RegistrationSearchForm()
-            return render(request, 'registry/person_search.html',
-                          {'form': form})
+        form = RegistrationSearchForm()
+        return render(request, 'registry/person_search.html',
+                      {'form': form})
     except Exception as e:
         msg = 'Person update error - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
@@ -1452,7 +1469,7 @@ def new_user(request, id):
                 messages.add_message(request, messages.INFO, msg)
                 form = NewUser(user, data=request.POST)
                 return render(request, 'registry/new_user.html',
-                              {'form': form},)
+                              {'form': form}, )
 
             # validate username if__exists
             username_exists = AppUser.objects.filter(username__iexact=username)
@@ -1461,7 +1478,7 @@ def new_user(request, id):
                 messages.add_message(request, messages.INFO, msg)
                 form = NewUser(user, data=request.POST)
                 return render(request, 'registry/new_user.html',
-                              {'form': form},)
+                              {'form': form}, )
             else:
                 # Create User
                 user = AppUser.objects.create_user(username=username,
@@ -1478,7 +1495,7 @@ def new_user(request, id):
         else:
             form = NewUser(user)
             return render(request, 'registry/new_user.html',
-                          {'names': names, 'form': form},)
+                          {'names': names, 'form': form}, )
     except Exception as e:
         msg = 'Error - (%s) ' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
@@ -1566,7 +1583,7 @@ def person_actions(request):
                                       'primary_unit': is_pri_unit,
                                       'reg_assistant': is_reg_ass,
                                       'date_delinked': None,
-                                      'is_void': False},)
+                                      'is_void': False}, )
             elif edit_type == 2:
                 message = 'Organisational Unit delinked'
                 org_unit_id = request.POST.get('org_unit_id')
@@ -1866,4 +1883,3 @@ def person_profile(request):
         results = {"status": 9, "message": msg}
         return JsonResponse(results, content_type='application/json',
                             safe=False)
-
