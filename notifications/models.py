@@ -17,8 +17,6 @@ from django.utils import timezone
 from jsonfield.fields import JSONField
 
 from model_utils import Choices
-from utils
-
 from six import text_type
 
 from notifications import settings as notifications_settings
