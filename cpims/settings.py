@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims2',
-        'USER': 'bowen2',
-        'PASSWORD': 'secret2',
+        'NAME': 'cpims',
+        'USER': 'jerim',
+        'PASSWORD': '@Admin',
         'HOST': '127.0.0.1',
         'PORT': '5432', }
 }
@@ -134,9 +134,9 @@ SESSION_COOKIE_AGE = 3 * 60 * 60
 SESSION_SAVE_EVERY_REQUEST = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
