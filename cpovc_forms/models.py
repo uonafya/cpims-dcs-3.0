@@ -50,6 +50,7 @@ class OVCBursary(models.Model):
         db_table = 'ovc_bursaryinfo'
 
 
+
 class OVCCaseRecord(models.Model):
     # Make case_id primary key
     case_id = models.UUIDField(
@@ -85,6 +86,8 @@ class OVCCaseRecord(models.Model):
     date_of_summon = models.DateField(null=True)
     summon_status = models.BooleanField(null=True, default=None)
     case_stage = models.IntegerField(default=0)
+    age = models.IntegerField(default=0)
+    gender = models.CharField(max_length=10, default="Female")
 
     class Meta:
         db_table = 'ovc_case_record'
@@ -94,6 +97,8 @@ class OVCCaseRecord(models.Model):
     def __unicode__(self):
         """To be returned by admin actions."""
         return '%s' % (self.case_serial)
+
+
 
 
 class OVCCaseGeo(models.Model):

@@ -1,10 +1,10 @@
 """API urls."""
 from django.conf.urls import include
-from  django.urls import path, re_path
+from django.urls import path, re_path
 from rest_framework import routers
 from .views import (
     SettingsViewSet, GeoViewSet, BasicCRSView, CountryViewSet,
-    basic_crs, OrgUnitViewSet)
+    basic_crs, OrgUnitViewSet, OVCCaseRecordViewSet)
 
 router = routers.DefaultRouter()
 # router.register(r'users', UserViewSet)
@@ -18,4 +18,5 @@ urlpatterns = [
     re_path(r'^ou/$', OrgUnitViewSet.as_view()),
     re_path(r'^crs-old/$', BasicCRSView.as_view()),
     re_path(r'^crs/$', basic_crs),
+    re_path(r'OVCCaseRecord/$', OVCCaseRecordViewSet.as_view())
 ]

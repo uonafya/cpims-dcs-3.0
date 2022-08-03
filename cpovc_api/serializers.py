@@ -3,7 +3,7 @@ from cpovc_auth.models import AppUser
 from cpovc_registry.models import RegOrgUnit
 from rest_framework import serializers
 from cpovc_main.models import SetupList, SetupGeography
-from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson
+from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson, OVCCaseRecord
 from . import Country
 
 
@@ -95,3 +95,9 @@ class CountrySerializer(serializers.Serializer):
         for field, value in validated_data.items():
             setattr(instance, field, value)
         return instance
+
+
+class OVCCaseRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OVCCaseRecord
+        fields = "__all__"
