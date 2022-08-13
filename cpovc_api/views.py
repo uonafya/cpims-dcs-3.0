@@ -10,11 +10,11 @@ from django.shortcuts import get_object_or_404
 from .serializers import (
     UserSerializer, OrgUnitSerializer, SettingsSerializer, GeoSerializer,
     CRSSerializer, CountrySerializer, CRSPersonserializer,
-    CRSCategorySerializer, OVCCaseRecordSerializer)
+    CRSCategorySerializer, OVCCaseRecordSerializer, OVCCaseCategorySerializer)
 from cpovc_auth.models import AppUser
 from cpovc_registry.models import RegOrgUnit
 from cpovc_main.models import SetupList, SetupGeography
-from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson, OVCCaseRecord
+from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson, OVCCaseRecord, OVCCaseCategory
 from cpovc_main.country import COUNTRIES as CLISTS
 from . import Country
 
@@ -50,7 +50,7 @@ class SettingsViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned values to a given prameter.
+        Optionally restricts the returned values to a given parameter.
         """
         queryset = SetupList.objects.all()
         field_name = self.request.query_params.get(
@@ -66,7 +66,7 @@ class GeoViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned values to a given prameter.
+        Optionally restricts the returned values to a given parameter.
         """
         queryset = SetupGeography.objects.all()
         field_name = self.request.query_params.get('area_type_id', None)
@@ -84,7 +84,7 @@ class OrgUnitViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned values to a given prameter.
+        Optionally restricts the returned values to a given parameter.
         """
         queryset = RegOrgUnit.objects.filter(
             is_void=False).order_by('org_unit_name')
@@ -303,5 +303,63 @@ def save_person(case_id, person_type, req_data):
 
 
 class OVCCaseRecordViewSet(generics.ListCreateAPIView):
+    """Get and pos OVC Case Record Viewset"""
     queryset = OVCCaseRecord.objects.all()
     serializer_class = OVCCaseRecordSerializer
+
+
+class OVCCaseCategoryViewSet(viewsets.ModelViewSet):
+    """
+    A  ViewSet for viewing and editing OVC case record categories.
+    """
+
+    queryset = OVCCaseCategory.objects.all()
+    serializer_class = OVCCaseCategorySerializer
+
+    def create(self, request, *args, **kwargs):
+        """'
+        Create a new category
+        """
+        serializer = OVCCaseCategorySerializer(data=request.data, context={"request": request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def list(self, request, *args, **kwargs):
+        """
+        List all categories
+        """
+        categories = OVCCaseCategory.objects.all()
+        serializer = OVCCaseCategorySerializer(categories, many=True, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def update(self, request, pk=None, *args, **kwargs):
+        """
+        Update a single category
+        """
+        try:
+            category = OVCCaseCategory.objects.get(case_category_id=pk)
+            serializer = OVCCaseCategorySerializer(data=request.data, instance=category, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except OVCCaseRecord.DoesNotExist:
+            return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    def retrieve(self, request, pk=None, *args, **kwargs):
+        try:
+            category = OVCCaseCategory.objects.get(case_category_id=pk)
+            serializer = OVCCaseCategorySerializer(category)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except OVCCaseCategory.DoesNotExist:
+            return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request,  pk=None, *args, **kwargs):
+        try:
+            category = OVCCaseCategory.objects.get(case_category_id=pk)
+            category.delete()
+            return Response({"Message": "OVCCaseCategory Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        except OVCCaseCategory.DoesNotExist:
+            return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)

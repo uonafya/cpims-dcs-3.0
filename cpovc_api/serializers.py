@@ -1,9 +1,9 @@
 """Serializers for the test API."""
 from cpovc_auth.models import AppUser
-from cpovc_registry.models import RegOrgUnit
+from cpovc_registry.models import RegOrgUnit, RegPerson
 from rest_framework import serializers
 from cpovc_main.models import SetupList, SetupGeography
-from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson, OVCCaseRecord
+from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson, OVCCaseRecord, OVCCaseCategory
 from . import Country
 
 
@@ -97,7 +97,25 @@ class CountrySerializer(serializers.Serializer):
         return instance
 
 
+class RegPersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegPerson
+        fields = "__all__"
+
+
 class OVCCaseRecordSerializer(serializers.ModelSerializer):
+    """Ovc case record serializer"""
+
     class Meta:
         model = OVCCaseRecord
+        fields = "__all__"
+
+
+class OVCCaseCategorySerializer(serializers.ModelSerializer):
+    """OVCCaseCategory Serializer"""
+    person = RegPersonSerializer(required=True)
+    case_id = OVCCaseRecordSerializer(required=True)
+
+    class Meta:
+        model = OVCCaseCategory
         fields = "__all__"

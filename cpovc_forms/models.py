@@ -5,6 +5,7 @@ from django.utils import timezone
 from cpovc_registry.models import (RegPerson, RegOrgUnit, AppUser)
 from cpovc_main.models import (SchoolList, SetupLocation)
 from cpovc_ovc.models import (OVCHouseHold)
+
 # from django.contrib.gis.db import models as geomodels
 
 # Create your models here.
@@ -50,11 +51,9 @@ class OVCBursary(models.Model):
         db_table = 'ovc_bursaryinfo'
 
 
-
 class OVCCaseRecord(models.Model):
     # Make case_id primary key
-    case_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid1, editable=False)
+    case_id = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     case_serial = models.CharField(max_length=50, default='XXXX')
     # place_of_event = models.CharField(max_length=50)
     perpetrator_status = models.CharField(max_length=20, default='PKNW')
@@ -75,7 +74,7 @@ class OVCCaseRecord(models.Model):
     police_station = models.CharField(max_length=200, null=True)
     ob_number = models.CharField(max_length=50, null=True)
     case_status = models.CharField(max_length=50, default='ACTIVE')
-    referral_present = models.CharField(max_length=10, default='AYES')
+    referral_present = models.CharField(max_length=10, default='YES')
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
@@ -96,9 +95,7 @@ class OVCCaseRecord(models.Model):
 
     def __unicode__(self):
         """To be returned by admin actions."""
-        return '%s' % (self.case_serial)
-
-
+        return '%s' % self.case_serial
 
 
 class OVCCaseGeo(models.Model):
@@ -214,15 +211,13 @@ class OVCMedicalSubconditions(models.Model):
 
 
 class OVCCaseCategory(models.Model):
-    case_category_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid1, editable=False)
-    # case_category_id = models.CharField(max_length=10, primary_key=True)
+    case_category_id = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     case_id = models.ForeignKey(OVCCaseRecord, on_delete=models.CASCADE)
-    case_category = models.CharField(max_length=4)
+    case_category = models.CharField(max_length=20)
     case_grouping_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    date_of_event = models.DateField(default=timezone.now)
-    place_of_event = models.CharField(max_length=4)
-    case_nature = models.CharField(max_length=4)
+    date_of_event = models.DateField(default=datetime.date.today)
+    place_of_event = models.CharField(max_length=20)
+    case_nature = models.CharField(max_length=50)
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
@@ -293,17 +288,18 @@ class OVCReferral(models.Model):
     class Meta:
         db_table = 'ovc_referrals'
 
-
-# class OVCReferralActors(models.Model):
-#    case_id = models.ForeignKey(OVCCaseRecord)
-#    referral_actor = models.CharField(max_length=50)
-#    referral_actor_description = models.CharField(max_length=250, null=True)
-#    referral_grouping_id = models.UUIDField(
-#       default=uuid.uuid1, editable=False)
-#    timestamp_created = models.DateTimeField(default=timezone.now)
-#    timestamp_updated = models.DateTimeField(default=timezone.now)
-#    is_void = models.BooleanField(default=False)
+    # class OVCReferralActors(models.Model):
+    #    case_id = models.ForeignKey(OVCCaseRecord)
+    #    referral_actor = models.CharField(max_length=50)
+    #    referral_actor_description = models.CharField(max_length=250, null=True)
+    #    referral_grouping_id = models.UUIDField(
+    #       default=uuid.uuid1, editable=False)
+    #    timestamp_created = models.DateTimeField(default=timezone.now)
+    #    timestamp_updated = models.DateTimeField(default=timezone.now)
+    #    is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
+
+
 #    person = models.ForeignKey(RegPerson)
 #
 #    class Meta:
@@ -334,6 +330,7 @@ class FormsLog(models.Model):
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
     timestamp_modified = models.DateTimeField(auto_now=True)
     app_user = models.IntegerField(null=True, default=404)
+
     # app_user = models.ForeignKey(AppUser, default=1)
 
     class Meta:
@@ -744,6 +741,7 @@ class OVCFamilyCare(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
+
     # children_office/contact_person/parental_status
 
     class Meta:
