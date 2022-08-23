@@ -356,7 +356,7 @@ class OVCCaseCategoryViewSet(viewsets.ModelViewSet):
         except OVCCaseCategory.DoesNotExist:
             return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    def destroy(self, request,  pk=None, *args, **kwargs):
+    def destroy(self, request, pk=None, *args, **kwargs):
         try:
             category = OVCCaseCategory.objects.get(case_category_id=pk)
             category.delete()

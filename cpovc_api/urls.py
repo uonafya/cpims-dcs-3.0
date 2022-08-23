@@ -12,6 +12,7 @@ router = routers.DefaultRouter()
 # Wire up our API using automatic URL routing.
 # router.register(r'country', CountryViewSet)
 
+
 urlpatterns = {
     re_path(r'^', include(router.urls)),
     re_path(r'^settings/$', SettingsViewSet.as_view()),
