@@ -207,7 +207,7 @@ class RegBiometric(models.Model):
 
     def __unicode__(self):
         """To be returned by admin actions."""
-        return '%s' % (self.account)
+        return '%s' % self.account
 
 
 class RegPersonsGuardians(models.Model):

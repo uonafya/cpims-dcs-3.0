@@ -2,7 +2,7 @@ import uuid
 from decimal import Decimal
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import viewsets, generics, status
+from rest_framework import viewsets, generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -10,11 +10,11 @@ from django.shortcuts import get_object_or_404
 from .serializers import (
     UserSerializer, OrgUnitSerializer, SettingsSerializer, GeoSerializer,
     CRSSerializer, CountrySerializer, CRSPersonserializer,
-    CRSCategorySerializer)
+    CRSCategorySerializer, OVCCaseRecordSerializer, OVCCaseCategorySerializer)
 from cpovc_auth.models import AppUser
 from cpovc_registry.models import RegOrgUnit
 from cpovc_main.models import SetupList, SetupGeography
-from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson
+from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson, OVCCaseRecord, OVCCaseCategory
 from cpovc_main.country import COUNTRIES as CLISTS
 from . import Country
 
@@ -50,7 +50,7 @@ class SettingsViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned values to a given prameter.
+        Optionally restricts the returned values to a given parameter.
         """
         queryset = SetupList.objects.all()
         field_name = self.request.query_params.get(
@@ -66,7 +66,7 @@ class GeoViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned values to a given prameter.
+        Optionally restricts the returned values to a given parameter.
         """
         queryset = SetupGeography.objects.all()
         field_name = self.request.query_params.get('area_type_id', None)
@@ -84,7 +84,7 @@ class OrgUnitViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned values to a given prameter.
+        Optionally restricts the returned values to a given parameter.
         """
         queryset = RegOrgUnit.objects.filter(
             is_void=False).order_by('org_unit_name')
@@ -239,11 +239,11 @@ def basic_crs(request):
                     save_person(case_id, 'PTRD', request.data)
                 # Child details
                 save_person(case_id, 'PTCH', request.data)
-                print ('CASE OK', serializer.data)
+                print('CASE OK', serializer.data)
                 return Response(serializer.data,
                                 status=status.HTTP_201_CREATED)
             else:
-                print ('CASE ERROR', serializer.errors)
+                print('CASE ERROR', serializer.errors)
                 return Response(serializer.errors,
                                 status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
@@ -269,19 +269,24 @@ def basic_mobi_crs(request):
 def save_person(case_id, person_type, req_data):
     try:
         if person_type == 'PTCH':
-            data = {'first_name': req_data.get('child_first_name')}
-            data['surname'] = req_data.get('child_surname')
-            data['other_names'] = req_data.get('child_other_names')
-            data['dob'] = req_data.get('child_dob')
-            data['sex'] = req_data.get('child_sex')
-            data['relationship'] = 'TBVC'
+            data = {
+                'first_name': req_data.get('child_first_name'),
+                'surname': req_data.get('child_surname'),
+                'other_names': req_data.get('child_other_names'),
+                'dob': req_data.get('child_dob'),
+                'sex': req_data.get('child_sex'),
+                'relationship': 'TBVC'
+            }
         elif person_type == 'PTRD':
-            data = {'first_name': req_data.get('reporter_first_name')}
-            data['surname'] = req_data.get('reporter_surname')
-            data['other_names'] = req_data.get('reporter_other_names')
-            data['dob'] = req_data.get('reporter_dob')
-            data['sex'] = req_data.get('reporter_sex')
-            data['relationship'] = req_data.get('relation')
+            data = {
+                'first_name': req_data.get('reporter_first_name'),
+                'surname': req_data.get('reporter_surname'),
+                'other_names': req_data.get('reporter_other_names'),
+                'dob': req_data.get('reporter_dob'),
+                'sex': req_data.get('reporter_sex'),
+                'relationship': req_data.get('relation')
+            }
+
         else:
             data = req_data
         data['person_type'] = person_type
@@ -295,3 +300,66 @@ def save_person(case_id, person_type, req_data):
     except Exception as e:
         print('Error saving data - %s' % str(e))
         pass
+
+
+class OVCCaseRecordViewSet(generics.ListCreateAPIView):
+    """Get and pos OVC Case Record Viewset"""
+    queryset = OVCCaseRecord.objects.all()
+    serializer_class = OVCCaseRecordSerializer
+
+
+class OVCCaseCategoryViewSet(viewsets.ModelViewSet):
+    """
+    A  ViewSet for viewing and editing OVC case record categories.
+    """
+
+    queryset = OVCCaseCategory.objects.all()
+    serializer_class = OVCCaseCategorySerializer
+
+    def create(self, request, *args, **kwargs):
+        """'
+        Create a new category
+        """
+        serializer = OVCCaseCategorySerializer(data=request.data, context={"request": request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def list(self, request, *args, **kwargs):
+        """
+        List all categories
+        """
+        categories = OVCCaseCategory.objects.all()
+        serializer = OVCCaseCategorySerializer(categories, many=True, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def update(self, request, pk=None, *args, **kwargs):
+        """
+        Update a single category
+        """
+        try:
+            category = OVCCaseCategory.objects.get(case_category_id=pk)
+            serializer = OVCCaseCategorySerializer(data=request.data, instance=category, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except OVCCaseRecord.DoesNotExist:
+            return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    def retrieve(self, request, pk=None, *args, **kwargs):
+        try:
+            category = OVCCaseCategory.objects.get(case_category_id=pk)
+            serializer = OVCCaseCategorySerializer(category)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except OVCCaseCategory.DoesNotExist:
+            return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request, pk=None, *args, **kwargs):
+        try:
+            category = OVCCaseCategory.objects.get(case_category_id=pk)
+            category.delete()
+            return Response({"Message": "OVCCaseCategory Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        except OVCCaseCategory.DoesNotExist:
+            return Response({"Message": "OVCCaseCategory Does Not Exist"}, status=status.HTTP_404_NOT_FOUND)
