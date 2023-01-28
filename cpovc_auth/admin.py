@@ -48,6 +48,7 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
+@admin.register(AppUser)
 class MyUserAdmin(UserAdmin):
     """
     Admin back end class.
@@ -70,7 +71,7 @@ class MyUserAdmin(UserAdmin):
     actions = [dump_to_csv]
 
     list_display = ['username', 'sex', 'surname', 'first_name', 'last_name',
-                    'email', 'timestamp_created', 'last_login', 'is_active']
+                    'user_email', 'timestamp_created', 'last_login', 'is_active']
 
     search_fields = ['username']
     readonly_fields = ['reg_person']
@@ -98,12 +99,11 @@ class MyUserAdmin(UserAdmin):
     # inlines = (PersonInline, )
 
 
-admin.site.register(AppUser, MyUserAdmin)
 
 
+@admin.register(CPOVCProfile)
 class MyProfileAdmin(admin.ModelAdmin):
     """Admin for profile."""
     list_display = ['user', 'details']
 
 
-admin.site.register(CPOVCProfile, MyProfileAdmin)

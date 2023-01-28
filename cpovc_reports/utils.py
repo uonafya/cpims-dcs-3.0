@@ -2,8 +2,6 @@ import pandas as pd
 # import numpy as np
 from django.db import connection, connections
 from datetime import datetime
-
-from django.http import HttpResponse
 from reportlab.lib.enums import TA_RIGHT, TA_CENTER, TA_LEFT
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle)
@@ -763,4 +761,3 @@ def get_register(request, id=1):
     p.save()
     '''
     return response
-

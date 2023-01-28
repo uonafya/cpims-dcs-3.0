@@ -15,4 +15,3 @@ def git_version(context):
         return '1.3.6'
     else:
         return git_short
-

@@ -179,7 +179,8 @@ def basic_crs(request):
             print('-*-' * 50)
             print(request.META)
             print('-*-' * 50)
-            family_status = family_statuses.split(',')[0] if family_statuses else ''
+            family_status = family_statuses.split(
+                ',')[0] if family_statuses else ''
             data = {'case_category': request.data.get('case_category'),
                     'county': request.data.get('county'),
                     'constituency': request.data.get('constituency'),
@@ -239,11 +240,11 @@ def basic_crs(request):
                     save_person(case_id, 'PTRD', request.data)
                 # Child details
                 save_person(case_id, 'PTCH', request.data)
-                print ('CASE OK', serializer.data)
+                print('CASE OK', serializer.data)
                 return Response(serializer.data,
                                 status=status.HTTP_201_CREATED)
             else:
-                print ('CASE ERROR', serializer.errors)
+                print('CASE ERROR', serializer.errors)
                 return Response(serializer.errors,
                                 status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
@@ -295,3 +296,28 @@ def save_person(case_id, person_type, req_data):
     except Exception as e:
         print('Error saving data - %s' % str(e))
         pass
+
+
+def get_settings(request, param=''):
+    """Method to get settings."""
+    try:
+        param_id = request.POST.get('domain', None)
+        # case_id = request.POST.get('case_id')
+        print('Param id', param_id)
+        results = []
+        if param_id:
+            itms = SetupList.objects.filter(item_id=param_id)
+            field_name = itms[0].field_name
+            field_sub_cat = itms[0].item_sub_category
+            print('field name', field_name, field_sub_cat)
+            items = SetupList.objects.filter(field_name=field_sub_cat)
+            for item in items:
+                item_id = item.item_id
+                item_name = item.item_description
+                results.append({'item_id': item_id, 'item_name': item_name})
+    except Exception:
+        return JsonResponse([], content_type='application/json',
+                            safe=False)
+    else:
+        return JsonResponse(results, content_type='application/json',
+                            safe=False)

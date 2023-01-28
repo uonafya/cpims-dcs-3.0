@@ -123,11 +123,12 @@
                                             <h4>{{ person_details.first_name }} {{ person_details.surname }}
                                                 {% if person_details.other_names %}{{ person_details.other_names }}{% endif %}
                                                 <br>
-                                                <small><b>
+                                                <small>
                                                 {% if not person_details.date_of_death == None %}
                                                     Date Of Death {{ person_details.date_of_death }}
                                                 {% endif %}
-                                                </b></small>
+                                                {% if person.is_void %} <span class='badge bg-secondary'>Deleted</span> {% else %} <span class='badge bg-danger'>Active</span> {% endif %}
+                                                </small>
                                             </h4>
                                             </th>
                                         </tr>

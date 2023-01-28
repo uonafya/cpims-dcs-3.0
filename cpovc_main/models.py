@@ -148,7 +148,8 @@ class ListQuestions(models.Model):
     answer_type_id = models.CharField(max_length=4, null=True, blank=True)
     answer_set_id = models.IntegerField(db_index=True, null=True)
     the_order = models.IntegerField(db_index=True, null=True)
-    timestamp_modified = models.DateTimeField(auto_now=True, null=True)
+    timestamp_created = models.DateTimeField(auto_now=True, null=True)
+    timestamp_updated = models.DateTimeField(auto_now=True, null=True)
     is_void = models.BooleanField(default=False)
 
     class Meta:
@@ -212,7 +213,7 @@ class FormGenAnswers(models.Model):
 
     form = models.ForeignKey(Forms, on_delete=models.CASCADE)
     question = models.ForeignKey(ListQuestions, on_delete=models.CASCADE)
-    answer = models.ForeignKey(ListAnswers, null=True, on_delete=models.CASCADE)
+    answer = models.ForeignKey(ListAnswers, on_delete=models.CASCADE, null=True)
 
     class Meta:
         """Override some params."""
@@ -302,7 +303,7 @@ class FormOrgUnitContributions(models.Model):
 class FormResChildren(models.Model):
     """Residential institution details."""
 
-    form = models.ForeignKey(Forms, null=True, on_delete=models.CASCADE)
+    form = models.ForeignKey(Forms, on_delete=models.CASCADE, null=True)
     child_person_id = models.IntegerField(null=True, blank=True)
     institution_id = models.IntegerField(null=True, blank=True)
     residential_status_id = models.CharField(max_length=4, null=True,
@@ -349,8 +350,8 @@ class AdminPreferences(models.Model):
 class CoreAdverseConditions(models.Model):
     """For adverse conditions tracking of case."""
 
-    beneficiary_person = models.ForeignKey(RegPerson,
-                                           related_name='adverse_beneficiary', on_delete=models.CASCADE)
+    beneficiary_person = models.ForeignKey(RegPerson, on_delete=models.CASCADE,
+                                           related_name='adverse_beneficiary')
     adverse_condition_id = models.CharField(max_length=4)
     is_void = models.BooleanField(default=False)
     sms_id = models.IntegerField(null=True)
@@ -365,10 +366,10 @@ class CoreAdverseConditions(models.Model):
 class CoreServices(models.Model):
     """For core services tracking of case."""
 
-    workforce_person = models.ForeignKey(RegPerson,
-                                         related_name='service_workforce', on_delete=models.CASCADE)
-    beneficiary_person = models.ForeignKey(RegPerson,
-                                           related_name='service_beneficiary', on_delete=models.CASCADE)
+    workforce_person = models.ForeignKey(RegPerson, on_delete=models.CASCADE,
+                                         related_name='service_workforce')
+    beneficiary_person = models.ForeignKey(RegPerson, on_delete=models.CASCADE,
+                                           related_name='service_beneficiary')
     encounter_date = models.DateField()
     core_item_id = models.CharField(max_length=4)
     sms_id = models.IntegerField(null=True)
@@ -383,10 +384,10 @@ class CoreServices(models.Model):
 class CoreEncounters(models.Model):
     """Core encouters for cases."""
 
-    workforce_person = models.ForeignKey(RegPerson,
-                                         related_name='encounter_workforce', on_delete=models.CASCADE)
+    workforce_person = models.ForeignKey(RegPerson, on_delete=models.CASCADE,
+                                         related_name='encounter_workforce')
     beneficiary_person = models.ForeignKey(
-        RegPerson, related_name='encounter_beneficiary', on_delete=models.CASCADE)
+        RegPerson, on_delete=models.CASCADE, related_name='encounter_beneficiary')
     encounter_date = models.DateField()
     org_unit_id = models.IntegerField()
     area_id = models.IntegerField()
@@ -407,10 +408,10 @@ class CoreEncountersNotes(models.Model):
 
     encounter = models.ForeignKey(CoreEncounters, on_delete=models.CASCADE)
     form_id = models.IntegerField()
-    workforce_person = models.ForeignKey(RegPerson,
-                                         related_name='encounter_n_workforce', on_delete=models.CASCADE)
+    workforce_person = models.ForeignKey(RegPerson, on_delete=models.CASCADE,
+                                         related_name='encounter_n_workforce')
     beneficiary_person = models.ForeignKey(
-        RegPerson, related_name='encounter_n_beneficiary', on_delete=models.CASCADE)
+        RegPerson, on_delete=models.CASCADE, related_name='encounter_n_beneficiary')
     encounter_date = models.DateField()
     note_type_id = models.CharField(max_length=4)
     note = models.CharField(max_length=255)
@@ -485,7 +486,7 @@ class ListReports(models.Model):
 class ListReportsParameters(models.Model):
     """Reports parameters."""
 
-    report = models.ForeignKey(ListReports, null=True, on_delete=models.CASCADE)
+    report = models.ForeignKey(ListReports, on_delete=models.CASCADE, null=True)
     parameter = models.CharField(max_length=50, null=True, blank=True)
     filter = models.CharField(max_length=50, null=True, blank=True)
     initially_visible = models.BooleanField(default=False)

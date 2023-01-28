@@ -77,8 +77,9 @@ group by gender, eligibility
 QUERIES['1G'] = '''
 SELECT count(cpims_ovc_id) as dcount,
 gender as sex_id, exit_reason
-from vw_cpims_registration where exit_status = 'EXITED' {cbos} {areas} {fdate}
-group by gender, exit_reason order by count(cpims_ovc_id) desc
+from vw_cpims_registration where exit_status = 'EXITED'
+and dcount > 0 {cbos} {areas} {fdate}
+group by gender, exit_reason
 '''
 
 QUERIES['1H'] = '''

@@ -58,7 +58,7 @@ from cpovc_auth.models import AppUser
 from django.conf import settings
 from django.db.models import Count
 from .queries import QUERIES, REPORTS
-from .parameters import ORPTS, RPTS, GRPTS, ADHC
+from .parameters import ORPTS, RPTS, GRPTS, ADHC, ACRPTS
 from .security import BarCode
 
 from reportlab.lib import colors
@@ -145,7 +145,7 @@ def get_case_details(field_names):
     try:
         case_categories = get_general_list(field_names)
     except Exception as e:
-        print(("Error getting case categories - %s" % (str(e))))
+        print("Error getting case categories - %s" % (str(e)))
         pass
     else:
         return case_categories
@@ -244,8 +244,9 @@ def simple_documents(params, document_name='CPIMS', report_name='letter'):
 
         styles.add(ParagraphStyle(name="Centered", alignment=TA_CENTER,
                                   leading=22))
-        heading = 'Ministry of Labour and East African Community Affairs'
-        sub_heading = 'DEPARTMENT OF CHILDREN SERVICES'
+        dcs_head = settings.DCS
+        heading = dcs_head['MINISTRY']
+        sub_heading = dcs_head['NAME']
         ptext = '<font size=16><b>%s</b></font>' % heading.upper()
         story.append(Paragraph(ptext, styles["Centered"]))
         # story.append(Spacer(1, 12))
@@ -401,9 +402,9 @@ def simple_document(params, document_name='CPIMS', report_name='letter'):
         story = []
         normal_style = get_style("Normal")
         center_style = get_style("Centered")
-        heading = ('Ministry of East African Community (EAC), Labour and '
-                   'Social Protection')
-        sub_heading = 'DEPARTMENT OF CHILDREN SERVICES'
+        dcs_head = settings.DCS
+        heading = dcs_head['MINISTRY']
+        sub_heading = dcs_head['NAME']
         ptext = '<font size=14><b>%s</b></font>' % heading.upper()
         story.append(Paragraph(ptext, center_style))
         ptext = '<font size=13><b>%s</b></font>' % sub_heading
@@ -466,7 +467,7 @@ def simple_document(params, document_name='CPIMS', report_name='letter'):
                     row_num -= 20
                     row_num = paginate(row_num, canvas, myfont, height)
             if field_value or field_value == '':
-                fd = str(str(field), 'utf-8')
+                fd = unicode(str(field), 'utf-8')
                 s_field = '.' if fd.isnumeric() else ':'
                 if '<line' in field:
                     twidth = -20
@@ -642,7 +643,7 @@ def get_period(report_type='M', month='', year='', period='F'):
     period should be a calculated month range given an end date.
     """
     try:
-        print('TYPE', report_type, 'MON', month, 'YR', year, 'PERIOD', period, end=' ')
+        print('TYPE', report_type, 'MON', month, 'YR', year, 'PERIOD', period,)
         days = 30
         reports_qs = {'Q1': 9, 'Q2': 12, 'Q3': 3, 'Q4': 6}
         other_yr = ['Q3', 'Q4', 'Y']
@@ -712,7 +713,7 @@ def get_period(report_type='M', month='', year='', period='F'):
         params['years'] = year_name
         params['sheet'] = sheet_name
         params['label'] = report_label
-        print(('BBBBBBBBBBBBBBBBBBBBBBB', params))
+        print('BBBBBBBBBBBBBBBBBBBBBBB', params)
         return params
     except Exception as e:
         print('error getting date - %s' % (str(e)))
@@ -834,8 +835,8 @@ def get_data(params, report='CASE_LOAD'):
     """
     try:
         data = []
-        print('Case Load params', params)
-        print('\n\n')
+        # print('Case Load params', params)
+        # print('\n\n')
         cl_queryset = OVCCaseCategory.objects.all()
         cl_queryset = cl_queryset.filter(is_void=False).exclude(
             case_id__is_void=True)
@@ -963,7 +964,7 @@ def get_case_ids(params):
         period_qs = OVCCaseRecord.objects.filter(is_void=False)
         period_qs = filter_by_date(params, period_qs, 'date_case_opened')
         period_qs = period_qs.values_list('case_id', flat=True)
-        print("case filters for ids by date")
+        # print "case filters for ids by date"
         return period_qs
     except Exception as e:
         print("Error getting case -%s" % (str(e)))
@@ -1386,7 +1387,7 @@ def get_raw_data(params, data_type=1):
                 raw_data.append(ptotal_raw['TOTAL'])
             data = dt
     except Exception as e:
-        print(('Error with raw data - %s' % (str(e))))
+        print('Error with raw data - %s' % (str(e)))
         raise e
     else:
         return data, raw_data
@@ -1474,6 +1475,7 @@ def get_raw_values(params, data_type=1):
                 params['org_unit'] = cbo_ids
             rpt_name = REPORTS[adhoc_name]
             sql = QUERIES[rpt_name].format(**params)
+            print(sql)
             results, desc = run_sql_data(None, sql)
             # print datas, desc
             msg = 'Data Rendering Not available for this report.'
@@ -1489,7 +1491,8 @@ def get_raw_values(params, data_type=1):
                 vals = []
                 for n, i in enumerate(titles):
                     val = res[i]
-                    if type(val) is str:
+                    # if type(val) is unicode:
+                    if isinstance(val, bytes):
                         val = val.encode('ascii', 'ignore').decode('ascii')
                     vals.append(val)
                 data.append(vals)
@@ -1620,7 +1623,7 @@ def get_population_data(params):
             eitem['age'] = ds.person.years
             eitem['kid'] = ds.person.id
             eitem['cid'] = ds.placement_id_id
-            print(('ADVI', eitem))
+            print('ADVI', eitem)
             death_data.append(eitem)
         raw_data = data_from_results(data)
         raw_old = data_from_results(old_data)
@@ -1752,7 +1755,7 @@ def get_totals(all_data, categories, summ=False):
             if children:
                 all_data['CHILD'] = children
     except Exception as e:
-        print(('Totals error - %s' % (str(e))))
+        print('Totals error - %s' % (str(e)))
         pass
     else:
         return data
@@ -1963,11 +1966,11 @@ def get_performance(request):
                 case_count=Count('created_by')).order_by('-case_count')
         for case in pcases:
             acases[case['created_by']] = case['case_count']
-        for pd in ads:
-            if pd in acases:
-                cases[pd] = acases[pd]
+        for pds in ads:
+            if pds in acases:
+                cases[pds] = acases[pds]
             else:
-                cases[pd] = 0
+                cases[pds] = 0
 
     except Exception as e:
         print('error with dashboard - %s' % (str(e)))
@@ -2038,7 +2041,9 @@ def get_variables(request):
             report_type = request.POST.get('report_type_other')
         rpt_ovc = int(report_ovc) if report_ovc else 1
         rpt_ovc_id = int(report_ovc_id) if report_ovc_id else 1
-        if rpt_ovc == 6:
+        if rpt_ovc == 7:
+            report_ovc_name = ACRPTS[rpt_ovc_id]
+        elif rpt_ovc == 6:
             report_ovc_name = ORPTS[rpt_ovc_id]
         else:
             report_ovc_name = RPTS[rpt_ovc]
@@ -2103,13 +2108,12 @@ def get_variables(request):
         # Handle calendars
         rpt_dt = request.POST.get('report_period')
         year = 2019
-        print(('jinga here', rpt_dt, year, month))
         if rpt_dt == 'Other':
             report_from_date = request.POST.get('report_from_date')
             report_to_date = request.POST.get('report_to_date')
             sdate = convert_date(report_from_date)
             edate = convert_date(report_to_date)
-            print((sdate, type(sdate)))
+            print(sdate, type(sdate))
             period_params = {'start_date': sdate, 'end_date': edate}
             year = sdate.year
         else:
@@ -2124,7 +2128,7 @@ def get_variables(request):
         report_variables['adhoc_type'] = adhoc_type
         report_variables['report_ovc'] = report_ovc
         report_variables['report_ovc_name'] = report_name
-        print(('RID', report_id))
+        print('RID', report_id)
         greports = GRPTS[report_id] if report_id in GRPTS else 'CaseLoad'
         if report_id == 5:
             greports = ADHC[adhoc_type] if adhoc_type in ADHC else 'Ad hoc'
@@ -2188,8 +2192,7 @@ def get_pivot_data(request, params={}):
                        "ngo_unit_type_id", "cci_unit_type_id",
                        "si_unit_type_id", "committee_unit_type_id",
                        "adoption_unit_type_id"]
-        print('PERMS', params)
-
+        # print 'PERMS', params
         sq = ''
         report_region = params['report_region']
         if report_region in [2, 3]:
@@ -2203,7 +2206,7 @@ def get_pivot_data(request, params={}):
             sq = 'and report_orgunit_id in (%s)' % (org_ids)
         params['extras'] = sq
         sql = QUERIES['pivot_report'].format(**params)
-        print(('Start', datetime.now()))
+        print('Start', datetime.now())
         data, cols = run_rawsql_data(None, sql, 1)
         df = pd.DataFrame(data)
         # print('df', df)
@@ -2348,7 +2351,7 @@ def get_pivot_data(request, params={}):
         if dx == 1:
             excel_file, html = write_pd_csv(ndata, file_name, params)
         results = {'file_name': excel_file, 'records': ds, 'code': 0}
-        print(('End', datetime.now()))
+        print('End', datetime.now())
     except Exception as e:
         print('error getting pivot data - %s' % (str(e)))
         results = {'file_name': '', 'records': '', 'code': 9}
@@ -2696,7 +2699,7 @@ def write_xls(response, data, titles=None):
 def write_xlsm(csv_file, file_name, report_id=1):
     """Method to write excel."""
     try:
-        print(MEDIA_ROOT)
+        # print MEDIA_ROOT
         csv_file_name = '%s/%s.csv' % (MEDIA_ROOT, csv_file)
         excel_file = '%s/%s.xlsx' % (MEDIA_ROOT, file_name)
         s_name = RPTS[report_id] if report_id in RPTS else 1
@@ -2712,7 +2715,7 @@ def write_xlsm(csv_file, file_name, report_id=1):
             workbook.filename = xlsm_file
             workbook.add_vba_project(vba_file)
             writer.save()
-            writer.close()
+            # writer.close()
             print('Macros written - %s' % (xlsm_file))
         else:
             file_name = ""
@@ -2724,17 +2727,17 @@ def write_xlsm(csv_file, file_name, report_id=1):
         return file_name
 
 
-def write_csv(data, file_name, params):
+def write_csv_old(data, file_name, params):
     """Method to write csv given data."""
     try:
         html = ''
         csv_file = '%s/%s.csv' % (MEDIA_ROOT, file_name)
-        with open(csv_file, 'wb') as csvfile:
+        with open(csv_file, 'w') as csvfile:
             csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"',
                                    quoting=csv.QUOTE_MINIMAL)
             csvwriter.writerows(data)
         mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-        print(('PARAMS', params))
+        print('PARAMS', params)
         dates = '%s' % (params['start_date'].strftime("%d, %b %Y"))
         dates += ' to %s' % (params['end_date'].strftime("%d, %b %Y"))
         mc.set(str(file_name), dates)
@@ -2754,9 +2757,13 @@ def write_csv(data, file_name, params):
             epoch_time = '%s00' % (datetime.now().strftime('%Y%m%d%H'))
             if file_name.startswith('tmp'):
                 file_name = file_name.replace('tmp-', '')
-                rnames = base64.urlsafe_b64decode(str(file_name))
-                # print rnames
-                report_details = rnames.split('_')
+                # rnames = base64.urlsafe_b64decode(str(file_name))
+                # print('rnames', rnames)
+                # #report_details = file_name.split('_')
+                # #file_name = file_name.replace('tmp-', '')
+                rnames = base64.urlsafe_b64decode(file_name.encode('ascii'))
+                report_details = rnames.decode("utf-8").split('_')
+
                 s_name = '%s.%s' % (report_details[0], epoch_time)
                 uid = report_details[-1]
                 fname = '%s-%s' % (uid, s_name)
@@ -2781,13 +2788,63 @@ def write_csv(data, file_name, params):
                 workbook.filename = xlsm_file
                 workbook.add_vba_project(vba_file)
             writer.save()
-            writer.close()
+            # writer.close()
             print('Excel Files', xlsm_file, xlsx_file)
     except Exception as e:
         print('Error creating csv Results - %s' % (str(e)))
         pass
     else:
         return excel_file, html
+
+
+def write_csv(data, file_name, params):
+    """Method to write csv given data."""
+    try:
+        csv_file = '%s/%s.csv' % (MEDIA_ROOT, file_name)
+        # columns = data[0]
+        # del data[0] delete row zero when using pandas
+        with open(csv_file, 'w') as csvfile:
+            csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"',
+                                   quoting=csv.QUOTE_MINIMAL)
+            csvwriter.writerows(data)
+        # Save excel to flat file
+        report_id = params['report_id'] if 'report_id' in params else 1
+        s_name = RPTS[report_id] if report_id in RPTS else 1
+        vba_file = '%s/%s/vbaProject.bin' % (DOC_ROOT, s_name)
+        excel_file = ''
+        if 'archive' in params:
+            epoch_time = int(time.time())
+            file_name = file_name.replace('tmp-', '')
+            print('ffffffffff', file_name)
+            if '_' not in file_name:
+                file_name = base64.urlsafe_b64decode(str(file_name))
+            # rnames = base64.urlsafe_b64decode(file_name.encode('ascii'))
+            rnames = file_name
+            report_details = rnames.split('_')
+            s_name = '%s.%s' % (report_details[0], epoch_time)
+            print('f 3', s_name)
+            uid = report_details[-1]
+            fname = '%s-%s' % (uid, s_name)
+            excel_file = '%s.xlsx' % (fname)
+            excel_file_path = '%s/xlsx/%s.xlsx' % (MEDIA_ROOT, fname)
+            writer = pd.ExcelWriter(excel_file_path, engine='xlsxwriter')
+            data = pd.read_csv(csv_file, low_memory=False)
+            data.to_excel(writer, sheet_name='Sheet1', index=False)
+            workbook = writer.book
+            workbook.add_worksheet('Sheet2')
+            workbook.add_worksheet('Sheet3')
+            if os.path.isfile(vba_file):
+                excel_file = excel_file.replace('.xlsx', '.xlsm')
+                excel_file_path = excel_file_path.replace('.xlsx', '.xlsm')
+                workbook.filename = excel_file_path
+                workbook.add_vba_project(vba_file)
+            writer.save()
+    except Exception as e:
+        print('Error creating csv Results - %s' % (str(e)))
+        pass
+        return '', ''
+    else:
+        return excel_file, ''
 
 
 def write_pd_csv(df, file_name, params, is_csv=0):
@@ -2811,7 +2868,7 @@ def write_pd_csv(df, file_name, params, is_csv=0):
         df.to_excel(xlsx_file, index=False)
         print('Excel Files', xlsx_file)
     except Exception as e:
-        print('Error creating csv Results - %s' % (str(e)))
+        print('Error creating csv Results pd - %s' % (str(e)))
         pass
     else:
         return excel_file, html
@@ -2821,8 +2878,8 @@ def get_sql_data(request, params):
     """Method to write data."""
     datas = []
     cbo = request.POST.get('org_unit')
-    rpt_id = request.POST.get('report_region')
-    report_ovc = request.POST.get('rpt_ovc_id')
+    rpt_id = request.POST.get('rpt_ovc_id')
+    report_ovc = request.POST.get('report_ovc')
     report_id = int(rpt_id) if rpt_id else 0
     rpt_ovc = int(report_ovc) if report_ovc else 1
     cluster = request.POST.get('cluster')
@@ -2830,12 +2887,14 @@ def get_sql_data(request, params):
     if report_id == 5:
         cbo_id = get_cbo_cluster(cluster)
     params['cbos'] = cbo_id
-    print(params)
     df_rpt = REPORTS[1]
     qname = REPORTS[rpt_ovc] if rpt_ovc in REPORTS else df_rpt
+    if rpt_ovc == 7:
+        qid = 'AFC_%s' % (rpt_id)
+        qname = REPORTS[qid] if qid in REPORTS else df_rpt
     sql = QUERIES[qname]
     sql = sql.format(**params)
-    print('nnnnn')
+    print('SQL', sql)
     row, desc = run_sql_data(request, sql)
     data = datas + row
     qblank = '%s_blank' % (qname)
@@ -2867,7 +2926,7 @@ def dictfetchall(cursor, cs=0):
     if cs:
         columns = column
     return [
-        collections.OrderedDict(list(zip(columns, row)))
+        collections.OrderedDict(zip(columns, row))
         for row in cursor.fetchall()
     ]
 
@@ -3064,7 +3123,7 @@ def csvxls_data(request, f):
     try:
         data = []
         csv_file = '%s/tmp-%s.csv' % (MEDIA_ROOT, f)
-        with open(csv_file, 'rb') as csvfile:
+        with open(csv_file, 'rt') as csvfile:
             rows = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in rows:
                 data.append(row)
@@ -3345,7 +3404,7 @@ def write_pdf(request, response, file_name):
         col1 = cols1[rid] if rid in cols1 else None
         cols = tuple([col1, col] + [1.42 * cm] * (col_size - 2))
         # datas = df.reset_index().values.tolist()
-        datas = np.array(df.reset_index(drop=True).get_values()).tolist()
+        datas = np.array(df.reset_index(drop=True).to_numpy()).tolist()
         if rid == 5:
             cols = tuple([None] * (col_size - 1) + [3 * cm])
             dfs = pd.pivot_table(df, values='ovccount',
@@ -3415,7 +3474,7 @@ def write_pdf(request, response, file_name):
         doc.build(element, onFirstPage=draw_page, onLaterPages=draw_page,
                   canvasmaker=Canvas)
     except Exception as e:
-        print(('pdf error', e))
+        print('pdf error', e)
         raise
     else:
         pass

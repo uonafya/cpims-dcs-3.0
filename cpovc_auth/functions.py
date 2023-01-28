@@ -1,12 +1,18 @@
 """Common functions for authentication module."""
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django import forms
+
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.tokens import default_token_generator
 
 from .models import CPOVCRole, CPOVCUserRoleGeoOrg, CPOVCProfile
 from cpovc_main.models import RegTemp
 from cpovc_registry.models import (
     RegPersonsGeo, RegPersonsOrgUnits, RegOrgUnit)
 from .perms import dates
+
+from .models import AppUser
 
 
 def get_allowed_units_county(user_id):

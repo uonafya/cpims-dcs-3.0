@@ -128,17 +128,17 @@
                                         {% endfor %}
                                         </td>
                                         <td>
-                                        {% if result.id|gen_value:app_user == result.id %}
-                                            {% if result.person_type != "TBVC" %}
+                                        {% ifequal result.id|gen_value:app_user result.id %}
+                                            {% ifnotequal result.person_type "TBVC" %}
                                             <button id="btn_create_account" type="submit" onClick="jsCreateUser()" class="btn  btn-sm btn-primary m-r-5">
                                             Create Account&nbsp;&nbsp;<i class="fa fa-lock"></i>
                                             </button>
-                                            {% endif %}
+                                            {% endifnotequal %}
                                         {% else %}
                                         <button id="btn_edit_details" onClick="window.location.href='{% url 'roles_home' %}{{ result.id|gen_value:app_user|cut:"U" }}'" class="btn  btn-sm btn-primary m-r-5">
                                              Assign Roles&nbsp;&nbsp; <i class="fa fa-edit"></i>
                                         </button>
-                                        {% endif %}
+                                        {% endifequal %}
                                         <button id="btn_view_details" onClick="window.location.href='{% url 'view_person' id=result.id %}'" class="btn  btn-sm btn-primary m-r-5">
                                         View&nbsp;&nbsp;<i class="fa fa-binoculars"></i>
                                         </button>

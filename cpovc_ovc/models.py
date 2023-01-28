@@ -25,7 +25,8 @@ class OVCAggregate(models.Model):
     county_active = models.IntegerField(null=False)
     subcounty_active = models.IntegerField(null=False)
     ward_active = models.IntegerField(null=False)
-    created_at = models.DateField(null=True, default=timezone.now)
+    timestamp_created = models.DateTimeField(null=True)
+    timestamp_updated = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         """Override table details."""
@@ -34,7 +35,7 @@ class OVCAggregate(models.Model):
         verbose_name = 'OVC aggregate data'
         verbose_name_plural = 'OVC aggregate data'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.indicator_name
 
@@ -55,7 +56,7 @@ class OVCUpload(models.Model):
         verbose_name = 'OVC upload data'
         verbose_name_plural = 'OVC upload data'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return self.ovc_filename
 
@@ -65,19 +66,22 @@ class OVCRegistration(models.Model):
 
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
-    person = models.ForeignKey(RegPerson, null=False, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE, null=False)
     registration_date = models.DateField(default=timezone.now)
     has_bcert = models.BooleanField(null=False, default=False)
     is_disabled = models.BooleanField(null=False, default=False)
     hiv_status = models.CharField(max_length=4, null=True)
-    # art_status = models.CharField(max_length=4, null=True)
+    art_status = models.CharField(max_length=4, null=True)
     school_level = models.CharField(max_length=4, null=True)
     immunization_status = models.CharField(max_length=4, null=True)
     org_unique_id = models.CharField(max_length=15, null=True)
-    caretaker = models.ForeignKey(RegPerson, null=True, related_name='ctaker', on_delete=models.CASCADE)
+    caretaker = models.ForeignKey(
+        RegPerson, on_delete=models.CASCADE, null=True, related_name='ctaker')
     child_cbo = models.ForeignKey(RegOrgUnit, on_delete=models.CASCADE)
-    child_chv = models.ForeignKey(RegPerson, related_name='chv', on_delete=models.CASCADE)
+    child_chv = models.ForeignKey(
+        RegPerson, on_delete=models.CASCADE, related_name='chv')
     exit_reason = models.CharField(max_length=4, null=True)
+    # exit_org_name = models.CharField(max_length=100, null=True)
     exit_date = models.DateField(default=timezone.now, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
@@ -90,9 +94,9 @@ class OVCRegistration(models.Model):
         verbose_name = 'OVC Registration'
         verbose_name_plural = 'OVC Registration'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
-        return self.org_unique_id
+        return str(self.person_id)
 
 
 class OVCEligibility(models.Model):
@@ -112,7 +116,7 @@ class OVCEligibility(models.Model):
         verbose_name = 'OVC Eligibility'
         verbose_name_plural = 'OVC Eligibility'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.id)
 
@@ -131,10 +135,10 @@ class OVCHouseHold(models.Model):
         """Override table details."""
 
         db_table = 'ovc_household'
-        verbose_name = 'OVC Registration'
-        verbose_name_plural = 'OVC Registration'
+        verbose_name = 'OVC Household'
+        verbose_name_plural = 'OVC Households'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.id)
 
@@ -144,7 +148,8 @@ class OVCHHMembers(models.Model):
 
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
-    house_hold = models.ForeignKey(OVCHouseHold, default=uuid.uuid4, on_delete=models.CASCADE)
+    house_hold = models.ForeignKey(
+        OVCHouseHold, on_delete=models.CASCADE, default=uuid.uuid4)
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     hh_head = models.BooleanField(default=False)
     member_type = models.CharField(max_length=4)
@@ -159,18 +164,19 @@ class OVCHHMembers(models.Model):
         """Override table details."""
 
         db_table = 'ovc_household_members'
-        verbose_name = 'OVC Registration'
-        verbose_name_plural = 'OVC Registration'
+        verbose_name = 'OVC HH Member'
+        verbose_name_plural = 'OVC HH Members'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
-        return self.id
+        return str(self.id)
 
 
 class OVCFacility(models.Model):
     """Model for OVC Care health details."""
 
-    sub_county = models.ForeignKey(SetupGeography, null=True, on_delete=models.CASCADE)
+    sub_county = models.ForeignKey(
+        SetupGeography, on_delete=models.CASCADE, null=True)
     facility_code = models.CharField(max_length=10, null=True)
     facility_name = models.CharField(max_length=200)
     is_void = models.BooleanField(default=False)
@@ -182,7 +188,7 @@ class OVCFacility(models.Model):
         verbose_name = 'OVC Facility'
         verbose_name_plural = 'OVC Facilities'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.facility_name)
 
@@ -198,6 +204,7 @@ class OVCHealth(models.Model):
     date_linked = models.DateField()
     ccc_number = models.CharField(max_length=20)
     created_at = models.DateTimeField(default=timezone.now)
+    timestamp_updated = models.DateTimeField(auto_now=True, null=True)
     is_void = models.BooleanField(default=False)
 
     class Meta:
@@ -207,7 +214,7 @@ class OVCHealth(models.Model):
         verbose_name = 'OVC Care Health'
         verbose_name_plural = 'OVC Care Health'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.id)
 
@@ -231,7 +238,7 @@ class OVCSchool(models.Model):
         verbose_name = 'OVC school'
         verbose_name_plural = 'OVC Schools'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.school_name)
 
@@ -256,7 +263,7 @@ class OVCEducation(models.Model):
         verbose_name = 'OVC Care Education'
         verbose_name_plural = 'OVC Care Education'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.id)
 
@@ -278,7 +285,7 @@ class OVCCluster(models.Model):
         verbose_name = 'OVC Cluster'
         verbose_name_plural = 'OVC Clusters'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.cluster_name)
 
@@ -300,6 +307,53 @@ class OVCClusterCBO(models.Model):
         verbose_name = 'OVC Cluster CBO'
         verbose_name_plural = 'OVC Cluster CBOs'
 
-    def __unicode__(self):
+    def __str__(self):
         """To be returned by admin actions."""
         return str(self.cbo)
+
+
+class OVCExit(models.Model):
+    """Model for OVC Care exit org unit details."""
+
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    org_unit = models.ForeignKey(
+        RegOrgUnit, on_delete=models.CASCADE, null=True)
+    org_unit_name = models.CharField(max_length=150, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    is_void = models.BooleanField(default=False)
+
+    class Meta:
+        """Override table details."""
+
+        db_table = 'ovc_exit_organization'
+        verbose_name = 'OVC Exit Org Unit'
+        verbose_name_plural = 'OVC Exit Org Units'
+
+    def __str__(self):
+        """To be returned by admin actions."""
+        return str(self.org_unit_name)
+
+
+class OVCViralload(models.Model):
+    """Model for OVC Care Viral Load."""
+
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    viral_load = models.IntegerField(null=True)
+    viral_date = models.DateField(null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    is_void = models.BooleanField(default=False)
+
+    class Meta:
+        """Override table details."""
+
+        db_table = 'ovc_viral_load'
+        verbose_name = 'OVC Viral Load'
+        verbose_name_plural = 'OVC Viral Loads'
+
+    def __str__(self):
+        """To be returned by admin actions."""
+        return str(self.person)

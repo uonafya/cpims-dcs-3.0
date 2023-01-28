@@ -39,7 +39,7 @@ class OVCBursary(models.Model):
     amount = models.CharField(max_length=20, null=True)
     year = models.CharField(max_length=20, null=True)
     term = models.CharField(max_length=20, null=True)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -80,10 +80,10 @@ class OVCCaseRecord(models.Model):
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
     parent_case_id = models.UUIDField(null=True)
     created_by = models.IntegerField(null=True, default=404)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
     case_remarks = models.TextField(null=True)
     date_of_summon = models.DateField(null=True)
-    summon_status = models.BooleanField(null=True, default=None)
+    summon_status = models.NullBooleanField(null=True, default=None)
     case_stage = models.IntegerField(default=0)
 
     class Meta:
@@ -99,10 +99,10 @@ class OVCCaseRecord(models.Model):
 class OVCCaseGeo(models.Model):
     case_id = models.ForeignKey(OVCCaseRecord, on_delete=models.CASCADE)
     report_subcounty = models.ForeignKey(
-        'cpovc_main.SetupGeography', related_name='report_subcounty_fk', on_delete=models.CASCADE)
+        'cpovc_main.SetupGeography', related_name='report_subcounty_fk')
     report_ward = models.CharField(max_length=100, null=True)
     report_village = models.CharField(max_length=100, null=True)
-    report_orgunit = models.ForeignKey(RegOrgUnit, max_length=10, null=True, on_delete=models.CASCADE)
+    report_orgunit = models.ForeignKey(RegOrgUnit, max_length=10, null=True)
     occurence_county = models.ForeignKey(
         'cpovc_main.SetupGeography', related_name='occurence_county_fk',
         on_delete=models.CASCADE)
@@ -114,7 +114,7 @@ class OVCCaseGeo(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_case_geo'
@@ -133,7 +133,7 @@ class OVCEconomicStatus(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_economic_status'
@@ -145,7 +145,7 @@ class OVCFamilyStatus(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_family_status'
@@ -157,7 +157,7 @@ class OVCHobbies(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_hobbies'
@@ -171,7 +171,7 @@ class OVCFriends(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_friends'
@@ -187,7 +187,7 @@ class OVCMedical(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_medical'
@@ -202,7 +202,7 @@ class OVCMedicalSubconditions(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_medical_subconditions'
@@ -221,7 +221,7 @@ class OVCCaseCategory(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_case_category'
@@ -240,7 +240,7 @@ class OVCCaseSubCategory(models.Model):
         OVCCaseCategory, on_delete=models.CASCADE)
     case_grouping_id = models.UUIDField(default=uuid.uuid1, editable=False)
     sub_category_id = models.CharField(max_length=4)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
@@ -283,7 +283,7 @@ class OVCReferral(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_referrals'
@@ -312,7 +312,7 @@ class OVCNeeds(models.Model):
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
 
     class Meta:
         db_table = 'ovc_needs'
@@ -323,7 +323,7 @@ class FormsLog(models.Model):
         primary_key=True, default=uuid.uuid1, editable=False)
     form_type_id = models.CharField(max_length=250)
     form_id = models.CharField(max_length=50, default='XXXX')
-    person = models.ForeignKey(RegPerson, null=True, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson, null=True)
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
@@ -344,7 +344,7 @@ class FormsAuditTrail(models.Model):
                                            db_index=True)
     interface_id = models.CharField(max_length=4, null=True, db_index=True)
     timestamp_modified = models.DateTimeField(auto_now=True)
-    app_user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    app_user = models.ForeignKey(AppUser)
     ip_address = models.GenericIPAddressField(protocol='both')
     meta_data = models.TextField(null=True)
 
@@ -358,12 +358,12 @@ class OVCPlacement(models.Model):
         primary_key=True, default=uuid.uuid1, editable=False)
     admission_number = models.CharField(max_length=50, default='XXXX/YYYY')
     residential_institution_name = models.CharField(max_length=100, blank=True)
-    residential_institution = models.ForeignKey(RegOrgUnit, blank=True, on_delete=models.CASCADE)
+    residential_institution = models.ForeignKey(RegOrgUnit, blank=True)
     admission_date = models.DateField(default=timezone.now, null=True)
     admission_type = models.CharField(max_length=4, blank=True)
     transfer_from = models.CharField(max_length=100, null=True, blank=True)
     transfer_from_institution = models.ForeignKey(
-        RegOrgUnit, blank=True, related_name='ou_from', null=True, on_delete=models.CASCADE)
+        RegOrgUnit, blank=True, related_name='ou_from', null=True)
     admission_reason = models.CharField(max_length=100, blank=True)
     holding_period = models.IntegerField(null=True, blank=True)
     committing_period_units = models.CharField(max_length=4, null=True)
@@ -378,10 +378,10 @@ class OVCPlacement(models.Model):
     ob_number = models.CharField(null=True, max_length=20, blank=True)
     placement_type = models.CharField(
         max_length=10, default='Normal', blank=True)  # Emergency/Normal
-    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    person = models.ForeignKey(RegPerson)
     transfer_to_institution = models.ForeignKey(
-        RegOrgUnit, blank=True, related_name='ou_tti', null=True, on_delete=models.CASCADE)
-    case_record = models.ForeignKey(OVCCaseRecord, blank=True, null=True, on_delete=models.CASCADE)
+        RegOrgUnit, blank=True, related_name='ou_', null=True)
+    case_record = models.ForeignKey(OVCCaseRecord, blank=True, null=True)
     created_by = models.IntegerField(null=True, default=404)
     is_active = models.BooleanField(default=True)
     timestamp_created = models.DateTimeField(default=timezone.now)
@@ -417,13 +417,13 @@ class OVCCaseEvents(models.Model):
     # For Application Outcome (Granted/Not Granted)
     application_outcome = models.CharField(max_length=4, null=True)
     # To track children who went to court from institutions
-    placement_id = models.ForeignKey(OVCPlacement, null=True, on_delete=models.CASCADE)
+    placement_id = models.ForeignKey(OVCPlacement, null=True)
     timestamp_created = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
     sync_id = models.UUIDField(default=uuid.uuid1, editable=False)
     case_id = models.ForeignKey(
         OVCCaseRecord, null=True, on_delete=models.CASCADE)
-    app_user = models.ForeignKey(AppUser, default=1, on_delete=models.CASCADE)
+    app_user = models.ForeignKey(AppUser, default=1)
 
     class Meta:
         db_table = 'ovc_case_events'

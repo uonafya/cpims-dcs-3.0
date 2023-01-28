@@ -564,7 +564,7 @@
                                     </h4>
                                 </div>
                                 <div class="modal-body">
-
+                                    <div class="row">
                                     <div id="summon_msgs" class="alert alert-danger fade in" style="display:none;">
                                         <span class="close" data-dismiss="alert">×</span>
                                         <i class="fa fa-close fa-2x pull-left"></i>
@@ -572,76 +572,87 @@
                                             <small><p></p></small>
                                         </ul>
                                     </div>
-                                <!--
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Total Number Of Summons :</label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        <h6><b> 0 </b></h6>
+                                    <!--
+                                    <div class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Total Number Of Summons :</label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            <h6><b> 0 </b></h6>
+                                        </div>
                                     </div>
-                                </div>
-                                <br><br>
-                                -->
-                                {{ form.case_event_id_summon }}
+                                    <br><br>
+                                    -->
+                                    {{ form.case_event_id_summon }}
 
-                                {{ form.reported_date }}
+                                    {{ form.reported_date }}
 
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Summon Count: </label></h6>
-                                    <div class="col-md-6 col-sm-6" id="summon_count_text">
-                                        <b>{{ summon_count }}</b>
+                                    <div class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Summon Count: </label></h6>
+                                        <div class="col-md-6 col-sm-6" id="summon_count_text">
+                                            <b>{{ summon_count }}</b>
+                                        </div>
+                                        <input type="hidden" id="summon_count" name="summon_count" value="{{ summon_count }}">
                                     </div>
-                                    <input type="hidden" id="summon_count" name="summon_count" value="{{ summon_count }}">
-                                </div>
 
-                                <!--
-                                <br><br>
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Date Of Visit:<span class="asteriskField"> *</span></label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        {{ form.visit_date }}
-                                        <div id="summons_msgs5" style="display:none;">
-                                            <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                    <!--
+                                    <br><br>
+                                    <div class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Date Of Visit:<span class="asteriskField"> *</span></label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            {{ form.visit_date }}
+                                            <div id="summons_msgs5" style="display:none;">
+                                                <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                -->
-                                <br><br> 
-                                <div id="div_honoured_date" class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Date Of Visit:<span class="asteriskField"> *</span></label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        {{ form.honoured_date }}
-                                        <div id="summons_msgs2" style="display:none;">
-                                            <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                    -->
+                                    <br><br> 
+                                    <div id="div_honoured_date" class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Date Of Visit:<span class="asteriskField"> *</span></label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            {{ form.honoured_date }}
+                                            <div id="summons_msgs2" style="display:none;">
+                                                <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <br><br>                                 
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Summon Honored ? :<span class="asteriskField"> *</span></label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        {{ form.honoured }}
-                                        <div id="summons_msgs1" style="display:none;">
-                                            <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                    <br><br>                                 
+                                    <div class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Summon Honored ? :<span class="asteriskField"> *</span></label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            {{ form.honoured }}
+                                            <div id="summons_msgs1" style="display:none;">
+                                                <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <br><br>                                                               
-                                <div id="div_summon_date" style="display:none;" class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Date Of Next Summon:<span class="asteriskField"> *</span></label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        {{ form.summon_date }}
-                                        <div id="summons_msgs3" style="display:none;">
-                                            <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                    <br><br>
+                                    <div id="div_summon_next" style="display:none;" class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Next Summon Required:<span class="asteriskField"> *</span></label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            {{ form.summon_next }}
+                                            <div id="summons_msgs5" style="display:none;">
+                                                <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                            </div>
                                         </div>
+                                        <br><br>
                                     </div>
-                                </div>                                
-                                <br><br>
-                                <div class="form-group">
-                                    <h6><label class="control-label col-md-4 col-sm-4">Notes :<span class="asteriskField"> *</span></label></h6>
-                                    <div class="col-md-6 col-sm-6">
-                                        {{ form.summon_note }}
-                                        <div id="summons_msgs4" style="display:none;">
-                                            <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                    <div id="div_summon_date" style="display:none;" class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Date Of Next Summon:<span class="asteriskField"> *</span></label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            {{ form.summon_date }}
+                                            <div id="summons_msgs3" style="display:none;">
+                                                <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                    </div>                             
+                                    <div class="form-group">
+                                        <h6><label class="control-label col-md-4 col-sm-4">Notes :<span class="asteriskField"> *</span></label></h6>
+                                        <div class="col-md-6 col-sm-6">
+                                            {{ form.summon_note }}
+                                            <div id="summons_msgs4" style="display:none;">
+                                                <small><span><p class="dialog_paragraph">This value is required</p></span></small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -943,6 +954,12 @@
             <button href="#close-case-dialog" class="btn  btn-sm btn-inverse m-r-5" onClick="fnOpenDialog('Closure')">
                 <b>Close Case</b>&nbsp;&nbsp;<i class="fa fa-close"></i>
             </button>
+
+            {% if case_id  and afc %}
+            <a href="{% url 'new_alt_care' case_id=case_id %}" class="btn  btn-sm btn-danger m-r-5">
+                <b>Alternative Care</b> &nbsp; &nbsp;<i class="fa fa-file-o"></i>
+            </a>
+            {% endif %}
 
         </div>
 
@@ -2497,6 +2514,7 @@ function fnSaveClosure()
                         LoadCaseEvents();
 
                         ResetEventsDialog('Closure');
+                        window.location.href = "{{ request.path }}";
                     },
                     error: function(e)
                     {
@@ -3616,8 +3634,8 @@ function fnSaveSummons(){
     var summon_date = $('#summon_date').val();
     // var visit_date = $('#visit_date').val();
     var summon_note = $('#summon_note').val();
+    var summon_next = $('#summon_next').val();
     
-    values['summon_note'] = summon_note;
 
     if(honoured_date)
     {
@@ -3652,16 +3670,29 @@ function fnSaveSummons(){
             }
             else
             {
+                if (summon_next){
+                    values['summon_next'] = summon_next;
+                }else{
+                    $("#summons_msgs5").css({ 'display': "block" });
+                    $("#summon_msgs").css({ 'display': "block" });
+                    $('#summon_msgs p').html('Please fill the missing values');
+                    return false;
+                }
+
                 if(summon_date)
                 {
                     values['summon_date'] = summon_date;
                 }
                 else
                 {
-                    $("#summons_msgs3").css({ 'display': "block" });
-                    $("#summon_msgs").css({ 'display': "block" });
-                    $('#summon_msgs p').html('Please fill the missing values');
-                    return false;
+                     if (summon_next == 'ANNO'){
+                        values['summon_date'] = null;
+                    }else{
+                       $("#summons_msgs3").css({ 'display': "block" });
+                       $("#summon_msgs").css({ 'display': "block" });
+                       $('#summon_msgs p').html('Please fill the missing values');
+                       return false;    
+                    }
                 }
             }            
         }
@@ -3672,7 +3703,20 @@ function fnSaveSummons(){
         $("#summon_msgs").css({ 'display': "block" });
         $('#summon_msgs p').html('Please fill the missing values');
         return false;
-    } 
+    }
+
+    // Make notes mandatory
+    if(summon_note)
+    {
+        values['summon_note'] = summon_note;
+    }
+    else
+    {
+        $("#summons_msgs4").css({ 'display': "block" });
+        $("#summon_msgs").css({ 'display': "block" });
+        $('#summon_msgs p').html('Please fill the missing values');
+        return false;
+    }
 
     // Save Summons
     $.ajax({
@@ -3707,7 +3751,6 @@ function fnSaveSummons(){
                 console.log(error)
             }
         });
-      
 }
 
 function fnViewSummon(case_event_id){
@@ -3750,12 +3793,16 @@ function fnViewSummon(case_event_id){
                         if(summon_date)
                         {  
                             $('#div_summon_date').css({'display': 'block'});                          
-                            $('#summon_date').val(summon_date);                             
+                            $('#summon_date').val(summon_date);
+                            $('#div_summon_next').css({'display': 'block'});
+                            $('#summon_next').val('AYES');                              
                         }
                         else
                         {
                             $('#div_summon_date').css({'display': 'none'});                          
-                            $('#summon_date').val('');                             
+                            $('#summon_date').val('');
+                            $('#div_summon_next').css({'display': 'block'});
+                            $('#summon_next').val('ANNO');                             
                         }
                     }
                     $('#summon_note').val(summon_note);
@@ -3785,6 +3832,7 @@ function fnUpdateSummons(case_event_id){
     var summon_date = $('#summon_date').val();
     // var visit_date = $('#visit_date').val();
     var summon_note = $('#summon_note').val();
+    var summon_next = $('#summon_next').val();
     
     values['summon_note'] = summon_note;
 
@@ -3822,10 +3870,14 @@ function fnUpdateSummons(case_event_id){
                 }
                 else
                 {
-                    $("#summons_msgs3").css({ 'display': "block" });
-                    $("#summon_msgs").css({ 'display': "block" });
-                    $('#summon_msgs p').html('Please fill the missing values');
-                    return false;
+                    if (summon_next == 'ANNO'){
+                        values['summon_date'] = null;
+                    }else{
+                       $("#summons_msgs3").css({ 'display': "block" });
+                       $("#summon_msgs").css({ 'display': "block" });
+                       $('#summon_msgs p').html('Please fill the missing values');
+                       return false;    
+                    }
                 }
             }            
         }
@@ -4110,7 +4162,8 @@ $("#honoured").change(function(event)
     if(honoured == 'AYES')
     {
         $('#div_summon_date').css({'display': 'none'});
-        // $('#div_honoured_date').css({'display': 'block'});       
+        // $('#div_honoured_date').css({'display': 'block'});
+        $('#div_summon_next').css({'display': 'none'});      
     }
     else if(honoured == 'ANNO')
     {
@@ -4122,10 +4175,13 @@ $("#honoured").change(function(event)
         {
             $('#div_summon_date').css({'display': 'none'});
             $('#summon_date').val('');
+            $('#div_summon_next').css({'display': 'none'});
+            $('#summon_next').val('');
         }
         else
         {
-            $('#div_summon_date').css({'display': 'block'}); 
+            $('#div_summon_date').css({'display': 'block'});
+            $('#div_summon_next').css({'display': 'block'});
 
             // reconfigure date_of_next_summon
             var reported_date = $('#reported_date').datepicker({ dateFormat: 'dd-M-yyyy' }).val();
@@ -4142,7 +4198,9 @@ $("#honoured").change(function(event)
     else
     {
         $('#div_summon_date').css({'display': 'none'});
-        $('#summon_date').val('')
+        $('#summon_date').val('');
+        $('#div_summon_next').css({'display': 'none'});
+        $('#summon_next').val('');
     }
     $("#summons_msgs1").css({ 'display': "none" });
 });
@@ -4155,6 +4213,18 @@ $("#honoured_date").change(function(event)
 $("#summon_date").change(function(event) 
 { 
     $("#summons_msgs3").css({ 'display': "none" });
+});
+// Next summon check
+$("#summon_next").change(function(event) 
+{ 
+    $("#summons_msgs5").css({ 'display': "none" });
+    var summon_next = $('#summon_next').val();
+    if (summon_next == 'AYES'){
+        $('#div_summon_date').css({'display': 'block'});
+    }else{
+        $('#div_summon_date').css({'display': 'none'});
+        $('#summon_date').val('');
+    }
 });
 
 

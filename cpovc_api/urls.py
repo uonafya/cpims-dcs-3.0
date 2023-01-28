@@ -1,21 +1,18 @@
 """API urls."""
-from django.conf.urls import include
-from  django.urls import path, re_path
+from django.urls import include, path, re_path
 from rest_framework import routers
-from .views import (
-    SettingsViewSet, GeoViewSet, BasicCRSView, CountryViewSet,
-    basic_crs, OrgUnitViewSet)
+from . import views
 
 router = routers.DefaultRouter()
 # router.register(r'users', UserViewSet)
-# router.register(r'country', CountryViewSet, base_name='Country')
+router.register(r'country', views.CountryViewSet, basename='Country')
 # Wire up our API using automatic URL routing.
-# router.register(r'country', CountryViewSet)
 urlpatterns = [
     re_path(r'^', include(router.urls)),
-    re_path(r'^settings/$', SettingsViewSet.as_view()),
-    re_path(r'^geo/$', GeoViewSet.as_view()),
-    re_path(r'^ou/$', OrgUnitViewSet.as_view()),
-    re_path(r'^crs-old/$', BasicCRSView.as_view()),
-    re_path(r'^crs/$', basic_crs),
+    path('settings/', views.SettingsViewSet.as_view()),
+    path('geo/', views.GeoViewSet.as_view()),
+    path('ou/', views.OrgUnitViewSet.as_view()),
+    path('crs-old/', views.BasicCRSView.as_view()),
+    path('crs/', views.basic_crs),
+    path('lookup/', views.get_settings, name='settings_lookup'),
 ]

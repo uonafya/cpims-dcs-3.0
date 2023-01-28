@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Case Information {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<style type="text/css">
+.tab-content ul {
+  list-style-type: none;
+  margin-left: 0px;
+}
+.tab-content li {
+    padding-left: 1em;
+    text-indent: -2em;
+    margin-right: 2em;
+}
+</style>
+{% endblock %}
+{% load app_filters %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Forms</a></li>
+    <li class="active">Case Information</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Additional Case Information <small>Management</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<!-- begin row -->
+<div class="row">
+   <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Additional Case Information - Emergency case details</h4>
+            </div>
+            <div class="alert alert-warning fade in">
+                <span class="close" data-dismiss="alert">×</span>
+                <i class="fa fa-check fa-2x pull-left"></i>
+                <span id="infomessage">This page allows to provide more information for specific cases. Emergency Case details, Missing Children cases and additional case information.</span>
+            </div>
+            <!-- start panel body -->            
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print"> 
+                        <a href="{% url 'case_info' case_id=case_uid %}" class="btn btn-sm btn-primary m-r-5 m-b-5"><i class="fa fa-arrow-left m-r-5"></i> To Case Info</a>                  
+                        <a href="{% url 'cpims_document' doc_id='CRS' case_id=case.case_id %}" class="btn btn-sm btn-danger m-r-5 m-b-5"><i class="fa fa-file-pdf-o m-r-5"></i> Case Record Sheet as PDF</a>
+                        <div class="btn-group m-r-5 m-b-5">
+                            <a href="#" class="btn btn-success">Case Actions</a>
+                            <a href="javascript:;" data-toggle="dropdown" class="btn btn-success dropdown-toggle">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="{% url 'view_case_record_sheet' id=case_id %}"><i class="fa fa-gears"></i> View Case Record Sheet</a></li>
+                                 <li><a href="{% url 'edit_case_record_sheet' id=case_id %}"><i class="fa fa-pencil"></i> Edit Case Record Sheet</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'case_events' id=case_id %}"><i class="fa fa-legal"></i> Case Follow up</a></li>
+                            </ul>
+                        </div>
+                    </span>
+                    Case No. {{ case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+            <form class="form-horizontal" id="formCaseinfo" data-parsley-validate="true" method="POST">
+                {% csrf_token %}
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="nav-pills-tab-1">
+                            <h3 class="m-t-10">Emergency case details</h3>
+                            <table class="table table-profile">
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
+                                        <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
+                                        <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
+                                        <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Category</td>
+                                        <td>
+                                            {% for cat in cats %}
+                                                {{ cat.case_category|gen_value:vals }}
+                                            {% endfor %}
+                                        </td>
+                                        <td class="field">Sub Category</td>
+                                        <td></td><td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Select Emergency</label>
+                                <div class="col-md-9">
+                                    {{ form.emergency }}
+                                </div>
+                            </div>
+                            <div class="form-group" id="div_em_detail">
+                                <label class="col-md-3 control-label">Other Emergency details</label>
+                                <div class="col-md-9">
+                                    {{ form.emergency_detail }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-9">
+                                    <button type="submit" class="btn btn-sm btn-success btnCaseinfo">Update Information</button>
+                                </div>
+                            </div>                           
+                            
+                        </div>
+                                     
+                    </div>
+                </form>
+                
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
+
+{% endblock %}

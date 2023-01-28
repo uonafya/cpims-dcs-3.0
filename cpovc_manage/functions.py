@@ -27,6 +27,9 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from cpovc_reports.documents import (
     logo_path, checked_image_path, unchecked_image_path)
 
+from .telegram import send_message
+from cpims.emails import send_email
+
 
 def get_travel(request, travel_id=0, params={}):
     """Method to get travels."""
@@ -777,7 +780,8 @@ def create_crs(request, case, case_id):
                     ovccaserecord.parent_case_id = parent_case_id
                     ovccaserecord.save(update_fields=['parent_case_id'])
     except Exception as e:
-        raise e
+        print('Error saving CRS - %s' % (str(e)))
+        return {}
     else:
         return response
 
@@ -994,3 +998,30 @@ def generate_document(request, response, params, case):
         raise e
     else:
         pass
+
+
+def report_bug(request):
+    """Method to report bugs."""
+    try:
+        msg = ""
+        ititle = request.POST.get('issue-title')
+        idetail = request.POST.get('issue-details')
+        url = request.POST.get('issue-url')
+        msg += ititle + "\n" + "URL : %s\r" % (url) + idetail + "\n"
+        # Telegram Alert
+        # resp = send_message(msg)
+        # Email to Service Desk and copy logged in user
+        emails = ['nmugaya@gmail.com', 'help@cpims.on.spiceworks.com']
+        tmsg = "CPIMS bug reporting \n URL : %s\r" % (url) + idetail + "\n"
+        params = {'subject': ititle}
+        hmsg = None
+        for email in emails:
+           send_email(email, tmsg, hmsg, params)
+        resp = {'ok': True}
+        tmsg = ' and Telegram' if resp['ok'] else ''
+        print(msg, resp)
+        response = {"message": "Service Desk%s" % (tmsg)}
+    except Exception as e:
+        raise e
+    else:
+        return response

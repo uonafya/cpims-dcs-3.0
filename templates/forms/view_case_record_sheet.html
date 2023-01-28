@@ -63,8 +63,9 @@
                         <button class="btn btn-sm btn-danger m-b-10">{{ ovccr.case_status }}</button>
                     {% endif %}
                     <a href="{% url 'edit_case_record_sheet' id=result.form_id %}" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                    <a href="{% url 'cpims_document' doc_id='CRS' case_id=ovccr.case_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-file-pdf-o m-r-5"></i> Export as PDF</a>
-                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
+                    <a href="{% url 'cpims_document' doc_id='CRS' case_id=ovccr.case_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-file-pdf-o m-r-5"></i> Export CRS to PDF</a>
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print Summary</a>
+                    <a href="{% url 'case_events' id=result.form_id %}" class="btn  btn-sm btn-primary m-b-10">Follow-up &nbsp; &nbsp;<i class="fa fa-paw"></i></a>
                     </span>
                     SERIAL NO. {{ ovccr.case_serial }}
                 </div>

@@ -75,49 +75,13 @@
 						{% live_notify_list list_class="dropdown-menu" %}
 						<ul class="dropdown-menu media-list pull-right animated fadeInDown" id="flash_messages">
                             <li class="dropdown-header">Notifications ({% live_notify_badge %}) </li>
-                            <!--
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="fa fa-bug media-object bg-red"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Server Error Reports</h6>
-                                        <div class="text-muted f-s-11">3 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="{% static 'img/user-2.jpg' %}" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">John Smith</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">25 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="fa fa-plus media-object bg-green"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New User Registered</h6>
-                                        <div class="text-muted f-s-11">1 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="fa fa-envelope media-object bg-blue"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New Email From John</h6>
-                                        <div class="text-muted f-s-11">2 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                        -->
-                            
 						</ul>
 					</li>
-
+                    <li class="dropdown">
+						<a href="javascript:;" id="bug-reporting" class="dropdown-toggle f-s-14">
+							<i class="fa fa-bug"></i><span class='label'>?</span>
+						</a>
+					</li>
 					{% if user.is_authenticated %}
 					<li class="dropdown" id="session_status"></li>
 					<li class="dropdown navbar-user">
@@ -134,7 +98,7 @@
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
 							<li><a href="{% url 'view_person' id=request.user.reg_person_id %}">View My Profile</a></li>
-{#							<li><a href="{% url 'password_change' %}">Change Password</a></li>#}
+							<li><a href="{% url 'password_change' %}">Change Password</a></li>
 							<li><a href="#"><span class="badge badge-danger pull-right">{% live_notify_badge %}</span> Messages</a></li>
 							<li class="divider"></li>
 							<li><a href="{% url 'cluster' %}">Clusters</a></li>
@@ -191,7 +155,7 @@
 			{% endif %}
 		</div>
 		<!-- end #content -->
-		<div id="footer" class="footer"> {{ status }} &nbsp; &copy; 2016 - {% now "Y" %}. All Rights Reserved. Version: 
+		<div id="footer" class="footer">  &copy; 2016 - {% now "Y" %}. All Rights Reserved. Version: 
         2.0.0
         <span class="promo"><img src="{% static 'img/logo_private.png' %}" height="40"></span>
 		</div>
@@ -210,7 +174,51 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        <div class="modal fade" id="modal-report-bug">
+            <div class="modal-dialog">
+                <div class="modal-content form-horizontal form-bordered">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">CPIMS error / bug reporting</h4>
+                    </div>
+                    <div class="modal-body">
+                    	<div id="log_bug" class="alert alert-info fade in m-b-15">
+							<strong>Info!</strong>
+							A copy of the reported issue will be sent to your email for easier tracking of support Ticket.
+							<span class="close" data-dismiss="alert">&times;</span>
+						</div>
+                    
+                     <form class="form-horizontal" id="report-bug-form">
+                     	{% csrf_token %}
+                     	<input type="hidden" name="issue-url" value="{{ request.META.HTTP_HOST }}{{ request.get_full_path }}">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Title of the issue</label>
+                            <div class="col-md-9">
+                                <input type="text" name="issue-title" id="issue-title" class="form-control" placeholder="Title in summary" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Description of the issue</label>
+                            <div class="col-md-9">
+                                <textarea name="issue-details" id="issue-details" class="form-control" placeholder="Detailed explanation" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Attachment (screenshot)</label>
+                            <div class="col-md-9">
+                                <input type="file" name="issue-attach" id="issue-attach" class="form-control" placeholder="Attachment" disabled />
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+						<button type="button" class="btn btn-sm btn-danger" id="report-bug"> <i class="fa fa-bug"></i> Report Issue / Bug</button>
+                    </div>
+                </div>
+            </div>
+        </div>     
 		
 		<!-- begin scroll to top btn -->
 		<a href="#" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
@@ -253,6 +261,39 @@
 				  $("ul#flash_messages").append(msgs);
 			    });
 			 }
+
+			 // Bug reporting
+			  $( "#bug-reporting" ).click(function() {
+				  $('#modal-report-bug').modal('show');
+				  return false;
+			  });
+			 $('#report-bug').click(function() {
+			 	var ititle = $("#issue-title").val();
+			 	var idetail = $("#issue-details").val();
+			 	if ((ititle == '') || (idetail == '' )){
+			 		$("#log_bug").addClass( "alert alert-danger fade in" );
+	                $('#log_bug').html("Please provide title and details");
+	                return false;
+			 	}
+			 	$.ajax({
+	               type: "POST",
+	               url: "{% url 'manage_bugs' %}",
+	               data: $("#report-bug-form").serialize(),
+	               success: function(data)
+	               {
+	                   var rid = data.response_code;
+	                   var msg = data.message;
+	                   $("#log_bug").addClass( "alert alert-success fade in" );
+	                   $('#log_bug').html(msg);
+	                   $("#issue-title").val('');
+	                   $("#issue-details").val('');
+	               },
+	                error: function(){
+	                    $("#log_bug").addClass( "alert alert-danger fade in" );
+	                    $('#log_bug').html("Error while reporting bug");
+	                }
+	             });
+			 });
 		});
 	</script>
 
@@ -270,7 +311,6 @@
            $('.timer').startTimer();
            var timeout = 120000; // 2 minutes
           });
-
           $(document).bind("active.idleTimer", function(){
                $("#session_status").html(msg);
           });

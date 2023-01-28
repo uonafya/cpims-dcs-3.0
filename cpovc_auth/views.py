@@ -1,7 +1,7 @@
 """CPIMS authentication views."""
-import urllib.parse
+from urllib import parse
 from django.shortcuts import render
-from django.urls import reverse, resolve
+from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from cpovc_auth.forms import LoginForm
@@ -20,7 +20,7 @@ from cpovc_registry.models import (
 from cpovc_main.models import SetupGeography
 
 from .forms import RolesOrgUnits, RolesGeoArea, RolesForm, PasswordResetForm
-# from .decorators import is_allowed_groups
+from .decorators import is_allowed_groups
 
 from django.contrib.auth.models import Permission
 from cpims.views import home as cpims_home
@@ -166,7 +166,7 @@ def log_out(request):
             url = '%s?next=%s' % (url, next_page)
         if 'd' in get_params:
             form_data = get_params['d']
-            form_params = dict(urllib.parse.parse_qsl(form_data))
+            form_params = dict(parse.parse_qsl(form_data))
             # Save this to temp table
             save_temp_data(user_id, next_page, form_params)
             print(user_id, next_page, form_params)
@@ -185,7 +185,7 @@ def register(request):
 
 
 @login_required
-# @is_allowed_groups(['ACM', 'DSU'])
+@is_allowed_groups(['ACM', 'DSU'])
 def roles_home(request):
     """Default page for Roles home."""
     try:
@@ -195,7 +195,7 @@ def roles_home(request):
 
 
 @login_required
-# @is_allowed_groups(['ACM', 'DSU'])
+@is_allowed_groups(['ACM', 'DSU'])
 def roles_edit(request, user_id):
     """Create / Edit page for the roles."""
     try:
@@ -441,10 +441,9 @@ def roles_edit(request, user_id):
 
 def reset_confirm(request, uidb64=None, token=None):
     """Method for confirm password reset."""
-    # return password_reset_confirm(
     return render(
         request, template_name='registration/password_reset_confirm.html',
-        uidb64=uidb64, token=token, post_reset_redirect=reverse(log_in))
+        uidb36=uidb64, token=token, post_reset_redirect=reverse(log_in))
 
 
 def reset(request):

@@ -463,9 +463,9 @@ function printReport() {
       var mapContainerParent = mapContainer.parent();
       var printContainer     = $('<div>');
       var prnt = '<center><img src="{% static 'img/gok_logo.jpg' %}" alt="" /></center>';
-      prnt += '<center><b>MINISTRY OF PUBLIC SERVICE, GENDER, SENIOR CITIZENS AFFAIRS & SPECIAL PROGRAMMES<br>';
-      prnt += 'STATE DEPARTMENT FOR SOCIAL PROTECTION, SENIOR CITIZENS AFFAIRS AND SPECIAL PROGRAMMES<br>';
-      prnt += 'DIRECTORATE OF CHILDREN SERVICES<br></b></center>';
+      prnt += '<center><b>{{ dcs.MINISTRY }}<br>';
+      prnt += '{{ dcs.STATE_DEPT }}<br>';
+      prnt += '{{ dcs.NAME }}<br></b></center>';
       var pdts = $('#pdates').text();
       prnt += 'Case data for dates '+ pdts
       //$("#print_title").val();
@@ -505,4 +505,3 @@ function printReport() {
 }
 </script>
 {% endblock lazy_javascript_code %}
-

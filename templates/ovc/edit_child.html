@@ -21,7 +21,7 @@
 <h1 class="page-header"><i class="fa fa-child"></i> OVC Care <small>Registration details | {{ child.first_name }} {{ child.surname }} | {{ child.age }}</small></h1>
 <!-- end page-header -->
 <div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
-    <span class="close" data-dismiss="alert">×</span>
+    <span class="close" data-dismiss="alert">�</span>
     <i class="fa fa-check fa-2x pull-left"></i>
     <span class="invalid-form-message" id="invalid-form-message"></span>
 </div>
@@ -40,18 +40,23 @@
             </div>
             <!-- start panel body -->
             <div class="panel-body">
-                <form action="." method="post" name="ovcreg_form" id="ovcreg_form" data-parsley-validate="true">
+                <form action="." method="post" name="ovcreg_form" id="ovcreg_form"  data-parsley-validate="true">
                 {% csrf_token %}
+                <input type="hidden" name="ovc_id" id="ovc_id" value="{{ child.id }}">
 
                 <div id="wizard">
                 <ol>
                   <li>
                       OVC Details
-                      <small>Biodata.</small>
+                      <small>Biodata and basic details.</small>
                   </li>
                   <li>
-                      Health and Education
-                      <small>Health and education information.</small>
+                      Health
+                      <small>Immunization and HIV information.</small>
+                  </li>
+                  <li>
+                      Education
+                      <small>Education information.</small>
                   </li>
                   <li>
                       Parents / Caregiver
@@ -90,11 +95,12 @@
                     </tbody>
                 </table>
                 <!-- begin row -->
+                <hr/>
                  <div class="row">
                     <!-- begin col-2 -->
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label>Date of Registration</label>
+                        <label class="text-bold">Date of Registration</label>
                         {{ form.reg_date }}
                       </div>
                     </div>
@@ -102,7 +108,7 @@
                     <!-- begin col-1 -->
                     <div class="col-md-1">
                     <div class="form-group">
-                        <label>Has BCert</label>
+                        <label class="text-bold">Has BCert</label>
                         {{ form.has_bcert }}
                       </div>
                     </div>
@@ -110,7 +116,7 @@
                     <!-- begin col-2 -->
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label>Birth Certificate No.</label>
+                        <label class="text-bold">Birth Certificate No.</label>
                         {{ form.bcert_no }}
                       </div>
                     </div>
@@ -118,7 +124,7 @@
                     <!-- begin col-1 -->
                     <div class="col-md-1">
                     <div class="form-group">
-                        <label>Is Disabled</label>
+                        <label class="text-bold">Is the child Disabled?</label>
                         {{ form.disb }}
                       </div>
                     </div>
@@ -126,18 +132,19 @@
                     <!-- begin col-2 -->
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label>NCPWD No.</label>
+                        <label class="text-bold">PWD Registration No.</label>
                         {{ form.ncpwd_no }}
                       </div>
                     </div>
                     <!-- end col-2 -->
                 </div>
+                <hr/>
                 <!-- begin row -->
                 <div class="row">
                     <!-- begin col-2 -->
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label>Eligibility Criteria</label>
+                        <label class="text-bold">Eligibility Criteria</label>
                         {{ form.eligibility }}
                       </div>
                     </div>
@@ -145,7 +152,7 @@
                     <!-- begin col-2 -->
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label>CBO Child ID</label>
+                        <label class="text-bold">CBO Child ID</label>
                         {{ form.cbo_uid }}
                         {{ form.cbo_uid_check }}
                       </div>
@@ -154,7 +161,7 @@
                      <!-- begin col-1 -->
                     <div class="col-md-1">
                     <div class="form-group">
-                        <label>Exit</label>
+                        <label class="text-bold">Exit</label>
                         {{ form.is_exited }}
                       </div>
                     </div>
@@ -162,7 +169,7 @@
                     <!-- begin col-4 -->
                     <div class="col-md-4" id="exit_reason_div">
                     <div class="form-group">
-                        <label>Exit reason</label>
+                        <label class="text-bold">Exit reason</label>
                         {{ form.exit_reason }}
                       </div>
                     </div>
@@ -172,14 +179,14 @@
         </div>
         <div class="primary1">
             <fieldset>
-                <legend class="pull-left width-full">Health and Education details</legend>
+                <legend class="pull-left width-full">Health details</legend>
                 <!-- begin row -->
                  {% if  not child.years > 5 %}
                  <div class="row">
                     <!-- begin col-2 -->
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label>Immunization Status</label>
+                        <label class="text-bold">Immunization Status</label>
                         {{ form.immunization }}
                       </div>
                     </div>
@@ -191,56 +198,85 @@
                     <!-- begin col-2 -->
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label>HIV Status</label>
+                        <label class="text-bold">HIV Status</label>
                         {{ form.hiv_status }}
                       </div>
                     </div>
                     <!-- end col-2 -->
                     <!-- begin col-2 -->
-                    <div class="col-md-3" id="facility_div">
+                    <div class="col-md-6" id="facility_div">
                     <div class="form-group">
-                        <label>Facility</label>
+                        <label class="text-bold">Facility</label>
                          {{ form.facility }}
                       </div>
                     </div>
                     <!-- end col-2 -->
-                    <div class="col-md-1" id="facility_id_div">
+                    <div class="col-md-2" id="facility_id_div">
                     <div class="form-group">
-                        <label>ID</label>
+                        <label class="text-bold">ID (Auto-populated)</label>
                         {{ form.facility_id }}
                       </div>
                     </div>
+                </div>
+                <div class="row">
                     <!-- begin col-2 -->
-                    <div class="col-md-2" id="art_div">
+                    <div class="col-md-3" id="art_div">
                     <div class="form-group">
-                        <label>ART Status</label>
+                        <label class="text-bold">ART Status</label>
                         {{ form.art_status }}
                       </div>
                     </div>
                     <!-- end col-2 -->
                     <!-- begin col-2 -->
-                    <div class="col-md-2" id="link_date_div">
+                    <div class="col-md-3" id="link_date_div">
                     <div class="form-group">
-                        <label>Date of Linkage</label>
+                        <label class="text-bold">Date of Linkage</label>
                         {{ form.link_date }}
                       </div>
                     </div>
                     <!-- end col-2 -->
                     <!-- begin col-2 -->
-                    <div class="col-md-1" id="ccc_no_div">
+                    <div class="col-md-3" id="ccc_no_div">
                     <div class="form-group">
-                        <label>CCC Number</label>
+                        <label class="text-bold">CCC Number</label>
                         {{ form.ccc_number }}
                       </div>
                     </div>
                     <!-- end col-2 -->
                 </div>
                 <!-- begin row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning fade in m-b-15">
+                            <strong>Warning!</strong>
+                            Facility details will only be saved if you provide all the details.
+                            <span class="close" data-dismiss="alert">&times;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>
+                          <a href="#modal-facility" data-toggle="modal"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Facility</button></a>
+                        </span>
+                        <span class="hidden" id="viralloadbtncontainer">
+                          <a href="#modal-viralload" data-toggle="modal"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Viral Load details </button></a>
+                        </span>
+                        <span>
+                                <a href="#modal-hiv" data-toggle="modal"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> HIV Status and Testing</button></a>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="primary2">
+            <fieldset>
+                <legend class="pull-left width-full">Education details</legend>
                  <div class="row">
                     <!-- begin col-2 -->
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                     <div class="form-group">
-                        <label>School Level</label>
+                        <label class="text-bold">School Level</label>
                         {{ form.school_level }}
                       </div>
                     </div>
@@ -248,21 +284,21 @@
                     <!-- begin col-2 -->
                     <div class="col-md-3" id="school_class_div">
                     <div class="form-group">
-                        <label>Class</label>
+                        <label class="text-bold">Class</label>
                         {{ form.school_class }}
                       </div>
                     </div>
                     <!-- end col-2 -->  
                     <!-- begin col-2 -->
-                    <div class="col-md-3" id="school_name_div">
+                    <div class="col-md-4" id="school_name_div">
                     <div class="form-group">
-                        <label>School Name</label>
+                        <label class="text-bold">School Name</label>
                         {{ form.school_name }}
                       </div>
                     </div>
                     <div class="col-md-1" id="school_id_div">
                     <div class="form-group">
-                        <label>ID</label>
+                        <label class="text-bold">ID</label>
                         {{ form.school_id }}
                       </div>
                     </div>
@@ -270,24 +306,33 @@
                     <!-- begin col-2 -->
                     <div class="col-md-2">
                     <div class="form-group" id="admission_type_div">
-                        <label>Boarding / Day</label>
+                        <label class="text-bold">Boarding / Day</label>
                         {{ form.admission_type }}
                       </div>
                     </div>
                     <!-- end col-2 -->
                 </div>
                 <div class="row">
-                      <a href="#modal-facility" data-toggle="modal"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Facility</button></a>
+                    <div class="col-md-12">
+                        <div class="alert alert-warning fade in m-b-15">
+                            <p class="text-bold">School details will only be saved if you provide all the details.</p>
+                            <!-- <span class="close" data-dismiss="alert">&times;</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
                       <a href="#modal-school" data-toggle="modal"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> School</button></a>
+                    </div>
                 </div>
                 </fieldset>
             </div>
-        <div class="primary2">
+        <div class="primary3">
                 <fieldset>
                 <legend class="pull-left width-full">Parents / Caregiver details</legend>
                 <!-- begin row -->
                  <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                     <table class="table">
                     <thead>
                         <tr>
@@ -344,9 +389,11 @@
                     </table>
                     </div>
                     <!-- begin col-2 -->
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label>Primary Caretaker {{ ctaker }}</label>
+                        <label class="text-bold">Primary Caretaker {{ ctaker }}</label>
                         <select class="form-control" name="caretaker" id="caretaker"  data-parsley-required="true" >
                             <option value="">Please Select Caretaker</option>
                             {% for guardian in hhmembers %}
@@ -363,7 +410,7 @@
                 </div>
              </fieldset>
             </div>
-        <div class="primary3">
+        <div class="primary4">
                 <fieldset>
                 <legend class="pull-left width-full">Siblings details</legend>
                 <!-- begin row -->
@@ -430,13 +477,16 @@
                 
                 <div class="row" id="form_actions">
                 <div class="form-group">
-                    <label class="control-label col-md-4 col-sm-4"></label>
-                    <div class="col-md-6 col-sm-6">
-                        <button type="submit" class="btn btn-primary" value="submit" id="s1">Update</button>
-                        <a href="{% url 'ovc_home' %}">
-                        <button type="button" class="btn btn-default">Cancel</button>
-                        </a>
-                    </div>
+                    <div class="row">
+                        <label class=""></label>
+                        <div class="col-md-8 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary" value="submit" id="s1"> <i class="fa fa-save"></i> Update</button>
+                            <button type="button" class="btn btn-danger" value="exit-ovc" id="ovcexit"> <i class="fa fa-pencil"></i> Exit OVC</button>
+                            <a href="{% url 'ovc_view' id=child.id %}">
+                            <button type="button" class="btn btn-default"> Cancel </button>
+                            </a>
+                        </div>
+                </div>
                 </div>
             </div>
             <!-- end panel body -->
@@ -449,12 +499,178 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
                     <h4 class="modal-title">New Health Facility</h4>
                 </div>
                 <div class="modal-body">
-                    <p>To create a new Health Facility request for the addition.</p>
-                    <p>This will be added to the Master Health List.</p>
+                    <div class="alert alert-info">
+                        <p class="text-bold">To create a new Health Facility, please request for the addition.</p>
+                        <i>This will be added to the Master Health List.</i>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- begin modal -->
+    <div class="modal fade" id="modal-hiv" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">HIV Status</h4>
+            </div>
+            <div class="modal-body">
+        <form id="hivstatus" class="form-horizontal">
+            <div class="row">
+                {% csrf_token %}
+                <div  class="col-md-6">
+                    <label>Date of HIV testing</label>
+                        {{form.date_of_testing}}
+                        
+                </div>
+                <div class="col-md-6">
+                    <label> HIV Status</label>
+                        {{form.hiv_statuss}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                <button type="button" class="btn btn-primary m-r-5" name='btn-hiv' id='btn_hiv'>submit</button>
+                </div>
+            </div>
+           </form>
+           <hr>
+
+                {% if hiv_data %}
+                <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>#</th>
+                          <th>HIV STATUS</th>
+                          <th>DATE OF TESTING</th> 
+                          
+                        </tr>
+                        {% for data in hiv_data %}
+                        {% if data.hiv_status == "HSTP" %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>Positive</td>
+                            <td>{{data.date_of_event}}</td>
+                        </tr>
+                        {% elif data.hiv_status == "HHEI" %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>Unknown (HEI)</td>
+                            <td>{{data.date_of_event}}</td>
+                        </tr>
+                        {% elif data.hiv_status == "HSTN" %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>Negative</td>
+                            <td>{{data.date_of_event}}</td>
+                        </tr>
+                        {% elif data.hiv_status == "HSKN" %}
+                        <tr>
+                                <td>{{ forloop.counter }}</td>
+                            <td>Not Known</td>
+                            <td>{{data.date_of_event}}</td>
+                        </tr>
+                        {% endif %}
+                       
+                        {% endfor %}
+                     </table>
+
+                {% else %}
+                <p>No previous HIV data available</p>
+                {% endif %}
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    <!-- # end modal-dialog -->
+     <!-- # start modal-dialog -->
+    <div class="modal fade" id="modal-viralload">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                    <h4 class="modal-title">Viral Load details</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="vmessage"></div>
+                    <div class="m-b-0">
+                      <h4 class="block">New Viral load details</h4>
+                    </div>
+                    <div class="row">
+                    <!-- begin col-2 -->
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="text-bold"><small>Date</small></label>
+                        <input type="text" class="form-control" id="viral_date" name="viral_date" placeholder="Date" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="text-bold"><small>LDL</small></label>
+                        <div class="checkbox">
+                            <label class="text-bold">
+                                <input type="checkbox" name="ldl" id="ldl" /> Check ONLY if LDL
+                            </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end col-2 -->
+                    <!-- begin col-2 -->
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="text-bold"><small>Viral Load</small></label>
+                        <input type="text" class="form-control" id="viral_value" placeholder="Value" />
+                      </div>
+                    </div>
+                    <!-- end col-2 -->
+                    <!-- begin col-2 -->
+                    <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="text-bold">&nbsp;</label>
+                        <button type="button" class="form-group btn btn-primary m-r-5" id="viral_details"> Save Record</button>
+                      </div>
+                    </div>
+                    <!-- end col-2 -->
+                </div>
+                <hr/>
+                    <div class="m-b-0">
+                      <h4 class="block">History</h4>
+                    </div>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>Date</th><th>Viral Load Value</th><th>Suppressed</th><th>Comments</th>
+                            </tr>
+                            {% for vload in vloads %}
+
+                                <tr>
+                                    <td>{{ forloop.counter }}</td><td>{{ vload.viral_date }}</td>
+                                    <td>{% if not vload.viral_load %} LDL {% else %} {{ vload.viral_load }}{% endif %}</td>
+
+                                    <td>{% if vload.viral_load > 1000%}<label class="label label-danger">No</label> 
+                                         {% else %} <label class="label label-success">Yes</label>{% endif %}</td>
+                                    <td>{% if vload.status == 1 %}<label class="label label-danger">Viral test required</label> 
+                                            {% else %} <label class="label label-success">Viral test valid</label>{% endif %}</td>
+                                     
+                                </tr>
+                            {% endfor %}
+                        </thead>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
@@ -464,16 +680,88 @@
     </div>
     <!-- # end modal-dialog -->
     <!-- # start modal-dialog -->
+
+
     <div class="modal fade" id="modal-school">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
                     <h4 class="modal-title">New School</h4>
                 </div>
                 <div class="modal-body">
-                    <p>To create a new School request for the addition.</p>
-                    <p>This will be added to the Master Schools List.</p>
+                    <div class="alert alert-info">
+                        <p class="text-bold">To create a new School, please request for the addition.</p>
+                        <i>This will be added to the Master Schools List.</i>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- # end modal-dialog -->
+    <!-- # start modal-dialog -->
+    <div class="modal fade" id="modal-ovc-exit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                    <h4 class="modal-title">Exit OVC - {{ child.first_name }} {{ child.surname }} | {{ child.age }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This is for handling all OVC exits.</p>
+                    <div id="exit-message"></div>
+                    <!-- begin col-4 -->
+                    <div class="primary4">
+                    <fieldset>
+                    <div class="row">
+                        <div class="col-md-4">
+                           <label class="text-bold">Exit reason</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.ovc_exit_reason }}
+                            </div>
+                        <!-- end col-4 -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                           <label class="text-bold">Exit Date</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.exit_date }}
+                            </div>
+                        <!-- end col-4 -->
+                        </div>
+                    </div>
+                    <div class="row" id="exit_org_div">
+                        <div class="col-md-4">
+                           <label class="text-bold">Organization Name</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.exit_org_name }}
+                            </div>
+                        <!-- end col-4 -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger" value="exit-ovc" id="oexit">Exit OVC</button>
+                            </div>
+                        <!-- end col-4 -->
+                        </div>
+                    </div>
+                    </fieldset>
+                    </div>
+                        
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
@@ -484,6 +772,7 @@
     <!-- # end modal-dialog -->
 </div>
 </div>
+</form>
 <!-- end row -->
 {% endblock %}
 
@@ -491,43 +780,178 @@
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
 <script>
-    $("#wizard").bwizard({ validating: function (e, ui) {
-        
-         if (ui.index == 0) {
-            // step-1 validation
-            
-            if (false === $('form[name="ovcreg_form"]').parsley().validate('primary')) {
-                return false;
-            }
-        } else if ((ui.index == 1) && (ui.nextIndex > ui.index)){
-            // step-2 validation
-            
-              if (false === $('form[name="ovcreg_form"]').parsley().validate('primary1')) {
-                return false;
-            }
-        } else if ((ui.index == 2) && (ui.nextIndex > ui.index)) {
-            // step-3 validation
-            
-            if (false === $('form[name="ovcreg_form"]').parsley().validate('primary2')) {
-                return false;
-            }
-        } else if ((ui.index == 3) && (ui.nextIndex >= ui.index)) {
-            // step-4 validation
-            $("#form_actions").show();
-            if (false === $('form[name="ovcreg_form"]').parsley().validate('primary3')) {
-                  return false;
-            }
+    $("#wizard").bwizard();
+    $('#ovcreg_form').submit(function(){
+        if ($('#ovcreg_form').parsley().isValid()){ 
+             $('#messages').html('Form is OK.');
+             $('#messages').show();
+        }else{
+            $('#messages').html('Please fill all the mandatory fields. Only complete records will be saved.');
+            $('#messages').show();
+            return true;
         }
+    
+         
+    });
+    console.log('{{date_difference}}')
 
-    }});
+    $('#ovcexit').click(function() { 
+        $('#modal-ovc-exit').modal('toggle');
+    });
+    $('#viral_details').click(function() {
+        var viral_date = $('#viral_date').val();
+        var viral_value = $('#viral_value').val();
+        var ldl = $('#ldl').is(":checked");
+         var ovc_id = $('#ovc_id').val();
+        //disable_fields(ccond, 'bcert_no');
+        var csrftoken = $.cookie('csrftoken');
+        var values = {'ovc_id': ovc_id, 'action': 3,
+                      'viral_value': viral_value,
+                      'viral_date': viral_date, 'ldl': ldl,
+                      'csrfmiddlewaretoken': csrftoken };
+        if(( ldl || viral_value) && viral_date){
+            $.ajax({
+                type: "POST",
+                data: values,
+                dataType: "json",
+                url: "{% url 'ovc_manage' %}",
+                success: function(data){
+                    $('#messages').html('Viral load update was successful' );
+                    $('#messages').show();
+                    // Redirect to view
+                    $('#modal-viralload').modal('toggle');
+                    // $(location).attr('href', '{% url 'ovc_view' id=child.id %}');
+                },
+                error: function(){
+                    $('#messages').html("Error");
+                    $('#messages').show();
+                }
+            });
+        }else{
+            $('#vmessage').html('Please fill the date and LDL or Viral Load value' );
+            $("#vmessage").addClass( "alert alert-danger fade in" ); 
+        }
+        $('#messages').html('Viral Load added successful' );
+        $('#messages').show();
+        //$(location).attr('href', '{% url 'ovc_view' id=child.id %}');
+    });  
+
+
+
+
+    $('#btn_hiv').click(function(ev) {
+        ev.preventDefault();
+        var date_of_testing=$('#date_of_event').val();
+        var hiv_statuss=$('#hiv_statuss option:selected').val();
+        // alert(hiv_statuss);
+        var csrftoken = $.cookie('csrftoken');
+        var child="{{child.id}}";
+        console.log('abdiiii ' +date_of_testing);
+        console.log('Moha ' +hiv_statuss);
+        console.log('WEWEW ' +child);
+
+        var csrftoken = $.cookie('csrftoken');
+        var values = {
+                      'hiv_statuss': hiv_statuss,
+                      'date_of_testing': date_of_testing,
+                      'child':child,
+                      'csrfmiddlewaretoken': csrftoken };
+        if(date_of_testing && hiv_statuss){
+            $.ajax({
+                type: "POST",
+                data: values,
+                dataType: "json",
+                url: "{% url 'hiv_status' %}",
+                success: function(data){
+                    $('#messages').html('HIV status update was successful' );
+                    $('#messages').show();
+                    // Redirect to view
+                    $('#modal-hiv').modal('toggle');
+                    $(location).attr('href', '{% url 'ovc_view' id=child.id %}');
+                },
+                // error: function(){
+                //     $('#messages').html("Error");
+                //     $('#messages').show();
+                // }
+            });
+        }else{
+            $('#vmessage').html('Please fill the date' );
+            $("#vmessage").addClass( "alert alert-danger fade in" ); 
+        }
+        $('#messages').removeClass('alert-danger').addClass('alert-success');
+        $('#messages').html('HIV status added successful' );
+        $('#messages').show();
+        $('#modal-hiv').find('button.close').trigger('click');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    $('#oexit').click(function() {
+        $('#ovcreg_form').parsley().validate("primary4");
+        var ovc_id = $('#ovc_id').val();
+        var ovc_exit_reason = $('#ovc_exit_reason').val();
+        var ovc_exit_date = $('#exit_date').val();
+        var ovc_exit_org = $('#exit_org_name').val();
+        
+        var csrftoken = $.cookie('csrftoken');
+        var values = {'ovc_id': ovc_id, 'action': 2,
+                      'exit_reason': ovc_exit_reason,
+                      'exit_date': ovc_exit_date,
+                      'exit_org_name': ovc_exit_org,
+                      'csrfmiddlewaretoken': csrftoken };
+        //Ajax call
+        var is_allowed = true;
+        if ((ovc_exit_reason == 'ERTL' || ovc_exit_reason == 'ERFO') && ovc_exit_org == ''){
+            is_allowed = false;
+        }
+        //if ($('#ovcreg_form').parsley().isValid()){
+        if (ovc_exit_reason && ovc_exit_date && is_allowed){
+            $.ajax({
+                type: "POST",
+                data: values,
+                dataType: "json",
+                url: "{% url 'ovc_manage' %}",
+                success: function(data){
+                    $('#messages').html('Exit was successful - ' + ovc_exit_date );
+                    $('#messages').show();
+                    // Redirect to view
+                    $('#modal-ovc-exit').modal('toggle');
+                    $(location).attr('href', '{% url 'ovc_view' id=child.id %}');
+                },
+                error: function(){
+                    $('#messages').html("Error");
+                    $('#messages').show();
+                }
+            });
+        }else{
+            $('#exit-message').html("Please provide all the details.");
+            $("#exit-message").addClass( "alert alert-danger fade in" );
+        }
+    });
+    
     var is_exit = $('#is_exited').is(":checked");
     disable_fields(is_exit, 'exit_reason');
-
     //Class levels
     {% for key, values in levels.items %}
         var {{ key }} = {{ values|safe }};
     {% endfor %}
-
     $('#eligibility, #exit_reason').multiselect({
         enableCaseInsensitiveFiltering: true,
         numberDisplayed: 1,
@@ -537,23 +961,19 @@
         enableClickableOptGroups: true,
         buttonClass: 'btn btn-white'
     });
-
-    $('#reg_date, #link_date').datepicker({
+    $('#reg_date, #link_date, #exit_date, #viral_date').datepicker({
         dateFormat: 'yy-mm-dd', format: 'dd-M-yyyy',
         endDate: '+0d', enddate: '+0d', autoclose: true
     });
     var ccond = $('#has_bcert').is(":checked");
     disable_fields(ccond, 'bcert_no');
-
     var dcond = $('#disb').is(":checked");
     disable_fields(dcond, 'ncpwd_no');
-
     $('#is_exited').live('change', function() {
         var is_exit = $('#is_exited').is(":checked");
         disable_fields(is_exit, 'exit_reason');
         $('#exit_reason').multiselect('rebuild');
     });
-
     $('#has_bcert').live('change', function() {
         var cond = $('#has_bcert').is(":checked");
         disable_fields(cond, 'bcert_no');
@@ -562,26 +982,27 @@
         var cond = $('#disb').is(":checked");
         disable_fields(cond, 'ncpwd_no');
     });
-
+    $('#exit_org_div').hide();
+    var cond = $('#ovc_exit_reason').val();
+    handle_exit_org(cond);
+    $('#ovc_exit_reason').live('change', function() {
+        var cond = $('#ovc_exit_reason').val();
+        handle_exit_org(cond);
+    });
     $('#caretaker').val('{{ child.caretaker }}');
-
     var hstatus = $('#hiv_status').val();
     var hlevel = $('#school_level').val();
     handle_hstatus(hstatus);
     handle_education(hlevel);
     handle_levels(hlevel);
-
     $('#school_class').val('{{ sch_class }}');
-
     $('#hiv_status').change(function(){
         handle_hstatus(this.value);
     });
-
     $('#school_level').change(function(){
         handle_education(this.value);
         handle_levels(this.value);
     });
-
     $('.alive').change(function(){
         var ids = $(this).attr('id');
         var alive = this.value;
@@ -598,7 +1019,6 @@
            $('#cstatus_' + id).attr("data-parsley-required", "false");
         }
     });
-
     //Facility query
     $( "#facility" ).autocomplete({
         source: function( request, response ) {
@@ -623,7 +1043,6 @@
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
     });
-
     //School query
     var s_level = $('#school_level').val();
     $( "#school_name" ).autocomplete({
@@ -669,9 +1088,17 @@
              $('#school_class').append('<option></option>'); 
         }
     }
-
+    function handle_exit_org(cond){
+        if (cond == 'ERFO' || cond == 'ERTL'){
+           $('#exit_org_div').show(); 
+           $('#exit_org_name').attr("data-parsley-required", "true");
+        }else{
+           $('#exit_org_div').hide();
+           $('#exit_org_name').attr("data-parsley-required", "false");
+        }
+    }
     function handle_hstatus(hstatus){
-        if (hstatus == 'HSTP') {
+        if ((hstatus == 'HSTP') || (hstatus == 'HHEI')){
             $('#facility_div').show();
             $('#facility_id_div').show();
             $('#art_div').show();
@@ -682,7 +1109,9 @@
             $('#art_status').attr("data-parsley-required", "true");
             $('#link_date').attr("data-parsley-required", "true");
             $('#ccc_number').attr("data-parsley-required", "true");
+            $('#viralloadbtncontainer').removeClass('hidden')
         }else{
+            $('#viralloadbtncontainer').addClass('hidden')
             $('#facility_div').hide();
             $('#facility_id_div').hide();
             $('#art_div').hide();
@@ -695,7 +1124,6 @@
             $('#ccc_number').attr("data-parsley-required", "false");
         } 
     }
-
     function handle_education(hlevel){
         if ((hlevel == 'SLNS') || (hlevel == '')) {
             $('#school_name_div').hide();
@@ -716,9 +1144,7 @@
             $('#school_class').attr("data-parsley-required", "true");
             $('#admission_type').attr("data-parsley-required", "true");
         }
-
     }
-
     function disable_fields(cond, field_id){
         if (cond){
             console.log(field_id + ' 1');
@@ -731,7 +1157,12 @@
         }
         
     }
-
 </script>
+<script>
+
+        $('#date_of_event').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+        </script>
 
 {% endblock %}

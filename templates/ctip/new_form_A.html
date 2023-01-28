@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CTiP {{ form_id }} - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP - Form </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CTiP - FORM {{ form_id }} ({{ form_name }}) <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Case</a>
+                    </span>
+                    Case No: {{ case.case_number }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> Name of Victim [Full Name]</label>
+                        <div class="col-md-8">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                    {% if case.person.years < 19 %}
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> Name of Parent/ Guardian [Full Name] (For Minors)</label>
+                        <div class="col-md-8">
+                            N/A
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> I.D. Number/ Passport Number</label>
+                        <div class="col-md-4">
+                            {% for contact in contacts %}
+                               {{ contact.identifier_type_id }} - {{ contact.identifier }}
+                            {% endfor %}                            
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                            }
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> Date of Birth</label>
+                        <div class="col-md-4">
+                            {{ case.person.date_of_birth }} ({{ case.person.age }})
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Consent details</label>
+                        <div class="col-md-8">
+                            <p>  
+                            I consent to receive the service(s), which are provided by the National Referral Mechanism for victims of
+                            human trafficking in Kenya. I understand that this application does not guarantee I will receive all the services I
+                            desire. I also consent to providing all documents and information required for the purposes of delivering these
+                            services. I understand that the personal information I provide is confidential. The release of any information
+                            regarding my involvement with the NRM may occur only with my written and signed consent.
+                            </p>
+                            <p>
+                            I declare to have understood the above and therefore have voluntarily signed this form without any form of
+                            force or coercion.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Date <span class="asteriskField">*</span></label>
+                        <div class="col-md-4">
+                            {{ form.consent_date }}
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Consent Provided <span class="asteriskField">*</span></label>
+                        <div class="col-md-4">
+                            {{ form.has_consent }}
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Consent details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script>
+$(document).ready(function() {
+    $('#consent_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+
+</script>
+{% endblock %}

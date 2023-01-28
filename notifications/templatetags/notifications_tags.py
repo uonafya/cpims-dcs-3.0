@@ -9,7 +9,7 @@ from django.utils.html import format_html
 try:
     from django.urls import reverse
 except ImportError:
-    from django.urls import reverse, resolve  # pylint: disable=no-name-in-module,import-error
+    from django.core.urlresolvers import reverse  # pylint: disable=no-name-in-module,import-error
 
 register = Library()
 

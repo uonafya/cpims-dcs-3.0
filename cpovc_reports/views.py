@@ -1,16 +1,14 @@
 """Views for all reports."""
 import os
 import re
-import csv
 import time
 import uuid
 import base64
-import urllib.request, urllib.parse, urllib.error
+import urllib
 import string
 import mimetypes
 import calendar
 import zipfile
-import pandas as pd
 from datetime import datetime
 # from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -25,7 +23,7 @@ from .functions import (
     get_sub_county_info, get_raw_data, create_year_list, get_totals,
     get_case_data, org_unit_tree, get_performance, get_performance_detail,
     get_pivot_data, get_pivot_ovc, get_variables, get_sql_data, write_xls,
-    csvxls_data, write_xlsm, get_cluster, edit_cluster, create_pepfar,
+    csvxls_data, get_cluster, edit_cluster, create_pepfar,
     get_dashboard_summary, write_csv, write_pdf)
 
 from cpovc_registry.models import RegOrgUnit
@@ -40,11 +38,10 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.pdfgen import canvas
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .parameters import ORPTS, RPTS, GRPTS
+from .parameters import ORPTS, ACRPTS
 
 from cpovc_forms.models import OVCGokBursary
 from .documents import search_child, generate_form, validate_case
@@ -54,6 +51,7 @@ from .utils import write_document, write_register
 MEDIA_ROOT = settings.MEDIA_ROOT
 DOC_ROOT = settings.DOCUMENT_ROOT
 STATIC_ROOT = settings.STATICFILES_DIRS[0]
+DCS_HDS = settings.DCS
 
 
 @login_required
@@ -121,7 +119,7 @@ def reports_home(request):
         return render(request, 'reports/reports_forms.html',
                       {'form': form, 'status': 200})
     except Exception as e:
-        print(('Error writing report - %s' % (str(e))))
+        print('Error writing report - %s' % (str(e)))
         raise e
 
 
@@ -146,7 +144,7 @@ def cpims_document(request, doc_id, case_id):
             return render(request, 'reports/reports_forms.html',
                           {'form': form, 'status': 200})
     except Exception as e:
-        print(('Error writing report - %s' % (str(e))))
+        print('Error writing report - %s' % (str(e)))
         raise e
 
 
@@ -207,7 +205,7 @@ def reports_home_old(request):
         return render(request, 'reports/reports_documents.html',
                       {'form': form, 'status': 200})
     except Exception as e:
-        print(('Error writing report - %s' % (str(e))))
+        print('Error writing report - %s' % (str(e)))
         raise e
 
 
@@ -222,7 +220,7 @@ def write_html(data, file_name, report_variables):
             row_cnt += 1
             table_string += "<tr>" + \
                 "<td>" + \
-                string.join(row, "</td><td>") + \
+                "</td><td>".join(row) + \
                 "</td>" + \
                 "</tr>\n"
         html = '<table class="table table-bordered">'
@@ -272,7 +270,7 @@ def write_xlsx(data, file_name, params):
         xls_name = '%s/xlsx/%s%s' % (MEDIA_ROOT, file_name, file_ext)
         wb.save(xls_name)
     except Exception as e:
-        print(("error writing excel - %s" % (str(e))))
+        print("error writing excel - %s" % (str(e)))
         raise e
 
 
@@ -315,6 +313,7 @@ def reports_caseload(request):
         form = CaseLoad(request.user)
         dates = {v: k for k, v in enumerate(calendar.month_abbr)}
         if request.method == 'POST':
+            print('shit 11111111111111111')
             sub_county_ids = request.POST.getlist('sub_county')
             sub_counties = request.POST.get('sub_county')
             county = request.POST.get('county')
@@ -369,7 +368,7 @@ def reports_caseload(request):
             period_params = get_period(
                 report_type=report_type, year=year, month=month)
             report_variables = merge_two_dicts(variables, period_params)
-            print(("CASE load params ", report_variables))
+            print("CASE load params ", report_variables)
             # -----------------------------------------------
             ou_ids = org_unit_tree(report_unit)
             report_variables['org_unit_tree'] = ou_ids
@@ -464,7 +463,7 @@ def reports_caseload(request):
                       {'form': form, 'results': results,
                        'report': html})
     except Exception as e:
-        print(('Case load report error - %s' % (str(e))))
+        print('Case load report error - %s' % (str(e)))
         raise e
 
 
@@ -491,7 +490,7 @@ def get_interventions(data_itv, dval, bn, kl, itvs):
                     itvs[knt].append(dts)
         # return itvs
     except Exception as e:
-        print(('Error getting intervention', str(e)))
+        print('Error getting intervention', str(e))
         pass
 
 
@@ -534,7 +533,7 @@ def get_interven_perc(case_data):
             intp = interven * 100.0 / case if case > 0 else 0
             int_perc.append(round(intp, 1))
     except Exception as e:
-        print(('Error calculating inteven percentage %s' % (str(e))))
+        print('Error calculating inteven percentage %s' % (str(e)))
         return []
     else:
         return int_perc
@@ -544,7 +543,7 @@ def reports_generate(request):
     """Case load views."""
     results, html = {}, None
     try:
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             msg = 'You have been logged out. Please log in again to proceed.'
             results = {'status': 9, 'file_name': '', 'message': msg}
             return JsonResponse(results, content_type='application/json',
@@ -559,7 +558,7 @@ def reports_generate(request):
             report_region = int(request.POST.get('report_region'))
             report_variables = get_variables(request)
             # all_datas = get_data(report_variables)
-            print(('VARS', report_variables))
+            print('VARS', report_variables)
             # all_data = all_datas['data']
             all_data, raw_data = get_raw_data(report_variables)
             if not raw_data:
@@ -606,7 +605,7 @@ def reports_generate(request):
             return JsonResponse(results, content_type='application/json',
                                 safe=False)
     except Exception as e:
-        print(('Error generating report - %s' % (str(e))))
+        print('Error generating report - %s' % (str(e)))
         raise e
 
 
@@ -615,12 +614,41 @@ def reports_download(request, file_name):
     """Generic method for downloading files."""
     try:
         file_folder = ''
+        if '_' not in file_name and '.' not in file_name:
+            file_name = base64.urlsafe_b64decode(str(file_name))
+        if str(file_name).endswith('xlsx') or str(file_name).endswith('xlsm'):
+            file_folder = 'xlsx/'
+        file_path = '%s/%s%s' % (MEDIA_ROOT, file_folder, file_name)
+
+        my_data = open(file_path, 'rb')
+
+        response = HttpResponse(my_data, headers={
+            'Content-Type': 'application/vnd.ms-excel',
+            'Content-Disposition': 'attachment; filename="%s"' % file_name, })
+    except Exception as e:
+        print("Error downloading file - %s" % (str(e)))
+        msg = 'Error downloading file. Please contact your administrator.'
+        messages.info(request, msg)
+        results, html, file_name = {}, None, None
+        form = CaseLoad(request.user)
+        return render(request, 'reports/reports_error.html',
+                      {'form': form, 'results': results,
+                       'report': html, 'file_name': file_name})
+    else:
+        return response
+
+
+@login_required
+def reports_download_old(request, file_name):
+    """Generic method for downloading files."""
+    try:
+        file_folder = ''
         if '_' not in file_name:
             file_name = base64.urlsafe_b64decode(str(file_name))
         if file_name.endswith('xlsx') or file_name.endswith('xlsm'):
             file_folder = 'xlsx/'
         file_path = '%s/%s%s' % (MEDIA_ROOT, file_folder, file_name)
-        fp = open(file_path, 'rb')
+        fp = open(file_path, 'rt')
         response = HttpResponse(fp.read())
         fp.close()
         mime_type, encoding = mimetypes.guess_type(file_name)
@@ -633,12 +661,12 @@ def reports_download(request, file_name):
         # new_name = uuid.uuid3(uuid.NAMESPACE_DNS, file_name)
         # To inspect details for the below code, see
         # http://greenbytes.de/tech/tc2231/
-        if 'WebKit' in request.META['HTTP_USER_AGENT']:
+        if u'WebKit' in request.META['HTTP_USER_AGENT']:
             # Safari 3.0 and Chrome 2.0 accepts UTF-8 encoded string
             # directly.
             filename_header = 'filename=%s' % file_name.encode(
                 'utf-8')
-        elif 'MSIE' in request.META['HTTP_USER_AGENT']:
+        elif u'MSIE' in request.META['HTTP_USER_AGENT']:
             # IE does not support internationalized filename at all.
             # It can only recognize internationalized URL, so we do the
             # trick via routing rules.
@@ -650,7 +678,7 @@ def reports_download(request, file_name):
                 file_name.encode('utf-8'))
         response['Content-Disposition'] = 'attachment; ' + filename_header
     except Exception as e:
-        print(("Error downloading file - %s" % (str(e))))
+        print("Error downloading file - %s" % (str(e)))
         msg = 'Error downloading file. Please contact your administrator.'
         messages.info(request, msg)
         results, html, file_name = {}, None, None
@@ -703,7 +731,7 @@ def manage_reports(request):
                     rep_name = fnames[0]
                     rarea = rep_name.replace('Org-U', 'OU-U')
                     report_id = uuid.uuid3(uuid.NAMESPACE_DNS, filename)
-                    fname = base64.urlsafe_b64encode(filename)
+                    fname = base64.urlsafe_b64encode(filename.encode('ascii'))
                     create_vars = fnames[4].split('.')
                     create_by = int(create_vars[0])
                     ftype = (create_vars[1]).upper()
@@ -806,7 +834,7 @@ def manage_dashboard(request):
                       {'persons': persons, 'units': units,
                        'cases': cases})
     except Exception as e:
-        print(('error - %s' % (str(e))))
+        print('error - %s' % (str(e)))
         raise e
     else:
         pass
@@ -820,7 +848,7 @@ def clean_reports(report_id):
         os.remove(file_name)
         return 0, 'File removed successfully.'
     except Exception as e:
-        print(("Delete error - %s" % (str(e))))
+        print("Delete error - %s" % (str(e)))
         return 99, 'File removal error. Please contact Administrator.'
 
 
@@ -829,7 +857,8 @@ def reports_pivot(request):
     """Method to do pivot reports."""
     try:
         form = CaseLoad(request.user)
-        return render(request, 'reports/pivot.html', {'form': form})
+        return render(
+            request, 'reports/pivot.html', {'form': form, 'dcs': DCS_HDS})
     except Exception as e:
         raise e
     else:
@@ -883,7 +912,7 @@ def reports_ovc_list(request):
                                 safe=False)
         return render(request, 'reports/pivot_listing.html', {'form': form})
     except Exception as e:
-        print(('Error response - %s' % (str(e))))
+        print('Error response - %s' % (str(e)))
         raise e
     else:
         pass
@@ -912,7 +941,7 @@ def reports_rawdata(request):
         return JsonResponse(data, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print(('error getting raw data 2 - %s' % (str(e))))
+        print('error getting raw data 2 - %s' % (str(e)))
         return JsonResponse([], content_type='application/json',
                             safe=False)
 
@@ -926,7 +955,7 @@ def reports_ovc_rawdata(request):
         report_variables = get_variables(request)
         if request.method == 'POST':
             ext = request.POST.get('ext')
-        # print ext
+        print(ext)
         report_ovc_id = int(report_variables['report_ovc'])
         report_name = report_variables['report_ovc_name']
         start_date = report_variables['start_date']
@@ -938,30 +967,30 @@ def reports_ovc_rawdata(request):
             results = get_pivot_ovc(request, report_variables)
         fid = '%s_%s_%s' % (report_name, today, user_id)
         fid = fid.replace(':', '').replace(' ', '_')
-        fid = base64.urlsafe_b64encode(fid)
+        # fid = base64.urlsafe_b64encode(fid)
+        fid = base64.urlsafe_b64encode(fid.encode('ascii'))
         #
         titles = []
         if results:
             for res in results[0]:
                 titles.append(res)
-        print(('RID', report_ovc_id, report_id))
+        print('RID', report_ovc_id, report_id, 'oops')
         columns = [col.lower() for col in titles]
         data = [columns]
-        print(('Results count - ', len(results)))
+        print('Results count - ', len(results))
         for res in results:
             vals = []
             for n, i in enumerate(titles):
                 val = res[i]
-                if type(val) is str:
-                    val = val.encode('ascii', 'ignore').decode('ascii')
+                if isinstance(val, str):
+                    val = val.encode('ascii', 'ignore').decode('utf-8')
                 vals.append(val)
             data.append(vals)
-        csv_file = 'tmp-%s' % (fid)
-        report_variables['archive'] = True
-        report_variables['report_id'] = report_id
-        xls_name, html = write_csv(data, csv_file, report_variables)
-        xls = ''
-        status = 9
+        fid_string = fid.decode("utf-8")
+        csv_file = 'tmp-%s' % (fid_string)
+        xls_name = write_csv(
+            data, csv_file, {'archive': True, 'report_id': report_id})
+        status, xls = 9, ''
         message = "No results matching your query."
         if len(results) > 0:
             status = 0
@@ -973,14 +1002,17 @@ def reports_ovc_rawdata(request):
             xlsm_name = '%sReport_%s' % (report_name, user_id)
             xls = write_xlsm(csv_file, xlsm_name)
             '''
-        datas = {'file_name': fid, 'data': results,
+        datas = {'file_name': fid_string, 'data': results,
                  'status': status, 'message': message, 'xls': xls_name}
-        print(('Results', message))
+        print('Results', message)
         return JsonResponse(datas, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print(('error getting raw data - %s' % (str(e))))
-        return JsonResponse([], content_type='application/json',
+        message = 'No data Found'
+        print('OVC error getting raw data - %s' % (str(e)))
+        datas = {'file_name': '', 'data': [],
+                 'status': 9, 'message': message, 'xls': xls}
+        return JsonResponse(datas, content_type='application/json',
                             safe=False)
 
 
@@ -1005,9 +1037,9 @@ def reports_ovc_download(request):
     today = datetime.now()
     dates = today.strftime('%d%m%Y')
     f = request.GET.get('f')
-    rnames = base64.urlsafe_b64decode(str(f))
-    print(rnames)
-    s_name = rnames.split('_')[0]
+    # rnames = base64.urlsafe_b64decode(str(f))
+    rnames = base64.urlsafe_b64decode(f.encode('ascii'))
+    s_name = rnames.decode('utf-8').split('_')[0]
     file_name = "REGISTRATIONReport_%s" % (dates)
     mc_name = "%s.xlsx" % (file_name)
     if f:
@@ -1070,7 +1102,7 @@ def dashboard_details(request):
         ous = request.session.get('ou_attached', False)
         report_id = request.GET.get('report_id', 0)
         rid = int(report_id) if report_id else 0
-        print(('OUs', ous))
+        print('OUs', ous)
         if rid > 10:
             # This is for GoK
             datas = get_dashboard_summary(request, rid)
@@ -1081,7 +1113,7 @@ def dashboard_details(request):
         return JsonResponse(results, content_type='application/json',
                             safe=False)
     except Exception as e:
-        print(('Error getting dasboard details - %s' % (str(e))))
+        print('Error getting dasboard details - %s' % (str(e)))
         return JsonResponse({}, content_type='application/json',
                             safe=False)
     else:
@@ -1092,6 +1124,7 @@ def raw_data(request, sql):
     """Method to generate raw data and zip the file."""
     try:
         res = my_custom_sql(sql)
+        tstmp = str(int(time.time()))
         fname = '%s.csv' % (tstmp)
         filename = '%s/csv/' % (DOC_ROOT, fname)
         final_file_name = '%s.zip' % (fname)
@@ -1101,7 +1134,7 @@ def raw_data(request, sql):
         zf.write(os.path.join(dirname, filename))
         zf.close()
     except Exception as e:
-        print(('Error getting Raw data - %s' % (str(e))))
+        print('Error getting Raw data - %s' % (str(e)))
         return 0
     else:
         return res
@@ -1136,7 +1169,7 @@ def reports_bursary(request):
                                 safe=False)
         return render(request, 'reports/bursary.html', {'form': form})
     except Exception as e:
-        print(('error on bursary report - %s' % (str(e))))
+        print('error on bursary report - %s' % (str(e)))
         raise e
     else:
         pass
@@ -1162,10 +1195,10 @@ def get_docs(request, id=4):
     params = {'name': report_name, 'ou_id': ou_id,
               'ou_name': ou_name}
     if rid <= 5:
-        print(('Write Document', rid))
+        print('Write Document', rid)
         write_document(response, f_name, params)
     else:
-        print(('Write Register', rid))
+        print('Write Register', rid)
         start_date = request.GET.get('start_date', False)
         end_date = request.GET.get('end_date', False)
         if start_date and end_date:
@@ -1179,3 +1212,18 @@ def get_docs(request, id=4):
 
     return response
 
+
+@login_required
+def reports_afc(request, id=0):
+    """Method to do pivot reports."""
+    try:
+        rpt_id = int(id)
+        name = ACRPTS[rpt_id] if rpt_id in ACRPTS else ACRPTS[1]
+        form = CaseLoad(request.user)
+        return render(request, 'reports/pivot_afc.html',
+                      {'form': form, 'name': name,
+                       'report_id': rpt_id})
+    except Exception as e:
+        raise e
+    else:
+        pass

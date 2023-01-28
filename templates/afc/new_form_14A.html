@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care - Forms </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ case.care_type|gen_value:vals }} - {{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    </span>
+                    Case No: {{ case.case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Child Names</label>
+                        <div class="col-md-3">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <label class="col-md-2 control-label">Sex</label>
+                        <div class="col-md-3">{{ case.person.sex_id|gen_value:vals }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"> Date of Birth</label>
+                        <div class="col-md-3">
+                            {{ case.person.date_of_birth }}
+                        </div>
+                        <label class="col-md-2 control-label">Age</label>
+                        <div class="col-md-3">{{ case.person.age }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="40%"></th>
+                                <th width="30%">DEGREE OF DISABILITY</th>
+                                <th>DEGREE OF FUNCTIONING / LIMITATION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    0 None<br>
+                                    1 Mild, lightly present with an intensity that the person can tolerate<br>
+                                    2 Moderate intensity that interferes with day-to-day life<br>
+                                    3 Severe intensity that disrupts day-to-day life<br>
+                                    4 Complete impairment<br>
+                                </td>
+                                <td>
+                                    0 No difficulty doing things<br>
+                                    1 Almost no difficulty doing things<br>
+                                    2 Moderate difficulty doing things in the physical and social environment<br>
+                                    3 Severe difficulty doing things in the physical and social environment<br>
+                                    4 Complete difficulty disrupting day to day life<br>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-5"><b>DEVELOPMENTAL/BODY DOMAIN</b></div>
+                        <div class="col-md-2"><b>Degree of disability</b></div>
+                        <div class="col-md-3"><b>Degree of functioning/limitation</b></div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Cognitive <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A1A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A1B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A1C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Mental <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A2A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A2B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A2C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Sensory <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A3A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A3B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A3C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Physical/mobility <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A4A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A4B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A4C_rdo }}</div>
+                    </div>
+                    <b>LIMITATIONS ON DAILY ACTIVITY</b>
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Learning and applying knowledge <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A5A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A5B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A5C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Communication <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A6A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A6B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A6C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Mobility <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A7A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A7B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A7C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Self-care <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A8A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A8B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A8C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Domestic life <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A9A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A9B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A9C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Social life and relationships <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A10A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A10B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A10C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Major life areas <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A11A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A11B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A11C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Community and civic life <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A12A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2">{{ form.qf14A12B_rdo }}</div>
+                        <div class="col-md-2">{{ form.qf14A12C_rdo }}</div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-md-5"><b>ENVIRONMENTAL FACTORS</b></div>
+                        <div class="col-md-5"><b>Degree of barrier - 0 (no barrier) to 4 (full barrier)</b></div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Support relationships <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A13A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">{{ form.qf14A13B_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Support services <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A14A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">{{ form.qf14A14B_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Attitudes <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A15A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">{{ form.qf14A15B_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Systems and other factors <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.qf14A16A_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">{{ form.qf14A16B_rdo }}</div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Disability diagnosis (if any)</label>
+                        <div class="col-md-6">
+                            {{ form.qf14A17A }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Observations</label>
+                        <div class="col-md-6">
+                            {{ form.qf14A18A }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Action required <span class="asteriskField">*</span></label>
+                        <div class="col-md-6">
+                            {{ form.qf14A19_rdo }}
+                            <span id="qf2A1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">{{ form.qf9A1_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Organisation performing the Assessment</b></label>
+                        <div class="col-md-6">
+                            {{ form.qf14A20 }}
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>                
+                    
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Date of Assessment</b> <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script>
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+
+</script>
+{% endblock %}

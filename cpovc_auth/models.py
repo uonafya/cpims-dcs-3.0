@@ -14,6 +14,11 @@ from notifications.signals import notify
 
 class CPOVCUserManager(BaseUserManager):
 
+    def get_by_natural_key(self, username):
+        i_field = '{}__iexact'.format(self.model.USERNAME_FIELD)
+        case_insensitive_username_field = i_field
+        return self.get(**{case_insensitive_username_field: username})
+
     def create_user(self, username, reg_person, password=None):
 
         from cpovc_registry.models import RegPerson
@@ -48,7 +53,8 @@ class CPOVCUserManager(BaseUserManager):
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
-    reg_person = models.ForeignKey(to='cpovc_registry.RegPerson', on_delete=models.CASCADE, null=False)
+    reg_person = models.OneToOneField(
+        'cpovc_registry.RegPerson', on_delete=models.CASCADE, null=False)
     role = models.CharField(max_length=20, unique=False, default='Public')
     username = models.CharField(max_length=20, unique=True)
     is_staff = models.BooleanField(default=False)
@@ -66,11 +72,12 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     objects = CPOVCUserManager()
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['reg_person']
+    EMAIL_FIELD = 'reg_person__email'
 
     def _get_email(self):
         return self.reg_person.email
 
-    email = property(_get_email)
+    user_email = property(_get_email)
 
     def _get_sex(self):
         sex_id = self.reg_person.sex_id
@@ -169,8 +176,10 @@ class CPOVCUserRoleGeoOrg(models.Model):
     # from cpovc_registry.models import RegPersonsGeo, RegOrgUnit
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     group = models.ForeignKey(CPOVCRole, on_delete=models.CASCADE)
-    org_unit = models.ForeignKey('cpovc_registry.RegOrgUnit', null=True, on_delete=models.CASCADE)
-    area = models.ForeignKey('cpovc_main.SetupGeography', null=True, on_delete=models.CASCADE)
+    org_unit = models.ForeignKey(
+        'cpovc_registry.RegOrgUnit', on_delete=models.CASCADE, null=True)
+    area = models.ForeignKey(
+        'cpovc_main.SetupGeography', on_delete=models.CASCADE, null=True)
     timestamp_modified = models.DateTimeField(default=timezone.now)
     is_void = models.BooleanField(default=False)
 
@@ -213,5 +222,4 @@ def my_handler(sender, instance, created, **kwargs):
     notify.send(instance, recipient=user, verb='User account changed')
 
 
-# post_save.connect(my_handler, sender=AppUser)
-
+post_save.connect(my_handler, sender=AppUser)

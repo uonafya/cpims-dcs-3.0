@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block page_title %} {{block.super}} {{ report_name }} Report{% endblock page_title %}
 
-{% load static %}
+{% load staticfiles %}
 
 {% block style_code %}
 <link href="{% static 'plugins/pivot-table/dist/pivot.css' %}" rel="stylesheet" >

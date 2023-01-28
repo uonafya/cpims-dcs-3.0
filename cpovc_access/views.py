@@ -31,4 +31,3 @@ def open_terms(fname='terms'):
             return data
     except Exception:
         return ''
-

@@ -125,3 +125,29 @@ class RPTIPopulation(models.Model):
     def __unicode__(self):
         """To be returned by admin actions."""
         return self.case_serial
+
+
+class COPIPs(models.Model):
+    """Model for COP Targets and IPs."""
+
+    cop = models.CharField(max_length=2,
+                           choices=[('21', 'COP21'), ('22', 'COP22')])
+    cop_target = models.IntegerField(default=0)
+    funding = models.CharField(max_length=5,
+                               choices=[('USAID', 'USAID'),
+                                        ('CDC', 'CDC'), ('DOD', 'DoD')])
+    ip = models.ForeignKey(RegOrgUnit, on_delete=models.CASCADE)
+    timestamp_created = models.DateTimeField(null=True, default=timezone.now)
+    timestamp_modified = models.DateTimeField(null=True, default=timezone.now)
+    is_void = models.BooleanField(default=False)
+
+    class Meta:
+        """Override table details."""
+
+        db_table = 'rpt_cop_ip'
+        verbose_name = 'COP IP Dashboard Reporting'
+        verbose_name_plural = 'COP IP Dashboard Reportings'
+
+    def __unicode__(self):
+        """To be returned by admin actions."""
+        return 'COP%s : %s' % (self.cop, self.ip)

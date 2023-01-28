@@ -223,13 +223,13 @@ class PasswordDisallowedTerms(PasswordStrengthPolicy):
                 found.append(term)
 
         if found:
-            msg = self.text.format(terms=', '.join(found))
+            msg = self.text.format(terms=u', '.join(found))
             raise ValidationError(msg, 'password_disallowed_terms')
 
     @property
     def policy_text(self):
         """For users not to disobet terms."""
-        return self.text.format(terms=', '.join(self.terms))
+        return self.text.format(terms=u', '.join(self.terms))
 
 
 class PasswordLimitReuse(PasswordStrengthPolicy):
@@ -262,4 +262,3 @@ class PasswordLimitReuse(PasswordStrengthPolicy):
             return self.plural_text.format(max_pw_history=self.max_pw_history)
         else:
             return self.text.format(max_pw_history=self.max_pw_history)
-

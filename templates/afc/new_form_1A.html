@@ -1,0 +1,569 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  @media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  #wizard_a ol { display: none; }
+  .bwizard-buttons { display: none; }
+  .bwizard-steps { display: none; }
+  #wizard_a ol li { display: none; }
+  #step2, #step3  { display: block !important; }
+  .control-label {margin-bottom: 5px;}
+}
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care - Forms </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
+            <b>Alternative Care - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                    {% if care %}
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% else %}
+                    <a href="{% url 'new_alt_care' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% endif %}
+                    </span>
+                    Case No: {{ case_num }} :: {{ case.case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+
+                    <div id="wizard_a">
+                        <ol>
+                            <li>
+                                CHILD BIOGRAPHICAL INFORMATION
+                                <small>Child Biographical Information.</small>
+                            </li>
+                            <li>
+                                DETAILS OF ADMISSION TO CARE
+                                <small>Details of admission to care.</small>
+                            </li>
+                            <li>
+                                STATUS OF FAMILY
+                                <small>Status of the child's family.</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">CHILD BIOGRAPHICAL INFORMATION</legend>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Date Assessment started <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">
+                                        {{ form.event_date }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">First Name</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.first_name }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Other Names</label>
+                                    <div class="col-md-3">{{ case.person.other_names }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Surname</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.surname }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Nickname or given name</label>
+                                    <div class="col-md-3">Not Provided</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Sex</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.sex_id|gen_value:vals }}
+                                    </div>
+                                    <label class="col-md-2 control-label">DOB</label>
+                                    <div class="col-md-3">{{ case.person.date_of_birth }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Child Has Birth Certificate <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">
+                                        {{ form.qf1A1_rdo }}
+                                        <span id="qf1A1_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label">Certificate No.</label>
+                                    <div class="col-md-4">{{ form.qf1A2 }}</div>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Place of Birth: County</label>
+                                    <div class="col-md-2">{{ geos.GPRV }}</div>
+                                    <label class="col-md-2 control-label">Sub County</label>
+                                    <div class="col-md-2">{{ geos.GDIS }}</div>
+                                    <label class="col-md-2 control-label">Ward</label>
+                                    <div class="col-md-2">{{ geos.GWRD }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Location</label>
+                                    <div class="col-md-2">Not Provided</div>
+                                    <label class="col-md-2 control-label">Sub Location</label>
+                                    <div class="col-md-2">Not Provided</div>
+                                    <label class="col-md-2 control-label">Village</label>
+                                    <div class="col-md-2">Not provided</div>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Height (cm)</label>
+                                    <div class="col-md-3">{{ form.qf1A3 }}</div>
+                                    <label class="col-md-2 control-label">Weight (kg)</label>
+                                    <div class="col-md-4">{{ form.qf1A4 }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Complexion</label>
+                                    <div class="col-md-3">{{ form.qf1A5 }}</div>
+                                    <label class="col-md-2 control-label">Ethnicity</label>
+                                    <div class="col-md-4">{{ form.qf1A6 }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Distinguishing Marks</label>
+                                    <div class="col-md-3">{{ form.qf1A7 }}</div>
+                                    <label class="col-md-2 control-label">Languages</label>
+                                    <div class="col-md-4">{{ form.qf1A8 }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Religion</label>
+                                    <div class="col-md-3">Not Provided</div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-2 control-label">Has disability <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">
+                                        {{ form.qf1A10_rdo }}
+                                        <span id="qf1A2_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="form-group" id="disability_details_div">
+                                    <label class="col-md-2 control-label">Type of Disability <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">{{ form.qf1A11_sdd }}</div>
+                                    <label class="col-md-2 control-label">Disability severity <span class="asteriskField">*</span></label>
+                                    <div class="col-md-4">{{ form.qf1A12_sdd }}</div>
+                                </div>
+                                <p></p>
+                                
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                        <!-- begin wizard step-2 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">DETAILS OF ADMISSION TO CARE</legend>
+                                <!-- begin row -->
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Date of Admission <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">
+                                        {{ form.event_date }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Age of child at admission</label>
+                                    <div class="col-md-4">{{ form.qf1A13 }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Other forms of admission</label>
+                                    <div class="col-md-3">{{ form.qf1A14_sdd }}</div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Has Committal Order <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">
+                                       {{ form.qf1A15_rdo }}
+                                        <span id="qf1A15_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Committal, Order No.</label>
+                                    <div class="col-md-3">{{ form.qf1A16 }}</div>
+                                    <label class="col-md-2 control-label">Committal Order date</label>
+                                    <div class="col-md-4">{{ form.qf1A17 }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Who referred the child (Name)</label>
+                                    <div class="col-md-3">{{ form.qf1A18 }}</div>
+                                    <label class="col-md-2 control-label">Referrer Title</label>
+                                    <div class="col-md-4">{{ form.qf1A19 }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Previous history of placements</label>
+                                    <div class="col-md-10">
+                                        <table class="table">
+                                            <thead>
+                                                <tr><th>#</th><th>Type of placement</th><th>Date From</th><th>Date To</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if afcs %}
+                                                {% for afc in afcs %}
+                                                <tr><td>{{ forloop.counter }}</td><td>{{ afc.care_type|gen_value:vals }}</td><td>{{ afc.case_date }}</td><td></td></tr>
+                                                {% endfor %}
+                                                {% else %}
+                                                <tr><td></td><td colspan="3">No existing previous placements</td></tr>
+                                                {% endif %}
+                                            </tbody>                                          
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">If child is not in any institution, indicate the type of vulnerability:</label>
+                                    <div class="col-md-6">{{ form.qf1A20_sdd }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">With whom and where was the child living before admission to care?  <small>(Name of person and place)</small></label>
+                                    <div class="col-md-6">{{ form.qf1A21 }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">Relationship?</label>
+                                    <div class="col-md-6">{{ form.qf1A21A_sdd }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">Are there other sibling(s) living with the child now in this form of care? <span class="asteriskField">*</span></label>
+                                    <div class="col-md-6">
+                                        {{ form.qf1A22_rdo }}
+                                        <span id="qf1A22_rdo_error"></span>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">Are there other sibling(s) admitted into care elsewhere? <span class="asteriskField">*</span></label>
+                                    <div class="col-md-6">
+                                        {{ form.qf1A23_rdo }}
+                                        <span id="qf1A23_rdo_error"></span>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <!-- end row -->                            
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-2 -->
+                        <!-- begin wizard step-3 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">STATUS OF FAMILY</legend>
+                                <!-- begin row -->
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Parents details</label>
+                                    <div class="col-md-10">
+                                        <table class="table">
+                                            <thead>
+                                                <tr><th>#</th><th>Type</th><th>Names</th><th>Alive</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if siblings %}
+                                                <tr><td></td><td></td><td></td></tr>
+                                                {% else %}
+                                                <tr><td colspan="3">No parents details provided</td></tr>
+                                                {% endif %}
+                                            </tbody>                                          
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Are mother and father living together? <span class="asteriskField">*</span></label>
+                                    <div class="col-md-3">
+                                        {{ form.qf1A24_rdo }}
+                                        <span id="qf1A24_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Siblings details</label>
+                                    <div class="col-md-10">
+                                        <table class="table">
+                                            <thead>
+                                                <tr><th>#</th><th>Names</th><th>Class</th><th>Age</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if siblings %}
+                                                <tr><td></td><td></td><td></td></tr>
+                                                {% else %}
+                                                <tr><td colspan="3">No siblings</td></tr>
+                                                {% endif %}
+                                            </tbody>                                          
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Other Relatives</label>
+                                    <div class="col-md-10">
+                                        <table class="table">
+                                            <thead>
+                                                <tr><th>#</th><th>Names</th><th>Relationship</th><th>Phone No.</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if siblings %}
+                                                <tr><td></td><td></td><td></td></tr>
+                                                {% else %}
+                                                <tr><td colspan="3">No relatives</td></tr>
+                                                {% endif %}
+                                            </tbody>                                          
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Is there any contact with family / parent(s) ?</label>
+                                    <div class="col-md-2">
+                                        {{ form.qf1A25_rdo }}
+                                        <span id="qf1A25_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label">If yes, Name</label>
+                                    <div class="col-md-4">{{ form.qf1A25A }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">If yes, does the child remember the date (or how long ago) the last visit occurred?</label>
+                                    <div class="col-md-4">{{ form.qf1A25B }}</div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Does child go home on school holidays?</label>
+                                    <div class="col-md-2">
+                                        {{ form.qf1A26_rdo }}
+                                        <span id="qf1A26_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Does family visit?</label>
+                                    <div class="col-md-2">
+                                        {{ form.qf1A27_rdo }}
+                                        <span id="qf1A27_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label">If Yes, How often do they visit?</label>
+                                    <div class="col-md-4">{{ form.qf1A27A }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Does the child express a preference for a caregiver? <span class="asteriskField">*</span></label>
+                                    <div class="col-md-2">
+                                        {{ form.qf1A28_rdo }}
+                                        <span id="qf1A28_rdo_error"></span>
+                                    </div>
+                                    <label class="col-md-2 control-label"></label>
+                                    <div class="col-md-4"></div>
+                                </div>
+
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-3 -->
+                    </div>
+                    
+                    
+                    
+                    <div class="form-group" id="printId">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard_a").bwizard({ validating: function (e, ui) { }            
+    });
+
+    
+    // Handle disability
+    var aval = $("input[name='qf1A10_rdo']:checked").val();
+        handle_disability(aval);
+    $('input[type=radio][name=qf1A10_rdo]').change(function() {
+        handle_disability(this.value);
+    });
+
+    // Handle toggle for birth certificate
+    var avalr = $("input[name='qf1A1_rdo']:checked").val();
+        handle_toggle(avalr, 1);
+    $('input[type=radio][name=qf1A1_rdo]').change(function() {
+        handle_toggle(this.value, 1);
+    });
+    // Handle toggle for committal
+    var avalr2 = $("input[name='qf1A15_rdo']:checked").val();
+        handle_toggle(avalr2, 2);
+    $('input[type=radio][name=qf1A15_rdo]').change(function() {
+        handle_toggle(this.value, 2);
+    }); 
+
+});
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+
+function handle_disability(has_disb){
+    if (has_disb == 'ANNO') {
+        $('#disability_details_div').hide();
+        $('#disability_severity').attr("data-parsley-required", "false");
+        $('#disability_type').attr("data-parsley-required", "false");
+    }else{
+        $('#disability_details_div').show();
+        $('#disability_severity').attr("data-parsley-required", "true");
+        $('#disability_type').attr("data-parsley-required", "true");
+    }
+
+}
+
+function handle_toggle(elem, itm){
+    console.log('here '+ elem)
+    if (itm == 1){
+        if (elem == 'ANNO') {
+            $("#qf1A2").prop("readonly", true);
+        }else{
+            $("#qf1A2").prop("readonly", false);
+        }
+    }else if (itm == 2){
+        if (elem == 'ANNO') {
+            $("#id_qf1A16").prop("readonly", true);
+            $("#id_qf1A17").prop("readonly", true);
+        }else{
+            $("#id_qf1A16").prop("readonly", false);
+            $("#id_qf1A17").prop("readonly", false);
+        }
+    }
+    
+
+}
+</script>
+{% endblock %}

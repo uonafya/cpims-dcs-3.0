@@ -211,11 +211,12 @@ function open_form(x, id)
                             
                         });
                         msg += '</table>';
-                        $('#div_casehistory p').html(msg)                      
+                        $('#div_casehistory p').html(msg);                    
                     },
                     error: function(xhr, status, error)
                     {
-                        alert(error);
+                        //alert(error);
+                        $('#div_casehistory p').html(error);
                     }
                 });               
     }           

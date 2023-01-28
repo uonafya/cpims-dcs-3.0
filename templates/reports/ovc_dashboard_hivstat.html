@@ -21,91 +21,11 @@
     <link href="{% static 'css/style-responsive.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/theme/default.css' %}" rel="stylesheet" id="theme" />
     <link href="{% static 'css/jquery.tagit.css' %}" rel="stylesheet">
-    <style type="text/css">
-        #container {
-            height: 400px; 
-        }
-
-        .highcharts-figure, .highcharts-data-table table {
-            min-width: 310px; 
-            max-width: 800px;
-            margin: 1em auto;
-        }
-
-        .highcharts-data-table table {
-            font-family: Verdana, sans-serif;
-            border-collapse: collapse;
-            border: 1px solid #EBEBEB;
-            margin: 10px auto;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-        .highcharts-data-table caption {
-            padding: 1em 0;
-            font-size: 1.2em;
-            color: #555;
-        }
-        .highcharts-data-table th {
-            font-weight: 600;
-            padding: 0.5em;
-        }
-        .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-            padding: 0.5em;
-        }
-        .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-            background: #f8f8f8;
-        }
-        .highcharts-data-table tr:hover {
-            background: #f1f7ff;
-        }
-        .page_loader {
-            border: 16px solid #f3f3f3; /* Light grey */
-            border-top: 16px solid #89cff0; /* Baby Blue */
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .alert {
-            padding:8px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-        @media print {
-          body {
-            margin: 0;
-            color: #000;
-            background-color: #fff;
-          }           
-            .cont
-            {
-                width: 100%;
-                height: 5%;
-                margin: 5px;
-                padding-right: 10px;
-                overflow: hidden;
-                border: 1px solid red;
-            }
-            .highcharts-container {
-              width: 100% !important;
-            }
-            .foot, .breadcrumb, #hashes, #filters{
-                display: none;
-            }
-
-        }
-    </style>
+    <link href="{% static 'css/dashboards.css' %}" rel="stylesheet">
     <!-- ================== END BASE CSS STYLE ================== -->
     
     <!-- ================== BEGIN BASE JS ================== -->
-    <script src="assets/plugins/pace/pace.min.js"></script>
+    <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
     <!-- ================== END BASE JS ================== -->
 </head>
 <body>
@@ -132,10 +52,15 @@
                 
                 <!-- begin header navigation right -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'ovc_dashboard' %}" id="main_url"><ul>Registrations</ul></a></li>
-                    <li><a href="{% url 'hivstat_dash' %}" id="hivstat_url">HIVSTAT & VL</a></li>
+                    <li><a href="{% url 'ovc_dashboard' %}" id="main_url">Registrations</a></li>
+                    <li><a href="{% url 'ovc_registration' %}" id="reg_url">Current Caseload</a></li>
+                    <li><a href="{% url 'hivstat_dash' %}" id="hivstat_url"><b>HIVSTAT & VL</b></a></li>
                     <li><a href="{% url 'services_dash' %}" id="services_url">Services</a></li>
                     <li><a href="{% url 'cm_dash' %}" id="cm_url">Case Management</a></li>
+                    <li><a href="{% url 'perform_dash' %}" id="pf_url">Performance</a></li>
+                    <li><a href="{% url 'mer_dash' %}" id="mer_url">MER Reporting</a></li>
+                    <li><a href="{% url 'epc_dash' %}" id="epd_url">Epidemic Control</a></li>
+                    <li><a href="#" onclick="printChart(); return false;"><i class="fa fa-print"></i> </a></li>
                     {% if user.is_authenticated %}
                     <li class="dropdown" id="session_status"></li>
                     <li class="dropdown navbar-user">
@@ -176,8 +101,6 @@
                         </ul>
                     </li>
                     {% endif %}
-                    <li class="dropdown"><a href="#modal-dialog" data-toggle="modal" title="Click for Date Filters"><i class="fa fa-filter"></i></a></li>
-                    <li class="dropdown"><a href="#" title="Click to Print Page" onclick="printChart(); return false;"><i class="fa fa-print"></i></a></li>
                 </ul>
                 <!-- end header navigation right -->
                 
@@ -206,7 +129,7 @@
                             <div class="col-md-2">
                                 {{ form.sel_ward }}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 {{ form.sel_funding }}
                             </div>
                             <div class="col-md-2">
@@ -215,6 +138,9 @@
 
                             <div class="col-md-2">
                                 {{ form.sel_lip }}
+                            </div>
+                            <div class="col-md-1">
+                                <a href="#modal-dialog" data-toggle="modal" title="Click for Date Filters" class="btn btn-sm btn-inverse"><i class="fa fa-filter"></i> Filter </a>
                             </div>
                         </div>
                     </form>
@@ -277,6 +203,51 @@
                 <!-- end col-6 -->
             </div>
             <!-- end row -->
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-6 -->
+                <div class="col-md-6">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <div id="container-2E"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+                <!-- begin col-6 -->
+                <div class="col-md-6">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <div id="container-2F"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+            </div>
+            <!-- end row -->
+
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-6 -->
+                <div class="col-md-6">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <div id="container-2G"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+                <!-- begin col-6 -->
+                <div class="col-md-6">            
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            <div id="container-2H"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+            </div>
+            <!-- end row -->
 
             <!-- begin row -->
             <div class="row">
@@ -305,10 +276,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Date Filters</h4>
+                        <h4 class="modal-title">Other Filters &amp; Settings</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" name="dash-settings" id="dash-settings">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Reporting Period</label>
                                 <div class="col-md-9">
@@ -333,11 +305,52 @@
                                     <input type="text" class="form-control" placeholder="Disabled input date" disabled />
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Colors Options </label>
+                                <div class="col-md-2">
+                                    <table class="table">
+                                        <tr>
+                                            <td><input type="radio" name="sel_color" value="1" {% if request.session.sel_color == 1 or not request.session.sel_color %} checked {% endif %}> 1 </td>
+                                        </tr>
+                                            {% for cl in colors.1 %}
+                                            <tr><td bgcolor="{{ cl }}">{{ forloop.counter }} : {{ cl }}</td></tr>
+                                            {% endfor %}
+                                    </table>                                        
+                                </div>
+                                <div class="col-md-2">
+                                    <table class="table">
+                                        <tr>
+                                            <td><input type="radio" name="sel_color" value="2" {% if request.session.sel_color == 2 %} checked {% endif %}> 2 </td>
+                                            {% for cl in colors.2 %}
+                                            <tr><td bgcolor="{{ cl }}">{{ forloop.counter }} : {{ cl }}</td></tr>
+                                            {% endfor %}
+                                        </table>                                        
+                                </div>
+                                <div class="col-md-2">
+                                    <table class="table">
+                                        <tr>
+                                            <td><input type="radio" name="sel_color" value="3" {% if request.session.sel_color == 3 %} checked {% endif %}> 3 </td>
+                                            {% for cl in colors.3 %}
+                                            <tr><td bgcolor="{{ cl }}">{{ forloop.counter }} : {{ cl }}</td></tr>
+                                            {% endfor %}
+                                        </table>                                        
+                                </div>
+                                <div class="col-md-2">
+                                    <table class="table">
+                                        <tr>
+                                            <td><input type="radio" name="sel_color" value="4" {% if request.session.sel_color == 4 %} checked {% endif %}> 4 </td>
+                                            {% for cl in colors.4 %}
+                                            <tr><td bgcolor="{{ cl }}">{{ forloop.counter }} : {{ cl }}</td></tr>
+                                            {% endfor %}
+                                        </table>                                        
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                        <a href="javascript:;" class="btn btn-sm btn-success">Apply Filter</a>
+                        <button class="btn btn-sm btn-success" type="button" id="fsettings">Apply Filters &amp; Settings</button>
                     </div>
                 </div>
             </div>
@@ -375,14 +388,17 @@
         function printChart() {
               //Print Chart
               //var mapContainer;
-              //var body = $('body');                  
-
+              //var body = $('body'); 
               window.print();
+              $( ".highcharts-data-table" ).show();
+              //$( ".highcharts-data-table" ).hide();
+
             }
         $(document).ready(function() {
            App.init();App.init();
+           // $('table').addClass('table');
            // Dynamically load Charts
-           var chartlists = ['2A', '2B', '2C', '2D'];
+           var chartlists = ['2A', '2B', '2C', '2D', '2E', '2F', '2G'];
 
            var colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9",
                          "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"];
@@ -392,6 +408,7 @@
            var cn = fields[0];
            var con = fields[1];
            var wd = fields[2];
+           var mid = fields[2];
            var ipv = fields[3];
            var lipv = fields[4];
            $( "#sel-county" ).val(cn);
@@ -431,24 +448,55 @@
                reloadVars();
             });
 
+           $("#sel-funding").change(function(){
+               var fund_id = $(this).val();
+               var ip = $( "#sel-ip" ).val();
+               getIP(fund_id, ip);
+               // Always clear LIP list
+               $('#sel-lip').empty();
+               $('#sel-lip').append("<option value=''> All LIPs </option>");
+               reloadVars();
+            });
+
            $("#sel-period, #sel-year").change(function(){
                reloadVars();
             });
 
            $("#sel-ip").change(function(){
                var ip_id = $(this).val();
+               var lip = $( "#sel-lip" ).val();
+               getLIP(ip_id, lip);
                reloadVars();
-               getLIP(ip_id, '');
             });
 
-           function createPage(county_id, const_id, ward_id, ip, lip, prd, yr){
+           $("#fsettings").click(function(){
+               $.ajax({
+                   type: "POST",
+                   url: "/api/v2/settings/",
+                   data: $("#dash-settings").serialize(),
+                   success: function(data)
+                   {
+                       var status_id = data.status;
+                   },
+                    error: function(){
+                        $("#log_cg").addClass( "alert alert-danger fade in" );
+                        $('#log_cg').html("Error");
+                    }
+                 });
+               reloadVars();
+               $('#modal-dialog').modal('hide');
+               // $('#modal-dialog').modal('toggle'); 
+           });
+
+           function createPage(county_id, const_id, ward_id, mid, ip, lip, prd, yr){
                 var cid = (county_id == '' ? "000" : county_id);
                 var ctid = (const_id == '' ? "000" : const_id);
                 var wid = (ward_id == '' ? "000" : ward_id);
+                var mcid = (mid == '' ? "0" : mid);
                 var ipd = (ip == '' ? "0" : ip);
                 var lipd = (lip == '' ? "0" : lip);
                 var geo_uri = cid + '/' + ctid + '/' + wid;
-                var ip_uri = ipd + '/' + lipd;
+                var ip_uri = mcid + '/' +ipd + '/' + lipd;
                 var dt_uri = prd+ '/' + yr;
                 window.location.hash = geo_uri + '/' + ip_uri + '/' + dt_uri;
                 var hashes = window.location.hash.substr(1);
@@ -459,11 +507,19 @@
                var county_id = $( "#sel-county" ).val();
                var const_id = $( "#sel-constituency" ).val();
                var ward_id = $( "#sel-ward" ).val();
+               var mid = $( "#sel-funding" ).val();
+               if (mid == '0'){
+                   $( "#sel-ip" ).val('');
+                   $( "#sel-lip" ).val('');
+               }
                var ip = $( "#sel-ip" ).val();
+               if (ip == '0'){
+                   $( "#sel-lip" ).val('');
+               }
                var lip = $( "#sel-lip" ).val();
                var prd = $( "#sel-period" ).val();
                var yr = $( "#sel-year" ).val();
-               createPage(county_id, const_id, ward_id, ip, lip, prd, yr);
+               createPage(county_id, const_id, ward_id, mid, ip, lip, prd, yr);
                // Current selections text for UI
                var county_name = $("#sel-county option:selected").text();
                var const_name = $( "#sel-constituency option:selected").text();
@@ -481,11 +537,23 @@
                var hashes = window.location.hash.substr(1);
                
                chartlists.forEach(function (itm, idx) {
-                  var url = "/api/v2/"+ itm +"/"+ hashes;
+                  var dt = new Date();
+                  let dts = dt.getTime();
+                  var url = "/api/v2/"+ itm +"/"+ hashes +"?t="+ dts;
                   // Page Loader
                   $("#container-"+ itm).html("<center><div class='page_loader'></div></center>");
                   // Load Data
-                  $("#container-"+ itm).load(url);
+                  // $("#container-"+ itm).load(url);
+                  $.ajax(url, {
+                       timeout: 50000, // 1000 ms
+                       success: function (data) {
+                           //$("#container-"+ itm).html("<center><div class='page_loader'></div></center>");
+                           $("#container-"+ itm).html(data);
+                       },
+                        error: function(){
+                            $("#container-"+ itm).html("Error Generating chart.")
+                        }
+                    });
                });
                // Change URLS to pick current page selections
                $("a#main_url").prop("href", "/d/#"+ hashes)
@@ -538,17 +606,37 @@
            function getLIP(ip_id, sel_lip){
                 var curl = "{% url 'get_lip' ip_id=0 %}"
                 var url = curl.replace('0', ip_id.toString());
+                $('#sel-lip').empty();
+                $('#sel-lip').append("<option value=''> All LIPs </option>");
                 $.ajax({
                     type: "GET",
                     url: url, 
                     contentType: "application/json; charset-utf-8",
                     dataType: "json",
                     success: function(data) {
-                      $('#sel-lip').empty();
-                      $('#sel-lip').append("<option value=''> All LIPs </option>");
                       $.each(data, function(i, item){
                         var sel = (sel_lip == data[i].id) ? 'selected="selected"' : ''; 
                         $('#sel-lip').append('<option value="'+data[i].id+'" '+ sel +'>'+data[i].name+'</option>');
+                      });
+                    }, 
+                    complete: function() {}
+                  });
+           }
+
+           function getIP(fund_id, sel_ip){
+                var curl = "{% url 'get_ip' fund_id=0 %}"
+                var url = curl.replace('0', fund_id.toString());
+                $('#sel-ip').empty();
+                $('#sel-ip').append("<option value=''> All IPs </option>");
+                $.ajax({
+                    type: "GET",
+                    url: url, 
+                    contentType: "application/json; charset-utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                      $.each(data, function(i, item){
+                        var sel = (sel_ip == data[i].id) ? 'selected="selected"' : ''; 
+                        $('#sel-ip').append('<option value="'+data[i].id+'" '+ sel +'>'+data[i].name+'</option>');
                       });
                     }, 
                     complete: function() {}

@@ -1,6 +1,5 @@
 """This is for versioning."""
 
-default_app_config = 'cpovc_access.apps.AccessAppConfig'
 __version__ = '1.5.0'
 
 

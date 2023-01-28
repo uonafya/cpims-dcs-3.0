@@ -27,11 +27,11 @@
     <i class="fa fa-check fa-2x pull-left"></i>
     <span class="invalid-form-message" id="invalid-form-message"></span>
 </div>
-<div class="alert alert-info fade in" tabindex="1">
+<div class="alert alert-danger fade in" tabindex="1">
     <span class="close" data-dismiss="alert">×</span>
     <i class="fa fa-check fa-2x pull-left"></i>
     <p>
-      Please counter check the Organization unit that you are about to create does not exist before creating a new one. There are so many duplicates caused by users registering new organization units without first searching. Contact the admin for any queries.
+      There are so many duplicates caused by users registering new organization units without first searching. This live system is also being used for tests and creation of non existent and dummy organanisation units. <b> Registration of new organisation units has been disabled and ONLY super users can do that until further notice. Contact the admin for any queries.</b>
    </p>
 </div>
 <!-- begin row -->
@@ -305,6 +305,9 @@ window.Parsley
 jQuery(document).ready(function() {
 	// $("#id_org_unit_name").parsley({ errorMessage: "User name already used" });
 	$('html,body').scrollTop(0);
+        {% if not request.user.is_superuser %}
+	$("#new_org_unit :input").prop("disabled", true);
+	{% endif %}
 	FormWizardValidation.init();
 
 	var unit_type = $("#id_org_unit_type").val();

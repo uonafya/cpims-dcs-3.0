@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CPIMS CTiP {% endblock %}
+
+{% load app_filters %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<style type="text/css">
+  form#formCaseinfo ul {
+      list-style-type: none;
+    }
+  form#formCaseinfo li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Counter Trafficking in Persons (CTiP) <small> New </small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <!-- begin col-2 -->
+    <div class="col-md-2">
+        <div class="m-b-10 text-inverse f-s-10"><b>AVAILABLE FORMS</b></div>
+        <table class="text-inverse m-b-20 width-full">
+            <tr>
+                <td>
+                    <a href="{% url 'view_ctip_form' form_id='A' case_id=case_id|stringformat:'s' %}">
+                    <i class="fa fa-pencil fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">{% if case.has_consent %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">Consent (Form A)</div></a>
+                </td>
+            </tr>
+            {% if case.has_consent %}
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'view_ctip_form' form_id='B' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-sitemap fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">{% if events.B > 0 %}{{ events.B }}{% else %} 0 {% endif %}</span>
+                    <div class="m-t-4">Initial Risk Assessment (Form B)</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'view_ctip_form' form_id='C' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-level-up fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">{% if events.C > 0 %}{{ events.C }}{% else %} 0 {% endif %}</span>
+                    <div class="m-t-4">Referrals (Form C)</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'view_ctip_form' form_id='D' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-crosshairs fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">{% if events.D > 0 %}{{ events.D }}{% else %} 0 {% endif %}</span>
+                    <div class="m-t-4">Screening (Form D)</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'view_ctip_form' form_id='E' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-expand fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">{% if events.E > 0 %}{{ events.E }}{% else %} 0 {% endif %}</span>
+                    <div class="m-t-4">Needs Assessment (Form E)</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'view_ctip_form' form_id='F' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-plane fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">{% if events.F > 0 %}{{ events.F }}{% else %} 0 {% endif %}</span>
+                    <div class="m-t-4">Return, Reintegration and Repatriation (Form F)</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'view_ctip_form' form_id='G' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-wrench fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Individual care plan (Form G)</div></a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="p-t-10">
+                    <a href="{% url 'case_events' id=ev_id %}">
+                    <i class="fa fa-cogs fa-2x pull-left fa-fw"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Other Follow ups (Court, Medical)</div></a>
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+        <div class="alert alert-warning">
+            <i class="fa fa-info-circle fa-lg m-r-5 pull-left m-t-2"></i> Follow ups can be done at <b class="text-inverse">any time</b> in the process and <b class="text-inverse">ONLY for cases with consent.</b>
+        </div>
+    </div>
+    <!-- end col-2 -->
+    <!-- begin col-10 -->
+    <div class="col-md-10">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Victim Details (Summary)</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="#" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="#" onclick="history.back()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Search</a>
+                    </span>
+                    Case No: XXXXX/YYYY
+                </div>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+                <form id="formCaseinfo" method="POST" data-parsley-validate="true">
+                    {% csrf_token %}
+                <table class="table table-profile">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                <h4>{{ case.person.first_name }} {{ case.person.surname }} <small>DoB: {{ case.person.date_of_birth }} ({{ case.person.age }})</small></h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight">
+                            <td class="field">Bio Data</td>
+                            <td></td>
+                        </tr>
+                        <tr class="divider">
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Sex</td>
+                            <td>{{ case.person.sex_id|gen_value:vals }}</td>
+                        </tr>
+                        <tr>
+                            <td class="field">DoB</td>
+                            <td>{{ case.person.date_of_birth }} (Actual / Estimated)</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Case Data</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Categories</td>
+                            <td>
+                                {% for ct in categories %}
+                                    {{ ct.case_category|gen_value:vals }}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Determination</td>
+                            <td>
+                                Is this a trafficking case? {{ tr_form.is_trafficking }}
+                                <div id="amp_div">
+                                <hr>
+                                    <div class="col-md-4"><label class="control-label"><strong>Activity</strong></label>
+                                        {{ tr_form.ctip_activity }}
+                                        <span id="activity_error"></span>
+                                    </div>
+                                    <div class="col-md-4"><label class="control-label"><strong>Means</strong></label>
+                                        {{ tr_form.ctip_means }}
+                                    </div>
+                                    <div class="col-md-4"><label class="control-label"><strong>Purpose</strong></label>
+                                        {{ tr_form.ctip_purpose }}
+                                        <span id="purpose_error"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="field">Other details</td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr class="divider">
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field"></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary m-r-5 btnNewcase"><i class="fa fa-save m-r-5"></i> Submit Case details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".btnNewcase").click(function(event) {
+            $("#formCaseinfo").parsley().validate();
+            if ($("#formCaseinfo").parsley().isValid() ) {
+                console.log('Is Valid');
+                return true;
+            }else{
+                console.log('Not Valid');
+                return false;
+            }
+            
+        });
+        var aval = $("input[name='is_trafficking']:checked").val();
+        handle_amp(aval);
+
+        // Purpose means logic
+        $('input[type=radio][name=is_trafficking]').change(function() {
+            handle_amp(this.value);
+        });
+
+        function handle_amp(aval){
+            console.log('AVAL', aval);
+            if (aval == 'AYES') {
+                $('#amp_div').show();
+                $('input[type=checkbox][name=ctip_activity]').attr('data-parsley-required', 'true');
+                $('input[type=checkbox][name=ctip_purpose]').attr('data-parsley-required', 'true');
+            }else{
+                $('#amp_div').hide();
+                $('input[type=checkbox][name=ctip_activity]').attr('data-parsley-required', 'false');
+                $('input[type=checkbox][name=ctip_purpose]').attr('data-parsley-required', 'false');
+            }
+        }
+    });
+</script>
+{% endblock %}
+

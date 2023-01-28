@@ -1,0 +1,13 @@
+Collecting PyOpenSSL
+  Using cached https://files.pythonhosted.org/packages/85/3a/fe3c98435856a1ed798977981f3da82d2685cf9df97e4d9546340d2b83db/pyOpenSSL-21.0.0-py2.py3-none-any.whl
+Collecting cryptography>=3.3 (from PyOpenSSL)
+  Using cached https://files.pythonhosted.org/packages/10/91/90b8d4cd611ac2aa526290ae4b4285aa5ea57ee191c63c2f3d04170d7683/cryptography-35.0.0.tar.gz
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-IXjsUR/cryptography/setup.py", line 84
+        print(f"    Python: {'.'.join(str(v) for v in sys.version_info[:3])}")
+                                                                            ^
+    SyntaxError: invalid syntax
+    
+    ----------------------------------------

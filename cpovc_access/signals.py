@@ -7,7 +7,6 @@ from django.contrib.auth.signals import user_logged_out
 from cpovc_access.models import AccessLog
 
 
-# user_locked_out = Signal(providing_args=['request', 'username', 'ip_address'])
 user_locked_out = Signal()
 
 
@@ -33,7 +32,5 @@ def log_user_lockout(sender, request, user, signal, *args, **kwargs):
         access_log.logout_time = now()
         access_log.save()
 
-# user_expired = Signal(providing_args=["user"])
-# temporary_password_set = Signal(providing_args=["user", "request", "password"])
 user_expired = Signal()
 temporary_password_set = Signal()

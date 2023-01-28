@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CPIMS CTiP {% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Counter Trafficking in Persons (CTiP) <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Counter Trafficking in Persons (CTiP) - Registry</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+                <div class="row">
+                    <form class="form-horizontal" action="." method="GET"  data-parsley-validate="true">                    
+                        <div class="col-md-4">
+                            <div class="form-group" class="m-r-10">
+                                {{ form.search_name }}
+                            </div>
+                        </div>
+                        <div class="col-md-1"><label class=" checkbox m-r-10"><span>Criteria</span></label></div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                {{ form.search_criteria }}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox m-r-10">
+                                <label>
+                                    {{ form.person_deceased }} <span>Include Inactive Cases</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-search"></i>&nbsp;Search</button>
+                            <a href="{% url 'new_person' %}" id="create-person">
+                               <button type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-plus"></i>&nbsp;Register New</button>
+                            </a>
+                        </div>
+                </form>
+                </div>
+                <hr>
+                <table class="table" id="data-table">
+                    <thead>
+                        <tr><th>#</th><th>CPIMS ID</th><th>Names</th><th>Case ID</th><th>Case Date</th><th></th></tr>
+                    </thead>
+                {% for case in cases %}
+                   <tr>
+                       <td>{{ forloop.counter }}</td>
+                       <td>{{ case.id }}</td>
+                       <td>{{ case.first_name }} {{ case.surname }}</td>
+                       <td>{{ case.case_serial }}</td>
+                       <td>{{ case.case_date }}</td>
+                       <td>
+                            {% if case.case_level == 2 %}
+                                <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
+                            {% elif case.case_level == 1 %}
+                                <a href="{% url 'new_ctip_case' case_id=case.case_cid|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">New CTiP Case details</a>
+                            {% else %}
+                                <a href="#" class="btn  btn-sm btn-danger m-r-5">New Case Record Sheet</a>
+                            {% endif %}
+                        </td>
+                   </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#data-table').DataTable( {
+        "order": [[ 0, "asc" ]]
+    } );
+
+    $('.ddash').on('click', function(ev) {
+        // var hashValue = location.hash.replace(/^#/, '');
+        var id = $(this).attr('id');
+        var cname = $(this).attr('rel');
+        var cdate = $(this).attr('rel1');
+        $('#cname').html(cname);
+        $('#cdate').html(cdate);
+        $('#item_cid').val(id);
+        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
+        $.ajax({
+           type: "POST",
+           url: "{{ request.get_full_path }}",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           success: function(response)
+           {
+               var msg = response.message;
+               var status_id = response.status;
+               var cdates = response.dates;
+               if (status_id == 0){
+                   $("#report_"+ id).remove();
+               }
+               $('#mng_messages').html(msg);
+               var dt = '';
+               var tchildren = 0;
+               var tcases = 0;
+               var trpts = 0;
+               $.each(response.data, function(key, val) {
+                    dt += '<tr><td></td><td>'+ key +'</td><td>';
+                    dt += val + '</td></tr>';
+                });
+               $('#mywork > tbody').html(dt);
+           },
+            error: function(){
+                $('#mng_messages').html("Error removing report")
+            }
+         });
+        $('#modal-details').modal('show');
+        ev.preventDefault();
+    });
+} );
+</script>
+{% endblock %}

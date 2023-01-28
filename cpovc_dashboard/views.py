@@ -110,9 +110,8 @@ def get_chart(request, rid, county_id, const_id, ward_id=0,
         html = get_chart_data(request, rid, county_id, const_id, ward_id,
                               ip_id, lip_id, prd, yr)
     except Exception as e:
-        print(('Chart view error - %s' % (str(e))))
+        print('Chart view error - %s' % (str(e)))
         msg = 'Please change the Filters and try again.'
         return HttpResponse('<p>Error Generating Chart. %s</p>' % (msg))
     else:
         return HttpResponse(html)
-

@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import REDIRECT_FIELD_NAME
-# from django.contrib.auth.views import password_change
+from django.contrib.auth.views import PasswordResetView
+
 from django.contrib import messages
 
 from cpovc_access.forms import StrictPasswordChangeForm
@@ -14,6 +15,9 @@ from cpovc_access.models import PasswordChange, UserChange
 logger = logging.getLogger(__name__)
 
 
+@admin.action(
+    description=u"Unlock selected user(s)"
+)
 def unlock_user(modeladmin, request, queryset):
     """
     These takes in a Django queryset and spits out a CSV file.
@@ -27,9 +31,7 @@ def unlock_user(modeladmin, request, queryset):
     messages.info(request, message)
 
 
-unlock_user.short_description = u"Unlock selected user(s)"
-
-
+@admin.register(AccessAttempt)
 class AccessAttemptAdmin(admin.ModelAdmin):
     """Class for handling attempts."""
 
@@ -74,9 +76,7 @@ class AccessAttemptAdmin(admin.ModelAdmin):
     actions = [unlock_user]
 
 
-admin.site.register(AccessAttempt, AccessAttemptAdmin)
-
-
+@admin.register(AccessLog)
 class AccessLogAdmin(admin.ModelAdmin):
     """Class for handling access logs."""
 
@@ -116,9 +116,6 @@ class AccessLogAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(AccessLog, AccessLogAdmin)
-
-
 def admin_login(request, extra_context=None):
     """Redirect to default login view which enforces auth policy."""
     next_page = request.get_full_path()
@@ -138,6 +135,7 @@ def admin_logout(request, extra_context=None):
 admin.site.logout = admin_logout
 
 
+@admin.register(PasswordChange)
 class PasswordChangeAdmin(admin.ModelAdmin):
     """Class to handle password change."""
 
@@ -168,9 +166,7 @@ class PasswordChangeAdmin(admin.ModelAdmin):
         return actions
 
 
-admin.site.register(PasswordChange, PasswordChangeAdmin)
-
-
+@admin.register(UserChange)
 class UserChangeAdmin(admin.ModelAdmin):
     """Class to handle user changes."""
 
@@ -200,9 +196,6 @@ class UserChangeAdmin(admin.ModelAdmin):
         return actions
 
 
-admin.site.register(UserChange, UserChangeAdmin)
-
-
 def admin_password_change(request):
     """Handle the "change password" task - both display and validation."""
     to_url = reverse('admin:password_change_done', current_app=admin.site.name)
@@ -213,7 +206,8 @@ def admin_password_change(request):
     }
     if admin.site.password_change_template is not None:
         defaults['template_name'] = admin.site.password_change_template
-    return password_change(request, **defaults)
+    # return password_change(request, **defaults)
+    return PasswordResetView.as_view(request, **defaults)
 
 
 admin.site.password_change = admin_password_change

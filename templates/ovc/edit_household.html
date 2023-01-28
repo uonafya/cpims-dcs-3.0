@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} OVC Care HouseHold Management {% endblock %}
+
+{% load app_filters %}
+
+{% block style_code %}
+
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">OVC Care</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"><i class="fa fa-child"></i> OVC Care <small>HouseHold Member edit</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">{{ person.first_name }} {{ person.surname }} | {{ person.sex_id|gen_value:vals }} | {{ person.date_of_birth }} ( {{ person.age }})</h4>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Surname</th>
+                                <th>Age</th>
+                                <th>Type</th>
+                                <th>Telephone</th>
+                                <th>Alive</th>
+                                <th>HIV Status</th>
+                                <th>Head</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hhmember in hhmembers %}
+                            <tr>
+                                <td>{{ forloop.counter }} {% if hhmember.person.id == person.id %}<i class="fa fa-check fa-2x"></i>{% endif %}</td>
+                                <td>{{ hhmember.person.first_name }}</td>
+                                <td>{{ hhmember.person.surname }}</td>
+                                <td>{{ hhmember.person.years }}</td>
+                                <td>
+                                {% if hhmember.member_type == 'TBVC' %}
+                                   Sibling
+                                {% elif hhmember.member_type == 'TOVC' %}
+                                   Enrolled OVC
+                                {% else %}
+                                   Parent/Guardian
+                                {% endif %}
+                                </td>
+                                <td>{{ hhmember.person.des_phone_number }}</td>
+                                <td>
+                                    {% if hhmember.person.date_of_death %}
+                                No
+                            {% else %}
+                                Yes
+                            {% endif %}
+                                </td>
+                                <td>
+                                {% if hhmember.hiv_status %}
+                                    {{ hhmember.hiv_status|gen_value:vals }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                                </td>
+                                <td>
+                                {% if not hhmember.hh_head %}
+                                    No
+                                {% else %}
+                                    Yes
+                                {% endif %}
+                                </td>
+                                <td>
+
+                               <a href="{% url 'hh_edit' hhid=hhid id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> Edit Member details </button></a>
+
+                                {% if hhmember.member_type == 'TBVC' %}
+                                {% if hhmember.hiv_status %}
+                                <a href="{% url 'ovc_view' id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> View</button></a>
+                                {% else %}
+                                <a href="{% url 'ovc_register' id=hhmember.person_id %}"><button type="button" class="btn btn-danger m-r-5"> <i class="fa fa-pencil"></i> Finish Registration</button></a>
+                                {% endif %}
+                                {% elif hhmember.member_type == 'TOVC' %}
+                                <a href="{% url 'ovc_view' id=hhmember.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> View</button></a>
+                                {% endif %}
+
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% if ovc %}
+                            <tr>
+                                <td># {% if ovc.child_chv.id == person.id %}<i class="fa fa-check fa-2x"></i>{% endif %}</td>
+                                <td>{{ ovc.child_chv.first_name }}</th>
+                                <td>{{ ovc.child_chv.surname }}</td>
+                                <td>{{ ovc.child_chv.years }}</td>
+                                <td>CHV</td>
+                                <td>{{ ovc.child_chv.des_phone_number }}</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><a href="{% url 'hh_edit' hhid=hhid id=ovc.child_chv.id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-file"></i> Edit CHV details </button></a></td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <hr style="border-color: red;">
+                {% if member %}
+                <form action="." class="form-horizontal" method="post" name="hh_edit_form" id="hh_edit_form" data-parsley-validate="true">
+                {% csrf_token %}
+                {{ form.member_type }}
+                <div class="row">
+                    <div class="col-md-5">
+                        <fieldset>
+                            <legend class="pull-left width-full">Additional details for Caregivers and CHV</legend>
+                            <!-- begin row -->
+                            {% if pobj.member_type == 'TBVC' or pobj.member_type == 'TOVC' %}
+
+                            <p>ONLY available for Caregivers / Guardians / CHV edit</p>
+                            
+                            {% else %}                            
+                            <div class="form-group" id="school_class_div">
+                                <label class="col-md-3 control-label">Date of Birth <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ extra_form.date_of_birth }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">ID Number <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ extra_form.id_number }}</div>
+                            </div>
+                            <div class="form-group" id="admission_type_div">
+                                <label class="col-md-3 control-label">Mobile No. <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ extra_form.mobile_number }}</div>
+                            </div>
+                            <div class="form-group" id="admission_type_div">
+                                <label class="col-md-3 control-label">Level of Education<span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ extra_form.education_level }}</div>
+                            </div>
+                            {% endif %}
+                        </fieldset>
+                    </div>
+                    <div class="col-md-7">
+                        <fieldset>
+                            <legend class="pull-left width-full">Facility linkage details</legend>
+                            <!-- begin row -->
+                            {% if pobj.member_type == 'CCHV' %}
+
+                            <p>ONLY available for OVC / Caregivers / Guardians</p>
+                            
+                            {% else %}
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">HIV Status <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ form.hiv_status }}</div>
+                            </div>
+                            <div class="form-group" id="facility_div">
+                                <label class="col-md-3 control-label">Facility Name <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ form.facility }}</div>
+                            </div>
+                            <div class="form-group" id="facility_id_div">
+                                <label class="col-md-3 control-label">Facility ID <span class="asteriskField">*</span></label>
+                                <div class="col-md-4">{{ form.facility_id }}</div>
+                            </div>
+                            <div class="form-group" id="ccc_no_div">
+                                <label class="col-md-3 control-label">CCC / HEI Number <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ form.ccc_number }}</div>
+                            </div>
+
+                            <div class="form-group" id="art_div">
+                                <label class="col-md-3 control-label">ART Status <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ form.art_status }}</div>
+                            </div>
+                            <div class="form-group" id="link_date_div">
+                                <label class="col-md-3 control-label">Date of Linkage <span class="asteriskField">*</span></label>
+                                <div class="col-md-9">{{ form.link_date }}</div>
+                            </div>
+
+                            {% endif %}
+
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row" id="form_actions">
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4"></label>
+                    <div class="col-md-6 col-sm-6">
+                        <button type="submit" class="btn btn-primary" value="submit" id="s1">Update</button>
+                        <a href="{% url 'pfs_home' %}">
+                        <button type="button" class="btn btn-default">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+            {% else %}
+
+            <p>Not a member or CHV to this HH</p>
+            {% endif %}
+
+
+
+                <a href="{% url 'ovc_view' id=ovc_id %}" class="badge badge-primary m-4"> Back to OVC</a>
+                <div class="badge pull-right m-4">Revised: May 2022</div>
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script>
+$(document).ready(function() {
+    {% if form.hiv_status.value == 'HSTP' and not request.user.is_superuser %}
+    $("#hiv_status").attr("disabled", true);
+    {% endif %}
+    $('#registration_date, #link_date').datepicker({
+        dateFormat: 'yy-mm-dd', format: 'dd-M-yyyy',
+        endDate: '+0d', enddate: '+0d', autoclose: true
+    });
+    //Facility query
+    $( "#facility" ).autocomplete({
+        source: function( request, response ) {
+        $.ajax({
+          url: "{% url 'ovc_search' %}",
+          dataType: "json",
+          data: {q: request.term, id: 1},
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 4,
+      select: function( event, ui ) {
+         $('#facility').val(ui.item.name);
+         $('#facility_id').val(ui.item.id);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    // Handle HIV status
+    var hstatus = $('#hiv_status').val();
+    handle_hstatus(hstatus);
+
+    $('#hiv_status').change(function(){
+        handle_hstatus(this.value);
+    });
+
+    function handle_hstatus(hstatus){
+        if (hstatus == 'HSTP') {
+            $('#facility_div').show();
+            $('#facility_id_div').show();
+            $('#art_div').show();
+            $('#link_date_div').show();
+            $('#ccc_no_div').show();
+            $('#facility').attr("data-parsley-required", "true");
+            $('#facility_id').attr("data-parsley-required", "true");
+            $('#art_status').attr("data-parsley-required", "true");
+            $('#link_date').attr("data-parsley-required", "true");
+            $('#ccc_number').attr("data-parsley-required", "true");
+        }else{
+            $('#facility_div').hide();
+            $('#facility_id_div').hide();
+            $('#art_div').hide();
+            $('#link_date_div').hide();
+            $('#ccc_no_div').hide();
+            $('#facility').attr("data-parsley-required", "false");
+            $('#facility_id').attr("data-parsley-required", "false");
+            $('#art_status').attr("data-parsley-required", "false");
+            $('#link_date').attr("data-parsley-required", "false");
+            $('#ccc_number').attr("data-parsley-required", "false");
+        } 
+    }
+});
+</script>
+{% endblock %}

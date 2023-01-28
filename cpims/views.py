@@ -114,7 +114,7 @@ def home(request):
                        'section': section, 'xmax': xmax,
                        'alt_phone': alt_phone})
     except Exception as e:
-        print(('dashboard error - %s' % (str(e))))
+        print('dashboard error - %s' % (str(e)))
         raise e
 
 
@@ -130,7 +130,7 @@ def access(request):
         raise e
 
 
-def handler_400(request, exception, template_name="400.html"):
+def handler_400(request, exception):
     """Some default page for Bad request error page."""
     try:
         return render(request, '400.html', {'status': 400})
@@ -154,10 +154,9 @@ def handler_500(request):
         raise e
 
 
-def csrf_failure(request):
+def csrf_failure(request, reason=""):
     """Some default page for CSRF error."""
     try:
-        return render(request, 'csrf.html', {'status': 500})
+        return render(request, 'csrf.html', {'status': 500, 'reason': reason})
     except Exception as e:
         raise e
-

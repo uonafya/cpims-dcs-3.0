@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.http import HttpResponse
 from .models import (
     OVCCaseGeo, OVCCaseCategory, OVCBasicCRS, OVCBasicPerson, OVCBasicCategory,
-    OVCPlacement, OVCDischargeFollowUp, OVCCaseRecord)
+    OVCPlacement, OVCDischargeFollowUp, OVCCaseRecord, OVCCaseLoadView,
+    OVCCaseEvents, OVCCaseLocation, OvcCaseInformation)
 
 
 def dump_to_csv(modeladmin, request, qs):
@@ -31,14 +32,14 @@ def dump_to_csv(modeladmin, request, qs):
             val = getattr(obj, field)
             if callable(val):
                 val = val()
-            if type(val) == str:
+            if type(val) == unicode:
                 val = val.encode("utf-8")
             row.append(val)
         writer.writerow(row)
     return response
 
 
-dump_to_csv.short_description = "Dump to CSV"
+dump_to_csv.short_description = u"Dump to CSV"
 
 
 def export_xls(modeladmin, request, queryset):
@@ -50,15 +51,15 @@ def export_xls(modeladmin, request, queryset):
     ws = wb.add_sheet("List Geo")
     row_num = 0
     columns = [
-        ("ID", 2000),
-        ("Name", 6000),
-        ("Parent", 8000),
+        (u"ID", 2000),
+        (u"Name", 6000),
+        (u"Parent", 8000),
     ]
 
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    for col_num in range(len(columns)):
+    for col_num in xrange(len(columns)):
         ws.write(row_num, col_num, columns[col_num][0], font_style)
         # set column width
         ws.col(col_num).width = columns[col_num][1]
@@ -72,13 +73,13 @@ def export_xls(modeladmin, request, queryset):
             obj.area_name,
             obj.parent_area_id,
         ]
-        for col_num in range(len(row)):
+        for col_num in xrange(len(row)):
             ws.write(row_num, col_num, row[col_num], font_style)
     wb.save(response)
     return response
 
 
-export_xls.short_description = "Export XLS"
+export_xls.short_description = u"Export XLS"
 
 
 def export_xlsx(modeladmin, request, queryset):
@@ -95,12 +96,12 @@ def export_xlsx(modeladmin, request, queryset):
     row_num = 0
 
     columns = [
-        ("ID", 15),
-        ("Name", 70),
-        ("Parent", 70),
+        (u"ID", 15),
+        (u"Name", 70),
+        (u"Parent", 70),
     ]
 
-    for col_num in range(len(columns)):
+    for col_num in xrange(len(columns)):
         c = ws.cell(row=row_num + 1, column=col_num + 1)
         c.value = columns[col_num][0]
         c.style.font.bold = True
@@ -115,7 +116,7 @@ def export_xlsx(modeladmin, request, queryset):
             obj.area_name,
             obj.parent_area_id,
         ]
-        for col_num in range(len(row)):
+        for col_num in xrange(len(row)):
             c = ws.cell(row=row_num + 1, column=col_num + 1)
             c.value = row[col_num]
             c.style.alignment.wrap_text = True
@@ -124,7 +125,7 @@ def export_xlsx(modeladmin, request, queryset):
     return response
 
 
-export_xlsx.short_description = "Export XLSX"
+export_xlsx.short_description = u"Export XLSX"
 
 
 class OVCCaseGeoAdmin(admin.ModelAdmin):
@@ -222,7 +223,7 @@ class OVCDischargeInline(admin.StackedInline):
     readonly_fields = ['person']
 
     def has_add_permission(self, request):
-        return True
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return True
@@ -284,6 +285,40 @@ class OVCCaseCategoryInline(admin.StackedInline):
         return True
 
 
+class OVCCaseGeoInline(admin.StackedInline):
+    model = OVCCaseGeo
+    readonly_fields = ['person']
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_module_permission(self, request):
+        return True
+
+
+class OVCCaseEventsInline(admin.StackedInline):
+    model = OVCCaseEvents
+    readonly_fields = ['placement_id', 'app_user']
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_module_permission(self, request):
+        return True
+
+
 class OVCCaseRecordAdmin(admin.ModelAdmin):
     search_fields = ['case_serial', 'person__first_name', 'person__id',
                      'person__surname', 'person__other_names']
@@ -296,7 +331,7 @@ class OVCCaseRecordAdmin(admin.ModelAdmin):
 
     readonly_fields = ['person']
 
-    inlines = (OVCCaseCategoryInline, )
+    inlines = (OVCCaseCategoryInline, OVCCaseGeoInline, OVCCaseEventsInline, )
 
     actions = [dump_to_csv]
 
@@ -313,3 +348,58 @@ class OVCCaseRecordAdmin(admin.ModelAdmin):
 
 admin.site.register(OVCCaseRecord, OVCCaseRecordAdmin)
 
+
+class OVCCaseLoadAdmin(admin.ModelAdmin):
+    search_fields = ['case_serial', 'cpims_id']
+    list_display = ['cpims_id', 'case_serial', 'case_category',
+                    'case_sub_category', 'org_unit', 'case_date',
+                    'intervention']
+    ordering = ('-date_case_opened',)
+
+    list_filter = ['date_case_opened']
+
+    # readonly_fields = ['person']
+
+    actions = [dump_to_csv]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(OVCCaseLoadView, OVCCaseLoadAdmin)
+
+'''
+class OVCCaseLocationAdmin(admin.ModelAdmin):
+    """Admin back end for Geo data management."""
+
+    search_fields = ['case_id', 'person__first_name', 'person__surname']
+    list_display = ['case_id', 'person', 'report_country_code', 'report_city',
+                    'get_creator']
+    # readonly_fields = ['area_id']
+    list_filter = ['is_void', 'report_country_code']
+
+    def get_creator(self, obj):
+        return obj.case.created_by
+    get_creator.short_description = 'Creator'
+    get_creator.admin_order_field = 'case__created_by'
+    actions = [dump_to_csv, export_xls, export_xlsx]
+
+
+admin.site.register(OVCCaseLocation, OVCCaseLocationAdmin)
+'''
+
+class OVCCaseInformationAdmin(admin.ModelAdmin):
+    """Admin back end for Geo data management."""
+
+    search_fields = ['case_id', 'person__first_name', 'person__surname']
+    list_display = ['case_id', 'person', 'info_type', 'info_item']
+    # readonly_fields = ['area_id']
+    list_filter = ['is_void']
+
+    actions = [dump_to_csv, export_xls, export_xlsx]
+
+
+admin.site.register(OvcCaseInformation, OVCCaseInformationAdmin)

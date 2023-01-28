@@ -2,10 +2,9 @@ import os
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
-from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import LETTER
-# from reportlab.lib.pagesizes import cm
+from reportlab.lib.units import cm
 from reportlab.platypus import (
     SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image, PageBreak)
 from cpovc_registry.functions import search_person_name
@@ -151,7 +150,7 @@ def generate_crs(response, ovc_data, ovc_items):
     slds = styles["Line_Data_Small"]
 
     story.append(tt1)
-    story.append(Paragraph("<b>DEPARTMENT OF CHILDREN SERVICES</b>", sllc))
+    story.append(Paragraph("<b>DIRECTORATE OF CHILDREN SERVICES</b>", sllc))
 
     story.append(Spacer(0.1 * cm, .2 * cm))
 

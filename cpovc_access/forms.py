@@ -60,7 +60,7 @@ class StrictAuthenticationForm(forms.Form):
 
     def clean(self):
         """Method to clean up our parameters."""
-        remote_addr = (self.request.META.get('HTTP_X_REAL_IP') or
+        remote_addr = (self.request.headers.get('x-real-ip') or
                        self.request.META.get('REMOTE_ADDR'))
         if not remote_addr:
             logger.warning('Could not reliably determine source address',

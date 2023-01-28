@@ -415,6 +415,8 @@ CHART['1E']['dfilter'] = 'registration_date'
 CHART['1E']['categories'] = ['HIV Status +Ve', 'HIV Status -Ve',
                              'HIV Status Unknown', 'HIV Test not Required',
                              'HIV Referred For Testing']
+CHART['1E']['colors'] = ['#377eb8', '#4daf4a', '#984ea3']
+
 # - Eligibility criterias
 CHART['1F'] = {}
 CHART['1F']['ctitle'] = 'Eligibility Criteria'

@@ -1,5 +1,5 @@
 from cpovc_auth.models import AppUser
-from django.contrib.auth.models import check_password
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.backends import ModelBackend
 from django.conf import settings
 
@@ -9,6 +9,7 @@ class CPOVCAuthenticationBackend(ModelBackend):
     def authenticate(self, username=None, password=None):
         """ Authenticate a user based on workforce_id / national_id. """
         try:
+            print('Log in testing', '*-*' * 50)
             user = AppUser.objects.get(username__iexact=username.lower())
             if settings.ALLOW_NATIONAL_ID_LOGIN:
                 if not user:

@@ -1,0 +1,1098 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CTiP {{ form_id }} - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+@media screen {
+  div.divHeader {
+    display: none;
+  }
+  form#new-form-d ul {
+      list-style-type: none;
+    }
+  form#new-form-d ul:not('.pager') li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  form#new-form-d ul {
+      list-style-type: none;
+    }
+  form#new-form-d ul li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  #wizard_screening ol { display: none; }
+  .bwizard-buttons { display: none; }
+  .bwizard-steps { display: none; }
+  #wizard_screening ol li { display: none; }
+}
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP - Form </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CTiP - FORM {{ form_id }} ({{ form_name }}) <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/><b>CTiP - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="{% url 'ctip_form' form_id='D' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-pencil m-r-5"></i> {% if events %} Edit {% else %} New {% endif %}Screening Form</a>
+                    <a href="{% url 'view_person' id=case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-child m-r-5"></i> Bio data</a>
+                    <a href="{% url 'view_case_record_sheet' id=case_id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-file-o m-r-5"></i> Case data</a>
+                    <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Case</a>
+                    </span>
+                    Case No: {{ case.case_number }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" id="new-form-d" action="." data-parsley-validate="true">
+                    {% if events %}
+
+                    <div id="wizard_screening">
+                        <ol>
+                            <li>
+                                Registration Data 
+                                <small>Confidentiality and registration data.</small>
+                            </li>
+                            <li>
+                                Case Data 
+                                <small>Case and interview data.</small>
+                            </li>
+                            <li>
+                                Recruitment
+                                <small>Recruitment.</small>
+                            </li>
+                            <li>
+                                Transportation
+                                <small>Transportation.</small>
+                            </li>
+                            <li>
+                                Exploitaion
+                                <small>Exploitation.</small>
+                            </li>
+                            <li>
+                                Corroborative Materials
+                                <small>Additional materials.</small>
+                            </li>
+                            <li>
+                                Decision
+                                <small>Is the individual a VOT.</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div>
+                            <fieldset>
+                                <legend class="pull-left width-full"><b>Confidentiality Statement</b></legend>
+                                 <div class="form-group row">
+                                    <label class="col-md-8 control-label">Informed consent is necessary for all services, such as medical examination and procedure, health assessments, assisted voluntary returns and reintegration assistance. If the individual is a minor, has the consent of the parent(s)/ guardian(s) been obtained.</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Default input" />
+                                    </div>
+                                </div>
+                                <!-- begin row -->
+                                <br>
+                                <legend class="pull-left width-full"><b>Registration data</b></legend>
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" name="firstname" value="{{ case.person.first_name }}" readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Surname</label>
+                                            <input type="text" name="surname" value="{{ case.person.surname }}" readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Other Name(s)</label>
+                                            <input type="text" name="other_names" value="{{ case.person.other_names }}" readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Sex</label>
+                                            <input type="text" name="sex" value="{% if case.person.sex_id == 'SMAL' %} Male {% else %} Female {% endif %}" readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Country of Birth</label>
+                                            {{ form.qfDR1_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Place of Birth</label>
+                                            {{ form.qfDR2_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <input type="text" name="date_of_birth" value="{{ case.person.date_of_birth }}" readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Is date of Birth estimate</label>
+                                            {{ form.qfDR3_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Last Place of residence in country of origin</label>
+                                            {{ form.qfDR4_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Contact information</label>
+                                            {{ form.qfDR5_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Citizenship</label>
+                                            {{ form.qfDR6_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Ethnicity</label>
+                                            {{ form.qfDR7_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <label class="col-md-4 control-label">Identity</label>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Document</label>
+                                            {{ form.qfDR8_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Number</label>
+                                            {{ form.qfDR9_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <label class="col-md-4 control-label">Next of Kin</label>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            {{ form.qfDR10_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Relation</label>
+                                            {{ form.qfDR11_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Contact Information</label>
+                                            {{ form.qfDR12_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Highest education</label>
+                                            {{ form.qfDR13_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                 <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Latest job / activity:</label>
+                                    <div class="col-md-8">
+                                        {{ form.qfDR14_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                        <!-- begin wizard step-2 -->
+                        <div>
+                            <fieldset>
+                                <!-- begin row -->
+                                <legend class="pull-left width-full"><b>Case and Interview data</b></legend>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Type of referring organization / individual</label>
+                                    <div class="col-md-8">
+                                       {{ form.qfDC1_rdo }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Name of referring organization / individual</label>
+                                    <div class="col-md-8">
+                                        {{ form.qfDC2_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Location of referring organization / individual</label>
+                                    <div class="col-md-8">
+                                        {{ form.qfDC3_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <label class="col-md-4 control-label">Interview details</label>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Interview Date</label>
+                                            {{ form.qfDC4_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Name of location</label>
+                                            {{ form.qfDC5_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Name of Interviewer</label>
+                                            {{ form.qfDC6_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Contact details of Interviewer</label>
+                                            {{ form.qfDC7_txt }}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <!-- end row -->
+                                 <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Name of Organization / Institution:</label>
+                                    <div class="col-md-8">
+                                        {{ form.qfDC8_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Interviewee's Language:</label>
+                                    <div class="col-md-4">
+                                        {{ form.qfDC9_txt }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">Interpreter:</label>
+                                    <div class="col-md-4">
+                                        {{ form.qfDC10_txt }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">First name and Surname of interpreter:</label>
+                                    <div class="col-md-8">
+                                        {{ form.qfDC11_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label">If Minor, first name and family name(s), address(es) and telephone contact of parent(s) or guardian(s):</label>
+                                    <div class="col-md-8">
+                                        {{ form.qfDC12_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-2 -->
+                        <!-- start wizard step-3 -->
+                        <div>
+                            <fieldset>
+                                <legend class="pull-left width-full"><b>Recruitment</b></legend>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">1.0 How did the individual enter the process (Indicate multiple options if necessary)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD10 }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD11_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">2.0 Did entry in to the process involve recruitment?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD20 }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 2.1 If YES, how was contact initiated between the individual and her/his recruiter?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD21 }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD21_txt }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">3.0 If labour migration, what activity did the individual believe s/he was going to be engaged in following arrival at the final destination (indicate multiple options if necessary)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD30 }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD31_txt }}
+                                    <br>
+                                        {{ form.qfD31_txt }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">4.0 What was the individual told would be their benefits following arrival at final destination? Did the individual pay the recruiter any money in advance?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD40_rdo }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 4.1 Salary (Equivalent in Ksh per month)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD41_txt }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD42_txt }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">5.0 In which month/year did the individual enter into the process?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD50_txt }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">6.0 Minor at time of entry into the process?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD60_rdo }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">7.0 From which place/country did the individual enter into the process?</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD70_txt }}
+                                    </div>
+                                </div>
+                                <p></p>
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">8.0 What place/country is the last (or intended) destination?</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD80_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-3 -->
+                        <!-- begin wizard step-4 -->
+                        <div>
+                            <fieldset>
+                                <legend class="pull-left width-full"><b>Transportation</b></legend>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">9.0 What was the means of transportation used?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD90 }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 9.1 Who paid the travel costs?</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD91_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">10.0 Did the individual travel alone?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD100_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 10.1 If NO, who did the individual travel with (indicate multiple options if necessary)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD101 }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD102_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">11.0 Did the individual cross any border while in transit?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD110_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 11.1 Did the individual cross the border at an official point of entry?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD111_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 11.2 If no, where and how was the border crossed?</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD112_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 11.3 Did the individual use his or her own documents or were the documents forged?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD113_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">12.0 Did the individual spend any time in transit place(s)/ country(ies)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD120_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 12.1 If YES, please specify in chronological order:</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD121_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 12.2 Did s/he engage in any activity in this place(s) country(ies)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD122_rdr }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 12.3 If YES, which activity in first/only transit place/ country:?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD123 }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-4 -->
+                        <!-- begin wizard step-5 -->
+                        <div>
+                            <fieldset>
+                                <legend class="pull-left width-full"><b>The Exploitation Phase</b></legend>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">13.0 What activity has the individual undertaken since her/his arrival in the last destination (Indicate multiple answers if necessary)?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD130 }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD131_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 14.0 How soon after arrival at the final destination did this activity begin?</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD140_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 14.1 How old was the individual when the activity began?</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD141_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 14.2 Was the individual coerced to engage in any activity against his/her will?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD142_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 14.3 How long did the most significant activity occur? (Years/ Months/ Weeks/ Days and/or hours)</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD143_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 14.4 Were any of the following means used to control the individual during the activity?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD144_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">15.0 Did the individual experience exploitation? (If NO, proceed to 16.0)</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD150_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">16.0 If NO exploitation took place, was there any indication of a real and substantial threat of exploitation?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD160_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 16.1 If YES, what were the reasons that exploitation never took place?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD161_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD162_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">17.0 What degree of freedom did the individual have?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD170_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">18.0 What were the conditions of exploitation?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD180_rdo }}
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-5 -->
+                        <!-- begin wizard step-6 -->
+                        <div>
+                            <fieldset>
+                                <legend class="pull-left width-full"><b>Corroborative Materials</b></legend>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-8 control-label">19.0 Additional corroborative materials</label>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Police or other official reports</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190A_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Identity documents</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190B_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Travel documents</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190C_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Medical reports</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190D_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Copies of employment contract or recruitment offer</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190E_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Personal writings by the individual</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190F_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; Hotline reports</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190G_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp;Other</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD190H_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD190H_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-6 -->
+                        <!-- begin wizard step-7 -->
+                        <div>
+                            <fieldset>
+                                <legend class="pull-left width-full"><b>Decision Making</b></legend>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">20.0 Is the individual a VICTIM of TRAFFICKING?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD200_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 20.1 Please justify the decision made in 18.0</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD201_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">21.0 Decision made by whom (Specify name(s))</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD210_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">22.0 If the individual is a victim of trafficking, was the type of trafficking in-country or transnational?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD220_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">23.0 If the individual is a victim of trafficking, is s/he eligible for the country’s VoT assistance Programme?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD230_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 23.1 If NO, why?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD231_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.qfD232_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">24.0 If the individual is NOT a victim of trafficking, is s/he in need of assistance?</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD240_rdo }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label"> &nbsp; &nbsp; 24.1 If YES, what is the individual’s situation? (Please specify all that apply)</label>
+                                    <div class="col-md-3">
+                                        {{ form.qfD241 }}
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <p></p>
+                                <!-- begin row -->
+                                <div class="form-group row">
+                                    <label class="col-md-5 control-label">25.0 Additional Remarks:</label>
+                                    <div class="col-md-7">
+                                        {{ form.qfD250_txt }}
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-7 -->
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Date of Screening</label>
+                            <div class="col-md-3">
+                                {{ form.event_date }}
+                            </div>
+                            <div class="col-md-5">
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="form-group" id="printId">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-8">
+                            <button type="button" id="map-print" class="btn btn-sm btn-danger m-r-5" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                            <button type="button" class="btn btn-sm btn-success m-r-5" onclick="location.href='{% url 'ctip_form' form_id='D' case_id=case.case_id|stringformat:'s' %}';"><i class="fa fa-pencil m-r-5"></i> {% if case.consent_date %} Edit {% else %} New {% endif %}Screening Form</button>
+                        </div>
+                    </div>
+                    </form>
+                    <br><br>
+                    <div class="invoice-footer text-muted">
+                    <p class="text-right">
+                        <span class="m-r-10"> Case ID: <strong>{{ case.case_id }}</strong>; Timestamp: {{ datetime }}</span>
+                    </p>
+                </div>
+            </div>
+                {% else %}
+                  This form has not been filled
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+$(document).ready(function() {
+    $('#event_date, #qfD50_txt, #qfDC4_txt').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard_screening").bwizard({ validating: function (e, ui) { }            
+    });
+
+    $('fieldset').prop('disabled', true);
+    $('#event_date').prop('disabled', true);         
+});
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $('#dtd').prop('disabled', 'false');
+      $('.well div.hide').addClass('bpnt');
+      $('.well div.hide').removeClass('hide');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+      $('.well div.bpnt').addClass('hide');
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CTiP {{ form_id }} - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP - Form </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CTiP - FORM {{ form_id }} ({{ form_name }}) <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Case</a>
+                    </span>
+                    Case No: {{ case.case_number }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-f" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Good physical and mental health condition. Can travel back to Country of origin or place of habitual
+residence</label>
+                        <div class="col-md-1">
+                            {{ form.qfF1_rdo }}
+                            <span id="qfF1_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF1_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">The VOT has a safe place to stay on arrival</label>
+                        <div class="col-md-1">
+                            {{ form.qfF2_rdo }}
+                            <span id="qfF2_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF2_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">All legal, administrative, identity and travel documents are secured</label>
+                        <div class="col-md-1">
+                            {{ form.qfF3_rdo }}
+                            <span id="qfF3_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF3_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Name, contact and focal person of receiving agency and initial reintegration plan (IRP</label>
+                        <div class="col-md-1">
+                            {{ form.qfF4_rdo }}
+                            <span id="qfF4_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF4_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Copies of necessary documents and VOT security information to be forwarded to the receiving agency</label>
+                        <div class="col-md-1">
+                            {{ form.qfF5_rdo }}
+                            <span id="qfF5_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF5_txt }}
+                        </div>
+                    </div>
+                    <legend class="pull-left width-full">Travel documents and other personal documents</legend>
+
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">a). Passport / Visa</label>
+                        <div class="col-md-1">
+                            {{ form.qfF6_rdo }}
+                            <span id="qfF6_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF6_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">b). Air ticket(s)</label>
+                        <div class="col-md-1">
+                            {{ form.qfF7_rdo }}
+                            <span id="qfF7_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF7_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">c). Bus ticket(s)</label>
+                        <div class="col-md-1">
+                            {{ form.qfF8_rdo }}
+                            <span id="qfF8_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF8_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">d). Medical records</label>
+                        <div class="col-md-1">
+                            {{ form.qfF9_rdo }}
+                            <span id="qfF9_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF9_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">e). Personal documents / items</label>
+                        <div class="col-md-1">
+                            {{ form.qfF10_rdo }}
+                            <span id="qfF10_rdo_error"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF10_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Date</label>
+                        <div class="col-md-4">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Checklist</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+<script>
+$(document).ready(function() {
+   $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+</script>
+{% endblock %}

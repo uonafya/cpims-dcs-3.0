@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CTiP {{ form_id }} - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+@media screen {
+  div.divHeader {
+    display: none;
+  }
+  form#new-form-e ul {
+      list-style-type: none;
+    }
+  form#new-form-e li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  form#new-form-e ul {
+      list-style-type: none;
+    }
+  form#new-form-e li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  textarea{
+    margin-bottom: 5px;
+  }
+}
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP - Form </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CTiP - FORM {{ form_id }} ({{ form_name }}) <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/><b>CTiP - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="{% url 'ctip_form' form_id='E' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-pencil m-r-5"></i> {% if events %} Edit {% else %} New {% endif %}Needs Assessment Form</a>
+                    <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Case</a>
+                    </span>
+                    Case No: {{ case.case_number }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-e" action="." data-parsley-validate="true">
+                    {% if events %}
+                    <fieldset id="dtd" disabled="disabled">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label pull-left">1. Case bio data (Name, case number, age, sex)</label>
+                        <div class="col-md-8">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">2. Do you feel that your personal safety is under threat?</label>
+                        <div class="col-md-4">
+                            {{ form.qfE2_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE2b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">3. Was the VOT followed by certain person(s) in certain period</label>
+                        <div class="col-md-4">
+                            {{ form.qfE3_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE3b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">4. Do you have a need accommodation services?</label>
+                        <div class="col-md-4">
+                            {{ form.qfE4_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE4b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">5. Food and special diet required</label>
+                        <div class="col-md-4">
+                            {{ form.qfE5_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE5b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">6. Clothing needs and other personal effects</label>
+                        <div class="col-md-4">
+                            {{ form.qfE6_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE6b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">7. Are you under any special medication?</label>
+                        <div class="col-md-4">
+                            {{ form.qfE7_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE7b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">8. Health needs like medical examination, high risk conditions</label>
+                        <div class="col-md-4">
+                            {{ form.qfE8_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE8b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">9. Disability challenges and support needs?</label>
+                        <div class="col-md-4">
+                            {{ form.qfE9_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE9b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">10. Location which may not be safe for the VOT to visit</label>
+                        <div class="col-md-4">
+                            {{ form.qfE10_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE10b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">11. Concerns about family members</label>
+                        <div class="col-md-4">
+                            {{ form.qfE11_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE11b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">12. Do you wish to be communicating with family members? (Specify details)</label>
+                        <div class="col-md-4">
+                            {{ form.qfE12_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE12b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">13. Any other important needs</label>
+                        <div class="col-md-4">
+                            {{ form.qfE13_txt }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfE13b_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Date</label>
+                        <div class="col-md-4">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-5">
+                        </div>
+                    </div>                  
+                    </fieldset>
+                    <div class="form-group" id="printId">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-8">
+                            <button type="button" id="map-print" class="btn btn-sm btn-danger m-r-5" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                            <button type="button" class="btn btn-sm btn-success m-r-5" onclick="location.href='{% url 'ctip_form' form_id='E' case_id=case.case_id|stringformat:'s' %}';"><i class="fa fa-pencil m-r-5"></i> {% if case.consent_date %} Edit {% else %} New {% endif %}Needs Assessment Form</button>
+                        </div>
+                    </div> 
+                </form>
+                <div class="invoice-footer text-muted">
+                    <p class="text-right">
+                        <span class="m-r-10"> Case ID: <strong>{{ case.case_id }}</strong>; Timestamp: {{ datetime }}</span>
+                    </p>
+                </div>
+            </div>
+                {% else %}
+                  <div>This form has not been filled</div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+<script>
+$(document).ready(function() {
+   $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $('#dtd').prop('disabled', 'false');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+
+}
+</script>
+{% endblock %}

@@ -7,4 +7,4 @@ class OVCAppConfig(AppConfig):
     """Password policies."""
 
     name = 'cpovc_ovc'
-    verbose_name = _('OVC Care')
+    verbose_name = _('OVC Care - Comprehensive')

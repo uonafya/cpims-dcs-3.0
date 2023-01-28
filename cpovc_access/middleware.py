@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth import views as auth_views
-from django.urls import reverse, resolve
+from django.core.urlresolvers import resolve, reverse
 from django.views.decorators.csrf import requires_csrf_token
 
 from cpovc_access.handlers import PasswordChangePolicyHandler
@@ -174,4 +174,3 @@ class AuthenticationPolicyMiddleware(object):
         messages.info(request, 'Please relogin')
         view_func, args, kwargs = resolve(self.logout_path)
         return view_func(request, *args, **kwargs)
-

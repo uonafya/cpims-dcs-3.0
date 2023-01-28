@@ -1,13 +1,18 @@
 ''' Django notifications apps file '''
 # -*- coding: utf-8 -*-
 from django.apps import AppConfig
+from django.utils.translation import gettext_lazy as _
+
+import notifications.signals
 
 
-class Config(AppConfig):
-    name = "notifications"
+class NotificationAppConfig(AppConfig):
+    """Password policies."""
+
+    name = 'notifications'
+    verbose_name = _('System Notifications')
 
     def ready(self):
-        super(Config, self).ready()
+        super(NotificationAppConfig, self).ready()
         # this is for backwards compability
-        import notifications.signals
         notifications.notify = notifications.signals.notify

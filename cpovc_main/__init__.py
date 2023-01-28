@@ -1,1 +1,1 @@
-default_app_config = 'cpims.apps.MainAppConfig'
+# default_app_config = 'cpims.apps.MainAppConfig'

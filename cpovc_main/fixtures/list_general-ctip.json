@@ -1,0 +1,2978 @@
+[
+    {
+        "pk": 34834, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "defilement_id", 
+            "item_id": "CCDV", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Defilement Victim", 
+            "sms_keyword": "False", 
+            "item_description": "Defilement Victim", 
+            "item_category": "Defilement"
+        }
+    },
+    {
+        "pk": 34835, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "defilement_id", 
+            "item_id": "CCDO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Defilement Offender", 
+            "sms_keyword": "False", 
+            "item_description": "Defilement Offender", 
+            "item_category": "Defilement"
+        }
+      },
+        {
+        "pk": 34836, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 43, 
+            "user_configurable": "False", 
+            "field_name": "case_category_id", 
+            "item_id": "CSSM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Smuggling", 
+            "sms_keyword": "False", 
+            "item_description": "Smuggling", 
+            "item_category": "Case Category"
+        }
+    },
+    {
+        "pk": 34837, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_activity_id", 
+            "item_id": "TARC", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Recruitment", 
+            "sms_keyword": "False", 
+            "item_description": "Recruitment", 
+            "item_category": "CTIP Activity"
+        }
+    },
+    {
+        "pk": 34838, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_activity_id", 
+            "item_id": "TATS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Transport", 
+            "sms_keyword": "False", 
+            "item_description": "Transport", 
+            "item_category": "CTIP Activity"
+        }
+    },
+    {
+        "pk": 34839, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_activity_id", 
+            "item_id": "TATF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Transfer", 
+            "sms_keyword": "False", 
+            "item_description": "Transfer", 
+            "item_category": "CTIP Activity"
+        }
+    },
+    {
+        "pk": 34840, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_activity_id", 
+            "item_id": "TAHB", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Harbouring", 
+            "sms_keyword": "False", 
+            "item_description": "Harbouring", 
+            "item_category": "CTIP Activity"
+        }
+    },
+    {
+        "pk": 34841, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_activity_id", 
+            "item_id": "TARP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Receipt", 
+            "sms_keyword": "False", 
+            "item_description": "Receipt", 
+            "item_category": "CTIP Activity"
+        }
+    },
+    {
+        "pk": 34842, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMUF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Threat", 
+            "sms_keyword": "False", 
+            "item_description": "Threat or use of force", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34843, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMCO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Coercion", 
+            "sms_keyword": "False", 
+            "item_description": "Coercion", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34844, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMAD", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Abduction", 
+            "sms_keyword": "False", 
+            "item_description": "Abduction", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34845, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMFR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Fraud", 
+            "sms_keyword": "False", 
+            "item_description": "Fraud", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34846, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMDC", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Deception", 
+            "sms_keyword": "False", 
+            "item_description": "Deception", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34847, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMAP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Abuse power", 
+            "sms_keyword": "False", 
+            "item_description": "Abuse of power or Vulnerability", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34848, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_means_id", 
+            "item_id": "TMGP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Giving", 
+            "sms_keyword": "False", 
+            "item_description": "Giving and / or payments or benefits", 
+            "item_category": "CTIP Means"
+        }
+    },
+    {
+        "pk": 34849, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_purpose_id", 
+            "item_id": "TPSE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Sexual Exploitation", 
+            "sms_keyword": "False", 
+            "item_description": "Sexual exploitation", 
+            "item_category": "CTIP Purpose"
+        }
+    },
+    {
+        "pk": 34850, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_purpose_id", 
+            "item_id": "TPLB", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Forced Labour", 
+            "sms_keyword": "False", 
+            "item_description": "Forced Labour", 
+            "item_category": "CTIP Purpose"
+        }
+    },
+    {
+        "pk": 34851, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_purpose_id", 
+            "item_id": "TPOR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Organ Removal", 
+            "sms_keyword": "False", 
+            "item_description": "Organ Removal", 
+            "item_category": "CTIP Purpose"
+        }
+    },
+    {
+        "pk": 34852, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_purpose_id", 
+            "item_id": "TPSL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Slavery", 
+            "sms_keyword": "False", 
+            "item_description": "Slavery or similar practices", 
+            "item_category": "CTIP Purpose"
+        }
+    },
+    {
+        "pk": 34853, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_purpose_id", 
+            "item_id": "TPPR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Prostitution", 
+            "sms_keyword": "False", 
+            "item_description": "Prostitution", 
+            "item_category": "CTIP Purpose"
+        }
+    },
+    {
+        "pk": 34854, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_purpose_id", 
+            "item_id": "TPOP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other Purposes", 
+            "sms_keyword": "False", 
+            "item_description": "Other Purposes", 
+            "item_category": "CTIP Purpose"
+        }
+    },
+    {
+        "pk": 34855, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b1", 
+            "item_id": "TFB1A", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Injuries", 
+            "sms_keyword": "False", 
+            "item_description": "Previous and present injuries", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34856, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b1", 
+            "item_id": "TFB1B", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Disability", 
+            "sms_keyword": "False", 
+            "item_description": "Physical challenges / disability", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34857, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b2", 
+            "item_id": "TFB2A", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Insomnia", 
+            "sms_keyword": "False", 
+            "item_description": "Insomnia", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34858, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b2", 
+            "item_id": "TFB2B", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Stressful condition", 
+            "sms_keyword": "False", 
+            "item_description": "Stressful condition - anxiety", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34859, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b2", 
+            "item_id": "TFB2C", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Depression", 
+            "sms_keyword": "False", 
+            "item_description": "Depression", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34860, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b2", 
+            "item_id": "TFB2D", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Mental disorders", 
+            "sms_keyword": "False", 
+            "item_description": "Mental Disorders", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34861, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b2", 
+            "item_id": "TFB2E", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Mental illness", 
+            "sms_keyword": "False", 
+            "item_description": "Mental illness (supporting documents)", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34862, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b3", 
+            "item_id": "TFB3A", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Present health condition", 
+            "sms_keyword": "False", 
+            "item_description": "Present health condition", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34863, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b3", 
+            "item_id": "TFB3B", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "High Risk conditions", 
+            "sms_keyword": "False", 
+            "item_description": "High Risk conditions", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34864, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b3", 
+            "item_id": "TFB3C", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Hereditary factors", 
+            "sms_keyword": "False", 
+            "item_description": "Hereditary factors", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34865, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b3", 
+            "item_id": "TFB3D", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Hazardous lifestyle", 
+            "sms_keyword": "False", 
+            "item_description": "Hazardous lifestyle", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34866, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b4", 
+            "item_id": "TFB4A", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Current safety concerns", 
+            "sms_keyword": "False", 
+            "item_description": "Current safety concerns", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34867, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b4", 
+            "item_id": "TFB4B", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Previous safety threats", 
+            "sms_keyword": "False", 
+            "item_description": "Previous safety threats", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34868, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b4", 
+            "item_id": "TFB4C", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Specific persons", 
+            "sms_keyword": "False", 
+            "item_description": "Specific persons who may cause problems", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34869, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b4", 
+            "item_id": "TFB4D", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Concern for the safety of family", 
+            "sms_keyword": "False", 
+            "item_description": "Concern for the safety of family members or friends", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34870, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b4", 
+            "item_id": "TFB4E", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Risky locations", 
+            "sms_keyword": "False", 
+            "item_description": "Risky locations for the Person", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34871, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_b4", 
+            "item_id": "TFB4F", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other concerns", 
+            "sms_keyword": "False", 
+            "item_description": "Other concerns", 
+            "item_category": "CTIP Form B"
+        }
+    },
+    {
+        "pk": 34872, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1a", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Kidnapping", 
+            "sms_keyword": "False", 
+            "item_description": "Kidnapping", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34873, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1B", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Sold by member of family", 
+            "sms_keyword": "False", 
+            "item_description": "Sold by member of family", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34874, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1C", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Sold by non-family member", 
+            "sms_keyword": "False", 
+            "item_description": "Sold by non-family member", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34875, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1D", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Adoption", 
+            "sms_keyword": "False", 
+            "item_description": "Adoption", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34876, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1E", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Educational opportunity", 
+            "sms_keyword": "False", 
+            "item_description": "Educational opportunity", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34877, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1F", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Family visit", 
+            "sms_keyword": "False", 
+            "item_description": "Family visit", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34878, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1G", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Friend visit", 
+            "sms_keyword": "False", 
+            "item_description": "Friend visit", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34879, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 8, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1H", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Labor migration", 
+            "sms_keyword": "False", 
+            "item_description": "Labor migration", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34880, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 9, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1I", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Marriage", 
+            "sms_keyword": "False", 
+            "item_description": "Marriage", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34881, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 10, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1J", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Tourism", 
+            "sms_keyword": "False", 
+            "item_description": "Tourism", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34882, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1K", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34883, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 12, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1L", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Not applicable", 
+            "sms_keyword": "False", 
+            "item_description": "Not applicable", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34884, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 13, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d10", 
+            "item_id": "TFD1M", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Don't Know", 
+            "sms_keyword": "False", 
+            "item_description": "Don't Know", 
+            "item_category": "CTIP Form D"
+        }
+    },
+    {
+        "pk": 34885, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2A", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Personal contact", 
+            "sms_keyword": "False", 
+            "item_description": "Personal contact", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34886, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2B", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Employment agency", 
+            "sms_keyword": "False", 
+            "item_description": "Employment agency", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34887, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2C", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Travel agency", 
+            "sms_keyword": "False", 
+            "item_description": "Travel agency", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34888, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2D", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Internet advertisement", 
+            "sms_keyword": "False", 
+            "item_description": "Internet advertisement", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34889, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2E", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Newspaper advertisement", 
+            "sms_keyword": "False", 
+            "item_description": "Newspaper advertisement", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34890, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2F", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Radio advertisement", 
+            "sms_keyword": "False", 
+            "item_description": "Radio advertisement", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34891, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2G", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Television advertisement", 
+            "sms_keyword": "False", 
+            "item_description": "Television advertisement", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34892, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 8, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2H", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Don't Know", 
+            "sms_keyword": "False", 
+            "item_description": "Don't Know", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34893, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 9, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2I", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34894, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 10, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2J", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Not applicable", 
+            "sms_keyword": "False", 
+            "item_description": "Not applicable", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34895, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "ctip_form_d21", 
+            "item_id": "TFD2K", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Don't Know", 
+            "sms_keyword": "False", 
+            "item_description": "Don't Know", 
+            "item_category": "CTIP Form D - 2.1"
+        }
+    },
+    {
+        "pk": 34896, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLA", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Agricultural work", 
+            "sms_keyword": "False", 
+            "item_description": "Agricultural work", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34897, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLB", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Begging", 
+            "sms_keyword": "False", 
+            "item_description": "Begging", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34898, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLC", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Child care", 
+            "sms_keyword": "False", 
+            "item_description": "Child care", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34899, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLD", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Construction", 
+            "sms_keyword": "False", 
+            "item_description": "Construction", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34900, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Domestic work", 
+            "sms_keyword": "False", 
+            "item_description": "Domestic work", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34901, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Factory work", 
+            "sms_keyword": "False", 
+            "item_description": "Factory work", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34902, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLG", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Fishing", 
+            "sms_keyword": "False", 
+            "item_description": "Fishing", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34903, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 8, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLH", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Low-level criminal activities", 
+            "sms_keyword": "False", 
+            "item_description": "Low-level criminal activities", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34904, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 9, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLI", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Marriage", 
+            "sms_keyword": "False", 
+            "item_description": "Marriage", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34905, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 10, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLJ", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Military service", 
+            "sms_keyword": "False", 
+            "item_description": "Military service", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34906, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLK", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Mining", 
+            "sms_keyword": "False", 
+            "item_description": "Mining", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34907, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 12, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Prostitution", 
+            "sms_keyword": "False", 
+            "item_description": "Prostitution", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34908, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 13, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Restaurants and hotel work", 
+            "sms_keyword": "False", 
+            "item_description": "Restaurants and hotel work", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34909, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 14, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Study", 
+            "sms_keyword": "False", 
+            "item_description": "Study", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34910, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 15, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Small street commerce", 
+            "sms_keyword": "False", 
+            "item_description": "Small street commerce", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34911, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 16, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Trade", 
+            "sms_keyword": "False", 
+            "item_description": "Trade", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34912, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 17, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLQ", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Transport sector", 
+            "sms_keyword": "False", 
+            "item_description": "Transport sector", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34913, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 18, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Unemployed", 
+            "sms_keyword": "False", 
+            "item_description": "Unemployed", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34914, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 17, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34915, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 18, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Not Applicable", 
+            "sms_keyword": "False", 
+            "item_description": "Not Applicable", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34916, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 19, 
+            "user_configurable": "False", 
+            "field_name": "ctip_labour", 
+            "item_id": "TFDLU", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Don't Know", 
+            "sms_keyword": "False", 
+            "item_description": "Don't Know", 
+            "item_category": "CTIP Forms - Labour"
+        }
+    },
+    {
+        "pk": 34917, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "On Foot", 
+            "sms_keyword": "False", 
+            "item_description": "On Foot", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34918, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTV", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Vehicle", 
+            "sms_keyword": "False", 
+            "item_description": "Vehicle", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34919, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Ferry", 
+            "sms_keyword": "False", 
+            "item_description": "Ferry", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34920, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Train", 
+            "sms_keyword": "False", 
+            "item_description": "Train", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34921, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTA", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Aircraft", 
+            "sms_keyword": "False", 
+            "item_description": "Aircraft", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34922, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34923, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_transport", 
+            "item_id": "TFDTN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "N/A", 
+            "sms_keyword": "False", 
+            "item_description": "Not Applicable", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34924, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCH", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Husband", 
+            "sms_keyword": "False", 
+            "item_description": "Husband", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34925, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCW", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Wife", 
+            "sms_keyword": "False", 
+            "item_description": "Wife", 
+            "item_category": "CTIP Forms - Transport"
+        }
+    },
+    {
+        "pk": 34926, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Partner", 
+            "sms_keyword": "False", 
+            "item_description": "Partner", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34927, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Relative", 
+            "sms_keyword": "False", 
+            "item_description": "Relative", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34928, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Friend", 
+            "sms_keyword": "False", 
+            "item_description": "Friend", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34929, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCC", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Recruiter", 
+            "sms_keyword": "False", 
+            "item_description": "Recruiter", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34930, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Transporter", 
+            "sms_keyword": "False", 
+            "item_description": "Transporter", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34931, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 8, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCU", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Unknown persons", 
+            "sms_keyword": "False", 
+            "item_description": "Unknown persons", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34932, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 9, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34933, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 10, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "N/A", 
+            "sms_keyword": "False", 
+            "item_description": "Not Applicable", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34934, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "ctip_companion", 
+            "item_id": "TFDCD", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "DK", 
+            "sms_keyword": "False", 
+            "item_description": "Don't know", 
+            "item_category": "CTIP Forms - Companion"
+        }
+    },
+    {
+        "pk": 34935, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_docs_type", 
+            "item_id": "TFDDO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Own", 
+            "sms_keyword": "False", 
+            "item_description": "Own", 
+            "item_category": "CTIP Forms - Docs type"
+        }
+    },
+    {
+        "pk": 34936, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_docs_type", 
+            "item_id": "TFDDO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Forged", 
+            "sms_keyword": "False", 
+            "item_description": "Forged", 
+            "item_category": "CTIP Forms - Docs type"
+        }
+    },
+    {
+        "pk": 34937, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_docs_type", 
+            "item_id": "TFDDN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "N/A", 
+            "sms_keyword": "False", 
+            "item_description": "Not applicable", 
+            "item_category": "CTIP Forms - Docs type"
+        }
+    },
+    {
+        "pk": 34938, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_yesno_otdk", 
+            "item_id": "AYES", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Yes", 
+            "sms_keyword": "False", 
+            "item_description": "Yes", 
+            "item_category": "CTIP Forms - Yes/No/NA/DK"
+        }
+    },
+    {
+        "pk": 34939, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_yesno_otdk", 
+            "item_id": "ANNO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "No", 
+            "sms_keyword": "False", 
+            "item_description": "No", 
+            "item_category": "CTIP Forms - Yes/No/NA/DK"
+        }
+    },
+    {
+        "pk": 34940, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_yesno_otdk", 
+            "item_id": "ANNA", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "N/A", 
+            "sms_keyword": "False", 
+            "item_description": "Not Applicable", 
+            "item_category": "CTIP Forms - Yes/No/NA/DK"
+        }
+    },
+    {
+        "pk": 34941, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_yesno_otdk", 
+            "item_id": "ANDK", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "DK", 
+            "sms_keyword": "False", 
+            "item_description": "Don't Know", 
+            "item_category": "CTIP Forms - Yes/No/NA/DK"
+        }
+    },
+    {
+        "pk": 34942, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_no_exploit_reason", 
+            "item_id": "TFDNR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Rescue", 
+            "sms_keyword": "False", 
+            "item_description": "Rescue", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34943, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_no_exploit_reason", 
+            "item_id": "TFDNE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Escape", 
+            "sms_keyword": "False", 
+            "item_description": "Escape", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34944, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_no_exploit_reason", 
+            "item_id": "TFDNO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34945, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_no_exploit_reason", 
+            "item_id": "TFDNN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "N/A", 
+            "sms_keyword": "False", 
+            "item_description": "Not applicable", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34946, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_no_exploit_reason", 
+            "item_id": "TFDND", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "DK", 
+            "sms_keyword": "False", 
+            "item_description": "Don't Know", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34947, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_freedom", 
+            "item_id": "TFDFT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Totally denied", 
+            "sms_keyword": "False", 
+            "item_description": "Totally denied", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34948, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_freedom", 
+            "item_id": "TFDFO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Only accompanied", 
+            "sms_keyword": "False", 
+            "item_description": "Only accompanied", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34949, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_freedom", 
+            "item_id": "TFDFN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "No restrictions imposed", 
+            "sms_keyword": "False", 
+            "item_description": "No restrictions imposed", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34950, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_freedom", 
+            "item_id": "TFDFA", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "N/A", 
+            "sms_keyword": "False", 
+            "item_description": "Not Applicable", 
+            "item_category": "CTIP Forms - No exploit"
+        }
+    },
+    {
+        "pk": 34951, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_exploit_condition", 
+            "item_id": "TFDEE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Excessive working hours", 
+            "sms_keyword": "False", 
+            "item_description": "Excessive working hours", 
+            "item_category": "CTIP Forms - Exploit conditions"
+        }
+    },
+    {
+        "pk": 34952, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_exploit_condition", 
+            "item_id": "TFDEL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Limited/no freedom of movement", 
+            "sms_keyword": "False", 
+            "item_description": "Limited/no freedom of movement", 
+            "item_category": "CTIP Forms - Exploit conditions"
+        }
+    },
+    {
+        "pk": 34953, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_trafficking_type", 
+            "item_id": "TFDVI", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "In-country", 
+            "sms_keyword": "False", 
+            "item_description": "In-country", 
+            "item_category": "CTIP Forms - Trafficking type"
+        }
+    },
+    {
+        "pk": 34954, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_trafficking_type", 
+            "item_id": "TFDVT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Transnational", 
+            "sms_keyword": "False", 
+            "item_description": "Transnational", 
+            "item_category": "CTIP Forms - Trafficking type"
+        }
+    },
+    {
+        "pk": 34955, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_trafficking_type", 
+            "item_id": "TFDVB", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Both", 
+            "sms_keyword": "False", 
+            "item_description": "Both", 
+            "item_category": "CTIP Forms - Trafficking type"
+        }
+    },
+    {
+        "pk": 34956, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_support_criteria", 
+            "item_id": "TFDSN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Does not meet project criteria", 
+            "sms_keyword": "False", 
+            "item_description": "Does not meet project criteria", 
+            "item_category": "CTIP Forms - Support criteria"
+        }
+    },
+    {
+        "pk": 34957, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_support_criteria", 
+            "item_id": "TFDSD", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Has deportation order", 
+            "sms_keyword": "False", 
+            "item_description": "Has deportation order", 
+            "item_category": "CTIP Forms - Support criteria"
+        }
+    },
+    {
+        "pk": 34958, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_support_criteria", 
+            "item_id": "TFDSI", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Suspected infiltrator", 
+            "sms_keyword": "False", 
+            "item_description": "Suspected infiltrator", 
+            "item_category": "CTIP Forms - Support criteria"
+        }
+    },
+    {
+        "pk": 34959, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_support_criteria", 
+            "item_id": "TFDSO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - Support criteria"
+        }
+    },
+    {
+        "pk": 34960, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_situation", 
+            "item_id": "TFDIM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "In need of emergency medical assistance", 
+            "sms_keyword": "False", 
+            "item_description": "In need of emergency medical assistance", 
+            "item_category": "CTIP Forms - Individual situation"
+        }
+    },
+    {
+        "pk": 34961, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_situation", 
+            "item_id": "TFDII", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Irregular status", 
+            "sms_keyword": "False", 
+            "item_description": "Irregular status", 
+            "item_category": "CTIP Forms - Individual situation"
+        }
+    },
+    {
+        "pk": 34962, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_situation", 
+            "item_id": "TFDIS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Victim of GBV", 
+            "sms_keyword": "False", 
+            "item_description": "Victim of sexual or gender-based violence", 
+            "item_category": "CTIP Forms - Individual situation"
+        }
+    },
+    {
+        "pk": 34963, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_situation", 
+            "item_id": "TFDIO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - Individual situation"
+        }
+    },
+    {
+        "pk": 34964, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRN", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "NGO", 
+            "sms_keyword": "False", 
+            "item_description": "NGO", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34965, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRI", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "International Organization", 
+            "sms_keyword": "False", 
+            "item_description": "International Organization", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34966, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Law enforcement", 
+            "sms_keyword": "False", 
+            "item_description": "Law enforcement", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34967, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Immigration", 
+            "sms_keyword": "False", 
+            "item_description": "Immigration", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34968, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRG", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Government", 
+            "sms_keyword": "False", 
+            "item_description": "Government", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34969, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Embassy", 
+            "sms_keyword": "False", 
+            "item_description": "Embassy", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34970, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRH", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Hotline or Helpline", 
+            "sms_keyword": "False", 
+            "item_description": "Hotline or Helpline", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34971, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 8, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Self-referral-walk-in", 
+            "sms_keyword": "False", 
+            "item_description": "Self-referral-walk-in", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34972, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 9, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Family", 
+            "sms_keyword": "False", 
+            "item_description": "Family", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34973, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 10, 
+            "user_configurable": "False", 
+            "field_name": "ctip_referral_type", 
+            "item_id": "TFDRO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "CTIP Forms - Referral type"
+        }
+    },
+    {
+        "pk": 34974, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "on_streets_id", 
+            "item_id": "CSSL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Street Living", 
+            "sms_keyword": "False", 
+            "item_description": "Street Living", 
+            "item_category": "Children on streets - sub category"
+        }
+    },
+    {
+        "pk": 34975, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "on_streets_id", 
+            "item_id": "CSSW", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Street Working", 
+            "sms_keyword": "False", 
+            "item_description": "Street Working", 
+            "item_category": "Children on streets - sub category"
+        }
+    },
+    {
+        "pk": 34976, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "on_streets_id", 
+            "item_id": "CSSF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "From Street Family", 
+            "sms_keyword": "False", 
+            "item_description": "From Street Family", 
+            "item_category": "Children on streets - sub category"
+        }
+    },
+    {
+        "pk": 34977, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "sexual_exploit_id", 
+            "item_id": "CEPR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Prostitution", 
+            "sms_keyword": "False", 
+            "item_description": "Prostitution", 
+            "item_category": "Sexual exploitation - sub category"
+        }
+    },
+    {
+        "pk": 34978, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "sexual_exploit_id", 
+            "item_id": "CEPO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Pornography", 
+            "sms_keyword": "False", 
+            "item_description": "Pornography", 
+            "item_category": "Sexual exploitation - sub category"
+        }
+    },
+    {
+        "pk": 34979, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "sexual_exploit_id", 
+            "item_id": "CEST", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Sexual tourism", 
+            "sms_keyword": "False", 
+            "item_description": "Sexual tourism", 
+            "item_category": "Sexual exploitation - sub category"
+        }
+    },
+    {
+        "pk": 34980, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "sexual_exploit_id", 
+            "item_id": "CEOT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "Sexual exploitation - sub category"
+        }
+    },
+    {
+        "pk": 34981, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTSL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Slavery", 
+            "sms_keyword": "False", 
+            "item_description": "Slavery", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34982, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTSS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Practices similar to slavery", 
+            "sms_keyword": "False", 
+            "item_description": "Practices similar to slavery", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34983, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTIS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Involuntary servitude", 
+            "sms_keyword": "False", 
+            "item_description": "Involuntary servitude", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34984, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTOR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Organ / tissue removal", 
+            "sms_keyword": "False", 
+            "item_description": "Organ / tissue removal", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34985, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTAC", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Armed conflict", 
+            "sms_keyword": "False", 
+            "item_description": "Armed conflict", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34986, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTFL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Forced labour", 
+            "sms_keyword": "False", 
+            "item_description": "Forced labour", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34987, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 7, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTCL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Child labour", 
+            "sms_keyword": "False", 
+            "item_description": "Child labour", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34988, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 8, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTSE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Sexual exploitation", 
+            "sms_keyword": "False", 
+            "item_description": "Sexual exploitation", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34989, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 9, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTCM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Child marriage", 
+            "sms_keyword": "False", 
+            "item_description": "Child marriage", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34990, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 10, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTFM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Forced marriage", 
+            "sms_keyword": "False", 
+            "item_description": "Forced marriage", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34991, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTVE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Violent extremism", 
+            "sms_keyword": "False", 
+            "item_description": "Violent extremism", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34992, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 12, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTDB", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Debt Bondage", 
+            "sms_keyword": "False", 
+            "item_description": "Debt Bondage", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34993, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 13, 
+            "user_configurable": "False", 
+            "field_name": "trafficking_id", 
+            "item_id": "CTBG", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Begging", 
+            "sms_keyword": "False", 
+            "item_description": "Begging", 
+            "item_category": "Trafficking - sub category"
+        }
+    },
+    {
+        "pk": 34994, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "cultural_practice_id", 
+            "item_id": "CHWI", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Witchcraft", 
+            "sms_keyword": "False", 
+            "item_description": "Witchcraft", 
+            "item_category": "Harmful culture - sub category"
+        }
+    },
+    {
+        "pk": 34995, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "cultural_practice_id", 
+            "item_id": "CHOT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "Harmful culture - sub category"
+        }
+    },
+    {
+        "pk": 34996, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRIM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Immigration", 
+            "sms_keyword": "False", 
+            "item_description": "Immigration", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 34997, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 12, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRHL", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Helpline 1195", 
+            "sms_keyword": "False", 
+            "item_description": "Helpline 1195", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 34998, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 13, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRSP", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Service Providers", 
+            "sms_keyword": "False", 
+            "item_description": "Service Providers", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 34999, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRLO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Labour Officers", 
+            "sms_keyword": "False", 
+            "item_description": "Labour Officers", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 35000, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 14, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRMT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Ministry of Tourism", 
+            "sms_keyword": "False", 
+            "item_description": "Ministry of Tourism", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 35001, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 15, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRTU", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Trade Union", 
+            "sms_keyword": "False", 
+            "item_description": "Trade Union", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 35002, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 16, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CRDM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Diplomatic missions", 
+            "sms_keyword": "False", 
+            "item_description": "Diplomatic missions", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 35003, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 17, 
+            "user_configurable": "False", 
+            "field_name": "case_reporter_id", 
+            "item_id": "CROG", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other Government agency", 
+            "sms_keyword": "False", 
+            "item_description": "Other Government agency", 
+            "item_category": "Case Reporter"
+        }
+    },
+    {
+        "pk": 35004, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 19, 
+            "user_configurable": "False", 
+            "field_name": "family_status_id", 
+            "item_id": "FSLA", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Living alone", 
+            "sms_keyword": "False", 
+            "item_description": "Living alone", 
+            "item_category": "Family status"
+        }
+    },
+    {
+        "pk": 35005, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 19, 
+            "user_configurable": "False", 
+            "field_name": "family_status_id", 
+            "item_id": "FSLF", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Living with a friend", 
+            "sms_keyword": "False", 
+            "item_description": "Living with a friend", 
+            "item_category": "Family status"
+        }
+    },
+    {
+        "pk": 35006, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 20, 
+            "user_configurable": "False", 
+            "field_name": "perpetrator_id", 
+            "item_id": "RCRA", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Recruitment agency", 
+            "sms_keyword": "False", 
+            "item_description": "Recruitment agency", 
+            "item_category": "Family status"
+        }
+    },
+    {
+        "pk": 35006, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 11, 
+            "user_configurable": "False", 
+            "field_name": "relationship_type_id", 
+            "item_id": "CGOT", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Other", 
+            "sms_keyword": "False", 
+            "item_description": "Other", 
+            "item_category": "Child Caregiver Relationship Type"
+        }
+    },
+    {
+        "pk": 35007, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 18, 
+            "user_configurable": "False", 
+            "field_name": "referral_destination_classification", 
+            "item_id": "RDNH", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "NHIF", 
+            "sms_keyword": "False", 
+            "item_description": "NHIF", 
+            "item_category": "Referral destination specified"
+        }
+    },
+    {
+        "pk": 35008, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 19, 
+            "user_configurable": "False", 
+            "field_name": "referral_destination_classification", 
+            "item_id": "RDIO", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "IOM", 
+            "sms_keyword": "False", 
+            "item_description": "IOM", 
+            "item_category": "Referral destination specified"
+        }
+    },
+    {
+        "pk": 35009, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 20, 
+            "user_configurable": "False", 
+            "field_name": "referral_destination_classification", 
+            "item_id": "RDDM", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Diplomatic Mission", 
+            "sms_keyword": "False", 
+            "item_description": "Diplomatic Mission", 
+            "item_category": "Referral destination specified"
+        }
+    },
+    {
+        "pk": 35010, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 21, 
+            "user_configurable": "False", 
+            "field_name": "referral_destination_classification", 
+            "item_id": "RDPI", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Private Health Insurance", 
+            "sms_keyword": "False", 
+            "item_description": "Private Health Insurance", 
+            "item_category": "Referral destination specified"
+        }
+    },
+    {
+        "pk": 35011, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 22, 
+            "user_configurable": "False", 
+            "field_name": "referral_destination_classification", 
+            "item_id": "RDCS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "CTiP Secretariat", 
+            "sms_keyword": "False", 
+            "item_description": "CTiP Secretariat", 
+            "item_category": "Referral destination specified"
+        }
+    },
+    {
+        "pk": 35012, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 32, 
+            "user_configurable": "False", 
+            "field_name": "referral_type_id", 
+            "item_id": "RMSH", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Safe House", 
+            "sms_keyword": "False", 
+            "item_description": "Safe House", 
+            "item_category": "Referral made"
+        }
+    },
+    {
+        "pk": 35013, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 33, 
+            "user_configurable": "False", 
+            "field_name": "referral_type_id", 
+            "item_id": "RMRE", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Repatriation", 
+            "sms_keyword": "False", 
+            "item_description": "Repatriation", 
+            "item_category": "Referral made"
+        }
+    },
+    {
+        "pk": 35014, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 34, 
+            "user_configurable": "False", 
+            "field_name": "referral_type_id", 
+            "item_id": "RMSV", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Screening of VoT", 
+            "sms_keyword": "False", 
+            "item_description": "Screening of VoT", 
+            "item_category": "Referral made"
+        }
+    },
+    {
+        "pk": 35015, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 12, 
+            "user_configurable": "False", 
+            "field_name": "long_term_support_id", 
+            "item_id": "LSLS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Life Skills", 
+            "sms_keyword": "False", 
+            "item_description": "Life Skills", 
+            "item_category": "Long-term needs"
+        }
+    },
+    {
+        "pk": 35015, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 91, 
+            "user_configurable": "False", 
+            "field_name": "long_term_support_id", 
+            "item_id": "SHIR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Health Insurance Registration", 
+            "sms_keyword": "False", 
+            "item_description": "Support with Health Insurance Registration", 
+            "item_category": "Service type"
+        }
+    },
+    {
+        "pk": 35016, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 92, 
+            "user_configurable": "False", 
+            "field_name": "long_term_support_id", 
+            "item_id": "SICR", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Information on child rights", 
+            "sms_keyword": "False", 
+            "item_description": "Provided with information on child rights and reponsibilities", 
+            "item_category": "Service type"
+        }
+    },
+    {
+        "pk": 35017, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 93, 
+            "user_configurable": "False", 
+            "field_name": "long_term_support_id", 
+            "item_id": "SDRS", 
+            "is_void": "False", 
+            "item_sub_category": "", 
+            "item_description_short": "Disability services", 
+            "sms_keyword": "False", 
+            "item_description": "Child living with disability reffered and linked to appropriate services", 
+            "item_category": "Service type"
+        }
+    }
+]

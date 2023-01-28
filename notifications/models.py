@@ -11,16 +11,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.db.models.query import QuerySet
-# from django.forms import JSONField
 from django.utils import timezone
-# from django.utils.six import text_type
-from jsonfield.fields import JSONField
-
-from model_utils import Choices
-from utils
-
 from six import text_type
-
+from jsonfield.fields import JSONField
+from model_utils import Choices
 from notifications import settings as notifications_settings
 from notifications.signals import notify
 from notifications.utils import id2slug
@@ -40,7 +34,8 @@ def is_soft_delete():
 
 def assert_soft_delete():
     if not is_soft_delete():
-        msg = """To use 'deleted' field, please set 'SOFT_DELETE'=True in settings.
+        msg = """To use 'deleted' field, please
+        set 'SOFT_DELETE'=True in settings.
         Otherwise NotificationQuerySet.unread and NotificationQuerySet.read
         do NOT filter by 'deleted' field.
         """
@@ -49,6 +44,7 @@ def assert_soft_delete():
 
 class NotificationQuerySet(models.query.QuerySet):
     ''' Notification QuerySet '''
+
     def unsent(self):
         return self.filter(emailed=False)
 
@@ -173,7 +169,8 @@ class Notification(models.Model):
 
     HTML Representation::
 
-        <a href="http://oebfare.com/">brosner</a> commented on <a href="http://github.com/pinax/pinax">pinax/pinax</a> 2 hours ago # noqa
+        <a href="http://oebfare.com/">brosner</a> commented on 
+        <a href="http://github.com/pinax/pinax">pinax/pinax</a> 2 hours ago # noqa
 
     """
     LEVELS = Choices('success', 'info', 'warning', 'error')

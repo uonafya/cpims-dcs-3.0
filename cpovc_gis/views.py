@@ -54,4 +54,3 @@ def gis_data(request):
                             safe=False)
     except Exception as e:
         raise e
-

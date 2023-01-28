@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CTiP {{ form_id }} - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+@media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+}
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP - Form </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CTiP - FORM {{ form_id }} ({{ form_name }}) <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/><b>CTiP - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="{% url 'ctip_form' form_id='A' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-pencil m-r-5"></i> {% if case.consent_date %} Edit {% else %} New {% endif %}Consent Form</a>
+                    <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Case</a>
+                    </span>
+                    Case No: {{ case.case_number }}
+                </div>
+            </div>
+            <div class="panel-body">
+                {% if case.consent_date %}
+                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Name of Victim [Full Name]</b></label>
+                        <div class="col-md-8">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                    {% if case.person.years < 19 %}
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Name of Parent/ Guardian [Full Name] (For Minors)</b></label>
+                        <div class="col-md-8">
+                            N/A
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>I.D. Number/ Passport Number</b></label>
+                        <div class="col-md-4">
+                            {% for contact in contacts %}
+                               {{ contact.identifier_type_id }} - {{ contact.identifier }}
+                            {% endfor %}                            
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Date of Birth</b></label>
+                        <div class="col-md-4">
+                            {{ case.person.date_of_birth }} ({{ case.person.age }})
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Consent details</b></label>
+                        <div class="col-md-8">
+                            <p>  
+                            I consent to receive the service(s), which are provided by the National Referral Mechanism for victims of
+                            human trafficking in Kenya. I understand that this application does not guarantee I will receive all the services I
+                            desire. I also consent to providing all documents and information required for the purposes of delivering these
+                            services. I understand that the personal information I provide is confidential. The release of any information
+                            regarding my involvement with the NRM may occur only with my written and signed consent.
+                            </p>
+                            <p>
+                            I declare to have understood the above and therefore have voluntarily signed this form without any form of
+                            force or coercion.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Date</b></label>
+                        <div class="col-md-4">
+                            {{ case.consent_date }}
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Consent Provided</b></label>
+                        <div class="col-md-4">
+                            {% if case.has_consent %}Yes{% else %}No{% endif %}
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="printId">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="button" id="map-print" class="btn btn-sm btn-danger m-r-5" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                            <button type="button" class="btn btn-sm btn-success m-r-5" onclick="location.href='{% url 'ctip_form' form_id='A' case_id=case.case_id|stringformat:'s' %}';"><i class="fa fa-pencil m-r-5"></i> {% if case.consent_date %} Edit {% else %} New {% endif %}Consent Form</button>
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                <div>Consent Form has not been filled. Please note you will not be able to fill any other form before consent is provided.</div>
+                {% endif %}
+            </div>
+
+                <div class="invoice-footer text-muted">
+                    <p class="text-right">
+                        <span class="m-r-10"> Case ID: <strong>{{ case.case_id }}</strong>; Timestamp: {{ datetime }}</span>
+                    </p>
+                </div>
+        </div>
+
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script>
+$(document).ready(function() {
+    $('#consent_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+
+</script>
+{% endblock %}

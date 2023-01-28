@@ -6,14 +6,28 @@
 
 {% block style_code %}
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<style type="text/css">
+  form#formCaseinfo ul {
+      list-style-type: none;
+    }
+  form#formCaseinfo li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  table.text-inverse tr{
+    margin: 35px 0 35px 0;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+</style>
 {% endblock %}
 {% load app_filters %}
 
 {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-	<li><a href="#">Forms</a></li>
-	<li class="active">Case Information</li>
+    <li><a href="#">Forms</a></li>
+    <li class="active">Case Information</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -24,10 +38,85 @@
     <i class="fa fa-check fa-2x pull-left"></i>
     <span class="invalid-form-message" id="invalid-form-message"></span>
 </div>
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 <!-- begin row -->
 <div class="row">
-  <!-- begin col-12 -->
-    <div class="col-md-12">
+   <!-- begin col-2 -->
+    <div class="col-md-2">
+        <div class="m-b-10 text-inverse f-s-12"><b>Additional Forms</b></div>
+        <table class="text-inverse m-b-20 width-full">
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=1 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Additional Information </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=2 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Emergency Cases </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=3 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Trafficked Persons </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=4 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Missing Children </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=5 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Alternative Care </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=6 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Institutional Placement </div></a>
+                </td>
+            </tr>
+            {% if tr_db %}
+            <tr>
+                <td>
+                    <a href="/forms/ctip/case/{{ case_uid }}/">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">CTiP Detailed Forms </div></a>
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+    <!-- begin col-10 -->
+    <div class="col-md-10">
         <!-- begin panel -->
         <div class="panel panel-inverse">
             <div class="panel-heading">
@@ -40,14 +129,14 @@
             <div class="alert alert-warning fade in">
                 <span class="close" data-dismiss="alert">×</span>
                 <i class="fa fa-check fa-2x pull-left"></i>
-                <span id="infomessage">This page allows to provide more information for specific cases. Emergency Case details, Missing Children cases and cases from Integrations (Vurugu Mapper and Helpline 116).</span>
+                <span id="infomessage">This page allows to provide more information for specific cases. Emergency Case details, Missing Children cases and additional case information.</span>
             </div>
             <!-- start panel body -->            
-            <div class="invoice">
+            <div class="cinvoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print"> 
                         <a href="/" class="btn btn-sm btn-primary m-r-5 m-b-5"><i class="fa fa-arrow-left m-r-5"></i> To Dashboard</a>                  
-                        <a href="{% url 'cpims_document' doc_id='CRS' case_id=case.case_id %}" class="btn btn-sm btn-danger m-r-5 m-b-5"><i class="fa fa-file-pdf-o m-r-5"></i> Export as PDF</a>
+                        <a href="{% url 'cpims_document' doc_id='CRS' case_id=case.case_id %}" class="btn btn-sm btn-danger m-r-5 m-b-5"><i class="fa fa-file-pdf-o m-r-5"></i> Case Record Sheet as PDF</a>
                         <div class="btn-group m-r-5 m-b-5">
                             <a href="#" class="btn btn-success">Case Actions</a>
                             <a href="javascript:;" data-toggle="dropdown" class="btn btn-success dropdown-toggle">
@@ -65,90 +154,56 @@
                 </div>
             </div>
             <div class="panel-body">
-            <form class="form-horizontal" id="formCaseinfo" data-parsley-validate="true">
-                {% csrf_token %}
-                <ul class="nav nav-pills">
-                        <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">Case Information</a></li>
-                        <li><a href="#nav-pills-tab-2" data-toggle="tab">Emergency Cases</a></li>
-                        <li><a href="#nav-pills-tab-3" data-toggle="tab">Missing Children</a></li>
-                        <li><a href="#nav-pills-tab-4" data-toggle="tab">Case Integration</a></li>
-                        <li><a href="#nav-pills-tab-5" data-toggle="tab">Other Information</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade active in" id="nav-pills-tab-1">
-                            <h3 class="m-t-10">General case details</h3>
-                            <table class="table table-profile">
-                                <tbody>
-                                    <tr class="highlight">
-                                        <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {{ case.person.other_names }}</td>
-                                        <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
-                                        <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
-                                        <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
-                                        <td></td><td></td>
-                                    </tr>
-                                    <tr class="highlight">
-                                        <td class="field">Case Category</td>
-                                        <td colspan="5">Case Category</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            
-                        </div>
-                        <div class="tab-pane fade" id="nav-pills-tab-2">
-                            <h3 class="m-t-10">Emergency case details</h3>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Select Emergency</label>
-                                <div class="col-md-10">
-                                    {{ form.emergency }}
-                                </div>
-                            </div>
-                            <div class="form-group" id="div_em_detail">
-                                <label class="col-md-2 control-label">Other Emergency details</label>
-                                <div class="col-md-10">
-                                    {{ form.emergency_detail }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label"></label>
-                                <div class="col-md-10">
-                                    <button type="button" id="tab-2" class="btn btn-sm btn-success btnCaseinfo">Update Emergency Details</button>
-                                </div>
-                            </div>
-                        </div>
+                <h3 class="m-t-10">General case details</h3>
+                <table class="table table-profile">
+                    <tbody>
+                        <tr class="highlight">
+                            <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
+                            <td class="field"></td><td></td>
+                            <td class="field"></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
+                            <td class="field"></td><td></td>
+                            <td class="field"></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
+                            <td class="field"></td><td></td>
+                            <td class="field"></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Date Reported</td><td>{{ case.date_case_opened }}</td>
+                            <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Case Category</td>
+                            <td>
+                                {% for cat in cats %}
+                                    {{ cat.case_category|gen_value:vals }}
+                                {% endfor %}
+                            </td>
+                            <td class="field">Sub Category</td>
+                            <td></td><td></td>
+                        </tr>
+                        {% if tr_case %}
+                        <tr class="highlight">
+                            <td colspan="6">
+                                <div class="alert alert-danger"><b class="text-inverse">This case has been flagged as a Possible Trafficking Case. Provide the details below for it to be added to VoT database.</b>
 
-                        <div class="tab-pane fade" id="nav-pills-tab-3">
-                            <h3 class="m-t-10">Missing Children</h3>
-                           
-                        </div>
-
-                        <div class="tab-pane fade" id="nav-pills-tab-4">
-                            <h3 class="m-t-10">Case Integration</h3>
-                           
-                        </div>
-                        <div class="tab-pane fade" id="nav-pills-tab-5">
-                            <h3 class="m-t-10">Other Information</h3>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Case Narration</label>
-                                <div class="col-md-10">
-                                    {{ form.case_narration }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label"></label>
-                                <div class="col-md-10">
-                                    <button type="button" id="tab-5" class="btn btn-sm btn-success btnCaseinfo">Update Other Information</button>
-                                </div>
-                            </div>                           
-                        </div>
-                    </div>               
-                
-            </form>
-                
-            </div>
-            <!-- end panel body -->
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="4">
+                                <div style="height: 250px;"></div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>                            
         </div>
         <!-- end panel -->  
     </div>
@@ -158,46 +213,5 @@
 {% endblock %}
 
 {% block lazy_javascript_code %}
-<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".btnCaseinfo").click(function(event) {
-            var id = $(this).attr('id');
-            console.log(id);
-            $('#emergency_detail').attr('data-parsley-required', 'false');
-            $('#case_narration').attr('data-parsley-required', 'false');
-            $('#div_em_detail').hide();
-            if(id == 'tab-2'){
-                var em = $('#emergency').val();
-                if (em == 'OE0001'){
-                   $('#emergency_detail').attr('data-parsley-required', 'true');
-                   $('#div_em_detail').show();   
-                }              
-            }else if(id == 'tab-5'){
-                $('#case_narration').attr('data-parsley-required', 'true');
-            }
-            $("#formCaseinfo").parsley().validate();
-            if ($("#formCaseinfo").parsley().isValid() ) {
-                console.log('Is Valid');
-                 $.ajax({
-                    url: '{% url 'case_info' case_id=case.case_id %}',
-                    method: 'POST',
-                    data: $("#formCaseinfo").serialize() + '&tab-id='+id,
-                    success: function(data)
-                    {
-                        $("#infomessage").html(data.message);
-                        //$( ".nav" ).tabs({ 'active': '#nav-pills-tab-1' });
-                        $('.nav a[href="#nav-pills-tab-1"]').tab('show');
-                    },
-                   error: function()
-                    {
-                        $("#infomessage").html('Error Saving Additional Case Information.');
-                    }
-                }); 
-            }else{
-                console.log('Not Valid');
-            }
-        });
-    });
-</script>
+
 {% endblock %}

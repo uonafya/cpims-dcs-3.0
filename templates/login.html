@@ -1,14 +1,14 @@
 {% extends 'base_home.html' %}
 {% load static %}
 
-{% block page_title %} {{block.super}} Log in {% endblock page_title%}    
+{% block page_title %} {{block.super}} Log in {% endblock page_title%}
 
 {% block primary %}
 <!-- begin right-content -->
 <div class="right-content">
     <!-- begin register-header -->
     <div class="register-header">
-        <h4 class="brand shome">Department of Children Services (DCS)</h4>
+        <h4 class="brand shome">Directorate of Children Services (DCS)</h4>
     </div>
     <h1 class="register-header">
         <small>Provide the required details to log in</small>
@@ -82,7 +82,7 @@
                     </span>
                     <hr />
                     <p class="text-center text-inverse">
-                        &copy; {% now "Y" %} Department of Children Services (DCS). All Rights Reserved.
+                        &copy; {% now "Y" %} Directorate of Children Services (DCS). All Rights Reserved.
                     </p>
                 </fieldset>
         </form>
@@ -93,4 +93,5 @@
 {% endblock primary %}
 
 {% block lazy_javascript_code %}
+<script src="{% static 'plugins/bootstrap-show-password/bootstrap-show-password.js' %}"></script>
 {% endblock lazy_javascript_code %}

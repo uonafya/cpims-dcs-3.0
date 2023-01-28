@@ -137,7 +137,7 @@ td.td_style {
 									{{ form.case_category_id }}
 
 									<div class="form-group">
-										<label class="control-label col-md-3 col-sm-3" for="case_originator">Case Reporter/Originator : <span class="asteriskField">* </label>
+										<label class="control-label col-md-3 col-sm-3" for="case_originator">Case Reporter/Originator : <span class="asteriskField">* </span></label>
 										<div class="col-md-8 col-sm-8">
 											{{ form.case_reporter }}
 										</div>
@@ -145,14 +145,14 @@ td.td_style {
 									</div>
 									<!-- Court Reported -->
 									<div id="div_court_name" class="form-group" style="display:none;">
-										<label class="control-label col-md-3 col-sm-3" for="court_name">Court Name : <span class="asteriskField">* </label>
+										<label class="control-label col-md-3 col-sm-3" for="court_name">Court Name : <span class="asteriskField">* </span></label>
 										<div class="col-md-8 col-sm-8">
 											{{ form.court_name }}
 										</div>
 										<a href="#" data-toggle="tooltip" title="Enter >Court Name"><i class="fa fa-info-circle fa-sm"></i></a>
 									</div>
 									<div id="div_court_number" class="form-group" style="display:none;">
-										<label class="control-label col-md-3 col-sm-3" for="court_number">Court/File Number : <span class="asteriskField">* </label>
+										<label class="control-label col-md-3 col-sm-3" for="court_number">Court/File Number : <span class="asteriskField">* </span></label>
 										<div class="col-md-8 col-sm-8">
 											{{ form.court_number }}
 										</div>
@@ -161,14 +161,14 @@ td.td_style {
 
 									<!-- Police Reported -->
 									<div id="div_police_station" class="form-group" style="display:none;">
-										<label class="control-label col-md-3 col-sm-3" for="police_station">Police Station : <span class="asteriskField">* </label>
+										<label class="control-label col-md-3 col-sm-3" for="police_station">Police Station : <span class="asteriskField">* </span></label>
 										<div class="col-md-8 col-sm-8">
 											{{ form.police_station }}
 										</div>
 										<a href="#" data-toggle="tooltip" title="Enter Police Station"><i class="fa fa-info-circle fa-sm"></i></a>
 									</div>
 									<div id="div_ob_number" class="form-group" style="display:none;">
-										<label class="control-label col-md-3 col-sm-3" for="ob_number">OB Number : <span class="asteriskField">* </label>
+										<label class="control-label col-md-3 col-sm-3" for="ob_number">OB Number : <span class="asteriskField">* </span></label>
 										<div class="col-md-8 col-sm-8">
 											{{ form.ob_number }}
 										</div>
@@ -177,7 +177,7 @@ td.td_style {
 									
 									<!-- Parents/Relatives/Non-Relative Reported -->
                                     <div id="div_reporter_names" class="form-group" style="display:none;">
-                                        <label class="control-label col-md-3 col-sm-3" for="case_reporter_first_name">Reporter Name(s) :<span class="asteriskField">* </label>
+                                        <label class="control-label col-md-3 col-sm-3" for="case_reporter_first_name">Reporter Name(s) :<span class="asteriskField">* </span></label>
                                         <div class="col-md-3 col-sm-6">
                                             {{ form.case_reporter_first_name }}
                                         </div> 
@@ -219,26 +219,57 @@ td.td_style {
                                     </div> 
                                     -->
 									<div class="form-group">
-										<label class="control-label col-md-3 col-sm-3" for="geolocs">Place Of Occurence : <span class="asteriskField">* </label>
-										<div class="col-md-4 col-sm-4">
-                                             County *   {{ form.occurence_county }}
+										<label class="control-label col-md-3 col-sm-3" for="geolocs">Place Of Occurence : <span class="asteriskField">* </span></label>
+										<div class="col-md-4 col-sm-8">
+                                             <label class="col-sm-4" for="child_ovc">In the Country<span class="asteriskField">*</span></label>
+                                                                              
+                                        {{ form.occurence_nationality }}
                                         </div>
-										<div class="col-md-4 col-sm-4">
-                                             Sub County *   {{ form.occurence_subcounty }}
-                                        </div>
+                                        <div id="nationality_error"></div>
 									</div>
-									<div class="form-group">
-										<label class="control-label col-md-3 col-sm-3" for="geolocs"></label>
+									<div class="form-group" id="occurence_country_div">
+										<label class="control-label col-md-3 col-sm-3" for="occurence_country"></label>
                                         <div class="col-md-4 col-sm-4">
-                                             Ward   {{ form.occurence_ward }}
+                                             <label>Country <span class="asteriskField">*</span></label>   {{ form.occurence_country }}
                                         </div>
                                         <div class="col-md-4 col-sm-4">
-                                        	 Village/Estate   {{ form.occurence_village }}
+                                        	 <label>City / Town <span class="asteriskField">*</span></label>   {{ form.occurence_city }}
                                         </div>
                                         <a href="#" data-toggle="tooltip" title="Enter Place Of Occurence"><i class="fa fa-info-circle fa-sm"></i></a>
-									</div>  
+									</div>
+									<div class="form-group" id="occurence_county_div">
+										<label class="control-label col-md-3 col-sm-3" for="occurence_county"></label>
+                                        <div class="col-md-4 col-sm-4">
+                                             <label>County <span class="asteriskField">*</span></label>   {{ form.occurence_county }}
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                        	 <label>Sub County <span class="asteriskField">*</span></label>   {{ form.occurence_subcounty }}
+                                        </div>
+                                        <a href="#" data-toggle="tooltip" title="Enter Place Of Occurence"><i class="fa fa-info-circle fa-sm"></i></a>
+									</div>
+									<div class="form-group" id="occurence_ward_div">
+										<label class="control-label col-md-3 col-sm-3" for="occurence_ward"></label>
+                                        <div class="col-md-4 col-sm-4">
+                                             <label>Ward</label>   {{ form.occurence_ward }}
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                        	 <label>Village/Estate </label>  {{ form.occurence_village }}
+                                        </div>
+                                        <a href="#" data-toggle="tooltip" title="Enter Place Of Occurence"><i class="fa fa-info-circle fa-sm"></i></a>
+									</div>
+									<div class="form-group" id="occurence_location_div">
+										<label class="control-label col-md-3 col-sm-3" for="occurence_location"></label>
+                                        <div class="col-md-4 col-sm-4">
+                                             <label>Location</label>   {{ form.occurence_location }}
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                        	 <label>Sub Location</label>   {{ form.occurence_sublocation }}
+                                        </div>
+                                        <a href="#" data-toggle="tooltip" title="Select Location"><i class="fa fa-info-circle fa-sm"></i></a>
+									</div>
+
                                     <div class="form-group">
-										<label class="control-label col-md-3 col-sm-3" for="geolocs">Place Of Reporting : <span class="asteriskField">* </label>
+										<label class="control-label col-md-3 col-sm-3" for="geolocs">Place Of Reporting : <span class="asteriskField">* </span></label>
 										<div class="col-md-4 col-sm-4">
                                              Sub County *   
                                              <br> {{ form.report_subcounty }}
@@ -1326,7 +1357,6 @@ function getCaseSubCategories(case_category_id)
             });        
 }
 </script>
-</script>
 
 <script>
 jQuery(document).ready(function() 
@@ -1342,6 +1372,9 @@ jQuery(document).ready(function()
 	/* getCaseSubCategories */ 
 	var category_id = $("#case_category").val();
 	getCaseSubCategories(category_id);
+
+	// For CTiP
+	$("#occurence_nationality_0").prop("checked", true);
 
 
 	/* Populate subcounty list with Working_in */ 
@@ -1736,6 +1769,14 @@ jQuery(document).ready(function()
 
 	$('html,body').scrollTop(0);
 	FormWizardValidation.init();
+
+	// Added for CTiP
+	var ntn = $('input[name=occurence_nationality]:checked', '#new_case_record').val();
+	handle_nationality(ntn);
+	$('#new_case_record input[name=occurence_nationality]').on('change', function() {
+	   var ntn = $('input[name=occurence_nationality]:checked', '#new_case_record').val();
+	   handle_nationality(ntn);
+	});
 });
 </script>
 <script type="text/javascript">
@@ -1786,10 +1827,41 @@ function getUserOrgUnits()
             },
             error: function(xhr, status, error)
             {
-                alert(error);
+                //alert(error);
+                $('#div_roles').show();
+                $('#div_roles p').html(error + " : Persmissions error because you are using admin account.");   
             }
         }); 
 }
+
+
+function handle_nationality(ntn){
+    console.log(ntn);
+    if (ntn == 'ANNO'){
+        $('#occurence_county_div').hide();
+        $('#occurence_county').attr('data-parsley-required', 'false');
+        $('#occurence_subcounty').attr('data-parsley-required', 'false');
+        $('#occurence_ward_div').hide();
+        $('#occurence_location_div').hide();   
+        //Foreigners
+        $('#occurence_country_div').show();
+        $('#occurence_country').attr('data-parsley-required', 'true');
+        $('#occurence_city').attr('data-parsley-required', 'true');
+    }else{
+        $('#occurence_county_div').show();
+        $('#occurence_county').attr('data-parsley-required', 'true');
+        $('#occurence_subcounty').attr('data-parsley-required', 'true');
+        $('#occurence_ward_div').show();
+        $('#occurence_location_div').show();
+        //Foreigners
+        $('#occurence_country_div').hide();
+        $('#occurence_country').attr('data-parsley-required', 'false');
+        $('#occurence_city').attr('data-parsley-required', 'false');
+    }
+
+}
+
+
 function displayVals(value)
 {
 	var selections = [];

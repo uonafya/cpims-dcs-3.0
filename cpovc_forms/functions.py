@@ -1,3 +1,5 @@
+import uuid
+from PIL import Image, ImageOps
 from django.db import connection
 from datetime import datetime, timedelta
 from django.core.cache import cache
@@ -7,9 +9,14 @@ from cpovc_registry.functions import (
 from cpovc_main.functions import get_general_list, convert_date
 from cpovc_forms.models import (
     FormsAuditTrail, OVCCareF1B, OVCCareEvents, OVCCaseGeo,
-    OVCEducationFollowUp, OVCPlacement, OvcCaseInformation)
+    OVCEducationFollowUp, OVCPlacement, OvcCaseInformation,
+    OVCCaseLocation, OVCCaseRecord)
 from cpovc_ovc.functions import get_house_hold
-from cpovc_main.models import ListAnswers
+from cpovc_main.models import ListAnswers, SetupGeography
+
+from cpovc_registry.models import Photo
+
+from django.conf import settings
 
 
 def validate_serialnumber(person_id, subcounty, serial_number):
@@ -47,7 +54,7 @@ def get_case_geo(request, case_id):
     try:
         case_geo = OVCCaseGeo.objects.get(case_id=case_id, is_void=False)
     except Exception as e:
-        print(('error getting case geo - %s' % (str(e))))
+        print('error getting case geo - %s' % (str(e)))
         return None
     else:
         return case_geo
@@ -64,7 +71,7 @@ def save_audit_trail(request, params, audit_type):
         interface_id = params['interface_id']
         meta_data = get_meta_data(request)
 
-        print(('Audit Trail', params))
+        print('Audit Trail', params)
 
         FormsAuditTrail(
             transaction_type_id=transaction_type_id,
@@ -77,7 +84,7 @@ def save_audit_trail(request, params, audit_type):
             app_user_id=user_id).save()
 
     except Exception as e:
-        print(('Error saving audit - %s' % (str(e))))
+        print('Error saving audit - %s' % (str(e)))
         pass
     else:
         pass
@@ -190,7 +197,7 @@ def get_person_ids(request, name):
             row = cursor.fetchall()
             pids = [r[0] for r in row]
     except Exception as e:
-        print(('Error getting results - %s' % (str(e))))
+        print('Error getting results - %s' % (str(e)))
         return []
     else:
         print(pids)
@@ -203,13 +210,13 @@ def update_case_stage(request, case, stage=1):
         case.case_stage = stage
         case.save()
     except Exception as e:
-        print(("Error changing case stage - %s" % str(e)))
+        print("Error changing case stage - %s" % str(e))
 
 
 def get_exit(period, units, start_date, e_date):
     """Method to get exit date."""
     try:
-        print((period, units, start_date, e_date))
+        print(period, units, start_date, e_date)
         periods = {}
         periods['CPYR'] = {'name': 'Years', 'units': 365}
         periods['CPMN'] = {'name': 'Months', 'units': 30}
@@ -229,7 +236,7 @@ def get_exit(period, units, start_date, e_date):
         if dys < 0:
             ck = 'after committal expiry'
             no_days = today - exit_date
-        print(('exit', total_days, start_date, exit_date, dys))
+        print('exit', total_days, start_date, exit_date, dys)
         # Get More
         years = ((no_days.total_seconds()) / (365.242 * 24 * 3600))
         years_int = int(years)
@@ -244,7 +251,7 @@ def get_exit(period, units, start_date, e_date):
         months_val = '%s months ' % (months_int) if mon_check else ''
         pds = '%s%s%s days' % (years_val, months_val, days_int)
     except Exception as e:
-        print(('Error calculating exit - %s' % str(e)))
+        print('Error calculating exit - %s' % str(e))
         return 'No committal info', ''
     else:
         return pds, ck
@@ -270,7 +277,7 @@ def get_stay(admission_date, exit_date):
         months_val = '%s months ' % (months_int) if mon_check else ''
         pds = '%s%s%s days' % (years_val, months_val, days_int)
     except Exception as e:
-        print(('Error calculating exit - %s' % str(e)))
+        print('Error calculating exit - %s' % str(e))
         return None
     else:
         return pds
@@ -446,7 +453,7 @@ def get_placement(request, ou_id, person_id):
             residential_institution_id=ou_id,
             person_id=person_id, is_active=True)
     except Exception as e:
-        print(('Child has not been placed - %s' % e))
+        print('Child has not been placed - %s' % e)
         return None
     else:
         return placement
@@ -459,7 +466,7 @@ def get_questions(set_id, default_txt=None):
         cache_list = cache.get(cache_key)
         if cache_list:
             v_list = cache_list
-            print(('FROM Cache %s' % (cache_key)))
+            print('FROM Cache %s' % (cache_key))
         else:
             v_list = ListAnswers.objects.filter(
                 answer_set_id=set_id, is_void=False)
@@ -471,7 +478,7 @@ def get_questions(set_id, default_txt=None):
             final_list = [initial_list] + list(my_list)
             return final_list
     except Exception as e:
-        print(('error - %s' % (e)))
+        print('error - %s' % (e))
         return ()
     else:
         return my_list
@@ -484,12 +491,12 @@ def save_case_info(request, case, item_type, item_id, item_detail):
         person_id = case.person_id
         obj, created = OvcCaseInformation.objects.update_or_create(
             case_id=case_id, person_id=person_id, info_type=item_type,
-            is_void=False,
-            defaults={'info_item': item_id, 'info_detail': item_detail},
+            info_item=item_id, is_void=False,
+            defaults={'info_detail': item_detail},
         )
-        print(('Saved', obj, created))
+        print('Saved', obj, created)
     except Exception as e:
-        print(('Error saving case info - %s' % (e)))
+        print('Error saving case info - %s' % (e))
         raise e
     else:
         return obj
@@ -505,3 +512,116 @@ def get_case_info(request, case_id):
     else:
         return case_infos
 
+
+def save_case_other_geos(case_id, person_id, params={}):
+    """Save Persons other geo ares."""
+    try:
+        country_code = params['country'] if 'country' in params else None
+        city = params['city'] if 'city' in params else None
+        location = params['location'] if 'location' in params else None
+        sub_loc = params['sub_location'] if 'sub_location' in params else None
+        geo, created = OVCCaseLocation.objects.update_or_create(
+            case_id=case_id, person_id=person_id,
+            defaults={'report_country_code': country_code, 'report_city': city,
+                      'report_location_id': location,
+                      'report_sublocation_id': sub_loc,
+                      'is_void': False},)
+    except Exception as e:
+        error = 'Error saving other geos -%s' % (str(e))
+        print(error)
+        return None, None
+    else:
+        return geo, created
+
+
+def handle_photo_upload(request):
+    """Method to handle photo uploads."""
+    try:
+        dt = datetime.now()
+        dts = int(dt.strftime("%Y%m%d%H%M"))
+        f = request.FILES['photo']
+        person_id = request.POST.get('person_id')
+        pid = str(person_id).zfill(10)
+        photo_type = int(request.POST.get('photo_type', 0))
+        ctype = f.content_type
+        fext = ctype.split('/')[1].replace('jpeg', 'jpg')
+        # Check if this photo exists to re-use the name
+        # TO DO - Check file type and size
+        # Get them liars who change extensions of even mp3 to jpg
+        cphotos = get_photo(request, person_id)
+        # fname = "%s-%s-%s"str(dts) + "-" + str(uuid.uuid4()) + "." + fext
+        fname = "%s-%s-%s.%s" % (str(dts), str(uuid.uuid4()), pid, fext)
+        if cphotos:
+            if cphotos.photo_passport and photo_type == 1:
+                fnm, fxt = str(cphotos.photo_passport).split('.')
+                fname = fnm + "." + fext
+            elif cphotos.photo_fullsize and photo_type == 2:
+                fnm, fxt = str(cphotos.photo_fullsize).split('.')
+                fname = fnm + "." + fext
+        file_name = '%s/%s' % (settings.MEDIA_PHOTOS, fname)
+        print('Photo uploaded', fname, file_name)
+        with open(file_name, 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+        # Remove metadata and resize the image
+        im = Image.open(r"%s" % file_name)
+        width, height = im.size
+        image_exif = im._getexif()
+        image_orientation = image_exif[274] if 274 in image_exif else 0
+        # ext 6
+        print('Photo size', width, height, 'Orientation', image_orientation)
+        if height > 1024:
+            nim = ImageOps.exif_transpose(im)
+            width, height = nim.size
+            nheight = 1024
+            nwidth = nheight * (height / width)
+            newsize = (nheight, int(nwidth))
+            new_file = nim.resize(newsize)
+            new_file.save(file_name)
+
+    except Exception as e:
+        raise e
+    else:
+        return fname
+
+
+def save_photo(request, photo):
+    """Save Persons other geo ares."""
+    try:
+        user_id = request.user.id
+        person_id = request.POST.get('person_id')
+        photo_type = int(request.POST.get('photo_type', 0))
+        has_photos = get_photo(request, person_id)
+        if has_photos and photo_type == 2:
+            photo_pp = has_photos.photo_passport
+            photo_fs = photo
+        elif has_photos and photo_type == 1:
+            photo_pp = photo
+            photo_fs = has_photos.photo_fullsize
+        else:
+            photo_pp = photo
+            photo_fs = None
+        pic, created = Photo.objects.update_or_create(
+            person_id=person_id,
+            defaults={'photo_passport': photo_pp,
+                      'photo_fullsize': photo_fs,
+                      'user_id': user_id,
+                      'is_void': False
+                      })
+    except Exception as e:
+        error = 'Error saving other photo -%s' % (str(e))
+        print(error)
+        return None, None
+    else:
+        return pic, created
+
+
+def get_photo(request, person_id):
+    """Method to get all case info for a case."""
+    try:
+        photos = Photo.objects.get(
+            person_id=person_id, is_void=False)
+    except Exception:
+        return {}
+    else:
+        return photos

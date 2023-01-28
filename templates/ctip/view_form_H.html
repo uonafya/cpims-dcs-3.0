@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CTiP {{ form_id }} - {{ form_name }} - {{ case.person.id }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+@media screen {
+  div.divHeader {
+    display: none;
+  }
+  form#new-form-f ul {
+      list-style-type: none;
+    }
+  form#new-form-f li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  form#new-form-f ul {
+      list-style-type: none;
+    }
+  form#new-form-f li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+}
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">CTiP - Form </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> CTiP - FORM {{ form_id }} ({{ form_name }}) <small>Home</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+    <div class="col-md-2">
+
+        <table class="text-inverse m-b-20 width-full">
+            <thead>
+            <tr>
+                <th><h4>Past Events</h4><hr></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+            <tr>
+                <td>
+                    <a href="{% url 'view_ctip_form' form_id='A' case_id=case.case_id|stringformat:'s' %}">
+                    <i class="fa fa-file pull-left"></i>
+                    <span class="badge pull-right">{% if case.has_consent %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-0">Follow up - {{ event.event_date }}</div></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'ctip_form' form_id='H' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-plus m-r-5"></i> New Follow up Form</a>
+
+    </div>
+    <div class="col-md-10">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/><b>CTiP - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="{% url 'ctip_form' form_id='H' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-pencil m-r-5"></i> {% if events %} Edit {% else %} New {% endif %}Follow up Form</a>
+                    <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Case</a>
+                    </span>
+                    Case No: {{ case.case_number }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-f" action="." data-parsley-validate="true">
+                    {% if events %}
+                    <fieldset id="dtd" disabled="disabled">
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Good physical and mental health condition. Can travel back to Country of origin or place of habitual
+residence</label>
+                        <div class="col-md-1">
+                            {{ form.qfF1_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF1_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">The VOT has a safe place to stay on arrival</label>
+                        <div class="col-md-1">
+                            {{ form.qfF2_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF2_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">All legal, administrative, identity and travel documents are secured</label>
+                        <div class="col-md-1">
+                            {{ form.qfF3_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF3_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Name, contact and focal person of receiving agency and initial reintegration plan (IRP</label>
+                        <div class="col-md-1">
+                            {{ form.qfF4_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF4_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Copies of necessary documents and VOT security information to be forwarded to the receiving agency</label>
+                        <div class="col-md-1">
+                            {{ form.qfF5_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF5_txt }}
+                        </div>
+                    </div>
+                    <legend class="pull-left width-full">Travel documents and other personal documents</legend>
+
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">a). Passport / Visa</label>
+                        <div class="col-md-1">
+                            {{ form.qfF6_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF6_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">b). Air ticket(s)</label>
+                        <div class="col-md-1">
+                            {{ form.qfF7_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF7_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">c). Bus ticket(s)</label>
+                        <div class="col-md-1">
+                            {{ form.qfF8_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF8_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">d). Medical records</label>
+                        <div class="col-md-1">
+                            {{ form.qfF9_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF9_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">e). Personal documents / items</label>
+                        <div class="col-md-1">
+                            {{ form.qfF10_rdo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.qfF10_txt }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Date</label>
+                        <div class="col-md-4">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    </fieldset>
+                    <div class="form-group" id="printId">
+                        <label class="col-md-5 control-label"></label>
+                        <div class="col-md-7">
+                            <button type="button" id="map-print" class="btn btn-sm btn-danger m-r-5" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                            <button type="button" class="btn btn-sm btn-success m-r-5" onclick="location.href='{% url 'ctip_form' form_id='F' case_id=case.case_id|stringformat:'s' %}';"><i class="fa fa-pencil m-r-5"></i> {% if case.consent_date %} Edit {% else %} New {% endif %}Checklist Form</button>
+                        </div>
+                    </div> 
+                </form>
+                <div class="invoice-footer text-muted">
+                    <p class="text-right">
+                        <span class="m-r-10"> Case ID: <strong>{{ case.case_id }}</strong>; Timestamp: {{ datetime }}</span>
+                    </p>
+                </div>
+            </div>
+                {% else %}
+                  <div>This form has not been filled</div>
+                {% endif %}
+            </div>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+<script>
+$(document).ready(function() {
+   $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $('#dtd').prop('disabled', 'false');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+
+}
+</script>
+{% endblock %}

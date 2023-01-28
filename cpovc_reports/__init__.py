@@ -1,1 +1,1 @@
-default_app_config = 'cpims.apps.RegReportConfig'
+# default_app_config = 'cpims.apps.RegReportConfig'

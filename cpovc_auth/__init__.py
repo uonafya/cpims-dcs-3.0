@@ -1,1 +1,1 @@
-default_app_config = 'cpims.apps.AuthAppConfig'
+# default_app_config = 'cpims.apps.AuthAppConfig'

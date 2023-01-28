@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} CPIMS Alternative Care {% endblock %}
+
+{% load app_filters %}
+
+{% block style_code %}
+<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+  form#formCaseinfo ul {
+      list-style-type: none;
+    }
+  form#formCaseinfo li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  table.text-inverse tr{
+    margin: 25px 0 25px 0;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Alternative Care <small> New </small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <!-- begin col-3 -->
+    <div class="col-md-3">
+        <div class="m-b-10 text-inverse f-s-10"><b>{{ care_name }} - Available Forms</b></div>
+        <table class="text-inverse m-b-20 width-full">
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='1A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.1A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F1 - Child Identification Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='1B' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.1B > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F1 - Child Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='2A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.2A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F2 - Family Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='3A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.3A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F3 - Consent Forms</div></a>
+                </td>
+            </tr>
+            {% if case.person.years >= 14 %}
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='3B' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.3B > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F3 - Child Assent Forms</div></a>
+                </td>
+            </tr>
+            {% endif %}
+            {% if step_one and case.care_type %}
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='4A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.4A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F4 - Case Plan</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='5A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.5A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F5 - Placement Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='6A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.6A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F6 : Monitoring Form</div></a>
+                </td>
+            </tr>
+            {% if case.person.years < 14 %}            
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='7A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.7A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F7 : Child and Caregiver Case Review Form</div></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='8A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.8A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F8 : Young Person Case Review Form</div></a>
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='9A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.9A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F9 : Case closure</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='10A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.10A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F10 - Case Transfer Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='12A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.12A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F12 - Referral Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='14A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.14A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F14 - Disability Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='15A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.15A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F15 - Caregiver Feedback Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'alt_care_form' cid=cid form_id='16A' care_id=case.care_id|stringformat:'s' %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">{% if events.16A > 0 %}Y{% else %}N{% endif %}</span>
+                    <div class="m-t-4">F16 - Child and Young Person Feedback Form</div></a>
+                </td>
+            </tr>
+            {% endif %}
+            
+        </table>
+        <div class="alert alert-warning">
+            <i class="fa fa-info-circle fa-lg m-r-5 pull-left m-t-2"></i> Follow ups can be done at <b class="text-inverse">any time</b> in the process and <b class="text-inverse">each type of care has different Forms and SOPs.</b>
+        </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-9 -->
+    <div class="col-md-9">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Child / Case Information (Summary)</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="#" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <a href="#" onclick="history.back()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Search</a>
+                    </span>
+                    Case No: {{ case.case_number }} ({{ care_name }})
+                </div>
+            </div>
+            <!-- start panel body -->
+            <div class="panel-body">
+                <form id="formCaseinfo" method="POST" data-parsley-validate="true">
+                    {% csrf_token %}
+                <table class="table table-profile">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan="3">
+                                <h4>{{ case.person.first_name }} {{ case.person.surname }} <small>DoB: {{ case.person.date_of_birth }} ({{ case.person.age }})</small></h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight" bgcolor="#f2f3f4">
+                            <td class="field">Bio Data</td>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr class="divider">
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Sex</td>
+                            <td>{{ case.person.sex_id|gen_value:vals }}</td>
+                        </tr>
+                        <tr>
+                            <td class="field">DoB</td>
+                            <td>{{ case.person.date_of_birth }}</td>
+                        </tr>
+                        <tr class="highlight" bgcolor="#f2f3f4">
+                            <td class="field">Case Data</td>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td class="field">Care Type</td>
+                            <td>
+                                Placement / Reunification
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="field">Care Option</td>
+                            <td colspan="3">{{ case.care_type|gen_value:vals }}</td>
+                        </tr>
+                        <tr>
+                            <td class="field">Care Sub-type</td>
+                            <td>
+                                {% if case.care_sub_type %} {{ case.care_sub_type|gen_value:vals }} {% else %} N/A {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="field">Date</td>
+                            <td colspan="3">{{ case.case_date }}</td>
+                        </tr>
+                        <tr class="divider">
+                            <td colspan="4"></td>
+                        </tr>
+                        {% if step_one and not case.care_type %}
+                        <tr class="highlight">
+                            <td class="field"></td>
+                            <td colspan="3">
+                                <a href="{% url 'edit_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-primary m-r-5 btnNewcase"><i class="fa fa-pencil m-r-5"></i> Edit Care details</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#case_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+        $(".btnNewcase").click(function(event) {
+            $("#formCaseinfo").parsley().validate();
+            if ($("#formCaseinfo").parsley().isValid() ) {
+                console.log('Is Valid');
+                return true;
+            }else{
+                console.log('Not Valid');
+                return false;
+            }
+            
+        });
+        var aval = $("input[name='is_trafficking']:checked").val();
+        handle_amp(aval);
+
+        // Purpose means logic
+        $('input[type=radio][name=is_trafficking]').change(function() {
+            handle_amp(this.value);
+        });
+
+        function handle_amp(aval){
+            console.log('AVAL', aval);
+            if (aval == 'AYES') {
+                $('#amp_div').show();
+                $('input[type=checkbox][name=ctip_activity]').attr('data-parsley-required', 'true');
+                $('input[type=checkbox][name=ctip_purpose]').attr('data-parsley-required', 'true');
+            }else{
+                $('#amp_div').hide();
+                $('input[type=checkbox][name=ctip_activity]').attr('data-parsley-required', 'false');
+                $('input[type=checkbox][name=ctip_purpose]').attr('data-parsley-required', 'false');
+            }
+        }
+    });
+</script>
+{% endblock %}
+

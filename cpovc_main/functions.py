@@ -7,6 +7,7 @@ import itertools
 import jellyfish
 import traceback
 import operator
+from dateutil import parser
 from functools import reduce
 from .models import SetupList, SetupGeography, SchoolList
 from django.core.cache import cache
@@ -55,15 +56,15 @@ class Persons:
     direct_services = None
 
     def __init__(
-            self, workforce_id, national_id, first_name, surname,
-            other_names, sex_id, date_of_birth, steps_ovc_number, man_number,
-            ts_number, sign_number, roles, org_units, primary_org_unit_name,
-            person_type, gdclsu_details, contact, person_type_id, districts=None,
-            wards=None, communities=None, direct_services=None,
-            edit_mode_hidden=None, workforce_type_change_date=None,
-            parent_org_change_date=None, work_locations_change_date=None,
-            date_of_death=None, org_data_hidden=None, primary_org_id=None,
-            wards_string=None, org_units_string=None, communities_string=None
+        self, workforce_id, national_id, first_name, surname,
+        other_names, sex_id, date_of_birth, steps_ovc_number, man_number,
+        ts_number, sign_number, roles, org_units, primary_org_unit_name,
+        person_type, gdclsu_details, contact, person_type_id, districts=None,
+        wards=None, communities=None, direct_services=None,
+        edit_mode_hidden=None, workforce_type_change_date=None,
+        parent_org_change_date=None, work_locations_change_date=None,
+        date_of_death=None, org_data_hidden=None, primary_org_id=None,
+        wards_string=None, org_units_string=None, communities_string=None
     ):
 
         if workforce_id == fielddictionary.empty_workforce_id:
@@ -293,9 +294,39 @@ def get_list(field_name=[], default_txt=False, category=False):
         cache_list = cache.get(cache_key)
         if cache_list:
             v_list = cache_list
-            print(('FROM Cache %s' % (cache_key)))
+            print('FROM Cache %s' % (cache_key))
         else:
             v_list = get_general_list([field_name], category)
+            cache.set(cache_key, v_list, 300)
+        my_list = v_list.values_list(
+            'item_id', 'item_description').order_by('the_order')
+        if default_txt:
+            initial_list = ('', default_txt)
+            final_list = [initial_list] + list(my_list)
+            return final_list
+    except Exception as e:
+        error = 'Error getting list - %s' % (str(e))
+        print(error)
+        return my_list
+    else:
+        return my_list
+
+
+def get_lists(field_names=[], default_txt=False, category=False):
+    my_list = ()
+    try:
+        cat_id = '1' if category else '0'
+        fnames = ''
+        for fname in field_names:
+            fnames += '_%s' % (fname)
+        cache_key = 'set_up_list_combo%s_%s' % (fnames, cat_id)
+        print('cache_key', cache_key)
+        cache_list = cache.get(cache_key)
+        if cache_list:
+            v_list = cache_list
+            print('FROM Cache %s' % (cache_key))
+        else:
+            v_list = get_general_list(field_names, category)
             cache.set(cache_key, v_list, 300)
         my_list = v_list.values_list(
             'item_id', 'item_description').order_by('the_order')
@@ -475,11 +506,10 @@ def order_by_relevence(wrapped_function):
                 str(field_string.upper()),
                 str(search_string.upper())
             )
-            diff_distances.append((result, diff_distance), )
+            diff_distances.append((result, diff_distance),)
         sorted_distances = sorted(diff_distances, key=lambda x: -x[1])
         # Now return the actual sorted results not the tuples
         return [sorted_distance[0] for sorted_distance in sorted_distances]
-
     return _wrapper
 
 
@@ -598,7 +628,7 @@ def rank_results(results_dict, required_fields, rank_order):
 
 
 def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
-    print(('include_dead', include_dead))
+    print('include_dead', include_dead)
     if RegPerson.objects.filter(pk=wfc_pk, is_void=False).count() > 0:
         tmp_wfc = None
         if include_dead:
@@ -655,7 +685,7 @@ def load_wfc_from_id(wfc_pk, user=None, include_dead=False):
             person_type_id = person_type.person_type_id
             wfc_type_tpl = list_provider.get_description_for_item_id(
                 person_type.person_type_id)
-            if (len(wfc_type_tpl) > 0):
+            if(len(wfc_type_tpl) > 0):
                 person_type_desc = wfc_type_tpl[0]
 
         geos = {}
@@ -904,7 +934,6 @@ def get_persons_list(user, tokens, wfc_type, getJSON=False,
 
     return wfcs
 
-
 class SearchIDs:
     def __init__(self, pid, first_name, surname, onames, sex, dob):
         self.id = pid
@@ -927,13 +956,13 @@ def get_list_of_persons(search_string,
                         ):
     try:
         pids = []
-        print(('criteria', search_criteria))
+        print('criteria', search_criteria)
         person_type = in_person_types[0]
         if search_criteria == 'PSCI':
             query = ("SELECT rp.id, rp.first_name, rp.surname, rp.other_names,"
                      " rp.sex_id, rp.date_of_birth FROM reg_person rp "
                      "INNER JOIN reg_persons_types pt ON pt.person_id = rp.id "
-                     "WHERE rp.id = '%s' AND pt.person_type_id = '%s'")
+                     "WHERE rp.id = %s AND pt.person_type_id = '%s'")
             vals = search_string.strip()
         elif search_criteria == 'PSOG':
             query = ("SELECT rp.id, rp.first_name, rp.surname, rp.other_names,"
@@ -946,6 +975,7 @@ def get_list_of_persons(search_string,
                      "wHERE to_tsvector (rou.org_unit_name) "
                      "@@ to_tsquery('english', '%s') AND rpou.is_void = False "
                      "AND rp.is_void = False and pt.person_type_id = '%s'")
+            search_string = search_string.replace("'", "''")
             names = search_string.strip().split()
             vals = ' & '.join(names)
         elif search_criteria == 'PSRE':
@@ -957,6 +987,7 @@ def get_list_of_persons(search_string,
                      "WHERE to_tsvector (lg.area_name) "
                      "@@ to_tsquery('english', '%s') AND rpg.is_void = False "
                      "AND rp.is_void = false and pt.person_type_id = '%s'")
+            search_string = search_string.replace("'", "''")
             names = search_string.strip().split()
             vals = ' & '.join(names)
         else:
@@ -973,27 +1004,26 @@ def get_list_of_persons(search_string,
                      "ORDER BY rp.date_of_birth DESC ")
             vals = ' & '.join(names)
         sql = query % (vals, person_type)
-        # print(sql)
+        print(sql)
         with connection.cursor() as cursor:
             cursor.execute(sql)
             row = cursor.fetchall()
             pids = [SearchIDs(r[0], r[1], r[2], r[3], r[4], r[5]) for r in row]
     except Exception as e:
-        print(('Error in search - %s' % (e)))
+        print('Error in search - %s' % (e))
         return []
     else:
         return pids
 
-
 def get_list_of_persons_old(search_string,
-                            search_string_look_in=["names", "core_ids",
-                                                   "parent_orgs", "geo_tags"],
-                            age=None, has_beneficiary_id=False,
-                            has_workforce_id=False, as_of_date=None,
-                            in_person_types=[], number_of_results=5,
-                            include_died=True, sex=None, include_void=False,
-                            search_criteria=None,
-                            ):
+                        search_string_look_in=["names", "core_ids",
+                                               "parent_orgs", "geo_tags"],
+                        age=None, has_beneficiary_id=False,
+                        has_workforce_id=False, as_of_date=None,
+                        in_person_types=[], number_of_results=5,
+                        include_died=True, sex=None, include_void=False,
+                        search_criteria=None,
+                        ):
     """
     search_string: The text the user has entered in the control. Used for
     searching among the following:
@@ -1237,19 +1267,16 @@ def beneficiary_id_generator(modelid):
     checkdigit = calculate_luhn(str(uniqueid))
     return benficiary_id_prefix + str(uniqueid) + str(checkdigit)
 
-
 def form_id_generator(modelid):
     uniqueid = '%05d' % modelid
     checkdigit = calculate_luhn(str(uniqueid))
     return form_id_prefix + str(uniqueid) + str(checkdigit)
 
-
 def case_event_id_generator(modelid):
     uniqueid = '%05d' % modelid
     checkdigit = calculate_luhn(str(uniqueid))
     return case_event_id_prefix + str(uniqueid) + str(checkdigit)
-
-
+    
 def org_id_generator(modelid):
     uniqueid = '%05d' % modelid
     checkdigit = calculate_luhn(str(uniqueid))
@@ -1260,10 +1287,8 @@ def luhn_checksum(check_number):
     '''
     http://en.wikipedia.org/wiki/Luhn_algorithm
     '''
-
     def digits_of(n):
         return [int(d) for d in str(n)]
-
     digits = digits_of(check_number)
     odd_digits = digits[-1::-2]
     even_digits = digits[-2::-2]
@@ -1302,3 +1327,16 @@ def convert_date(d_string, fmt='%d-%b-%Y'):
     else:
         return new_date
 
+
+def get_days_difference(d_event):
+    '''
+    get difference of provided date and today's day
+    '''
+    d_today = datetime.datetime.now()
+    d_today = d_today.strftime("%Y-%m-%d")
+    d_event = d_event.strftime("%Y-%m-%d")
+    d_today = parser.parse(d_today)
+    d_event = parser.parse(d_event)
+    delta = d_today - d_event
+
+    return delta.days

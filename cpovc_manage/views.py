@@ -1,6 +1,6 @@
 import collections
 from django.shortcuts import render
-from django.urls import reverse, resolve
+from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory
@@ -20,7 +20,7 @@ from cpovc_reports.forms import CaseLoad
 from cpovc_reports.models import RPTCaseLoad
 from .functions import (
     travel_pdf, handle_integration, get_geo, get_person_geo,
-    get_person_orgs, generate_document)
+    get_person_orgs, generate_document, report_bug)
 from cpovc_main.models import SetupGeography
 
 from .params import PARAMS
@@ -301,7 +301,7 @@ def integration_home(request):
             return JsonResponse(results, content_type='application/json',
                                 safe=False)
         cases = OVCBasicCRS.objects.filter(
-            is_void=False).order_by('-timestamp_created')
+            is_void=False).order_by('-timestamp_created')[:100]
         if not request.user.is_superuser:
             if request.user.username == 'vurugumapper':
                 cases = cases.filter(account_id=user_id)
@@ -576,8 +576,11 @@ def se_data(request):
         ou_ids = []
         org_unit = request.GET.get('org_unit')
         county = request.GET.get('county')
+
         persons = RegPersonsOrgUnits.objects.filter(
-            is_void=False, date_delinked__isnull=True)
+            is_void=False, date_delinked__isnull=True).exclude(
+            person__designation__isnull=True, person__designation='',
+            person__designation__in=['CCGV', 'COVC'])
         check_fields = ['wdn_cadre_type_id', 'vol_cadre_type',
                         'sw_cadre_type_id', 'scc_cadre_type_id',
                         'po_cadre_type_id', 'pm_cadre_type_id',
@@ -640,3 +643,19 @@ def se_data(request):
         raise e
     else:
         pass
+
+
+@login_required(login_url='/')
+def manage_bugs(request):
+    """Main home method and view."""
+    try:
+        person_id = request.user.reg_person_id
+        resp = report_bug(request)
+        msg = resp['message']
+        result = {"response_code": 0, "message": "Issue Successfully sent to %s" % (msg)}
+        return JsonResponse(result, content_type='application/json',
+                            safe=False)
+    except Exception:
+        result = {"response_code": 9, "message": "Error while reporting bug"}
+        return JsonResponse(result, content_type='application/json',
+                            safe=False)

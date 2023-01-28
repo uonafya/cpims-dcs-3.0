@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Case Information - {{ form_name }} {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<style type="text/css">
+.tab-content ul {
+  list-style-type: none;
+  margin-left: 0px;
+}
+.tab-content li {
+    padding-left: 1em;
+    text-indent: -2em;
+    margin-right: 2em;
+}
+
+.picture-container
+{
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+.picture-container .polaroid
+{
+    position: absolute;
+    border: 1px solid darkgrey;
+    background-color: white;
+    padding: 15px 15px 60px 15px;
+    box-shadow: 5px 10px 10px darkgrey;
+}
+.picture-container .polaroid:after
+{
+    content: attr(polaroid-caption);
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+}
+.picture-container .image1
+{
+    left: 40px;
+    top: 20px;
+
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+</style>
+{% endblock %}
+{% load app_filters %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Forms</a></li>
+    <li class="active">Case Information</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Additional Case Information <small>Management</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<!-- begin row -->
+<div class="row">
+   <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Additional Case Information - {{ form_name }}</h4>
+            </div>
+            <div class="alert alert-warning fade in">
+                <span class="close" data-dismiss="alert">×</span>
+                <i class="fa fa-check fa-2x pull-left"></i>
+                <span id="infomessage">This page allows to provide more information for specific cases. Emergency Case details, Missing Children cases and additional case information.</span>
+            </div>
+            <!-- start panel body -->            
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print"> 
+                        <a href="{% url 'case_info' case_id=case_uid %}" class="btn btn-sm btn-primary m-r-5 m-b-5"><i class="fa fa-arrow-left m-r-5"></i> To Case Info</a>                  
+                        <a href="{% url 'cpims_document' doc_id='CRS' case_id=case.case_id %}" class="btn btn-sm btn-danger m-r-5 m-b-5"><i class="fa fa-file-pdf-o m-r-5"></i> Case Record Sheet as PDF</a>
+                        <div class="btn-group m-r-5 m-b-5">
+                            <a href="#" class="btn btn-success">Case Actions</a>
+                            <a href="javascript:;" data-toggle="dropdown" class="btn btn-success dropdown-toggle">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="{% url 'view_case_record_sheet' id=case_id %}"><i class="fa fa-gears"></i> View Case Record Sheet</a></li>
+                                 <li><a href="{% url 'edit_case_record_sheet' id=case_id %}"><i class="fa fa-pencil"></i> Edit Case Record Sheet</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'case_events' id=case_id %}"><i class="fa fa-legal"></i> Case Follow up</a></li>
+                            </ul>
+                        </div>
+                    </span>
+                    Case No. {{ case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+            <form class="form-horizontal" id="formCaseinfo" data-parsley-validate="true" method="POST">
+                {% csrf_token %}
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="nav-pills-tab-1">
+                            <h3 class="m-t-10">Case details - {{ form_name }}</h3>
+                            <table class="table table-profile">
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
+                                        <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
+                                        <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
+                                        <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Category</td>
+                                        <td>
+                                            {% for cat in cats %}
+                                                {{ cat.case_category|gen_value:vals }}
+                                            {% endfor %}
+                                        </td>
+                                        <td class="field">Sub Category</td><td></td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td colspan="6">
+
+                                            <div class="row" style="min-height: 400px;">
+                                                <div class="col-md-4">
+                                                    <div class="picture-container">
+                                                         <div class="polaroid image1" polaroid-caption="#Passport size">
+                                                            <a href="#modal-passport" data-toggle="modal">
+                                                                 <img id="Photo1" src="{{ photo_pp }}" height="250px" alt="Passport size">
+                                                             </a>
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="picture-container">
+                                                         <div class="polaroid image1" polaroid-caption="#Full size">
+                                                         <img id="Photo2" src="{{ photo_fs }}" height="270px" alt="Full size">
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="note note-info">
+                                                        <h4>Photo settings and details</h4>
+                                                        <ul>
+                                                            <li>The maximum file size for uploads is <strong>10 MB</strong>.</li>
+                                                            <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed.</li>
+                                                            <li>All metadata from the original photos will be wiped</li>
+                                                            <li>All photos will be scaled down to max {} width as specified by DCS</li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <a href="#modal-dialog" class="btn btn-primary" data-toggle="modal">
+                                                    <i class="fa fa-upload"></i>
+                                                        <span>Upload photos</span>
+                                                    </a>
+                                                    <button type="button" class="btn btn-success start">
+                                                        <i class="fa fa-file-o"></i>
+                                                        <span>Poster</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-inverse ">
+                                                        <i class="fa fa-plus"></i>
+                                                        <span>Case update</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger ">
+                                                        <i class="fa fa-file"></i>
+                                                        <span>Close case</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Other addtional details</label>
+                                <div class="col-md-10">
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <button type="submit" class="btn btn-sm btn-success btnCaseinfo">Update Information</button>
+                                    <a href="{% url 'case_info' case_id=case_uid %}" class="btn btn-sm btn-default"> Cancel</a>
+                                </div>
+                            </div>                           
+                            
+                        </div>
+
+                    </div>                                     
+                </form>
+                
+            </div>
+            <!-- end panel body -->
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+<!-- start #modal-dialog -->
+<div class="modal fade" id="modal-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Photo Upload</h4>
+            </div>
+            <div class="modal-body" style="min-height: 700px;">
+                <form class="form-horizontal" method="POST" enctype="multipart/form-data" data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <div class="form-group">
+                        <label class="col-md-1 control-label">Type</label>
+                        <div class="col-md-9">
+                            <select id="photo_type" name="photo_type" class="form-control" required>
+                                <option value="">Please select</option>
+                                <option value="1">Passport</option>
+                                <option value="2">Full size</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group" style="min-height: 640px;">
+                        <label class="col-md-1 control-label">Photo</label>
+                        <div class="col-md-10">
+                            <div class="picture-container">
+                                 <div class="polaroid image1" polaroid-caption="#Photo preview">
+                                 <img id="imgPreview" src="{{ photo_pp }}" alt="Photo" height="450px">
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label">Properties</label>
+                        <div class="col-md-10" style="background-color: #ddd; min-height: 40px;">
+                            <ul id="ulList"></ul>
+                            <span class="fileupload-process"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                        
+                        </div>
+                    </div>                
+                </div>
+                <div class="modal-footer">
+                    <span class="btn btn-success fileinput-button">
+                        <i class="fa fa-plus"></i>
+                        <span>Add files...</span>
+                        <input type="file" name="photo" id="photo" required>
+                    </span>
+                    <button type="submit" class="btn btn-primary start">
+                        <i class="fa fa-upload"></i>
+                        <span>Start upload</span>
+                    </button>
+                    <button type="reset" class="btn btn-warning cancel">
+                        <i class="fa fa-ban"></i>
+                        <span>Cancel upload</span>
+                    </button>
+                    <button type="button" class="btn btn-danger delete">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span>Delete</span>
+                    </button>
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end #modal-dialog -->
+<!-- start #modal-dialog -->
+<div class="modal fade" id="modal-passport">
+    <div class="modal-dialog">
+        <div class="modal-body" style="min-height: 780px;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="picture-container">
+                     <div class="polaroid image1" polaroid-caption="#Passport size">
+                        <a href="#modal-passport" data-toggle="modal">
+                             <img src="{{ photo_pp }}" alt="Passport size">
+                         </a>
+                     </div>
+                </div> 
+    </div>
+</div>
+<!-- end #modal-dialog -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
+
+<script type="text/javascript">
+$(document).ready(()=>{
+  $('#photo').change(function(){
+    const file = this.files[0];
+    console.log(file);
+    if (file){
+      let reader = new FileReader();
+      reader.onload = function(event){
+        console.log(event.target.result);
+        $('#imgPreview').attr('src', event.target.result);
+      }
+      reader.readAsDataURL(file);
+
+      $("#ulList").empty();
+            var lg = this.files.length; // get length
+            var items = this.files;
+            var fragment = "";
+            
+            if (lg > 0) {
+                for (var i = 0; i < lg; i++) {
+                    var fileName = items[i].name; // get file name
+                    var fileSize = items[i].size; // get file size 
+                    var fileType = items[i].type; // get file type
+
+                    // append li to UL tag to display File info
+                    fragment += "<li>Name : " + fileName + "; Size : <b>" + fileSize + "</b> bytes;";
+                    fragment += " File Type : " + fileType + "</li>";
+                }
+
+                $("#ulList").append(fragment);
+            }
+    }
+  });
+
+  $("#photo_type").change(function () {
+        var pid = this.value;
+        var fVal = $('#Photo'+ pid).attr('src');
+        $('#imgPreview').attr('src', fVal);
+    });
+  
+});
+
+</script>
+
+{% endblock %}

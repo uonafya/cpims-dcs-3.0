@@ -1,1 +1,1 @@
-default_app_config = 'cpims.apps.FormsAppConfig'
+# default_app_config = 'cpims.apps.FormsAppConfig'

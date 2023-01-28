@@ -279,4 +279,3 @@ def notifications_read(request, id):
         raise e
     else:
         pass
-
