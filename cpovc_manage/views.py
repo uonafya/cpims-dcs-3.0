@@ -300,18 +300,22 @@ def integration_home(request):
                        'data': case_data}
             return JsonResponse(results, content_type='application/json',
                                 safe=False)
-        cases = OVCBasicCRS.objects.filter(
-            is_void=False).order_by('-timestamp_created')[:100]
+        cases = OVCBasicCRS.objects.filter(is_void=False)
         if not request.user.is_superuser:
             if request.user.username == 'vurugumapper':
                 cases = cases.filter(account_id=user_id)
             else:
                 cases = cases.filter(county__in=user_counties)
         # Get filters from the URL
+        cases = cases.order_by('-timestamp_created')
         case_source = request.GET.get('case_source', None)
-        case_status = request.GET.get('case_status', None)
+        case_totals = int(request.GET.get('case_totals', 100))
+        case_status = request.GET.get('case_status', 0)
         from_date = request.GET.get('report_from_date', None)
         to_date = request.GET.get('report_to_date', None)
+        svals['case_totals'] = case_totals
+        svals['case_source'] = case_source
+        svals['case_status'] = case_status
         if from_date and to_date:
             sdate = convert_date(from_date)
             edate = convert_date(to_date)
@@ -320,7 +324,10 @@ def integration_home(request):
             cases = cases.filter(case_date__range=(sdate, edate))
         if case_source:
             cases = cases.filter(account_id=case_source)
-        for cs in cases[:1000]:
+        if case_status:
+            cases = cases.filter(status=case_status)
+        cases = cases[:case_totals]
+        for cs in cases:
             case_ids.append(cs.case_id)
         case_cats = OVCBasicCategory.objects.filter(
             is_void=False, case_id__in=case_ids)

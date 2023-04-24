@@ -1,0 +1,99 @@
+[
+    {
+        "pk": 20000, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 1, 
+            "user_configurable": "False", 
+            "field_name": "afc_domain_id", 
+            "item_id": "DEDU", 
+            "is_void": "False", 
+            "item_sub_category": "afc_domain_ed", 
+            "item_description_short": "Education", 
+            "sms_keyword": "False", 
+            "item_description": "Education", 
+            "item_category": "Alternative Care Domain"
+        }
+    },
+    {
+        "pk": 20001, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 2, 
+            "user_configurable": "False", 
+            "field_name": "afc_domain_id", 
+            "item_id": "DHNU", 
+            "is_void": "False", 
+            "item_sub_category": "afc_domain_hd", 
+            "item_description_short": "Health and Development", 
+            "sms_keyword": "False", 
+            "item_description": "Health and Development", 
+            "item_category": "Alternative Care Domain"
+        }
+    }, 
+    {
+        "pk": 20002, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 3, 
+            "user_configurable": "False", 
+            "field_name": "afc_domain_id", 
+            "item_id": "DHES", 
+            "is_void": "False", 
+            "item_sub_category": "afc_domain_es", 
+            "item_description_short": "Economic stability", 
+            "sms_keyword": "False", 
+            "item_description": "Economic stability", 
+            "item_category": "Alternative Care Domain"
+        }
+    }, 
+    {
+        "pk": 20003, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 4, 
+            "user_configurable": "False", 
+            "field_name": "afc_domain_id", 
+            "item_id": "DPRO", 
+            "is_void": "False", 
+            "item_sub_category": "afc_domain_ps", 
+            "item_description_short": "Protection and safety", 
+            "sms_keyword": "False", 
+            "item_description": "Protection and safety", 
+            "item_category": "Alternative Care Domain"
+        }
+    }, 
+    {
+        "pk": 20004, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 5, 
+            "user_configurable": "False", 
+            "field_name": "afc_domain_id", 
+            "item_id": "DPSC", 
+            "is_void": "False", 
+            "item_sub_category": "afc_domain_pw", 
+            "item_description_short": "Psychosocial well-being and community belonging", 
+            "sms_keyword": "False", 
+            "item_description": "Psychosocial well-being and community belonging", 
+            "item_category": "Alternative Care Domain"
+        }
+    }, 
+    {
+        "pk": 20005, 
+        "model": "cpovc_main.SetupList", 
+        "fields": {
+            "the_order": 6, 
+            "user_configurable": "False", 
+            "field_name": "afc_domain_id", 
+            "item_id": "DCRA", 
+            "is_void": "False", 
+            "item_sub_category": "afc_domain_ca", 
+            "item_description_short": "Child-caregiver / Mentor relationship and attachment", 
+            "sms_keyword": "False", 
+            "item_description": "Child-caregiver / Mentor relationship and attachment", 
+            "item_category": "Alternative Care Domain"
+        }
+    }
+]
+

@@ -8,6 +8,7 @@
 
 {% block style_code %}
 <link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block primary %}
@@ -40,17 +41,15 @@
             </div>
             <!-- start panel body -->
             <div class="panel-body">
-              <form id="icases" name="icases" method="POST" action=".">
-               {% csrf_token %}
+              <form id="icases" name="icases" method="GET" action=".">
                <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                       <div class="form-group">
                       <label for="aspect">Source</label>
-                      <select class="form-control" id="q_aspect" name="q_aspect" />
+                      <select class="form-control" id="case_source" name="case_source" />
                          <option value="">All</option>
-                         <option value="1"> Helpline 116</option>
-                         <option value="2"> Vurugu Mapper</option>
-
+                         <option value="913"> Helpline 116</option>
+                         <option value="947"> Vurugu Mapper</option>
                       </select>
                       </div>
                   </div>                  
@@ -67,10 +66,10 @@
                       {{ form.report_to_date }}
                       </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label for="aspect">Status</label>
-                      <select class="form-control" id="q_aspect" name="q_aspect" />
+                      <select class="form-control" id="case_status" name="case_status" />
                          <option value="">All</option>
                          <option value="1"> New Cases</option>
                          <option value="2"> Processed</option>
@@ -78,10 +77,21 @@
                       </select>
                       </div>
                   </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="aspect">Totals</label>
+                      <select class="form-control" id="case_totals" name="case_totals" />
+                         <option value="100" selected> 100</option>
+                         <option value="500"> 500</option>
+                         <option value="1000"> 1000</option>
+
+                      </select>
+                      </div>
+                  </div>
               </div>
               <div class="row">                    
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-sm btn-primary m-r-5 ddash"> Search Cases </button>
+                        <button type="submit" class="btn btn-sm btn-primary m-r-5"> Search Cases </button>
                         <button type="reset" class="btn btn-sm btn-default"> Reset Form </button>
                         <span id="mng_messages">Pick None of the filters to use ALL.</span>
                     </div>
@@ -142,48 +152,47 @@
 </div>
 <!-- end row -->
 <!-- #modal-dialog -->
-              <div class="modal fade" id="modal-details">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      <h4 class="modal-title">Case Details - Case submitted from Integration</h4>
-                    </div>
-                    <div class="modal-body">
-                    <input type="hidden" name="item_cid" id="item_cid">
-                    <div id="user_actions"></div>
-                    <table width="100%" class="table table-profile">
-                    <tbody>
-                        <tr>
-                            <td class="field" width="40%">Child Name</td>
-                            <td><span id="cname"></span></td>
-                        </tr>
-                            <td class="field">Timestamp</td>
-                            <td><span id="cdate"></span></td>
-                            
-                        </tr>
-                    <table id="mywork" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th  class="text-right"></th>
-                                <th>Item</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                    
-                    </div>
-                    <div class="modal-footer">
-                      <a href="#" class="btn btn-sm btn-primary cc_acc" id="1">Take Up Case</a>
-                      <a href="#" class="btn btn-sm btn-danger cc_acc" id="3">Dismiss Case</a>
-                      <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-           <!-- end modal -->
+<div class="modal fade" id="modal-details">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Case Details - Case submitted from Integration</h4>
+        </div>
+        <div class="modal-body">
+        <input type="hidden" name="item_cid" id="item_cid">
+        <div id="user_actions"></div>
+        <table width="100%" class="table table-profile">
+        <tbody>
+            <tr>
+                <td class="field" width="40%">Child Name</td>
+                <td><span id="cname"></span></td>
+            </tr>
+                <td class="field">Timestamp</td>
+                <td><span id="cdate"></span></td>
+                
+            </tr>
+        <table id="mywork" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th  class="text-right"></th>
+                    <th>Item</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-sm btn-primary cc_acc" id="1" onclick = "Redirect();">Process Case</a>
+          <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- end modal -->
 {% endblock %}
 
 {% block lazy_javascript_code %}
@@ -195,11 +204,14 @@ $(document).ready(function() {
         "order": [[ 0, "asc" ]]
     } );
 
+    $('#from_date, #to_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
     $('.ddash').live( "click", function(ev) {
         // var hashValue = location.hash.replace(/^#/, '');
         var id = $(this).attr('id');
         var cname = $(this).attr('rel');
         var cdate = $(this).attr('rel1');
+        var csrftoken = $.cookie('csrftoken');
         $('#cname').html(cname);
         $('#cdate').html(cdate);
         $('#item_cid').val(id);
@@ -207,7 +219,7 @@ $(document).ready(function() {
         $.ajax({
            type: "POST",
            url: "{{ request.get_full_path }}",
-           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
+           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1&csrfmiddlewaretoken="+csrftoken,
            success: function(response)
            {
                var msg = response.message;
@@ -235,5 +247,10 @@ $(document).ready(function() {
         ev.preventDefault();
     });
 } );
+
+function Redirect(url) {
+  var itd = $('#item_cid').val();
+   window.location = "/manage/api/" + itd;
+}
 </script>
 {% endblock %}

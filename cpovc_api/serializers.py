@@ -4,6 +4,8 @@ from cpovc_registry.models import RegOrgUnit
 from rest_framework import serializers
 from cpovc_main.models import SetupList, SetupGeography
 from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson
+
+from cpovc_ovc.models import OVCFacility, OVCSchool
 from . import Country
 
 
@@ -95,3 +97,26 @@ class CountrySerializer(serializers.Serializer):
         for field, value in validated_data.items():
             setattr(instance, field, value)
         return instance
+
+
+class SchoolSerializer(serializers.HyperlinkedModelSerializer):
+    """Organisation Unit serializer."""
+
+    class Meta:
+        """Overrride parameters."""
+
+        model = OVCSchool
+        fields = ('id', 'school_level', 'school_name')
+        read_only_fields = ('id', 'school_name')
+
+
+class FacilitySerializer(serializers.HyperlinkedModelSerializer):
+    """Organisation Unit serializer."""
+
+    class Meta:
+        """Overrride parameters."""
+
+        model = OVCFacility
+        fields = ('id', 'facility_code', 'facility_name')
+        read_only_fields = ('id')
+

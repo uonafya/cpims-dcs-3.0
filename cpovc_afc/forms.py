@@ -13,7 +13,7 @@ disability_list = get_list('disability_type_id', 'Please Select one')
 severity_list = get_list('severity_level_id', 'Please Select one')
 admission_type_list = get_list('admission_type_id', 'Please Select')
 admission_reason_list = get_list('care_admission_reason_id')
-domain_list = get_list('olmis_domain_id', 'Please Select')
+domain_list = get_list('afc_domain_id', 'Please Select')
 list_sex_id = get_list('sex_id')
 consent_forms_list = get_list('consent_forms', 'Please Select')
 # new listings
@@ -2780,14 +2780,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A1B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A1B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A1C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A1C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A1C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A2A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2796,6 +2798,7 @@ class AFCForm14A(forms.Form):
             # renderer=RadioCustomRenderer,
             attrs={'id': 'qf9A1_rdo',
                    'data-parsley-required': 'true',
+                   'class': 'form-check-inline',
                    'data-parsley-errors-container': "#qf14A2A_rdo_error"}))
 
     qf14A2B_rdo = forms.ChoiceField(
@@ -2803,19 +2806,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A2B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A2B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A2C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A2C_rdo_error"}))
-
-    qf14A20 = forms.CharField(
-        required=False,
-        widget=forms.TextInput(
-            attrs={'class': 'form-control'}))
+            attrs={'data-parsley-errors-container': "#qf14A2C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A3A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2831,14 +2831,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A3B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A3B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A3C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A3C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A3C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A4A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2854,14 +2856,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A4B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A4B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A4C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A4C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A4C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A5A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2870,6 +2874,7 @@ class AFCForm14A(forms.Form):
             # renderer=RadioCustomRenderer,
             attrs={'id': 'qf14A5A_rdo',
                    'data-parsley-required': 'true',
+                   'class': 'form-check-inline',
                    'data-parsley-errors-container': "#qf14A5A_rdo_error"}))
 
     qf14A5B_rdo = forms.ChoiceField(
@@ -2877,14 +2882,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A5B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A5B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A5C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A5C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A5C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A6A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2900,14 +2907,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A6B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A6B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A6C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A6C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A6C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A7A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2923,14 +2932,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A7B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A7B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A7C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A7C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A7C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A8A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2946,14 +2957,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A8B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A8B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A8C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A8C_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A8C_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A9A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2969,14 +2982,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A9B_rdo_error"}))
+            attrs={'data-parsley-errors-container': "#qf14A9B_rdo_error",
+                   'class': 'form-check-inline'}))
 
     qf14A9C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A9C_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A9C_rdo_error"}))
 
     qf14A10A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -2992,14 +3007,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A10B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A10B_rdo_error"}))
 
     qf14A10C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A10C_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A10C_rdo_error"}))
 
     qf14A11A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -3015,14 +3032,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A11B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A11B_rdo_error"}))
 
     qf14A11C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A11C_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A11C_rdo_error"}))
 
     qf14A12A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -3038,14 +3057,16 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A12B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A12B_rdo_error"}))
 
     qf14A12C_rdo = forms.ChoiceField(
         choices=disability_degree,
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A12C_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A12C_rdo_error"}))
 
     qf14A13A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -3061,7 +3082,8 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A13B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A13B_rdo_error"}))
 
     qf14A14A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -3077,7 +3099,8 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A14B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A14B_rdo_error"}))
 
     qf14A15A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -3093,7 +3116,8 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A15B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A15B_rdo_error"}))
 
     qf14A16A_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,
@@ -3109,7 +3133,8 @@ class AFCForm14A(forms.Form):
         required=False,
         widget=forms.RadioSelect(
             # renderer=RadioCustomRenderer,
-            attrs={'data-parsley-errors-container': "#qf14A16B_rdo_error"}))
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A16B_rdo_error"}))
 
     qf14A17A = forms.CharField(
         required=False,
@@ -3130,6 +3155,27 @@ class AFCForm14A(forms.Form):
             # renderer=RadioCustomRenderer,
             attrs={'id': 'qf14A19_rdo', 'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#qf14A19_rdo_error"}))
+
+    qf14A20 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control'}))
+
+    qf14A21B_rdo = forms.ChoiceField(
+        choices=disability_degree,
+        required=False,
+        widget=forms.RadioSelect(
+            # renderer=RadioCustomRenderer,
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A12B_rdo_error"}))
+
+    qf14A21C_rdo = forms.ChoiceField(
+        choices=disability_degree,
+        required=False,
+        widget=forms.RadioSelect(
+            # renderer=RadioCustomRenderer,
+            attrs={'class': 'form-check-inline',
+                   'data-parsley-errors-container': "#qf14A12C_rdo_error"}))
 
 
 class AFCForm15A(forms.Form):

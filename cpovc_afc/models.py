@@ -107,7 +107,7 @@ class AFCInfo(models.Model):
     care = models.ForeignKey(AFCMain, on_delete=models.CASCADE)
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     item_id = models.CharField(max_length=12)
-    item_value = models.CharField(max_length=5)
+    item_value = models.CharField(max_length=10)
     item_detail = models.TextField(null=True, blank=True)
     timestamp_created = models.DateTimeField(default=timezone.now)
     timestamp_modified = models.DateTimeField(default=timezone.now)

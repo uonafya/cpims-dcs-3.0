@@ -1428,7 +1428,7 @@ left outer join list_geo as cou_geo on cou_geo.area_id=scou_geo.parent_area_id a
 left outer join list_general c_cat on c_cat.item_id=ccat.case_category and c_cat.field_name = 'case_category_id'
 left outer join ovc_case_sub_category cscat on cscat.case_category_id=ccat.case_category_id
 left outer join list_general cs_cat on cs_cat.item_id=cscat.sub_category_id
-where date_case_opened between '{start_date}' and '{end_date}'
+where date_case_opened between '{start_date}' and '{end_date}' {other_params}
 ORDER BY ocr.timestamp_created ASC;
 '''
 
@@ -1468,7 +1468,7 @@ left join ovc_case_events as cev on cev.case_id_id = case_id and cev.case_event_
 left join ovc_case_event_encounters as cen on cen.case_event_id_id=cev.case_event_id
 left outer join list_general intv on intv.item_id=cen.service_provided and intv.field_name = 'intervention_id'
 left outer join list_general ous on ous.item_id=ou.org_unit_type_id
-where date_case_opened between '{start_date}' and '{end_date}'
+where date_case_opened between '{start_date}' and '{end_date}' {other_params}
 group by ocr.person_id, ocr.date_case_opened, rp.sex_id, ous.item_description,
 rp.date_of_birth, c_cat.item_description, ou.org_unit_name,
 scou_geo.area_name, cou_geo.area_name, ocr.case_stage, ocr.timestamp_created,

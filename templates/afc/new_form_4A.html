@@ -31,7 +31,7 @@ form#new-form-b ul {
 <h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
 <!-- end page-header -->
 {% if messages %}
-<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+<div id="messages" class="alert alert-success fade in">
     <span class="close" data-dismiss="alert">×</span>
     <i class="fa fa-check fa-2x pull-left"></i>
     <ul class="messages">
@@ -184,27 +184,61 @@ form#new-form-b ul {
                         <table class="table table-condensed slimtable" id="submissions_table">
                             <thead>
                                 <tr>
+                                    <th>Date</th>
                                     <th>Domain</th>
                                     <th>Goal</th>
                                     <th>Needs/Gaps</th>
-                                    <th>Priority Actions</th>
-                                    <th>Services</th>
+                                    <th>Proposed Actions</th>
+                                    <th>Deadline</th>
                                     <th>Responsible</th>
                                     <th>Completed</th>
-                                    <th>Results</th>
-                                    <th>Reasons</th>
-                                    <th>Action</th>
+                                    <th width="10%"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                {% for event in events %}
+                                    <tr>
+                                    <td>{{ event.event_date }}</td>
+                                    <td>{{ event.qf4A1_sdd|gen_value:vals }}</td>
+                                    <td>{{ event.qf4A2_sdd|gen_value:vals }}</td>
+                                    <td>{{ event.qf4A3_sdd|gen_value:vals }}</td>
+                                    <td>{{ event.qf4A4_sdd|gen_value:vals }}</td>
+                                    <td>{{ event.qf4A5 }}</td>
+                                    <td>{{ event.qf4A6_sdd|gen_value:vals }}</td>
+                                    <td>{{ event.qf4A7_rdo|gen_value:vals }}</td>
+                                    <td>
+                                        <a href="{% url 'edit_alt_care_form' cid=cid form_id='4A' care_id=event.care_id|stringformat:'s' ev_id=event.event_count %}" class="btn btn-sm btn-primary">Edit</a>
+                                        
+                                        <a class="btn btn-danger" data-toggle="modal" href='#del_form_4a_{{ event.event_id }}'> <i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                            <div class="modal fade" id="del_form_4a_{{ event.event_id }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <h4 class="modal-title">Delete this event - {{ event.event_id }}</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete the <b>{{ event.event_date }}</b> event?
+    
+                                                        </div>
+                                                        <div class="modal-footer">
+           
+                                                            <button type="button" class="btn btn-danger" onclick="deleteEntry( 0, '{{ event.event_id }}' )" id="del_form_4a_{{ event.event_id }}">Yes, DELETE</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No, cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    </tr>
+                                {% endfor %}                                
                             </tbody>
                         </table>
                     </div>
                 </form>
             </div>
         </div>
-    
+    </div>
 </div>
 <!-- end row -->
 
@@ -227,13 +261,13 @@ $(document).ready(function() {
 
 function loadOptions(domain){
     // Selects on qf4A2, qf4A3, qf4A4
-    // $('#qf4A2').append('<option value="TST"> Test Goal A</option>');
-    $('#qf4A3').append('<option value="TST"> Test Need A</option>');
-    $('#qf4A4').append('<option value="TST"> Test Action A</option>');
 
     var csrftoken = $.cookie('csrftoken');
     var values = {'domain': domain, 'action': 2,
                   'csrfmiddlewaretoken': csrftoken };
+    $('#qf4A2').empty();
+    $('#qf4A3').empty();
+    $('#qf4A4').empty();
 
     $.ajax({
             type: "POST",
@@ -241,11 +275,30 @@ function loadOptions(domain){
             dataType: "json",
             url: "{% url 'settings_lookup' %}",
             success: function(data){
-                //$('#id_ward').html("<option value=''>Select One</option>");           
-                $.each(data, function(i, items) {
+                //$('#id_ward').html("<option value=''>Select One</option>");
+                var goals = data.goals;
+                var gaps = data.gaps;
+                var services = data.services;
+                $.each(goals, function(i, items) {
                     var item_id = items.item_id;
                     var item_name = items.item_name;
                     $('#qf4A2')
+                        .append($("<option></option>")
+                        .attr("value", item_id)
+                        .text(item_name));
+                 });
+                $.each(gaps, function(i, items) {
+                    var item_id = items.item_id;
+                    var item_name = items.item_name;
+                    $('#qf4A3')
+                        .append($("<option></option>")
+                        .attr("value", item_id)
+                        .text(item_name));
+                 });
+                $.each(services, function(i, items) {
+                    var item_id = items.item_id;
+                    var item_name = items.item_name;
+                    $('#qf4A4')
                         .append($("<option></option>")
                         .attr("value", item_id)
                         .text(item_name));
@@ -257,6 +310,31 @@ function loadOptions(domain){
                 $('#messages').html("Error")
             }
         });
+}
+
+function deleteEntry(person_id, event_id){
+    $('#del_form_4a_' + event_id.toString() ).modal('hide');
+    var eventToDelete= "{% url 'delete_alt_care_form' form_id='4A' event_id='00000000-0000-0000-0000-000000000000' %}".replace(/00000000-0000-0000-0000-000000000000/, event_id.toString());
+
+    $.ajax({
+        url: eventToDelete,
+        dataType: 'json',
+        method: 'GET',
+        success: function(result)
+        {
+            // Debug
+            var message = result.message
+            console.log("deleted");
+            $('#message').css({'display': 'block'}).removeClass('alert-danger').addClass('alert-success');
+            $('#message p').html(message);
+            window.location.href = "{{ request.path }}";
+        },
+        error: function(xhr, status, error){
+            console.error('not deleted ==> status: '+ JSON.stringify(status) + ' & error: '+JSON.stringify(error));
+            $('#message').css({'display': 'block'}).removeClass('alert-success').addClass('alert-danger');
+            $('#message p').html('Error deleting form entry.');
+        }
+    });
 }
 </script>
 {% endblock %}

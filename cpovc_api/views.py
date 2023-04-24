@@ -10,12 +10,14 @@ from django.shortcuts import get_object_or_404
 from .serializers import (
     UserSerializer, OrgUnitSerializer, SettingsSerializer, GeoSerializer,
     CRSSerializer, CountrySerializer, CRSPersonserializer,
-    CRSCategorySerializer)
+    CRSCategorySerializer, SchoolSerializer, FacilitySerializer)
 from cpovc_auth.models import AppUser
 from cpovc_registry.models import RegOrgUnit
 from cpovc_main.models import SetupList, SetupGeography
 from cpovc_forms.models import OVCBasicCRS, OVCBasicCategory, OVCBasicPerson
 from cpovc_main.country import COUNTRIES as CLISTS
+
+from cpovc_ovc.models import OVCFacility, OVCSchool, OVCRegistration, OVCHealth
 from . import Country
 
 
@@ -95,6 +97,48 @@ class OrgUnitViewSet(generics.ListAPIView):
         if parent_id is not None:
             queryset = queryset.filter(parent_org_unit_id=parent_id)
         return queryset
+
+
+class SchoolViewSet(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = SchoolSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned values to a given prameter.
+        """
+        queryset = OVCSchool.objects.filter(
+            is_void=False).order_by('school_name')
+        unit_id = self.request.query_params.get('id', None)
+        unit_level = self.request.query_params.get('school_level', None)
+        start = int(self.request.query_params.get('start', 0))
+        limit = int(self.request.query_params.get('limit', 1000))
+        if unit_id is not None:
+            queryset = queryset.filter(id=unit_id)
+        if unit_level is not None:
+            queryset = queryset.filter(school_level=unit_level)
+        return queryset[start:limit]
+
+
+class HealthFacilityViewSet(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = FacilitySerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned values to a given prameter.
+        """
+        queryset = OVCFacility.objects.filter(
+            is_void=False).order_by('facility_name')
+        unit_id = self.request.query_params.get('id', None)
+        unit_code = self.request.query_params.get('facility_code', None)
+        start = int(self.request.query_params.get('start', 0))
+        limit = int(self.request.query_params.get('limit', 1000))
+        if unit_id is not None:
+            queryset = queryset.filter(id=unit_id)
+        if unit_code is not None:
+            queryset = queryset.filter(facility_code=unit_code)
+        return queryset[start:limit]
 
 
 class BasicCRSView(generics.ListAPIView):
@@ -298,26 +342,81 @@ def save_person(case_id, person_type, req_data):
         pass
 
 
-def get_settings(request, param=''):
+def get_settings(request, param='', filter_id=''):
     """Method to get settings."""
     try:
         param_id = request.POST.get('domain', None)
         # case_id = request.POST.get('case_id')
-        print('Param id', param_id)
-        results = []
+        results = {}
+        itm = {'item_id': '', 'item_name': 'Please Select'}
+        goals, gaps, services = [itm], [itm], [itm]
         if param_id:
-            itms = SetupList.objects.filter(item_id=param_id)
+            itms = SetupList.objects.filter(
+                item_id=param_id, field_name__istartswith='afc_domain')
             field_name = itms[0].field_name
             field_sub_cat = itms[0].item_sub_category
             print('field name', field_name, field_sub_cat)
-            items = SetupList.objects.filter(field_name=field_sub_cat)
+            goals_id = '%s_goals' % (field_sub_cat)
+            gaps_id = '%s_gaps' % (field_sub_cat)
+            services_id = '%s_services' % (field_sub_cat)
+            itms_id = [goals_id, gaps_id, services_id]
+            items = SetupList.objects.filter(field_name__in=itms_id)
             for item in items:
                 item_id = item.item_id
                 item_name = item.item_description
-                results.append({'item_id': item_id, 'item_name': item_name})
+                item_field = item.field_name
+                print('Field', item_field)
+                itm_dict = {'item_id': item_id, 'item_name': item_name}
+                if item_field == goals_id:
+                    goals.append(itm_dict)
+                if item_field == gaps_id:
+                    gaps.append(itm_dict)
+                if item_field == services_id:
+                    services.append(itm_dict)
+        results['goals'] = goals
+        results['gaps'] = gaps
+        results['services'] = services
+        print(results)
     except Exception:
         return JsonResponse([], content_type='application/json',
                             safe=False)
     else:
         return JsonResponse(results, content_type='application/json',
                             safe=False)
+
+
+@api_view(['GET', 'POST'])
+def dreams(request):
+    """Method to handle DREAMS."""
+    try:
+        results = {}
+        if request.method == 'GET':
+            ovc_id = request.query_params.get('cpims_id')
+            dreams_id = request.query_params.get('dreams_id')
+            print('ID', ovc_id)
+            if dreams_id:
+                print('Get the corresponding cpims id from ext ids')
+            qs = OVCRegistration.objects.filter(
+                person_id=ovc_id, is_void=False)
+            if qs:
+                queryset = qs[0]
+                if queryset.hiv_status == 'HSTP':
+                    health = OVCHealth.objects.get(
+                        person_id=ovc_id, is_void=False)
+                    if health:
+                        facility_name = health.facility.facility_name
+                        results['ccc_number'] = health.ccc_number
+                        results['date_of_linkage'] = health.date_linked
+                        results['facility_name'] = facility_name
+                results['registration_date'] = queryset.registration_date
+                msg = 'OVC details Found'
+            else:
+                msg = 'OVC details Found'
+        else:
+            msg = 'Method not Implemented'
+        results['details'] = msg
+    except Exception as e:
+        msg = 'Error getting OVC details - %s' % (str(e))
+        return Response({'details': msg})
+    else:
+        return Response(results)
