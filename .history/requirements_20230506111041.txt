@@ -1,0 +1,13 @@
+Django
+django-crispy-forms
+jellyfish
+pillow
+psycopg2
+reportlab
+djangorestframework
+openpyxl
+python-dateutil
+jellyfish
+python-memcached
+pandas
+xlsxwriter

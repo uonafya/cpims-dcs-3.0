@@ -1,0 +1,170 @@
+{% load app_class %}
+{% load notifications_tags %}
+<ul class="nav">
+	<li class="nav-header">Navigation</li>
+	<li class="has-sub {{ request.path|get_class:'/' }} {{ request.path|get_class:'dashboard' }}">
+		<a href="{% url 'home' %}">
+		    <i class="fa fa-laptop"></i>
+		    <span>Home</span>
+	    </a>
+	</li>
+	
+	<li class="has-sub {{ request.path|get_class:'registry' }}">
+		<a href="#">
+		    <b class="caret pull-right"></b>
+		    <i class="fa fa-suitcase"></i>
+		    <span>Registry</span> 
+		</a>
+		<ul class="sub-menu">
+			<li><a href="{% url 'registry' %}">Organizational Units</a></li>
+			<li><a href="{% url 'search_persons' %}">Persons Registry</a></li>
+		</ul>
+	</li>
+	
+	<li class="has-sub {{ request.path|get_class:'forms' }} {{ request.path|get_class:'ovcare' }}">
+		<a href="#">
+		    <b class="caret pull-right"></b>
+		    <i class="fa fa-file-o"></i>
+		    <span>Forms</span>
+		</a>
+	    <ul class="sub-menu">
+			<li><a href="{% url 'case_record_sheet' %}">Case Record Sheet</a></li>
+			<li><a href="{% url 'residential_placement' %}">Institutional Placement</a></li>
+			<li><a href="{% url 'alternative_family_care' %}">Alternative Family Care</a></li>
+			<li><a href="{% url 'alternative_care' %}">Alternative Care</a></li>
+			<li><a href="{% url 'background_details' %}">School and Bursary</a></li>
+			<li><a href="{% url 'forms_registry' %}">Follow-ups</a></li>
+			<li><a href="{% url 'documents_manager' %}">Documents Manager</a></li>
+			<li><a href="{% url 'ovc_home' %}">OVC Care</a></li>
+			<li><a href="#">Family Support / HES</a></li>
+			<li><a href="{% url 'ctip_home' %}">Trafficked Persons</a></li>
+		</ul>
+		
+	</li>
+			
+	
+	<li class="has-sub {{ request.path|get_class:'reports' }}">
+	    <a href="#">
+		    <b class="caret pull-right"></b>
+	        <i class="fa fa-area-chart"></i>
+		    <span>Reports</span>
+		</a>
+		<ul class="sub-menu">
+		    <li><a href="{% url 'caseload_reports' %}">Case Load Report</a></li>
+		    <li><a href="{% url 'cpims_reports' id=1 %}">KNBS Report</a></li>
+		    <li><a href="{% url 'cpims_reports' id=3 %}">Institutions Population Returns Report </a></li>
+		    <li><a href="{% url 'cpims_reports' id=4 %}">Health Report </a></li>
+		    <li><a href="{% url 'cpims_reports' id=5 %}">Ad Hoc Report </a></li>
+		    <li><a href="{% url 'pivot_reports' %}">Ad Hoc Pivot Report </a></li>
+		    <li><a href="{% url 'document_reports' %}">Document Templates </a></li>
+		    <li class="has-sub">
+				<a href="#">
+				    <b class="caret pull-right"></b>
+				    <i class="fa fa-align-left"></i> 
+				    <span>Alternative Care Reports</span>
+				</a>
+				<ul class="sub-menu">
+					<li><a href="{% url 'reports_afc' id=1 %}">AFC Summpary report</a></li>
+					<li><a href="{% url 'reports_afc' id=2 %}">Identification Report</a></li>
+					<li><a href="{% url 'reports_afc' id=3 %}">Assessment Report - Child</a></li>
+					<li><a href="{% url 'reports_afc' id=4 %}">Assessment Report - Family</a></li>
+					<li><a href="{% url 'reports_afc' id=5 %}">Case Plan</a></li>
+					<li><a href="{% url 'reports_afc' id=6 %}">Placement Report</a></li>
+					<li><a href="{% url 'reports_afc' id=7 %}">Monitoring</a></li>
+					<li><a href="{% url 'reports_afc' id=8 %}">Case Review - Child</a></li>
+					<li><a href="{% url 'reports_afc' id=9 %}">Case Review - Caregiver</a></li>
+				</ul>
+			</li>
+		    <li class="has-sub">
+				<a href="#">
+				    <b class="caret pull-right"></b>
+				    <i class="fa fa-align-left"></i> 
+				    <span>OVC Reports</span>
+				</a>
+				<ul class="sub-menu">
+					<li><a href="{% url 'pivot_ovc_reports' %}">DATIM</a></li>
+					<li><a href="{% url 'pivot_ovc_pepfar' %}">Services by Domain (PEPFAR Summary)</a></li>
+					<li><a href="{% url 'pivot_ovc_kpi' %}">Key Performance Indicator</a></li>
+					<li><a href="{% url 'reports_ovc' id=1 %}">Registration List</a></li>
+					<li><a href="{% url 'reports_ovc' id=2 %}">Registration by HH</a></li>
+					<li><a href="{% url 'reports_ovc' id=3 %}">CSI</a></li>
+					<li><a href="{% url 'reports_ovc' id=4 %}">CHV monthly RR</a></li>
+					<li><a href="{% url 'reports_ovc' id=5 %}">List of OVC not served</a></li>
+                                        <li><a href="{% url 'reports_ovc' id=12 %}">List of OVC Served</a></li>
+					<li><a href="{% url 'reports_ovc' id=6 %}">PEPFAR detailed summary</a></li>
+					<li><a href="{% url 'reports_ovc' id=7 %}">Registration by CHV</a></li>
+					<li><a href="{% url 'reports_ovc' id=8 %}">Beneficiary list</a></li>
+					<li><a href="{% url 'reports_ovc' id=9 %}">Form1a summary</a></li>
+					<li><a href="{% url 'reports_ovc' id=10 %}">Needs vs Served by domain</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+
+	<li class="has-sub {{ request.path|get_class:'manage' }} {{ request.path|get_class:'settings' }}">
+	    <a href="#">
+	        <b class="caret pull-right"></b>
+	        <i class="fa fa-tasks"></i>
+	        <span>Management</span>
+	    </a>
+		<ul class="sub-menu">
+			<li><a href="{% url 'home_travel' %}" >Non Objection to Travel</a></li>
+			<li><a href="{% url 'integration_home' %}" >API Integration</a></li>
+			<li><a href="{% url 'dq_home' %}" >Data Quality</a></li>
+			<li><a href="{% url 'se_home' %}" >Staff Establishment</a></li>
+            <li><a href="{% url 'settings_duplicates' %}" >De-duplication</a></li>
+            <li><a href="{% url 'settings_reports' %}" >Archived Reports</a></li>
+		</ul>
+	</li>
+	
+	<li class="has-sub {{ request.path|get_class:'gis' }}">
+	    <a href="#">
+	        <b class="caret pull-right"></b>
+	        <i class="fa fa-map-marker"></i>
+	        <span>GIS Module</span>
+	    </a>
+		<ul class="sub-menu">
+			<li><a href="{% url 'gis_home' %}" >Map</a></li>
+		</ul>
+	</li>
+	<li class="has-sub">
+	    <a href="#">
+		    <b class="caret pull-right"></b>
+		    <i class="fa fa-camera"></i>
+		    <span>Gallery</span>
+		</a>
+	    <ul class="sub-menu">
+	        <li><a href="#">Gallery One</a></li>
+	        <li><a href="#">Gallery Two</a></li>
+	    </ul>
+	</li>			
+	
+	<li class="has-sub">
+	    <a href="#">
+		    <b class="caret pull-right"></b>
+		    <i class="fa fa-question"></i>
+		    <span>Help and Documents</span>
+		</a>
+	    <ul class="sub-menu">
+	        <li><a href="{% url 'help_downloads' %}">Downloads</a></li>
+	        <li><a href="{% url 'help_faq' %}">FAQ</a></li>
+	    </ul>
+	</li>
+	<li>
+		<a href="{% url 'notifications:home' %}">
+			<span class="badge pull-right">{% live_notify_badge %}</span>
+			<i class="fa fa-inbox"></i> 
+			<span>Notifications</span>
+		</a>
+	</li>
+    <!-- begin sidebar minify button -->
+	<li><a href="#" class="sidebar-minify-btn" data-click="sidebar-minify">
+	    <i class="fa fa-angle-double-left"></i></a>
+	</li>
+    <!-- end sidebar minify button -->
+    <li><a href="https://play.google.com/store/apps/details?id=com.poimapper.vurugumapper">
+    	<i class="fa fa-download"></i> <span>Vurugu Mapper(Android)</span></a>
+    </li>
+    <li><img width="220px" src="/static/img/qr-vm.png">
+    </li>
+</ul>

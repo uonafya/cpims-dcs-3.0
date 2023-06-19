@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Case Information {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<style type="text/css">
+  form#formCaseinfo ul {
+      list-style-type: none;
+    }
+  form#formCaseinfo li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  table.text-inverse tr{
+    margin: 35px 0 35px 0;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+</style>
+{% endblock %}
+{% load app_filters %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Forms</a></li>
+    <li class="active">Case Information</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Additional Case Information <small>Management</small></h1>
+<!-- end page-header -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+{% if messages %}
+<div id="messages" class="alert alert-success fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <!-- begin col-2 -->
+    <div class="col-md-2">
+        <div class="m-b-10 text-inverse f-s-12"><b>Additional Forms</b></div>
+        <table class="text-inverse m-b-20 width-full">
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=1 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Additional Information </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=2 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Emergency Cases </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=3 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Trafficked Persons </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=4 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Missing Children </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=5 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Alternative Care </div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'case_info_form' form_id=6 case_id=case_uid %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Institutional Placement </div></a>
+                </td>
+            </tr>
+            {% if tr_db %}
+            <tr>
+                <td>
+                    <a href="/forms/ctip/case/{{ case_uid }}/">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">CTiP Detailed Forms </div></a>
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+    <!-- begin col-10 -->
+    <div class="col-md-10">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Additional Case Information </h4>
+            </div>
+            <div class="alert alert-warning fade in">
+                <span class="close" data-dismiss="alert">×</span>
+                <i class="fa fa-check fa-2x pull-left"></i>
+                <span id="infomessage">This page allows to provide more information for specific cases. Emergency Case details, Missing Children cases and additional case information.</span>
+            </div>
+            <!-- start panel body -->            
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print"> 
+                        <a href="/" class="btn btn-sm btn-primary m-r-5 m-b-5"><i class="fa fa-arrow-left m-r-5"></i> To Dashboard</a>                  
+                        <a href="{% url 'cpims_document' doc_id='CRS' case_id=case.case_id %}" class="btn btn-sm btn-danger m-r-5 m-b-5"><i class="fa fa-file-pdf-o m-r-5"></i> Case Record Sheet as PDF</a>
+                        <div class="btn-group m-r-5 m-b-5">
+                            <a href="#" class="btn btn-success">Case Actions</a>
+                            <a href="javascript:;" data-toggle="dropdown" class="btn btn-success dropdown-toggle">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="{% url 'view_case_record_sheet' id=case_id %}"><i class="fa fa-gears"></i> View Case Record Sheet</a></li>
+                                 <li><a href="{% url 'edit_case_record_sheet' id=case_id %}"><i class="fa fa-pencil"></i> Edit Case Record Sheet</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'case_events' id=case_id %}"><i class="fa fa-legal"></i> Case Follow up</a></li>
+                            </ul>
+                        </div>
+                    </span>
+                    Case No. {{ case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <h3 class="m-t-10">General case details</h3>
+                <table class="table table-profile">
+                    <tbody>
+                        <tr class="highlight">
+                            <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
+                            <td class="field"></td><td></td>
+                            <td class="field"></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
+                            <td class="field"></td><td></td>
+                            <td class="field"></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
+                            <td class="field"></td><td></td>
+                            <td class="field"></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Date Reported</td><td>{{ case.date_case_opened }}</td>
+                            <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td class="field">Case Category</td>
+                            <td>
+                                {% for cat in cats %}
+                                    {{ cat.case_category|gen_value:vals }}
+                                {% endfor %}
+                            </td>
+                            <td class="field">Sub Category</td>
+                            <td></td><td></td>
+                        </tr>
+                        {% if tr_case %}
+                        <tr class="highlight">
+                            <td colspan="6">
+                                <div class="alert alert-danger"><b class="text-inverse">This case has been flagged as a Possible Trafficking Case. Provide the details below for it to be added to VoT database.</b>
+
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="4">
+                                <div style="height: 250px;"></div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>                            
+        </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+{% endblock %}
