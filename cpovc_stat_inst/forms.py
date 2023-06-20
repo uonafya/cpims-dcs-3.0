@@ -61,6 +61,12 @@ ADMISSION_TYPE = (
     ("transfer_in", "transfer in"),
 )
 
+REASON_FOR_REFERRAL = (
+    ("By court order", "By court order"),
+    ("Supervision", "Supervision"),
+    ("Others", "Others"),
+)
+
 
 class SIPreAdmission(forms.Form):
     pass
@@ -155,3 +161,23 @@ class SIAdmission(forms.Form):
             }
         ),
     )
+
+
+class SICaseReferral(forms.Form):
+    name = forms.CharField(max_length=100)
+    age = forms.IntegerField()
+    sex = forms.ChoiceField(
+        choices=(("M", "Male"), ("F", "Female")),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control", "id": "gender"}),
+    )
+    child_class = forms.CharField(max_length=100)
+    reason_for_referral = forms.MultipleChoiceField(
+        choices=REASON_FOR_REFERRAL,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={'data-parsley-required': 'true'}))
+    file_name = forms.CharField(widget=forms.TextInput(
+        attrs={'placeholder': _('File Name'),
+               'class': 'form-control',
+               'readonly': 'true',
+               'id': 'file_name'}))

@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission
+from .forms import SIAdmission, SICaseReferral
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -76,6 +76,21 @@ def SI_admissions(request, person_id):
             'form': form
         }
         return render(request,'stat_inst/admission.html',context)
+    
+    except Exception as e:
+        raise e
+    
+
+def si_casereferral(request):
+    data = request.GET
+
+    form = SICaseReferral()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/case_referral.html',context)
     
     except Exception as e:
         raise e
