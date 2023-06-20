@@ -84,9 +84,7 @@
                             {% if case.case_level == 2 %}
                                 <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
                             {% elif case.case_level == 1 %}
-                                <a href="{% url 'new_ctip_case' case_id=case.case_cid|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">Records Man Case details</a>
-                            {% else %}
-                                <a href="#" class="btn  btn-sm btn-danger m-r-5">Register Record</a>
+                                <a href="{% url 'new_ctip_case' case_id=case.case_cid|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">Enroll </a>
                             {% endif %}
                         </td>
                    </tr>

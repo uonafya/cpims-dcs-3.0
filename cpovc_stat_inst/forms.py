@@ -1,0 +1,157 @@
+from django import forms
+from django.utils.translation import gettext_lazy as _
+from django.forms.widgets import RadioSelect
+
+from cpovc_main.functions import get_list, get_org_units_list
+from cpovc_registry.functions import (
+    get_geo_list,
+    get_all_geo_list,
+    get_all_location_list,
+    get_all_sublocation_list,
+)
+from cpovc_registry.models import RegOrgUnit
+
+# from .functions import get_questions
+# Added for CTiP
+from cpovc_main.country import OCOUNTRIES
+
+
+ENTRY_CHOICES = (
+    ("identified", "Was identified"),
+    ("referred", "Was referred"),
+    ("own_will", "Came of own will"),
+)
+
+YES_NO_CHOICES = (
+    ("yes", "Yes"),
+    ("no", "No"),
+)
+
+REFERRAL_SOURCES = (
+    ("Parent", "Parent"),
+    ("Family_member", "Family member"),
+    ("Guardian", "Guardian"),
+    ("Members_of_the_public", "Members of the public"),
+    ("Local_leader", "Local leader"),
+    ("Police", "Police"),
+    ("Lawyer", "Lawyer"),
+    ("Court", "Court"),
+    ("Childrens_Department", "Children’s Department"),
+    ("Local_Administration_Office", "Local Administration Office"),
+    ("Other", "Other"),
+)
+
+CHILD_CATEGORY = (
+    ("Abandoned_child", "Abandoned child"),
+    ("Neglected_child", "Neglected child"),
+    ("Destitute_child", "Destitute child"),
+    ("Street_child", "Street child"),
+    ("Refugee_child", "Refugee child"),
+    ("Lost_child", "Lost child"),
+    ("Abused_child", "Abused child (specify)"),
+    ("Victim_of_harmful_cultural", "Victim of harmful cultural"),
+    ("practices", "practices"),
+    ("harmful_religious_practices", "Victim of harmful religious practices"),
+)
+
+ADMISSION_TYPE = (
+    ("New_admission", "New admission"),
+    ("readmission_after_escape", "readmission after escape"),
+    ("readmission_on_relapse", "readmission on relapse"),
+    ("transfer_in", "transfer in"),
+)
+
+
+class SIPreAdmission(forms.Form):
+    pass
+
+
+class SIAdmission(forms.Form):
+    name = forms.CharField(max_length=100)
+    nickname = forms.CharField(max_length=50)
+    sex = forms.ChoiceField(
+        choices=(("M", "Male"), ("F", "Female")),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control", "id": "gender"}),
+    )
+    date_of_birth = forms.DateField()
+    age = forms.IntegerField()
+    date_of_admission = forms.DateField()
+    current_year_of_school = forms.CharField(max_length=50)
+    type_of_entry = forms.ChoiceField(
+        choices=ENTRY_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "type_of_entry",
+            }
+        ),
+    )
+    referral_source = forms.ChoiceField(
+        choices=REFERRAL_SOURCES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "referral_source",
+            }
+        ),
+    )
+    child_category = forms.ChoiceField(
+        choices=REFERRAL_SOURCES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "child_category",
+            }
+        ),
+    )
+    abused_child_desc = forms.CharField(max_length=100)
+    referral_source_others = forms.CharField(max_length=100)
+    referrer_name = forms.CharField(max_length=100)
+    referrer_address = forms.CharField(max_length=100)
+    referrer_phone = forms.CharField(max_length=100)
+    not_contact_child = forms.ChoiceField(
+        choices=YES_NO_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "not_contact_child",
+            }
+        ),
+    )
+    name_not_contact_child = forms.CharField(max_length=100)
+    relationship_to_child_not_contact_child = forms.CharField(max_length=100)
+    consent_form_signed = forms.ChoiceField(
+        choices=YES_NO_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "consent_form_signed",
+            }
+        ),
+    )
+    commital_court_order = forms.ChoiceField(
+        choices=YES_NO_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "commital_court_order",
+            }
+        ),
+    )
+    school_name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Name of School"),
+                "class": "form-control",
+                "id": "school_name",
+            }
+        ),
+    )

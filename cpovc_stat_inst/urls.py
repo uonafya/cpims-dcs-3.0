@@ -3,5 +3,7 @@ from . import views
 
 # This should contain urls related to registry ONLY
 urlpatterns = [
-    path('', views.home, name='SI_Home'),
+    path('', views.si_home, name='SI_home'),
+    # path('new/<uuid:case_id>/', views.SI_admissions, name='new_si_admit'),
+    path('new/<uuid:person_id>/', views.SI_admissions, name='new_si_admit'),
 ]
