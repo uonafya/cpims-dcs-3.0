@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.si_home, name='SI_home'),
     # path('new/<uuid:case_id>/', views.SI_admissions, name='new_si_admit'),
     path('new/<uuid:person_id>/', views.SI_admissions, name='new_si_admit'),
+    path('identify/<uuid:person_id>/', views.SI_childIdentification, name='si_child_identification'),
 ]

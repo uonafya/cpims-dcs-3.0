@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission
+from .forms import SIAdmission, SIChildIdentification
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -79,4 +79,19 @@ def SI_admissions(request, person_id):
     
     except Exception as e:
         raise e
-    
+
+
+
+def SI_childIdentification(request,person_id):
+    data = request.POST
+
+    form = SIChildIdentification()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request, 'stat_inst/childIdentification.html', context)
+
+    except Exception as e:
+        raise e
