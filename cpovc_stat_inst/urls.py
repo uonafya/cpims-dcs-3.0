@@ -8,4 +8,5 @@ urlpatterns = [
     path('new/<uuid:person_id>/', views.SI_admissions, name='new_si_admit'),
     path('case_refer', views.si_casereferral, name='SI_casereferral'),
     path('exit_certificate', views.si_certificateofexit, name='SI_certificateofexit'),
+    path('remand_home_escape', views.si_remandhomeescape, name='SI_remandhomeescape'),
 ]

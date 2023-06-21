@@ -174,6 +174,54 @@ class SICaseReferral(forms.Form):
                'readonly': 'true',
                'id': 'file_name'}))
     
+class SIRemandHomeEscape(forms.Form):
+    admission_no = forms.CharField(max_length=100)
+    id_no = forms.CharField(max_length=100)
+    court_file_no = forms.CharField(max_length=100)
+    police_file_no = forms.CharField(max_length=100)
+    ethnic_group = forms.CharField(max_length=100)
+    address_of_remandhome = forms.CharField(max_length=100)
+    clan = forms.CharField(max_length=100)
+    county = forms.CharField(max_length=100)
+    location = forms.CharField(max_length=100)
+    village = forms.CharField(max_length=100)
+    mode_of_escape = forms.CharField(max_length=100)
+    gvt_clothing_taken = forms.CharField(max_length=250)
+    circumstances_of_escape = forms.CharField(max_length=250)
+    officer_incharge = forms.CharField(max_length=250)
+    ward = forms.CharField(max_length=250)
+    sublocation = forms.CharField(max_length=250)
+    sub_chief = forms.CharField(max_length=250)
+    criminal_case_no = forms.CharField(max_length=250)
+    steps_taken_torecapture = forms.CharField(max_length=250)
+    description_of_escape = forms.CharField(max_length=250)
+    escape_under_supervision_of = forms.CharField(max_length=250)
+    station = forms.CharField(max_length=250)
+    date_of_order= forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    date_of_escape = forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    date__ = forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+   
 class SICertificateofExit(forms.Form):
     admission_no = forms.CharField(max_length=100)
     date_of_admission= forms.CharField(
@@ -224,4 +272,3 @@ class SICertificateofExit(forms.Form):
     telephone= forms.CharField(max_length=100)
     name= forms.CharField(max_length=100)
     designation= forms.CharField(max_length=100)
-   
