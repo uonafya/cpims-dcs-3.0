@@ -164,14 +164,6 @@ class SIAdmission(forms.Form):
 
 
 class SICaseReferral(forms.Form):
-    name = forms.CharField(max_length=100)
-    age = forms.IntegerField()
-    sex = forms.ChoiceField(
-        choices=(("M", "Male"), ("F", "Female")),
-        required=False,
-        widget=forms.Select(attrs={"class": "form-control", "id": "gender"}),
-    )
-    child_class = forms.CharField(max_length=100)
     reason_for_referral = forms.MultipleChoiceField(
         choices=REASON_FOR_REFERRAL,
         widget=forms.CheckboxSelectMultiple(
@@ -181,3 +173,55 @@ class SICaseReferral(forms.Form):
                'class': 'form-control',
                'readonly': 'true',
                'id': 'file_name'}))
+    
+class SICertificateofExit(forms.Form):
+    admission_no = forms.CharField(max_length=100)
+    date_of_admission= forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    expiry_date = forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    date_of_committal_order = forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    date_of_exit = forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    date_of_follow_up = forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    reason_for_exit = forms.CharField(max_length=250)
+    name_of_person_followingup = forms.CharField(max_length=100)
+    name_of_organization= forms.CharField(max_length=100)
+    relationship_to_child= forms.CharField(max_length=100)
+    address= forms.CharField(max_length=100)
+    telephone= forms.CharField(max_length=100)
+    name= forms.CharField(max_length=100)
+    designation= forms.CharField(max_length=100)
+   

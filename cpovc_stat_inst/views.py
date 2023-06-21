@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission, SICaseReferral
+from .forms import SIAdmission, SICaseReferral, SICertificateofExit
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -91,6 +91,20 @@ def si_casereferral(request):
             'form': form
         }
         return render(request,'stat_inst/case_referral.html',context)
+    
+    except Exception as e:
+        raise e
+    
+def si_certificateofexit(request):
+    data = request.GET
+
+    form = SICertificateofExit()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/certificate_of_exit.html',context)
     
     except Exception as e:
         raise e
