@@ -8,7 +8,7 @@ from django.db.models import Count
 
 from .forms import (SIAdmission, SICaseReferral, 
 SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits,
- SIFamilyConference, SIReleaseForm)
+ SIFamilyConference, SIReleaseForm,SIChildProfile)
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -163,6 +163,20 @@ def si_releaseform(request):
             'form': form
         }
         return render(request,'stat_inst/release_form.html',context)
+    
+    except Exception as e:
+        raise e
+
+def si_childprofile(request): 
+    data = request.GET
+
+    form = SIChildProfile()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/change_in_profile.html',context)
     
     except Exception as e:
         raise e

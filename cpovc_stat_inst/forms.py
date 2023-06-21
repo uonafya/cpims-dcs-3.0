@@ -433,3 +433,76 @@ class SIReleaseForm(forms.Form):
                    'id': 'relation_to_child'}
         ))
    
+class SIChildProfile(forms.Form):
+    record_date= forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    name_of_institution = forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Name of Institution'),
+                   'class': 'form-control',
+                   'id': 'name_of_institution'}
+        ))
+    scco_addressed = forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('SCCO Addressed'),
+                   'class': 'form-control',
+                   'id': 'scco_addressed'}
+        ))
+    old_released_to = forms.CharField(max_length=100,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Old address to be released to'),
+                   'class': 'form-control',
+                   'id': 'old_released_to'}
+        ) )
+    new_released_to = forms.CharField(max_length=100,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('New address to be released to'),
+                   'class': 'form-control',
+                   'id': 'new_released_to'}
+        ) )
+    guardian_job = forms.CharField(max_length=100,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Job of guardian'),
+                   'class': 'form-control',
+                   'id': 'guardian_job'}
+        ) )
+    relation_guardian= forms.CharField(max_length=100,
+         widget=forms.TextInput(
+            attrs={'placeholder': _('Relation with the guardian'),
+                   'class': 'form-control',
+                   'id': 'relation_guardian'}
+        ) )
+    expiration_date= forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    reason_forchange= forms.CharField(max_length=250, widget=forms.TextInput(
+        attrs={'placeholder': _('Reason for change'),
+                'class': 'form-control',
+                'id': 'reason_forchange'}
+    ) )
+    life_planning= forms.CharField(max_length=100,
+            widget=forms.TextInput(
+            attrs={'placeholder': _('Life planning (interest and aptitude)'),
+                   'class': 'form-control',
+                   'id': 'life_planning'}
+        ))
+    mental_state = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Mental and Physical states'),
+                   'class': 'form-control',
+                   'id': 'mental_state'}
+        ))
+    other_changes = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Other Changes'),
+                   'class': 'form-control',
+                   'id': 'other_changes'}
+        ))
+   

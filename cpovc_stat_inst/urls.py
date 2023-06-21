@@ -11,5 +11,6 @@ urlpatterns = [
     path('remand_home_escape', views.si_remandhomeescape, name='SI_remandhomeescape'),
     path('record_of_visits', views.si_recordofvisits, name='SI_recordofvisits'),
     path('family_conference', views.si_familyconference, name='SI_familyconference'),
-    path('release_form', views.si_releaseform, name='SI_releaseform'),
+    path('release_form', views.si_releaseform, name='SI_releaseform'), 
+    path('child_profile', views.si_childprofile, name='SI_childprofile'),
 ]

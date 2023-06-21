@@ -1,0 +1,348 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Bio Data {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  @media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  #wizard_a ol { display: none; }
+  .bwizard-buttons { display: none; }
+  .bwizard-steps { display: none; }
+  #wizard_a ol li { display: none; }
+  #step2, #step3  { display: block !important; }
+  .control-label {margin-bottom: 5px;}
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,td{
+    padding: 10px;
+    text-align: left; 
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+.custom-margin {
+      margin-left: 10em;
+    }
+.table-margin {
+        margin-left: 10px;
+      }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Bio Data </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
+            <b>Statutory Institution - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                    {% if care %}
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% else %}
+                   
+                    {% endif %}
+                    </span>
+                    <!-- Case No: {{ case_num }} :: {{ case.case.case_serial }} -->
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+
+                    <div id="wizard_a">
+                        <ol>
+                            <li>
+                                Child's Profile
+                                <small>CHANGE IN THE PROFILE OF A CHILD UNDER ENVIRONMENTAL ADJUSTMENT</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">Profile</legend>
+
+                                <div class="form-group">
+                                      
+                                        <label class="col-md-2 control-label">Date</label>
+                                        <div class="col-md-3">
+                                            {{ form.record_date }}
+                                        </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                        <label class="col-md-2 control-label">Name of Institution</label>
+                                        <div class="col-md-3">
+                                            {{ form.name_of_institution }}
+                                        </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">SCCO Addressed</label>
+                                    <div class="col-md-3">{{ form.scco_addressed }}</div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-md-2 control-label">Old address to be released to</label>
+                                        <div class="col-md-3">
+                                            {{ form.old_released_to }}
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Job of guardian</label>
+                                    <div class="col-md-3">
+                                        {{ form.guardian_job }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">New address to be released to</label>
+                                    <div class="col-md-3">
+                                        {{ form.new_released_to }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Relation with the guardian</label>
+                                    <div class="col-md-3">
+                                        {{ form.relation_guardian }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Expiration date</label>
+                                    <div class="col-md-3">
+                                        {{ form.expiration_date }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Reason for change</label>
+                                    <div class="col-md-3">
+                                        {{ form.reason_forchange }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Life planning (interest and aptitude)</label>
+                                    <div class="col-md-3">
+                                        {{ form.life_planning }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Mental and Physical states</label>
+                                    <div class="col-md-3">
+                                        {{ form.mental_state }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Other Changes</label>
+                                    <div class="col-md-3">
+                                        {{ form.other_changes }}
+                                    </div>
+                                </div>
+
+                        </div>
+                        <!-- end wizard step-3 -->
+                    </div>
+                    <form method="post" >
+                        <!-- form fields -->
+                        <div class="form-group" id="printId">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                            </div>
+                        </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard_a").bwizard({ validating: function (e, ui) { }            
+    });
+
+    
+    // Handle disability
+    var aval = $("input[name='qf1A10_rdo']:checked").val();
+        handle_disability(aval);
+    $('input[type=radio][name=qf1A10_rdo]').change(function() {
+        handle_disability(this.value);
+    });
+
+    // Handle toggle for birth certificate
+    var avalr = $("input[name='qf1A1_rdo']:checked").val();
+        handle_toggle(avalr, 1);
+    $('input[type=radio][name=qf1A1_rdo]').change(function() {
+        handle_toggle(this.value, 1);
+    });
+    // Handle toggle for committal
+    var avalr2 = $("input[name='qf1A15_rdo']:checked").val();
+        handle_toggle(avalr2, 2);
+    $('input[type=radio][name=qf1A15_rdo]').change(function() {
+        handle_toggle(this.value, 2);
+    }); 
+
+});
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+
+function handle_disability(has_disb){
+    if (has_disb == 'ANNO') {
+        $('#disability_details_div').hide();
+        $('#disability_severity').attr("data-parsley-required", "false");
+        $('#disability_type').attr("data-parsley-required", "false");
+    }else{
+        $('#disability_details_div').show();
+        $('#disability_severity').attr("data-parsley-required", "true");
+        $('#disability_type').attr("data-parsley-required", "true");
+    }
+
+}
+
+function handle_toggle(elem, itm){
+    console.log('here '+ elem)
+    if (itm == 1){
+        if (elem == 'ANNO') {
+            $("#qf1A2").prop("readonly", true);
+        }else{
+            $("#qf1A2").prop("readonly", false);
+        }
+    }else if (itm == 2){
+        if (elem == 'ANNO') {
+            $("#id_qf1A16").prop("readonly", true);
+            $("#id_qf1A17").prop("readonly", true);
+        }else{
+            $("#id_qf1A16").prop("readonly", false);
+            $("#id_qf1A17").prop("readonly", false);
+        }
+    }
+    
+
+}
+</script>
+{% endblock %}
