@@ -297,3 +297,99 @@ class SIRecordofVisits(forms.Form):
     type_of_communication= forms.CharField(max_length=100)
     description = forms.CharField(max_length=250)
     name_of_staff= forms.CharField(max_length=100)
+
+class SIFamilyConference(forms.Form):
+    name_of_participant = forms.CharField(max_length=100,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Name of Participant'),
+                   'class': 'form-control',
+                   'id': 'name_of_participant'}
+        ) )
+    relationship_to_child= forms.CharField(max_length=100,
+         widget=forms.TextInput(
+            attrs={'placeholder': _('Relationship with the child'),
+                   'class': 'form-control',
+                   'id': 'relationship_child'}
+        ) 
+                                           )
+    address= forms.CharField(max_length=100,
+            widget=forms.TextInput(
+            attrs={'placeholder': _('Address'),
+                   'class': 'form-control',
+                   'id': 'address'}
+        ) 
+                             )
+    telephone= forms.CharField(max_length=100, widget=forms.TextInput(
+            attrs={'placeholder': _('Telephone'),
+                   'class': 'form-control',
+                   'id': 'telephone'}
+        ) )
+    underlying_issues = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Underlying Issues'),
+                   'class': 'form-control',
+                   'id': 'underlying_issues'}
+        ))
+    presenting_issues = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Presenting Issues'),
+                   'class': 'form-control',
+                   'id': 'presenting_issues'}
+        ))
+    consensus = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Consensus'),
+                   'class': 'form-control',
+                   'id': 'consensus'}
+        ))
+    family_promise = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Family Promise of Commitment'),
+                   'class': 'form-control',
+                   'id': 'family_promise'}
+        ))
+    child_promise = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Childs Promise of Commitment'),
+                   'class': 'form-control',
+                   'id': 'child_promise'}
+        ))
+    child_name = forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Childs Name'),
+                   'class': 'form-control',
+                   'id': 'child_name'}
+        ))
+    family_member= forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Name of family member'),
+                   'class': 'form-control',
+                   'id': 'family_member'}
+        ))
+    significant_other= forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Significant Other'),
+                   'class': 'form-control',
+                   'id': 'significant_other'}
+        ))
+    official_handling= forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Official handling the case'),
+                   'class': 'form-control',
+                   'id': 'official_handling'}
+        ))
+    follow_up_meeting= forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Follow up meeting to be held at?'),
+                   'class': 'form-control',
+                   'id': 'follow_up_meeting'}
+        ))
+    family_contactperson= forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Family Contact Person'),
+                   'class': 'form-control',
+                   'id': 'family_contactperson'}
+        ))
+    family_contactdetails= forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Contact details '),
+                   'class': 'form-control',
+                   'id': 'family_contactdetails'}
+        ))
+    follow_up_date= forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+   
