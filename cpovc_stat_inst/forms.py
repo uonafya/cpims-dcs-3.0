@@ -272,3 +272,28 @@ class SICertificateofExit(forms.Form):
     telephone= forms.CharField(max_length=100)
     name= forms.CharField(max_length=100)
     designation= forms.CharField(max_length=100)
+
+class SIRecordofVisits(forms.Form):
+    admission_no = forms.CharField(max_length=100)
+    name_of_visitor = forms.CharField(max_length=250)
+    age = forms.IntegerField()
+    sex = forms.ChoiceField(
+        choices=(("M", "Male"), ("F", "Female")),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control", "id": "gender"}),
+    )
+    date_of_visit= forms.CharField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'id': 'datepicker'},
+
+                   ))
+    relationship_to_child= forms.CharField(max_length=100)
+    address= forms.CharField(max_length=100)
+    telephone= forms.CharField(max_length=100)
+    id_no= forms.CharField(max_length=100)
+    type_of_communication= forms.CharField(max_length=100)
+    description = forms.CharField(max_length=250)
+    name_of_staff= forms.CharField(max_length=100)
