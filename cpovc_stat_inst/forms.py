@@ -393,3 +393,43 @@ class SIFamilyConference(forms.Form):
 
                    ))
    
+class SIReleaseForm(forms.Form):
+    admission_no = forms.CharField(max_length=100,widget=forms.TextInput(
+            attrs={'placeholder': _('Admission Number'),
+                   'class': 'form-control',
+                   'id': 'admission_no'}
+        ))
+    name = forms.CharField(max_length=100,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Name'),
+                   'class': 'form-control',
+                   'id': 'name'}
+        ) )
+    id_no= forms.CharField(max_length=100,
+         widget=forms.TextInput(
+            attrs={'placeholder': _('ID Number'),
+                   'class': 'form-control',
+                   'id': 'id_no'}
+        ) )
+    telephone= forms.CharField(max_length=100, widget=forms.TextInput(
+        attrs={'placeholder': _('Telephone'),
+                'class': 'form-control',
+                'id': 'telephone'}
+    ) )
+    occupation= forms.CharField(max_length=100,
+            widget=forms.TextInput(
+            attrs={'placeholder': _('Occupation'),
+                   'class': 'form-control',
+                   'id': 'occupation'}
+        ))
+    residence = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Residence'),
+                   'class': 'form-control',
+                   'id': 'residence'}
+        ))
+    relation_to_child = forms.CharField(max_length=250,widget=forms.TextInput(
+            attrs={'placeholder': _('Relation to Child'),
+                   'class': 'form-control',
+                   'id': 'relation_to_child'}
+        ))
+   

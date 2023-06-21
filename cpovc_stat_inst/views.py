@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
 from .forms import (SIAdmission, SICaseReferral, 
-SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits, SIFamilyConference)
+SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits,
+ SIFamilyConference, SIReleaseForm)
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -138,7 +139,7 @@ def si_recordofvisits(request):
     except Exception as e:
         raise e
     
-def si_familyconference(request):
+def si_familyconference(request): 
     data = request.GET
 
     form = SIFamilyConference()
@@ -148,6 +149,20 @@ def si_familyconference(request):
             'form': form
         }
         return render(request,'stat_inst/family_conference.html',context)
+    
+    except Exception as e:
+        raise e
+
+def si_releaseform(request): 
+    data = request.GET
+
+    form = SIReleaseForm()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/release_form.html',context)
     
     except Exception as e:
         raise e
