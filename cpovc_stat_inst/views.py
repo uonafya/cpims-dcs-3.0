@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission
+from .forms import SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -66,7 +66,7 @@ def si_home(request):
         raise e
     
 
-def SI_admissions(request, person_id):
+def SI_admissions(request, id):
     data = request.GET
 
     form = SIAdmission()
@@ -76,6 +76,63 @@ def SI_admissions(request, person_id):
             'form': form
         }
         return render(request,'stat_inst/admission.html',context)
+    
+    except Exception as e:
+        raise e
+    
+
+def SI_needriskform(request, id):
+    data = request.GET
+
+    form = SINeedRiskAssessment()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/needriskform.html',context)
+    
+    except Exception as e:
+        raise e
+    
+def SI_needriskscale(request, id):
+    data = request.GET
+
+    form = SINeedRiskScale()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/needriskscale.html',context)
+    
+    except Exception as e:
+        raise e
+    
+def SI_vacancyapplication(request, id):
+    data = request.GET
+
+    form = SIVacancyApp()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/vacancy_app.html',context)
+    
+    except Exception as e:
+        raise e
+
+def SI_vacancyconfirmation(request, id):
+    data = request.GET
+
+    form = SIVacancyConfirm()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/vacancy_confirm.html',context)
     
     except Exception as e:
         raise e

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block page_title %} {{block.super}} Statutoy Institutions Registration {% endblock page_title%}
+{% block page_title %} {{block.super}} Statutoy Institutions - Needs and Risk Assessment Form {% endblock page_title%}
 
 {% load static %}
 
@@ -18,7 +18,7 @@
     <li><a href="#">Home</a></li>
     <li class="active">SI</li>
 </ol>
-<h1 class="page-header">SI registration <small>Register children in the Statutory Institutions (Reamnd Homes, Rehabilitations schools or Reascue centres and CCI's)</small></h1>
+<h1 class="page-header">NEEDS AND RISK ASSESSMENT FORM</h1>
 <!-- end breadcrumb -->
 <div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
     <span class="close" data-dismiss="alert">×</span>
@@ -37,7 +37,7 @@
                     <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>                      
-                <h4 class="panel-title">Register Child &nbsp;<i class="fa fa-male"></i> <span id="person_name"></span></h4>
+                <h4 class="panel-title">Child Needs and risk Assessment &nbsp;<i class="fa fa-snowflake-0"></i> <span id="person_name"></span></h4>
                 </div>
                 <div class="alert alert-info fade in">
                         <button type="button" class="close" data-dismiss="alert">
@@ -61,232 +61,33 @@
                             <fieldset>
                                 <legend class="pull-left width-full">Child details</legend>
                                 <div class="divider pull-left width-full"></div>
-                                <div class="row">
-                                    <!-- end col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group block1">
-                                            <label for="first_name">First Name <span class="asteriskField">*</span></label>
-                                            {% comment %} {{ form.first_name }} {% endcomment %}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="surname">Surname <span class="asteriskField">*</span></label>
-                                            {% comment %} {{ form.surname }} {% endcomment %}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="other_names">Other Name(s) <span class="asteriskField"></span></label>
-                                            {% comment %} {{ form.other_names}} {% endcomment %}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                </div>
                                 <div class="divider pull-left width-full"></div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div id="" class="col-md-3">
                                         <div class="form-group block1">
-                                            <label for="sex_id">Sex <span class="asteriskField">*</span></label>
-                                            {% comment %} {{ form.sex_id }} {% endcomment %}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div id="dob_div" class="form-group">
-                                            <label for="date_of_birth">Date of Birth <span class="asteriskField">*</span></label>
-                                            {% comment %} {{ form.date_of_birth }} {% endcomment %}
-                                        </div>
-                                    </div>
-                                    <!-- begin col-4 -->
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div id="" class="form-group">
-                                            <label for="institution_type">Institution Type <span class="asteriskField">*</span> :</label>
-                                            {{ form.institution_type }}
-                                        </div>
-                                        <div id="date_warning" class="form-group" style="display: none"></div>
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4"></div>
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                <div class="row">
-                                    <div id="div_admission" class="col-md-3">
-                                        <div class="form-group block1">
-                                            <label for="date_of_admission">Date of admission to <span class="asteriskField">*</span></label>
-                                            {{ form.date_of_admission }}
+                                            <label for="previous_institution">Name of previous Institution <span class="asteriskField">*</span></label>
+                                            {{ form.previous_institution }}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
                                     <!-- begin col-4 -->
                                     <div class="col-md-3">
                                         <div id="dob_div" class="form-group">
-                                            <label for="current_year_of_school">Current year of school <span class="asteriskField">*</span></label>
-                                            {{ form.current_year_of_school }}
+                                            <label for="prev_inst_release_date">Date of release from previous Institution <span class="asteriskField">*</span></label>
+                                            {{ form.prev_inst_release_date }}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <div id="" class="form-group">
-                                            <label for="date_of_admission">Admission No <span class="asteriskField">*</span></label>
-                                            {{ form.date_of_admission }}
+                                            <label for="needrisk_assess">Categories of risk factors <span class="asteriskField">*</span></label>
+                                            {{ form.needrisk_assess }}
                                         </div>
                                     </div>
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-3">
-                                        <div id="" class="form-group">
-                                            <label for="school_name">Most recent school attended <span class="asteriskField">*</span> :</label>
-                                            {{ form.school_name }}
-                                        </div>
-                                        <div id="date_warning" class="form-group" style="display: none"></div>
+                                
                                     </div>
-                                </div>
                                 <div class="divider pull-left width-full"></div>
-                            </fieldset>
+                            </fieldset>                            
 
-                            <!--- Start Wizard Block -->
-
-                            <div id="wizard_persons">
-                                    <ol>
-                                        <li>
-                                            REFERRAL  
-                                            <small>Child referred to Remand Home by</small>
-                                        </li>
-
-                                        <li>
-                                            Special Needs and circumstances
-                                            <small></small>
-                                        </li>
-                                    </ol>
-                                    <!-- begin wizard step-1 -->
-                                    <div class="wizard-step-1">
-                                        <fieldset>
-                                            <!-- begin row -->
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="type_of_entry">Type of Entry <span class="asteriskField"></span></label>
-                                                        {{ form.type_of_entry}}
-                                                    </div>                                                    
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="referral_source">Referral Source <span class="asteriskField"></span></label>
-                                                        {{ form.referral_source}}
-                                                    </div>
-                                                </div> 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="child_category">Category of Child <span class="asteriskField"></span></label>
-                                                        {{ form.child_category}}
-                                                    </div>
-                                                </div>  
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="referral_source_others">Referral Sources Others <span class="asteriskField"></span></label>
-                                                        {{ form.referral_source_others}}
-                                                    </div>
-                                                </div>                                
-                                            </div>
-                                            <!-- end row -->
-                                             <!-- begin row -->
-                                             <div class="row">
-                                                <h5>Person referering child</h5>
-                                                <hr/>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="referrer_name">Name of Referrer <span class="asteriskField"></span></label>
-                                                        {{ form.referrer_name}}
-                                                    </div>                                                    
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="referrer_address">Referrer Address <span class="asteriskField"></span></label>
-                                                        {{ form.referrer_address}}
-                                                    </div>
-                                                </div> 
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="referrer_phone">Referrer Phone <span class="asteriskField"></span></label>
-                                                        {{ form.referrer_phone}}
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <!-- end row -->
-                                        </fieldset>
-                                    </div>
-                                    <!-- end wizard step-1 -->
-                                    <!-- begin wizard step-2 -->
-                                    <div class="wizard-step-2">
-                                        <fieldset>
-                                            <!-- begin row -->
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="">
-                                                        <label for="consent_form_signed">Parental Consent for signed <span class="asteriskField"></span></label>                                                    
-                                                        <div class="radio-inline">
-                                                            {{ form.consent_form_signed}}
-                                                        </div>                                                                
-                                                    </div>                                                    
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="referral_source">Commital court order <span class="asteriskField"></span></label>
-                                                        {{ form.referral_source}}
-                                                    </div>
-                                                </div> 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="health_status">Current health situation <span class="asteriskField"></span></label>
-                                                        {{ form.health_status}}
-                                                    </div>
-                                                </div>  
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="special_needs">Any special needs  <span class="asteriskField"></span></label>
-                                                        {{ form.special_needs}}
-                                                    </div>
-                                                </div>                                
-                                            </div>
-                                            <!-- end row -->
-                                             <!-- begin row -->
-                                             <div class="row">
-                                                <h5>persons not permitted to have contact with or supervise the child?</h5>
-                                                <hr/>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="not_contact_child">Are there person not permitted: <span class="asteriskField"></span></label>
-                                                        <div class="radio-inline">
-                                                            {{ form.not_contact_child}}
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="name_not_contact_child">Name of person <span class="asteriskField"></span></label>
-                                                        {{ form.name_not_contact_child}}
-                                                    </div>
-                                                </div> 
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="relationship_to_child_not_contact_child">Relationship of person <span class="asteriskField"></span></label>
-                                                        {{ form.relationship_to_child_not_contact_child}}
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <!-- end row -->
-                                        </fieldset>
-                                    </div>
-                                    <!-- end wizard step-2 -->
-                                </div>
-
-                            <!--- End Wizard Block -->
                             <div class="row" id="audit_detail_div">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -317,226 +118,7 @@
                     </div>
                 </div>
                 <!-- end panel -->
-            </div>
-            <!-- end col-6 -->
-        <div class="modal fade" id="modal-sibling">
-            <div class="modal-dialog">
-                <div class="modal-content form-horizontal form-bordered">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Add Sibling</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="row">
-                                <div id="log_cg"></div>
-                                    <div id="caregiver_id_adult" class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4" for="caregiver_id">CPIMS registered child:</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            {{ form.is_cpims_sibling }}
-                                        </div>
-                                    </div>
-                                    <div id="sibling_search_div" class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4" for="caregiver_id">Search Child:</label>
-                                        <div class="col-md-8 col-sm-8">
-                                            {{ form.sibling_id }}
-                                            <div id="my-siblings"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                <div class="row">
-                                    <!-- end col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group block1">
-                                            <label>First Name <span class="asteriskField">*</span></label>
-                                            {{ form.sibling_firstname }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Surname <span class="asteriskField">*</span></label>
-                                            {{ form.sibling_surname }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Other Name(s)</label>
-                                            {{ form.sibling_othernames }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                <div class="row">
-                                    <!-- end col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group block1">
-                                            <label>Date of Birth :</label>
-                                            {{ form.sibling_dob }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Sex <span class="asteriskField">*</span>:</label>
-                                            {{ form.sibling_gender }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Class <span class="asteriskField">*</span>:</label>
-                                            {{ form.sibling_class }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4" for="sibling_remark">Remarks :</label>
-                                    <div class="col-md-8 col-sm-8">
-                                        {{ form.sibling_remark }}
-                                        {{ form.sibling_cpims_id }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="proc_sibling"><i class="fa fa-plus"></i> Proceed</button>
-                        <button type="button" class="btn btn-success" id="add_sibling"><i class="fa fa-plus"></i> Sibling</button>
-                            <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                        </div>
-                    </div>
-                </div>
-            </div>          
-        </div>
-        <div class="modal fade" id="modal-caregiver">
-            <div class="modal-dialog">
-                <div class="modal-content form-horizontal form-bordered">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Attach a caregiver</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div id="log"></div>
-                                    <div id="caregiver_cpims" class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4" for="caregiver_id">CPIMS registered caregiver:</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            {{ form.is_cpims_caregiver }}
-                                        </div>
-                                    </div>
-                                    <div id="caregiver_search_div" class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4" for="caregiver_id">Search Caregiver:</label>
-                                        <div class="col-md-8 col-sm-8">
-                                            {{ form.caregiver_id }}
-                                            <div id="my-caregiver"></div>
-                                        </div>
-                                    </div>
-                                    <div id="caregiver_id_adult" class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4" for="caregiver_id">No adult caregiver:</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            {{ form.no_adult_caregiver }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                <div class="row">
-                                    <!-- end col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group block1">
-                                            <label>First Name <span class="asteriskField">*</span></label>
-                                            {{ form.caregiver_firstname }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Surname <span class="asteriskField">*</span></label>
-                                            {{ form.caregiver_surname }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Other Name(s)</label>
-                                            {{ form.caregiver_othernames }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                <div class="row">
-                                    <!-- end col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group block1">
-                                            <label>Date of Birth :</label>
-                                            {{ form.caregiver_dob }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Sex <span class="asteriskField">*</span>:</label>
-                                            {{ form.caregiver_gender }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Relationship with child <span class="asteriskField">*</span>:</label>
-                                            {{ form.relationship_type_id }}
-                                            {{ form.caregiver_cpims_id }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                {% if request.session.reg_ovc %}
-                                <div class="row">
-                                    <!-- end col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group block1">
-                                            <label>National ID No. <span class="asteriskField">*</span>:</label>
-                                            {{ form.caregiver_idno }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                    <!-- begin col-4 -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Mobile Number:</label>
-                                            {{ form.caregiver_tel }}
-                                        </div>
-                                    </div>
-                                    <!-- end col-4 -->
-                                </div>
-                                <div class="divider pull-left width-full"></div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" id="add_caregiver"><i class="fa fa-plus"></i> Caregiver</button>
-                            <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                        </div>
-                    </div>
-                </div>
-            </div>          
-        </div>
+            </div>        
         </form>
     </div>
 </div>
