@@ -538,15 +538,50 @@ class IndividualCarePlanForm(forms.Form):
                                            attrs={'placeholder': _(''),
                                                   'class': 'form-control',
                                                   'data-parsley-required': "false"}))
-    goal = forms.ChoiceField(label='GOAL',
-                             choices=GOAL,
-                             widget=forms.Select
-                             )
+    goal = forms.CharField(label="Officer’s Comment",
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
     sub_goal_action_plan = forms.ChoiceField(label='SUB-GOAL/ACTION PLAN',
                                              choices=SUB_GOAL,
                                              widget=forms.Select)
+    sub_goal_action_plan_1 = forms.CharField(label='SUB-GOAL/ACTION PLAN 1-1',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    sub_goal_action_plan_2 = forms.CharField(label='SUB-GOAL/ACTION PLAN 1-2',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    sub_goal_action_plan_3 = forms.CharField(label='SUB-GOAL/ACTION PLAN 2-1',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    sub_goal_action_plan_4 = forms.CharField(label='SUB-GOAL/ACTION PLAN 2-2',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    sub_goal_action_plan_5 = forms.CharField(label='SUB-GOAL/ACTION PLAN 3-1',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    sub_goal_action_plan_6 = forms.CharField(label='SUB-GOAL/ACTION PLAN 3-2',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
 
-    counsellors_recommendations = forms.CharField(label='COUNSELLORS RECOMMENDATIONS', widget=forms.Textarea)
+    counsellors_recommendations = forms.CharField(label='COUNSELLORS RECOMMENDATIONS',
+                                                  widget=forms.TextInput(
+                                                      attrs={'placeholder': _(''),
+                                                             'class': 'form-control',
+                                                             'data-parsley-required': "false"}))
     family_conferencing_result = forms.CharField(label='FAMILY CONFERENCING RESULT')
     family_conferencing_date = forms.CharField(
         required=False,
@@ -557,7 +592,11 @@ class IndividualCarePlanForm(forms.Form):
                    'id': 'datepicker',
                    'data-parsley-group': 'primary'}))
     family_conferencing_venue = forms.CharField(label='Venue')
-    family_conferencing_participants = forms.CharField(label='Participants', widget=forms.Textarea)
+    family_conferencing_participants = forms.CharField(label='Participants',
+                                                       widget=forms.TextInput(
+                                                           attrs={'placeholder': _(''),
+                                                                  'class': 'form-control',
+                                                                  'data-parsley-required': "false"}))
     family_conferencing_result = forms.CharField(label='Result',
                                                  widget=forms.TextInput(
                                                      attrs={'placeholder': _(''),
