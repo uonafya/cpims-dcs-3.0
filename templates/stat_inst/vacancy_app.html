@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block page_title %} {{block.super}} Statutoy Institutions - Needs and Risk Assessment Form {% endblock page_title%}
+{% block page_title %} {{block.super}} Statutoy Institutions -  Application for a Vacancy {% endblock page_title%}
 
 {% load static %}
 
@@ -9,6 +9,8 @@
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
 <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 <link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+
+<link href="{% static 'css/si_module.css' %}" rel="stylesheet" />
 {% endblock style_code%}
 
     
@@ -16,9 +18,10 @@
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
     <li><a href="#">Home</a></li>
-    <li class="active">SI</li>
+    <li><a href="{% url 'SI_home' %}">SI</a></li>
+    <li class="active"> Vacancy</li>
 </ol>
-<h1 class="page-header">NEEDS AND RISK ASSESSMENT FORM</h1>
+<h1 class="page-header"> Application for a Vacancy to an Institution</h1>
 <!-- end breadcrumb -->
 <div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
     <span class="close" data-dismiss="alert">×</span>
@@ -37,7 +40,7 @@
                     <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>                      
-                <h4 class="panel-title">Child Needs and risk Assessment &nbsp;<i class="fa fa-snowflake-0"></i> <span id="person_name"></span></h4>
+                <h4 class="panel-title">Vacancy Aplication &nbsp;<i class="fa fa-snowflake-0"></i> <span id="person_name"></span></h4>
                 </div>
                 <div class="alert alert-info fade in">
                         <button type="button" class="close" data-dismiss="alert">
@@ -63,53 +66,131 @@
                                 <div class="divider pull-left width-full"></div>
                                 <div class="divider pull-left width-full"></div>
                                 <div class="row">
-                                    <div id="" class="col-md-3">
+                                    <div id="" class="col-md-2">
                                         <div class="form-group block1">
-                                            <label for="previous_institution">Name of previous Institution <span class="asteriskField">*</span></label>
-                                            {{ form.previous_institution }}
+                                            <label for="previous_institution">CPIMS ID</label><br>
+                                            ####
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
                                     <!-- begin col-4 -->
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div id="dob_div" class="form-group">
-                                            <label for="prev_inst_release_date">Date of release from previous Institution <span class="asteriskField">*</span></label>
-                                            {{ form.prev_inst_release_date }}
+                                            <label for="prev_inst_release_date">NAME </label><br>
+                                            ####
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div id="" class="form-group">
-                                            <label for="needrisk_assess">Categories of risk factors <span class="asteriskField">*</span></label>
-                                            {{ form.needrisk_assess }}
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Age </label><br>
+                                            ####
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Sex </label><br>
+                                            ####
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Guardian Name </label><br>
+                                            ####
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Institution Name </label><br>
+                                            ####
                                         </div>
                                     </div>
                                 
-                                    </div>
+                                </div>
                                 <div class="divider pull-left width-full"></div>
+                                <div class="row">
+                                    <legend class="pull-left width-full">Form details</legend>
+                                    <div class="divider pull-left width-full"></div>
+                                <div class="divider pull-left width-full"></div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="ref_no">Reference No</label><br>
+                                            {{ form.ref_no }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="crc_no">CRC NO:</label><br>
+                                            {{ form.crc_no }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="pnc_no">P&C NO:</label><br>
+                                            {{ form.pnc_no }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="date_of_application">Date of application</label><br>
+                                            {{ form.date_of_application }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divider pull-left width-full"></div>
+                                <div class="row">
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="court_number">Court Number </label><br>
+                                            {{ form.court_number }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="judge_name">Judge Name</label><br>
+                                            {{ form.judge_name }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="child_held_at">Child held at: </label><br>
+                                            {{ form.child_held_at }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="date_of_next_mention">Date of next mention </label><br>
+                                            {{ form.date_of_next_mention }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="" class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label for="requesting_officer">Requesting Officer </label><br>
+                                            {{ form.requesting_officer }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label for="designation">Designation </label><br>
+                                            {{ form.designation }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label for="sub_county_children_officer">Sub County Children Officer</label><br>
+                                            {{ form.sub_county_children_officer }}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </fieldset>                            
 
-                            <div class="row" id="audit_detail_div">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="audit_workforce">Workforce member recorded on paper :<span class="asteriskField">*</span></label>
-                                        {{ form.audit_workforce }}
-                                        {{ form.workforce_id }}
-                                    </div>
-                                </div>
-                                <!-- begin col-6 -->
-                                <div class="col-md-6">
-                                    <div class="form-group col-md-6">
-                                        <label for="audit_date">Date paper form filled :<span class="asteriskField">*</span></label>
-                                        {{ form.audit_date }}
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4"></label>
                                 <div class="col-md-6 col-sm-6">
                                     <button type="submit" class="btn btn-primary" value="submit" id="s1">Submit</button>
-                                    <button type="submit" class="btn btn-primary" value="proceed" id="s2">Proceed</button>
-                                    <a href="{% url 'search_persons' %}">
+                                    <a href="{% url 'SI_home' %}">
                                     <button type="button" class="btn btn-default">Cancel</button>
                                     </a>
                                 </div>
@@ -121,6 +202,55 @@
             </div>        
         </form>
     </div>
+    <div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>                          
+                <h4 class="panel-title"><b>Vacancy Application </b></h4>                    
+            </div>
+
+            <div class="panel-body">
+                <div  class="panel panel-inverse">
+                    <div id="case-events"  class="table-responsive">
+                        <table id="f1a_events_data_table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr> 
+                                    <th>Event Type</th>                                 
+                                    <th>Details</th> 
+                                    <th>Date Recorded</th>                
+                                    <th>Institution Applied</th> 
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> 
+                                    <td></td>                                 
+                                    <td></td> 
+                                    <td></td>                
+                                    <td>
+                                        <button type="button" class="btn btn-primary">Approve</button >
+                                        <button type="button" class="btn btn-danger">Deny</button >
+                                        <button type="button" class="btn btn-secondary">View Details</button >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br><br>                           
+                </div>
+            </div>
+
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
 </div>
 <!-- end row -->
 {% endblock primary %}
@@ -131,6 +261,12 @@
 <script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
 <script>
 jQuery(document).ready(function() {
+    // instantiate datepicker
+    #('#date_of_application').datepicker()
+
+
+
+
     //Hide these <divs> on page_load()
     var hashes = window.location.hash.substr(1);
     $('#person_type').val(hashes);

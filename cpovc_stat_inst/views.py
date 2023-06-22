@@ -6,7 +6,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm
+from .forms import SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry
+
+from .models import SI_Admission, SI_NeedRiskAssessment, SI_NeedRiskScale, SI_VacancyApp, SI_SocialInquiry
+
+from .functions import convert_date
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -67,13 +71,48 @@ def si_home(request):
     
 
 def SI_admissions(request, id):
-    data = request.GET
+
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    print(dir(request))
+
+    child = person_id.values()[0]
 
     form = SIAdmission()
     try:
+        if(request.method == "POST"):
+            data = request.POST
 
+            print(data)
+            SI_Admission(
+                person_id = data.get('person_id'),
+                institution_type = data.get('institution_type'),
+                date_of_admission = convert_date(data.get('date_of_admission')),
+                current_year_of_school = data.get('current_year_of_school'),
+                type_of_entry = data.get('type_of_entry'),
+                referral_source = data.get('referral_source'),
+                child_category = data.get('child_category'),
+                abused_child_desc = data.get('abused_child_desc'),
+                referral_source_others = data.get('referral_source_others'),
+                referrer_name = data.get('referrer_name'),
+                referrer_address = data.get('referrer_address'),
+                referrer_phone = data.get('referrer_phone'),
+                not_contact_child = data.get('not_contact_child'),
+                name_not_contact_child = data.get('name_not_contact_child'),
+                relationship_to_child_not_contact_child = data.get('relationship_to_child_not_contact_child'),
+                consent_form_signed = data.get('consent_form_signed'),
+                commital_court_order = data.get('commital_court_order'),
+                school_name = data.get('school_name'),
+                health_status = data.get('health_status'),
+                special_needs = data.get('special_needs'),
+                workforce_id = data.get('workforce_id'),
+                audit_date = convert_date(data.get('audit_date'))   
+            ).save()
+
+            HttpResponseRedirect(reverse(si_home))
         context = {
-            'form': form
+            'form': form,
+            'child': child
         }
         return render(request,'stat_inst/admission.html',context)
     
@@ -125,14 +164,45 @@ def SI_vacancyapplication(request, id):
 
 def SI_vacancyconfirmation(request, id):
     data = request.GET
+    try:
+        pass
+    except Exception as e:
+        raise e
+    
+def SI_social_inquiry(request, id):
+    data = request.GET
 
-    form = SIVacancyConfirm()
+    form = SISocialInquiry()
     try:
 
         context = {
             'form': form
         }
-        return render(request,'stat_inst/vacancy_confirm.html',context)
+        return render(request,'stat_inst/social_inquiry.html',context)
+    
+    except Exception as e:
+        raise e
+    
+
+def SI_child_view(request, id):
+    data = request.POST
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
+
+    creg = {}
+    creg['is_active '] = True
+
+    form = ""
+    try:
+        if request.method == 'POST':
+            pass
+
+        context = {
+            'form': form,
+            'child': child
+        }
+        return render(request,'stat_inst/view_child.html',context)
     
     except Exception as e:
         raise e
