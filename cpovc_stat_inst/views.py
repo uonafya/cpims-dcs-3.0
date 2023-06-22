@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission, SIChildIdentification
+from .forms import *
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -92,6 +92,63 @@ def SI_childIdentification(request,person_id):
             'form': form
         }
         return render(request, 'stat_inst/childIdentification.html', context)
+
+    except Exception as e:
+        raise e
+
+def SI_medicalassesment(request,person_id):
+    data = request.POST
+
+    form = MedicalAssesmentForm()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request, 'stat_inst/medicalassesmentform.html', context)
+
+    except Exception as e:
+        raise e
+
+def SI_individualCarePlan(request,person_id):
+    data = request.POST
+
+    form = IndividualCarePlanForm()
+    try:
+
+        context = {
+            'person_id': person_id,
+            'form': form
+        }
+        return render(request, 'stat_inst/individualtreatmentplan.html', context)
+
+    except Exception as e:
+        raise e
+def SI_LeaveOfAbscence(request,person_id):
+    data = request.POST
+
+    form = LeaveOfAbsenceForm()
+    try:
+
+        context = {
+            'person_id': person_id,
+            'form': form
+        }
+        return render(request, 'stat_inst/leaveofabsenceassesmentform.html', context)
+
+    except Exception as e:
+        raise e
+def SI_RemandHomeEscape(request,person_id):
+    data = request.POST
+
+    form = RemandHomeEscapeForm()
+    try:
+
+        context = {
+            'person_id': person_id,
+            'form': form
+        }
+        return render(request, 'stat_inst/escapeform.html', context)
 
     except Exception as e:
         raise e

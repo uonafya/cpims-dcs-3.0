@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.forms.widgets import RadioSelect
+from django.forms.widgets import RadioSelect,TimeInput,DateInput,TextInput,DateInput
 
-from cpovc_main.functions import get_list, get_org_units_list
+from cpovc_main.functions import get_list, get_org_units_list,get_lists
 from cpovc_registry.functions import (
     get_geo_list,
     get_all_geo_list,
@@ -14,6 +14,74 @@ from cpovc_registry.models import RegOrgUnit
 # from .functions import get_questions
 # Added for CTiP
 from cpovc_main.country import OCOUNTRIES
+person_type_list = get_list('person_type_id', 'Please Select Type')
+school_level_list = get_list('school_level_id', 'Please Select Level')
+admission_list = get_list('school_type_id', 'Please Select one')
+disability_list = get_list('disability_type_id', 'Please Select one')
+severity_list = get_list('severity_level_id', 'Please Select one')
+admission_type_list = get_list('admission_type_id', 'Please Select')
+admission_reason_list = get_list('care_admission_reason_id')
+domain_list = get_list('afc_domain_id', 'Please Select')
+list_sex_id = get_list('sex_id')
+list_relationship = get_list('relationship_type_id', 'Please Select')
+consent_forms_list = get_list('consent_forms', 'Please Select')
+# new listings
+list_other_adms = get_list('other_form_admission', 'Please Select')
+list_other_vulnerability = get_list(
+    'vulnerability_at_admission', 'Please Select')
+list_relationship = get_list('relationship_type_id', 'Please Select')
+list_education_perf = get_list('education_performance')
+list_marriage_type = get_list('parents_marriage_type', 'Please Select')
+list_items_count = get_list('items_count_id', 'Please Select')
+list_special_support = get_list('special_support')
+list_community_services = get_list('community_services')
+list_school_category = get_list('school_category_id', 'Please Select')
+list_range_level = get_list('attachment_level', 'Please Select')
+list_range_level_rdo = get_lists(['attachment_level', 'na_option'])
+list_child_exhibits = get_list('child_exhibits')
+list_income_range = get_list('income_range', 'Please Select')
+list_employment_type = get_list('employment_type', 'Please Select')
+list_closure_reasons = get_list('case_closure_reasons', 'Please Select')
+list_case_transfer_ids = get_list('case_transfer_ids', 'Please Select')
+list_satisfied_level = get_list('satisfied_level_ids')
+list_feeling_level = get_list('feeling_level_ids')
+list_referral_reasons = get_list('referral_reasons_ids', 'Please Select')
+list_referral_documents = get_list('referral_documents_ids')
+list_case_plan_responsible = get_list('case_plan_responsible', 'Please Select')
+psearch_criteria_list = get_list('psearch_criteria_type_id', 'Select Criteria')
+org_units_list = get_org_units_list('Please select Unit')
+classes_list = get_list('class_level_id', 'Please Select')
+
+all_list = get_all_geo_list()
+county_list = get_geo_list(all_list, 'GPRV')
+sub_county_list = get_geo_list(all_list, 'GDIS')
+ward_list = get_geo_list(all_list, 'GWRD')
+
+
+disability_actions = get_list('disability_actions')
+list_family_types = get_list('family_type_id', 'Please Select')
+
+YESNO_UN_CHOICES = get_list('yesno_una')
+list_disability_assessment = get_list('disability_assessment_id')
+list_disability_handling = get_list('disability_handling_id')
+list_attachment_assessment = get_list(
+    'attachment_assessment_id', 'Please select')
+
+
+YESNO_CHOICES = get_list('yesno_id')
+YESNO_UK_CHOICES = get_lists(['yesno_id', 'uk_option'])
+care_option_list = get_list(
+    'alternative_family_care_type_id', 'Please Select Care')
+
+disability_degree = (('0', '0'), ('1', '1'), ('2', '2'),
+                     ('3', '3'), ('4', '4'), )
+
+YESNONA_choices = get_list('yesno_na')
+list_sex_other_id = get_list('sex_id', 'Please Select')
+list_ratings = get_list('ratings_id')
+list_frequency = get_lists(['period_frequency_id', 'na_option'])
+
+
 
 
 ENTRY_CHOICES = (
@@ -29,10 +97,7 @@ DIFFICULTY=(("No", "No"), ("Some difficulty", "Yes, some difficulty"),
             ("A lot of difficulty", "Yes, a lot of difficulty"),
             ("Cannot do it at all", "Cannot do it at all"))
 
-YES_NO_CHOICES = (
-    ("yes", "Yes"),
-    ("no", "No"),
-)
+YES_NO_CHOICES = get_list('yesno_id')
 
 REFERRAL_SOURCES = (
     ("Parent", "Parent"),
@@ -67,68 +132,22 @@ ADMISSION_TYPE = (
     ("readmission_on_relapse", "readmission on relapse"),
     ("transfer_in", "transfer in"),
 )
-RELIGION= (("Christian", "Christian"),
-            ("Muslim", "Muslim"),
-            ("Hindu", "Hindu"))
-REASON_FOR_ADMISSION=(("School/education access", "School/education access"),
-                                                               ("Poverty/family vulnerability", "Poverty/family vulnerability"),
-                                                               ("Abuse or neglect at home", "Abuse or neglect at home"),
-                                                               ("Child abandoned", "Child abandoned"),
-                                                               ("Child on the street", "Child on the street"),
-                                                               ("HIV & AIDS or other chronic illness", "HIV & AIDS or other chronic illness"),
-                                                               ("Special needs (disability)", "Special needs (disability)"),
-                                                               ("Child victim of human trafficking", "Child victim of human trafficking"),
-                                                               ("Orphan", "Orphan"),
-                                                               ("Child lost and found", "Child lost and found"),
-                                                               ("Separated/unaccompanied", "Separated/unaccompanied"),
-                                                               ("Child of imprisoned parent", "Child of imprisoned parent"),
-                                                               ("Other", "Other"))
-ALTERNATIVE_CARE=(
-    ("Kinship Care", "Kinship Care"),
-    ("Foster Care", "Foster Care"),
-    ("Temporary Shelter", "Temporary Shelter"),
-    ("CCI", "CCI"),
-    ("SCI", "SCI"),
-    ("Supported child-headed household", "Supported child-headed household"),
-    ("Supported Independent Living", "Supported Independent Living"),
-    ("Guardianship", "Guardianship"),
-    ("Kafaalah", "Kafaalah"),
-    ("Other", "Other")
-                  )
 
-YES_NO_NA_CHOICES=(
-    ("Yes", "Yes"),
-    ("No", "No"),
-    ("unsure", "Unsure"),
-    ("N/A", "N/A")
-)
-OTHER_FORMS_OF_ADMISSION=(
-    ("Self-referral", "Self-referral"),
-    ("Abandoned at CCI", "Abandoned at CCI")
-)
-EXHIBITED_BEHAVIOR=(
-        ("self_harm", "Self harm"),
-        ("history_of_abuse", "Known history of abuse"),
-        ("inappropriate_sexual_behavior", "Inappropriate sexual behaviour"),
-        ("substance_abuse", "Drug and/or substance abuse"),
-        ("potential_abuse_symptoms", "Displays potential symptoms of abuse"),
-        ("emotional_distress", "Displays signs of emotional distress"),
-        ("risk_behavior", "Exhibits risk"),
-        ("change_in_behavior", "Any unexplained recent change in behavior")
-)
-LEVEL=(
-    ("high", "High"),
-    ("medium", "Medium"),
-    ("low", "Low"))
-AGE_DYNAMICS=(
-    ("older", "Much older"),
-    ("younger", "Much younger"),
-    ("same", "Same age")
-)
-QUALITY=(
-   ("positive", "Positive"),
-   ("negative", "Negative")
-)
+GOAL = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+]
+
+SUB_GOAL = [
+    ('1-1', '1-1'),
+    ('1-2', '1-2'),
+    ('2-1', '1-1'),
+    ('2-2', '2-2'),
+    ('3-1', '3-1'),
+    ('3-2', '3-2')
+]
+
 
 class SIPreAdmission(forms.Form):
     pass
@@ -192,7 +211,11 @@ class SIAdmission(forms.Form):
         ),
     )
     name_not_contact_child = forms.CharField(max_length=100)
-    relationship_to_child_not_contact_child = forms.CharField(max_length=100)
+    relationship_to_child_not_contact_child = forms.ChoiceField(
+        choices=list_relationship,
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'form-control'}))
     consent_form_signed = forms.ChoiceField(
         choices=YES_NO_CHOICES,
         required=False,
@@ -225,290 +248,355 @@ class SIAdmission(forms.Form):
     )
 
 
-class SIChildIdentification(forms.Form):
-    case_number = forms.CharField(label="Child’s Case Number")
 
-    current_location = forms.CharField(label="Child’s Current Location")
+class MedicalAssesmentForm(forms.Form):
+    name = forms.CharField(label='Name')
+    age = forms.IntegerField(label='Age')
+    sex = forms.ChoiceField(label='Sex',
+                            choices=list_sex_id,
+                            widget=forms.RadioSelect)
 
-    assessment_started = forms.DateField(label="Date Assessment Started")
+    height = forms.DecimalField(label='Height',
+                                widget=forms.NumberInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    blood_pressure = forms.CharField(label='Blood Pressure',
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    weight = forms.DecimalField(label='Weight',
+                                widget=forms.NumberInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    pulse_rate = forms.IntegerField(label='Pulse Rate',
+                                    widget=forms.NumberInput(
+                                        attrs={'placeholder': _(''),
+                                               'class': 'form-control',
+                                               'data-parsley-required': "false"}))
 
-    first_name = forms.CharField(label="First name")
+    physical_disability = forms.ChoiceField(label='Any Physical Disability',
+                                            choices=disability_list,
+                                            widget=forms.ChoiceField)
 
-    middle_name = forms.CharField(label="Middle name")
 
-    surname = forms.CharField(label="Surname")
+    current_illness = forms.ChoiceField(label='Any Current Illness',
+                                      choices=YES_NO_CHOICES,
+                                      widget=forms.RadioSelect )
 
-    nickname = forms.CharField(label="Nickname or likes to be called")
+    current_medications = forms.CharField(label='List Current Medications',
+                                          widget=forms.TextInput(
+                                          attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
 
-    sex = forms.ChoiceField(label="Sex", choices=GENDER)
+    tb_treatment_or_exposure = forms.ChoiceField (label='Any treatment for TB or exposure to a TB patient?',
+                                                  choices=YES_NO_CHOICES,
+                                                  widget=forms.RadioSelect
 
-    dob_day = forms.IntegerField(label="Date of birth (DOB): DD", min_value=1, max_value=31)
+                                               )
 
-    dob_month = forms.IntegerField(label="Date of birth (DOB): MM", min_value=1, max_value=12)
+    mental_illness_history = forms.ChoiceField(label='Any history of mental illness in self or family',
+                                             choices=YES_NO_CHOICES,
+                                             widget=forms.RadioSelect)
 
-    dob_year = forms.IntegerField(label="Date of birth (DOB): YYYY", min_value=1900, max_value=2100)
+    sleep_problems = forms.ChoiceField(label='Any sleep problems?',
+                                       choices=YES_NO_CHOICES,
+                                       widget=forms.RadioSelect)
+    sleep_problems_description = forms.CharField(label='Elaborate',
+                                                 widget=forms.TextInput(
+                                                     attrs={'placeholder': _(''),
+                                                            'class': 'form-control',
+                                                            'data-parsley-required': "false"}))
 
-    age_estimate = forms.IntegerField(label="Estimate of approximate age if DOB unknown")
+    seizures_history = forms.ChoiceField(label='Any history of seizures?',
+                                         choices=YES_NO_CHOICES,
+                                         widget=forms.RadioSelect)
+    seizures_duration = forms.CharField(label='List current duration',
+                                        widget=forms.TextInput(
+                                        attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+    seizures_medications = forms.CharField(label='List current medications',
+                                           widget=forms.TextInput(
+                                               attrs={'placeholder': _(''),
+                                                      'class': 'form-control',
+                                                      'data-parsley-required': "false"}))
 
-    current_age_months = forms.IntegerField(label="Current age (Months)", min_value=0)
-
-    current_age_years = forms.IntegerField(label="Current age (Years)", min_value=0)
-
-    birth_registered = forms.BooleanField(label="Birth registered?", required=False)
-
-    birth_registration_number = forms.CharField(label="Birth registration no.", required=False)
-
-    place_of_birth_county = forms.CharField(label="Place of birth: County")
-
-    place_of_birth_subcounty = forms.CharField(label="Place of birth: Subcounty")
-
-    place_of_birth_village = forms.CharField(label="Place of birth: Village")
-
-    place_of_birth_not_known = forms.BooleanField(label="Not known", required=False)
-    height = forms.CharField(label="Height")
-
-    weight = forms.CharField(label="Weight")
-
-    complexion = forms.CharField(label="Complexion")
-
-    ethnicity = forms.CharField(label="Ethnicity")
-
-    religion = forms.ChoiceField(label="Religion",
-                                 choices=RELIGION)
-
-    distinguishing_features = forms.CharField(label="Distinguishing physical features (e.g., scar or birth mark)")
-
-    languages = forms.CharField(label="Languages")
-
-    #DIFFUCULTY SECTION
-    vision_difficulty = forms.ChoiceField(label="Does the child have difficulty seeing, even if wearing glasses?",
-                                          choices=DIFFICULTY)
-    hearing_difficulty = forms.ChoiceField(label="Does the child have difficulty hearing, even if using a hearing aid?",
-                                           choices=DIFFICULTY)
-    walking_difficulty = forms.ChoiceField(label="Does the child have difficulty walking or climbing steps?",
-                                           choices=DIFFICULTY)
-    memory_difficulty = forms.ChoiceField(label="Does the child have difficulty remembering or concentrating?",
-                                          choices=DIFFICULTY)
-    self_care_difficulty = forms.ChoiceField(label="Does the child have difficulty with self-care (e.g., washing all over or dressing)?",
-                                             choices=DIFFICULTY)
-    communication_difficulty = forms.ChoiceField(label="Does the child have difficulty communicating (e.g., understanding or being understood by others)?",
-                                                 choices=DIFFICULTY)
-
-    #DETAILS OPF ADMISSION TO CARE
-    date_of_admission = forms.DateField(label="Date of admission")
-    age_at_admission = forms.IntegerField(label="Age of the child at admission")
-    other_forms_of_admission = forms.MultipleChoiceField(label="Other forms of admission",
-                                                        choices=OTHER_FORMS_OF_ADMISSION,
-                                                        widget=forms.CheckboxSelectMultiple)
-    admission_order_issued = forms.ChoiceField(label="Was Admission Order issued?",
-                                               choices=YES_NO_NA_CHOICES)
-    committal_order_number = forms.CharField(label="Committal Order #", required=False)
-    date_of_committal = forms.DateField(label="Date of committal", required=False)
-    referring_person_name = forms.CharField(label="Name of referring person", required=False)
-    referring_person_title = forms.CharField(label="Title of referring person", required=False)
-    referring_person_relationship = forms.CharField(label="Relationship to the child", required=False)
-    referring_person_contact = forms.CharField(label="Contact of referring person", required=False)
-    referring_person_location = forms.CharField(label="Location of referring person", required=False)
-    current_care_provider_name_address = forms.CharField(label="Name and address of current care provider", required=False)
-    current_care_provider_phone = forms.CharField(label="Phone number of current care provider", required=False)
-    current_care_provider_registration_status = forms.CharField(label="Registration status of current care provider",
-                                                                required=False)
-    alternative_care_placement_type = forms.MultipleChoiceField(label="Current Alternative Care Placement Type",
-                                                                choices=ALTERNATIVE_CARE,
-                                                                widget=forms.CheckboxSelectMultiple,
-                                                                required=False)
-    reasons_for_admission = forms.MultipleChoiceField(label="Reasons for admission",
-                                                      choices=REASON_FOR_ADMISSION,
-                                                      widget=forms.CheckboxSelectMultiple,
-                                                      required=False)
-    # New fields
-    cci_types_names = forms.CharField(label="Types and/or names of CCIs",
-                                      widget=forms.Textarea,
+    known_allergy = forms.ChoiceField(label='Any known allergy?',
+                                      choices=YES_NO_CHOICES,
+                                      widget=forms.RadioSelect,
                                       required=False)
+    known_allergy_list = forms.CharField(label='List',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
 
-    child_not_in_institution_vulnerability_type = forms.CharField(label="Type of vulnerability if child not in any institution",
-                                                                  required=False)
+    # Physical Examination
+    general_examination=forms.CharField(label="genral examination",
+                                        widget=forms.Textarea(
+                                            attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
 
-    street_connected_child_location = forms.CharField(label="Location of street connected child",
-                                                      required=False)
+    orientation_time = forms.TimeField(label='Orientation: Time',
+                                           widget=TimeInput(format='%H:%M'))
 
-    child_at_risk_of_separation_location = forms.CharField(label="Location of child at risk of separation",
-                                                           required=False)
+    orientation_date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
 
-    other_vulnerability_type = forms.CharField(label="Other vulnerability type",
-                                               widget=forms.Textarea,
-                                               required=False)
+    orientation_place = forms.CharField(label='Orientation: Place',
+                                        widget=forms.TextInput(
+                                            attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+    orientation_person = forms.CharField(label='Orientation: Person',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    speech = forms.CharField(label='Speech',
+                             widget=forms.TextInput(
+                                 attrs={'placeholder': _(''),
+                                        'class': 'form-control',
+                                        'data-parsley-required': "false"}))
+    visual_acuity_re = forms.CharField(label='Visual Acuity: RE',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    visual_acuity_le = forms.CharField(label='Visual Acuity: LE',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    head_and_neck = forms.CharField(label='Head and Neck',
+                                    widget=forms.TextInput(
+                                        attrs={'placeholder': _(''),
+                                               'class': 'form-control',
+                                               'data-parsley-required': "false"}))
+    ent = forms.CharField(label='ENT',
+                          widget=forms.TextInput(
+                              attrs={'placeholder': _(''),
+                                     'class': 'form-control',
+                                     'data-parsley-required': "false"}))
+    central_nervous_system = forms.CharField(label='Central Nervous System',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    cardiovascular_system = forms.CharField(label='Cardiovascular System',
+                                            widget=forms.TextInput(
+                                                attrs={'placeholder': _(''),
+                                                       'class': 'form-control',
+                                                       'data-parsley-required': "false"}))
+    respiratory_system = forms.CharField(label='Respiratory System',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    git_system = forms.CharField(label='GIT System',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    musculoskeletal_system = forms.CharField(label='Musculoskeletal System',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    reproductive_system = forms.CharField(label='Reproductive System',
+                                          widget=forms.TextInput(
+                                              attrs={'placeholder': _(''),
+                                                     'class': 'form-control',
+                                                     'data-parsley-required': "false"}))
+    skin_condition = forms.CharField(label='Condition of the Skin',
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    dental_condition = forms.ChoiceField(label='Any dental condition?',
+                                         choices=YES_NO_CHOICES,
+                                         widget=forms.RadioSelect,
+                                         required=False)
+    urinalysis = forms.CharField(label='Urinalysis',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    stool_oc = forms.CharField(label='Stool for O/C',
+                               widget=forms.TextInput(
+                                   attrs={'placeholder': _(''),
+                                          'class': 'form-control',
+                                          'data-parsley-required': "false"}))
+    vdrl_test = forms.CharField(label='VDRL Test',
+                                widget=forms.TextInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    pregnancy_test = forms.CharField(label='Pregnancy Test', required=False,
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    covid19_test = forms.CharField(label='COVID-19 Test', required=False,
+                                   widget=forms.TextInput(
+                                       attrs={'placeholder': _(''),
+                                              'class': 'form-control',
+                                              'data-parsley-required': "false"}))
+    hiv_test = forms.CharField(label='HIV Test', required=False,
+                               widget=forms.TextInput(
+                                   attrs={'placeholder': _(''),
+                                          'class': 'form-control',
+                                          'data-parsley-required': "false"}))
+    consent = forms.BooleanField(label='Consent')
+    xray_report = forms.CharField(label='X-Ray Report',
+                                  required=False,
+                                  widget=forms.TextInput(
+                                      attrs={'placeholder': _(''),
+                                             'class': 'form-control',
+                                             'data-parsley-required': "false"}))
+    medical_observations = forms.CharField(label='Any other medical observations or comments by the doctor',
+                                           widget=forms.TextInput(
+                                               attrs={'placeholder': _(''),
+                                                      'class': 'form-control',
+                                                      'data-parsley-required': "false"}))
+    medical_practitioner_certify=forms.CharField(
+                                                 widget=forms.TextInput(
+                                                     attrs={'placeholder': _(''),
+                                                            'class': 'form-control',
+                                                            'data-parsley-required': "false"}))
 
-    living_before_admission_names = forms.CharField(label="Name(s) of person(s) child was living with before admission",
-                                                    widget=forms.Textarea,
-                                                    required=False)
+    medical_practitioner_name = forms.CharField(label='Name of Medical Practitioner',
+                                                widget=forms.TextInput(
+                                                    attrs={'placeholder': _(''),
+                                                           'class': 'form-control',
+                                                           'data-parsley-required': "false"}))
 
-    living_before_admission_phone = forms.CharField(label="Phone number(s) of person(s) child was living with before admission",
-                                                    required=False)
+    medical_practitioner_date = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
 
-    living_before_admission_relationships = forms.CharField(label="Relationship(s) to child of person(s) child was living with before admission",
-                                                            widget=forms.Textarea,
-                                                            required=False)
+class IndividualCarePlanForm(forms.Form):
+    child_name = forms.CharField(label='CHILD NAME',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    admission_no = forms.CharField(label='ADMISSION NO.' ,
+                                   widget=forms.TextInput(
+                                       attrs={'placeholder': _(''),
+                                              'class': 'form-control',
+                                              'data-parsley-required': "false"}))
+    needs_of_the_child = forms.CharField(label='NEEDS OF THE CHILD',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    family_child_risks = forms.CharField(label='FAMILY / CHILD RISKS',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    family_resources = forms.CharField(label='FAMILY RESOURCES',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    starting_date = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
+    ending_date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
+    officers_comment = forms.CharField(label="Officer’s Comment",
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    goal = forms.ChoiceField(label='GOAL',
+                             choices=GOAL,
+                             widget=forms.Select
+                             )
+    sub_goal_action_plan = forms.ChoiceField(label='SUB-GOAL/ACTION PLAN',
+                                             choices=SUB_GOAL,
+                                             widget=forms.Select)
 
-    living_before_admission_in_cci = forms.BooleanField(label="Was this placement in a CCI?", required=False)
+    counsellors_recommendations = forms.CharField(label='COUNSELLORS RECOMMENDATIONS', widget=forms.Textarea)
+    family_conferencing_result = forms.CharField(label='FAMILY CONFERENCING RESULT')
+    family_conferencing_date = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
+    family_conferencing_venue = forms.CharField(label='Venue')
+    family_conferencing_participants = forms.CharField(label='Participants', widget=forms.Textarea)
+    family_conferencing_result = forms.CharField(label='Result',
+                                                 widget=forms.TextInput(
+                                                     attrs={'placeholder': _(''),
+                                                            'class': 'form-control',
+                                                            'data-parsley-required': "false"}))
 
-    living_before_admission_county = forms.CharField(label="County", required=False)
 
-    living_before_admission_subcounty = forms.CharField(label="Subcounty", required=False)
 
-    living_before_admission_location = forms.CharField(label="Location", required=False)
 
-    living_before_admission_sublocation = forms.CharField(label="Sub-location", required=False)
-
-    living_before_admission_village_estate = forms.CharField(label="Village/estate", required=False)
-
-    living_before_admission_landmark = forms.CharField(label="Landmark (e.g. school/church/mosque/market)",
-                                                       required=False)
-    sibling_with_child_now = forms.BooleanField(label="Are there other sibling(s) living with the child now in this form of care?",
-                                                required=False)
-    sibling_with_child_now_names = forms.CharField(label="Name(s) of sibling(s) living with the child now",
-                                                   widget=forms.Textarea,
-                                                   required=False)
-    sibling_in_care_elsewhere = forms.BooleanField(label="Are there other sibling(s) admitted into care elsewhere?",
-                                                   required=False)
-    sibling_in_care_elsewhere_details = forms.CharField(label="Details of sibling(s) admitted into care elsewhere",
-                                                        widget=forms.Textarea,
-                                                        required=False)
-    #STATUS OF FAMILILY
-    name = forms.CharField(label="Name")
-    other_names = forms.CharField(label="Other Names")
-    last_known_location = forms.CharField(label="Last Known Location")
-    phone_number = forms.CharField(label="Phone No.")
-    alive_choices = [
-        ('Y', 'Yes'),
-        ('N', 'No'),
-        ('Unknown', 'Unknown')
-    ]
-    alive = forms.ChoiceField(label="Alive (Y/N/Unknown)", choices=alive_choices)
-    mother = forms.CharField(label="Mother")
-    father = forms.CharField(label="Father")
-    living_together = forms.BooleanField(label="Are mother and father living together?", required=False)
-    mother_current_residence_county = forms.CharField(label="Mother's current residence county", required=False)
-    mother_current_residence_subcounty = forms.CharField(label="Mother's current residence subcounty", required=False)
-    mother_current_residence_location = forms.CharField(label="Mother's current residence location", required=False)
-    mother_current_residence_sublocation = forms.CharField(label="Mother's current residence sub-location", required=False)
-    mother_current_residence_village_estate = forms.CharField(label="Mother's current residence village/estate", required=False)
-    father_current_residence_county = forms.CharField(label="Father's current residence county", required=False)
-    father_current_residence_subcounty = forms.CharField(label="Father's current residence subcounty", required=False)
-    father_current_residence_location = forms.CharField(label="Father's current residence location", required=False)
-    father_current_residence_sublocation = forms.CharField(label="Father's current residence sub-location", required=False)
-    father_current_residence_village_estate = forms.CharField(label="Father's current residence village/estate", required=False)
-    sibling_names = forms.CharField(label="Name(s) of other siblings currently living with caregiver", widget=forms.Textarea, required=False)
-    sibling_nicknames = forms.CharField(label="Nickname(s) of other siblings currently living with caregiver", widget=forms.Textarea, required=False)
-    sibling_last_known_locations = forms.CharField(label="Last known location(s) of other siblings currently living with caregiver", widget=forms.Textarea, required=False)
-    sibling_education_employment = forms.CharField(label="Education / Employment of other siblings currently living with caregiver", widget=forms.Textarea, required=False)
-    sibling_class = forms.CharField(label="Class of other siblings currently living with caregiver", widget=forms.Textarea, required=False)
-    sibling_ages = forms.CharField(label="Age(s) of other siblings currently living with caregiver", widget=forms.Textarea, required=False)
-    relative_names = forms.CharField(label="Name(s) of other relatives", widget=forms.Textarea, required=False)
-    relative_relationships = forms.CharField(label="Relationship to the child", widget=forms.Textarea, required=False)
-    relative_last_known_locations = forms.CharField(label="Last known location(s) of other relatives",
-                                                    widget=forms.Textarea, required=False)
-    relative_phone_numbers = forms.CharField(label="Phone No.(s) of other relatives", widget=forms.Textarea,
-                                             required=False)
-    is_contact_with_family = forms.BooleanField(label="Is there any contact with family?", required=False)
-    contact_person = forms.CharField(label="If yes, who", required=False)
-    last_visit_date = forms.CharField(
-        label="If yes, does the child remember the date (or how long ago) the last visit occurred?", required=False)
-    goes_home_on_school_holidays = forms.BooleanField(label="Does child go home on school holidays?", required=False)
-    family_visits = forms.BooleanField(label="Does family visit?", required=False)
-    family_visit_details = forms.CharField(label="If yes, who, and how often do they visit?", widget=forms.Textarea,
-                                           required=False)
-    expresses_caregiver_preference = forms.BooleanField(label="Does the child express a preference of caregiver?",
-                                                        required=False)
-    #4.CHILD WELLBEING
-    # a)HEALTH AND DEVELOPMENT
-    is_growing_appropriately = forms.CharField(
-        label="Is the child growing appropriately for their age? Describe physical skills and needs, intellectual skills and needs, social skills and needs",
-        widget=forms.Textarea,
-        required=False
-    )
-    medical_history = forms.CharField(
-        label="Any history of medical issues/hospitalization? Frequency? Explain and attach records",
-        widget=forms.Textarea,
-        required=False
-    )
-    has_current_health_condition = forms.BooleanField(label="Any current health conditions?", required=False)
-    current_health_condition = forms.CharField(label="Specify", required=False)
-    has_chronic_health_condition = forms.BooleanField(label="Any chronic health conditions?", required=False)
-    chronic_health_condition = forms.CharField(label="Specify", required=False)
-    is_on_medication = forms.BooleanField(label="Currently on any medication?", required=False)
-    medication_details = forms.CharField(label="If yes, specify", required=False)
-    is_fully_immunized = forms.BooleanField(label="Has the child been fully immunized?", required=False)
-    immunization_reason = forms.CharField(label="If no, what is the reason?", required=False)
-    has_allergy = forms.BooleanField(label="Any allergy?", required=False)
-    allergy_details = forms.CharField(label="If yes, specify", required=False, widget=forms.Textarea)
-    feeding_routine = forms.CharField(label="Feeding routine and special needs", required=False, widget=forms.Textarea)
-    # b) EDUCATION
-
-    previously_attended_school = forms.BooleanField(label="Previously attended any school?", required=False)
-    previous_school_type = forms.ChoiceField(label="If yes, type of school",
-                                             choices=[("public", "Public"), ("private", "Private")], required=False)
-    previous_school_name = forms.CharField(label="Name and location of school", required=False)
-
-    currently_attending_school = forms.BooleanField(label="Child currently attending school?", required=False)
-    current_school_type = forms.ChoiceField(label="If yes, type of school",
-                                            choices=[("public", "Public"), ("private", "Private")], required=False)
-    current_school_name = forms.CharField(label="Name and location of school", required=False)
-    education_level = forms.CharField(label="Current education level", required=False)
-    school_performance = forms.CharField(label="Attendance, performance, extra-curricular activity, and behaviour",
-                                         required=False, widget=forms.Textarea)
-    # c)PSYCHOSOCIAL AND EMOTIONAL WELLBEING
-    friends = forms.CharField(label="Who are the child’s friends?", widget=forms.Textarea, required=False)
-    activities_with_friends = forms.CharField(label="What kinds of things do they do together?", widget=forms.Textarea,
-                                              required=False)
-    interaction_frequency = forms.CharField(label="How often do they interact?", required=False)
-
-    peer_friendship_views = forms.CharField(label="What are the child’s views of these peer friendships?",
-                                            widget=forms.Textarea, required=False)
-    friendship_quality = forms.ChoiceField(label="What is the quality of these friendships?",
-                                           choices=[], required=False)
-    age_dynamics = forms.ChoiceField(label="Are the perceived friends much older, younger, or same age?",
-                                     choices=AGE_DYNAMICS, required=False)
-
-    caregiver_attachment_level = forms.ChoiceField(label="Level of attachment between the child and current caregiver",
-                                                   choices=LEVEL,
-                                                   required=False)
-    caregiver_relationship = forms.CharField(label="Describe the relationship with the current caregiver",
-                                             widget=forms.Textarea, required=False)
-
-    previous_caregiver_attachment_level = forms.ChoiceField(label="Level of attachment to previous primary caregiver",
-                                                            choices=LEVEL, required=False)
-    previous_caregiver_relationship = forms.CharField(
-        label="Describe the relationship with the previous primary caregiver", widget=forms.Textarea, required=False)
-
-    exhibited_behaviors = forms.MultipleChoiceField(label="Does the child exhibit any of the following?", choices=EXHIBITED_BEHAVIOR, widget=forms.CheckboxSelectMultiple, required=False)
-    daily_routine = forms.CharField(label="Daily routine", widget=forms.Textarea, required=False)
-    degree_of_independence = forms.CharField(label="Degree of independence", widget=forms.Textarea, required=False)
-
-    likes = forms.CharField(label="Likes", widget=forms.Textarea, required=False)
-    dislikes = forms.CharField(label="Dislikes", widget=forms.Textarea, required=False)
-    fears = forms.CharField(label="Fears", widget=forms.Textarea, required=False)
-    skills_strengths = forms.CharField(label="Skills / strengths", widget=forms.Textarea, required=False)
-
-     # CHILD PERSPECTIBVE ON REINTERGRATION
-    preference_reunification = forms.ChoiceField(label="Does the child express a preference for reunification/placement?", choices=YES_NO_NA_CHOICES)
-    concerns_reunification = forms.ChoiceField(label="Does the child express concerns about reunification/placement?", choices=YES_NO_CHOICES)
-    concerns_reunification_details = forms.CharField(label="If yes, please specify", widget=forms.Textarea, required=False)
-
-    #Assesemnt CONCLUSION AND ACTION POINTS
-    strengths_resources = forms.CharField(label="Strengths and resources", widget=forms.Textarea, required=False)
-    needs_concerns = forms.CharField(label="Needs or concerns", widget=forms.Textarea, required=False)
-    additional_observations = forms.CharField(label="Additional observations", widget=forms.Textarea, required=False)
-    things_to_achieve = forms.CharField(label="Things to be achieved", widget=forms.Textarea, required=False)
-
-    #SIGNATURE
-    caseworker_name = forms.CharField(label="Caseworker's name", required=False)
-    caseworker_signature = forms.CharField(label="Caseworker's signature", required=False)
-    caseworker_date = forms.DateField(label="Caseworker's date", required=False)
-
-    case_manager_name = forms.CharField(label="Case Manager's name", required=False)
-    case_manager_signature = forms.CharField(label="Case Manager's signature", required=False)
-    case_manager_date = forms.DateField(label="Case Manager's date", required=False)
+class LeaveOfAbsenceForm(forms.Form):
+    name = forms.CharField(label='Name')
+    admission_number = forms.CharField(label='Admission Number')
+    dormitory = forms.CharField(label='Dormitory')
+    class_name = forms.CharField(label='Class')
+    guardian_name = forms.CharField(label='Name and Relationship of Guardian')
+    guardian_relationship = forms.ChoiceField(
+        choices=list_relationship,
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'form-control'}))
+    guardian_address = forms.CharField(label='Address of Guardian')
+    guardian_contact_measures = forms.CharField(label='Measures to Contact Guardian (nearest phone etc.)')
+    leave_period = forms.CharField(label='Period of Leave of Absence')
+    leave_conditions = forms.CharField(label='Conditions to Grant Leave of Absence')
+    child_health_conditions = forms.CharField(label='Mental and Physical Health Conditions of the child')
+    risk_of_escape = forms.CharField(label='Risk of Escape')
+    sco_spo_information = forms.CharField(label='Information from SCO / SPO')
+    relationship_with_guardian = forms.ChoiceField(
+        choices=list_relationship,
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'form-control'}))
+    collecting_sending_guardians = forms.CharField(label='Guardians who Collect/Send Back')
+    good_behavior_at_rs = forms.CharField(label='Good Behavior Maintained at the RS')
+    rule_violations = forms.CharField(label='Rule Violation Committed so far')
+    previous_leave_problem = forms.CharField(label='Problem with Previous Leave')
+    others = forms.CharField(label='Others')
+    personal_officer_opinion = forms.CharField(label='Opinion of Personal Officer')
+    school_committee_decision = forms.CharField(label='Decision by the School Committee')
 
 
 
