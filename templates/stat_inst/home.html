@@ -81,18 +81,14 @@
                        <td>{{ case.case_serial }}</td>
                        <td>{{ case.case_date }}</td>
                        <td>
-                            {% if case.case_level == 2 %}
-                                <a href="{% url 'view_ctip_case' case_id=case.case_id|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
-                            {% elif case.case_level == 1 %}
+                            {% comment %} {% if case.case_level == 2 %} {% endcomment %}
+                                <a href="{% url 'new_si_child_view' '8' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
+                            {% comment %} {% elif case.case_level == 1 %}
                                 <a href="{% url 'new_ctip_case' case_id=case.case_cid|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">Enroll </a>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                         </td>
                    </tr>
-                    <tr>
-                    <td>
-                        <a href="{% url 'view_' case_id=case.case_id|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
-                    </td>
-                    </tr>
+                    
                 {% endfor %}
                 </table>
             </div>

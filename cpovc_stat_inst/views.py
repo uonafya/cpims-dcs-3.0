@@ -6,9 +6,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import (SIAdmission, SICaseReferral, 
-SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits,
- SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry)
+from .forms import (SIAdmission, SICaseReferral, RemandHomeEscape,MedicalAssesmentForm,
+SICertificateofExit, SIRecordofVisits,IndividualCarePlanForm,
+ SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm)
 
 from .models import SI_Admission, SI_NeedRiskAssessment, SI_NeedRiskScale, SI_VacancyApp, SI_SocialInquiry
 
@@ -76,8 +76,6 @@ def SI_admissions(request, id):
 
     person_id = RegPerson.objects.filter(id=id, is_void=False)
 
-    print(dir(request))
-
     child = person_id.values()[0]
 
     form = SIAdmission()
@@ -134,7 +132,7 @@ def SI_childIdentification(request,person_id):
     
 
 
-def si_casereferral(request):
+def si_casereferral(request, id):
     data = request.GET
 
     form = SICaseReferral()
@@ -151,11 +149,15 @@ def si_casereferral(request):
 def SI_needriskform(request, id):
     data = request.GET
     form = SINeedRiskAssessment()
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
 
     try:
 
         context = {
-            'form': form
+            'form': form,
+            'child': child
         }
         return render(request,'stat_inst/needriskform.html',context)
       
@@ -176,7 +178,7 @@ def SI_medicalassesment(request,person_id):
 
     
 
-def si_certificateofexit(request):
+def si_certificateofexit(request, id):
     data = request.GET
 
     form = SICertificateofExit()
@@ -194,29 +196,34 @@ def si_certificateofexit(request):
     except Exception as e:
         raise e
 
-def SI_individualCarePlan(request,person_id):
+def SI_individualCarePlan(request,id):
     data = request.POST
 
     form = IndividualCarePlanForm()
+
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
     try:
 
         context = {
-            'person_id': person_id,
-            'form': form
+            'id': id,
+            'form': form,
+            "child": child
         }
         return render(request, 'stat_inst/individualtreatmentplan.html', context)
 
     except Exception as e:
         raise e
         
-def SI_LeaveOfAbscence(request,person_id):
+def SI_LeaveOfAbscence(request,id):
     data = request.POST
 
     form = LeaveOfAbsenceForm()
     try:
 
         context = {
-            'person_id': person_id,
+            'id': id,
             'form': form
         }
         return render(request, 'stat_inst/leaveofabsenceassesmentform.html', context)
@@ -224,14 +231,14 @@ def SI_LeaveOfAbscence(request,person_id):
     except Exception as e:
         raise e
         
-def SI_RemandHomeEscape(request,person_id):
+def SI_RemandHomeEscape(request,id):
     data = request.POST
 
-    form = RemandHomeEscapeForm()
+    form = RemandHomeEscape()
     try:
 
         context = {
-            'person_id': person_id,
+            'id': id,
             'form': form
         }
         return render(request, 'stat_inst/escapeform.html', context)
@@ -241,15 +248,18 @@ def SI_RemandHomeEscape(request,person_id):
 
 def SI_needriskscale(request, id):
     data = request.GET
-
     form = SINeedRiskScale()
+    context = {
+        "form": form
+    }
+
     return render(request,'stat_inst/needriskscale.html',context)
     
 
-def si_remandhomeescape(request):
+def si_remandhomeescape(request, id):
     data = request.GET
 
-    form = SIRemandHomeEscape()
+    form = RemandHomeEscape()
     context = {
             'form': form
         }
@@ -260,11 +270,17 @@ def SI_vacancyapplication(request, id):
     data = request.GET
 
     form = SIVacancyApp()
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    print(dir(request))
+
+    child = person_id.values()[0]
 
     try:
 
         context = {
-            'form': form
+            'form': form,
+            "child": child
         }    
 
         return render(request,'stat_inst/vacancy_app.html',context)    
@@ -272,7 +288,7 @@ def SI_vacancyapplication(request, id):
         raise e
 
 
-def si_recordofvisits(request):
+def si_recordofvisits(request, id):
     data = request.GET
 
     form = SIRecordofVisits()
@@ -286,7 +302,7 @@ def si_recordofvisits(request):
     except Exception as e:
         raise e
     
-def si_familyconference(request): 
+def si_familyconference(request, id): 
     data = request.GET
 
     form = SIFamilyConference()
@@ -307,11 +323,15 @@ def SI_social_inquiry(request, id):
     data = request.GET
 
     form = SISocialInquiry()
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
 
     try:
 
         context = {
-            'form': form
+            'form': form, 
+            'child': child
         }
 
         return render(request,'stat_inst/social_inquiry.html',context)
@@ -319,7 +339,7 @@ def SI_social_inquiry(request, id):
     except Exception as e:
         raise e
 
-def si_releaseform(request): 
+def si_releaseform(request, id): 
     data = request.GET
 
     form = SIReleaseForm()
@@ -333,7 +353,7 @@ def si_releaseform(request):
     except Exception as e:
         raise e
 
-def si_childprofile(request): 
+def si_childprofile(request, id): 
     data = request.GET
 
     form = SIChildProfile()

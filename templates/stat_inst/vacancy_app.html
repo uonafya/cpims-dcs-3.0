@@ -69,7 +69,7 @@
                                     <div id="" class="col-md-2">
                                         <div class="form-group block1">
                                             <label for="previous_institution">CPIMS ID</label><br>
-                                            ####
+                                            {{child.id}}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
@@ -77,19 +77,19 @@
                                     <div class="col-md-2">
                                         <div id="dob_div" class="form-group">
                                             <label for="prev_inst_release_date">NAME </label><br>
-                                            ####
+                                            {{child.first_name}}  {{child.surname}}  {{child.other_names}}
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div id="dob_div" class="form-group">
                                             <label for="prev_inst_release_date">Age </label><br>
-                                            ####
+                                            {{ child.date_of_birth}}
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div id="dob_div" class="form-group">
                                             <label for="prev_inst_release_date">Sex </label><br>
-                                            ####
+                                            {{child.sex_id}}
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -190,7 +190,7 @@
                                 <label class="control-label col-md-4 col-sm-4"></label>
                                 <div class="col-md-6 col-sm-6">
                                     <button type="submit" class="btn btn-primary" value="submit" id="s1">Submit</button>
-                                    <a href="{% url 'SI_home' %}">
+                                    <a href="{% url 'new_si_child_view' child.id %}">
                                     <button type="button" class="btn btn-default">Cancel</button>
                                     </a>
                                 </div>

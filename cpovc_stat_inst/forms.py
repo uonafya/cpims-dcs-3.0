@@ -876,7 +876,7 @@ class SICaseReferral(forms.Form):
                'readonly': 'true',
                'id': 'file_name'}))
     
-class SIRemandHomeEscape(forms.Form):
+class RemandHomeEscape(forms.Form):
     admission_no = forms.CharField(max_length=100)
     id_no = forms.CharField(max_length=100)
     court_file_no = forms.CharField(max_length=100)
@@ -1770,4 +1770,245 @@ class SISocialInquiry(forms.Form):
         ),
     )
 
+class MedicalAssesmentForm(forms.Form):
+    name = forms.CharField(label='Name')
+    age = forms.IntegerField(label='Age')
+    sex = forms.ChoiceField(label='Sex',
+                            choices=list_sex_id,
+                            widget=forms.RadioSelect)
+
+    height = forms.DecimalField(label='Height',
+                                widget=forms.NumberInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    blood_pressure = forms.CharField(label='Blood Pressure',
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    weight = forms.DecimalField(label='Weight',
+                                widget=forms.NumberInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    pulse_rate = forms.IntegerField(label='Pulse Rate',
+                                    widget=forms.NumberInput(
+                                        attrs={'placeholder': _(''),
+                                               'class': 'form-control',
+                                               'data-parsley-required': "false"}))
+
+    physical_disability = forms.ChoiceField(label='Any Physical Disability',
+                                            choices=disability_list,
+                                            widget=forms.ChoiceField)
+
+
+    current_illness = forms.ChoiceField(label='Any Current Illness',
+                                      choices=YES_NO_CHOICES,
+                                      widget=forms.RadioSelect )
+
+    current_medications = forms.CharField(label='List Current Medications',
+                                          widget=forms.TextInput(
+                                          attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+
+    tb_treatment_or_exposure = forms.ChoiceField (label='Any treatment for TB or exposure to a TB patient?',
+                                                  choices=YES_NO_CHOICES,
+                                                  widget=forms.RadioSelect
+
+                                               )
+
+    mental_illness_history = forms.ChoiceField(label='Any history of mental illness in self or family',
+                                             choices=YES_NO_CHOICES,
+                                             widget=forms.RadioSelect)
+
+    sleep_problems = forms.ChoiceField(label='Any sleep problems?',
+                                       choices=YES_NO_CHOICES,
+                                       widget=forms.RadioSelect)
+    sleep_problems_description = forms.CharField(label='Elaborate',
+                                                 widget=forms.TextInput(
+                                                     attrs={'placeholder': _(''),
+                                                            'class': 'form-control',
+                                                            'data-parsley-required': "false"}))
+
+    seizures_history = forms.ChoiceField(label='Any history of seizures?',
+                                         choices=YES_NO_CHOICES,
+                                         widget=forms.RadioSelect)
+    seizures_duration = forms.CharField(label='List current duration',
+                                        widget=forms.TextInput(
+                                        attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+    seizures_medications = forms.CharField(label='List current medications',
+                                           widget=forms.TextInput(
+                                               attrs={'placeholder': _(''),
+                                                      'class': 'form-control',
+                                                      'data-parsley-required': "false"}))
+
+    known_allergy = forms.ChoiceField(label='Any known allergy?',
+                                      choices=YES_NO_CHOICES,
+                                      widget=forms.RadioSelect,
+                                      required=False)
+    known_allergy_list = forms.CharField(label='List',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+
+    # Physical Examination
+    general_examination=forms.CharField(label="genral examination",
+                                        widget=forms.Textarea(
+                                            attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+
+    orientation_time = forms.TimeField(label='Orientation: Time',
+                                           widget=TimeInput(format='%H:%M'))
+
+    orientation_date = forms.DateField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
+
+    orientation_place = forms.CharField(label='Orientation: Place',
+                                        widget=forms.TextInput(
+                                            attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+    orientation_person = forms.CharField(label='Orientation: Person',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    speech = forms.CharField(label='Speech',
+                             widget=forms.TextInput(
+                                 attrs={'placeholder': _(''),
+                                        'class': 'form-control',
+                                        'data-parsley-required': "false"}))
+    visual_acuity_re = forms.CharField(label='Visual Acuity: RE',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    visual_acuity_le = forms.CharField(label='Visual Acuity: LE',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    head_and_neck = forms.CharField(label='Head and Neck',
+                                    widget=forms.TextInput(
+                                        attrs={'placeholder': _(''),
+                                               'class': 'form-control',
+                                               'data-parsley-required': "false"}))
+    ent = forms.CharField(label='ENT',
+                          widget=forms.TextInput(
+                              attrs={'placeholder': _(''),
+                                     'class': 'form-control',
+                                     'data-parsley-required': "false"}))
+    central_nervous_system = forms.CharField(label='Central Nervous System',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    cardiovascular_system = forms.CharField(label='Cardiovascular System',
+                                            widget=forms.TextInput(
+                                                attrs={'placeholder': _(''),
+                                                       'class': 'form-control',
+                                                       'data-parsley-required': "false"}))
+    respiratory_system = forms.CharField(label='Respiratory System',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    git_system = forms.CharField(label='GIT System',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    musculoskeletal_system = forms.CharField(label='Musculoskeletal System',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    reproductive_system = forms.CharField(label='Reproductive System',
+                                          widget=forms.TextInput(
+                                              attrs={'placeholder': _(''),
+                                                     'class': 'form-control',
+                                                     'data-parsley-required': "false"}))
+    skin_condition = forms.CharField(label='Condition of the Skin',
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    dental_condition = forms.ChoiceField(label='Any dental condition?',
+                                         choices=YES_NO_CHOICES,
+                                         widget=forms.RadioSelect,
+                                         required=False)
+    urinalysis = forms.CharField(label='Urinalysis',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    stool_oc = forms.CharField(label='Stool for O/C',
+                               widget=forms.TextInput(
+                                   attrs={'placeholder': _(''),
+                                          'class': 'form-control',
+                                          'data-parsley-required': "false"}))
+    vdrl_test = forms.CharField(label='VDRL Test',
+                                widget=forms.TextInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    pregnancy_test = forms.CharField(label='Pregnancy Test', required=False,
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    covid19_test = forms.CharField(label='COVID-19 Test', required=False,
+                                   widget=forms.TextInput(
+                                       attrs={'placeholder': _(''),
+                                              'class': 'form-control',
+                                              'data-parsley-required': "false"}))
+    hiv_test = forms.CharField(label='HIV Test', required=False,
+                               widget=forms.TextInput(
+                                   attrs={'placeholder': _(''),
+                                          'class': 'form-control',
+                                          'data-parsley-required': "false"}))
+    consent = forms.BooleanField(label='Consent')
+    xray_report = forms.CharField(label='X-Ray Report',
+                                  required=False,
+                                  widget=forms.TextInput(
+                                      attrs={'placeholder': _(''),
+                                             'class': 'form-control',
+                                             'data-parsley-required': "false"}))
+    medical_observations = forms.CharField(label='Any other medical observations or comments by the doctor',
+                                           widget=forms.TextInput(
+                                               attrs={'placeholder': _(''),
+                                                      'class': 'form-control',
+                                                      'data-parsley-required': "false"}))
+    medical_practitioner_certify=forms.CharField(
+                                                 widget=forms.TextInput(
+                                                     attrs={'placeholder': _(''),
+                                                            'class': 'form-control',
+                                                            'data-parsley-required': "false"}))
+
+    medical_practitioner_name = forms.CharField(label='Name of Medical Practitioner',
+                                                widget=forms.TextInput(
+                                                    attrs={'placeholder': _(''),
+                                                           'class': 'form-control',
+                                                           'data-parsley-required': "false"}))
+
+    medical_practitioner_date = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Select date'),
+                   'class': 'form-control',
+                   'data-parsley-notfuturedate': "dd-M-yy",
+                   'id': 'datepicker',
+                   'data-parsley-group': 'primary'}))
 
