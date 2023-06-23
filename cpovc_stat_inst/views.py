@@ -294,7 +294,7 @@ def si_familyconference(request):
             'form': form
         }
 
-     return render(request,'stat_inst/family_conference.html',context)
+    return render(request,'stat_inst/family_conference.html',context)
 
 def SI_vacancyconfirmation(request, id):
     data = request.GET
