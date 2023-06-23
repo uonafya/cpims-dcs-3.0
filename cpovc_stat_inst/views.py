@@ -6,11 +6,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-from .forms import SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry
+
+from .forms import (SIAdmission, SICaseReferral, 
+SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits,
+ SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry)
 
 from .models import SI_Admission, SI_NeedRiskAssessment, SI_NeedRiskScale, SI_VacancyApp, SI_SocialInquiry
 
 from .functions import convert_date
+
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -120,9 +124,23 @@ def SI_admissions(request, id):
         raise e
     
 
-def SI_needriskform(request, id):
+
+def si_casereferral(request):
     data = request.GET
 
+    form = SICaseReferral()
+    try:
+
+        context = {
+            'form': form
+        }
+
+        return render(request,'stat_inst/case_referral.html',context)    
+    except Exception as e:
+        raise e
+
+def SI_needriskform(request, id):
+    data = request.GET
     form = SINeedRiskAssessment()
     try:
 
@@ -130,37 +148,83 @@ def SI_needriskform(request, id):
             'form': form
         }
         return render(request,'stat_inst/needriskform.html',context)
+
     
     except Exception as e:
         raise e
     
-def SI_needriskscale(request, id):
+
+def si_certificateofexit(request):
     data = request.GET
 
-    form = SINeedRiskScale()
+    form = SICertificateofExit()
     try:
 
         context = {
             'form': form
         }
-        return render(request,'stat_inst/needriskscale.html',context)
+
+        return render(request,'stat_inst/certificate_of_exit.html',context)
     
     except Exception as e:
         raise e
+
+def SI_needriskscale(request, id):
+    data = request.GET
+
+    form = SINeedRiskScale()
+    return render(request,'stat_inst/needriskscale.html',context)
+    
+
+def si_remandhomeescape(request):
+    data = request.GET
+
+    form = SIRemandHomeEscape()
+    context = {
+            'form': form
+        }
+
+    return render(request,'stat_inst/remand_home_escape.html',context)  
     
 def SI_vacancyapplication(request, id):
     data = request.GET
 
     form = SIVacancyApp()
+
+    try:
+
+        context = {
+            'form': form
+        }    
+
+        return render(request,'stat_inst/vacancy_app.html',context)    
+    except Exception as e:
+        raise e
+
+
+def si_recordofvisits(request):
+    data = request.GET
+
+    form = SIRecordofVisits()
     try:
 
         context = {
             'form': form
         }
-        return render(request,'stat_inst/vacancy_app.html',context)
+        return render(request,'stat_inst/record_of_visits.html',context)
     
     except Exception as e:
         raise e
+    
+def si_familyconference(request): 
+    data = request.GET
+
+    form = SIFamilyConference()
+    context = {
+            'form': form
+        }
+
+     return render(request,'stat_inst/family_conference.html',context)
 
 def SI_vacancyconfirmation(request, id):
     data = request.GET
@@ -173,12 +237,42 @@ def SI_social_inquiry(request, id):
     data = request.GET
 
     form = SISocialInquiry()
+
     try:
 
         context = {
             'form': form
         }
+
         return render(request,'stat_inst/social_inquiry.html',context)
+    
+    except Exception as e:
+        raise e
+
+def si_releaseform(request): 
+    data = request.GET
+
+    form = SIReleaseForm()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/release_form.html',context)
+    
+    except Exception as e:
+        raise e
+
+def si_childprofile(request): 
+    data = request.GET
+
+    form = SIChildProfile()
+    try:
+
+        context = {
+            'form': form
+        }
+        return render(request,'stat_inst/change_in_profile.html',context)        
     
     except Exception as e:
         raise e
