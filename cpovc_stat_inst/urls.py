@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.si_home, name='SI_home'),
     # path('new/<uuid:case_id>/', views.SI_admissions, name='new_si_admit'),
+
     path('new/<uuid:person_id>/', views.SI_admissions, name='new_si_admit'),
     path('case_refer', views.si_casereferral, name='SI_casereferral'),
     path('exit_certificate', views.si_certificateofexit, name='SI_certificateofexit'),
@@ -13,4 +14,15 @@ urlpatterns = [
     path('family_conference', views.si_familyconference, name='SI_familyconference'),
     path('release_form', views.si_releaseform, name='SI_releaseform'), 
     path('child_profile', views.si_childprofile, name='SI_childprofile'),
+
+    path('view/<int:id>/', views.SI_child_view, name='new_si_child_view'),
+
+    path('new/<int:id>/', views.SI_admissions, name='new_si_admit'),
+    path('needriskform/<int:id>/', views.SI_needriskform, name='new_si_riskneedform'),    
+    path('needriskscale/<int:id>/', views.SI_needriskscale, name='new_si_riskneedscale'),
+
+    path('vacancy/<int:id>/', views.SI_vacancyapplication, name='vacancy_app'),
+    path('confirmation/<int:id>/', views.SI_vacancyconfirmation, name='vacancy_confirm'),
+    path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
+
 ]
