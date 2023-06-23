@@ -7,6 +7,12 @@ urlpatterns = [
     # path('new/<uuid:case_id>/', views.SI_admissions, name='new_si_admit'),
 
     path('new/<uuid:person_id>/', views.SI_admissions, name='new_si_admit'),
+
+    path('medical-assessment/<uuid:person_id>/', views.SI_medicalassesment, name='medical_assessment_form'),
+    path('individual-care-plan/<uuid:person_id>/', views.SI_individualCarePlan, name='individual_care_plan_form'),
+    path('leave_of_abscence/<uuid:person_id>/', views.SI_LeaveOfAbscence, name='individual_care_plan_form'),
+    path('remand_home_escape/<uuid:person_id>/', views.SI_RemandHomeEscape, name='individual_care_plan_form'),
+
     path('case_refer', views.si_casereferral, name='SI_casereferral'),
     path('exit_certificate', views.si_certificateofexit, name='SI_certificateofexit'),
     path('remand_home_escape', views.si_remandhomeescape, name='SI_remandhomeescape'),
@@ -24,5 +30,6 @@ urlpatterns = [
     path('vacancy/<int:id>/', views.SI_vacancyapplication, name='vacancy_app'),
     path('confirmation/<int:id>/', views.SI_vacancyconfirmation, name='vacancy_confirm'),
     path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
+
 
 ]

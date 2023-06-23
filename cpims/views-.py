@@ -30,7 +30,7 @@ def home(request):
         tcases = float(dash['case_records'])
         intervens = (pcases / tcases) if tcases > 0 else 0
         interven = int(intervens * 100)
-        print interven
+
         summary['interven'] = interven
         # OVC care
         odash = ovc_dashboard(request)

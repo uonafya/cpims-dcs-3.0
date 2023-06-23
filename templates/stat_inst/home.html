@@ -88,6 +88,11 @@
                             {% endif %}
                         </td>
                    </tr>
+                    <tr>
+                    <td>
+                        <a href="{% url 'view_' case_id=case.case_id|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
+                    </td>
+                    </tr>
                 {% endfor %}
                 </table>
             </div>

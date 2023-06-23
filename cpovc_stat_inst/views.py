@@ -6,7 +6,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
-
 from .forms import (SIAdmission, SICaseReferral, 
 SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits,
  SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry)
@@ -14,7 +13,6 @@ SICertificateofExit,SIRemandHomeEscape, SIRecordofVisits,
 from .models import SI_Admission, SI_NeedRiskAssessment, SI_NeedRiskScale, SI_VacancyApp, SI_SocialInquiry
 
 from .functions import convert_date
-
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
@@ -122,6 +120,17 @@ def SI_admissions(request, id):
     
     except Exception as e:
         raise e
+
+
+def SI_childIdentification(request,person_id):
+    data = request.POST
+
+    form = SIChildIdentification()
+    context = {
+            'form': form
+        }
+    return render(request, 'stat_inst/childIdentification.html', context)
+
     
 
 
@@ -142,30 +151,91 @@ def si_casereferral(request):
 def SI_needriskform(request, id):
     data = request.GET
     form = SINeedRiskAssessment()
+
     try:
 
         context = {
             'form': form
         }
         return render(request,'stat_inst/needriskform.html',context)
+      
+        
 
-    
     except Exception as e:
         raise e
+
+def SI_medicalassesment(request,person_id):
+    data = request.POST
+
+    form = MedicalAssesmentForm()
+    context = {
+            'form': form
+        }
+    
+    return render(request, 'stat_inst/medicalassesmentform.html', context)
+
     
 
 def si_certificateofexit(request):
     data = request.GET
 
     form = SICertificateofExit()
+
     try:
 
         context = {
             'form': form
         }
 
+        
         return render(request,'stat_inst/certificate_of_exit.html',context)
-    
+#       return render(request,'stat_inst/certificate_of_exit.html',context)
+
+    except Exception as e:
+        raise e
+
+def SI_individualCarePlan(request,person_id):
+    data = request.POST
+
+    form = IndividualCarePlanForm()
+    try:
+
+        context = {
+            'person_id': person_id,
+            'form': form
+        }
+        return render(request, 'stat_inst/individualtreatmentplan.html', context)
+
+    except Exception as e:
+        raise e
+        
+def SI_LeaveOfAbscence(request,person_id):
+    data = request.POST
+
+    form = LeaveOfAbsenceForm()
+    try:
+
+        context = {
+            'person_id': person_id,
+            'form': form
+        }
+        return render(request, 'stat_inst/leaveofabsenceassesmentform.html', context)
+
+    except Exception as e:
+        raise e
+        
+def SI_RemandHomeEscape(request,person_id):
+    data = request.POST
+
+    form = RemandHomeEscapeForm()
+    try:
+
+        context = {
+            'person_id': person_id,
+            'form': form
+        }
+        return render(request, 'stat_inst/escapeform.html', context)
+
     except Exception as e:
         raise e
 
