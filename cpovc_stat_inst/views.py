@@ -10,7 +10,11 @@ from .forms import (SIAdmission, SICaseReferral, RemandHomeEscape,MedicalAssesme
 SICertificateofExit, SIRecordofVisits,IndividualCarePlanForm,
  SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm)
 
-from .models import SI_Admission, SI_NeedRiskAssessment, SI_NeedRiskScale, SI_VacancyApp, SI_SocialInquiry
+# from .models import (SI_Admission, 
+#                      SI_NeedRiskAssessment, 
+#                      SI_NeedRiskScale, 
+#                      SI_VacancyApp, 
+#                      SI_SocialInquiry)
 
 from .functions import convert_date
 
@@ -39,8 +43,10 @@ def si_home(request):
 
         ctip_ids, case_ids = {}, {}
         cases = RegPerson.objects.filter(is_void=False, id__in=pids)
+
+
         # Get case record sheet details
-        crss = OVCCaseRecord.objects.filter(is_void=False, person_id__in=pids)
+        crss = SI_Admission.objects.filter(is_void=False, person_id__in=pids)
         for crs in crss:
             case_ids[crs.person_id]={'clv': 1, 'cs': crs.case_serial, 'cid': crs.case_id}
 

@@ -82,10 +82,10 @@
                        <td>{{ case.case_date }}</td>
                        <td>
                             {% comment %} {% if case.case_level == 2 %} {% endcomment %}
-                                <a href="{% url 'new_si_child_view' '8' %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
-                            {% comment %} {% elif case.case_level == 1 %}
-                                <a href="{% url 'new_ctip_case' case_id=case.case_cid|stringformat:'s' %}" class="btn  btn-sm btn-primary m-r-5">Enroll </a>
-                            {% endif %} {% endcomment %}
+                                <a href="{% url 'new_si_child_view' case.id %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
+                             {% comment %} {% elif case.case_level == 1 %} {% endcomment %}
+                                <a href="{% url 'new_si_admit' case.id %}" class="btn  btn-sm btn-primary m-r-5">Enroll </a>
+                            {% comment %} {% endif %}  {% endcomment %}
                         </td>
                    </tr>
                     

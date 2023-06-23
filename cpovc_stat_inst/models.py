@@ -1,14 +1,11 @@
-import uuid
 from django.db import models
+import uuid
 from django.utils import timezone
 
 from cpovc_auth.models import AppUser
 
 # Create your models here.
 from cpovc_registry.models import RegPerson
-from cpovc_forms.models import OVCCaseRecord
-
-from .functions import convert_date
 
 YES_NO_CHOICES = (
     ("yes", "Yes"),
@@ -53,33 +50,12 @@ class SI_Admission(models.Model):
         AppUser, on_delete=models.CASCADE, null=True)
     created_at = models.DateField(default=timezone.now)
 
-    def _get_cases(self):
-        _cases = SI_Admission.objects.all().count()
-        if self.si:
-            return _cases
-        else:
-            return _cases + 1
-
-    def save(self, *args, **kwargs):
-        # This is to save the Unique code.
-        if self.pk is None and not self.si:
-            self.si = self.si
-        elif self.pk and not self.si:
-            case_num = self._get_cases()
-            self.si = case_num
-
-        # Call the original save method
-        super(SI_Admission, self).save(*args, **kwargs)
-
     class Meta:
+        managed = True
         db_table = "ovc_si_main"
         verbose_name = "Statutory Institutions"
         verbose_name_plural = "Statutory Institutions"
         app_label = "Statutory Institutions"
-
-    def __unicode__(self):
-        """To be returned by admin actions."""
-        return "%s" % (str(self.si))
     
 class SI_NeedRiskAssessment(models.Model):
     needs = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
@@ -93,10 +69,10 @@ class SI_NeedRiskAssessment(models.Model):
 
 
     class Meta:
-        db_table = "your_table_name"
+        db_table = "si_needriskassessment"
         verbose_name = "SINeedRiskAssessment"
         verbose_name_plural = "SINeedRiskAssessments"
-        app_label = "your_app_label"
+        app_label = "SINeedRiskAssessment"
 
 
 class SI_NeedRiskScale(models.Model):
@@ -110,10 +86,10 @@ class SI_NeedRiskScale(models.Model):
     created_at = models.DateField(default=timezone.now)
 
     class Meta:
-        db_table = "your_table_name"
+        db_table = "si_needriskscale"
         verbose_name = "SINeedRiskScale"
         verbose_name_plural = "SINeedRiskScales"
-        app_label = "your_app_label"
+        app_label = "SINeedRiskScale"
 
 
 class SI_VacancyApp(models.Model):
@@ -140,10 +116,10 @@ class SI_VacancyApp(models.Model):
     created_at = models.DateField(default=timezone.now)
 
     class Meta:
-        db_table = "your_table_name"
+        db_table = "si_vacancy"
         verbose_name = "SIVacancyApp"
         verbose_name_plural = "SIVacancyApps"
-        app_label = "your_app_label"
+        app_label = "SIVacancyApp"
 
 
 
@@ -227,6 +203,6 @@ class SI_SocialInquiry(models.Model):
         db_table = 'si_social_inquiry'
         verbose_name = "SIVacancyApp"
         verbose_name_plural = "SIVacancyApps"
-        app_label = "your_app_label"
+        app_label = "SIVacancyApp"
 
 

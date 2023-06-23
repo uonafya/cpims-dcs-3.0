@@ -9,14 +9,14 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('cpovc_ctip', '0002_initial'),
         ('cpovc_registry', '0001_initial'),
-        ('cpovc_help', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='ovcdownloads',
+            model_name='ctipevents',
             name='person',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cpovc_registry.regperson'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cpovc_registry.regperson'),
         ),
     ]
