@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.forms.widgets import RadioSelect,TimeInput,DateInput,TextInput,DateInput
+from django.forms.widgets import RadioSelect,TimeInput,DateInput,TextInput,DateInput,FileInput
 
 from cpovc_main.functions import get_list, get_org_units_list,get_lists
 from cpovc_registry.functions import (
@@ -819,7 +819,11 @@ class IndividualCarePlanForm(forms.Form):
                    'data-parsley-notfuturedate': "dd-M-yy",
                    'id': 'datepicker',
                    'data-parsley-group': 'primary'}))
-    family_conferencing_venue = forms.CharField(label='Venue')
+    family_conferencing_venue = forms.CharField(label='Venue',
+                                                widget=forms.TextInput(
+                                                    attrs={'placeholder': _(''),
+                                                           'class': 'form-control',
+                                                           'data-parsley-required': "false"}))
     family_conferencing_participants = forms.CharField(label='Participants',
                                                        widget=forms.TextInput(
                                                            attrs={'placeholder': _(''),
@@ -830,40 +834,226 @@ class IndividualCarePlanForm(forms.Form):
                                                      attrs={'placeholder': _(''),
                                                             'class': 'form-control',
                                                             'data-parsley-required': "false"}))
+class RevocationForm(forms.Form):
+    send_to=forms.CharField(label="To",
+                       widget=forms.TextInput(
+                           attrs={'placeholder': _(''),
+                                  'class': 'form-control',
+                                  'data-parsley-required': "false"}))
+    sent_by=forms.CharField(label="To",
+                         widget=forms.TextInput(
+                             attrs={'placeholder': _(''),
+                                    'class': 'form-control',
+                                    'data-parsley-required': "false"}))
+    child_name = forms.CharField(label='Name of the child',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    committing_court = forms.CharField(label='Name of Committing Court',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    court_case_number = forms.CharField(label='Court Case Number',
+                                        widget=forms.TextInput(
+                                            attrs={'placeholder': _(''),
+                                                   'class': 'form-control',
+                                                   'data-parsley-required': "false"}))
+    committal_date = forms.DateField(label='Committal Date',
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _('Select date'),
+                                                'class': 'form-control',
+                                                'data-parsley-notfuturedate': "dd-M-yy",
+                                                'id': 'datepicker',
+                                                'data-parsley-group': 'primary'}))
+    age = forms.IntegerField(label='Age of the child')
+    birth_date = forms.DateField(label='Birth Date',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _('Select date'),
+                                            'class': 'form-control',
+                                            'data-parsley-notfuturedate': "dd-M-yy",
+                                            'id': 'datepicker',
+                                            'data-parsley-group': 'primary'}))
+    aftercare_person = forms.CharField(label='Person in charge of aftercare',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    address=forms.CharField(label="address",
+                            widget=forms.TextInput(
+                                attrs={'placeholder': _(''),
+                                       'class': 'form-control',
+                                       'data-parsley-required': "false"}))
+    release_date = forms.DateField(label='Requested release date',
+                                   widget=forms.TextInput(
+                                       attrs={'placeholder': _('Select date'),
+                                              'class': 'form-control',
+                                              'data-parsley-notfuturedate': "dd-M-yy",
+                                              'id': 'datepicker',
+                                              'data-parsley-group': 'primary'}))
+    expiration_date = forms.DateField(label='Expiration date',
+                                      widget=forms.TextInput(
+                                          attrs={'placeholder': _('Select date'),
+                                                 'class': 'form-control',
+                                                 'data-parsley-notfuturedate': "dd-M-yy",
+                                                 'id': 'datepicker',
+                                                 'data-parsley-group': 'primary'}))
+    life_planning = forms.CharField(label='Life planning after release',
+                                    widget=forms.Textarea(
+                                        attrs={'placeholder': _(''),
+                                               'class': 'form-control',
+                                               'data-parsley-required': "false"}))
+    mental_physical_conditions = forms.CharField(label='Current mental and physical conditions',
+                                                 widget=forms.TextInput(
+                                                     attrs={'placeholder': _(''),
+                                                            'class': 'form-control',
+                                                            'data-parsley-required': "false"}))
+    rehabilitation_conditions = forms.CharField(label='Current conditions of rehabilitation',
+                                                widget=forms.TextInput(
+                                                    attrs={'placeholder': _(''),
+                                                           'class': 'form-control',
+                                                           'data-parsley-required': "false"}))
+    release_conditions = forms.CharField(label='Suggested release conditions',
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': _(''),
+                                                    'class': 'form-control',
+                                                    'data-parsley-required': "false"}))
+    committal_order_copy = forms.FileField(label='Copy of committal order',
+                                           widget=forms.FileInput(
+                                               attrs={'placeholder': _(''),
+                                                      'class': 'form-control',
+                                                      'data-parsley-required': "false"}))
+    itp_copy = forms.FileField(label='Copy of ITP (as of the request date)',
+                               widget=forms.FileInput(
+                                   attrs={'placeholder': _(''),
+                                          'class': 'form-control',
+                                          'data-parsley-required': "false"}))
+    adjustment_report_copy = forms.FileField(label='Copy of the most recent Environmental Adjustment Report',
+                                             widget=forms.FileInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    progress_report_copy = forms.FileField(label='Copy of the most recent Quarterly Progress Report',
+                                           widget=forms.FileInput(
+                                               attrs={'placeholder': _(''),
+                                                      'class': 'form-control',
+                                                      'data-parsley-required': "false"}))
+    other_reference_materials = forms.CharField(label='Other reference materials',
+                                                widget=forms.Textarea(
+                                                    attrs={'placeholder': _(''),
+                                                           'class': 'form-control',
+                                                           'data-parsley-required': "false"}))
+    cc_to = forms.CharField(label='CC To',
+                            widget=forms.TextInput(
+                                attrs={'placeholder': _(''),
+                                       'class': 'form-control',
+                                       'data-parsley-required': "false"}))
 
 
 
 
 class LeaveOfAbsenceForm(forms.Form):
     name = forms.CharField(label='Name')
-    admission_number = forms.CharField(label='Admission Number')
-    dormitory = forms.CharField(label='Dormitory')
-    class_name = forms.CharField(label='Class')
-    guardian_name = forms.CharField(label='Name and Relationship of Guardian')
+    admission_number = forms.CharField(label='Admission Number',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    dormitory = forms.CharField(label='Dormitory',
+                                widget=forms.TextInput(
+                                    attrs={'placeholder': _(''),
+                                           'class': 'form-control',
+                                           'data-parsley-required': "false"}))
+    class_name = forms.CharField(label='Class',
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': _(''),
+                                            'class': 'form-control',
+                                            'data-parsley-required': "false"}))
+    guardian_name = forms.CharField(label='Name and Relationship of Guardian',
+                                    widget=forms.TextInput(
+                                        attrs={'placeholder': _(''),
+                                               'class': 'form-control',
+                                               'data-parsley-required': "false"}))
     guardian_relationship = forms.ChoiceField(
         choices=list_relationship,
         required=False,
         widget=forms.Select(
             attrs={'class': 'form-control'}))
-    guardian_address = forms.CharField(label='Address of Guardian')
-    guardian_contact_measures = forms.CharField(label='Measures to Contact Guardian (nearest phone etc.)')
-    leave_period = forms.CharField(label='Period of Leave of Absence')
-    leave_conditions = forms.CharField(label='Conditions to Grant Leave of Absence')
-    child_health_conditions = forms.CharField(label='Mental and Physical Health Conditions of the child')
-    risk_of_escape = forms.CharField(label='Risk of Escape')
-    sco_spo_information = forms.CharField(label='Information from SCO / SPO')
+    guardian_address = forms.CharField(label='Address of Guardian',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    guardian_contact_measures = forms.CharField(label='Measures to Contact Guardian (nearest phone etc.)',
+                                                widget=forms.TextInput(
+                                                    attrs={'placeholder': _(''),
+                                                           'class': 'form-control',
+                                                           'data-parsley-required': "false"}))
+    leave_period = forms.CharField(label='Period of Leave of Absence',
+                                   widget=forms.TextInput(
+                                       attrs={'placeholder': _(''),
+                                              'class': 'form-control',
+                                              'data-parsley-required': "false"}))
+    leave_conditions = forms.CharField(label='Conditions to Grant Leave of Absence',
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': _(''),
+                                                  'class': 'form-control',
+                                                  'data-parsley-required': "false"}))
+    child_health_conditions = forms.CharField(label='Mental and Physical Health Conditions of the child',
+                                              widget=forms.TextInput(
+                                                  attrs={'placeholder': _(''),
+                                                         'class': 'form-control',
+                                                         'data-parsley-required': "false"}))
+    risk_of_escape = forms.CharField(label='Risk of Escape',
+                                     widget=forms.TextInput(
+                                         attrs={'placeholder': _(''),
+                                                'class': 'form-control',
+                                                'data-parsley-required': "false"}))
+    sco_spo_information = forms.CharField(label='Information from SCO / SPO',
+                                          widget=forms.TextInput(
+                                              attrs={'placeholder': _(''),
+                                                     'class': 'form-control',
+                                                     'data-parsley-required': "false"}))
     relationship_with_guardian = forms.ChoiceField(
         choices=list_relationship,
         required=False,
         widget=forms.Select(
             attrs={'class': 'form-control'}))
-    collecting_sending_guardians = forms.CharField(label='Guardians who Collect/Send Back')
-    good_behavior_at_rs = forms.CharField(label='Good Behavior Maintained at the RS')
-    rule_violations = forms.CharField(label='Rule Violation Committed so far')
-    previous_leave_problem = forms.CharField(label='Problem with Previous Leave')
-    others = forms.CharField(label='Others')
-    personal_officer_opinion = forms.CharField(label='Opinion of Personal Officer')
-    school_committee_decision = forms.CharField(label='Decision by the School Committee')
+    collecting_sending_guardians = forms.CharField(label='Guardians who Collect/Send Back',
+                                                   widget=forms.TextInput(
+                                                       attrs={'placeholder': _(''),
+                                                              'class': 'form-control',
+                                                              'data-parsley-required': "false"}))
+    good_behavior_at_rs = forms.CharField(label='Good Behavior Maintained at the RS',
+                                          widget=forms.TextInput(
+                                              attrs={'placeholder': _(''),
+                                                     'class': 'form-control',
+                                                     'data-parsley-required': "false"}))
+    rule_violations = forms.CharField(label='Rule Violation Committed so far',
+                                      widget=forms.TextInput(
+                                          attrs={'placeholder': _(''),
+                                                 'class': 'form-control',
+                                                 'data-parsley-required': "false"}))
+    previous_leave_problem = forms.CharField(label='Problem with Previous Leave',
+                                             widget=forms.TextInput(
+                                                 attrs={'placeholder': _(''),
+                                                        'class': 'form-control',
+                                                        'data-parsley-required': "false"}))
+    others = forms.CharField(label='Others',
+                             widget=forms.TextInput(
+                                 attrs={'placeholder': _(''),
+                                        'class': 'form-control',
+                                        'data-parsley-required': "false"}))
+    personal_officer_opinion = forms.CharField(label='Opinion of Personal Officer',
+                                               widget=forms.TextInput(
+                                                   attrs={'placeholder': _(''),
+                                                          'class': 'form-control',
+                                                          'data-parsley-required': "false"}))
+    school_committee_decision = forms.CharField(label='Decision by the School Committee',widget=forms.TextInput(
+                                                           attrs={'placeholder': _(''),
+                                                                  'class': 'form-control',
+                                                                  'data-parsley-required': "false"}))
     
 class SICaseReferral(forms.Form):
     reason_for_referral = forms.MultipleChoiceField(
@@ -1864,7 +2054,15 @@ class MedicalAssesmentForm(forms.Form):
                                                    'data-parsley-required': "false"}))
 
     orientation_time = forms.TimeField(label='Orientation: Time',
-                                           widget=TimeInput(format='%H:%M'))
+                                       widget=forms.TimeInput(
+                                           format='%H:%M',  # Specify the desired time format here
+                                           attrs={
+                                               'placeholder': _('Select time'),
+                                               'class': 'form-control',
+                                               'id': 'timepicker',
+                                               'data-parsley-group': 'primary'
+                                           }
+                                       ))
 
     orientation_date = forms.DateField(
         required=False,

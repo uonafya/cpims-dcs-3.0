@@ -11,7 +11,7 @@ urlpatterns = [
     path('medical-assessment/<int:id>/', views.SI_medicalassesment, name='medical_assessment_form'),
     path('individual-care-plan/<int:id>/', views.SI_individualCarePlan, name='individual_care_plan_form'),
     path('leave_of_abscence/<int:id>/', views.SI_LeaveOfAbscence, name='leave_of_absence'),
-    path('remand_home_escape/<int:id>/', views.SI_RemandHomeEscape, name='remand_escape'),
+    path('revocation_of_commital_order/<int:id>/', views.SI_RevocationOfCommitalOrder, name='SI_commital_order_revocation'),
 
     path('case_refer/<int:id>/', views.si_casereferral, name='SI_casereferral'),
     path('exit_certificate/<int:id>/', views.si_certificateofexit, name='SI_certificateofexit'),

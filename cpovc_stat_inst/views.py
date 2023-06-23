@@ -9,7 +9,7 @@ from django.db.models import Count
 from .forms import (SIAdmission, SICaseReferral, RemandHomeEscape,MedicalAssesmentForm,
 SICertificateofExit, SIRecordofVisits,IndividualCarePlanForm,
  SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm)
-
+from .forms import *
 from .models import SI_Admission, SI_NeedRiskAssessment, SI_NeedRiskScale, SI_VacancyApp, SI_SocialInquiry
 
 from .functions import convert_date
@@ -151,7 +151,9 @@ def SI_needriskform(request, id):
     form = SINeedRiskAssessment()
     person_id = RegPerson.objects.filter(id=id, is_void=False)
 
+
     child = person_id.values()[0]
+
 
     try:
 
@@ -166,12 +168,17 @@ def SI_needriskform(request, id):
     except Exception as e:
         raise e
 
-def SI_medicalassesment(request,person_id):
+def SI_medicalassesment(request,id):
     data = request.POST
 
     form = MedicalAssesmentForm()
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
+
     context = {
-            'form': form
+            'form': form,
+            "child":child
         }
     
     return render(request, 'stat_inst/medicalassesmentform.html', context)
@@ -215,36 +222,47 @@ def SI_individualCarePlan(request,id):
 
     except Exception as e:
         raise e
+
+def SI_RevocationOfCommitalOrder(request,id):
+    data = request.POST
+
+    form = RevocationForm()
+
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
+
+    try:
+
+        context = {
+            'id': id,
+            'form': form,
+            "child": child
+        }
+        return render(request, 'stat_inst/revocationofCommittalOrder.html', context)
+
+    except Exception as e:
+        raise e
         
 def SI_LeaveOfAbscence(request,id):
     data = request.POST
 
     form = LeaveOfAbsenceForm()
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
     try:
 
         context = {
             'id': id,
-            'form': form
+            'form': form,
+            "child":child
         }
         return render(request, 'stat_inst/leaveofabsenceassesmentform.html', context)
 
     except Exception as e:
         raise e
-        
-def SI_RemandHomeEscape(request,id):
-    data = request.POST
 
-    form = RemandHomeEscape()
-    try:
-
-        context = {
-            'id': id,
-            'form': form
-        }
-        return render(request, 'stat_inst/escapeform.html', context)
-
-    except Exception as e:
-        raise e
 
 def SI_needriskscale(request, id):
     data = request.GET

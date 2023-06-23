@@ -158,7 +158,7 @@ Child details
             </tr>
             <tr>
                 <td>
-                    {% comment %} <a href="{% url 'new_hivscreeningtool' id=creg.person_id%}"> {% endcomment %}
+                    <a href="{% url 'SI_commital_order_revocation' id=child.id %}">
                     <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Request for Revocation of Committal Order</div></a>
@@ -208,13 +208,14 @@ Child details
             </tr>
             <tr>
                 <td>
-                    <a href="{% url 'remand_escape' id=child.id %}">
+                    <a href="{% url 'SI_remandhomeescape' id=child.id %}">
                         <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                         <span class="badge pull-right">N</span>
                         <div class="m-t-4">Escape Form</div>
                     </a>
                 </td>
             </tr>
+
             <tr>
                 <td>
                     <a href="{% url 'SI_casereferral' id=child.id%}">

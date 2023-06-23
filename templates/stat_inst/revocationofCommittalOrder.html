@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block page_title %} {{block.super}} LEAVE OF ABSENCE FORM {% endblock page_title%}
+{% block page_title %} {{block.super}} REQUEST FOR REVOCATION OF COMMITAL ORDER {% endblock page_title%}
 
 {% load static %}
 
@@ -18,7 +18,7 @@
     <li><a href="#">Home</a></li>
     <li class="active">SI</li>
 </ol>
-<h1 class="page-header">LEAVE OF ABSCENCE FORM <small> for children in the Statutory Institutions (Reamnd Homes, Rehabilitations schools or Reascue centres and CCI's)</small></h1>
+<h1 class="page-header">REVOCATION OF COMMITAL ORDER <small> for children in the Statutory Institutions (Reamnd Homes, Rehabilitations schools or Reascue centres and CCI's)</small></h1>
 <!-- end breadcrumb -->
 <div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
     <span class="close" data-dismiss="alert">×</span>
@@ -59,13 +59,13 @@
                             <input type="hidden" name="person_uid" id="person_uid" value="{{ person_uid }}">
                         <div class="row">
                             <fieldset>
-                                <legend class="pull-left width-full">Child details</legend>
+{#                                <legend class="pull-left width-full">REQUEST FOR REVOCATION OF COMMITAL ORDER</legend>#}
                                 <div class="divider pull-left width-full"></div>
                                 <div class="row">
                                     <!-- end col-4 -->
                                     <div class="col-md-4">
                                         <div class="form-group block1">
-                                            <label for="first_name">First Name <span class="asteriskField">*</span></label>
+                                            <label for="first_name"> Child's First Name <span class="asteriskField">*</span></label>
                                             {{ child.first_name }}
                                         </div>
                                     </div>
@@ -73,8 +73,14 @@
                                     <!-- begin col-4 -->
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="surname">Surname <span class="asteriskField">*</span></label>
+                                            <label for="surname"> Child's Surname <span class="asteriskField">*</span></label>
                                             {{ child.surname }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="surname"> Child's Age <span class="asteriskField">*</span></label>
+                                            {{ age }}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
@@ -86,8 +92,8 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group block1">
-                                            <label for="sex_id">ADMISSION NUMBER: <span class="asteriskField">*</span></label>
-                                            {{ form.admission_no }}
+                                            <label for="sex_id">TO: <span class="asteriskField">*</span></label>
+                                            {{ form.send_to }}
                                         </div>
                                     </div>
 
@@ -105,7 +111,7 @@
 
                             <div id="wizard_persons">
                                     <ol>
-                                        <li>Leave of Absence Assessment Form
+                                        <li>REQUEST FOR REVOCATION OF COMMITAL ORDER
                                             <small> </small>
 
                                         </li>
@@ -119,115 +125,104 @@
                                             <legend class="pull-left width-full"></legend>
                                             <!-- begin row -->
                                             <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                        <div class="form-group block1">
-                                            <label for="sex_id">Dormitory: <span class="asteriskField">*</span></label>
-                                            {{ form.dormitory }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="form-group block1">
-                                            <label for="sex_id">Class: <span class="asteriskField">*</span></label>
-                                            {{ form.class_name }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <div class="form-group block1">
-                                            <label for="sex_id">Name of Guardian: <span class="asteriskField">*</span></label>
-                                            {{ form.guardian_name}}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <div class="form-group block1">
-                                            <label for="sex_id">Relationship : <span class="asteriskField">*</span></label>
-                                            {{ form.relationship_with_guardian}}
-                                        </div>
-                                    </div>
                                         <div class="col-md-4 col-sm-4">
                                         <div class="form-group block1">
-                                            <label for="sex_id">Address of Guardian: <span class="asteriskField">*</span></label>
-                                            {{ form.guardian_address}}
+                                            <label for="sex_id"> Name of Committing Court <span class="asteriskField">*</span></label>
+                                            {{ form.committing_court }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="form-group block1">
+                                            <label for="sex_id">Court Case Number:  <span class="asteriskField">*</span></label>
+                                            {{ form.court_case_number }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="form-group block1">
+                                            <label for="sex_id"> Committal Date: <span class="asteriskField">*</span></label>
+                                            {{ form.committal_date}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6" hidden="hidden"> </div>
+                                     <div class="col-md-6 col-sm-6">
+                                        <div class="form-group block1">
+                                            <label for="sex_id">Person in charge of aftercare of the child: <span class="asteriskField">*</span></label>
+                                            {{ form.aftercare_person}}
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6 col-sm-6">
+                                        <div class="form-group block1">
+                                            <label for="sex_id">Address : <span class="asteriskField">*</span></label>
+                                            {{ form.address}}
                                         </div>
                                     </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Period of Leave of Absence: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" >  Requested release date: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.leave_period}}
+                                                        {{ form.release_date}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Conditions to Grant Leave of Absence: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" >  Expiration date: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.leave_conditions}}
+                                                        {{ form.expiration_date}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Mental and Physical Health Conditions of the child: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Life planning after release: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.child_health_conditions}}
+                                                        {{ form.life_planning}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Risk of Escape: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Current Mental and physical conditions of the child: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.risk_of_escape}}
+                                                        {{ form.mental_physical_conditions}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Information from SCO / SPO: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Current conditions of the child’s rehabilitation:</label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.sco_spo_information}}
+                                                        {{ form.rehabilitation_conditions}}
                                                     </div>
                                                 </div>
                                                  <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Relationship with Guardian: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" >  Suggested conditions the child has to follow if s/he is released: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.relationship_with_guardian}}
+                                                        {{ form.release_conditions}}
                                                     </div>
                                                 </div>
                                                  <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Guardians who Collect/Send Back: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Copy of committal order: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.collecting_sending_guardians}}
+                                                        {{ form.committal_order_copy}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Good Behavior Maintained at the RS: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Copy of ITP (as of the request date): </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.good_behavior_at_rs}}
+                                                        {{ form.itp_copy}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Rule Violation Committed so far: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" >  Copy of the most recent Environmental Adjustment Report: </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.rule_violations}}
+                                                        {{ form.adjustment_report_copy}}
                                                     </div>
                                                 </div>
                                                  <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Problem with Previous Leave:</label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Copy of the most recent Quarterly Progress Report:</label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.previous_leave_problem}}
+                                                        {{ form.progress_report_copy}}
                                                     </div>
                                                 </div>
                                                  <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Others: </label>
+                                                    <label class="control-label col-md-4 col-sm-4" > Other reference materials (specify:) </label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        {{ form.others}}
+                                                        {{ form.other_reference_materials}}
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" > Opinion of Personal Officer: </label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.personal_officer_opinion}}
-                                                    </div>
-                                                </div>
-                                                 <div class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" >Decision by the School Committee: </label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.school_committee_decision}}
-                                                    </div>
-                                                </div>
 
                                             </div>
                                             <!-- end row -->

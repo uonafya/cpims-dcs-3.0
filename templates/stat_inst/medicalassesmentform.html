@@ -66,7 +66,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group block1">
                                             <label for="first_name">First Name <span class="asteriskField">*</span></label>
-                                            {{ form.first_name }}
+                                            {{ child.first_name }}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
@@ -74,7 +74,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="surname">Surname <span class="asteriskField">*</span></label>
-                                            {{ form.surname }}
+                                            {{ child.surname }}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
@@ -82,7 +82,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group block1">
                                             <label for="sex_id">Sex <span class="asteriskField">*</span></label>
-                                            {{ form.sex_id }}
+                                            {{ child.sex_id }}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
@@ -95,7 +95,7 @@
                                     <div class="col-md-4">
                                         <div id="age_div" class="form-group">
                                             <label for="date_of_birth">Age <span class="asteriskField">*</span></label>
-                                            {{ form.date_of_birth }}
+                                            {{ age }}
                                         </div>
                                     </div>
 
@@ -133,30 +133,31 @@
                                             </div>
                                             <div class="row"> </div>
                                             <div class="row">
-                                                <div class="col-md-6">
-                                        <div id="hieght" class="form-group">
-                                            <label for="height">Height: <span class="asteriskField">*</span></label>
-                                            {{ form.height }}
-                                        </div>
-                                         </div>
-                                                        <div class="col-md-6">
-                                                        <div id="weight_div" class="form-group">
-                                                            <label for="weight">Weight: <span class="asteriskField">*</span></label>
-                                                            {{ form.weight }}
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Height: <span class="asteriskField">*</span></label>
+                                                                {{ form.height }}
+                                                            </div>
                                                         </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Weight: <span class="asteriskField">*</span></label>
+                                                                {{ form.weight }}
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                        <div id="pressure-div" class="form-group">
-                                                            <label for="blood_pressure">Blood pressure:<span class="asteriskField">*</span></label>
-                                                            {{ form.blood_pressure }}
+                                                <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Blood pressure: <span class="asteriskField">*</span></label>
+                                                                {{ form.blood_pressure }}
+                                                            </div>
                                                         </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Pulse Rate: <span class="asteriskField">*</span></label>
+                                                                {{ form.pulse_rate }}
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                        <div id="pulse_div" class="form-group">
-                                                            <label for="pulse">Pulse Rate: <span class="asteriskField">*</span></label>
-                                                            {{ form.pulse_rate }}
-                                                        </div>
-                                                        </div>
+
 
                                                 <div  class="form-group col-md-5 col-sm-5">
                                                     <label class="control-label col-md-4 col-sm-4" >Any Current illness? <span class="asteriskField">*</span> </label>
@@ -177,17 +178,19 @@
                                                     </div>
                                                 </div>
                                                 <div  class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" >Any history of mental illness in self or Family <span id="staff_id_m" class="asteriskField">*</span> </label>
-                                                    <div class="col-md-6 col-sm-6">
+                                                    <label class="control-label col-md-4 " >Any history of mental illness in self or Family <span id="staff_id_m" class="asteriskField">*</span> </label>
+                                                    <div class="col-md-6 col-sm-6" >
                                                         {{ form.mental_illness_history}}
                                                     </div>
                                                 </div>
+
                                                 <div  class="form-group col-md-6 col-sm-6" >
                                                     <label class="control-label col-md-4 col-sm-4" >Any sleep problems ? <br></label>
                                                     <div class="col-md-6 col-sm-6">
                                                         {{ form.sleep_problems }}
                                                     </div>
                                                 </div>
+
                                                 <div  class="form-group col-md-6 col-sm-6">
                                                     <label class="control-label col-md-4 col-sm-4" > <br> If Yes, <BR> Elaborate</label>
                                                     <div class="col-md-6 col-sm-6">
@@ -244,40 +247,41 @@
                                                        {{ form.general_examination }}
                                                     </div>
                                                 </div>
-                                                <div  class="form-group col-lg-12 col-sm-12">
-                                                    <label class="control-label " > <center> Orientation </center>> </label>
 
-                                                </div>
-                                                 <div  class="form-group col-md-3 col-sm-3">
-                                                    <label class="control-label col-md-4 col-sm-4" >Time</label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.orientation_time }}
+                                                    <div  class="form-group col-md-12 col-sm-12">
+                                                        <legend  style="font-size: large "> <b>Orientation</b>  </legend>
                                                     </div>
-                                                </div>
-                                                 <div  class="form-group col-md-3 col-sm-3">
-                                                    <label class="control-label col-md-4 col-sm-4" >Date</label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.orientation_date }}
-                                                    </div>
-                                                </div>
-                                                 <div  class="form-group col-md-3 col-sm-3">
-                                                    <label class="control-label col-md-4 col-sm-4" >Place</label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.orientation_place }}
-                                                    </div>
-                                                </div>
-                                                  <div  class="form-group col-md-3 col-sm-3">
-                                                    <label class="control-label col-md-4 col-sm-4" >Person</label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.orientation_person }}
-                                                    </div>
-                                                </div>
-                                                <div id="email_div" class="form-group">
-                                                    <label class="control-label col-md-4 col-sm-4" >Speech <span  class="asteriskField">*</span> :</label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.speech }}
-                                                    </div>
-                                                </div>
+                                                     <div class="col-md-3 col-sm-3">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Time: <span class="asteriskField">*</span></label>
+                                                                {{ form.orientation_time }}
+                                                            </div>
+                                                        </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Date: <span class="asteriskField">*</span></label>
+                                                                {{ form.orientation_date }}
+                                                            </div>
+                                                        </div>
+
+                                                 <div class="col-md-3 col-sm-3">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Place: <span class="asteriskField">*</span></label>
+                                                                {{ form.orientation_place }}
+                                                            </div>
+                                                        </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                            <div class="form-group block1">
+                                                                <label for="sex_id">Person: <span class="asteriskField">*</span></label>
+                                                                {{ form.orientation_person }}
+                                                            </div>
+                                                        </div>
+
+
+
+
+
                                                 <div  class="form-group col-md-6 col-sm-6">
                                                     <label class="control-label col-md-4 col-sm-4" >Visual Acuity:RE</label>
                                                     <div class="col-md-6 col-sm-6">
@@ -288,6 +292,12 @@
                                                     <label class="control-label col-md-4 col-sm-4" >Visual Acuity:LE</label>
                                                     <div class="col-md-6 col-sm-6">
                                                         {{ form.visual_acuity_le }}
+                                                    </div>
+                                                </div>
+                                                 <div id="email_div" class="form-group">
+                                                    <label class="control-label col-md-4 col-sm-4" >Speech <span  class="asteriskField">*</span> :</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        {{ form.speech }}
                                                     </div>
                                                 </div>
                                                 <div  class="form-group ">
@@ -356,12 +366,7 @@
                                                         {{ form.urinalysis }}
                                                     </div>
                                                 </div>
-                                                <div  class="form-group ">
-                                                    <label class="control-label col-md-4 col-sm-4" >Urinalysis</label>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        {{ form.urinalysis }}
-                                                    </div>
-                                                </div>
+
                                                 <div  class="form-group ">
                                                     <label class="control-label col-md-4 col-sm-4" >Stool for O/C</label>
                                                     <div class="col-md-6 col-sm-6">
@@ -398,7 +403,7 @@
                                                         {{ form.consent }}
                                                     </div>
                                                 </div>
-                                                <div  class="form-group ">
+                                                <div  class="form-group col-md-12 col-sm-12 ">
                                                     <label class="control-label col-md-4 col-sm-4" > X-Ray Report</label>
                                                     <div class="col-md-6 col-sm-6">
                                                         {{ form.xray_report }}
