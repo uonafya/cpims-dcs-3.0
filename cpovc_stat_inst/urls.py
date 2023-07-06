@@ -7,6 +7,7 @@ urlpatterns = [
     # path('new/<uuid:case_id>/', views.SI_admissions, name='new_si_admit'),
 
     path('new/<int:id>/', views.SI_admissions, name='new_si_admit'),
+    path('si_lookup/', views.si_look, name='si_lookup'),
 
     path('medical-assessment/<int:id>/', views.SI_medicalassesment, name='medical_assessment_form'),
     path('individual-care-plan/<int:id>/', views.SI_individualCarePlan, name='individual_care_plan_form'),
@@ -27,9 +28,20 @@ urlpatterns = [
     path('needriskform/<int:id>/', views.SI_needriskform, name='new_si_riskneedform'),    
     path('needriskscale/<int:id>/', views.SI_needriskscale, name='new_si_riskneedscale'),
 
+    path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
+
+    path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
+
+    # Vacancy mode
     path('vacancy/<int:id>/', views.SI_vacancyapplication, name='vacancy_app'),
     path('confirmation/<int:id>/', views.SI_vacancyconfirmation, name='vacancy_confirm'),
-    path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
+    path('deny_vacancy/<uuid:uid>/', views.SI_deny_vacancy, name='deny_vacancy'),
+    path('delete_vacancy/<uuid:uid>/', views.SI_delete_vacancy, name='delete_vacancy'),
+    path('vacancyDetail/', views.SI_vacancyDetail, name='vacancyDetail'),
+    path('vacancyApprove/', views.SI_vacancyApprove, name='vacancyApprove'),
+
+
+
 
 
 ]

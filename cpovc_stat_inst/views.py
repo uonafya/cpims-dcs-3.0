@@ -1,76 +1,198 @@
 from datetime import datetime
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+import uuid
+
+from django.utils import timezone
 
 from .forms import (SIAdmission, SICaseReferral, RemandHomeEscape,MedicalAssesmentForm,
 SICertificateofExit, SIRecordofVisits,IndividualCarePlanForm,
  SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm)
 
-# from .models import (SI_Admission, 
-#                      SI_NeedRiskAssessment, 
-#                      SI_NeedRiskScale, 
-#                      SI_VacancyApp, 
-#                      SI_SocialInquiry)
+from .forms import (
+    SI_INSTITUTION,
+    APP_STATUS
+)
 
-from .functions import convert_date
+from .models import (SI_Admission, 
+                     SI_NeedRiskAssessment, 
+                     SI_NeedRiskScale, 
+                     SI_VacancyApp, SI_SocialInquiry)
+
+from .functions import convert_date, convertYesNo, get_si_reg_list
+
 
 from cpovc_main.functions import get_dict
 from cpovc_forms.models import OVCCaseCategory
 from cpovc_forms.forms import OVCSearchForm
 from cpovc_forms.functions import get_person_ids, get_case_info
-from cpovc_registry.models import RegPersonsExternalIds
-from cpovc_ctip.models import CTIPMain, CTIPEvents, CTIPForms
+from cpovc_registry.models import RegPersonsExternalIds, RegOrgUnit
 # from .settings import FMS
 
 # from .functions import save_ctip_form, get_ctip, handle_ctip
 from cpovc_forms.models import OVCCaseRecord
 from cpovc_registry.models import RegPerson
 
-from cpovc_forms.functions import get_person_ids, get_case_info
-
 # Create your views here.
+
+# Get organisation units linked to an SI type
+@login_required
+def si_look(request):
+    data = request.POST
+    si_type = data.get('si_type')
+
+    si_lists = RegOrgUnit.objects.filter(is_void=False, org_unit_type_id=si_type)
+    print(si_lists)
+    context = {
+        "centres": 
+            [
+                ['"",Please Select'],
+            ]
+        
+    }
+    for si_list in si_lists:
+        context['centres'].append([f'{si_list.org_unit_id_vis},{si_list.org_unit_name}'])
+    
+    print(context)
+
+    return JsonResponse(context, content_type='application/json',
+                                safe=False)
+
+# Get organisation units linked to an SI type
+@login_required
+def SI_vacancyDetail(request):
+    data = request.POST
+    uid = request.POST.get('vacancyId')
+
+    vacancy = SI_VacancyApp.objects.filter(is_void=False, vacancy=uid)
+    context=vacancy.values()[0]
+
+    return JsonResponse(context, content_type='application/json',
+                                safe=False)
+@login_required
+def SI_deny_vacancy(request, uid):
+    person_id = ""
+    try:
+        del_vanc = SI_VacancyApp.objects.get(is_void=False, vacancy=uid)
+        print(dir(del_vanc))
+        del_vanc.application_status='D'
+        del_vanc.date_of_approved=timezone.now()
+        del_vanc.save()
+        person_id = del_vanc.person_id
+
+        msg = f'Application  {del_vanc.ref_no } denial successful'
+        messages.add_message(request, messages.SUCCESS, msg)
+
+    except Exception as e:
+        err= f'Could not deny: {e}'
+
+        msg = 'Follow-up error - (%s). %s.' % (str(e), err)
+        print(msg)
+        messages.add_message(request, messages.ERROR, msg)
+
+    return HttpResponseRedirect(reverse('new_si_child_view', args=(person_id,))) # person_id)
+
+@login_required
+def SI_delete_vacancy(request, uid):
+    person_id = ""
+    try:
+        del_vanc = SI_VacancyApp.objects.get(is_void=False, vacancy=uid)
+        print(dir(del_vanc))
+        del_vanc.is_void=True
+        del_vanc.updated_at=timezone.now()
+        del_vanc.save()
+        person_id = del_vanc.person_id
+
+        msg = f'Application  {del_vanc.ref_no } deleted successfully'
+        messages.add_message(request, messages.SUCCESS, msg)
+
+    except Exception as e:
+        err= f'Could not Delete: {e}'
+
+        msg = 'Follow-up error - (%s). %s.' % (str(e), err)
+        print(msg)
+        messages.add_message(request, messages.ERROR, msg)
+
+    return HttpResponseRedirect(reverse('new_si_child_view', args=(person_id,))) # person_id)
+
+@login_required
+def SI_vacancyApprove(request):
+    data = request.POST
+    uid = request.POST.get('vacancyId')
+    try:
+        vacancy = SI_VacancyApp.objects.get(is_void=False, vacancy=uid)
+        vacancy.cci_placed = request.POST.get('siname')
+        vacancy.months_approved = request.POST.get('months')
+        vacancy.magistrate_court = request.POST.get('magistrate_court')
+        vacancy.application_status='A'
+        vacancy.save()
+        context={
+            "message":"Data saved successfully"
+        }
+
+    except Exception as e:
+        print(e)
+        msgs = f'Data didnt save : {e}'
+        context={
+            "message":msgs
+        }
+
+
+        msg = f'Data didnt save {e}'
+        messages.add_message(request, messages.ERROR, msg)
+
+    return JsonResponse(context, content_type='application/json',
+                                safe=False)
+
 def si_home(request):
 
     try:
         form = OVCSearchForm(data=request.GET)
-
+        print(f'forms {form}')
         search_string = request.GET.get('search_name')
         pids = get_person_ids(request, search_string)
 
-        ctip_ids, case_ids = {}, {}
+        ctip_ids, inst_name = {}, {}
         cases = RegPerson.objects.filter(is_void=False, id__in=pids)
 
 
-        # Get case record sheet details
+        # Get children already in institutions
         crss = SI_Admission.objects.filter(is_void=False, person_id__in=pids)
         for crs in crss:
-            case_ids[crs.person_id]={'clv': 1, 'cs': crs.case_serial, 'cid': crs.case_id}
+            inst_name[crs.person_id]={'clv': 1, 'cs': crs.institution_type, 'cid': crs.institution_name}
 
         for case in cases:
             pid = case.id
-            cid = ctip_ids[pid]['cid'] if pid in ctip_ids else 'N/A'
-            cdt = ctip_ids[pid]['cdt'] if pid in ctip_ids else 'N/A'
-            clvf = case_ids[pid]['clv'] if pid in case_ids else 0
-            clv = ctip_ids[pid]['clv'] if pid in ctip_ids else clvf
-            csn = case_ids[pid]['cs'] if pid in case_ids else 'N/A'
-            ccid = case_ids[pid]['cid'] if pid in case_ids else 'N/A'
+            cdt = dict(SI_INSTITUTION)[inst_name[pid]['cs']] if pid in inst_name else 'Not Enrolled'
+            csn = inst_name[pid]['cid'] if pid in inst_name else 'Not Enrolled'
 
-            setattr(case, 'case_t', str(cid))
-            setattr(case, 'case_date', cdt)
-            setattr(case, 'case_level', clv)
-            setattr(case, 'case_id', cid)
-            setattr(case, 'case_cid', str(ccid))
-            setattr(case, 'case_serial', csn)
+            setattr(case, 'inst_type', cdt)
+            setattr(case, 'inst_name', csn)
+        
+        apps = SI_VacancyApp.objects.filter(is_void=False, person_id__in=pids, application_status='W')
+        for app in apps:
+            ctip_ids[app.person_id]={'clv': 1, 'cs': app.application_status, 'cid': app.ref_no}
+
+        for case in cases:
+            pid = case.id
+            cdt = ctip_ids[pid]['cs'] if pid in ctip_ids  else 'Not Enrolled'
+            csn = 'Application Pending Approval' if pid in ctip_ids  else 'Application pending approval'
+
+            setattr(case, 'inst_type', cdt)
+            setattr(case, 'inst_name', csn)
+        
+        # print(cases)
         context = {
             'status': 200,
             'cases': cases,
             'form': form
         }
-
+        face  = get_si_reg_list(['TNGP'])
+        # print(f' output {face}')
         return render(request,'stat_inst/home.html',context)
     
 
@@ -91,7 +213,7 @@ def SI_admissions(request, id):
 
             print(data)
             SI_Admission(
-                person_id = data.get('person_id'),
+                person_id = id,
                 institution_type = data.get('institution_type'),
                 date_of_admission = convert_date(data.get('date_of_admission')),
                 current_year_of_school = data.get('current_year_of_school'),
@@ -103,11 +225,11 @@ def SI_admissions(request, id):
                 referrer_name = data.get('referrer_name'),
                 referrer_address = data.get('referrer_address'),
                 referrer_phone = data.get('referrer_phone'),
-                not_contact_child = data.get('not_contact_child'),
+                not_contact_child = convertYesNo(data.get('not_contact_child')),
                 name_not_contact_child = data.get('name_not_contact_child'),
                 relationship_to_child_not_contact_child = data.get('relationship_to_child_not_contact_child'),
-                consent_form_signed = data.get('consent_form_signed'),
-                commital_court_order = data.get('commital_court_order'),
+                consent_form_signed = convertYesNo(data.get('consent_form_signed')),
+                commital_court_order = convertYesNo(data.get('commital_court_order')),
                 school_name = data.get('school_name'),
                 health_status = data.get('health_status'),
                 special_needs = data.get('special_needs'),
@@ -273,25 +395,55 @@ def si_remandhomeescape(request, id):
     return render(request,'stat_inst/remand_home_escape.html',context)  
     
 def SI_vacancyapplication(request, id):
-    data = request.GET
-
-    form = SIVacancyApp()
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    print(dir(request))
-
-    child = person_id.values()[0]
-
     try:
+        person_In = RegPerson.objects.get(id=id, is_void=False)  # Get Instance
+            
 
+        if(request.method == 'POST'):
+            data = request.POST
+            print(data)
+            SI_VacancyApp(
+                vacancy = uuid.uuid1(),
+                person = person_In,
+                ref_no = data.get('ref_no'),
+                date_of_application = convert_date(data.get('date_of_application')),
+                crc_no = data.get('crc_no'),
+                pnc_no = data.get('pnc_no'),
+                court_number = data.get('court_number'),
+                judge_name = data.get('judge_name'),
+                child_held_at = data.get('child_held_at'),
+                date_of_next_mention = convert_date(data.get('date_of_next_mention')),
+                requesting_officer = data.get('requesting_officer'),
+                designation = data.get('designation'),
+                sub_county_children_officer = data.get('sub_county_children_officer')
+            ).save()
+            
+            msg = f'Application  {data.get("ref_no")} saved successful'
+            messages.add_message(request, messages.SUCCESS, msg)
+
+            return HttpResponseRedirect(reverse('new_si_child_view', args=(id,))) # person_id)
+        form = SIVacancyApp()
+        applications = SI_VacancyApp.objects.filter(is_void=False, person_id = id)
+        vacancy = applications.values()
+        child = {
+            "first_name": person_In.first_name,
+            "other_names": person_In.other_names,
+            "surname": person_In.surname,
+            "id": id,
+            "age": person_In.age,
+            "sex_id": person_In.sex_id
+        }
+    
+        print(type(vacancy))
         context = {
-            'form': form,
-            "child": child
+            "form": form,
+            "child": child,
+            "vacancies": vacancy            
         }    
 
         return render(request,'stat_inst/vacancy_app.html',context)    
     except Exception as e:
-        raise e
+            raise e
 
 
 def si_recordofvisits(request, id):

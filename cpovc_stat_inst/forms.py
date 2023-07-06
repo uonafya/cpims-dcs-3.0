@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.forms.widgets import RadioSelect,TimeInput,DateInput,TextInput,DateInput
+from django.forms.widgets import RadioSelect, TimeInput, DateInput, TextInput, DateInput
 
-from cpovc_main.functions import get_list, get_org_units_list,get_lists
+from cpovc_main.functions import get_list, get_org_units_list, get_lists
 from cpovc_registry.functions import (
     get_geo_list,
     get_all_geo_list,
@@ -14,74 +14,75 @@ from cpovc_registry.models import RegOrgUnit
 # from .functions import get_questions
 # Added for CTiP
 from cpovc_main.country import OCOUNTRIES
-person_type_list = get_list('person_type_id', 'Please Select Type')
-school_level_list = get_list('school_level_id', 'Please Select Level')
-admission_list = get_list('school_type_id', 'Please Select one')
-disability_list = get_list('disability_type_id', 'Please Select one')
-severity_list = get_list('severity_level_id', 'Please Select one')
-admission_type_list = get_list('admission_type_id', 'Please Select')
-admission_reason_list = get_list('care_admission_reason_id')
-domain_list = get_list('afc_domain_id', 'Please Select')
-list_sex_id = get_list('sex_id')
-list_relationship = get_list('relationship_type_id', 'Please Select')
-consent_forms_list = get_list('consent_forms', 'Please Select')
+
+person_type_list = get_list("person_type_id", "Please Select Type")
+school_level_list = get_list("school_level_id", "Please Select Level")
+admission_list = get_list("school_type_id", "Please Select one")
+disability_list = get_list("disability_type_id", "Please Select one")
+severity_list = get_list("severity_level_id", "Please Select one")
+admission_type_list = get_list("admission_type_id", "Please Select")
+admission_reason_list = get_list("care_admission_reason_id")
+domain_list = get_list("afc_domain_id", "Please Select")
+list_sex_id = get_list("sex_id")
+list_relationship = get_list("relationship_type_id", "Please Select")
+consent_forms_list = get_list("consent_forms", "Please Select")
 # new listings
-list_other_adms = get_list('other_form_admission', 'Please Select')
-list_other_vulnerability = get_list(
-    'vulnerability_at_admission', 'Please Select')
-list_relationship = get_list('relationship_type_id', 'Please Select')
-list_education_perf = get_list('education_performance')
-list_marriage_type = get_list('parents_marriage_type', 'Please Select')
-list_items_count = get_list('items_count_id', 'Please Select')
-list_special_support = get_list('special_support')
-list_community_services = get_list('community_services')
-list_school_category = get_list('school_category_id', 'Please Select')
-list_range_level = get_list('attachment_level', 'Please Select')
-list_range_level_rdo = get_lists(['attachment_level', 'na_option'])
-list_child_exhibits = get_list('child_exhibits')
-list_income_range = get_list('income_range', 'Please Select')
-list_employment_type = get_list('employment_type', 'Please Select')
-list_closure_reasons = get_list('case_closure_reasons', 'Please Select')
-list_case_transfer_ids = get_list('case_transfer_ids', 'Please Select')
-list_satisfied_level = get_list('satisfied_level_ids')
-list_feeling_level = get_list('feeling_level_ids')
-list_referral_reasons = get_list('referral_reasons_ids', 'Please Select')
-list_referral_documents = get_list('referral_documents_ids')
-list_case_plan_responsible = get_list('case_plan_responsible', 'Please Select')
-psearch_criteria_list = get_list('psearch_criteria_type_id', 'Select Criteria')
-org_units_list = get_org_units_list('Please select Unit')
-classes_list = get_list('class_level_id', 'Please Select')
+list_other_adms = get_list("other_form_admission", "Please Select")
+list_other_vulnerability = get_list("vulnerability_at_admission", "Please Select")
+list_relationship = get_list("relationship_type_id", "Please Select")
+list_education_perf = get_list("education_performance")
+list_marriage_type = get_list("parents_marriage_type", "Please Select")
+list_items_count = get_list("items_count_id", "Please Select")
+list_special_support = get_list("special_support")
+list_community_services = get_list("community_services")
+list_school_category = get_list("school_category_id", "Please Select")
+list_range_level = get_list("attachment_level", "Please Select")
+list_range_level_rdo = get_lists(["attachment_level", "na_option"])
+list_child_exhibits = get_list("child_exhibits")
+list_income_range = get_list("income_range", "Please Select")
+list_employment_type = get_list("employment_type", "Please Select")
+list_closure_reasons = get_list("case_closure_reasons", "Please Select")
+list_case_transfer_ids = get_list("case_transfer_ids", "Please Select")
+list_satisfied_level = get_list("satisfied_level_ids")
+list_feeling_level = get_list("feeling_level_ids")
+list_referral_reasons = get_list("referral_reasons_ids", "Please Select")
+list_referral_documents = get_list("referral_documents_ids")
+list_case_plan_responsible = get_list("case_plan_responsible", "Please Select")
+psearch_criteria_list = get_list("psearch_criteria_type_id", "Select Criteria")
+org_units_list = get_org_units_list("Please select Unit")
+classes_list = get_list("class_level_id", "Please Select")
 
 all_list = get_all_geo_list()
-county_list = get_geo_list(all_list, 'GPRV')
-sub_county_list = get_geo_list(all_list, 'GDIS')
-ward_list = get_geo_list(all_list, 'GWRD')
+county_list = get_geo_list(all_list, "GPRV")
+sub_county_list = get_geo_list(all_list, "GDIS")
+ward_list = get_geo_list(all_list, "GWRD")
 
 
-disability_actions = get_list('disability_actions')
-list_family_types = get_list('family_type_id', 'Please Select')
+disability_actions = get_list("disability_actions")
+list_family_types = get_list("family_type_id", "Please Select")
 
-YESNO_UN_CHOICES = get_list('yesno_una')
-list_disability_assessment = get_list('disability_assessment_id')
-list_disability_handling = get_list('disability_handling_id')
-list_attachment_assessment = get_list(
-    'attachment_assessment_id', 'Please select')
-
-
-YESNO_CHOICES = get_list('yesno_id')
-YESNO_UK_CHOICES = get_lists(['yesno_id', 'uk_option'])
-care_option_list = get_list(
-    'alternative_family_care_type_id', 'Please Select Care')
-
-disability_degree = (('0', '0'), ('1', '1'), ('2', '2'),
-                     ('3', '3'), ('4', '4'), )
-
-YESNONA_choices = get_list('yesno_na')
-list_sex_other_id = get_list('sex_id', 'Please Select')
-list_ratings = get_list('ratings_id')
-list_frequency = get_lists(['period_frequency_id', 'na_option'])
+YESNO_UN_CHOICES = get_list("yesno_una")
+list_disability_assessment = get_list("disability_assessment_id")
+list_disability_handling = get_list("disability_handling_id")
+list_attachment_assessment = get_list("attachment_assessment_id", "Please select")
 
 
+YESNO_CHOICES = get_list("yesno_id")
+YESNO_UK_CHOICES = get_lists(["yesno_id", "uk_option"])
+care_option_list = get_list("alternative_family_care_type_id", "Please Select Care")
+
+disability_degree = (
+    ("0", "0"),
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4", "4"),
+)
+
+YESNONA_choices = get_list("yesno_na")
+list_sex_other_id = get_list("sex_id", "Please Select")
+list_ratings = get_list("ratings_id")
+list_frequency = get_lists(["period_frequency_id", "na_option"])
 
 
 ENTRY_CHOICES = (
@@ -91,15 +92,15 @@ ENTRY_CHOICES = (
     ("own_will", "Came of own will"),
 )
 
-GENDER=(
-    ("M", "Male"),
-    ("F", "Female")
+GENDER = (("M", "Male"), ("F", "Female"))
+DIFFICULTY = (
+    ("No", "No"),
+    ("Some difficulty", "Yes, some difficulty"),
+    ("A lot of difficulty", "Yes, a lot of difficulty"),
+    ("Cannot do it at all", "Cannot do it at all"),
 )
-DIFFICULTY=(("No", "No"), ("Some difficulty", "Yes, some difficulty"),
-            ("A lot of difficulty", "Yes, a lot of difficulty"),
-            ("Cannot do it at all", "Cannot do it at all"))
 
-YES_NO_CHOICES = get_list('yesno_id')
+YES_NO_CHOICES = get_list("yesno_id")
 
 
 REFERRAL_SOURCES = (
@@ -138,13 +139,21 @@ ADMISSION_TYPE = (
     ("readmission_on_relapse", "readmission on relapse"),
     ("transfer_in", "transfer in"),
 )
+# SI_INSTITUTION = (
+#     ("", "Select"),
+#     ("TNRH", "Remand Homes"),
+#     ("TNRS", "Rehabilitation Centres"),
+#     ("TNRR", "Rescue Centres"),
+# )
+
+# Test
 SI_INSTITUTION = (
     ("", "Select"),
-    ("Remand", "Remand Homes"),
-    ("Rehabilitation", "Rehabilitation Centres"),
-    ("Rescue", "Rescue Centres"),
+    ("TNGP", "Remand Homes"),
+    ("TNGN", "Rehabilitation Centres"),
+    ("TNSA", "Rescue Centres"),
+    ("TNRS", "Rehabilitation Centres"),
 )
-
 NEEDS_RISK_ASSESSMENT = (
     (
         "1",
@@ -213,19 +222,30 @@ REASON_FOR_REFERRAL = (
 )
 
 GOAL = [
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
 ]
 
 SUB_GOAL = [
-    ('1-1', '1-1'),
-    ('1-2', '1-2'),
-    ('2-1', '1-1'),
-    ('2-2', '2-2'),
-    ('3-1', '3-1'),
-    ('3-2', '3-2')
+    ("1-1", "1-1"),
+    ("1-2", "1-2"),
+    ("2-1", "1-1"),
+    ("2-2", "2-2"),
+    ("3-1", "3-1"),
+    ("3-2", "3-2"),
 ]
+
+SI_ORGS = (
+    ('', 'Please select..'),
+    ('', 'Please select..')
+)
+
+APP_STATUS = (
+    ('W', 'Waiting'),
+    ('A', 'Approved'),
+    ('D', 'Denied'),
+)
 
 
 class SIPreAdmission(forms.Form):
@@ -244,10 +264,10 @@ class SIAdmission(forms.Form):
             }
         ),
     )
-    institution_name = forms.CharField(
-        max_length=100,
+    institution_name = forms.ChoiceField(
+        choices = SI_ORGS,
         required=False,
-        widget=forms.TextInput(
+        widget=forms.Select(
             attrs={
                 "placeholder": _("Name of the Institution"),
                 "class": "form-control",
@@ -315,7 +335,7 @@ class SIAdmission(forms.Form):
                 "data_parsley_required": "false",
                 "data_parsley_group": "group0",
             }
-        )
+        ),
     )
     current_year_of_school = forms.CharField(
         max_length=50,
@@ -463,6 +483,7 @@ class SIAdmission(forms.Form):
         widget=forms.RadioSelect(
             attrs={
                 "id": "commital_court_order",
+                "class": "radio-inline"
             }
         ),
     )
@@ -476,406 +497,754 @@ class SIAdmission(forms.Form):
             }
         ),
     )
+    health_status = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": _("Health Situation"),
+                "class": "form-control",
+                "id": "health_status",
+                "rows": "2",
+            }
+        ),
+    )
+
+    special_needs = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": _("Special needs"),
+                "class": "form-control",
+                "id": "special_needs",
+                "rows": "2",
+            }
+        ),
+    )
+    workforce_id = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Workforce ID"),
+                "class": "form-control",
+                "id": "workforce_id",
+            }
+        ),
+    )
+    audit_workforce = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Workforce ID"),
+                "class": "form-control",
+                "id": "audit_workforce_id",
+            }
+        ),
+    )
+    audit_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={
+                "class": "form-control",
+                "data_parsley_required": "true",
+                "id": "audit_date",
+            }
+        ),
+    )
+
 
 class MedicalAssesmentForm(forms.Form):
-    name = forms.CharField(label='Name')
-    age = forms.IntegerField(label='Age')
-    sex = forms.ChoiceField(label='Sex',
-                            choices=list_sex_id,
-                            widget=forms.RadioSelect)
+    name = forms.CharField(label="Name")
+    age = forms.IntegerField(label="Age")
+    sex = forms.ChoiceField(label="Sex", choices=list_sex_id, widget=forms.RadioSelect)
 
-    height = forms.DecimalField(label='Height',
-                                widget=forms.NumberInput(
-                                    attrs={'placeholder': _(''),
-                                           'class': 'form-control',
-                                           'data-parsley-required': "false"}))
-    blood_pressure = forms.CharField(label='Blood Pressure',
-                                     widget=forms.TextInput(
-                                         attrs={'placeholder': _(''),
-                                                'class': 'form-control',
-                                                'data-parsley-required': "false"}))
-    weight = forms.DecimalField(label='Weight',
-                                widget=forms.NumberInput(
-                                    attrs={'placeholder': _(''),
-                                           'class': 'form-control',
-                                           'data-parsley-required': "false"}))
-    pulse_rate = forms.IntegerField(label='Pulse Rate',
-                                    widget=forms.NumberInput(
-                                        attrs={'placeholder': _(''),
-                                               'class': 'form-control',
-                                               'data-parsley-required': "false"}))
+    height = forms.DecimalField(
+        label="Height",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    blood_pressure = forms.CharField(
+        label="Blood Pressure",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    weight = forms.DecimalField(
+        label="Weight",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    pulse_rate = forms.IntegerField(
+        label="Pulse Rate",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    physical_disability = forms.ChoiceField(label='Any Physical Disability',
-                                            choices=disability_list,
-                                            widget=forms.ChoiceField)
+    physical_disability = forms.ChoiceField(
+        label="Any Physical Disability",
+        choices=disability_list,
+        widget=forms.ChoiceField,
+    )
 
+    current_illness = forms.ChoiceField(
+        label="Any Current Illness", choices=YES_NO_CHOICES, widget=forms.RadioSelect
+    )
 
-    current_illness = forms.ChoiceField(label='Any Current Illness',
-                                      choices=YES_NO_CHOICES,
-                                      widget=forms.RadioSelect )
+    current_medications = forms.CharField(
+        label="List Current Medications",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    current_medications = forms.CharField(label='List Current Medications',
-                                          widget=forms.TextInput(
-                                          attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
+    tb_treatment_or_exposure = forms.ChoiceField(
+        label="Any treatment for TB or exposure to a TB patient?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+    )
 
-    tb_treatment_or_exposure = forms.ChoiceField (label='Any treatment for TB or exposure to a TB patient?',
-                                                  choices=YES_NO_CHOICES,
-                                                  widget=forms.RadioSelect
+    mental_illness_history = forms.ChoiceField(
+        label="Any history of mental illness in self or family",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+    )
 
-                                               )
+    sleep_problems = forms.ChoiceField(
+        label="Any sleep problems?", choices=YES_NO_CHOICES, widget=forms.RadioSelect
+    )
+    sleep_problems_description = forms.CharField(
+        label="Elaborate",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    mental_illness_history = forms.ChoiceField(label='Any history of mental illness in self or family',
-                                             choices=YES_NO_CHOICES,
-                                             widget=forms.RadioSelect)
+    seizures_history = forms.ChoiceField(
+        label="Any history of seizures?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+    )
+    seizures_duration = forms.CharField(
+        label="List current duration",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    seizures_medications = forms.CharField(
+        label="List current medications",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    sleep_problems = forms.ChoiceField(label='Any sleep problems?',
-                                       choices=YES_NO_CHOICES,
-                                       widget=forms.RadioSelect)
-    sleep_problems_description = forms.CharField(label='Elaborate',
-                                                 widget=forms.TextInput(
-                                                     attrs={'placeholder': _(''),
-                                                            'class': 'form-control',
-                                                            'data-parsley-required': "false"}))
-
-    seizures_history = forms.ChoiceField(label='Any history of seizures?',
-                                         choices=YES_NO_CHOICES,
-                                         widget=forms.RadioSelect)
-    seizures_duration = forms.CharField(label='List current duration',
-                                        widget=forms.TextInput(
-                                        attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
-    seizures_medications = forms.CharField(label='List current medications',
-                                           widget=forms.TextInput(
-                                               attrs={'placeholder': _(''),
-                                                      'class': 'form-control',
-                                                      'data-parsley-required': "false"}))
-
-    known_allergy = forms.ChoiceField(label='Any known allergy?',
-                                      choices=YES_NO_CHOICES,
-                                      widget=forms.RadioSelect,
-                                      required=False)
-    known_allergy_list = forms.CharField(label='List',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
+    known_allergy = forms.ChoiceField(
+        label="Any known allergy?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=False,
+    )
+    known_allergy_list = forms.CharField(
+        label="List",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
     # Physical Examination
-    general_examination=forms.CharField(label="genral examination",
-                                        widget=forms.Textarea(
-                                            attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
+    general_examination = forms.CharField(
+        label="genral examination",
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    orientation_time = forms.TimeField(label='Orientation: Time',
-                                           widget=TimeInput(format='%H:%M'))
+    orientation_time = forms.TimeField(
+        label="Orientation: Time", widget=TimeInput(format="%H:%M")
+    )
 
     orientation_date = forms.DateField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )
 
-    orientation_place = forms.CharField(label='Orientation: Place',
-                                        widget=forms.TextInput(
-                                            attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
-    orientation_person = forms.CharField(label='Orientation: Person',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
-    speech = forms.CharField(label='Speech',
-                             widget=forms.TextInput(
-                                 attrs={'placeholder': _(''),
-                                        'class': 'form-control',
-                                        'data-parsley-required': "false"}))
-    visual_acuity_re = forms.CharField(label='Visual Acuity: RE',
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
-    visual_acuity_le = forms.CharField(label='Visual Acuity: LE',
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
-    head_and_neck = forms.CharField(label='Head and Neck',
-                                    widget=forms.TextInput(
-                                        attrs={'placeholder': _(''),
-                                               'class': 'form-control',
-                                               'data-parsley-required': "false"}))
-    ent = forms.CharField(label='ENT',
-                          widget=forms.TextInput(
-                              attrs={'placeholder': _(''),
-                                     'class': 'form-control',
-                                     'data-parsley-required': "false"}))
-    central_nervous_system = forms.CharField(label='Central Nervous System',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    cardiovascular_system = forms.CharField(label='Cardiovascular System',
-                                            widget=forms.TextInput(
-                                                attrs={'placeholder': _(''),
-                                                       'class': 'form-control',
-                                                       'data-parsley-required': "false"}))
-    respiratory_system = forms.CharField(label='Respiratory System',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
-    git_system = forms.CharField(label='GIT System',
-                                 widget=forms.TextInput(
-                                     attrs={'placeholder': _(''),
-                                            'class': 'form-control',
-                                            'data-parsley-required': "false"}))
-    musculoskeletal_system = forms.CharField(label='Musculoskeletal System',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    reproductive_system = forms.CharField(label='Reproductive System',
-                                          widget=forms.TextInput(
-                                              attrs={'placeholder': _(''),
-                                                     'class': 'form-control',
-                                                     'data-parsley-required': "false"}))
-    skin_condition = forms.CharField(label='Condition of the Skin',
-                                     widget=forms.TextInput(
-                                         attrs={'placeholder': _(''),
-                                                'class': 'form-control',
-                                                'data-parsley-required': "false"}))
-    dental_condition = forms.ChoiceField(label='Any dental condition?',
-                                         choices=YES_NO_CHOICES,
-                                         widget=forms.RadioSelect,
-                                         required=False)
-    urinalysis = forms.CharField(label='Urinalysis',
-                                 widget=forms.TextInput(
-                                     attrs={'placeholder': _(''),
-                                            'class': 'form-control',
-                                            'data-parsley-required': "false"}))
-    stool_oc = forms.CharField(label='Stool for O/C',
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': _(''),
-                                          'class': 'form-control',
-                                          'data-parsley-required': "false"}))
-    vdrl_test = forms.CharField(label='VDRL Test',
-                                widget=forms.TextInput(
-                                    attrs={'placeholder': _(''),
-                                           'class': 'form-control',
-                                           'data-parsley-required': "false"}))
-    pregnancy_test = forms.CharField(label='Pregnancy Test', required=False,
-                                     widget=forms.TextInput(
-                                         attrs={'placeholder': _(''),
-                                                'class': 'form-control',
-                                                'data-parsley-required': "false"}))
-    covid19_test = forms.CharField(label='COVID-19 Test', required=False,
-                                   widget=forms.TextInput(
-                                       attrs={'placeholder': _(''),
-                                              'class': 'form-control',
-                                              'data-parsley-required': "false"}))
-    hiv_test = forms.CharField(label='HIV Test', required=False,
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': _(''),
-                                          'class': 'form-control',
-                                          'data-parsley-required': "false"}))
-    consent = forms.BooleanField(label='Consent')
-    xray_report = forms.CharField(label='X-Ray Report',
-                                  required=False,
-                                  widget=forms.TextInput(
-                                      attrs={'placeholder': _(''),
-                                             'class': 'form-control',
-                                             'data-parsley-required': "false"}))
-    medical_observations = forms.CharField(label='Any other medical observations or comments by the doctor',
-                                           widget=forms.TextInput(
-                                               attrs={'placeholder': _(''),
-                                                      'class': 'form-control',
-                                                      'data-parsley-required': "false"}))
-    medical_practitioner_certify=forms.CharField(
-                                                 widget=forms.TextInput(
-                                                     attrs={'placeholder': _(''),
-                                                            'class': 'form-control',
-                                                            'data-parsley-required': "false"}))
+    orientation_place = forms.CharField(
+        label="Orientation: Place",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    orientation_person = forms.CharField(
+        label="Orientation: Person",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    speech = forms.CharField(
+        label="Speech",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    visual_acuity_re = forms.CharField(
+        label="Visual Acuity: RE",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    visual_acuity_le = forms.CharField(
+        label="Visual Acuity: LE",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    head_and_neck = forms.CharField(
+        label="Head and Neck",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    ent = forms.CharField(
+        label="ENT",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    central_nervous_system = forms.CharField(
+        label="Central Nervous System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    cardiovascular_system = forms.CharField(
+        label="Cardiovascular System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    respiratory_system = forms.CharField(
+        label="Respiratory System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    git_system = forms.CharField(
+        label="GIT System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    musculoskeletal_system = forms.CharField(
+        label="Musculoskeletal System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    reproductive_system = forms.CharField(
+        label="Reproductive System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    skin_condition = forms.CharField(
+        label="Condition of the Skin",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    dental_condition = forms.ChoiceField(
+        label="Any dental condition?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=False,
+    )
+    urinalysis = forms.CharField(
+        label="Urinalysis",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    stool_oc = forms.CharField(
+        label="Stool for O/C",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    vdrl_test = forms.CharField(
+        label="VDRL Test",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    pregnancy_test = forms.CharField(
+        label="Pregnancy Test",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    covid19_test = forms.CharField(
+        label="COVID-19 Test",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    hiv_test = forms.CharField(
+        label="HIV Test",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    consent = forms.BooleanField(label="Consent")
+    xray_report = forms.CharField(
+        label="X-Ray Report",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    medical_observations = forms.CharField(
+        label="Any other medical observations or comments by the doctor",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    medical_practitioner_certify = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        )
+    )
 
-    medical_practitioner_name = forms.CharField(label='Name of Medical Practitioner',
-                                                widget=forms.TextInput(
-                                                    attrs={'placeholder': _(''),
-                                                           'class': 'form-control',
-                                                           'data-parsley-required': "false"}))
+    medical_practitioner_name = forms.CharField(
+        label="Name of Medical Practitioner",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
     medical_practitioner_date = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )
+
 
 class IndividualCarePlanForm(forms.Form):
-    child_name = forms.CharField(label='CHILD NAME',
-                                 widget=forms.TextInput(
-                                     attrs={'placeholder': _(''),
-                                            'class': 'form-control',
-                                            'data-parsley-required': "false"}))
-    admission_no = forms.CharField(label='ADMISSION NO.' ,
-                                   widget=forms.TextInput(
-                                       attrs={'placeholder': _(''),
-                                              'class': 'form-control',
-                                              'data-parsley-required': "false"}))
-    needs_of_the_child = forms.CharField(label='NEEDS OF THE CHILD',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
-    family_child_risks = forms.CharField(label='FAMILY / CHILD RISKS',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
-    family_resources = forms.CharField(label='FAMILY RESOURCES',
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
+    child_name = forms.CharField(
+        label="CHILD NAME",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    admission_no = forms.CharField(
+        label="ADMISSION NO.",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    needs_of_the_child = forms.CharField(
+        label="NEEDS OF THE CHILD",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    family_child_risks = forms.CharField(
+        label="FAMILY / CHILD RISKS",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    family_resources = forms.CharField(
+        label="FAMILY RESOURCES",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
     starting_date = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )
     ending_date = forms.DateField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
-    officers_comment = forms.CharField(label="Officer’s Comment",
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
-    goal = forms.CharField(label="Officer’s Comment",
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
-    sub_goal_action_plan = forms.ChoiceField(label='SUB-GOAL/ACTION PLAN',
-                                             choices=SUB_GOAL,
-                                             widget=forms.Select)
-    sub_goal_action_plan_1 = forms.CharField(label='SUB-GOAL/ACTION PLAN 1-1',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    sub_goal_action_plan_2 = forms.CharField(label='SUB-GOAL/ACTION PLAN 1-2',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    sub_goal_action_plan_3 = forms.CharField(label='SUB-GOAL/ACTION PLAN 2-1',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    sub_goal_action_plan_4 = forms.CharField(label='SUB-GOAL/ACTION PLAN 2-2',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    sub_goal_action_plan_5 = forms.CharField(label='SUB-GOAL/ACTION PLAN 3-1',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    sub_goal_action_plan_6 = forms.CharField(label='SUB-GOAL/ACTION PLAN 3-2',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )
+    officers_comment = forms.CharField(
+        label="Officer’s Comment",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    goal = forms.CharField(
+        label="Officer’s Comment",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    sub_goal_action_plan = forms.ChoiceField(
+        label="SUB-GOAL/ACTION PLAN", choices=SUB_GOAL, widget=forms.Select
+    )
+    sub_goal_action_plan_1 = forms.CharField(
+        label="SUB-GOAL/ACTION PLAN 1-1",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    sub_goal_action_plan_2 = forms.CharField(
+        label="SUB-GOAL/ACTION PLAN 1-2",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    sub_goal_action_plan_3 = forms.CharField(
+        label="SUB-GOAL/ACTION PLAN 2-1",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    sub_goal_action_plan_4 = forms.CharField(
+        label="SUB-GOAL/ACTION PLAN 2-2",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    sub_goal_action_plan_5 = forms.CharField(
+        label="SUB-GOAL/ACTION PLAN 3-1",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    sub_goal_action_plan_6 = forms.CharField(
+        label="SUB-GOAL/ACTION PLAN 3-2",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    counsellors_recommendations = forms.CharField(label='COUNSELLORS RECOMMENDATIONS',
-                                                  widget=forms.TextInput(
-                                                      attrs={'placeholder': _(''),
-                                                             'class': 'form-control',
-                                                             'data-parsley-required': "false"}))
-    family_conferencing_result = forms.CharField(label='FAMILY CONFERENCING RESULT')
+    counsellors_recommendations = forms.CharField(
+        label="COUNSELLORS RECOMMENDATIONS",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    family_conferencing_result = forms.CharField(label="FAMILY CONFERENCING RESULT")
     family_conferencing_date = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
-    family_conferencing_venue = forms.CharField(label='Venue')
-    family_conferencing_participants = forms.CharField(label='Participants',
-                                                       widget=forms.TextInput(
-                                                           attrs={'placeholder': _(''),
-                                                                  'class': 'form-control',
-                                                                  'data-parsley-required': "false"}))
-    family_conferencing_result = forms.CharField(label='Result',
-                                                 widget=forms.TextInput(
-                                                     attrs={'placeholder': _(''),
-                                                            'class': 'form-control',
-                                                            'data-parsley-required': "false"}))
-
-
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )
+    family_conferencing_venue = forms.CharField(label="Venue")
+    family_conferencing_participants = forms.CharField(
+        label="Participants",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    family_conferencing_result = forms.CharField(
+        label="Result",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
 
 class LeaveOfAbsenceForm(forms.Form):
-    name = forms.CharField(label='Name')
-    admission_number = forms.CharField(label='Admission Number')
-    dormitory = forms.CharField(label='Dormitory')
-    class_name = forms.CharField(label='Class')
-    guardian_name = forms.CharField(label='Name and Relationship of Guardian')
+    name = forms.CharField(label="Name")
+    admission_number = forms.CharField(label="Admission Number")
+    dormitory = forms.CharField(label="Dormitory")
+    class_name = forms.CharField(label="Class")
+    guardian_name = forms.CharField(label="Name and Relationship of Guardian")
     guardian_relationship = forms.ChoiceField(
         choices=list_relationship,
         required=False,
-        widget=forms.Select(
-            attrs={'class': 'form-control'}))
-    guardian_address = forms.CharField(label='Address of Guardian')
-    guardian_contact_measures = forms.CharField(label='Measures to Contact Guardian (nearest phone etc.)')
-    leave_period = forms.CharField(label='Period of Leave of Absence')
-    leave_conditions = forms.CharField(label='Conditions to Grant Leave of Absence')
-    child_health_conditions = forms.CharField(label='Mental and Physical Health Conditions of the child')
-    risk_of_escape = forms.CharField(label='Risk of Escape')
-    sco_spo_information = forms.CharField(label='Information from SCO / SPO')
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+    guardian_address = forms.CharField(label="Address of Guardian")
+    guardian_contact_measures = forms.CharField(
+        label="Measures to Contact Guardian (nearest phone etc.)"
+    )
+    leave_period = forms.CharField(label="Period of Leave of Absence")
+    leave_conditions = forms.CharField(label="Conditions to Grant Leave of Absence")
+    child_health_conditions = forms.CharField(
+        label="Mental and Physical Health Conditions of the child"
+    )
+    risk_of_escape = forms.CharField(label="Risk of Escape")
+    sco_spo_information = forms.CharField(label="Information from SCO / SPO")
     relationship_with_guardian = forms.ChoiceField(
         choices=list_relationship,
         required=False,
-        widget=forms.Select(
-            attrs={'class': 'form-control'}))
-    collecting_sending_guardians = forms.CharField(label='Guardians who Collect/Send Back')
-    good_behavior_at_rs = forms.CharField(label='Good Behavior Maintained at the RS')
-    rule_violations = forms.CharField(label='Rule Violation Committed so far')
-    previous_leave_problem = forms.CharField(label='Problem with Previous Leave')
-    others = forms.CharField(label='Others')
-    personal_officer_opinion = forms.CharField(label='Opinion of Personal Officer')
-    school_committee_decision = forms.CharField(label='Decision by the School Committee')
-    
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+    collecting_sending_guardians = forms.CharField(
+        label="Guardians who Collect/Send Back"
+    )
+    good_behavior_at_rs = forms.CharField(label="Good Behavior Maintained at the RS")
+    rule_violations = forms.CharField(label="Rule Violation Committed so far")
+    previous_leave_problem = forms.CharField(label="Problem with Previous Leave")
+    others = forms.CharField(label="Others")
+    personal_officer_opinion = forms.CharField(label="Opinion of Personal Officer")
+    school_committee_decision = forms.CharField(
+        label="Decision by the School Committee"
+    )
+
+
 class SICaseReferral(forms.Form):
     reason_for_referral = forms.MultipleChoiceField(
         choices=REASON_FOR_REFERRAL,
-        widget=forms.CheckboxSelectMultiple(
-            attrs={'data-parsley-required': 'true'}))
-    file_name = forms.CharField(widget=forms.TextInput(
-        attrs={'placeholder': _('File Name'),
-               'class': 'form-control',
-               'readonly': 'true',
-               'id': 'file_name'}))
-    
+        widget=forms.CheckboxSelectMultiple(attrs={"data-parsley-required": "true"}),
+    )
+    file_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("File Name"),
+                "class": "form-control",
+                "readonly": "true",
+                "id": "file_name",
+            }
+        )
+    )
+
+
 class RemandHomeEscape(forms.Form):
     admission_no = forms.CharField(max_length=100)
     id_no = forms.CharField(max_length=100)
@@ -899,81 +1268,99 @@ class RemandHomeEscape(forms.Form):
     description_of_escape = forms.CharField(max_length=250)
     escape_under_supervision_of = forms.CharField(max_length=250)
     station = forms.CharField(max_length=250)
-    date_of_order= forms.CharField(
+    date_of_order = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     date_of_escape = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     date__ = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
 
-                   ))
-   
+
 class SICertificateofExit(forms.Form):
     admission_no = forms.CharField(max_length=100)
-    date_of_admission= forms.CharField(
+    date_of_admission = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     expiry_date = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     date_of_committal_order = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     date_of_exit = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     date_of_follow_up = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
     reason_for_exit = forms.CharField(max_length=250)
     name_of_person_followingup = forms.CharField(max_length=100)
-    name_of_organization= forms.CharField(max_length=100)
-    relationship_to_child= forms.CharField(max_length=100)
-    address= forms.CharField(max_length=100)
-    telephone= forms.CharField(max_length=100)
-    name= forms.CharField(max_length=100)
-    designation= forms.CharField(max_length=100)
+    name_of_organization = forms.CharField(max_length=100)
+    relationship_to_child = forms.CharField(max_length=100)
+    address = forms.CharField(max_length=100)
+    telephone = forms.CharField(max_length=100)
+    name = forms.CharField(max_length=100)
+    designation = forms.CharField(max_length=100)
+
 
 class SIRecordofVisits(forms.Form):
     admission_no = forms.CharField(max_length=100)
@@ -984,230 +1371,388 @@ class SIRecordofVisits(forms.Form):
         required=False,
         widget=forms.Select(attrs={"class": "form-control", "id": "gender"}),
     )
-    date_of_visit= forms.CharField(
+    date_of_visit = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
-    relationship_to_child= forms.CharField(max_length=100)
-    address= forms.CharField(max_length=100)
-    telephone= forms.CharField(max_length=100)
-    id_no= forms.CharField(max_length=100)
-    type_of_communication= forms.CharField(max_length=100)
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
+    relationship_to_child = forms.CharField(max_length=100)
+    address = forms.CharField(max_length=100)
+    telephone = forms.CharField(max_length=100)
+    id_no = forms.CharField(max_length=100)
+    type_of_communication = forms.CharField(max_length=100)
     description = forms.CharField(max_length=250)
-    name_of_staff= forms.CharField(max_length=100)
+    name_of_staff = forms.CharField(max_length=100)
+
 
 class SIFamilyConference(forms.Form):
-    name_of_participant = forms.CharField(max_length=100,
+    name_of_participant = forms.CharField(
+        max_length=100,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Name of Participant'),
-                   'class': 'form-control',
-                   'id': 'name_of_participant'}
-        ) )
-    relationship_to_child= forms.CharField(max_length=100,
-         widget=forms.TextInput(
-            attrs={'placeholder': _('Relationship with the child'),
-                   'class': 'form-control',
-                   'id': 'relationship_child'}
-        ) 
-                                           )
-    address= forms.CharField(max_length=100,
-            widget=forms.TextInput(
-            attrs={'placeholder': _('Address'),
-                   'class': 'form-control',
-                   'id': 'address'}
-        ) 
-                             )
-    telephone= forms.CharField(max_length=100, widget=forms.TextInput(
-            attrs={'placeholder': _('Telephone'),
-                   'class': 'form-control',
-                   'id': 'telephone'}
-        ) )
-    underlying_issues = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Underlying Issues'),
-                   'class': 'form-control',
-                   'id': 'underlying_issues'}
-        ))
-    presenting_issues = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Presenting Issues'),
-                   'class': 'form-control',
-                   'id': 'presenting_issues'}
-        ))
-    consensus = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Consensus'),
-                   'class': 'form-control',
-                   'id': 'consensus'}
-        ))
-    family_promise = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Family Promise of Commitment'),
-                   'class': 'form-control',
-                   'id': 'family_promise'}
-        ))
-    child_promise = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Childs Promise of Commitment'),
-                   'class': 'form-control',
-                   'id': 'child_promise'}
-        ))
-    child_name = forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Childs Name'),
-                   'class': 'form-control',
-                   'id': 'child_name'}
-        ))
-    family_member= forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Name of family member'),
-                   'class': 'form-control',
-                   'id': 'family_member'}
-        ))
-    significant_other= forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Significant Other'),
-                   'class': 'form-control',
-                   'id': 'significant_other'}
-        ))
-    official_handling= forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Official handling the case'),
-                   'class': 'form-control',
-                   'id': 'official_handling'}
-        ))
-    follow_up_meeting= forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Follow up meeting to be held at?'),
-                   'class': 'form-control',
-                   'id': 'follow_up_meeting'}
-        ))
-    family_contactperson= forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Family Contact Person'),
-                   'class': 'form-control',
-                   'id': 'family_contactperson'}
-        ))
-    family_contactdetails= forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Contact details '),
-                   'class': 'form-control',
-                   'id': 'family_contactdetails'}
-        ))
-    follow_up_date= forms.CharField(
+            attrs={
+                "placeholder": _("Name of Participant"),
+                "class": "form-control",
+                "id": "name_of_participant",
+            }
+        ),
+    )
+    relationship_to_child = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Relationship with the child"),
+                "class": "form-control",
+                "id": "relationship_child",
+            }
+        ),
+    )
+    address = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Address"),
+                "class": "form-control",
+                "id": "address",
+            }
+        ),
+    )
+    telephone = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Telephone"),
+                "class": "form-control",
+                "id": "telephone",
+            }
+        ),
+    )
+    underlying_issues = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Underlying Issues"),
+                "class": "form-control",
+                "id": "underlying_issues",
+            }
+        ),
+    )
+    presenting_issues = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Presenting Issues"),
+                "class": "form-control",
+                "id": "presenting_issues",
+            }
+        ),
+    )
+    consensus = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Consensus"),
+                "class": "form-control",
+                "id": "consensus",
+            }
+        ),
+    )
+    family_promise = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Family Promise of Commitment"),
+                "class": "form-control",
+                "id": "family_promise",
+            }
+        ),
+    )
+    child_promise = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Childs Promise of Commitment"),
+                "class": "form-control",
+                "id": "child_promise",
+            }
+        ),
+    )
+    child_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Childs Name"),
+                "class": "form-control",
+                "id": "child_name",
+            }
+        ),
+    )
+    family_member = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Name of family member"),
+                "class": "form-control",
+                "id": "family_member",
+            }
+        ),
+    )
+    significant_other = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Significant Other"),
+                "class": "form-control",
+                "id": "significant_other",
+            }
+        ),
+    )
+    official_handling = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Official handling the case"),
+                "class": "form-control",
+                "id": "official_handling",
+            }
+        ),
+    )
+    follow_up_meeting = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Follow up meeting to be held at?"),
+                "class": "form-control",
+                "id": "follow_up_meeting",
+            }
+        ),
+    )
+    family_contactperson = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Family Contact Person"),
+                "class": "form-control",
+                "id": "family_contactperson",
+            }
+        ),
+    )
+    family_contactdetails = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Contact details "),
+                "class": "form-control",
+                "id": "family_contactdetails",
+            }
+        ),
+    )
+    follow_up_date = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
 
-                   ))
-   
+
 class SIReleaseForm(forms.Form):
-    admission_no = forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Admission Number'),
-                   'class': 'form-control',
-                   'id': 'admission_no'}
-        ))
-    name = forms.CharField(max_length=100,
+    admission_no = forms.CharField(
+        max_length=100,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Name'),
-                   'class': 'form-control',
-                   'id': 'name'}
-        ) )
-    id_no= forms.CharField(max_length=100,
-         widget=forms.TextInput(
-            attrs={'placeholder': _('ID Number'),
-                   'class': 'form-control',
-                   'id': 'id_no'}
-        ) )
-    telephone= forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={'placeholder': _('Telephone'),
-                'class': 'form-control',
-                'id': 'telephone'}
-    ) )
-    occupation= forms.CharField(max_length=100,
-            widget=forms.TextInput(
-            attrs={'placeholder': _('Occupation'),
-                   'class': 'form-control',
-                   'id': 'occupation'}
-        ))
-    residence = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Residence'),
-                   'class': 'form-control',
-                   'id': 'residence'}
-        ))
-    relation_to_child = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Relation to Child'),
-                   'class': 'form-control',
-                   'id': 'relation_to_child'}
-        ))
-   
+            attrs={
+                "placeholder": _("Admission Number"),
+                "class": "form-control",
+                "id": "admission_no",
+            }
+        ),
+    )
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={"placeholder": _("Name"), "class": "form-control", "id": "name"}
+        ),
+    )
+    id_no = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("ID Number"),
+                "class": "form-control",
+                "id": "id_no",
+            }
+        ),
+    )
+    telephone = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Telephone"),
+                "class": "form-control",
+                "id": "telephone",
+            }
+        ),
+    )
+    occupation = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Occupation"),
+                "class": "form-control",
+                "id": "occupation",
+            }
+        ),
+    )
+    residence = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Residence"),
+                "class": "form-control",
+                "id": "residence",
+            }
+        ),
+    )
+    relation_to_child = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Relation to Child"),
+                "class": "form-control",
+                "id": "relation_to_child",
+            }
+        ),
+    )
+
+
 class SIChildProfile(forms.Form):
-    record_date= forms.CharField(
+    record_date = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
-    name_of_institution = forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('Name of Institution'),
-                   'class': 'form-control',
-                   'id': 'name_of_institution'}
-        ))
-    scco_addressed = forms.CharField(max_length=100,widget=forms.TextInput(
-            attrs={'placeholder': _('SCCO Addressed'),
-                   'class': 'form-control',
-                   'id': 'scco_addressed'}
-        ))
-    old_released_to = forms.CharField(max_length=100,
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
+    name_of_institution = forms.CharField(
+        max_length=100,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Old address to be released to'),
-                   'class': 'form-control',
-                   'id': 'old_released_to'}
-        ) )
-    new_released_to = forms.CharField(max_length=100,
+            attrs={
+                "placeholder": _("Name of Institution"),
+                "class": "form-control",
+                "id": "name_of_institution",
+            }
+        ),
+    )
+    scco_addressed = forms.CharField(
+        max_length=100,
         widget=forms.TextInput(
-            attrs={'placeholder': _('New address to be released to'),
-                   'class': 'form-control',
-                   'id': 'new_released_to'}
-        ) )
-    guardian_job = forms.CharField(max_length=100,
+            attrs={
+                "placeholder": _("SCCO Addressed"),
+                "class": "form-control",
+                "id": "scco_addressed",
+            }
+        ),
+    )
+    old_released_to = forms.CharField(
+        max_length=100,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Job of guardian'),
-                   'class': 'form-control',
-                   'id': 'guardian_job'}
-        ) )
-    relation_guardian= forms.CharField(max_length=100,
-         widget=forms.TextInput(
-            attrs={'placeholder': _('Relation with the guardian'),
-                   'class': 'form-control',
-                   'id': 'relation_guardian'}
-        ) )
-    expiration_date= forms.CharField(
+            attrs={
+                "placeholder": _("Old address to be released to"),
+                "class": "form-control",
+                "id": "old_released_to",
+            }
+        ),
+    )
+    new_released_to = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("New address to be released to"),
+                "class": "form-control",
+                "id": "new_released_to",
+            }
+        ),
+    )
+    guardian_job = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Job of guardian"),
+                "class": "form-control",
+                "id": "guardian_job",
+            }
+        ),
+    )
+    relation_guardian = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Relation with the guardian"),
+                "class": "form-control",
+                "id": "relation_guardian",
+            }
+        ),
+    )
+    expiration_date = forms.CharField(
         required=False,
         widget=forms.DateInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'id': 'datepicker'},
-
-                   ))
-    reason_forchange= forms.CharField(max_length=250, widget=forms.TextInput(
-        attrs={'placeholder': _('Reason for change'),
-                'class': 'form-control',
-                'id': 'reason_forchange'}
-    ) )
-    life_planning= forms.CharField(max_length=100,
-            widget=forms.TextInput(
-            attrs={'placeholder': _('Life planning (interest and aptitude)'),
-                   'class': 'form-control',
-                   'id': 'life_planning'}
-        ))
-    mental_state = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Mental and Physical states'),
-                   'class': 'form-control',
-                   'id': 'mental_state'}
-        ))
-    other_changes = forms.CharField(max_length=250,widget=forms.TextInput(
-            attrs={'placeholder': _('Other Changes'),
-                   'class': 'form-control',
-                   'id': 'other_changes'}
-        ))
-   
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
+        ),
+    )
+    reason_forchange = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Reason for change"),
+                "class": "form-control",
+                "id": "reason_forchange",
+            }
+        ),
+    )
+    life_planning = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Life planning (interest and aptitude)"),
+                "class": "form-control",
+                "id": "life_planning",
+            }
+        ),
+    )
+    mental_state = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Mental and Physical states"),
+                "class": "form-control",
+                "id": "mental_state",
+            }
+        ),
+    )
+    other_changes = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _("Other Changes"),
+                "class": "form-control",
+                "id": "other_changes",
+            }
+        ),
+    )
 
     health_status = forms.CharField(
         required=False,
@@ -1350,6 +1895,28 @@ class SINeedRiskScale(forms.Form):
 
 
 class SIVacancyApp(forms.Form):
+    institution_type = forms.ChoiceField(
+        choices=SI_INSTITUTION,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Institution to be Admitted"),
+                "class": "form-control",
+                "id": "institution_type",
+            }
+        ),
+    )
+    institution_name = forms.ChoiceField(
+        choices = SI_ORGS,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Name of the Institution"),
+                "class": "form-control",
+                "id": "institution_name",
+            }
+        ),
+    )
     ref_no = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={"class": "form-control", "id": "ref_no"}),
@@ -1406,6 +1973,19 @@ class SIVacancyApp(forms.Form):
         widget=forms.TextInput(
             attrs={"class": "form-control", "id": "sub_county_children_officer"}
         ),
+    )
+    magistrate_court = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "id": "magistrate_court"}
+        ),
+    )
+    case_no = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={"class": "form-control", "id": "case_no"}),
+    )
+    months = forms.IntegerField(
+        widget=forms.NumberInput(attrs={"class": "form-control", "id": "months"}),
     )
 
 
@@ -1537,10 +2117,7 @@ class SISocialInquiry(forms.Form):
         choices=YES_NO_CHOICES,
         required=False,
         widget=forms.RadioSelect(
-            attrs={
-                "id": "has_close_relative",
-                "class": "radio-inline"
-            }
+            attrs={"id": "has_close_relative", "class": "radio-inline"}
         ),
     )
     relative_name = forms.CharField(
@@ -1666,12 +2243,7 @@ class SISocialInquiry(forms.Form):
     father_alive = forms.ChoiceField(
         choices=YES_NO_CHOICES,
         required=False,
-        widget=forms.RadioSelect(
-            attrs={
-                "id": "father_alive",
-                "class": "radio-inline"
-            }
-        ),
+        widget=forms.RadioSelect(attrs={"id": "father_alive", "class": "radio-inline"}),
     )
     father_name = forms.CharField(
         label="Name of Father",
@@ -1726,12 +2298,7 @@ class SISocialInquiry(forms.Form):
     mother_alive = forms.ChoiceField(
         choices=YES_NO_CHOICES,
         required=False,
-        widget=forms.RadioSelect(
-            attrs={
-                "id": "mother_alive",
-                "class": "radio-inline"
-            }
-        ),
+        widget=forms.RadioSelect(attrs={"id": "mother_alive", "class": "radio-inline"}),
     )
     mother_name = forms.CharField(
         label="Name of Mother",
@@ -1770,245 +2337,433 @@ class SISocialInquiry(forms.Form):
         ),
     )
 
+
 class MedicalAssesmentForm(forms.Form):
-    name = forms.CharField(label='Name')
-    age = forms.IntegerField(label='Age')
-    sex = forms.ChoiceField(label='Sex',
-                            choices=list_sex_id,
-                            widget=forms.RadioSelect)
+    name = forms.CharField(label="Name")
+    age = forms.IntegerField(label="Age")
+    sex = forms.ChoiceField(label="Sex", choices=list_sex_id, widget=forms.RadioSelect)
 
-    height = forms.DecimalField(label='Height',
-                                widget=forms.NumberInput(
-                                    attrs={'placeholder': _(''),
-                                           'class': 'form-control',
-                                           'data-parsley-required': "false"}))
-    blood_pressure = forms.CharField(label='Blood Pressure',
-                                     widget=forms.TextInput(
-                                         attrs={'placeholder': _(''),
-                                                'class': 'form-control',
-                                                'data-parsley-required': "false"}))
-    weight = forms.DecimalField(label='Weight',
-                                widget=forms.NumberInput(
-                                    attrs={'placeholder': _(''),
-                                           'class': 'form-control',
-                                           'data-parsley-required': "false"}))
-    pulse_rate = forms.IntegerField(label='Pulse Rate',
-                                    widget=forms.NumberInput(
-                                        attrs={'placeholder': _(''),
-                                               'class': 'form-control',
-                                               'data-parsley-required': "false"}))
+    height = forms.DecimalField(
+        label="Height",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    blood_pressure = forms.CharField(
+        label="Blood Pressure",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    weight = forms.DecimalField(
+        label="Weight",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    pulse_rate = forms.IntegerField(
+        label="Pulse Rate",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    physical_disability = forms.ChoiceField(label='Any Physical Disability',
-                                            choices=disability_list,
-                                            widget=forms.ChoiceField)
+    physical_disability = forms.ChoiceField(
+        label="Any Physical Disability",
+        choices=disability_list,
+        widget=forms.ChoiceField,
+    )
 
+    current_illness = forms.ChoiceField(
+        label="Any Current Illness", choices=YES_NO_CHOICES, widget=forms.RadioSelect
+    )
 
-    current_illness = forms.ChoiceField(label='Any Current Illness',
-                                      choices=YES_NO_CHOICES,
-                                      widget=forms.RadioSelect )
+    current_medications = forms.CharField(
+        label="List Current Medications",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    current_medications = forms.CharField(label='List Current Medications',
-                                          widget=forms.TextInput(
-                                          attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
+    tb_treatment_or_exposure = forms.ChoiceField(
+        label="Any treatment for TB or exposure to a TB patient?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+    )
 
-    tb_treatment_or_exposure = forms.ChoiceField (label='Any treatment for TB or exposure to a TB patient?',
-                                                  choices=YES_NO_CHOICES,
-                                                  widget=forms.RadioSelect
+    mental_illness_history = forms.ChoiceField(
+        label="Any history of mental illness in self or family",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+    )
 
-                                               )
+    sleep_problems = forms.ChoiceField(
+        label="Any sleep problems?", choices=YES_NO_CHOICES, widget=forms.RadioSelect
+    )
+    sleep_problems_description = forms.CharField(
+        label="Elaborate",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    mental_illness_history = forms.ChoiceField(label='Any history of mental illness in self or family',
-                                             choices=YES_NO_CHOICES,
-                                             widget=forms.RadioSelect)
+    seizures_history = forms.ChoiceField(
+        label="Any history of seizures?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+    )
+    seizures_duration = forms.CharField(
+        label="List current duration",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    seizures_medications = forms.CharField(
+        label="List current medications",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    sleep_problems = forms.ChoiceField(label='Any sleep problems?',
-                                       choices=YES_NO_CHOICES,
-                                       widget=forms.RadioSelect)
-    sleep_problems_description = forms.CharField(label='Elaborate',
-                                                 widget=forms.TextInput(
-                                                     attrs={'placeholder': _(''),
-                                                            'class': 'form-control',
-                                                            'data-parsley-required': "false"}))
-
-    seizures_history = forms.ChoiceField(label='Any history of seizures?',
-                                         choices=YES_NO_CHOICES,
-                                         widget=forms.RadioSelect)
-    seizures_duration = forms.CharField(label='List current duration',
-                                        widget=forms.TextInput(
-                                        attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
-    seizures_medications = forms.CharField(label='List current medications',
-                                           widget=forms.TextInput(
-                                               attrs={'placeholder': _(''),
-                                                      'class': 'form-control',
-                                                      'data-parsley-required': "false"}))
-
-    known_allergy = forms.ChoiceField(label='Any known allergy?',
-                                      choices=YES_NO_CHOICES,
-                                      widget=forms.RadioSelect,
-                                      required=False)
-    known_allergy_list = forms.CharField(label='List',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
+    known_allergy = forms.ChoiceField(
+        label="Any known allergy?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=False,
+    )
+    known_allergy_list = forms.CharField(
+        label="List",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
     # Physical Examination
-    general_examination=forms.CharField(label="genral examination",
-                                        widget=forms.Textarea(
-                                            attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
+    general_examination = forms.CharField(
+        label="genral examination",
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
-    orientation_time = forms.TimeField(label='Orientation: Time',
-                                           widget=TimeInput(format='%H:%M'))
+    orientation_time = forms.TimeField(
+        label="Orientation: Time", widget=TimeInput(format="%H:%M")
+    )
 
     orientation_date = forms.DateField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )
 
-    orientation_place = forms.CharField(label='Orientation: Place',
-                                        widget=forms.TextInput(
-                                            attrs={'placeholder': _(''),
-                                                   'class': 'form-control',
-                                                   'data-parsley-required': "false"}))
-    orientation_person = forms.CharField(label='Orientation: Person',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
-    speech = forms.CharField(label='Speech',
-                             widget=forms.TextInput(
-                                 attrs={'placeholder': _(''),
-                                        'class': 'form-control',
-                                        'data-parsley-required': "false"}))
-    visual_acuity_re = forms.CharField(label='Visual Acuity: RE',
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
-    visual_acuity_le = forms.CharField(label='Visual Acuity: LE',
-                                       widget=forms.TextInput(
-                                           attrs={'placeholder': _(''),
-                                                  'class': 'form-control',
-                                                  'data-parsley-required': "false"}))
-    head_and_neck = forms.CharField(label='Head and Neck',
-                                    widget=forms.TextInput(
-                                        attrs={'placeholder': _(''),
-                                               'class': 'form-control',
-                                               'data-parsley-required': "false"}))
-    ent = forms.CharField(label='ENT',
-                          widget=forms.TextInput(
-                              attrs={'placeholder': _(''),
-                                     'class': 'form-control',
-                                     'data-parsley-required': "false"}))
-    central_nervous_system = forms.CharField(label='Central Nervous System',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    cardiovascular_system = forms.CharField(label='Cardiovascular System',
-                                            widget=forms.TextInput(
-                                                attrs={'placeholder': _(''),
-                                                       'class': 'form-control',
-                                                       'data-parsley-required': "false"}))
-    respiratory_system = forms.CharField(label='Respiratory System',
-                                         widget=forms.TextInput(
-                                             attrs={'placeholder': _(''),
-                                                    'class': 'form-control',
-                                                    'data-parsley-required': "false"}))
-    git_system = forms.CharField(label='GIT System',
-                                 widget=forms.TextInput(
-                                     attrs={'placeholder': _(''),
-                                            'class': 'form-control',
-                                            'data-parsley-required': "false"}))
-    musculoskeletal_system = forms.CharField(label='Musculoskeletal System',
-                                             widget=forms.TextInput(
-                                                 attrs={'placeholder': _(''),
-                                                        'class': 'form-control',
-                                                        'data-parsley-required': "false"}))
-    reproductive_system = forms.CharField(label='Reproductive System',
-                                          widget=forms.TextInput(
-                                              attrs={'placeholder': _(''),
-                                                     'class': 'form-control',
-                                                     'data-parsley-required': "false"}))
-    skin_condition = forms.CharField(label='Condition of the Skin',
-                                     widget=forms.TextInput(
-                                         attrs={'placeholder': _(''),
-                                                'class': 'form-control',
-                                                'data-parsley-required': "false"}))
-    dental_condition = forms.ChoiceField(label='Any dental condition?',
-                                         choices=YES_NO_CHOICES,
-                                         widget=forms.RadioSelect,
-                                         required=False)
-    urinalysis = forms.CharField(label='Urinalysis',
-                                 widget=forms.TextInput(
-                                     attrs={'placeholder': _(''),
-                                            'class': 'form-control',
-                                            'data-parsley-required': "false"}))
-    stool_oc = forms.CharField(label='Stool for O/C',
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': _(''),
-                                          'class': 'form-control',
-                                          'data-parsley-required': "false"}))
-    vdrl_test = forms.CharField(label='VDRL Test',
-                                widget=forms.TextInput(
-                                    attrs={'placeholder': _(''),
-                                           'class': 'form-control',
-                                           'data-parsley-required': "false"}))
-    pregnancy_test = forms.CharField(label='Pregnancy Test', required=False,
-                                     widget=forms.TextInput(
-                                         attrs={'placeholder': _(''),
-                                                'class': 'form-control',
-                                                'data-parsley-required': "false"}))
-    covid19_test = forms.CharField(label='COVID-19 Test', required=False,
-                                   widget=forms.TextInput(
-                                       attrs={'placeholder': _(''),
-                                              'class': 'form-control',
-                                              'data-parsley-required': "false"}))
-    hiv_test = forms.CharField(label='HIV Test', required=False,
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': _(''),
-                                          'class': 'form-control',
-                                          'data-parsley-required': "false"}))
-    consent = forms.BooleanField(label='Consent')
-    xray_report = forms.CharField(label='X-Ray Report',
-                                  required=False,
-                                  widget=forms.TextInput(
-                                      attrs={'placeholder': _(''),
-                                             'class': 'form-control',
-                                             'data-parsley-required': "false"}))
-    medical_observations = forms.CharField(label='Any other medical observations or comments by the doctor',
-                                           widget=forms.TextInput(
-                                               attrs={'placeholder': _(''),
-                                                      'class': 'form-control',
-                                                      'data-parsley-required': "false"}))
-    medical_practitioner_certify=forms.CharField(
-                                                 widget=forms.TextInput(
-                                                     attrs={'placeholder': _(''),
-                                                            'class': 'form-control',
-                                                            'data-parsley-required': "false"}))
+    orientation_place = forms.CharField(
+        label="Orientation: Place",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    orientation_person = forms.CharField(
+        label="Orientation: Person",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    speech = forms.CharField(
+        label="Speech",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    visual_acuity_re = forms.CharField(
+        label="Visual Acuity: RE",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    visual_acuity_le = forms.CharField(
+        label="Visual Acuity: LE",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    head_and_neck = forms.CharField(
+        label="Head and Neck",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    ent = forms.CharField(
+        label="ENT",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    central_nervous_system = forms.CharField(
+        label="Central Nervous System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    cardiovascular_system = forms.CharField(
+        label="Cardiovascular System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    respiratory_system = forms.CharField(
+        label="Respiratory System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    git_system = forms.CharField(
+        label="GIT System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    musculoskeletal_system = forms.CharField(
+        label="Musculoskeletal System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    reproductive_system = forms.CharField(
+        label="Reproductive System",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    skin_condition = forms.CharField(
+        label="Condition of the Skin",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    dental_condition = forms.ChoiceField(
+        label="Any dental condition?",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=False,
+    )
+    urinalysis = forms.CharField(
+        label="Urinalysis",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    stool_oc = forms.CharField(
+        label="Stool for O/C",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    vdrl_test = forms.CharField(
+        label="VDRL Test",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    pregnancy_test = forms.CharField(
+        label="Pregnancy Test",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    covid19_test = forms.CharField(
+        label="COVID-19 Test",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    hiv_test = forms.CharField(
+        label="HIV Test",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    consent = forms.BooleanField(label="Consent")
+    xray_report = forms.CharField(
+        label="X-Ray Report",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    medical_observations = forms.CharField(
+        label="Any other medical observations or comments by the doctor",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
+    medical_practitioner_certify = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        )
+    )
 
-    medical_practitioner_name = forms.CharField(label='Name of Medical Practitioner',
-                                                widget=forms.TextInput(
-                                                    attrs={'placeholder': _(''),
-                                                           'class': 'form-control',
-                                                           'data-parsley-required': "false"}))
+    medical_practitioner_name = forms.CharField(
+        label="Name of Medical Practitioner",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": _(""),
+                "class": "form-control",
+                "data-parsley-required": "false",
+            }
+        ),
+    )
 
     medical_practitioner_date = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'placeholder': _('Select date'),
-                   'class': 'form-control',
-                   'data-parsley-notfuturedate': "dd-M-yy",
-                   'id': 'datepicker',
-                   'data-parsley-group': 'primary'}))
-
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "data-parsley-notfuturedate": "dd-M-yy",
+                "id": "datepicker",
+                "data-parsley-group": "primary",
+            }
+        ),
+    )

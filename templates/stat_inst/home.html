@@ -71,21 +71,69 @@
                 <hr>
                 <table class="table" id="data-table">
                     <thead>
-                        <tr><th>#</th><th>CPIMS ID</th><th>Names</th><th>Case ID</th><th>Case Date</th><th></th></tr>
+                        <tr><th>#</th><th>CPIMS ID</th><th>Names</th><th>institution Type</th><th>Institution Names</th><th>Actions</th></tr>
                     </thead>
                 {% for case in cases %}
                    <tr>
                        <td>{{ forloop.counter }}</td>
                        <td>{{ case.id }}</td>
                        <td>{{ case.first_name }} {{ case.surname }}</td>
-                       <td>{{ case.case_serial }}</td>
-                       <td>{{ case.case_date }}</td>
+                       <td>{{ case.inst_type }}</td>
+                       <td>{{ case.inst_name }}</td>
                        <td>
-                            {% comment %} {% if case.case_level == 2 %} {% endcomment %}
-                                <a href="{% url 'new_si_child_view' case.id %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
-                             {% comment %} {% elif case.case_level == 1 %} {% endcomment %}
-                                <a href="{% url 'new_si_admit' case.id %}" class="btn  btn-sm btn-primary m-r-5">Enroll </a>
-                            {% comment %} {% endif %}  {% endcomment %}
+                           {% if case.inst_type == "W" %} 
+                                <a href="{% url 'vacancy_app' case.id %}" class="btn  btn-sm btn-primary m-r-1">View Applications</a>
+                           {% elif case.inst_type != "Not Enrolled" %} 
+                               <a href="{% url 'new_si_child_view' case.id %}" class="btn  btn-sm btn-primary m-r-1">View Case</a>
+                             {% else %} 
+                               
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Enroll{{case.id}}">
+                                        Enroll
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal modal_enrol fade" id="Enroll{{case.id}}" tabindex="-1" role="dialog" aria-labelledby="EnrollLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="EnrollLabel">Institution to Enroll child: </h5>
+                                              {% comment %} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button> {% endcomment %}
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-8"></div>
+                                                    <div class="row p-10">
+                                                        <div class="col-md-6">Child Name: {{case.first_name}}  {{case.other_names}}  {{case.surname}}</div>
+                                                    </div>
+                                                    <div class="row p-10">
+                                                        <div class="col-md-4">
+                                                            <div id="" class="form-group">
+                                                                <label for="institution_type">Institution Type <span class="asteriskField">*</span> :</label>
+                                                                {{ form.institution_type }}
+                                                            </div>
+                                                            <div id="date_warning" class="form-group" style="display: none"></div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="institution_name">Name of institution  :</label>
+                                                                {{ form.institution_name }}
+                                                        </div>
+                                                    </div>
+                                                <div class="col-md-2"></div>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                               <a id="admitbtn" href="{% url 'new_si_admit' case.id %}" class="btn  btn-sm btn-primary m-r-1">Admit</a>
+                                               <a id="vacancybtn" href="{% url 'vacancy_app' case.id %}" class="btn  btn-sm btn-primary m-r-1">Apply for a vacancy</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                {% comment %} </a> {% endcomment %}
+                            {% endif %}  
                         </td>
                    </tr>
                     
@@ -107,6 +155,8 @@
 <script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
 <script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
 <script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+<script src="{% static 'js/si.js' %}"></script>
+{% comment %} <script src="{% static 'js/select2.min.js' %}"></script> {% endcomment %}
 
 <script>
 $(document).ready(function() {
@@ -114,45 +164,72 @@ $(document).ready(function() {
         "order": [[ 0, "asc" ]]
     } );
 
-    $('.ddash').on('click', function(ev) {
-        // var hashValue = location.hash.replace(/^#/, '');
-        var id = $(this).attr('id');
-        var cname = $(this).attr('rel');
-        var cdate = $(this).attr('rel1');
-        $('#cname').html(cname);
-        $('#cdate').html(cdate);
-        $('#item_cid').val(id);
-        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
-        $.ajax({
-           type: "POST",
-           url: "{{ request.get_full_path }}",
-           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
-           success: function(response)
-           {
-               var msg = response.message;
-               var status_id = response.status;
-               var cdates = response.dates;
-               if (status_id == 0){
-                   $("#report_"+ id).remove();
-               }
-               $('#mng_messages').html(msg);
-               var dt = '';
-               var tchildren = 0;
-               var tcases = 0;
-               var trpts = 0;
-               $.each(response.data, function(key, val) {
-                    dt += '<tr><td></td><td>'+ key +'</td><td>';
-                    dt += val + '</td></tr>';
-                });
-               $('#mywork > tbody').html(dt);
-           },
-            error: function(){
-                $('#mng_messages').html("Error removing report")
+    $('#admintbtn').hide()
+    $('#vacancytbtn').hide()
+
+        // Fetching institution by type
+        $("#institution_type").on('change', function(e) {
+            var si_type = $("#institution_type").val();
+
+            // vacancy & admission redirection
+            if(si_type=='TNGP'){ // Remand Home
+                // alert(si_type)
+                $('#admintbtn').show()
+                // alert('below')
+                $('#vacancytbtn').hide()
+            }else if (si_type=='TNGN'){ // Rehabilitations Home
+                $('#vacancytbtn').show()
+                $('#admintbtn').hide()
+            } else {
+                $('#vacancytbtn').hide()
+                $('#admintbtn').hide()
             }
-         });
-        $('#modal-details').modal('show');
-        ev.preventDefault();
-    });
+            var csrftoken = $.cookie('csrftoken');
+            var values = {'si_type': si_type, 'action': 2,
+                          'csrfmiddlewaretoken': csrftoken };
+            $('#institution_name').empty();
+            $.ajax({
+                type: "POST",
+                data: values,
+                dataType: "json",
+                url: "si_lookup/",
+                success: function(data){
+                    var wards = data.centres;
+                    console.log(wards)
+                    //$('#working_in_ward').html("<option value=''>Please Select</option>");           
+                    $.each(wards, function(i, record) {
+                        var ward_attribs = wards[i][0].split(",");
+                        $('#institution_name')
+                            .append($("<option></option>")
+                            .attr("value", ward_attribs[0])
+                            .text(ward_attribs[1]));
+                     });
+                    $('#institution_name').select2();
+                },
+                error: function(){
+                    $('#messages').html("Error")
+                }
+            });
+        });
+
+
+        $("#institution_name").on('change', function(e) {
+            var si_type = $("#institution_type").val();
+            var si_name = $("#institution_name").val();
+            console.log({si_type, si_name})
+            // vacancy & admission redirection
+            if(si_type=='TNSA' && si_name == 'U000028'){ // Remand Home
+                $('#admintbtn').show()
+                $('#vacancytbtn').hide()
+            }else if (si_type=='TNSA'){ // Remand Home
+                $('#vacancytbtn').show()
+                $('#admintbtn').hide()
+            }
+
+        })
+  
+
+
 } );
 </script>
 {% endblock %}

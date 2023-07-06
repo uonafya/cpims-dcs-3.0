@@ -7,16 +7,15 @@ from cpovc_auth.models import AppUser
 # Create your models here.
 from cpovc_registry.models import RegPerson
 
-YES_NO_CHOICES = (
-    ("yes", "Yes"),
-    ("no", "No"),
-)
+# Database options
+from .forms import YES_NO_CHOICES, SI_INSTITUTION, APP_STATUS
 
 
 class SI_Admission(models.Model):
     si = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
-    institution_type = models.CharField(max_length=100, null=False, blank=False)  # from list general institution type id
+    institution_type = models.CharField(max_length=5, null=False, blank=False, choices=SI_INSTITUTION)  # from list general institution type id
+    institution_name = models.CharField(max_length=100, null=False, blank=False)  # from list general institution type id
     date_of_admission = models.DateField(null=True, blank=True)
     current_year_of_school = models.CharField(max_length=50, null=True, blank=True)
     type_of_entry = models.CharField(max_length=100, null=True, blank=True)
@@ -28,17 +27,17 @@ class SI_Admission(models.Model):
     referrer_address = models.CharField(max_length=100, null=True, blank=True)
     referrer_phone = models.CharField(max_length=100, null=True, blank=True)
     not_contact_child = models.CharField(
-        max_length=3, choices=YES_NO_CHOICES, null=True, blank=True
+        max_length=10, choices=YES_NO_CHOICES, null=True, blank=True
     )
     name_not_contact_child = models.CharField(max_length=100, null=True, blank=True)
     relationship_to_child_not_contact_child = models.CharField(
         max_length=100, null=True, blank=True
     )
     consent_form_signed = models.CharField(
-        max_length=3, choices=YES_NO_CHOICES, null=True, blank=True
+        max_length=10, choices=YES_NO_CHOICES, null=True, blank=True
     )
     commital_court_order = models.CharField(
-        max_length=3, choices=YES_NO_CHOICES, null=True, blank=True
+        max_length=10, choices=YES_NO_CHOICES, null=True, blank=True
     )
     school_name = models.CharField(max_length=100, null=True, blank=True)
     health_status = models.TextField(null=True, blank=True)
@@ -52,10 +51,10 @@ class SI_Admission(models.Model):
 
     class Meta:
         managed = True
-        db_table = "ovc_si_main"
+        db_table = "si_main"
         verbose_name = "Statutory Institutions"
         verbose_name_plural = "Statutory Institutions"
-        app_label = "Statutory Institutions"
+        app_label = "cpovc_stat_inst"
     
 class SI_NeedRiskAssessment(models.Model):
     needs = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
@@ -72,7 +71,7 @@ class SI_NeedRiskAssessment(models.Model):
         db_table = "si_needriskassessment"
         verbose_name = "SINeedRiskAssessment"
         verbose_name_plural = "SINeedRiskAssessments"
-        app_label = "SINeedRiskAssessment"
+        app_label = "cpovc_stat_inst"
 
 
 class SI_NeedRiskScale(models.Model):
@@ -89,11 +88,11 @@ class SI_NeedRiskScale(models.Model):
         db_table = "si_needriskscale"
         verbose_name = "SINeedRiskScale"
         verbose_name_plural = "SINeedRiskScales"
-        app_label = "SINeedRiskScale"
+        app_label = "cpovc_stat_inst"
 
 
 class SI_VacancyApp(models.Model):
-    vacancy = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
+    vacancy = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     ref_no = models.CharField(max_length=100)
     date_of_application = models.DateField(null=True, blank=True)
@@ -106,20 +105,21 @@ class SI_VacancyApp(models.Model):
     requesting_officer = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)
     sub_county_children_officer = models.CharField(max_length=100)
-    application_status = models.BooleanField(default=False)
-    date_of_approved = models.DateField()
+    application_status = models.CharField(default='W', choices=APP_STATUS, max_length=4)
+    date_of_approved = models.DateField(null=True, blank=True)
     months_approved = models.CharField(max_length=100)
     magistrate_court = models.CharField(max_length=100)
-    cci_placed = models.CharField(max_length=100)
+    cci_placed = models.CharField(max_length=20)
     is_void = models.BooleanField(default=False)
     created_by = models.ForeignKey(AppUser, on_delete=models.CASCADE, null=True)
     created_at = models.DateField(default=timezone.now)
+    updated_at = models.DateField(default=timezone.now)
 
     class Meta:
         db_table = "si_vacancy"
         verbose_name = "SIVacancyApp"
         verbose_name_plural = "SIVacancyApps"
-        app_label = "SIVacancyApp"
+        app_label = "cpovc_stat_inst"
 
 
 
@@ -201,8 +201,8 @@ class SI_SocialInquiry(models.Model):
 
     class Meta:
         db_table = 'si_social_inquiry'
-        verbose_name = "SIVacancyApp"
-        verbose_name_plural = "SIVacancyApps"
-        app_label = "SIVacancyApp"
+        verbose_name = "SI Social Inquiry"
+        verbose_name_plural = "SI Social Inquirys"
+        app_label = "cpovc_stat_inst"
 
 

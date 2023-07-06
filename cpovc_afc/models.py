@@ -146,3 +146,5 @@ class AFCQuestions(models.Model):
     def __unicode__(self):
         """To be returned by admin actions."""
         return '%s' % (str(self.question_code))
+    
+

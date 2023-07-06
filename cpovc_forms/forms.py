@@ -11,6 +11,8 @@ from .functions import get_questions
 # Added for CTiP
 from cpovc_main.country import OCOUNTRIES
 
+from cpovc_stat_inst.forms import SI_INSTITUTION, SI_ORGS
+
 phone_regex = "/^[0-9\\+]{1,}[0-9\\-]{3,15}$/"
 
 YESNO_CHOICES = (('AYES', 'Yes'), ('ANNO', 'No'))
@@ -499,6 +501,28 @@ class OVCSearchForm(forms.Form):
             attrs={'class': 'form-control',
                    'id': 'form_type_search',
                    'data-parsley-required': 'true'}))
+    institution_type = forms.ChoiceField(
+        choices=SI_INSTITUTION,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Institution to be Admitted"),
+                "class": "form-control",
+                "id": "institution_type",
+            }
+        ),
+    )
+    institution_name = forms.ChoiceField(
+        choices = SI_ORGS,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Name of the Institution"),
+                "class": "form-control",
+                "id": "institution_name",
+            }
+        ),
+    )
 
 
 class ResidentialFollowupForm(forms.Form):
