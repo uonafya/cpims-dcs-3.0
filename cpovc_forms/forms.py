@@ -501,28 +501,7 @@ class OVCSearchForm(forms.Form):
             attrs={'class': 'form-control',
                    'id': 'form_type_search',
                    'data-parsley-required': 'true'}))
-    institution_type = forms.ChoiceField(
-        choices=SI_INSTITUTION,
-        required=False,
-        widget=forms.Select(
-            attrs={
-                "placeholder": _("Institution to be Admitted"),
-                "class": "form-control",
-                "id": "institution_type",
-            }
-        ),
-    )
-    institution_name = forms.ChoiceField(
-        choices = SI_ORGS,
-        required=False,
-        widget=forms.Select(
-            attrs={
-                "placeholder": _("Name of the Institution"),
-                "class": "form-control",
-                "id": "institution_name",
-            }
-        ),
-    )
+    
 
 
 class ResidentialFollowupForm(forms.Form):

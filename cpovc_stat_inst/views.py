@@ -9,9 +9,13 @@ import uuid
 
 from django.utils import timezone
 
+from cpovc_auth.models import AppUser
+
 from .forms import (SIAdmission, SICaseReferral, RemandHomeEscape,MedicalAssesmentForm,
 SICertificateofExit, SIRecordofVisits,IndividualCarePlanForm,
- SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm)
+SIFamilyConference, SIReleaseForm,SIChildProfile, SIAdmission, 
+SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp, SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm, 
+childPlacement)
 
 from .forms import (
     SI_INSTITUTION,
@@ -21,7 +25,10 @@ from .forms import (
 from .models import (SI_Admission, 
                      SI_NeedRiskAssessment, 
                      SI_NeedRiskScale, 
-                     SI_VacancyApp, SI_SocialInquiry)
+                     SI_VacancyApp, 
+                     SI_SocialInquiry,
+                     SI_Referral,
+                     )
 
 from .functions import convert_date, convertYesNo, get_si_reg_list
 
@@ -262,12 +269,49 @@ def SI_childIdentification(request,person_id):
 
 def si_casereferral(request, id):
     data = request.GET
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    person = RegPerson.objects.get(id=id, is_void=False)
+    user_id = request.user.id
+    current_user = AppUser.objects.get(reg_person=user_id, is_active=True)
+    child = person_id.values()[0]
+
+    applications = SI_Referral.objects.filter(is_void=False, person_id = id)
+    referrals = applications.values()
+    print(referrals)
+
+    print(request)
+    admission = {
+        'institution_name': "Wamumu Children home"
+    }
 
     form = SICaseReferral()
     try:
+        if request.method == 'POST':
+            data = request.POST
+
+            SI_Referral(
+                person = person,
+                user = current_user,
+                ref_no = data.get('ref_no'),
+                refferal_to = data.get('refferal_to'),
+                reason_for_referral =  data.get('reason_for_referral '),
+                reason_for_referral_others =  data.get('reason_for_referral_others '),
+                documents_attached = data.get('documents_attached') 
+            ).save()
+
+            msg = f'Case referral  {data.get("ref_no")} saved successful'
+            messages.add_message(request, messages.SUCCESS, msg)
+
+            return HttpResponseRedirect(reverse('new_si_child_view', args=(id,))) # person_id)
+
+
 
         context = {
-            'form': form
+            'form': form,
+            'child': child,
+            "admission": admission,
+            "referrals": referrals
         }
 
         return render(request,'stat_inst/case_referral.html',context)    
@@ -548,4 +592,27 @@ def SI_child_view(request, id):
     
     except Exception as e:
         raise e
+
+
+def child_placement(request, id):
+    data = request.POST
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+
+    child = person_id.values()[0]
+
+    creg = {}
+    creg['is_active '] = True
+
+    form = childPlacement()
+    try:
+        if request.method == 'POST':
+            pass
+
+        context = {
+            'form': form,
+            'child': child
+        }
+        return render(request,'stat_inst/placement.html',context)
     
+    except Exception as e:
+        raise e

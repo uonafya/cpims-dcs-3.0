@@ -4,10 +4,8 @@ from . import views
 # This should contain urls related to registry ONLY
 urlpatterns = [
     path('', views.si_home, name='SI_home'),
-    # path('new/<uuid:case_id>/', views.SI_admissions, name='new_si_admit'),
 
     path('new/<int:id>/', views.SI_admissions, name='new_si_admit'),
-    path('si_lookup/', views.si_look, name='si_lookup'),
 
     path('medical-assessment/<int:id>/', views.SI_medicalassesment, name='medical_assessment_form'),
     path('individual-care-plan/<int:id>/', views.SI_individualCarePlan, name='individual_care_plan_form'),
@@ -24,13 +22,11 @@ urlpatterns = [
 
     path('view/<int:id>/', views.SI_child_view, name='new_si_child_view'),
 
-    path('new/<int:id>/', views.SI_admissions, name='new_si_admit'),
     path('needriskform/<int:id>/', views.SI_needriskform, name='new_si_riskneedform'),    
     path('needriskscale/<int:id>/', views.SI_needriskscale, name='new_si_riskneedscale'),
 
     path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
 
-    path('socialinquiry/<int:id>/', views.SI_social_inquiry, name='social_inquiry'),
 
     # Vacancy mode
     path('vacancy/<int:id>/', views.SI_vacancyapplication, name='vacancy_app'),
@@ -40,8 +36,12 @@ urlpatterns = [
     path('vacancyDetail/', views.SI_vacancyDetail, name='vacancyDetail'),
     path('vacancyApprove/', views.SI_vacancyApprove, name='vacancyApprove'),
 
+    # Placement
+    path('placement/<int:id>/', views.child_placement, name='placement'),
 
 
+    # lookup script/ Api endpoints
+    path('si_lookup/', views.si_look, name='si_lookup'),
 
 
 ]

@@ -13,7 +13,7 @@ const fetchSiOrgs = () => {
             type: "POST",
             data: values,
             dataType: "json",
-            url: "si_lookup/",
+            url: "/si/si_lookup/",
             success: function(data){
                 var wards = data.centres;
                 console.log(wards)

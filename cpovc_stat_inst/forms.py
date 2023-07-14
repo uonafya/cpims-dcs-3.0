@@ -152,7 +152,6 @@ SI_INSTITUTION = (
     ("TNGP", "Remand Homes"),
     ("TNGN", "Rehabilitation Centres"),
     ("TNSA", "Rescue Centres"),
-    ("TNRS", "Rehabilitation Centres"),
 )
 NEEDS_RISK_ASSESSMENT = (
     (
@@ -246,6 +245,20 @@ APP_STATUS = (
     ('A', 'Approved'),
     ('D', 'Denied'),
 )
+
+DOCUMENT_CHOICES_CASE_REFERRAL = (
+        ('default', 'Please Select'),
+        ('crs', 'Case Record Sheet'),
+        ('sir', 'Social Inquiry Report'),
+        ('court_order', 'Court Order'),
+        ('assess_form', 'Assessment form'),
+    )
+REASON_CHOICES_CASE_REFERRAL = (
+        ('default', 'Please Select'),
+        ('court_order', 'By Court Order'),
+        ('supervision', 'Supervision'),
+        ('others', 'Others'),
+    )
 
 
 class SIPreAdmission(forms.Form):
@@ -1242,6 +1255,50 @@ class SICaseReferral(forms.Form):
                 "id": "file_name",
             }
         )
+    )
+    ref_no = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'id': 'ref_no',
+            'class': 'form-control',
+            'data-parsley-required': 'true'
+        })
+    )
+
+    refferal_to = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'id': 'refferal_to',
+            'class': 'form-control',
+            'data-parsley-required': 'true'
+        })
+    )
+
+    
+    reason_for_referral = forms.ChoiceField(
+        choices=REASON_CHOICES_CASE_REFERRAL,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+            'data-parsley-required': 'true'
+        })
+    )
+
+    reason_for_referral_others = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'id': 'reason_for_referral_others',
+            'class': 'form-control',
+            'data-parsley-required': 'false'
+        })
+    )
+
+   
+    documents_attached = forms.MultipleChoiceField(
+        choices=DOCUMENT_CHOICES_CASE_REFERRAL,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+            'data-parsley-required': 'false'
+        })
     )
 
 
@@ -2764,6 +2821,41 @@ class MedicalAssesmentForm(forms.Form):
                 "data-parsley-notfuturedate": "dd-M-yy",
                 "id": "datepicker",
                 "data-parsley-group": "primary",
+            }
+        ),
+    )
+
+
+class childPlacement(forms.Form):
+    institution_type = forms.ChoiceField(
+        choices=SI_INSTITUTION,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Institution to be Admitted"),
+                "class": "form-control",
+                "id": "institution_type",
+            }
+        ),
+    )
+    institution_name = forms.ChoiceField(
+        choices = SI_ORGS,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Name of the Institution"),
+                "class": "form-control",
+                "id": "institution_name",
+            }
+        ),
+    )
+    institution_name = forms.CharField(
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "placeholder": _("Name of the Institution"),
+                "class": "form-control",
+                "id": "institution_name",
             }
         ),
     )

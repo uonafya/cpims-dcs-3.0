@@ -7,6 +7,7 @@ from cpovc_auth.models import AppUser
 # Create your models here.
 from cpovc_registry.models import RegPerson
 
+
 # Database options
 from .forms import YES_NO_CHOICES, SI_INSTITUTION, APP_STATUS
 
@@ -16,6 +17,7 @@ class SI_Admission(models.Model):
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     institution_type = models.CharField(max_length=5, null=False, blank=False, choices=SI_INSTITUTION)  # from list general institution type id
     institution_name = models.CharField(max_length=100, null=False, blank=False)  # from list general institution type id
+    admissionNumber = models.CharField(max_length=100, null=False, blank=False)
     date_of_admission = models.DateField(null=True, blank=True)
     current_year_of_school = models.CharField(max_length=50, null=True, blank=True)
     type_of_entry = models.CharField(max_length=100, null=True, blank=True)
@@ -206,3 +208,17 @@ class SI_SocialInquiry(models.Model):
         app_label = "cpovc_stat_inst"
 
 
+class SI_Referral(models.Model):
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    is_void = models.BooleanField(default=False)
+    ref_completed = models.BooleanField(default=False)
+    ref_no = models.CharField(max_length=100, blank=True)
+    refferal_to = models.CharField(max_length=100, blank=True, null=True)
+    reason_for_referral = models.CharField(max_length=100, blank=True, null=True)
+    reason_for_referral_others = models.CharField(max_length=100, blank=True, null=True)
+    documents_attached = models.CharField(max_length=100, blank=True)
+
+    class Meta:
+            db_table = 'si_case_referrals'

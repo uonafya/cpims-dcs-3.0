@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+{% block page_title %} {{block.super}} Statutoy Institutions Placement {% endblock page_title%}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/si_module.css' %}" rel="stylesheet" />
+<link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
+
+{% endblock style_code%}
+
+    
+{% block primary %}  
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Home</a></li>
+    <li class="active">SI</li>
+    <li class="active">placement</li>
+</ol>
+<h1 class="page-header">SI Placement <small> Workflow
+<!-- end breadcrumb -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-info fa-2x pull-left"></i>
+    <span id="invalid-form-message"></span>
+    <span class="validation-errors"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                    <h4 class="panel-title">Enroll Child &nbsp;<i class="fa fa-male"></i> <span id="person_name"></span></h4>
+                    <div class="alert alert-info fade in">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div id="mng_messages">
+                                <b>INFO!</b>  
+                            </div>
+                    </div>
+                </div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal form-bordered" action="." method="POST" data-parsley-validate="true" name="form-wizard" id="new_person">
+                            {% csrf_token %}
+                            {% if request.session.reg_ovc %}
+                            <input type="hidden" name="ovc_program" id="ovc_program" value="1">
+                            {% else %}
+                            <input type="hidden" name="ovc_program" id="ovc_program" value="0">
+                            {% endif %}
+                            <input type="hidden" name="person_uid" id="person_uid" value="{{ person_uid }}">
+                            <div class="row">
+                                <fieldset>
+                                    <legend class="pull-left width-full">Child Enrollment Selection </legend>
+                                    <div class="divider pull-left width-full"></div>
+                                    <div class="row"> 
+                                        <div class="col-md-2 m-5">Child Name: <br/>
+                                            <span class="p-5">  {{child.first_name}}  {{child.other_names}}  {{child.surname}}</span></div>
+                                        <div class="col-md-2 m-5">Date of Birth: <br/>
+                                            <span class="p-5">  {{child.date_of_birth }} </span></div>
+                                        <div class="col-md-2 m-5">Gender: <br/>
+                                            <span id="childGender" class="p-5">  
+                                            {% if child.sex_id == 'SMAL' %}
+                                                Male
+                                            {% elif child.sex_id == 'SFEM' %}
+                                                Female
+                                            {% endif %}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2 m-5">Date of Registration: <br/>
+                                            <span class="p-5">  {{child.created_at}} </span></div>
+                                    </div>
+                                    <div class="row p-10">
+                                        <div class="col-md-4">
+                                            <div id="" class="form-group">
+                                                <label for="institution_type">Institution Type <span class="asteriskField">*</span> :</label>
+                                                {{ form.institution_type }}
+                                            </div>
+                                            <div id="date_warning" class="form-group" style="display: none"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="institution_name">Name of institution  :</label>
+                                                {{ form.institution_name }}
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>                             
+                                    
+                                </fieldset>
+
+                            
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4"></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        {% comment %} <button type="submit" class="btn btn-primary" value="submit" id="s1">Submit</button>
+                                        <a href="{% url 'new_si_child_view' child.id %}">
+                                        <button type="button" class="btn btn-default">Cancel</button>
+                                        </a> {% endcomment %}
+                                        <a id="submitbtn" type="submit" class="btn  btn-sm btn-primary m-r-1">Admit</a>
+                                        <a href="{% url 'new_si_child_view' child.id %}">
+                                            <button type="button" class="btn btn-default">Cancel</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{% endblock primary %}
+
+{% block lazy_javascript_code %}
+<script type="text/javascript" src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/form-wizards.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/select2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/si.js' %}"></script>
+<script>
+jQuery(document).ready(function() {
+    FormWizardValidation.init();
+
+    $('#admitbtn').hide()
+    $('#vacancybtn').hide()
+
+    // To get workforce
+    $( "#audit_workforce_id" ).autocomplete({
+        source: function( request, response ) {
+        $.ajax({
+          url: "{% url 'registry' %}",
+          dataType: "json",
+          data: {q: request.term, id: 3},
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 4,
+      select: function( event, ui ) {
+         $('#workforce_id').val(ui.item.id);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    fetchSiOrgs()
+
+    window.Parsley.on('field:error', function(fieldInstance) {
+        // Get the error messages
+            var messages = ParsleyUI.getErrorsMessages(fieldInstance);
+
+            // Get the field's name
+            var fieldName = fieldInstance.$element.attr('name');
+            //var fieldLabel = fieldInstance.$element.attr('label');
+            //'+ fieldInstance.$element.attr('name') +'
+            var fieldLabel = $('label[for="'+ fieldName +'"]').text();
+
+            // Loop through all the messages
+            var fmsg = '';
+            for (var i in messages) {
+                // Create a message for each error
+                var message = (fieldLabel + ': ' + messages[i]).replace('*', '');
+                //var msg = $('<p><a class="focus-' + fieldName + '" href="#">' + message + '</a><p>');
+                var msg = $('<p><a class="focus-' + fieldName + '" href="#">' + message + '</a><p>');
+
+                // Append the errors to the div
+                fmsg += fieldLabel.replace('*', '') + ' - '+ messages[i] +'; ';
+                if (fieldLabel != ''){
+                    //$('.validation-errors').append(', ' + fieldLabel);
+                    fmsgs = fieldLabel.replace('*', '') + ' - '+ messages[i] +'; ';
+                }   
+            }
+            if (fmsg != ''){
+            $('.validation-errors').append(fmsg.replace(':', ''));
+            $('#messages').show();  
+            }else{
+                $('#messages').hide();
+            }     
+    });
+
+})
+</script>
+
+<script type="text/javascript">
+
+        // Fetching institution by type
+        $("#institution_type").on('change', function(e) {
+
+            var sGender = $('#childGender').html().trim()
+       
+            
+            var si_type = $("#institution_type").val();
+            
+
+           
+            var csrftoken = $.cookie('csrftoken');
+            var values = {'si_type': si_type, 'action': 2,
+                          'csrfmiddlewaretoken': csrftoken };
+            $('#institution_name').empty();
+            $.ajax({
+                type: "POST",
+                data: values,
+                dataType: "json",
+                url: "/si/si_lookup/",
+                success: function(data){
+                    var wards = data.centres;
+                    
+                    //$('#working_in_ward').html("<option value=''>Please Select</option>");           
+                    $.each(wards, function(i, record) {
+                        var ward_attribs = wards[i][0].split(",");
+                        $('#institution_name')
+                            .append($("<option></option>")
+                            .attr("value", ward_attribs[0])
+                            .text(ward_attribs[1]));
+                     });
+                    $('#institution_name') //.multiselect();
+                },
+                error: function(){
+                    $('#messages').html("Error")
+                }
+            });
+                    // vacancy & admission redirection
+            if(si_type=='TNGP'){ // Remand Home
+                $('#submitbtn').html("Admit")
+
+            }else if (si_type=='TNGN'){ // Rehabilitations Home
+                $('#submitbtn').html("Apply for vacancy")
+                $('#submitbtn').html("To Reception Centre")
+
+                if (sGender == 'Male'){
+                    $('#institution_name').val('U000018') // .select2('val', 'U000018').trigger('change');
+                } else if (sGender == 'Female') {
+                    $('#institution_name').val('U000026') //.select2('val', 'U000026').trigger('change');
+                }
+
+            } else if (si_type=='TNSA') {  // Rescue centres
+                $('#submitbtn').attr("disabled", "true")
+
+               
+            }
+           
+        });
+
+
+        $("#institution_name").on('change', function(e) {
+            var si_type = $("#institution_type").val();
+            var si_name = $("#institution_name").val();
+            console.log({si_type, si_name})
+            // vacancy & admission redirection
+            if(si_type=='TNSA' && si_name == 'U000028'){ // Remand Home
+                $('#admitbtn').show()
+                $('#vacancybtn').hide()
+            }else if (si_type=='TNSA'){ // Remand Home
+                $('#vacancytbtn').show()
+                $('#admitbtn').hide()
+            }
+
+        })
+</script>
+{% endblock lazy_javascript_code %}
