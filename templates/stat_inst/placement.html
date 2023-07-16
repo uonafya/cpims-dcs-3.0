@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block page_title %} {{block.super}} Statutoy Institutions Placement {% endblock page_title%}
+{% block page_title %} {{block.super}} SI Placement {% endblock page_title%}
 
 {% load static %}
 
@@ -40,8 +40,10 @@
                 <div class="panel-heading-btn">
                     <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>                      
-                    <h4 class="panel-title">Enroll Child &nbsp;<i class="fa fa-male"></i> <span id="person_name"></span></h4>
+                </div> 
+                    <div>                    
+                        <h4 class="panel-title">Enroll Child &nbsp;<i class="fa fa-male"></i> <span id="person_name"></span></h4>
+                    </div>
                     <div class="alert alert-info fade in">
                             <button type="button" class="close" data-dismiss="alert">
                                 <span aria-hidden="true">&times;</span>
@@ -107,7 +109,7 @@
                                         <a href="{% url 'new_si_child_view' child.id %}">
                                         <button type="button" class="btn btn-default">Cancel</button>
                                         </a> {% endcomment %}
-                                        <a id="submitbtn" type="submit" class="btn  btn-sm btn-primary m-r-1">Admit</a>
+                                        <button id="submitbtn" type="submit" class="btn  btn-sm btn-primary m-r-1">Admit</button>
                                         <a href="{% url 'new_si_child_view' child.id %}">
                                             <button type="button" class="btn btn-default">Cancel</button>
                                         </a>
@@ -136,6 +138,8 @@ jQuery(document).ready(function() {
 
     $('#admitbtn').hide()
     $('#vacancybtn').hide()
+
+    $("#institution_name option[value='default_option']").prop("disabled", true).prop("selected", true);
 
     // To get workforce
     $( "#audit_workforce_id" ).autocomplete({
@@ -232,6 +236,7 @@ jQuery(document).ready(function() {
                             .text(ward_attribs[1]));
                      });
                     $('#institution_name') //.multiselect();
+                    $("#institution_name option[value='default_option']").prop("disabled", true).prop("selected", true);
                 },
                 error: function(){
                     $('#messages').html("Error")
@@ -240,18 +245,20 @@ jQuery(document).ready(function() {
                     // vacancy & admission redirection
             if(si_type=='TNGP'){ // Remand Home
                 $('#submitbtn').html("Admit")
+                $('#submitbtn').removeAttr("disabled")
 
             }else if (si_type=='TNGN'){ // Rehabilitations Home
-                $('#submitbtn').html("Apply for vacancy")
                 $('#submitbtn').html("To Reception Centre")
-
+                $('#submitbtn').removeAttr("disabled")
+                
                 if (sGender == 'Male'){
                     $('#institution_name').val('U000018') // .select2('val', 'U000018').trigger('change');
                 } else if (sGender == 'Female') {
                     $('#institution_name').val('U000026') //.select2('val', 'U000026').trigger('change');
                 }
-
+                
             } else if (si_type=='TNSA') {  // Rescue centres
+                $('#submitbtn').html("Apply for vacancy")
                 $('#submitbtn').attr("disabled", "true")
 
                

@@ -19,7 +19,10 @@ childPlacement)
 
 from .forms import (
     SI_INSTITUTION,
-    APP_STATUS
+    APP_STATUS,
+    DOCUMENT_CHOICES_CASE_REFERRAL,
+    REASON_CHOICES_CASE_REFERRAL,
+
 )
 
 from .models import (SI_Admission, 
@@ -28,6 +31,7 @@ from .models import (SI_Admission,
                      SI_VacancyApp, 
                      SI_SocialInquiry,
                      SI_Referral,
+                     SI_Release,
                      )
 
 from .functions import convert_date, convertYesNo, get_si_reg_list
@@ -57,7 +61,7 @@ def si_look(request):
     context = {
         "centres": 
             [
-                ['"",Please Select'],
+                ['default_option,Please Select'],
             ]
         
     }
@@ -265,8 +269,7 @@ def SI_childIdentification(request,person_id):
     return render(request, 'stat_inst/childIdentification.html', context)
 
     
-
-
+# Case referral logic
 def si_casereferral(request, id):
     data = request.GET
     person_id = RegPerson.objects.filter(id=id, is_void=False)
@@ -278,8 +281,14 @@ def si_casereferral(request, id):
 
     applications = SI_Referral.objects.filter(is_void=False, person_id = id)
     referrals = applications.values()
-    print(referrals)
 
+    dict_reasons = dict(REASON_CHOICES_CASE_REFERRAL)
+    dict_documents = dict(DOCUMENT_CHOICES_CASE_REFERRAL)
+    # breakpoint()
+    for one_ref in referrals:
+        one_ref['reason_for_referral_s'] = dict_reasons[one_ref.get('reason_for_referral')]
+        one_ref['documents_attached_s'] = dict_documents[one_ref.get('documents_attached')]
+    
     print(request)
     admission = {
         'institution_name': "Wamumu Children home"
@@ -292,11 +301,11 @@ def si_casereferral(request, id):
 
             SI_Referral(
                 person = person,
-                user = current_user,
+                user = current_user,    
                 ref_no = data.get('ref_no'),
                 refferal_to = data.get('refferal_to'),
-                reason_for_referral =  data.get('reason_for_referral '),
-                reason_for_referral_others =  data.get('reason_for_referral_others '),
+                reason_for_referral =  data.get('reason_for_referral'),
+                reason_for_referral_others =  data.get('reason_for_referral_others'),
                 documents_attached = data.get('documents_attached') 
             ).save()
 
@@ -317,6 +326,30 @@ def si_casereferral(request, id):
         return render(request,'stat_inst/case_referral.html',context)    
     except Exception as e:
         raise e
+    
+@login_required
+def si_casereferral_completed(request, id):
+    person_id = ""
+    try:
+        update_vac = SI_Referral.objects.get(is_void=False, id=id)
+        update_vac.ref_completed=True
+        update_vac.updated_at=timezone.now()
+        update_vac.save()
+        person_id = update_vac.person_id
+        print(update_vac)
+
+        msg = f'Referral  {update_vac.ref_no } marked as completed'
+        messages.add_message(request, messages.SUCCESS, msg)
+
+    except Exception as e:
+        err= f'Could not Mark as successful: {e}'
+
+        msg = 'Follow-up error - (%s). %s.' % (str(e), err)
+        print(msg)
+        messages.add_message(request, messages.ERROR, msg)  
+
+    return HttpResponseRedirect(reverse('SI_casereferral', args=(person_id,))) # person_id)
+
 
 def SI_needriskform(request, id):
     data = request.GET
@@ -543,12 +576,46 @@ def SI_social_inquiry(request, id):
 
 def si_releaseform(request, id): 
     data = request.GET
+    person_id = RegPerson.objects.filter(id=id, is_void=False)
+    child = person_id.values()[0]
+
 
     form = SIReleaseForm()
     try:
+        person_In = RegPerson.objects.get(id=id, is_void=False)  # Get Instance
+        if request.method == 'POST':
+            active_User = AppUser.objects.get(id=request.user.id)
+            data = request.POST
+            
+            SI_Release(
+                person = person_In,
+                ref_no = data.get('ref_no'),
+                date_released = convert_date(data.get('date_released')),
+                name = data.get('name'),
+                id_no = data.get('id_no'),
+                phone_number = data.get('telephone'),
+                occupation = data.get('occupation'),
+                residence = data.get('residence'),
+                relation_to_child = data.get('relation_to_child'),
+                user = active_User
+            ).save()
 
+            msg = f'Release  {data.get("ref_no")} saved successful'
+            messages.add_message(request, messages.SUCCESS, msg)
+
+            return HttpResponseRedirect(reverse('SI_releaseform', args=(id,))) # person_id)
+
+        child_inst_details = SI_Admission.objects.filter(person_id=id, is_void=False)
+        releases = SI_Release.objects.filter(person_id = id, is_void = False)
+        if len(releases)>0:
+            for release in releases:
+                release['institution_name'] = child_inst_details.institution_name
+                print(release)
+                # breakpoint()
         context = {
-            'form': form
+            'form': form,
+            'child': child,
+            'releases': releases
         }
         return render(request,'stat_inst/release_form.html',context)
     
@@ -595,7 +662,6 @@ def SI_child_view(request, id):
 
 
 def child_placement(request, id):
-    data = request.POST
     person_id = RegPerson.objects.filter(id=id, is_void=False)
 
     child = person_id.values()[0]
@@ -606,7 +672,22 @@ def child_placement(request, id):
     form = childPlacement()
     try:
         if request.method == 'POST':
-            pass
+            child_inst = RegPerson.objects.get(is_void = False, id=id)
+            data = request.POST
+            active_User = AppUser.objects.get(id=request.user.id)
+            SI_Admission(
+                person = child_inst,
+                institution_type = data.get('institution_type'),
+                institution_name = data.get('institution_name'),
+                is_placed = True,
+                placed_by = active_User,
+                place_created_at = timezone.now(),
+            ).save()
+
+            msg = f'Placement  successful'
+            messages.add_message(request, messages.SUCCESS, msg)
+
+            return HttpResponseRedirect(reverse('new_si_admit', args=(id,))) # person_id)
 
         context = {
             'form': form,

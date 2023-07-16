@@ -86,7 +86,7 @@ list_frequency = get_lists(["period_frequency_id", "na_option"])
 
 
 ENTRY_CHOICES = (
-    ("", "Select"),
+    ("default_option", "Select"),
     ("identified", "Was identified"),
     ("referred", "Was referred"),
     ("own_will", "Came of own will"),
@@ -104,7 +104,7 @@ YES_NO_CHOICES = get_list("yesno_id")
 
 
 REFERRAL_SOURCES = (
-    ("", "Select"),
+    ("default_option", "Select"),
     ("Parent", "Parent"),
     ("Family_member", "Family member"),
     ("Guardian", "Guardian"),
@@ -119,7 +119,7 @@ REFERRAL_SOURCES = (
 )
 
 CHILD_CATEGORY = (
-    ("", "Select"),
+    ("default_option", "Select"),
     ("Abandoned_child", "Abandoned child"),
     ("Neglected_child", "Neglected child"),
     ("Destitute_child", "Destitute child"),
@@ -133,7 +133,7 @@ CHILD_CATEGORY = (
 )
 
 ADMISSION_TYPE = (
-    ("", "Select"),
+    ("default_option", "Select"),
     ("New_admission", "New admission"),
     ("readmission_after_escape", "readmission after escape"),
     ("readmission_on_relapse", "readmission on relapse"),
@@ -148,7 +148,7 @@ ADMISSION_TYPE = (
 
 # Test
 SI_INSTITUTION = (
-    ("", "Select"),
+    ("default_option", "Select"),
     ("TNGP", "Remand Homes"),
     ("TNGN", "Rehabilitation Centres"),
     ("TNSA", "Rescue Centres"),
@@ -236,8 +236,7 @@ SUB_GOAL = [
 ]
 
 SI_ORGS = (
-    ('', 'Please select..'),
-    ('', 'Please select..')
+    ('default_option', 'Please select..'),
 )
 
 APP_STATUS = (
@@ -247,14 +246,14 @@ APP_STATUS = (
 )
 
 DOCUMENT_CHOICES_CASE_REFERRAL = (
-        ('default', 'Please Select'),
+        ('default_option', 'Please Select'),
         ('crs', 'Case Record Sheet'),
         ('sir', 'Social Inquiry Report'),
         ('court_order', 'Court Order'),
         ('assess_form', 'Assessment form'),
     )
 REASON_CHOICES_CASE_REFERRAL = (
-        ('default', 'Please Select'),
+        ('default_option', 'Please Select'),
         ('court_order', 'By Court Order'),
         ('supervision', 'Supervision'),
         ('others', 'Others'),
@@ -1279,7 +1278,8 @@ class SICaseReferral(forms.Form):
         choices=REASON_CHOICES_CASE_REFERRAL,
         widget=forms.Select(attrs={
             'class': 'form-control',
-            'data-parsley-required': 'true'
+            'data-parsley-required': 'true',
+            'id': 'reason_for_referral'
         })
     )
 
@@ -1621,7 +1621,7 @@ class SIFamilyConference(forms.Form):
 
 
 class SIReleaseForm(forms.Form):
-    admission_no = forms.CharField(
+    ref_no = forms.CharField(
         max_length=100,
         widget=forms.TextInput(
             attrs={
@@ -1629,6 +1629,16 @@ class SIReleaseForm(forms.Form):
                 "class": "form-control",
                 "id": "admission_no",
             }
+        ),
+    )
+    date_released = forms.CharField(
+        required=True,
+        widget=forms.DateInput(
+            attrs={
+                "placeholder": _("Select date"),
+                "class": "form-control",
+                "id": "datepicker",
+            },
         ),
     )
     name = forms.CharField(

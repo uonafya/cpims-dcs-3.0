@@ -13,6 +13,9 @@ urlpatterns = [
     path('remand_home_escape/<int:id>/', views.SI_RemandHomeEscape, name='remand_escape'),
 
     path('case_refer/<int:id>/', views.si_casereferral, name='SI_casereferral'),
+    path('confirm_refer/<int:id>/', views.si_casereferral_completed, name='SI_casereferral_comp'),
+
+
     path('exit_certificate/<int:id>/', views.si_certificateofexit, name='SI_certificateofexit'),
     path('remand_home_escape/<int:id>/', views.si_remandhomeescape, name='SI_remandhomeescape'),
     path('record_of_visits/<int:id>/', views.si_recordofvisits, name='SI_recordofvisits'),

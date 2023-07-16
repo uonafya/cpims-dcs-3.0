@@ -14,10 +14,19 @@ from .forms import YES_NO_CHOICES, SI_INSTITUTION, APP_STATUS
 
 class SI_Admission(models.Model):
     si = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
+    # placement fields
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
-    institution_type = models.CharField(max_length=5, null=False, blank=False, choices=SI_INSTITUTION)  # from list general institution type id
+    institution_type = models.CharField(max_length=15, null=False, blank=False, choices=SI_INSTITUTION)  # from list general institution type id
     institution_name = models.CharField(max_length=100, null=False, blank=False)  # from list general institution type id
-    admissionNumber = models.CharField(max_length=100, null=False, blank=False)
+    is_placed = models.BooleanField(default=False)
+    placed_by = models.ForeignKey(AppUser, on_delete=models.CASCADE, null=True, related_name='placed_by')
+    place_created_at = models.DateField()
+    # approval
+    is_placement_approved = models.BooleanField(default=False,)
+    place_approved_by = models.ForeignKey(AppUser, on_delete=models.CASCADE, null=True, related_name='place_approved_by')
+    place_approved_at = models.DateField(null=True)
+    # admission fields
+    admission_number = models.CharField(max_length=100, null=False, blank=False)
     date_of_admission = models.DateField(null=True, blank=True)
     current_year_of_school = models.CharField(max_length=50, null=True, blank=True)
     type_of_entry = models.CharField(max_length=100, null=True, blank=True)
@@ -48,7 +57,7 @@ class SI_Admission(models.Model):
     audit_date = models.DateField(null=True, blank=True)
     is_void = models.BooleanField(default=False)
     created_by = models.ForeignKey(
-        AppUser, on_delete=models.CASCADE, null=True)
+        AppUser, on_delete=models.CASCADE, null=True, related_name='created_by')
     created_at = models.DateField(default=timezone.now)
 
     class Meta:
@@ -57,6 +66,7 @@ class SI_Admission(models.Model):
         verbose_name = "Statutory Institutions"
         verbose_name_plural = "Statutory Institutions"
         app_label = "cpovc_stat_inst"
+        
     
 class SI_NeedRiskAssessment(models.Model):
     needs = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
@@ -209,16 +219,36 @@ class SI_SocialInquiry(models.Model):
 
 
 class SI_Referral(models.Model):
+    # referral = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
-    is_void = models.BooleanField(default=False)
-    ref_completed = models.BooleanField(default=False)
     ref_no = models.CharField(max_length=100, blank=True)
     refferal_to = models.CharField(max_length=100, blank=True, null=True)
     reason_for_referral = models.CharField(max_length=100, blank=True, null=True)
     reason_for_referral_others = models.CharField(max_length=100, blank=True, null=True)
     documents_attached = models.CharField(max_length=100, blank=True)
+    ref_completed = models.BooleanField(default=False)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    is_void = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(null=True)
 
     class Meta:
             db_table = 'si_case_referrals'
+
+class SI_Release(models.Model):
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    ref_no = models.CharField(max_length=50)
+    date_released = models.DateField()
+    name = models.CharField(max_length=100)
+    id_no = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20)
+    occupation = models.CharField(max_length=100)
+    residence = models.CharField(max_length=200)
+    relation_to_child = models.CharField(max_length=100)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    is_void = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(null=True)
+
+    class Meta:
+        db_table = 'si_releases'

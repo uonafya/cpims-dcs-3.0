@@ -75,7 +75,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="surname">County </label><br/>
-                                            
+                                                {{ child.id}}
                                         </div>
                                     </div>
                                     <!-- end col-4 -->
@@ -217,8 +217,8 @@
                                     <tr>
                                         <td>{{refer.ref_no}}</td> 
                                         <td>{{refer.refferal_to}}</td>                            
-                                        <td>{{refer.reason_for_referral}} {% if refer.reason_for_referral == 'others' %} {{ refer.reason_for_referral_others}} {%else%} {%endif%}</td> 
-                                        <td>{{refer.documents_attached}}</td>                
+                                        <td>{{refer.reason_for_referral_s }} {% if refer.reason_for_referral == 'others' %} {{ refer.reason_for_referral_others}} {%else%} {%endif%}</td> 
+                                        <td>{{refer.documents_attached_s }}</td>                
                                         <td>
                                             {%if refer.ref_completed == True %}
                                                 <span class="text-primary">Completed</span>
@@ -228,7 +228,7 @@
                                         </td>  
                                         <td>
                                             {%if refer.ref_completed == False %}
-                                                <a href="" type="button" class="btn btn-primary">Mark as Completed</a>
+                                                <a href="{% url 'SI_casereferral_comp' id=refer.id %}" type="button" class="btn btn-primary">Mark as Completed</a>
                                             {%elif refer.ref_completed == True  %}
                                                     <a></a>
                                             {%endif%}
@@ -253,6 +253,7 @@
             </div>
             <!-- end col-12 -->
         </div>
+    </div>
 </div>
 <!-- end row -->
 {% endblock primary %}
@@ -268,8 +269,8 @@ jQuery(document).ready(function() {
 
         $('#referral_others').hide()
 
-        $("#id_documents_attached option[value='default']").prop("disabled", true).prop("selected", true);
-        $("#id_reason_for_referral option[value='default']").prop("disabled", true).prop("selected", true);
+        $("#id_documents_attached option[value='default_option']").prop("disabled", true).prop("selected", true);
+        $("#id_reason_for_referral option[value='default_option']").prop("disabled", true).prop("selected", true);
 
 });
 
