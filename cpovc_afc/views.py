@@ -219,21 +219,50 @@ def alt_care_form(request, cid, form_id, care_id, ev_id=0):
     '''
     try:
         check_fields = ['sex_id', 'case_category_id', 'religion_type_id',
-                        'alternative_family_care_type_id',
-                        'family_type_id']
+                        'alternative_family_care_type_id', 'yesno_id',
+                        'family_type_id', 'olmis_education_assessment_id',
+                        'case_plan_responsible', 'afc_domain_id',
+                        'afc_domain_ed_goals', 'afc_domain_hd_goals',
+                        'afc_domain_ps_goals', 'afc_domain_es_goals',
+                        'afc_domain_pw_goals', 'afc_domain_ed_gaps',
+                        'afc_domain_hd_gaps', 'afc_domain_ps_gaps',
+                        'afc_domain_es_gaps', 'afc_domain_pw_gaps',
+                        'afc_domain_ed_services', 'afc_domain_hd_services',
+                        'afc_domain_ps_services', 'afc_domain_es_services',
+                        'afc_domain_pw_services']
         vals = get_dict(field_name=check_fields)
         # Handle saved items - Multiple instance forms
         all_events = AFCEvents.objects.filter(
             care_id=care_id, form_id=form_id)
-        if form_id in ['6A', '2A']:
+        event_ids = all_events.values('event_id')
+        if form_id in ['6A', '2A', '4A']:
             events = all_events.filter(event_count=ev_id)
         else:
             events = all_events
         # print('Event', form_id, case_id, events)
-        for ev in events:
-            print('ev', ev, ev.event_count)
+        fels = {}
+        form_els = AFCForms.objects.filter(event_id__in=event_ids)
+        for fel in form_els:
+            fid = fel.event_id
+            qid = fel.question_id
+            qans = fel.item_value
+            if qans == 'QTXT':
+                qans = fel.item_detail
+            if fid not in fels:
+                fels[fid] = {}
+            if qid not in fels[fid]:
+                fels[fid][qid] = []
+            fels[fid][qid].append(qans)
+        for event in all_events:
+            evt_id = event.event_id
+            for itm in fels[evt_id]:
+                itmd = fels[evt_id][itm]
+                setattr(event, itm, itmd)
+                print('QIT', itm, itmd, event)
+        print('Done')
         idata = {}
-        if events:
+
+        if events and form_id not in ['6A', '2A', '4A']:
             edate = events[0].event_date
             event_date = edate.strftime('%d-%b-%Y')
             idata['event_date'] = event_date
@@ -253,6 +282,7 @@ def alt_care_form(request, cid, form_id, care_id, ev_id=0):
                 else:
                     idata[qid] = q_detail
             print('idata', idata)
+
         form_name = FMS[form_id] if form_id in FMS else 'Default'
         my_care = get_alt_care(request, care_id, 1)
         if my_care:
@@ -312,7 +342,8 @@ def alt_care_form(request, cid, form_id, care_id, ev_id=0):
                 url = reverse(
                     new_alternative_care, kwargs={'case_id': case_id})
             return HttpResponseRedirect(url)
-        print('idata', idata, case)
+        if form_id == '4A' and ev_id == 0:
+            idata = {}
         form = get_form(form_id, idata, cid)
         tmpl = 'afc/new_form_%s.html' % (form_id)
         case_uid = str(case_id).replace('-', '')

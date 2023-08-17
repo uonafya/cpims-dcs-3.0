@@ -17,6 +17,14 @@ form#new-form-b ul {
       padding-left: 1em;
       text-indent: -2em;
   }
+  .form-check-inline div {
+    display: inline-block;
+    margin-right: 15px;
+    vertical-align: middle;
+  }
+  .form-check-inline div label {
+    vertical-align: middle;
+  }
 </style>
 {% endblock %}
 
@@ -91,193 +99,143 @@ form#new-form-b ul {
                         <div class="col-md-1"></div>
                     </div>
                     <hr>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th width="40%"></th>
-                                <th width="30%">DEGREE OF DISABILITY</th>
-                                <th>DEGREE OF FUNCTIONING / LIMITATION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    0 None<br>
-                                    1 Mild, lightly present with an intensity that the person can tolerate<br>
-                                    2 Moderate intensity that interferes with day-to-day life<br>
-                                    3 Severe intensity that disrupts day-to-day life<br>
-                                    4 Complete impairment<br>
-                                </td>
-                                <td>
-                                    0 No difficulty doing things<br>
-                                    1 Almost no difficulty doing things<br>
-                                    2 Moderate difficulty doing things in the physical and social environment<br>
-                                    3 Severe difficulty doing things in the physical and social environment<br>
-                                    4 Complete difficulty disrupting day to day life<br>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="form-group">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-3"><b>DEGREE OF DISABILITY</b><br>
+                        0. None<br>
+                        1. Mild, lightly present with an intensity that the person can tolerate<br>
+                        2. Moderate intensity that interferes with day-to-day life<br>
+                        3. Severe intensity that disrupts day-to-day life<br>
+                        4. Complete impairment<br>
+                        </div>
+                        <div class="col-md-4"><b>DEGREE OF FUNCTIONING / LIMITATION</b><br>
+                        0. No difficulty doing things<br>
+                        1. Almost no difficulty doing things<br>
+                        2. Moderate difficulty doing things in the physical and social environment<br>
+                        3. Severe difficulty doing things in the physical and social environment<br>
+                        4. Complete difficulty disrupting day to day life<br>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
                     <hr>
                     <div class="form-group">
-                        <div class="col-md-5"><b>DEVELOPMENTAL/BODY DOMAIN</b></div>
-                        <div class="col-md-2"><b>Degree of disability</b></div>
-                        <div class="col-md-3"><b>Degree of functioning/limitation</b></div>
-                        <div class="col-md-2"></div>
+                        <div class="col-md-4"><b>DEVELOPMENTAL/BODY DOMAIN</b></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-1"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Cognitive <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A1A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A1B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A1C_rdo }}</div>
+                        <label class="col-md-4 control-label">Cognitive <span class="asteriskField">*</span>
+                        <br><small>Intellectual; Learning; Attention; Memory; Other</small>
+                        </label>
+                        <div class="col-md-3">{{ form.qf14A1B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A1C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Mental <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A2A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A2B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A2C_rdo }}</div>
+                        <label class="col-md-4 control-label">Mental <span class="asteriskField">*</span>
+                        <br><small>Depression; Anxiety; Autism; Other</small></label>
+                        <div class="col-md-3">{{ form.qf14A2B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A2C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Sensory <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A3A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A3B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A3C_rdo }}</div>
+                        <label class="col-md-4 control-label">Sensory <span class="asteriskField">*</span>
+                        <br><small>Vision; Hearing; Tactile; Other</small></label>
+                        <div class="col-md-3">{{ form.qf14A3B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A3C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Physical/mobility <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A4A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A4B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A4C_rdo }}</div>
+                        <label class="col-md-4 control-label">Language/speech <span class="asteriskField">*</span>
+                        <br><small></small></label>
+                        <div class="col-md-3">{{ form.qf14A21B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A21C_rdo }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Physical/mobility <span class="asteriskField">*</span>
+                        <br><small>Involuntary movement; Mobility of joints; Muscle strength; Incontinence/enuresis</small></label>
+                        <div class="col-md-3">{{ form.qf14A4B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A4C_rdo }}</div>
                     </div>
                     <b>LIMITATIONS ON DAILY ACTIVITY</b>
                     <hr>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Learning and applying knowledge <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A5A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A5B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A5C_rdo }}</div>
+                        <label class="col-md-4 control-label">Learning and applying knowledge <span class="asteriskField">*</span>
+                        <br><small>Read; Write; Listen</small></label>
+                        <div class="col-md-3">{{ form.qf14A5B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A5C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Communication <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A6A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A6B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A6C_rdo }}</div>
+                        <label class="col-md-4 control-label">Communication <span class="asteriskField">*</span>
+                        <br><small>Speaking; Receiving spoken messages; Receiving nonverbal messages</small></label>
+                        <div class="col-md-3">{{ form.qf14A6B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A6C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Mobility <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A7A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A7B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A7C_rdo }}</div>
+                        <label class="col-md-4 control-label">Mobility <span class="asteriskField">*</span>
+                        <br><small>Walking; Moving around; Using public transport; Lifting and using hands</small></label>
+                        <div class="col-md-3">{{ form.qf14A7B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A7C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Self-care <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A8A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A8B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A8C_rdo }}</div>
+                        <label class="col-md-4 control-label">Self-care <span class="asteriskField">*</span>
+                        <br><small>Toileting; Dressing; Eating; Drinking; Washing self; Overall care of self</small></label>
+                        <div class="col-md-3">{{ form.qf14A8B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A8C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Domestic life <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A9A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A9B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A9C_rdo }}</div>
+                        <label class="col-md-4 control-label">Domestic life <span class="asteriskField">*</span>
+                        <br><small>Shopping; Cooking and preparing meals; Cleaning house, dishes, clothes; Assisting others</small></label>
+                        <div class="col-md-3">{{ form.qf14A9B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A9C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Social life and relationships <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A10A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A10B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A10C_rdo }}</div>
+                        <label class="col-md-4 control-label">Social life and relationships <span class="asteriskField">*</span>
+                        <br><small>Basic social interactions; Relating to strangers; Formal relationships; Family relationship</small></label>
+                        <div class="col-md-3">{{ form.qf14A10B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A10C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Major life areas <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A11A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A11B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A11C_rdo }}</div>
+                        <label class="col-md-4 control-label">Major life areas <span class="asteriskField">*</span>
+                        <br><small>School education; Higher education; Informal education; Vocational education; Basic economic transactions; Paid employment opportunities; Economic self sufficiency</small></label>
+                        <div class="col-md-3">{{ form.qf14A11B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A11C_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Community and civic life <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A12A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-2">{{ form.qf14A12B_rdo }}</div>
-                        <div class="col-md-2">{{ form.qf14A12C_rdo }}</div>
+                        <label class="col-md-4 control-label">Community and civic life <span class="asteriskField">*</span>
+                        <br><small>Recreation and leisure activities; Religion and spiritual life; Political and citizenship; Claim of human rights</small></label>
+                        <div class="col-md-3">{{ form.qf14A12B_rdo }}</div>
+                        <div class="col-md-4">{{ form.qf14A12C_rdo }}</div>
                     </div>
                     <br>
                     <div class="form-group">
-                        <div class="col-md-5"><b>ENVIRONMENTAL FACTORS</b></div>
+                        <div class="col-md-4"><b>ENVIRONMENTAL FACTORS</b></div>
                         <div class="col-md-5"><b>Degree of barrier - 0 (no barrier) to 4 (full barrier)</b></div>
                         <div class="col-md-2"></div>
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Support relationships <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A13A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-4">{{ form.qf14A13B_rdo }}</div>
+                        <label class="col-md-4 control-label">Support relationships <span class="asteriskField">*</span>
+                            <br><small>Immediate family; Friends, peers; Neighbors, community</small></label>
+                        <div class="col-md-5">{{ form.qf14A13B_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Support services <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A14A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-4">{{ form.qf14A14B_rdo }}</div>
+                        <label class="col-md-4 control-label">Support services <span class="asteriskField">*</span>
+                            <br><small>Health professionals; Special education staff; Therapeutic support</small></label>
+                        <div class="col-md-5">{{ form.qf14A14B_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Attitudes <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A15A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-4">{{ form.qf14A15B_rdo }}</div>
+                        <label class="col-md-4 control-label">Attitudes <span class="asteriskField">*</span>
+                            <br><small>Individual attitudes in family; Individual attitudes of care providers; Individual attitudes of friends; Individual attitudes of community people; Social norms and practices</small></label>
+                        <div class="col-md-5">{{ form.qf14A15B_rdo }}</div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Systems and other factors <span class="asteriskField">*</span></label>
-                        <div class="col-md-2">
-                            {{ form.qf14A16A_rdo }}
-                            <span id="qf2A1_rdo_error"></span>
-                        </div>
-                        <div class="col-md-4">{{ form.qf14A16B_rdo }}</div>
+                        <label class="col-md-4 control-label">Systems and other factors <span class="asteriskField">*</span>
+                            <br><small>Housing; Communication services; Transportation services; Health services; Education and training services; Work readiness and employment; General support services</small></label>
+                        <div class="col-md-5">{{ form.qf14A16B_rdo }}</div>
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Disability diagnosis (if any)</label>
+                        <label class="col-md-4 control-label">Disability diagnosis (if any)</label>
                         <div class="col-md-6">
                             {{ form.qf14A17A }}
                             <span id="qf2A1_rdo_error"></span>
@@ -285,7 +243,7 @@ form#new-form-b ul {
                         <div class="col-md-2"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Observations</label>
+                        <label class="col-md-4 control-label">Observations</label>
                         <div class="col-md-6">
                             {{ form.qf14A18A }}
                             <span id="qf2A1_rdo_error"></span>
@@ -293,23 +251,23 @@ form#new-form-b ul {
                         <div class="col-md-2"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Action required <span class="asteriskField">*</span></label>
+                        <label class="col-md-4 control-label">Action required <span class="asteriskField">*</span></label>
                         <div class="col-md-6">
                             {{ form.qf14A19_rdo }}
                             <span id="qf2A1_rdo_error"></span>
                         </div>
-                        <div class="col-md-4">{{ form.qf9A1_rdo }}</div>
+                        <div class="col-md-2"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label"><b>Organisation performing the Assessment</b></label>
+                        <label class="col-md-4 control-label"><b>Organisation performing the Assessment</b></label>
                         <div class="col-md-6">
                             {{ form.qf14A20 }}
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-2"></div>
                     </div>                
                     
                     <div class="form-group">
-                        <label class="col-md-3 control-label"><b>Date of Assessment</b> <span class="asteriskField">*</span></label>
+                        <label class="col-md-4 control-label"><b>Date of Assessment</b> <span class="asteriskField">*</span></label>
                         <div class="col-md-2">
                             {{ form.event_date }}
                         </div>
@@ -317,7 +275,7 @@ form#new-form-b ul {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
+                        <label class="col-md-4 control-label"></label>
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
                         </div>

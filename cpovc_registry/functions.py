@@ -225,10 +225,8 @@ def ovc_dashboard(request):
         case_counts = case_records.count()
         dash['case_records'] = case_counts
         # Case categories to find pending cases
-        pending_cases = OVCCaseCategory.objects.filter(
-            is_void=False)
-        pending_count = pending_cases.exclude(
-            case_id__summon_status=True).count()
+        #  pending_cases = OVCCaseCategory.objects.filter(is_void=False)
+        pending_count = case_records.filter(case_stage=0).count()
         dash['pending_cases'] = pending_count
         # Child registrations
         ptypes = RegPersonsTypes.objects.filter(
@@ -1250,7 +1248,7 @@ def get_specific_units(org_ids):
         return result
 
 
-def get_geo_selected(results, datas, extras, filters=False):
+def get_geo_selected(results, datas, extras, filters=False, action=0):
     """Get specific Geography based on existing ids."""
     wards = []
     all_list = get_all_geo_list(filters)
@@ -1274,7 +1272,15 @@ def get_geo_selected(results, datas, extras, filters=False):
             wards.append(extra_list)
     unique_wards = list(set(wards))
     results['wards'] = unique_wards
-    # print('newton', results)
+    # Get locations and sub locations
+    print('check x', area_ids)
+    if action == 8:
+        locs = get_geo_slocation(area_ids, 'GSLC')
+        results['list_sub_locations'] = locs
+    else:
+        locs = get_geo_slocation(area_ids)
+        results['list_locations'] = locs
+    print('newton LOCS', locs, results)
     return results
 
 
@@ -1296,6 +1302,27 @@ def get_all_geo_list(filters=False):
         raise e
     else:
         return geo_lists
+
+
+def get_geo_slocation(filters, area_type='GLOC'):
+    """Method to get all the related locations."""
+    try:
+        flocs = []
+        print('filters', filters, type(filters))
+        locs = SetupLocation.objects.filter(
+            parent_area_id__in=filters, area_type_id=area_type, is_void=False)
+        print('locs', locs)
+        for loc in locs:
+            a_id = loc.area_id
+            a_name = loc.area_name
+            a_code = loc.area_code
+            itm = {"id": a_id, "code": a_code, "name": a_name}
+            flocs.append(itm)
+    except Exception as e:
+        print('error getting locations - %s' % (str(e)))
+        return []
+    else:
+        return flocs
 
 
 def get_geo_list(geo_lists, geo_filter, add_select=False, user_filter=[]):
@@ -1836,12 +1863,11 @@ def get_dashboards(request, did, org_ids):
                 case_id_id__in=case_ids, is_void=False)
             if did == 'PC':
                 case_records = OVCCaseRecord.objects.filter(
-                    case_id__in=case_ids, is_void=False)
+                    case_id__in=case_ids, is_void=False, case_stage=0)
                 # Get pending
-                cases_pending = case_records.filter(
-                    case_stage=0, case_id__in=case_ids).values_list(
-                    'case_id', flat=True).distinct()
-                cases = cases.filter(case_id_id=cases_pending)
+                cases_pending = case_records.values_list(
+                    'case_id', flat=True)
+                cases = cases.filter(case_id_id__in=cases_pending)
             cases = cases.order_by("-case_id__date_case_opened")[:1000]
             for case in cases:
                 onames = case.case_id.person.other_names

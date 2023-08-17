@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
@@ -123,13 +124,12 @@ def save_alt_care(request, params):
 def save_altcare_form(request, form_id, ev_id=0):
     """Method to save forms."""
     try:
-        response = True
         case_id = request.POST.get('case_id')
         care_id = request.POST.get('care_id')
         person_id = request.POST.get('person_id')
         event_date = request.POST.get('event_date')
         lid = get_last_form(request, form_id, care_id, person_id)
-        print('Last ID', lid)
+        print('Last ID', form_id, care_id, person_id, lid)
         # Default to existing care
         response = care_id
         if case_id == care_id:
@@ -144,36 +144,66 @@ def save_altcare_form(request, form_id, ev_id=0):
         # if form_id in ['6A']:
         ev_count = ev_id if ev_id > 0 else lid
         user_id = request.user.id
+        # Handle jsons
+        all_answers = request.POST.get('all_answers', '{}')
+        afc_datas = json.loads(all_answers)
+        print('JSONS', afc_datas)
         print('CID,FID,CAID,EV', case_id, form_id, care_id, ev_count)
-        obj, created = AFCEvents.objects.update_or_create(
-            case_id=case_id, form_id=form_id, care_id=care_id,
-            event_count=ev_count,
-            defaults={'event_date': convert_date(event_date),
-                      'person_id': person_id, 'created_by_id': user_id})
-        event_id = obj.pk
-        # Schoool details in some forms
-        ecare = get_alt_care(request, case_id)
-        if form_id == '1A':
-            school_level = request.POST.get('school_level')
-            # Save School details
-            if school_level and school_level != 'SLNS':
-                school_class = request.POST.get('school_class')
-                school_id = request.POST.get('school')
-                admin_type = request.POST.get('admission_type')
-                obj, created = OVCEducation.objects.update_or_create(
-                    person_id=person_id, is_void=False,
-                    defaults={'school_id': school_id,
-                              'school_level': school_level,
-                              'school_class': school_class,
-                              'admission_type': admin_type, 'is_void': False},
-                )
-            # Update main table
-            if ecare:
-                ecare.school_level = school_level
-                ecare.save(update_fields=["school_level"])
-        save_form_data(request, form_id, event_id)
-        pref = 'qf%s' % (form_id)
-        extract_params(request, pref)
+        if not afc_datas:
+            obj, created = AFCEvents.objects.update_or_create(
+                case_id=case_id, form_id=form_id, care_id=care_id,
+                event_count=ev_count,
+                defaults={'event_date': convert_date(event_date),
+                          'person_id': person_id, 'created_by_id': user_id})
+            event_id = obj.pk
+            # Schoool details in some forms
+            ecare = get_alt_care(request, case_id)
+            if form_id == '1A':
+                school_level = request.POST.get('school_level')
+                # Save School details
+                if school_level and school_level != 'SLNS':
+                    school_class = request.POST.get('school_class')
+                    school_id = request.POST.get('school')
+                    admin_type = request.POST.get('admission_type')
+                    obj, created = OVCEducation.objects.update_or_create(
+                        person_id=person_id, is_void=False,
+                        defaults={'school_id': school_id,
+                                  'school_level': school_level,
+                                  'school_class': school_class,
+                                  'admission_type': admin_type,
+                                  'is_void': False},
+                    )
+                # Update main table
+                if ecare:
+                    ecare.school_level = school_level
+                    ecare.save(update_fields=["school_level"])
+            save_form_data(request, form_id, event_id)
+        else:
+            print('Handle Jsons')
+            response = care_id
+            for afc_id in afc_datas:
+                ev_count += 1
+                afc_data = afc_datas[afc_id]
+                event_date = afc_data['event_date'][0]
+                obj, created = AFCEvents.objects.update_or_create(
+                    case_id=case_id, form_id=form_id, care_id=care_id,
+                    event_count=ev_count,
+                    defaults={'event_date': convert_date(event_date),
+                              'person_id': person_id,
+                              'created_by_id': user_id})
+                event_id = obj.pk
+                # Save form elements
+                afc_data.pop("event_date", None)
+                for itms in afc_data:
+                    for itm in afc_data[itms]:
+                        itdm, itdl = get_field_type(itm, itms)
+                        if itdm:
+                            obj, created = AFCForms.objects.update_or_create(
+                                event_id=event_id, question_id=itms,
+                                item_value=itdm,
+                                defaults={'item_detail': itdl})
+        # pref = 'qf%s' % (form_id)
+        # extract_params(request, pref)
     except Exception as e:
         print('Error saving form - %s' % (str(e)))
         return False
@@ -212,7 +242,7 @@ def save_form_data(request, form_id, event_id):
                     defaults={'item_value': itdm, 'item_detail': itdl},
                 )
     except Exception as e:
-        print('Error saving TIP %s' % (str(e)))
+        print('Error saving AFC %s' % (str(e)))
     else:
         return True
 
@@ -234,6 +264,7 @@ def save_form_info(request, care_id, person_id, fm_pref='AFC_FM'):
                     defaults={'item_detail': itdl, 'is_void': False,
                               'timestamp_modified': now},
                 )
+                # Assemble all these so that we will delete the diff from all
     except Exception as e:
         print('Save info error - %s' % (str(e)))
         return {}

@@ -1,0 +1,211 @@
+pk,the_order,field_name,item_category,item_id,item_description,item_description_short,item_sub_category,user_configurable,sms_keyword,is_void
+41000,1,afc_domain_ed_goals,Education Goals,GH1ED,GH1ED. All school going children/young person enrolled in school/education program,GH1ED. All school going children/young person enrolled in school/education program,,FALSE,FALSE,FALSE
+41001,2,afc_domain_ed_goals,Education Goals,GH2ED,GH2ED. All school going children/young person access and retained in school/education institution.,GH2ED. All school going children/young person access and retained in school/education institution.,,FALSE,FALSE,FALSE
+41002,3,afc_domain_ed_goals,Education Goals,GH3ED,GH3ED. All school going children/young person progressing and transitioning apropriately.,GH3ED. All school going children/young person progressing and transitioning apropriately.,,FALSE,FALSE,FALSE
+41003,4,afc_domain_ed_goals,Education Goals,GH4ED,GH4ED. All school going children/young person with disability are enrolled and regulary attend a disability friendly learning institutions,GH4ED. All school going children/young person with disability are enrolled,,FALSE,FALSE,FALSE
+41004,1,afc_domain_hd_goals,Health and Dev Goals,GH1HD,GH1HD. Children have atleast three balanced meals per day,GH1HD. Children have atleast three balanced meals per day,,FALSE,FALSE,FALSE
+41005,2,afc_domain_hd_goals,Health and Dev Goals,GH2HD,GH2HD. Children have access to medical services as needed,GH2HD. Children have access to medical services as needed,,FALSE,FALSE,FALSE
+41006,3,afc_domain_hd_goals,Health and Dev Goals,GH3HD,GH3HD. children are fully immunized ,GH3HD. children are fully immunized ,,FALSE,FALSE,FALSE
+41007,4,afc_domain_hd_goals,Health and Dev Goals,GH4HD,GH4HD. Families live in drug and substance free environment ,GH4HD. Families live in drug and substance free environment ,,FALSE,FALSE,FALSE
+41008,5,afc_domain_hd_goals,Health and Dev Goals,GH5HD,GH5HD. Families / children live in Clean and healthy environment ,GH5HD. Families / children live in Clean and healthy environment ,,FALSE,FALSE,FALSE
+41009,6,afc_domain_hd_goals,Health and Dev Goals,GH6HD,"GH6HD. Child developing normally in physical,cognitive ând milestones","GH6HD. Child developing normally in physical,cognitive ând milestones",,FALSE,FALSE,FALSE
+41010,1,afc_domain_ps_goals,Protection and safety Goals,GH1PS,GH1PS. The child is protected  from all forms violence and abuse,GH1PS. The child is protected  from all forms violence and abuse,,FALSE,FALSE,FALSE
+41011,2,afc_domain_ps_goals,Protection and safety Goals,GH2PS,"GH2PS. Availability and accessibility of functional reporting mechanism (Child Helpline 116, Police & referral services)",GH2PS. Availability and accessibility of functional reporting mechanism ,,FALSE,FALSE,FALSE
+41012,3,afc_domain_ps_goals,Protection and safety Goals,GH3PS,GH3PS. Reduced stigma in families and communities,GH3PS. Reduced stigma in families and communities,,FALSE,FALSE,FALSE
+41013,4,afc_domain_ps_goals,Protection and safety Goals,GH4PS,"GH4PS. Children and caregivers have basic statutory documents i.e birth certificate, notifications, death certificates, burial permit, wills, land title deeds and  baptism card.",GH4PS. Children and caregivers have basic statutory documents,,FALSE,FALSE,FALSE
+41014,1,afc_domain_es_goals,Economic stability Goals,GH1ES,GH1ES. Increase Caregivers/Young person's ability  to meet  basic needs,GH1ES. Increase Caregivers/Young person's ability  to meet  basic needs,,FALSE,FALSE,FALSE
+41015,1,afc_domain_pw_goals,PSS Goals,GH1PW,GH1PW. To promote children participation in community activities,GH1PW. To promote children participation in community activities,,FALSE,FALSE,FALSE
+41016,2,afc_domain_pw_goals,PSS Goals,GH2PW,GH2PW. Children & families access social protection services,GH2PW. Children & families access social protection services,,FALSE,FALSE,FALSE
+41017,3,afc_domain_pw_goals,PSS Goals,GH3PW,GH3PW. All children and young persons are living in inclusivie families & communities,GH3PW. All children and young persons are living in inclusivie families & communities,,FALSE,FALSE,FALSE
+41018,4,afc_domain_pw_goals,PSS Goals,GH4PW,"GH4PW. Children and young persons are able to build inner strength, personal skills, and healthy social relationships","GH4PW. Children and young persons are able to build inner strength, personal skills",,FALSE,FALSE,FALSE
+41019,5,afc_domain_ra_goals,RA Goals,GH1RA,GH1RA. Children/young person spends quality time with caregivers/mentor,GH5PW. Children/young person spends quality time with caregivers/mentor,,FALSE,FALSE,FALSE
+41020,6,afc_domain_ra_goals,RA Goals,GH2RA,GH2RA. Children and caregiver have positive communication,GH6PW. Children and caregiver have positive communication,,FALSE,FALSE,FALSE
+41021,7,afc_domain_ra_goals,RA Goals,GH3RA,GH3RA. Children have consistent caregiver,GH7PW. Children have consistent caregiver,,FALSE,FALSE,FALSE
+41022,1,afc_domain_ed_gaps,Education needs,GN1.1ED,"GN1.1ED. Lack of scholastic materials (School bag, stationary, uniform)","GN1.1ED. Lack of scholastic materials (School bag, stationary, uniform)",,FALSE,FALSE,FALSE
+41023,2,afc_domain_ed_gaps,Education needs,GN1.2ED,GN1.2ED. Lack of school levies.,GN1.2ED. Lack of school levies.,,FALSE,FALSE,FALSE
+41024,3,afc_domain_ed_gaps,Education needs,GN1.3ED,GN1.3ED. Lack of child birth certificate,GN1.3ED. Lack of child birth certificate,,FALSE,FALSE,FALSE
+41025,4,afc_domain_ed_gaps,Education needs,GN1.4ED,GN1.4ED. Child/young person/Caregiver illness,GN1.4ED. Child/young person/Caregiver illness,,FALSE,FALSE,FALSE
+41026,5,afc_domain_ed_gaps,Education needs,GN2.1ED,GN2.1ED. Child dropped out of school/education program,GN2.1ED. Child dropped out of school/education program,,FALSE,FALSE,FALSE
+41027,6,afc_domain_ed_gaps,Education needs,GN2.2ED,GN2.2ED. Child does not want to go to school,GN2.2ED. Child does not want to go to school,,FALSE,FALSE,FALSE
+41028,7,afc_domain_ed_gaps,Education needs,GN2.3ED,GN2.3ED. Lack of hygiene facilities for adolescent girls,GN2.3ED. Lack of hygiene facilities for adolescent girls,,FALSE,FALSE,FALSE
+41029,8,afc_domain_ed_gaps,Education needs,GN2.4ED,GN2.4ED. Lack of dignity packs,GN2.4ED. Lack of dignity packs,,FALSE,FALSE,FALSE
+41030,9,afc_domain_ed_gaps,Education needs,GN2.5ED,GN2.5ED. Child/young person/Caregiver illness,GN2.5ED. Child/young person/Caregiver illness,,FALSE,FALSE,FALSE
+41031,10,afc_domain_ed_gaps,Education needs,GN3.1ED,GN3.1ED. Negative cultural believes,GN3.1ED. Negative cultural believes,,FALSE,FALSE,FALSE
+41032,11,afc_domain_ed_gaps,Education needs,GN3.2ED,GN3.2ED. Child headed house hold ,GN3.2ED. Child headed house hold ,,FALSE,FALSE,FALSE
+41033,12,afc_domain_ed_gaps,Education needs,GN4.1ED,GN4.1ED. Education insitution lacks disability friendly services,GN4.1ED. Education insitution lacks disability friendly services,,FALSE,FALSE,FALSE
+41034,13,afc_domain_ed_gaps,Education needs,GN4.2ED,GN4.2ED. Lack of caregiver and teacher awareness on special needs categorization,GN4.2ED. Lack of caregiver and teacher awareness on special needs,,FALSE,FALSE,FALSE
+41035,1,afc_domain_hd_gaps,Health needs,GN1.1HD,GN1.1HD. Inadequate meals ,GN1.1HD. Inadequate meals,,FALSE,FALSE,FALSE
+41036,2,afc_domain_hd_gaps,Health needs,GN1.2HD,GN1.2HD. lack of balanced diet,GN1.2HD. lack of balanced diet,,FALSE,FALSE,FALSE
+41037,3,afc_domain_hd_gaps,Health needs,GN1.3HD,GN1.3HD. lack of special diet for chronically  ill and children with disability,GN1.3HD. lack of special diet for chronically  ill and children with disability,,FALSE,FALSE,FALSE
+41038,4,afc_domain_hd_gaps,Health needs,GN2.1HD,GN2.1HD. Long distance to health facilities,GN2.1HD. Long distance to health facilities,,FALSE,FALSE,FALSE
+41039,5,afc_domain_hd_gaps,Health needs,GN2.2HD,GN2.2HD. Financial incapacity for medical services,GN2.2HD. Financial incapacity for medical services,,FALSE,FALSE,FALSE
+41040,6,afc_domain_hd_gaps,Health needs,GN2.3HD,GN2.3HD. Lack of health supplies in health facilities,GN2.3HD. Lack of health supplies in health facilities,,FALSE,FALSE,FALSE
+41041,7,afc_domain_hd_gaps,Health needs,GN2.4HD,GN2.4HD. Poor road networks to health facilities,GN2.4HD. Poor road networks to health facilities,,FALSE,FALSE,FALSE
+41042,8,afc_domain_hd_gaps,Health needs,GN2.5HD,GN2.5HD. low uptake  of  enrollment in medical insurance,GN2.5HD. low uptake  of  enrollment in medical insurance,,FALSE,FALSE,FALSE
+41043,9,afc_domain_hd_gaps,Health needs,GN2.6HD,GN2.6HD. Accessibility to  disability friendly  /inclusive  services,GN2.6HD. Accessibility to  disability friendly  /inclusive  services,,FALSE,FALSE,FALSE
+41044,10,afc_domain_hd_gaps,Health needs,GN3.1HD,GN3.1HD. low uptake of immunization,GN3.1HD. low uptake of immunization,,FALSE,FALSE,FALSE
+41045,11,afc_domain_hd_gaps,Health needs,GN4.1HD,GN4.1HD. drug and substance,GN4.1HD. drug and substance,,FALSE,FALSE,FALSE
+41046,12,afc_domain_hd_gaps,Health needs,GN4.2HD,GN4.2HD. lack of sufficient information on drug and substance abuse,GN4.2HD. lack of sufficient information on drug and substance abuse,,FALSE,FALSE,FALSE
+41047,13,afc_domain_hd_gaps,Health needs,GN4.3HD,GN4.3HD. inaquate drug and rehabilitation facilities,GN4.3HD. inaquate drug and rehabilitation facilities,,FALSE,FALSE,FALSE
+41048,14,afc_domain_hd_gaps,Health needs,GN4.4HD,GN4.4HD. low uptake of medical insurance to cater for rehabilitation services,GN4.4HD. low uptake of medical insurance to cater for rehabilitation services,,FALSE,FALSE,FALSE
+41049,15,afc_domain_hd_gaps,Health needs,GN4.5HD,GN4.5HD. peer pressure leading to drug and substance abuse,GN4.5HD. peer pressure leading to drug and substance abuse,,FALSE,FALSE,FALSE
+41050,16,afc_domain_hd_gaps,Health needs,GN5.1HD,GN5.1HD. inadequate clean water,GN5.1HD. inadequate clean water,,FALSE,FALSE,FALSE
+41051,17,afc_domain_hd_gaps,Health needs,GN5.2HD,GN5.2HD. poor solid waste management,GN5.2HD. poor solid waste management,,FALSE,FALSE,FALSE
+41052,18,afc_domain_hd_gaps,Health needs,GN5.3HD,GN5.3HD. poor abblution facilities(open defeacation),GN5.3HD. poor abblution facilities(open defeacation),,FALSE,FALSE,FALSE
+41053,19,afc_domain_hd_gaps,Health needs,GN6.1HD,GN6.1HD. milestone in growth and development,GN6.1HD. milestone in growth and development,,FALSE,FALSE,FALSE
+41054,20,afc_domain_hd_gaps,Health needs,GN6.2HD,GN6.2HD. stunting / wasting,GN6.2HD. stunting / wasting,,FALSE,FALSE,FALSE
+41055,1,afc_domain_ps_gaps,Protection needs,GN1.1PS,"GN1.1PS. Exploitation, -Sexual abuse, -Physical abuse, -Emotional abuse,","GN1.1PS. Exploitation, -Sexual abuse, -Physical abuse, -Emotional abuse,",,FALSE,FALSE,FALSE
+41056,2,afc_domain_ps_gaps,Protection needs,GN1.2PS,"GN1.2PS. Child labour, -Gender Based Violence(GBV)","GN1.2PS. Child labour, -Gender Based Violence(GBV)",,FALSE,FALSE,FALSE
+41057,3,afc_domain_ps_gaps,Protection needs,GN2.1PS,GN2.1PS. Low levels of  awareness on available reporting mechanisms,GN2.1PS. Low levels of  awareness on available reporting mechanisms,,FALSE,FALSE,FALSE
+41058,4,afc_domain_ps_gaps,Protection needs,GN2.2PS,"GN2.2PS. Inaccessibility to institutions of reporting  i.e distance and services,","GN2.2PS. Inaccessibility to institutions of reporting  i.e distance and services,",,FALSE,FALSE,FALSE
+41059,5,afc_domain_ps_gaps,Protection needs,GN2.3PS,GN2.3PS. dysfunctional reporting mechanisms,GN2.3PS. dysfunctional reporting mechanisms,,FALSE,FALSE,FALSE
+41060,6,afc_domain_ps_gaps,Protection needs,GN3.1PS,GN3.1PS. Special needs,GN3.1PS. Special needs,,FALSE,FALSE,FALSE
+41061,7,afc_domain_ps_gaps,Protection needs,GN3.2PS,GN3.2PS. FGM,GN3.2PS. FGM,,FALSE,FALSE,FALSE
+41062,8,afc_domain_ps_gaps,Protection needs,GN3.3PS,GN3.3PS. Harmful Cultural practices,GN3.3PS. Harmful Cultural practices,,FALSE,FALSE,FALSE
+41063,9,afc_domain_ps_gaps,Protection needs,GN3.4PS,GN3.4PS. child truancy and delinquency,GN3.4PS. child truancy and delinquency,,FALSE,FALSE,FALSE
+41064,10,afc_domain_ps_gaps,Protection needs,GN3.5PS,"GN3.5PS. Terminal illnesses(HIV/AIDS, cancer)","GN3.5PS. Terminal illnesses(HIV/AIDS, cancer)",,FALSE,FALSE,FALSE
+41065,11,afc_domain_ps_gaps,Protection needs,GN3.6PS,"GN3.6PS. Child offenders, -Street children","GN3.6PS. Child offenders, -Street children",,FALSE,FALSE,FALSE
+41066,12,afc_domain_ps_gaps,Protection needs,GN3.7PS,GN3.7PS. Reintegrating children from CCIs,GN3.7PS. Reintegrating children from CCIs,,FALSE,FALSE,FALSE
+41067,13,afc_domain_ps_gaps,Protection needs,GN4.1PS,GN4.1PS. Lack of basic statutory documents,GN4.1PS. Lack of basic statutory documents,,FALSE,FALSE,FALSE
+41068,14,afc_domain_ps_gaps,Protection needs,GN4.2PS,GN4.2PS. Inheritance/succession disputes,GN4.2PS. Inheritance/succession disputes,,FALSE,FALSE,FALSE
+41069,15,afc_domain_ps_gaps,Protection needs,GN4.3PS,GN4.3PS. Inaccessibility of institutions providing documents,GN4.3PS. Inaccessibility of institutions providing documents,,FALSE,FALSE,FALSE
+41070,1,afc_domain_es_gaps,Economic stable needs,GN1.1ES,GN1.1ES. Inadequate source of income,GN1.1ES. Inadequate source of income,,FALSE,FALSE,FALSE
+41071,2,afc_domain_es_gaps,Economic stable needs,GN1.2ES,GN1.2ES. Lack of regular savings,GN1.2ES. Lack of regular savings,,FALSE,FALSE,FALSE
+41072,3,afc_domain_es_gaps,Economic stable needs,GN1.3ES,"GN1.3ES. Inadequate finacial literacy (planning, budgeting, savings & responsible spending)","GN1.3ES. Inadequate finacial literacy (planning, budgeting, savings & responsible spen",,FALSE,FALSE,FALSE
+41073,4,afc_domain_es_gaps,Economic stable needs,GN1.4ES,"GN1.4ES. Inability to meet emergency expenses(drought,food)","GN1.4ES. Inability to meet emergency expenses(drought,food)",,FALSE,FALSE,FALSE
+41074,5,afc_domain_es_gaps,Economic stable needs,GN1.5ES,GN1.5ES. Inability to meet medical expanses ,GN1.5ES. Inability to meet medical expanses,,FALSE,FALSE,FALSE
+41075,6,afc_domain_es_gaps,Economic stable needs,GN1.6ES,GN1.6ES. Lack of access to loans and credit,GN1.6ES. Lack of access to loans and credit,,FALSE,FALSE,FALSE
+41076,7,afc_domain_es_gaps,Economic stable needs,GN1.7ES,GN1.7ES. Inadeqaute assets ,GN1.7ES. Inadeqaute assets,,FALSE,FALSE,FALSE
+41077,8,afc_domain_es_gaps,Economic stable needs,GN1.8ES,GN1.8ES. Lack of  basic technical skills,GN1.8ES. Lack of  basic technical skills,,FALSE,FALSE,FALSE
+41078,9,afc_domain_es_gaps,Economic stable needs,GN1.9ES,GN1.9ES. Lack of sustainable means of livelihoods,GN1.9ES. Lack of sustainable means of livelihoods,,FALSE,FALSE,FALSE
+41079,10,afc_domain_es_gaps,Economic stable needs,GN1.10ES,GN1.10ES. Inability to Meet legal and other administrative fees ,GN1.10ES. Inability to Meet legal and other administrative fees,,FALSE,FALSE,FALSE
+41080,1,afc_domain_pw_gaps,PSS needs,GN1.1PW,"GN1.1PW. Child does not belong in any community group setups e.g Church/mosque, local sports club & school clubs","GN1.1PW. Child does not belong in any community group setups e.g Church/mosque, l",,FALSE,FALSE,FALSE
+41081,2,afc_domain_pw_gaps,PSS needs,GN1.2PW,GN1.2PW. Child faces stigma from the community,GN1.2PW. Child faces stigma from the community,,FALSE,FALSE,FALSE
+41082,3,afc_domain_pw_gaps,PSS needs,GN1.3PW,GN1.3PW. Community activities not disability friendly,GN1.3PW. Community activities not disability friendly,,FALSE,FALSE,FALSE
+41083,4,afc_domain_pw_gaps,PSS needs,GN1.4PW,GN1.4PW. Child not aware of their rights (eg Right to leisure),GN1.4PW. Child not aware of their rights (eg Right to leisure),,FALSE,FALSE,FALSE
+41084,5,afc_domain_pw_gaps,PSS needs,GN1.5PW,GN1.5PW. Community not provided safe places for play & leisure,GN1.5PW. Community not provided safe places for play & leisure,,FALSE,FALSE,FALSE
+41085,6,afc_domain_pw_gaps,PSS needs,GN2.1PW,GN2.1PW. Caregiver not bale to provide basic needs due to poverty,GN2.1PW. Caregiver not bale to provide basic needs due to poverty,,FALSE,FALSE,FALSE
+41086,7,afc_domain_pw_gaps,PSS needs,GN2.2PW,GN2.2PW. Families not able to articulate where to access support services for themselves,GN2.2PW. Families not able to articulate where to access support services for themselves,,FALSE,FALSE,FALSE
+41087,8,afc_domain_pw_gaps,PSS needs,GN2.3PW,GN2.3PW. Families not able to access support services when needed,GN2.3PW. Families not able to access support services when needed,,FALSE,FALSE,FALSE
+41088,9,afc_domain_pw_gaps,PSS needs,GN2.4PW,"GN2.4PW. Children/young persons lack relavant identification document eg birth certificate, national ID",GN2.4PW. Children/young persons lack relavant identification document eg birth certif,,FALSE,FALSE,FALSE
+41089,10,afc_domain_pw_gaps,PSS needs,GN3.1PW,GN3.1PW. The family does not feel connected to the culture of the,GN3.1PW. The family does not feel connected to the culture of the,,FALSE,FALSE,FALSE
+41090,11,afc_domain_pw_gaps,PSS needs,GN3.2PW,GN3.2PW. The family does not participate in community activities ie dont feel socially connected,GN3.2PW. The family does not participate in community activities ie dont feel socially c,,FALSE,FALSE,FALSE
+41091,12,afc_domain_pw_gaps,PSS needs,GN3.3PW,GN3.3PW. The family does not have relatives or friends living in close proximity,GN3.3PW. The family does not have relatives or friends living in close proximity,,FALSE,FALSE,FALSE
+41092,13,afc_domain_pw_gaps,PSS needs,GN3.4PW,GN3.4PW. The child is facing stigma from the community,GN3.4PW. The child is facing stigma from the community,,FALSE,FALSE,FALSE
+41093,14,afc_domain_pw_gaps,PSS needs,GN3.5PW,GN3.5PW. The family does not have a good relationship with the extended family,GN3.5PW. The family does not have a good relationship with the extended family,,FALSE,FALSE,FALSE
+41094,15,afc_domain_pw_gaps,PSS needs,GN3.6PW,GN3.6PW. The family does not have a good relationship with the neigbours,GN3.6PW. The family does not have a good relationship with the neigbours,,FALSE,FALSE,FALSE
+41095,16,afc_domain_pw_gaps,PSS needs,GN3.7PW,GN3.7PW. There is low level of acceptance of relatives and community towards the child,GN3.7PW. There is low level of acceptance of relatives and community towards the child,,FALSE,FALSE,FALSE
+41096,17,afc_domain_pw_gaps,PSS needs,GN3.8PW,GN3.8PW. Local leaders do not know the family,GN3.8PW. Local leaders do not know the family,,FALSE,FALSE,FALSE
+41097,18,afc_domain_pw_gaps,PSS needs,GN3.9PW,"GN3.9PW. Young person is not a member of any community group e.g church/mosque, peer support group, savings group etc","GN3.9PW. Young person is not a member of any community group e.g church/mosque,",,FALSE,FALSE,FALSE
+41098,19,afc_domain_pw_gaps,PSS needs,GN3.10PW,GN3.10PW. The caregivers family is dysfunctional,GN3.10PW. The caregivers family is dysfunctional,,FALSE,FALSE,FALSE
+41099,20,afc_domain_pw_gaps,PSS needs,GN4.1PW,GN4.1PW. Freedom of expression,GN4.1PW. Freedom of expression,,FALSE,FALSE,FALSE
+41100,21,afc_domain_pw_gaps,PSS needs,GN4.2PW,GN4.2PW. Child/young person does not seek support and comfort from the caregiver/mentor in response to stressors,GN4.2PW. Child/young person does not seek support and comfort from the caregiver/ment,,FALSE,FALSE,FALSE
+41101,22,afc_domain_pw_gaps,PSS needs,GN4.3PW,"GN4.3PW. The caregiver/mentor does not know the childs/young persons likes, dislikes,what makes them happy/sad etc","GN4.3PW. The caregiver/mentor does not know the childs/young persons likes, dislikes,w",,FALSE,FALSE,FALSE
+41102,23,afc_domain_pw_gaps,PSS needs,GN4.4PW,GN4.4PW. Communication between the child/young person & caregiver/mentor is not frequent and open and not satisfying,GN4.4PW. Communication between the child/young person & caregiver/mentor is not f,,FALSE,FALSE,FALSE
+41103,24,afc_domain_pw_gaps,PSS needs,GN4.5PW,GN4.5PW. The child/young person is not able to articulate the rules of the house and the consequences of breaking the rules,GN4.5PW. The child/young person is not able to articulate the rules of the house and,,FALSE,FALSE,FALSE
+41104,25,afc_domain_ra_gaps,RA needs,GN1.1RA,GN1.1RA. Parental abseentism,GN1.1RA. Parental abseentism,,FALSE,FALSE,FALSE
+41105,26,afc_domain_ra_gaps,RA needs,GN1.2RA,GN1.2RA. The child does not spend quality time with the caregiver/mentor,GN1.2RA. The child does not spend quality time with the caregiver/mentor,,FALSE,FALSE,FALSE
+41106,27,afc_domain_ra_gaps,RA needs,GN1.3RA,GN1.3RA. The child is not involved in decision making on matters involving them.,GN1.3RA. The child is not involved in decision making on matters involving them.,,FALSE,FALSE,FALSE
+41107,28,afc_domain_ra_gaps,RA needs,GN1.4RA,GN1.4RA. the child is exposed to abuse/neglect from the family,GN1.4RA. the child is exposed to abuse/neglect from the family,,FALSE,FALSE,FALSE
+41108,29,afc_domain_ra_gaps,RA needs,GN2.1RA,GN2.1RA. The child is unable to confide and seek comfort with the caregiver,GN1.1RA. The child is unable to confide and seek comfort with the caregiver,,FALSE,FALSE,FALSE
+41109,30,afc_domain_ra_gaps,RA needs,GN2.2RA,GN2.2RA. Caregiver does not encourage the chilld postively,GN2.2RA. Caregiver does not encourage the chilld postively,,FALSE,FALSE,FALSE
+41110,31,afc_domain_ra_gaps,RA needs,GN2.3RA,GN2.3RA. Communication between the child and the care giver is wanting,GN2.3RA. Communication between the child and the care giver is wanting,,FALSE,FALSE,FALSE
+41111,32,afc_domain_ra_gaps,RA needs,GN2.4RA,GN2.4RA. The child is unable to confide and seek comfort with the caregiver,GN2.4RA. The child is unable to confide and seek comfort with the caregiver,,FALSE,FALSE,FALSE
+41112,33,afc_domain_ra_gaps,RA needs,GN3.1RA,GN3.1RA. Relationship between the adults in the household is not good,GN3.1RA. Relationship between the adults in the household is not good,,FALSE,FALSE,FALSE
+41113,34,afc_domain_ra_gaps,RA needs,GN3.2RA,GN3.2RA. The relationship between the child and the caregiver is wanting,GN3.2RA. The relationship between the child and the caregiver is wanting,,FALSE,FALSE,FALSE
+41114,35,afc_domain_ra_gaps,RA needs,GN3.3RA,GN3.3RA. Caregiver does not respond to the child misbehaviour or fails to discipline him/her positively,GN3.3RA. Caregiver does not respond to the child misbehaviour or fails to discipline him,,FALSE,FALSE,FALSE
+41115,36,afc_domain_ra_gaps,RA needs,GN3.4RA,GN3.4RA. The child is not involved in decision making on matters involving them.,GN3.4RA. The child is not involved in decision making on matters involving them.,,FALSE,FALSE,FALSE
+41116,37,afc_domain_ra_gaps,RA needs,GN3.5RA,GN3.5RA. The child is not free when with the caregiver,GN3.5RA. The child is not free when with the caregiver,,FALSE,FALSE,FALSE
+41120,1,afc_domain_ed_services,Education services,CP1.1ED,CP1.1ED. Provide scholastic materials,CP1.1ED. Provide scholastic materials,,FALSE,FALSE,FALSE
+41121,2,afc_domain_ed_services,Education services,CP1.2ED,CP1.2ED. Pay school levies/bursary,CP1.2ED. Pay school levies/bursary,,FALSE,FALSE,FALSE
+41122,3,afc_domain_ed_services,Education services,CP1.3ED,CP1.3ED. Caregiver to acquire birth certificate for the child,CP1.3ED. Caregiver to acquire birth certificate for the child,,FALSE,FALSE,FALSE
+41123,4,afc_domain_ed_services,Education services,CP1.4ED,CP1.4ED. Refer child/young person/caregiver for medical services ,CP1.4ED. Refer child/young person/caregiver for medical services ,,FALSE,FALSE,FALSE
+41124,5,afc_domain_ed_services,Education services,CP2.1ED,CP2.1ED. Enforce back to school policy,CP2.1ED. Enforce back to school policy,,FALSE,FALSE,FALSE
+41125,6,afc_domain_ed_services,Education services,CP2.2ED,CP2.2ED. Monitor child to regulary attend school/education program,CP2.2ED. Monitor child to regulary attend school/education program,,FALSE,FALSE,FALSE
+41126,7,afc_domain_ed_services,Education services,CP2.3ED,CP2.3ED. Caregiver to support children/young person with homework,CP2.3ED. Caregiver to support children/young person with homework,,FALSE,FALSE,FALSE
+41127,8,afc_domain_ed_services,Education services,CP2.4ED,CP2.4ED. Pay school levies/provision of bursary,CP2.4ED. Pay school levies/provision of bursary,,FALSE,FALSE,FALSE
+41128,9,afc_domain_ed_services,Education services,CP2.5ED,CP2.5ED. School provide bins for disposing sanitary pads,CP2.5ED. School provide bins for disposing sanitary pads,,FALSE,FALSE,FALSE
+41129,10,afc_domain_ed_services,Education services,CP2.6ED,CP2.6ED. Provision of dignity packs ,CP2.6ED. Provision of dignity packs ,,FALSE,FALSE,FALSE
+41130,11,afc_domain_ed_services,Education services,CP2.7ED,CP2.7ED. Referral to support services for Child headed house holds,CP2.7ED. Referral to support services for Child headed house holds,,FALSE,FALSE,FALSE
+41131,12,afc_domain_ed_services,Education services,CP3.1ED,CP3.1ED. Pay school levies/provision of bursary/Vocation support for young person,CP3.1ED. Pay school levies/provision of bursary/Vocation support for young person,,FALSE,FALSE,FALSE
+41132,13,afc_domain_ed_services,Education services,CP3.2ED,CP3.2ED. Caregiver and child sensitized on the importance of education,CP3.2ED. Caregiver and child sensitized on the importance of education,,FALSE,FALSE,FALSE
+41133,14,afc_domain_ed_services,Education services,CP3.3ED,CP3.3ED. Referral to support services for Child headed house holds,CP3.3ED. Referral to support services for Child headed house holds,,FALSE,FALSE,FALSE
+41134,15,afc_domain_ed_services,Education services,CP3.4ED,CP3.4ED. Child linked to an adult caregiver,CP3.4ED. Child linked to an adult caregiver,,FALSE,FALSE,FALSE
+41135,16,afc_domain_ed_services,Education services,CP3.5ED,CP3.5ED. Child caregiver supported to access education program,CP3.5ED. Child caregiver supported to access education program,,FALSE,FALSE,FALSE
+41136,17,afc_domain_ed_services,Education services,CP4.1ED,CP4.1ED. Referral for disability friendly services,CP4.1ED. Referral for disability friendly services,,FALSE,FALSE,FALSE
+41137,18,afc_domain_ed_services,Education services,CP4.2ED,CP4.2ED. Complete referral for disability friendly services,CP4.2ED. Complete referral for disability friendly services,,FALSE,FALSE,FALSE
+41138,1,afc_domain_hd_services,Health services,CP1.1HD,CP1.1HD. Empowering families to afford three balanced meals per day,CP1.1HD. Empowering families to afford three balanced meals per day,,FALSE,FALSE,FALSE
+41139,2,afc_domain_hd_services,Health services,CP1.2HD,CP1.2HD. Linkages to service providers for families in need of food supplies* School feeding programme,CP1.2HD. Linkages to service providers for families in need of food supplies* School feedin,,FALSE,FALSE,FALSE
+41140,3,afc_domain_hd_services,Health services,CP1.3HD,CP1.3HD. Provision of special diet for chronically ill and children with disability,CP1.3HD. Provision of special diet for chronically ill and children with disability,,FALSE,FALSE,FALSE
+41141,4,afc_domain_hd_services,Health services,CP2.1HD,CP2.1HD. Capacity building community health workers to offer basic health interventions in hard to reach areas,CP2.1HD. Capacity building community health workers to offer basic health interventio,,FALSE,FALSE,FALSE
+41142,5,afc_domain_hd_services,Health services,CP2.2HD,CP2.2HD. Development of IGAs to economically empower families,CP2.2HD. Development of IGAs to economically empower families,,FALSE,FALSE,FALSE
+41143,6,afc_domain_hd_services,Health services,CP2.3HD,"CP2.3HD. Develop networks with County Governments, NHIF and partners to support health insurance","CP2.3HD. Develop networks with County Governments, NHIF and partners to support h",,FALSE,FALSE,FALSE
+41144,7,afc_domain_hd_services,Health services,CP2.4HD,CP2.4HD. Awareness creation on importance of KEPI vaccinnations,CP2.4HD. Awareness creation on importance of KEPI vaccinnations,,FALSE,FALSE,FALSE
+41145,8,afc_domain_hd_services,Health services,CP2.5HD,CP2.5HD. Awareness creation on registration with NCPWD and other disability friendly services ,CP2.5HD. Awareness creation on registration with NCPWD and other disability friendly,,FALSE,FALSE,FALSE
+41146,9,afc_domain_hd_services,Health services,CP4.1HD,CP4.1HD. Awareness creation on dangers of drug/substance abuse,CP4.1HD. Awareness creation on dangers of drug/substance abuse,,FALSE,FALSE,FALSE
+41147,10,afc_domain_hd_services,Health services,CP4.2HD,CP4.2HD. Psychosocial support provision to children/young people to resist negative peer influence,CP4.2HD. Psychosocial support provision to children/young people to resist negative peer i,,FALSE,FALSE,FALSE
+41148,11,afc_domain_hd_services,Health services,CP5.1HD,"CP5.1HD. Empowering families to afford clean water (Protection ofwater sources,treatment)","CP5.1HD. Empowering families to afford clean water (Protection ofwater sources,treatmen",,FALSE,FALSE,FALSE
+41149,12,afc_domain_hd_services,Health services,CP5.2HD,CP5.2HD. Capacity building families/ community groups on waste management,CP5.2HD. Capacity building families/ community groups on waste management,,FALSE,FALSE,FALSE
+41150,13,afc_domain_hd_services,Health services,CP6.1HD,CP6.1HD. Regular child clinic attendance,CP6.1HD. Regular child clinic attendance,,FALSE,FALSE,FALSE
+41151,14,afc_domain_hd_services,Health services,CP6.2HD,CP6.2HD. Sensitizing parents in early detection of delayed milestones,CP6.2HD. Sensitizing parents in early detection of delayed milestones,,FALSE,FALSE,FALSE
+41152,1,afc_domain_ps_services,Protection services,CP1.1PS,"CP1.1PS. Awareness creation for children, caregivers and the community on children’s rights.","CP1.1PS. Awareness creation for children, caregivers and the community on children’s",,FALSE,FALSE,FALSE
+41153,2,afc_domain_ps_services,Protection services,CP1.2PS,CP1.2PS. Prompt response to cases of violence against children.,CP1.2PS. Prompt response to cases of violence against children.,,FALSE,FALSE,FALSE
+41154,3,afc_domain_ps_services,Protection services,CP1.3PS,CP1.3PS. Availability of emergency interventions.,CP1.3PS. Availability of emergency interventions.,,FALSE,FALSE,FALSE
+41155,4,afc_domain_ps_services,Protection services,CP1.4PS,CP1.4PS. Availability of a directory/list with contacts of essential service providers.,CP1.4PS. Availability of a directory/list with contacts of essential service providers.,,FALSE,FALSE,FALSE
+41156,5,afc_domain_ps_services,Protection services,CP1.5PS,CP1.5PS. Referral for post violence services. i.e counseling and restorative justice,CP1.5PS. Referral for post violence services. i.e counseling and restorative justice,,FALSE,FALSE,FALSE
+41157,6,afc_domain_ps_services,Protection services,CP2.1PS,CP2.1PS. Awareness creation on child rights & responsibilities,CP2.1PS. Awareness creation on child rights & responsibilities,,FALSE,FALSE,FALSE
+41158,7,afc_domain_ps_services,Protection services,CP2.2PS,CP2.2PS. Accessibility to referral services,CP2.2PS. Accessibility to referral services,,FALSE,FALSE,FALSE
+41159,8,afc_domain_ps_services,Protection services,CP2.3PS,"CP2.3PS. Documents( Birth Notification, birth certificate & Death certificate)","CP2.3PS. Documents( Birth Notification, birth certificate & Death certificate)",,FALSE,FALSE,FALSE
+41160,9,afc_domain_ps_services,Protection services,CP2.4PS,CP2.4PS. Positive  forms of discipline,CP2.4PS. Positive  forms of discipline,,FALSE,FALSE,FALSE
+41161,10,afc_domain_ps_services,Protection services,CP2.5PS,CP2.5PS. Restorative justice,CP2.5PS. Restorative justice,,FALSE,FALSE,FALSE
+41162,11,afc_domain_ps_services,Protection services,CP3.1PS,CP3.1PS. Awareness raising and advocacy for inclusive families/communities,CP3.1PS. Awareness raising and advocacy for inclusive families/communities,,FALSE,FALSE,FALSE
+41163,12,afc_domain_ps_services,Protection services,CP3.2PS,CP3.2PS. Providing disability friendly & inclusive services such as barrier-free buildings,CP3.2PS. Providing disability friendly & inclusive services such as barrier-free buildings,,FALSE,FALSE,FALSE
+41164,13,afc_domain_ps_services,Protection services,CP3.3PS,CP3.3PS. Restorative justice mechanisms,CP3.3PS. Restorative justice mechanisms,,FALSE,FALSE,FALSE
+41165,14,afc_domain_ps_services,Protection services,CP3.4PS,CP3.4PS. Alternative Dispute Resolution or mediation,CP3.4PS. Alternative Dispute Resolution or mediation,,FALSE,FALSE,FALSE
+41166,15,afc_domain_ps_services,Protection services,CP4.1PS,CP4.1PS. Awareness raising on importance of statutory documents,CP4.1PS. Awareness raising on importance of statutory documents,,FALSE,FALSE,FALSE
+41167,16,afc_domain_ps_services,Protection services,CP4.2PS,CP4.2PS. Mobilizing the community for birth registrations and writing of wills,CP4.2PS. Mobilizing the community for birth registrations and writing of wills,,FALSE,FALSE,FALSE
+41168,17,afc_domain_ps_services,Protection services,CP4.3PS,CP4.3PS. Child rights clubs,CP4.3PS. Child rights clubs,,FALSE,FALSE,FALSE
+41169,18,afc_domain_ps_services,Protection services,CP4.4PS,CP4.4PS. child participation,CP4.4PS. child participation,,FALSE,FALSE,FALSE
+41170,1,afc_domain_es_services,Economic stability services,CP1.1ES,CP1.1ES. IGA ,CP1.1ES. IGA,,FALSE,FALSE,FALSE
+41171,2,afc_domain_es_services,Economic stability services,CP1.2ES,CP1.2ES. Enroll to savings group,CP1.2ES. Enroll to savings group,,FALSE,FALSE,FALSE
+41172,3,afc_domain_es_services,Economic stability services,CP1.3ES,CP1.3ES. Linkages to social security safet nets (cash tranfers),CP1.3ES. Linkages to social security safet nets (cash tranfers),,FALSE,FALSE,FALSE
+41173,4,afc_domain_es_services,Economic stability services,CP1.4ES,CP1.4ES. Financial training,CP1.4ES. Financial training,,FALSE,FALSE,FALSE
+41174,5,afc_domain_es_services,Economic stability services,CP1.5ES,CP1.5ES. Enterprenuership training,CP1.5ES. Enterprenuership training,,FALSE,FALSE,FALSE
+41175,6,afc_domain_es_services,Economic stability services,CP1.6ES,CP1.6ES. Joining savings and credit societies/organizations,CP1.6ES. Joining savings and credit societies/organizations,,FALSE,FALSE,FALSE
+41176,7,afc_domain_es_services,Economic stability services,CP1.7ES,CP1.7ES. Linkages to medical cover shemes(NHIF),CP1.7ES. Linkages to medical cover shemes(NHIF),,FALSE,FALSE,FALSE
+41177,8,afc_domain_es_services,Economic stability services,CP1.8ES,CP1.8ES. Enroll savings and credit societies/organizations.Link to financial institutions ,CP1.8ES. Enroll savings and credit societies/organizations.Link to financial institutions,,FALSE,FALSE,FALSE
+41178,9,afc_domain_es_services,Economic stability services,CP1.9ES,CP1.9ES. Linkages to organization supporting asset growth,CP1.9ES. Linkages to organization supporting asset growth,,FALSE,FALSE,FALSE
+41179,10,afc_domain_es_services,Economic stability services,CP1.10ES,CP1.10ES. Link caregiver for bussiness support start up kit/bussiness boost,CP1.10ES. Link caregiver for bussiness support start up kit/bussiness boost,,FALSE,FALSE,FALSE
+41180,11,afc_domain_es_services,Economic stability services,CP1.11ES,CP1.11ES. Linkages to technical training,CP1.11ES. Linkages to technical training,,FALSE,FALSE,FALSE
+41181,12,afc_domain_es_services,Economic stability services,CP1.12ES,CP1.12ES. Referral to vocational training/apprenticeships,CP1.12ES. Referral to vocational training/apprenticeships,,FALSE,FALSE,FALSE
+41182,13,afc_domain_es_services,Economic stability services,CP1.13ES,CP1.13ES. Refer for agri bussiness skills ,CP1.13ES. Refer for agri bussiness skills,,FALSE,FALSE,FALSE
+41183,14,afc_domain_es_services,Economic stability services,CP1.14ES,CP1.14ES. Referral to enterprenuership training ,CP1.14ES. Referral to enterprenuership training,,FALSE,FALSE,FALSE
+41184,15,afc_domain_es_services,Economic stability services,CP1.15ES,CP1.15ES. Linkage to internship and job opportunities,CP1.15ES. Linkage to internship and job opportunities,,FALSE,FALSE,FALSE
+41185,16,afc_domain_es_services,Economic stability services,CP1.16ES,CP1.16ES. Link caregiver for bussiness support start up kit/bussiness boost,CP1.16ES. Link caregiver for bussiness support start up kit/bussiness boost,,FALSE,FALSE,FALSE
+41186,17,afc_domain_es_services,Economic stability services,CP1.17ES,CP1.17ES. Referral for legal and other administrative fees support e.g civil registratios or inheritance ,CP1.17ES. Referral for legal and other administrative fees support e.g civil registratios or i,,FALSE,FALSE,FALSE
+41187,1,afc_domain_pw_services,PSS services,CP1.1PW,CP1.1PW. involve/engage children in community activities ie play groups,CP1.1PW. involve/engage children in community activities ie play groups,,FALSE,FALSE,FALSE
+41188,2,afc_domain_pw_services,PSS services,CP1.2PW,CP1.2PW. Prioritize child friendly school and community programmes e.g. clubs,CP1.2PW. Prioritize child friendly school and community programmes e.g. clubs,,FALSE,FALSE,FALSE
+41189,3,afc_domain_pw_services,PSS services,CP1.3PW,CP1.3PW. Provide child-friendly services to the child with special needs,CP1.3PW. Provide child-friendly services to the child with special needs,,FALSE,FALSE,FALSE
+41190,4,afc_domain_pw_services,PSS services,CP1.4PW,CP1.4PW. Community sensitization & awareness on promotion of child participation in community activities & child rights,CP1.4PW. Community sensitization & awareness on promotion of child participation in,,FALSE,FALSE,FALSE
+41191,5,afc_domain_pw_services,PSS services,CP2.1PW,"CP2.1PW. Linkages to social protection services e.g cash transers, bursaries etc","CP2.1PW. Linkages to social protection services e.g cash transers, bursaries etc",,FALSE,FALSE,FALSE
+41192,6,afc_domain_pw_services,PSS services,CP2.2PW,CP2.2PW. Referals to stakeholders for household for economic strenthening,CP2.2PW. Referals to stakeholders for household for economic strenthening,,FALSE,FALSE,FALSE
+41193,7,afc_domain_pw_services,PSS services,CP2.3PW,"CP2.3PW. Provide asset support e.g goats, poultry","CP2.3PW. Provide asset support e.g goats, poultry",,FALSE,FALSE,FALSE
+41194,8,afc_domain_pw_services,PSS services,CP2.4PW,CP2.4PW. Linking the household to savings & lending groups/IGAS & startup capital,CP2.4PW. Linking the household to savings & lending groups/IGAS & startup capital,,FALSE,FALSE,FALSE
+41195,9,afc_domain_pw_services,PSS services,CP2.5PW,"CP2.5PW. Capacity building on business skills, financial literacy","CP2.5PW. Capacity building on business skills, financial literacy",,FALSE,FALSE,FALSE
+41196,10,afc_domain_pw_services,PSS services,CP2.6PW,CP2.6PW. Provide livelihood skills/support,CP2.6PW. Provide livelihood skills/support,,FALSE,FALSE,FALSE
+41197,11,afc_domain_pw_services,PSS services,CP3.1PW,CP3.1PW. Awareness and availability of support services,CP3.1PW. Awareness and availability of support services,,FALSE,FALSE,FALSE
+41198,12,afc_domain_pw_services,PSS services,CP3.2PW,CP3.2PW. Sensitization of the family & community,CP3.2PW. Sensitization of the family & community,,FALSE,FALSE,FALSE
+41199,13,afc_domain_pw_services,PSS services,CP3.3PW,CP3.3PW. Establishing accessible community reconciliation committees,CP3.3PW. Establishing accessible community reconciliation committees,,FALSE,FALSE,FALSE
+41200,14,afc_domain_pw_services,PSS services,CP3.4PW,CP3.4PW. Positive parenting skills,CP3.4PW. Positive parenting skills,,FALSE,FALSE,FALSE
+41201,15,afc_domain_pw_services,PSS services,CP3.5PW,CP3.5PW. Mediation & Arbitration,CP3.5PW. Mediation & Arbitration,,FALSE,FALSE,FALSE
+41202,16,afc_domain_pw_services,PSS services,CP4.1PW,"CP4.1PW. Participation in children assemblies, capacity building, school clubs, mentorship","CP4.1PW. Participation in children assemblies, capacity building, school clubs, mentorsh",,FALSE,FALSE,FALSE
+41203,17,afc_domain_pw_services,PSS services,CP4.2PW,CP4.2PW. child/parent communication skills,CP4.2PW. child/parent communication skills,,FALSE,FALSE,FALSE
+41204,18,afc_domain_pw_services,PSS services,CP4.3PW,CP4.3PW. Mentorship ,CP4.3PW. Mentorship,,FALSE,FALSE,FALSE
+41205,19,afc_domain_pw_services,PSS services,CP4.4PW,CP4.4PW. Counselling,CP4.4PW. Counselling,,FALSE,FALSE,FALSE
+41206,20,afc_domain_ra_services,RA services,CP1.1RA,CP1.1RA. Sensitize caregiver/child/young person/mentor on importance of spending quality time together,CP1.1RA. Sensitize caregiver/child/young person/mentor on importance of spending quali,,FALSE,FALSE,FALSE
+41207,21,afc_domain_ra_services,RA services,CP1.2RA,CP1.2RA. Positive parenting,CP1.2RA. Positive parenting,,FALSE,FALSE,FALSE
+41208,22,afc_domain_ra_services,RA services,CP1.3RA,CP1.3RA. Positive discpline,CP1.3RA. Positive discpline,,FALSE,FALSE,FALSE
+41209,23,afc_domain_ra_services,RA services,CP2.1RA,CP2.1RA. Effective role modelling,CP2.1RA. Effective role modelling,,FALSE,FALSE,FALSE
+41210,24,afc_domain_ra_services,RA services,CP3.1RA,CP3.1RA. Arbitration & mediation,CP3.1RA. Arbitration & mediation,,FALSE,FALSE,FALSE
+41211,25,afc_domain_ra_services,RA services,CP3.2RA,CP3.2RA. child/caregiver/young person to be sensitized on their rights and responsibilities,CP3.2RA. child/caregiver/young person to be sensitized on their rights and responsibiliti,,FALSE,FALSE,FALSE
+41212,26,afc_domain_ra_services,RA services,CP3.3RA,CP3.3RA. promote caregiver child dialogue,CP3.3RA. promote caregiver child dialogue,,FALSE,FALSE,FALSE

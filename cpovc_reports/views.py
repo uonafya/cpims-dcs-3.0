@@ -9,6 +9,7 @@ import string
 import mimetypes
 import calendar
 import zipfile
+import codecs
 from datetime import datetime
 # from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -313,7 +314,6 @@ def reports_caseload(request):
         form = CaseLoad(request.user)
         dates = {v: k for k, v in enumerate(calendar.month_abbr)}
         if request.method == 'POST':
-            print('shit 11111111111111111')
             sub_county_ids = request.POST.getlist('sub_county')
             sub_counties = request.POST.get('sub_county')
             county = request.POST.get('county')
@@ -614,6 +614,7 @@ def reports_download(request, file_name):
     """Generic method for downloading files."""
     try:
         file_folder = ''
+        print('File Name', file_name)
         if '_' not in file_name and '.' not in file_name:
             file_name = base64.urlsafe_b64decode(str(file_name))
         if str(file_name).endswith('xlsx') or str(file_name).endswith('xlsm'):
@@ -648,7 +649,7 @@ def reports_download_old(request, file_name):
         if file_name.endswith('xlsx') or file_name.endswith('xlsm'):
             file_folder = 'xlsx/'
         file_path = '%s/%s%s' % (MEDIA_ROOT, file_folder, file_name)
-        fp = open(file_path, 'rt')
+        fp = open(file_path, 'r', 'utf-8')
         response = HttpResponse(fp.read())
         fp.close()
         mime_type, encoding = mimetypes.guess_type(file_name)

@@ -1541,6 +1541,9 @@ def registry_look(request):
             if action == 6:
                 county = request.POST.get('county')
                 datas, extras = [county], []
+            if action == 8:
+                location = request.POST.get('location')
+                datas, extras = [location], []
             su = request.user.is_superuser
             # Check if in National person
             if filters and not su:
@@ -1551,7 +1554,7 @@ def registry_look(request):
                     filters = False
             filter_id = request.user if filters and not su else False
             print('lookup', results, datas, extras, filter_id)
-            results = get_geo_selected(results, datas, extras, filter_id)
+            results = get_geo_selected(results, datas, extras, filter_id, action)
             res_extras = list(map(str, extras))
             if res_extras:
                 selects = ','.join(res_extras)

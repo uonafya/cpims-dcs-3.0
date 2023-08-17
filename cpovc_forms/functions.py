@@ -12,7 +12,8 @@ from cpovc_forms.models import (
     OVCEducationFollowUp, OVCPlacement, OvcCaseInformation,
     OVCCaseLocation, OVCCaseRecord)
 from cpovc_ovc.functions import get_house_hold
-from cpovc_main.models import ListAnswers, SetupGeography
+from cpovc_main.models import ListAnswers, SetupGeography, SetupLocation
+
 
 from cpovc_registry.models import Photo
 
@@ -566,8 +567,7 @@ def handle_photo_upload(request):
         # Remove metadata and resize the image
         im = Image.open(r"%s" % file_name)
         width, height = im.size
-        image_exif = im._getexif()
-        image_orientation = image_exif[274] if 274 in image_exif else 0
+        image_orientation = get_photo_exif(request, im)
         # ext 6
         print('Photo size', width, height, 'Orientation', image_orientation)
         if height > 1024:
@@ -625,3 +625,47 @@ def get_photo(request, person_id):
         return {}
     else:
         return photos
+
+
+def get_related_geos(sc_id, loc_id):
+    """Method to get all related geos."""
+    try:
+        geos = {}
+        geo = SetupLocation.objects.get(area_id=sc_id)
+        sclists = SetupLocation.objects.filter(
+            parent_area_id=geo.parent_area_id).values('area_id', 'area_name')
+        sc_list = [(wloc['area_id'], wloc['area_name']) for wloc in sclists]
+        geo_others = SetupLocation.objects.filter(parent_area_id=sc_id)
+        wlists = geo_others.filter(
+            area_type_id='GWRD').values('area_id', 'area_name')
+        wards_list = [(wloc['area_id'], wloc['area_name']) for wloc in wlists]
+        llists = geo_others.filter(
+            area_type_id='GLOC').values('area_id', 'area_name')
+        loc_list = [(wloc['area_id'], wloc['area_name']) for wloc in llists]
+        # Sub locations
+        location_id = loc_id if loc_id else 0
+        sllists = geo_others.filter(
+            parent_area_id=location_id, area_type_id='GSLC').values(
+            'area_id', 'area_name')
+        sloc_list = [(wloc['area_id'], wloc['area_name']) for wloc in sllists]
+        geos['sub_counties'] = sc_list
+        geos['wards'] = wards_list
+        geos['locations'] = loc_list
+        geos['sub_locations'] = sloc_list
+    except Exception as e:
+        print('Error getting related sc geos - %s' % str(e))
+        return {}
+    else:
+        return geos
+
+
+def get_photo_exif(request, im, im_key=274):
+    """Method to get Image exif information dictionary."""
+    try:
+        img_exif = im._getexif()
+        image_exif = img_exif if img_exif else {}
+        image_orientation = image_exif[im_key] if im_key in image_exif else 0
+    except Exception:
+        return {}
+    else:
+        return image_orientation

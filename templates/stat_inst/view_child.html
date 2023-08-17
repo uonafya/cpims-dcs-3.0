@@ -1,0 +1,576 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} SI Module : details {% endblock %}
+
+{% load app_filters %}
+
+{% block style_code %}
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+  table.text-inverse tr{
+    margin: 25px 0 25px 0;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  td.field{
+    text-align: right;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Home</a></li>
+    <li class="active">SI Module</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+
+<h1 class="page-header"><i class="fa fa-child"></i> Statutory Institutions <small>
+Child details 
+</small></h1>
+<!-- end page-header -->
+{% if messages %}
+    {% for message in messages %}
+    {% if 'error' in message.tags %}
+        <div id="messages" class="alert alert-danger fade in">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-info fa-2x pull-left"></i>
+    {% else %}
+        <div id="messages" class="alert alert-success fade in">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-check fa-2x pull-left"></i>
+    {% endif %}    
+        <p>{{ message }}</p>
+    </div>
+   {% endfor %}
+{% endif %}
+    <div id="message" class="alert alert-success fade in" style="display: none">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-check fa-2x pull-left"></i>
+  
+        <span id="response"></span>
+    </div>
+<!-- begin row -->
+
+
+<div class="row">
+   <!-- begin col-2 -->
+    <div class="col-md-3">
+
+        <table class="text-inverse m-b-20 width-full">
+            <tr>
+                <td>
+                    <br><div class="m-b-10 text-inverse f-s-12"><b>SI Forms</b></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI001F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Application for a Vacancy</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI002F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Needs and Risk Assessment</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI003F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Needs and Risk Assessment Scale</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI004F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Admission Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI005F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Social Enquiry Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI006F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child and Caregiver Case Review Tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI032F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Young Person and Caregiver Case Review Tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI007F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Identification Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI031F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI008F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Family Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI009F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Individual Treatment Plan</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI010F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Individual Care Plan</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI011F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Medical Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI012F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Monitoring tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI013F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Request for Revocation of Committal Order</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI014F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Change in the Profile of a Child Under Environmental Adjustment</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI015F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Family Conferencing Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI016F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Joint Family Agreement Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI017F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Leave of Absence Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI018F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Record of Visits and Correspondence</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI019F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Escape Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI020F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Referral Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI021F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Release form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI022F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Certificate of Exit for Children</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI023F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Closure Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI024F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Access to Legal Aid Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI025F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Re-unification Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI026F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Participation Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI027F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Counselling Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI028F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Court Attendance Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI029F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Education Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI030F' id=child.id %}">
+                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Vocational and Proficiency Form</div></a>
+                </td>
+            </tr>
+
+        </table>
+        <div class="alert alert-warning">
+            <i class="fa fa-info-circle fa-lg m-r-5 pull-left m-t-2"></i> Follow ups can be done at <b class="text-inverse">any time</b> in the process and <b class="text-inverse">each type of Institution has different Forms and SOPs.</b>
+        </div>
+
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-9 -->
+    <div class="col-md-9">
+    
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>  
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-success btn-xs">Action</button>
+                    <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" id="checkin">Check in</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="checkins">My Check ins</a></li>
+                    </ul>
+                </div>                    
+                <h4 class="panel-title">Registration details &nbsp; </h4>
+            </div>
+
+            <!-- start panel body -->
+     <div style="overflow-x: auto; min-height: 300px;">
+            <div class="panel-body">
+                <form action="." method="post" name="ovcreg_form" id="ovcreg_form" data-parsley-validate="true">
+                {% csrf_token %}
+                <input type="hidden" name="ovc_id" id="ovc_id" value="{{ creg.person_id }}">
+                <table width="100%" class="table">
+                    <tbody>
+                        <tr>
+                            <td class="field">First Name</td>
+                            <td width="30%">{{ child.first_name }}</td>
+                            <td class="field">Surname</td>
+                            <td width="30%">{{ child.surname }}</td>
+                        </tr>
+                        <tr>
+                            <td class="field">Other Names</td>
+                            <td>{{ child.other_names }}</td>
+                            <td class="field">DOB</td>
+                            <td>{{ child.date_of_birth }}
+                            ({{ child.years }})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="field">Name of Institution</td>
+                            <td>{{ creg.child_cbo.org_unit_name }}</td>
+                            <td class="field">Type</td>
+                            <td>{{ creg.child_chv.full_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="field">OVC CPIMS ID</td>
+                            <td>{{ child.id }}</td>
+                            <td class="field">Admission&nbsp;Date</td>
+                            <td>{{ creg.registration_date }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="field">Reason(s) for admission</td>
+                            <td colspan="3">
+                                    {% for criteria in criterias %}
+                                        {{ criteria.criteria }},&nbsp;
+                                    {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+
+                <fieldset>
+                <legend class="pull-left width-full">Prior Institution admissions</legend>
+                <!-- begin row -->
+                 <div class="row">
+                    <div class="col-md-12">
+                        {% if placements %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Insititution type</th>
+                                    <th>Institution name</th>
+                                    <th>Date of admission</th>
+                                    <th>Date of release</th>
+                                    <th>Admission reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p>No earlier placements exists.</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+                </fieldset>
+
+               <hr/>
+
+                <div class="row pull-left" id="form_actions">
+                    
+                       <a href="{% url 'ovc_home' %}" ><type="button" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-arrow-left"></i> &nbsp;<b>Back to search</b>&nbsp; </button></a> 
+
+                        {% if allow_edit %}
+
+                        <a href="{% url 'ovc_edit' id=creg.person_id %}"><button type="button" class="btn btn-primary"> <i class="fa fa-child"></i> Edit OVC</button></a>
+
+                        <a href="{% url 'hh_manage' hhid=hhold.house_hold.id %}">
+                        <button type="button" class="btn btn-primary"> <i class="fa fa-users"></i> Manage HH </button>
+                        </a>
+                        {% endif %}
+                </div>
+            <!-- end panel body -->
+        </div>
+     </div>
+        <!-- end panel -->  
+    </div>
+    <!-- end col-12 -->
+</div>
+</div>
+<!-- end row -->
+<!-- #modal-dialog -->
+      <div class="modal fade" id="modal-checkins">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">My Check ins</h4>
+            </div>
+            <div class="modal-body">
+                <div id="msg"></div>
+                <div class="form-horizontal row">
+                  <div class="form-group">
+                      <div class="col-md-12">
+                          <table width="100%" id="mycheckins" class="table table-striped table-bordered"></table>
+                      </div>
+                  </div>
+                </div>  
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- #modal-dialog -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'js/bootstrap-table.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-table-locale-all.min.js' %}"></script>  
+<script type="text/javascript">
+
+    $('#checkin').click(function() {
+        $('#message').show();
+        $.ajax({
+               type: "POST",
+               url: "{{ request.get_full_path }}",
+               dataType: "json",
+               data: $("#ovcreg_form").serialize() + "&id=1",
+               success: function(data)
+               {
+                   var status = data.status;
+                   if (status == 0){
+                       $("#message").addClass( "alert alert-success fade in" );
+                       $('#response').html(data.message);
+                    }else{
+                       $("#message").addClass( "alert alert-danger fade in" );
+                       $('#response').html(data.message);
+                    }
+               },
+                error: function(){
+                    $("#message").addClass( "alert alert-danger fade in" );
+                    $('#response').html("Error checking in. Please try again.");
+                }
+             });
+    });
+    $('#checkins').click(function() {
+        $('#modal-checkins').modal('toggle');
+        $('#mycheckins').bootstrapTable({
+            url: '{{ request.get_full_path }}',
+            method: 'get',
+            queryParams: function (p) {
+                return { 'id': 2, 'limit': p.limit, 'offset': p.offset };
+            },
+            columns: [{
+                field: 'ovc_id',
+                title: 'OVC ID'
+            }, {
+                field: 'ovc_name',
+                title: 'OVC Name'
+            }, {
+                field: 'ctime',
+                title: 'Time'
+            }, {
+                field: 'caction',
+                title: 'Action'
+            }, ],
+            search: 'true',
+            sortable: 'true',
+            locale: 'en-US',
+            pagination: 'true',
+            pageNumber: 1,
+            pageSize: 10,
+            showRefresh: true,
+            showToggle: true,
+            singleSelect: true,
+            clickToSelect:true,
+            maintainSelected: true
+        });
+    });
+
+    $("#mycheckins").delegate(".removecheckin", "click", function() {
+        var ovcid = $(this).attr('id');
+        $.ajax({
+               type: "POST",
+               url: "{{ request.get_full_path }}",
+               dataType: "json",
+               data: $("#ovcreg_form").serialize() + "&id=3&ovc_out_id="+ovcid,
+               success: function(data)
+               {
+                   var status = data.status;
+                   if (status == 0){
+                       $("#msg").addClass( "alert alert-success fade in" );
+                       $('#msg').html(data.message);
+                       $("#mycheckins").bootstrapTable('refresh');
+                    }else{
+                       $("#msg").addClass( "alert alert-danger fade in" );
+                       $('#msg').html(data.message);
+                    }
+               },
+                error: function(){
+                    $("#msg").addClass( "alert alert-danger fade in" );
+                    $('#msg').html("Error getting check ins. Please try again.");
+                }
+             });
+    });
+
+</script>
+
+{% endblock %}

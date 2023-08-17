@@ -38,7 +38,7 @@ list_satisfied_level = get_list('satisfied_level_ids')
 list_feeling_level = get_list('feeling_level_ids')
 list_referral_reasons = get_list('referral_reasons_ids', 'Please Select')
 list_referral_documents = get_list('referral_documents_ids')
-list_case_plan_responsible = get_list('case_plan_responsible', 'Please Select')
+list_case_plan_responsible = get_list('case_plan_responsible')
 
 disability_actions = get_list('disability_actions')
 list_family_types = get_list('family_type_id', 'Please Select')
@@ -1309,18 +1309,26 @@ class AFCForm4A(forms.Form):
             attrs={'class': 'form-control', 'id': 'qf4A4',
                    'data-parsley-required': "true"}))
 
+    qf4A4_msc = forms.MultipleChoiceField(
+        choices=(),
+        widget=forms.SelectMultiple(
+            attrs={'class': 'form-control',
+                   'data-parsley-required': "true",
+                   'id': 'qf4A4'}))
+
     qf4A5 = forms.CharField(widget=forms.TextInput(
-        attrs={'placeholder': _('Date'),
+        attrs={'placeholder': _('Date'), 'id': 'qf4A5',
                'class': 'form-control other_date',
                'data-parsley-required': "true"
                }))
 
-    qf4A6_sdd = forms.ChoiceField(
+
+    qf4A6_msc = forms.MultipleChoiceField(
         choices=list_case_plan_responsible,
-        initial='0',
-        widget=forms.Select(
-            attrs={'class': 'form-control', 'id': 'qf4A6',
-                   'data-parsley-required': "true"}))
+        widget=forms.SelectMultiple(
+            attrs={'class': 'form-control',
+                   'data-parsley-required': "true",
+                   'id': 'qf4A6'}))
 
     qf4A7_rdo = forms.ChoiceField(
         choices=YESNO_CHOICES,

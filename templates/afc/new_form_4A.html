@@ -17,6 +17,9 @@ form#new-form-b ul {
       padding-left: 1em;
       text-indent: -2em;
   }
+  .multiselect-container > li > a { 
+    white-space: normal;
+}
 </style>
 {% endblock %}
 
@@ -41,6 +44,7 @@ form#new-form-b ul {
     </ul>
 </div>
 {% endif %}
+<div id="msg"></div>
 <!-- begin row -->
 <div class="row">
    <div class="col-md-12">
@@ -69,12 +73,13 @@ form#new-form-b ul {
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-4A" action="." data-parsley-validate="false">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
                     <input type="hidden" name="person_id" value="{{ case.person.id }}">
                     <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <input type="hidden" name="all_answers" id="all_answers" value="">
                     <div class="form-group">
                         <label class="col-md-2 control-label">Child Names</label>
                         <div class="col-md-3">
@@ -148,38 +153,47 @@ form#new-form-b ul {
                             <div class="col-md-3"><b>Goals <span class="asteriskField">*</span></b></div>
                             <div class="col-md-3"><b>Needs <span class="asteriskField">*</span></b></div>
                             <div class="col-md-3"><b>Proposed actions <span class="asteriskField">*</span></b></div>
-                            <div class="col-md-3"><b>Deadline <span class="asteriskField">*</span></b></div>
+                            <div class="col-md-2"><b>Deadline <span class="asteriskField">*</span></b></div>
+                            <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">{{ form.qf4A2_sdd }}</div>
                             <div class="col-md-3">{{ form.qf4A3_sdd }}</div>
-                            <div class="col-md-3">{{ form.qf4A4_sdd }}</div>
-                            <div class="col-md-3">{{ form.qf4A5 }}</div>
+                            <div class="col-md-3">{{ form.qf4A4_msc }}</div>
+                            <div class="col-md-2">{{ form.qf4A5 }}</div>
+                            <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3"><b>Responsible <span class="asteriskField">*</span></b></div>
                             <div class="col-md-2"><b>Action completed <span class="asteriskField">*</span></b></div>
                             <div class="col-md-4"><b>Action not completed(explain)</b></div>
-                            <div class="col-md-3"><b>New action identified </b></div>
+                            <div class="col-md-2"><b>New action identified </b></div>
+                            <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-3">{{ form.qf4A6_sdd }}</div>
+                            <div class="col-md-3">{{ form.qf4A6_msc }}</div>
                             <div class="col-md-2">{{ form.qf4A7_rdo }}<br><span id="qf4A7_rdo_error"></span></div>
                             <div class="col-md-4">{{ form.qf4A8 }}</div>
-                            <div class="col-md-3">{{ form.qf4A9 }}</div>
+                            <div class="col-md-2">{{ form.qf4A9 }}</div>
+                            <div class="col-md-1"><button id="btnAddCasePlan" type="button" class="btn btn-sm btn-inverse m-r-5" onClick="AddCasePlan()"> <i class="fa fa-plus" aria-hidden="true"></i> Add Goal</button></div>
+                        </div>
+                        <div class="row">
+                        <table class="table table-condensed slimtable" id="holding_table">
+                            <tbody>
+                            </tbody>
+                        </table>
                         </div>
                     </fieldset>
-                  
+                    <hr>
                     
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-3">
-                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                            <button id="btnSubmit" type="button" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
                         </div>
                         <div class="col-md-6"></div>
                     </div>
 
-                    <hr>
                     <div class="table-responsive">
                         <table class="table table-condensed slimtable" id="submissions_table">
                             <thead>
@@ -199,13 +213,13 @@ form#new-form-b ul {
                                 {% for event in events %}
                                     <tr>
                                     <td>{{ event.event_date }}</td>
-                                    <td>{{ event.qf4A1_sdd|gen_value:vals }}</td>
-                                    <td>{{ event.qf4A2_sdd|gen_value:vals }}</td>
-                                    <td>{{ event.qf4A3_sdd|gen_value:vals }}</td>
-                                    <td>{{ event.qf4A4_sdd|gen_value:vals }}</td>
-                                    <td>{{ event.qf4A5 }}</td>
-                                    <td>{{ event.qf4A6_sdd|gen_value:vals }}</td>
-                                    <td>{{ event.qf4A7_rdo|gen_value:vals }}</td>
+                                    <td>{% for ev in event.qf4A1_sdd %} {{ ev|gen_value:vals }}{% endfor %}</td>
+                                    <td>{% for ev in event.qf4A2_sdd  %} {{ ev|gen_value:vals }}{% endfor %}</td>
+                                    <td>{% for ev in event.qf4A3_sdd  %} {{ ev|gen_value:vals }}{% endfor %}</td>
+                                    <td>{% for ev in event.qf4A4_msc  %} {{ ev|gen_value:vals }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+                                    <td>{% for ev in event.qf4A5  %} {{ ev }}{% endfor %}</td>
+                                    <td>{% for ev in event.qf4A6_msc  %} {{ ev|gen_value:vals }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+                                    <td>{% for ev in event.qf4A7_rdo  %} {{ ev|gen_value:vals }}{% endfor %}</td>
                                     <td>
                                         <a href="{% url 'edit_alt_care_form' cid=cid form_id='4A' care_id=event.care_id|stringformat:'s' ev_id=event.event_count %}" class="btn btn-sm btn-primary">Edit</a>
                                         
@@ -245,8 +259,10 @@ form#new-form-b ul {
 {% endblock %}
 
 {% block lazy_javascript_code %}
-
+<script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
 <script>
+var answers = {};
+var all_answers = {};
 $(document).ready(function() {
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
     $('.other_date').datepicker({ format: 'dd-M-yyyy' });
@@ -257,6 +273,35 @@ $(document).ready(function() {
         // alert(domain);
         loadOptions(domain);
     });
+
+    $('#qf4A2, #qf4A3, #qf4A4, #qf4A6').multiselect({
+        includeSelectAllOption: false,
+        enableCaseInsensitiveFiltering: true,
+        numberDisplayed: 1,
+        maxHeight: 300,
+        buttonWidth: '100%',
+        buttonClass: 'btn btn-white'
+    });
+
+    // Form submission
+    $('#btnSubmit').on("click",function(e) {
+        e.preventDefault();
+        //
+        var all_ans = $('#all_answers').val();
+
+        // Messages
+        if (all_ans == '' || all_ans == '{}'){
+            $('#msg').empty();
+            $("#msg").addClass( "alert alert-danger fade in" );
+            $('#msg').html('Please add atleast one Goal to the Grid before submitting.');
+        }else{
+            $('#new-form-4A').parsley().destroy();
+            $('#new-form-4A').submit();
+            $('#msg').empty();
+            $("#msg").addClass( "alert alert-danger fade in" );
+            $('#msg').html('Please add atleast one Goal to the Grid before submitting.' + all_ans);
+        }
+    }); 
 });
 
 function loadOptions(domain){
@@ -303,8 +348,9 @@ function loadOptions(domain){
                         .attr("value", item_id)
                         .text(item_name));
                  });
-                // $("#id_ward option[value='" + e + "']").prop("selected", true);
-                // $('#id_ward').multiselect('rebuild');
+                $('#qf4A2').multiselect('rebuild');
+                $('#qf4A3').multiselect('rebuild');
+                $('#qf4A4').multiselect('rebuild');
             },
             error: function(){
                 $('#messages').html("Error")
@@ -335,6 +381,128 @@ function deleteEntry(person_id, event_id){
             $('#message p').html('Error deleting form entry.');
         }
     });
+}
+
+function AddCasePlan(){
+    // Validate form first
+    var parsley = $('#new-form-4A').parsley();
+    var validate = parsley.validate();
+    var isValid = parsley.isValid();
+
+    // Save to JSON
+    answers['event_date'] = []; 
+    answers['qf4A1_sdd'] = [];
+    answers['qf4A2_sdd'] = [];
+    answers['qf4A3_sdd'] = [];
+    answers['qf4A4_msc'] = [];
+    answers['qf4A5'] = [];
+    answers['qf4A6_msc'] = [];
+    answers['qf4A7_rdo'] = [];
+    answers['qf4A8'] = [];
+    answers['qf4A9'] = [];
+
+    if(isValid){
+        // Get the form elements - Values        
+        var event_date = $('#event_date').val();
+        var domain = $('#qf4A1').val();
+        var goal = $('#qf4A2').val();
+        var need = $('#qf4A3').val();
+        var actions = $('#qf4A4').val();
+        var deadline = $('#qf4A5').val();
+        var responsible = $('#qf4A6').val();
+        // var completed = $('#qf4A7').val();
+        var completed = $('input[name="qf4A7_rdo"]:checked').val();
+        var reason = $('#qf4A8').val();
+        var new_gap = $('#qf4A9').val();
+        // Get the form elements - Text for display
+        var domain_txt = $('#qf4A1 option:selected').text();
+        var goals_txt = $('#qf4A2 option:selected').text();
+        var needs_txt = $('#qf4A3 option:selected').text();
+        //var actions_txt = $('#qf4A4 option:selected').text();
+        //var responsible_txt = $('#qf4A6 option:selected').text();
+        var resp = [];
+        var acts = [];
+        $('#qf4A4 option:selected').each(function(){
+            acts.push($(this).text());
+            answers['qf4A4_msc'].push($(this).val());
+        });
+        $('#qf4A6 option:selected').each(function(){
+            resp.push($(this).text());
+            answers['qf4A6_msc'].push($(this).val());
+        });
+        var actions_txt = acts.join(', ');
+        var responsible_txt = resp.join(', ');
+        var completed_txt = $('input[name="qf4A7_rdo"]:checked').parent().text();
+        var rid = Math.floor((Math.random() * 9999) + 1000);
+
+        // Add to the Grid table
+        $('#msg').empty();
+        $("#msg").addClass( "alert alert-success fade in" );
+        $('#msg').html('Case plan data successfully added to the Grid.');
+        // Grid data
+        cols = "<tr id='tmpRow_"+ rid +"'><td>"+ event_date +"</td>"
+        cols += "<td>"+ domain_txt +"</td><td>"+ goals_txt +"</td>"
+        cols += "<td>"+ needs_txt +"</td><td>"+ actions_txt +"</td>";
+        cols += "<td>"+ deadline +"</td><td>"+ responsible_txt +"</td>";
+        cols += "<td>"+ completed_txt +"</td><td>";
+        cols += '<button id="btnAddCasePlan" type="button" class="btn btn-sm btn-danger m-r-5" '
+        cols += 'onClick="RemoveCasePlan('+rid+')"> <i class="fa fa-trash" aria-hidden="true"></i> Remove</button>';
+        cols += "</td></tr>";
+        $("#holding_table").last().append(cols);
+
+        // Add in data
+        answers['event_date'].push(event_date);
+        answers['qf4A1_sdd'].push(domain);
+        answers['qf4A2_sdd'].push(goal);
+        answers['qf4A3_sdd'].push(need);
+        answers['qf4A5'].push(deadline);
+        //answers['result'].push();
+        answers['qf4A7_rdo'].push(completed);
+        answers['qf4A8'].push(reason);
+        answers['qf4A9'].push(new_gap);
+
+        // Make the form empty        
+        $('#event_date').val('');
+        $('#qf4A1').val('');
+        $('#qf4A2').val('');
+        $('#qf4A3').val('');
+        $('#qf4A4').val('');
+        $('#qf4A5').val('');
+        $('#qf4A6').val('');
+        $('#qf4A7').val('');
+        $('#qf4A8').val('');
+        $('#qf4A2, #qf4A3, #qf4A4, #qf4A6').multiselect('rebuild');
+
+        all_answers[rid] = answers;
+        var all_ans = JSON.stringify(all_answers);
+        $('#all_answers').val(all_ans);
+        console.log(all_ans);
+    }else {
+        // Warming Message for blank fields
+        $('#msg').empty();
+        $("#msg").addClass( "alert alert-danger fade in" );
+        $('#msg').html('Case plan data is incomplete. Complete the form before you add to the Grid.');
+    }
+
+}
+
+function RemoveCasePlan(row_id){
+    // Remove from the table    
+    $('#tmpRow_'+ row_id).remove();
+    // Remove from the JSON
+    var all_ans = $('#all_answers').val();
+    var all_answers = JSON.parse(all_ans);
+    console.log('ALL', all_answers);
+    delete all_answers[row_id];
+    console.log('Final', all_answers);
+    // Save back the edited records
+    var final_ans = JSON.stringify(all_answers);
+    $('#all_answers').val(final_ans);
+
+    // Messages
+    $('#msg').empty();
+    $("#msg").addClass( "alert alert-danger fade in" );
+    $('#msg').html('Case plan data row successfully removed from the Grid.');
 }
 </script>
 {% endblock %}

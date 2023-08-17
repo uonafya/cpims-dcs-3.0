@@ -1,0 +1,66 @@
+[
+    {
+        "pk": 41300,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "sex_id",
+            "item_category": "Sex",
+            "item_id": "SINT",
+            "item_description": "Intersex",
+            "item_description_short": "Intersex",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41301,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "hiv_status_source_id",
+            "item_category": "HIV status source",
+            "item_id": "HSREP",
+            "item_description": "Reported",
+            "item_description_short": "Reported",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41302,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "hiv_status_source_id",
+            "item_category": "HIV status source",
+            "item_id": "HSSCR",
+            "item_description": "Screened",
+            "item_description_short": "Screened",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41303,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "hiv_status_source_id",
+            "item_category": "HIV status source",
+            "item_id": "HSTST",
+            "item_description": "Tested",
+            "item_description_short": "Tested",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    }
+]

@@ -574,6 +574,7 @@ class Photo(models.Model):
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     photo_passport = models.FileField(upload_to='photos/')
     photo_fullsize = models.FileField(upload_to='photos/', null=True)
+    has_consent = models.BooleanField(default=False)
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     timestamp_created = models.DateTimeField(default=timezone.now)
     timestamp_updated = models.DateTimeField(default=timezone.now)
@@ -590,4 +591,3 @@ class Photo(models.Model):
         db_table = 'reg_person_photo'
         verbose_name = 'Person Photo'
         verbose_name_plural = 'Person Photos'
-

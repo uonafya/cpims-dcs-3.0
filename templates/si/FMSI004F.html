@@ -1,0 +1,681 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Institutions Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  @media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  #wizard_a ol { display: none; }
+  .bwizard-buttons { display: none; }
+  .bwizard-steps { display: none; }
+  #wizard_a ol li { display: none; }
+  #step2, #step3  { display: block !important; }
+  .control-label {margin-bottom: 5px;}
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,td{
+    padding: 10px;
+    text-align: left; 
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+.custom-margin {
+      margin-left: 10em;
+    }
+.table-margin {
+        margin-left: 10px;
+      }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Institutions </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
+            <b>Statutory Institution - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                    <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    </span>
+                    Case No: {{ case.person.id }}
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+
+                    <div id="wizard_a">
+                        <ol>
+                            <li>
+                                Personal Information
+                                <small>Personal Information</small>
+                            </li>
+                            <li>
+                                Institution and admission data
+                                <small>Institution and admission data</small>
+                            </li>
+                            <li>
+                                Placement data
+                                <small>Placement data</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">Section 1 : Personal Information</legend>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">First Name</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.first_name }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Other Names</label>
+                                    <div class="col-md-3">{% if case.person.other_names %}{{ case.person.other_names }}{% else %} Not Provided {% endif %}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Surname</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.surname }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Nickname or given name</label>
+                                    <div class="col-md-3">Not Provided</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Sex</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.sex_id|gen_value:vals }}
+                                    </div>
+                                    <label class="col-md-2 control-label">DOB</label>
+                                    <div class="col-md-3">{{ case.person.date_of_birth }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Case Record Sheet</label>
+                                    <div class="col-md-9">
+                                        {% for crs in case.cases %}
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="case_record_id" value="{{ crs.case_id }}" data-parsley-group="group0" data-parsley-required="true" {% if case.placement.case_record_id == crs.case_id %}  checked    {% endif %}/>
+                                                    {{ crs.case_serial }} - {{ crs.date_case_opened }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                
+
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                        <!-- begin wizard step-2 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">Section 2 : Institution and admission data</legend>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q1_admission_num.label }}
+                                            {% if form.Q1_admission_num.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-5">
+                                            {{ form.Q1_admission_num }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q2_admission_inst.label }}
+                                            {% if form.Q2_admission_inst.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-5">
+                                            {{ form.Q2_admission_inst }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q3_admission_type.label }}
+                                            {% if form.Q3_admission_type.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-5">
+                                            {{ form.Q3_admission_type }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q4_admission_reason.label }}
+                                            {% if form.Q4_admission_reason.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-5">
+                                            {{ form.Q4_admission_reason }}
+                                        </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-2 -->
+
+                        <!-- begin wizard step-3 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">Section 3 : Placement data</legend>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q5_has_committal.label }}
+                                        {% if form.Q5_has_committal.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q5_has_committal }}
+                                        <span id="Q5_has_committal_error"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="Q6_holding_days_div">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q6_holding_days.label }}
+                                        {% if form.Q6_holding_days.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q6_holding_days }}
+                                    </div>
+                                </div>
+                                <div class="form-group" id="Q7_ob_number_div">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q7_ob_number.label }}
+                                        {% if form.Q7_ob_number.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q7_ob_number }}
+                                    </div>
+                                </div>
+                                <div class="form-group" id="Q8_court_order_num_div">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q8_court_order_num.label }}
+                                        {% if form.Q8_court_order_num.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q8_court_order_num }}
+                                    </div>
+                                </div>
+                                <div class="form-group" id="Q9_court_order_date_div">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q9_court_order_date.label }}
+                                        {% if form.Q9_court_order_date.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q9_court_order_date }}
+                                    </div>
+                                </div>
+                                <div class="form-group" id="Q10_court_name_div">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q10_court_name.label }}
+                                        {% if form.Q10_court_name.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q10_court_name }}
+                                    </div>
+                                </div>
+                                <div class="form-group" id="Q11_committal_period_div">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q11_committal_period_units.label }}
+                                        {% if form.Q11_committal_period_units.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q11_committal_period_units }}
+                                        <span id="Q11_committal_period_error"></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ form.Q12_committal_period }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q13_previous_order.label }}
+                                        {% if form.Q13_previous_order.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q13_previous_order }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q14_previous_order_details.label }}
+                                        {% if form.Q14_previous_order_details.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-6">
+                                        {{ form.Q14_previous_order_details }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-3 -->
+                    </div>
+                    <hr>                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Date of Admission yyyy{% if case.placement %}Newton{% endif %}<span class="asteriskField">*</span></label>
+                        <div class="col-md-3">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+                    <div class="form-group" id="printId">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                        <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        <a href="{% url 'new_si_child_view' case.person.id %}">
+                            <button type="button" class="btn btn-default">Cancel</button>
+                        </a>
+                        </div>
+                    </div>
+                </form>
+                {% if edit_form > 0 %}
+
+                <div class="row">
+                    <!-- begin col-12 -->
+                    <div class="col-md-12">
+                        <!-- begin panel -->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-heading-btn">
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                </div>                          
+                                <h4 class="panel-title"><b>Past Events </b></h4>                    
+                            </div>
+
+                            <div class="panel-body">
+                                <div  class="panel panel-inverse">
+                                    <div id="case-events"  class="table-responsive">
+                                        <table id="tableData" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr> 
+                                                    <th>#</th>                                 
+                                                    <th>Event Date</th>                
+                                                    <th>Officer</th> 
+                                                    <th width="25%">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if case.events %}
+                                                {% for vacancy in case.events %}
+                                                <tr id="si_row-{{ vacancy.pk }}"> 
+                                                    <td>{{ forloop.counter }}</td>                                 
+                                                    <td>{{ vacancy.event_date }}</td>
+                                                    <td>N/A</td>
+        
+                                                    <td>
+                                                        <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
+                                                            <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View Details</button>
+                                                        </a>
+
+                                                        <!-- Modal -->
+                                                         <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div style="background-color:#d9edf7" class="modal-header">
+                                                                    <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete Vacancy Application - {{ vacancy.date_of_application }}</strong></h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                    <p>Are you sure you want to delete this Assessment dated {{ vacancy.date_of_application }} ? </p>
+                                                                    <br>
+                                                                    <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                                    <hr>
+                                                                    <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                                    <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" class="btn btn-primary">
+                                                            <i class="fa fa-cogs"></i> Follow Up
+                                                        </a>
+                                                        <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
+                                                            <i class="fa fa-trash"></i> Delete
+                                                        </a>                                                        
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                {% else %}
+                                                <tr>
+                                                    <td colspan="6">No previous events available</td>
+                                                </tr>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <br><br>                           
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end panel -->
+                    </div>
+                    <!-- end col-12 -->
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+<!-- Modal -->
+<div  class="modal fade" id="successMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #8f9191">
+            <div style="background-color: #d9edf7" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Successful Deletion of Event</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>Deleted successfully!</p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="errorMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div style="background-color: #ff9966" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Deletion NOT completed.</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>This item can not be deleted. <span id="msg_id"></span></p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js' %}"></script>
+<script>
+// Delete Django Ajax Call
+function deleteEvent(form_id, event_id) {
+    var csrftoken = $.cookie('csrftoken');
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'si_form_delete' %}",
+        
+        data: {'form_id': form_id, 'event_id': event_id,
+               'csrfmiddlewaretoken': csrftoken },
+        dataType: 'json',
+        
+        success: function (data) {
+            if (data.deleted == 1) {
+                console.log(data);
+              $("#tableData #si_row-" + event_id).remove();
+              $("#successMsg").modal('show');
+            }
+            if(data.deleted == 0){
+                console.log(data.days)
+                $("#msg_id").html(data.message);
+                $("#errorMsg").modal('show');
+    
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard_a").bwizard({ validating: function (e, ui) { }            
+    });
+
+    getUserOrgUnits();
+
+
+    // Handle toggle for committal
+    var avalr = $("input[name='Q5_has_committal']:checked").val();
+        handle_toggle(avalr, 2);
+    $("input[type=radio][name='Q5_has_committal']").change(function() {
+        handle_toggle(this.value, 2);
+    }); 
+
+});
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+
+function handle_disability(has_disb){
+    if (has_disb == 'ANNO') {
+        $('#disability_details_div').hide();
+        $('#disability_severity').attr("data-parsley-required", "false");
+        $('#disability_type').attr("data-parsley-required", "false");
+    }else{
+        $('#disability_details_div').show();
+        $('#disability_severity').attr("data-parsley-required", "true");
+        $('#disability_type').attr("data-parsley-required", "true");
+    }
+
+}
+
+function handle_toggle(elem, itm){
+    console.log('here '+ elem)
+    if (itm == 1){
+        if (elem == 'ANNO') {
+            $("#qf1A2").prop("readonly", true);
+        }else{
+            $("#qf1A2").prop("readonly", false);
+        }
+    }else if (itm == 2){
+        if (elem == 'ANNO') {
+            //$("#id_qf1A16").prop("readonly", true);
+            $('#Q6_holding_days_div').show();
+            $('#Q6_holding_days').attr("data-parsley-required", "true");
+            $('#Q7_ob_number_div').show();
+            $('#Q7_ob_number').attr("data-parsley-required", "true");
+            // Committal
+            $('#Q8_court_order_num_div').hide();
+            $('#Q8_court_order_num').attr("data-parsley-required", "false");
+            $('#Q9_court_order_date_div').hide();
+            $('#Q9_court_order_date').attr("data-parsley-required", "false");
+            $('#Q10_court_name_div').hide();
+            $('#Q10_court_name').attr("data-parsley-required", "false");
+            $('#Q11_committal_period_div').hide();
+            $('#Q11_committal_period').attr("data-parsley-required", "false");
+            $('#Q12_committal_count_div').hide();
+            $('#Q12_committal_count').attr("data-parsley-required", "false");
+        }else{
+            //$("#id_qf1A16").prop("readonly", false);
+            $('#Q6_holding_days_div').hide();
+            $('#Q6_holding_days').attr("data-parsley-required", "false");
+            $('#Q7_ob_number_div').hide();
+            $('#Q7_ob_number').attr("data-parsley-required", "false");
+            // Committal
+            $('#Q8_court_order_num_div').show();
+            $('#Q8_court_order_num').attr("data-parsley-required", "true");
+            $('#Q9_court_order_date_div').show();
+            $('#Q9_court_order_date').attr("data-parsley-required", "true");
+            $('#Q10_court_name_div').show();
+            $('#Q10_court_name').attr("data-parsley-required", "true");
+            $('#Q11_committal_period_div').show();
+            $('#Q11_committal_period').attr("data-parsley-required", "true");
+            $('#Q12_committal_count_div').show();
+            $('#Q12_committal_count').attr("data-parsley-required", "true");
+        }
+    }
+}
+
+function getUserOrgUnits(){
+    var data = new Array();
+    var csrftoken = $.cookie('csrftoken');
+    var user_id = $('#user_id').val();
+    var values = {  
+                    'user_id' : {{ request.user.id }},
+                    'types': 3,
+                    'csrfmiddlewaretoken': csrftoken
+                 }; 
+    $.ajax({
+            url: '{% url 'userorgunits_lookup' %}',
+            dataType: 'json',
+            method: 'POST',
+            data: values,
+            success: function(result)
+            {
+                var multiselect_data = [];
+                var multiselect_dict = {};
+                var multiselect_dict_initial = { label:'Please Select', value:''};
+                multiselect_data.push(multiselect_dict_initial);
+
+                $.each(result, function(i, val) {  
+                    
+                    // Prepopulate multiselects from json 
+                    var org_unit_id = val.id;
+                    var org_unit_name = val.org_unit_name;
+                    var multiselect_dict = { label: org_unit_name, value: org_unit_id };
+                    multiselect_data.push(multiselect_dict);
+                });
+
+                $('#Q2_admission_inst').multiselect({
+                    selectMultiple: false,
+                    selectAllValue: 'multiselect-all',
+                    includeSelectAllOption: true,
+                    enableCaseInsensitiveFiltering: true,
+                    numberDisplayed: 1,
+                    maxHeight: 300,
+                    buttonWidth: '100%',
+                    buttonClass: 'btn btn-white'
+                }); 
+                $('#Q2_admission_inst').empty();                             
+                $("#Q2_admission_inst").multiselect('dataprovider', multiselect_data);
+                {% if case.placement %}
+                $('#Q2_admission_inst').val({{ case.placement.residential_institution_id }}); 
+                {% endif %}
+                $("#Q2_admission_inst").multiselect('refresh');
+            },
+            error: function(xhr, status, error)
+            {
+                alert(error);
+            }
+        }); 
+}
+</script>
+{% endblock %}

@@ -1,0 +1,910 @@
+h{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care - Forms </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ case.care_type|gen_value:vals }} - {{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if care %}
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% else %}
+                    <a href="{% url 'new_alt_care' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% endif %}
+                    </span>
+                    Case No: {{ case.case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Child Names</label>
+                        <div class="col-md-3">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <label class="col-md-2 control-label">Sex</label>
+                        <div class="col-md-3">{{ case.person.sex_id|gen_value:vals }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"> Date of Birth</label>
+                        <div class="col-md-3">
+                            {{ case.person.date_of_birth }}
+                        </div>
+                        <label class="col-md-2 control-label">Age</label>
+                        <div class="col-md-3">{{ case.person.age }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Family being assessed <span class="asteriskField">*</span></label>
+                        <div class="col-md-3">
+                            {{ form.qf2A65_sdd }}
+                        </div>
+                        <div class="col-md-7"></div>
+                    </div>
+                    <div id="wizard">
+                        <ol>
+                            <li>
+                                FAMILY BIO INFORMATION
+                                <small>Family Biographical Information.</small>
+                            </li>
+                            <li>
+                                A.&nbsp;HEALTH AND HOME ENVIRONMENT
+                                <small>Health and Home environment</small>
+                            </li>
+                            <li>
+                                B.&nbsp;EDUCATION
+                                <small>Education details</small>
+                            </li><li>
+                                C.&nbsp;ECONOMIC STABILITY
+                                <small>Economic stability details</small>
+                            </li>
+                            <li>
+                                D.&nbsp;PROTECTION AND SAFETY
+                                <small>Protection and safety details.</small>
+                            </li>
+                            <li>
+                                E.&nbsp;RELATIONSHIP & ATTACHMENT
+                                <small>Child-Caregiver/Young Adult-Mentor relationship and attachment.</small>
+                            </li>
+                            <li>
+                                F.&nbsp;PSYCHOSOCIAL WELL-BEING
+                                <small>Pyschosocial well being and community belonging.</small>
+                            </li>
+                            <li>
+                                FAMILY'S PERSPECTIVE & RECOMMENDATIONS
+                                <small>Family perspective on placement / reintegration and recommendations</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div>
+                        <fieldset>
+                        <legend class="pull-left width-full">FAMILY BIO INFO</legend>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Number of Children in the houseshold</label>
+                                <div class="col-md-2">
+                                    {{ form.qf2A1 }}
+                                    <span id="qf1B1_rdo_error"></span>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-1 control-label">Family details</label>
+                                <div class="col-md-11">
+                                    <table class="table">
+                                        <thead>
+                                            <tr><th>#</th>
+                                                <th>Names</th>
+                                                <th>Relationship</th>
+                                                <th>Age</th>
+                                                <th>Did child ever live with this person?</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if siblings %}
+                                            <tr><td></td><td></td><td></td></tr>
+                                            {% else %}
+                                            <tr><td colspan="3">No relatives</td></tr>
+                                            {% endif %}
+                                        </tbody>                                          
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Marital status of the parent(s) <span class="asteriskField">*</span></label>
+                                <div class="col-md-7">
+                                    {{ form.qf2A2_sdd }}
+                                    <span id="qf2A2_sdd_error"></span>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">If family of origin, what is the family’s perspective on the reasons for the separation?</label>
+                                <div class="col-md-7">
+                                    {{ form.qf2A3 }}
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">How does this family/household feel about potential reunification/placement with the child</label>
+                                <div class="col-md-7">
+                                    {{ form.qf2A4 }}
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!-- end wizard step-1 -->
+                    <!-- begin wizard step-2 -->
+                    <div>
+                    <fieldset>
+                    <legend class="pull-left width-full">A. HEALTH AND HOME ENVIRONMENT</legend>
+                        <hr>
+                        <div class="note note-info">
+                            <h4 class="block">Food and nutrition</h4>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Access to Food / Meals <span class="asteriskField">*</span></label>
+                            <div class="col-md-6">
+                                {{ form.qf2A5_sdd }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Access to balanced diet food(s) consumed <span class="asteriskField">*</span></label>
+                            <div class="col-md-6">
+                                {{ form.qf2A6_rdo }}
+                                <span id="qf26_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Source of Food</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A7 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Reliability of source</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A8 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>                       
+                        <div class="note note-info">
+                            <h4 class="block">Hygiene and sanitation</h4>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the latrine (shared, distance from house, pit/flush/none)</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A9 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe access to and source of clean water</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A10 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the home environment (inside, outside and surrounding— ventilation, cleanliness, size of the house, rooms, roof, walls and floor, including materials used)</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A11 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the bathing arrangements/habits (including hand-washing)</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A12 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the availability, disposal, knowledge of sanitary items</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A13 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="note note-info">
+                            <h4 class="block">Basic Health</h4>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does the family have access to health services? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A14_rdo }}
+                                <span id="qf2A14_rdo_error"></span>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does the family have medical insurance? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A15_rdo }}
+                                <span id="qf2A15_rdo_error"></span>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Is there any household member with a chronic illness (e.g. diabetes, hypertension)? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A16A_rdo }}
+                                <span id="qf2A16A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A16B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Is there anyone in the family who has any disability? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A17A_rdo }}
+                                <span id="qf2A17A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A17B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"><b>Is there anyone in the family who (tick one response that applies):</b></label>
+                            <div class="col-md-7"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Has difficulty seeing, even if wearing glasses?</label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A1_rdo }}
+                                <span id="qf2A18A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Has difficulty hearing, even if using a hearing aid? </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A2_rdo }}
+                                <span id="qf2A17A2_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Has difficulty walking or climbing steps? </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A3_rdo }}
+                                <span id="qf2A17A2_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Has difficulty remembering or concentrating? </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A4_rdo }}
+                                <span id="qf2A17A2_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Has difficulty (with self-care, such as) washing all over or dressing? </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A5_rdo }}
+                                <span id="qf2A17A2_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Using their usual language, has difficulty communicating (e.g., understanding or being understood by others)? </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A6_rdo }}
+                                <span id="qf2A17A2_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Is the household able to take care of a child with a disability (if child returning home has a disability)? </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A18A7_rdo }}
+                                <span id="qf2A17A2_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">What type of additional support does the household need?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A18A8_msc }}
+                                <span id="qf2A18A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A18B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there religious/cultural practices that hinder/could hinder children from accessing health services? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A19A_rdo }}
+                                <span id="qf2A19A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A19B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there functional community services (tick all that apply)</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A20_msc }}
+                                <span id="qf2A20_rdo_error"></span>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are these community services easily accessible? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A21_rdo }}
+                                <span id="qf2A21_rdo_error"></span>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-2 -->
+                    <!-- begin wizard step-3 -->
+                    <div>
+                    <fieldset>
+                    <legend class="pull-left width-full">B. EDUCATION</legend>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Is there access to education facilities? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A22_rdo }}
+                                <span id="qf2A22_rdo_error"></span>
+                            </div>
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Distance to school? Walking: </label>
+                            <div class="col-md-2">
+                                {{ form.qf2A23A }}
+                            </div>
+                            <label class="col-md-1 control-label">(Minutes)</label>
+                            <div class="col-md-2">{{ form.qf2A23B }}</div>
+                            <label class="col-md-1 control-label">(Hours)</label>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">OR Driving : </label>
+                            <div class="col-md-2">
+                                {{ form.qf2A23C }}
+                            </div>
+                            <label class="col-md-1 control-label">(Minutes)</label>
+                            <div class="col-md-2">{{ form.qf2A23D }}</div>
+                            <label class="col-md-1 control-label">(Hours)</label>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">The school type</label>
+                            <div class="col-md-3">
+                                {{ form.qf2A24_sdd }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Is the school inclusive and able to meet unique needs of child <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A25A_rdo }}
+                                <span id="qf2A25A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A25B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Are children in the household currently attending school? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A26A_rdo }}
+                                <span id="qf2A26A_rdo_error"></span>
+                            </div>
+                            <label class="col-md-3 control-label">If yes, is their class appropriate for their age and evolving capacity?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A26B_rdo }}
+                                <span id="qf2A26B_rdo_error"></span>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Do caregivers show interest in children’s education? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A27_rdo }}
+                                <span id="qf2A27_rdo_error"></span>
+                            </div>
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-3 -->
+                    <!-- begin wizard step-4 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">C. ECONOMIC STABILITY</legend>
+                    
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Who in household is involved in economic activity? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A28 }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Type of employment/occupation (casual, informal,formal) <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A29_sdd }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Estimated monthly income (< KES 3000, 3000-10000, >10000) <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A30_sdd }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Is there any financial/material support provided by people living outside of the household? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A31A_rdo }}
+                                <span id="qf2A31A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A31B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Assets owned by family (list all you can observe, including land) <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A32 }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-4 -->
+                    <!-- begin wizard step-5 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">D. PROTECTION AND SAFETY</legend>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there signs of violence (including harsh physical punishment), abuse or neglect in the home? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A33A_rdo }}
+                                <span id="qf2A33A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A33B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there signs/reports of drug / alcohol abuse in the family? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A34_rdo }}
+                                <span id="qf2A34_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there concerns of potential violence or abuse in community or school environment? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A35A_rdo }}
+                                <span id="qf2A35A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A35B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Is there an accessible local administrative office<br><small> (e.g., Chief, Assistant Chief, village elder, nyumba kumi)?</small></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A36_rdo }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the condition of the household <br><small>(i.e. level of safety, roof/wall/floor, ventilation, number of rooms?)</small></label>
+                            <div class="col-md-6">{{ form.qf2A37 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does the family live in a rented home?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A38A_rdo }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does the family live on the land legally?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A38B_rdo }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-5 -->
+                    <!-- begin wizard step-6 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">E. RELATIONSHIP AND ATTACHMENT</legend>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Type of relationship being assessed? <span class="asteriskField">*</span></label>
+                            <div class="col-md-6">
+                                {{ form.qf2A39_sdd }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there signs of tension and/or conflict within family? <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A39A_rdo }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A39B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are there mental health concerns? <br><small>(Hint: Use indirect methodologies: Observe, probe neighbors and children, etc.)</small></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A40A_rdo }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A40B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Has the family been through a significant life event recently?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A41A_rdo }}
+                                <span id="qf2A41A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A41B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the relationship between adults in the house. <br><small>(Hint: Engage support people.)</small></label>
+                            <div class="col-md-6">{{ form.qf2A42 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe the current relationship between the current caregiver and the child? <span class="asteriskField">*</span></label>
+                            <div class="col-md-6">{{ form.qf2A43_rdo }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Do the children confide in caregiver if having challenges?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A44_rdo }}
+                                <span id="qf2A44_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Do the children seek comfort from caregiver ?<br><small>(Observe)</small></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A45_rdo }}
+                                <span id="qf2A44_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">How do the children react when separated from caregiver? <span class="asteriskField">*</span></label>
+                            <div class="col-md-6">{{ form.qf2A46 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does caregiver spend time with their children?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A47_rdo }}
+                                <span id="qf2A47A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Describe how the caregiver communicates with children</label>
+                            <div class="col-md-6">{{ form.qf2A48 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does caregiver encourage the child positively?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A49A_rdo }}
+                                <span id="qf2A49A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A49B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">How does the caregiver respond to a child’s misbehavior? (including type of discipline)?</label>
+                            <div class="col-md-6">{{ form.qf2A50 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are the children free around the caregiver? <br><small>(Observe)</small> <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A51_rdo }}
+                                <span id="qf2A50_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Are the children involved in decision on matters concerning them?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A52_rdo }}
+                                <span id="qf2A50_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-6 -->
+                    <!-- begin wizard step-7 -->
+                    <div>
+                    <fieldset>
+                    <legend class="pull-left width-full">F. PSYCHOSOCIAL WELL - BEING AND COMMUNITY BELONGING</legend>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does the family feel connected to the culture of the community?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A53_rdo }}
+                                <span id="qf2A53_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Does the family feel socially connected? <br><small>(Hint: participate in community activities.)</small></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A54A_rdo }}
+                                <span id="qf2A54A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4">{{ form.qf2A54B }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Does the family have relatives and/or friends living in close proximity?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A55_rdo }}
+                                <span id="qf2A55_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Describe the family’s relationship with their extended family(ies)</label>
+                            <div class="col-md-6">{{ form.qf2A56 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Describe the family’s relationship with neighbors:</label>
+                            <div class="col-md-6">{{ form.qf2A57 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Describe the level of acceptance of relatives and the community toward the child:</label>
+                            <div class="col-md-6">{{ form.qf2A58 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Do local leaders know the family?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A59_rdo }}
+                                <span id="qf2A59_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-7 -->
+                    <!-- begin wizard step-8 -->
+                    <div>
+                    <fieldset>
+                    <legend class="pull-left width-full">FAMILY'S PERSPECTIVE & RECOMMENDATIONS ON PLACEMENT / REINTEGRATION</legend>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Does family want reunification / placement with the child<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A60_rdo }}
+                                <span id="qf2A60_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> What other information does the family need?</label>
+                            <div class="col-md-6">{{ form.qf2A61 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> What support does the family need? (information gathered here should be used to develop the case plan.)</label>
+                            <div class="col-md-6">{{ form.qf2A62 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Other(s):</label>
+                            <div class="col-md-6">{{ form.qf2A63 }}</div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"> Family, relatives and community acceptance towards the child</label>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div style="background-color: #f2f3f4;">
+                        <div class="form-group" style="border-bottom: 1px solid #fff;">
+                            <label class="col-md-5 control-label"><b>High</b></label>
+                            <div class="col-md-6"><p>Family expresses strong desire to reunify, visits child regularly; no known history of child abuse, domestic violence or substance abuse. Poverty may be an issue but there is good potential to improve their economic High condition. The family is able and motivated to access services necessary to raise the child
+                                </p></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group"  style="border-bottom: 1px solid #fff;">
+                            <label class="col-md-5 control-label"><b>Medium</b></label>
+                            <div class="col-md-6"><p>Family expresses moderate desire to reunify, has visited child occasionally; there may be some concerns with domestic violence, mental health or substance abuse, but the family is amenable to treatment and is able and Medium motivated to access necessary services.</p>
+                                </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label"><b>Low</b></label>
+                            <div class="col-md-6"><p>Family’s motivation to reunify is difficult to read or very low, has seldom visited the child; there may be significant issues of violence, neglect or substance abuse in the home. The family seems minimally motivated to Low address its vulnerabilities
+                                </p></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Select One <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf2A64_sdd }}
+                                <span id="qf2A1_rdo_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        
+                    </fieldset>
+                    </div>
+                </div>
+                    <hr>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Date of assessment <span class="asteriskField">*</span></label>
+                        <div class="col-md-4">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>               
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+
+$(document).ready(function() {
+    $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard").bwizard();
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,9 @@
+pk,the_order,field_name,item_category,item_id,item_description,item_description_short,item_sub_category,user_configurable,sms_keyword,is_void
+41300,3,sex_id,Sex,SINT,Intersex,Intersex,,FALSE,FALSE,FALSE
+41301,1,hiv_status_source_id,HIV status source,HSREP,Reported,Reported,,FALSE,FALSE,FALSE
+41302,2,hiv_status_source_id,HIV status source,HSSCR,Screened,Screened,,FALSE,FALSE,FALSE
+41303,3,hiv_status_source_id,HIV status source,HSTST,Tested,Tested,,FALSE,FALSE,FALSE
+41304,1,identifier_type_id,Person ID type - external,INUPI,NUPI Number,NUPI Number,,FALSE,FALSE,FALSE
+41305,2,identifier_type_id,Person ID type - external,INEM,NEMIS Number,NEMIS Number,,FALSE,FALSE,FALSE
+41306,3,identifier_type_id,Person ID type - external,IDRM,DREAMS ID,DREAMS ID,,FALSE,FALSE,FALSE
+41307,4,identifier_type_id,Person ID type - external,IBCN,Birth Notification Number,Birth Notification Number,,FALSE,FALSE,FALSE

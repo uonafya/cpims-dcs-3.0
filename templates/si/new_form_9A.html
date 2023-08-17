@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care - Forms </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ case.care_type|gen_value:vals }} - {{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if care %}
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% else %}
+                    <a href="{% url 'new_alt_care' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% endif %}
+                    </span>
+                    Case No: {{ case.case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Child Names</label>
+                        <div class="col-md-3">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <label class="col-md-2 control-label">Sex</label>
+                        <div class="col-md-3">{{ case.person.sex_id|gen_value:vals }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"> Date of Birth</label>
+                        <div class="col-md-3">
+                            {{ case.person.date_of_birth }}
+                        </div>
+                        <label class="col-md-2 control-label">Age</label>
+                        <div class="col-md-3">{{ case.person.age }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Reason for case closure <span class="asteriskField">*</span></label>
+                        <div class="col-md-4">
+                            {{ form.qf9AA_sdd }}
+                            <span id="qf9AA_sdd_error"></span>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Children or person provided feedback on the case management services. <span class="asteriskField">*</span></label>
+                        <div class="col-md-1">
+                            {{ form.qf9AB1_rdo }}
+                            <span id="qf9AB1_rdo_error"></span>
+                        </div>
+                        <label class="col-md-1 control-label">If Yes</label>
+                        <div class="col-md-4">{{ form.qf9AB2_rdo }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Caregiver provided feedback on the case management services. <span class="asteriskField">*</span></label>
+                        <div class="col-md-1">
+                            {{ form.qf9AC1_rdo }}
+                            <span id="qf9AC1_rdo_error"></span>
+                        </div>
+                        <label class="col-md-1 control-label">If Yes</label>
+                        <div class="col-md-4">{{ form.qf9AC2_rdo }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <fieldset>
+                        <legend class="pull-left width-full">CASE CLOSURE CHECKLIST</legend>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">1. Final visit scheduled with the child and the family. <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf9A1A_rdo }}
+                                <span id="qf9A1A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-2">{{ form.qf9A1B }}</div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">2. Recommendation for closure made by caseworker; closure approved by alternative care committee. <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf9A2A_rdo }}
+                                <span id="qf9A2A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-2">{{ form.qf9A2B }}</div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">3. Referrals have been completed, and case closure plans have been developed with the child and family. Caseworker has recognized and appreciated the achievements of the child(ren) and family. <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf9A3A_rdo }}
+                                <span id="qf9A3A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-2">{{ form.qf9A3B }}</div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">4. The child(ren) and the family have been informed of available, relevant support services in case support is needed in the future, and contact information has been provided. <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf9A4A_rdo }}
+                                <span id="qf9A4A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-2">{{ form.qf9A4B }}</div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">5. The Sub-County Children’s Officer has reviewed the closure plan and provided final approval <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf9A5A_rdo }}
+                                <span id="qf9A5A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-2">{{ form.qf9A5B }}</div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">6. If the child was removed or referred, copies of the relevant paperwork have been attached to the child’s case file and provided to statutory authority and new care
+placement provider. <span class="asteriskField">*</span></label>
+                            <div class="col-md-2">
+                                {{ form.qf9A6A_rdo }}
+                                <span id="qf9A6A_rdo_error"></span>
+                            </div>
+                            <div class="col-md-2">{{ form.qf9A6B }}</div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </fieldset>
+                    
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Date of Closure <span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label"></label>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script>
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+});
+
+</script>
+{% endblock %}

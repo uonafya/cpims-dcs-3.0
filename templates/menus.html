@@ -30,6 +30,7 @@
 	    <ul class="sub-menu">
 			<li><a href="{% url 'case_record_sheet' %}">Case Record Sheet</a></li>
 			<li><a href="{% url 'residential_placement' %}">Institutional Placement</a></li>
+			<li><a href="{% url 'SI_home' %}">Statutory Institution</a></li>
 			<li><a href="{% url 'alternative_family_care' %}">Alternative Family Care</a></li>
 			<li><a href="{% url 'alternative_care' %}">Alternative Care</a></li>
 			<li><a href="{% url 'background_details' %}">School and Bursary</a></li>
@@ -64,7 +65,7 @@
 				    <span>Alternative Care Reports</span>
 				</a>
 				<ul class="sub-menu">
-					<li><a href="{% url 'reports_afc' id=1 %}">AFC Summpary report</a></li>
+					<li><a href="{% url 'reports_afc' id=1 %}">Summary report</a></li>
 					<li><a href="{% url 'reports_afc' id=2 %}">Identification Report</a></li>
 					<li><a href="{% url 'reports_afc' id=3 %}">Assessment Report - Child</a></li>
 					<li><a href="{% url 'reports_afc' id=4 %}">Assessment Report - Family</a></li>
@@ -162,9 +163,7 @@
 	    <i class="fa fa-angle-double-left"></i></a>
 	</li>
     <!-- end sidebar minify button -->
-    <li><a href="https://play.google.com/store/apps/details?id=com.poimapper.vurugumapper">
+    <li><a href="/static/d/Vurugumapper.1.0.3.apk">
     	<i class="fa fa-download"></i> <span>Vurugu Mapper(Android)</span></a>
-    </li>
-    <li><img width="220px" src="/static/img/qr-vm.png">
     </li>
 </ul>
