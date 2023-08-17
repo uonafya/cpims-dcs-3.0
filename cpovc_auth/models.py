@@ -62,7 +62,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     timestamp_created = models.DateTimeField(auto_now_add=True)
     timestamp_updated = models.DateTimeField(auto_now=True)
-    password_changed_timestamp = models.DateTimeField(blank=True, null=True)
+    password_changed_timestamp = models.DateTimeField(null=True)
 
     # For admin so remove if you don't want to use admin
     first_name = False

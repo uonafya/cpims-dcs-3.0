@@ -1,9 +1,10 @@
 """Admin backend for editing some admin details."""
 from django.contrib import admin
 
-from .models import (RegPerson, RegOrgUnit, RegOrgUnitsAuditTrail,
-                     RegPersonsAuditTrail, RegPersonsTypes,
-                     RegPersonsGeo, RegPersonsOrgUnits)
+from .models import (
+    RegPerson, RegOrgUnit, RegOrgUnitsAuditTrail,
+    RegPersonsAuditTrail, RegPersonsTypes, RegPersonsOtherGeo,
+    RegPersonsGeo, RegPersonsOrgUnits, Photo)
 
 
 from cpovc_auth.models import AppUser
@@ -104,3 +105,30 @@ class PersonsAuditAdmin(admin.ModelAdmin):
 
 
 admin.site.register(RegPersonsAuditTrail, PersonsAuditAdmin)
+
+
+class RegPersonOtherGeoAdmin(admin.ModelAdmin):
+    """Register persons admin."""
+
+    search_fields = ['person__surname', 'person__first_name',
+                     'country_code', 'city']
+    list_display = ['id', 'person', 'country_code',
+                    'location', 'date_linked', 'is_void']
+    # readonly_fields = ['id']
+    list_filter = ['is_void', 'date_linked']
+
+
+admin.site.register(RegPersonsOtherGeo, RegPersonOtherGeoAdmin)
+
+
+class PhotoAdmin(admin.ModelAdmin):
+    """Register persons admin."""
+
+    search_fields = ['person__surname', 'person__first_name',
+                     'user__username']
+    list_display = ['id', 'person', 'user', 'photo_passport', 'is_void']
+    # readonly_fields = ['id']
+    list_filter = ['is_void']
+
+
+admin.site.register(Photo, PhotoAdmin)

@@ -1,0 +1,818 @@
+[
+    {
+        "pk": 42000,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_holding_place_id",
+            "item_category": "Holding places",
+            "item_id": "HPPST",
+            "item_description": "Police station",
+            "item_description_short": "Police station",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42001,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_holding_place_id",
+            "item_category": "Holding places",
+            "item_id": "HPCRH",
+            "item_description": "Remand Home",
+            "item_description_short": "Remand Home",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42002,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_holding_place_id",
+            "item_category": "Holding places",
+            "item_id": "HPCCI",
+            "item_description": "Charitable Children Institution",
+            "item_description_short": "CCI",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42003,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a1",
+            "item_category": "Risk Assessment 1",
+            "item_id": "SRAA1A",
+            "item_description": "a. Three or more prior arrests",
+            "item_description_short": "a. Three or more prior arrests",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42004,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a1",
+            "item_category": "Risk Assessment 1",
+            "item_id": "SRAA1B",
+            "item_description": "b. Two or more prior findings of guilty",
+            "item_description_short": "b. Two or more prior findings of guilty",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42005,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a1",
+            "item_category": "Risk Assessment 1",
+            "item_id": "SRAA1C",
+            "item_description": "c. Two or more failures to comply",
+            "item_description_short": "c. Two or more failures to comply",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42006,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a1",
+            "item_category": "Risk Assessment 1",
+            "item_id": "SRAA1D",
+            "item_description": "d. Prior SCCO's supervision/Probation",
+            "item_description_short": "d. Prior SCCO's supervision/Probation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42007,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a1",
+            "item_category": "Risk Assessment 1",
+            "item_id": "SRAA1E",
+            "item_description": "e. Prior custody",
+            "item_description_short": "e. Prior custody",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42008,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a2",
+            "item_category": "Risk Assessment 2",
+            "item_id": "SRAA2A",
+            "item_description": "a. Inadequate supervision",
+            "item_description_short": "a. Inadequate supervision",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42009,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a2",
+            "item_category": "Risk Assessment 2",
+            "item_id": "SRAA2B",
+            "item_description": "b. Difficulty in controlling behaviour",
+            "item_description_short": "b. Difficulty in controlling behaviour",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42010,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a2",
+            "item_category": "Risk Assessment 2",
+            "item_id": "SRAA2C",
+            "item_description": "c. Inappropriate discipline",
+            "item_description_short": "c. Inappropriate discipline",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42011,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a2",
+            "item_category": "Risk Assessment 2",
+            "item_id": "SRAA2D",
+            "item_description": "d. Inconsistent parenting",
+            "item_description_short": "d. Inconsistent parenting",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42012,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a2",
+            "item_category": "Risk Assessment 2",
+            "item_id": "SRAA2E",
+            "item_description": "e. Poor relations/father-child",
+            "item_description_short": "e. Poor relations/father-child",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42013,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_risk_assess_a2",
+            "item_category": "Risk Assessment 2",
+            "item_id": "SRAA2F",
+            "item_description": "f. Poor relations/mother-child",
+            "item_description_short": "f. Poor relations/mother-child",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42014,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3A",
+            "item_description": "a. Disruptive classroom behaviour",
+            "item_description_short": "a. Disruptive classroom behaviour",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42015,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3B",
+            "item_description": "b. Disruptive behaviour on school property",
+            "item_description_short": "b. Disruptive behaviour on school property",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42016,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3C",
+            "item_description": "c. Low Achievement",
+            "item_description_short": "c. Low Achievement",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42017,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3D",
+            "item_description": "d. Problems with peers",
+            "item_description_short": "d. Problems with peers",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42018,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3E",
+            "item_description": "e. Problems with teachers",
+            "item_description_short": "e. Problems with teachers",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42019,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3F",
+            "item_description": "f. Truancy",
+            "item_description_short": "f. Truancy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42020,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "si_risk_assess_a3",
+            "item_category": "Risk Assessment 3",
+            "item_id": "SRAA3G",
+            "item_description": "g. Unemployed/not seeking employment",
+            "item_description_short": "g. Unemployed/not seeking employment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42021,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a4",
+            "item_category": "Risk Assessment 4",
+            "item_id": "SRAA4A",
+            "item_description": "a. Some delinquent acquaintances",
+            "item_description_short": "a. Some delinquent acquaintances",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42022,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a4",
+            "item_category": "Risk Assessment 4",
+            "item_id": "SRAA4B",
+            "item_description": "b. Some delinquent friends",
+            "item_description_short": "b. Some delinquent friends",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42023,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a4",
+            "item_category": "Risk Assessment 4",
+            "item_id": "SRAA4C",
+            "item_description": "c. No or few positive acquaintances",
+            "item_description_short": "c. No or few positive acquaintances",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42024,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a4",
+            "item_category": "Risk Assessment 4",
+            "item_id": "SRAA4D",
+            "item_description": "d. Nor or few positive friends",
+            "item_description_short": "d. Nor or few positive friends",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42025,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a5",
+            "item_category": "Risk Assessment 5",
+            "item_id": "SRAA5A",
+            "item_description": "a. Occasional drug use",
+            "item_description_short": "a. Occasional drug use",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42026,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a5",
+            "item_category": "Risk Assessment 5",
+            "item_id": "SRAA5B",
+            "item_description": "b. Chronic drug use",
+            "item_description_short": "b. Chronic drug use",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42027,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a5",
+            "item_category": "Risk Assessment 5",
+            "item_id": "SRAA5C",
+            "item_description": "c. Chronic alcohol abuse",
+            "item_description_short": "c. Chronic alcohol abuse",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42028,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a5",
+            "item_category": "Risk Assessment 5",
+            "item_id": "SRAA5D",
+            "item_description": "d. Substance abuse interferes with life",
+            "item_description_short": "d. Substance abuse interferes with life",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42029,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a5",
+            "item_category": "Risk Assessment 5",
+            "item_id": "SRAA5E",
+            "item_description": "e. Substance abuse linked to the offence(s)",
+            "item_description_short": "e. Substance abuse linked to the offence(s)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42030,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a6",
+            "item_category": "Risk Assessment 6",
+            "item_id": "SRAA6A",
+            "item_description": "a. Limited organized activities",
+            "item_description_short": "a. Limited organized activities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42031,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a6",
+            "item_category": "Risk Assessment 6",
+            "item_id": "SRAA6B",
+            "item_description": "b. Could make better use of time",
+            "item_description_short": "b. Could make better use of time",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42032,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a6",
+            "item_category": "Risk Assessment 6",
+            "item_id": "SRAA6C",
+            "item_description": "c. No personal interests",
+            "item_description_short": "c. No personal interests",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42033,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a7",
+            "item_category": "Risk Assessment 7",
+            "item_id": "SRAA7A",
+            "item_description": "a. Away from home for more than one month",
+            "item_description_short": "a. Away from home for more than one month",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42034,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a7",
+            "item_category": "Risk Assessment 7",
+            "item_id": "SRAA7B",
+            "item_description": "b. Sleep on the street",
+            "item_description_short": "b. Sleep on the street",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42035,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a7",
+            "item_category": "Risk Assessment 7",
+            "item_id": "SRAA7C",
+            "item_description": "c. Changed name/age",
+            "item_description_short": "c. Changed name/age",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42036,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a7",
+            "item_category": "Risk Assessment 7",
+            "item_id": "SRAA7D",
+            "item_description": "d. Scavenging",
+            "item_description_short": "d. Scavenging",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42037,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a7",
+            "item_category": "Risk Assessment 7",
+            "item_id": "SRAA7E",
+            "item_description": "e. Tattooing",
+            "item_description_short": "e. Tattooing",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42038,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_risk_assess_a7",
+            "item_category": "Risk Assessment 7",
+            "item_id": "SRAA7F",
+            "item_description": "f. Identification with a base",
+            "item_description_short": "f. Identification with a base",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42039,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8A",
+            "item_description": "a. Inflated self-esteem",
+            "item_description_short": "a. Inflated self-esteem",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42040,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8B",
+            "item_description": "b. Physically aggressive",
+            "item_description_short": "b. Physically aggressive",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42041,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8C",
+            "item_description": "c. Tantrums",
+            "item_description_short": "c. Tantrums",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42042,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8D",
+            "item_description": "d. Short attention span",
+            "item_description_short": "d. Short attention span",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42043,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8E",
+            "item_description": "e. Poor frustration tolerance",
+            "item_description_short": "e. Poor frustration tolerance",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42044,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8F",
+            "item_description": "f. Inadequate guilt feelings",
+            "item_description_short": "f. Inadequate guilt feelings",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42045,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "si_risk_assess_a8",
+            "item_category": "Risk Assessment 8",
+            "item_id": "SRAA8G",
+            "item_description": "g. Verbally aggressive, impudent",
+            "item_description_short": "g. Verbally aggressive, impudent",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42046,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_risk_assess_a9",
+            "item_category": "Risk Assessment 9",
+            "item_id": "SRAA9A",
+            "item_description": "a. Antisocial/pro-criminal attitudes",
+            "item_description_short": "a. Antisocial/pro-criminal attitudes",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42047,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_risk_assess_a9",
+            "item_category": "Risk Assessment 9",
+            "item_id": "SRAA9B",
+            "item_description": "b. Not seeking help",
+            "item_description_short": "b. Not seeking help",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42048,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_risk_assess_a9",
+            "item_category": "Risk Assessment 9",
+            "item_id": "SRAA9C",
+            "item_description": "c. Actively rejecting help",
+            "item_description_short": "c. Actively rejecting help",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42049,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_risk_assess_a9",
+            "item_category": "Risk Assessment 9",
+            "item_id": "SRAA9D",
+            "item_description": "d. Defies Authority",
+            "item_description_short": "d. Defies Authority",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42050,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_risk_assess_a9",
+            "item_category": "Risk Assessment 9",
+            "item_id": "SRAA9E",
+            "item_description": "e. Callous, little concern for others",
+            "item_description_short": "e. Callous, little concern for others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    }
+]

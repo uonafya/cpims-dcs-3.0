@@ -3482,4 +3482,3 @@ def write_pdf(request, response, file_name):
 
 if __name__ == '__main__':
     pass
-

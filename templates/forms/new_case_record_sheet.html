@@ -1386,7 +1386,7 @@ jQuery(document).ready(function()
 	var future_needs_list = new Array();
 
 	//multi selects
-	$('#physical_subcondition, #other_subcondition, #mental_subcondition, #report_subcounty, #report_ward, #report_orgunit, #occurence_county, #occurence_subcounty, #occurence_ward, #family_status, #gliving_in, #case_subcategory, #case_category, #place_of_event, #case_nature, #intervention, #refferal_to, #refferal_destination_type, #refferal_destination_description, #immediate_needs, #future_needs').multiselect({
+	$('#physical_subcondition, #other_subcondition, #mental_subcondition, #report_subcounty, #report_ward, #report_orgunit, #occurence_county, #occurence_subcounty, #occurence_ward, #family_status, #gliving_in, #case_subcategory, #case_category, #place_of_event, #case_nature, #intervention, #refferal_to, #refferal_destination_type, #refferal_destination_description, #immediate_needs, #future_needs, #occurence_location, #occurence_sublocation').multiselect({
         selectAllValue: 'multiselect-all',
         includeSelectAllOption: false,
         enableCaseInsensitiveFiltering: true,
@@ -2314,6 +2314,8 @@ $("#occurence_subcounty").change(function(e) {
                   'county': 0, 'action': 4,
                   'csrfmiddlewaretoken': csrftoken };
     $('#occurence_ward').empty();
+    $('#occurence_location').empty();
+    $('#occurence_sublocation').empty();
     $.ajax({
         type: "POST",
         data: values,
@@ -2321,12 +2323,17 @@ $("#occurence_subcounty").change(function(e) {
         url: "{% url 'reg_lookup' %}",
         success: function(data){
             var wards = data.wards;
+            var locs = data.list_locations;
             
             // Default Option - Please Select
             $('#occurence_ward')
                     .append($("<option></option>")
                     .attr("value", '')
-                    .text('Please Select')); 
+                    .text('Please Select'));
+            $('#occurence_location')
+                    .append($("<option></option>")
+                    .attr("value", '')
+                    .text('Please Select'));
 
             $.each(wards, function(i, record) {
                 var ward_attribs = wards[i].split(",");
@@ -2335,7 +2342,53 @@ $("#occurence_subcounty").change(function(e) {
                     .attr("value", ward_attribs[0])
                     .text(ward_attribs[1]));
              });
+
+            $.each(locs, function(i, loc) {
+                $('#occurence_location')
+                    .append($("<option></option>")
+                    .attr("value", loc.id)
+                    .text(loc.name));
+             });
              $('#occurence_ward').multiselect('rebuild');
+             $('#occurence_location').multiselect('rebuild');
+        },
+        error: function(){
+            $('#messages').html("Error")
+        }
+    });
+});
+
+// Cascading drop down for occurence in sub-location
+$("#occurence_location").change(function(e) {
+    var sub_county = $("#occurence_subcounty").val();
+    var location = $("#occurence_location").val();
+    var csrftoken = $.cookie('csrftoken');
+    var values = {'sub_county': sub_county, 'location': location,
+                  'county': 0, 'action': 8,
+                  'csrfmiddlewaretoken': csrftoken };
+    $('#occurence_sublocation').empty();
+    $.ajax({
+        type: "POST",
+        data: values,
+        dataType: "json",
+        url: "{% url 'reg_lookup' %}",
+        success: function(data){
+            var wards = data.wards;
+            var locs = data.list_sub_locations;
+            
+            // Default Option - Please Select
+            $('#occurence_sublocation')
+                    .append($("<option></option>")
+                    .attr("value", '')
+                    .text('Please Select')); 
+
+            $.each(locs, function(i, loc) {
+                $('#occurence_sublocation')
+                    .append($("<option></option>")
+                    .attr("value", loc.id)
+                    .text(loc.name));
+             });
+             $('#occurence_sublocation').multiselect('rebuild');
         },
         error: function(){
             $('#messages').html("Error")

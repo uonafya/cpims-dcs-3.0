@@ -51,6 +51,9 @@ urlpatterns = [
     # Residential Placement FollowUp
     path('placement_followup/<int:id>/',
          views.placement_followup, name='placement_followup'),
+    # Option 2
+    path('placement/followup/<uuid:id>/',
+         views.placement_follow_up, name='placement_follow_up'),
     path('save_placementfollowup/',
          views.save_placementfollowup, name='save_placementfollowup'),
     path('view_placementfollowup/',
@@ -175,9 +178,9 @@ urlpatterns = [
     path('bursary/manage/',
          views.manage_bursary, name='manage_bursary'),
 
-    path('case/<uuid:case_id>/', views.case_info, name='case_info'),
+    path('caseinfo/<uuid:case_id>/', views.case_info, name='case_info'),
     path(
-        'case/<int:form_id>/<uuid:case_id>/',
+        'caseinfo/<int:form_id>/<uuid:case_id>/',
         views.case_info_form, name='case_info_form'),
 
     # OVC Care - CSI

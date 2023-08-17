@@ -7,6 +7,10 @@ from django.dispatch import receiver
 from cpovc_registry.models import RegPerson
 import uuid
 
+F_TYPE_CHOICES = (("FMSL", "Select"), ("FMRD", "Radio"), ("FMCB", "Checkbox"),
+                  ("FMTF", "TextField"), ("FMTA", "TextArea"),)
+F_SET_CHOICES = ((1, "Text"), (2, "Number"), (3, "Date"),)
+
 
 class SchoolList(models.Model):
     """List of Schools model."""
@@ -82,7 +86,7 @@ class SetupLocation(models.Model):
     area_name = models.CharField(max_length=100)
     area_type_id = models.CharField(max_length=50)
     area_code = models.CharField(max_length=10, null=True)
-    parent_area_id = models.IntegerField(null=True)
+    parent_area_id = models.IntegerField(null=True, blank=True)
     is_void = models.BooleanField(default=False)
 
     class Meta:
@@ -97,7 +101,7 @@ class SetupList(models.Model):
 
     item_id = models.CharField(max_length=4)
     item_description = models.CharField(max_length=255)
-    item_description_short = models.CharField(max_length=26, null=True)
+    item_description_short = models.CharField(max_length=100, null=True)
     item_category = models.CharField(max_length=255, null=True, blank=True)
     item_sub_category = models.CharField(max_length=255, null=True, blank=True)
     the_order = models.IntegerField(null=True)
@@ -116,20 +120,20 @@ class SetupList(models.Model):
 class Forms(models.Model):
     """Forms model."""
 
-    form_guid = models.CharField(max_length=64)
-    form_title = models.CharField(max_length=255, null=True)
-    form_type_id = models.CharField(max_length=4, null=True)
-    form_subject_id = models.IntegerField(null=True, blank=False)
-    form_area_id = models.IntegerField(null=True)
+    form_guid = models.CharField(max_length=10)
+    form_title = models.CharField(max_length=255, null=True, blank=True)
+    form_type_id = models.CharField(max_length=4, null=True, blank=True)
+    form_subject_id = models.IntegerField(null=True, blank=True)
+    form_area_id = models.IntegerField(null=True, blank=True)
     date_began = models.DateField(null=True)
-    date_ended = models.DateField(null=True)
+    date_ended = models.DateField(null=True, blank=True)
     date_filled_paper = models.DateField(null=True)
-    person_id_filled_paper = models.IntegerField(null=True)
-    org_unit_id_filled_paper = models.IntegerField(null=True)
+    person_id_filled_paper = models.IntegerField(null=True, blank=True)
+    org_unit_id_filled_paper = models.IntegerField(null=True, blank=True)
     capture_site_id = models.IntegerField(null=True, blank=True)
     timestamp_created = models.DateTimeField(null=True)
     user_id_created = models.CharField(max_length=9, null=True)
-    timestamp_updated = models.DateTimeField(null=True)
+    timestamp_updated = models.DateTimeField(null=True, blank=True)
     user_id_updated = models.CharField(max_length=9, null=True)
     is_void = models.BooleanField(default=False)
 
@@ -137,6 +141,12 @@ class Forms(models.Model):
         """Override some params."""
 
         db_table = 'forms'
+        verbose_name = 'Generic Form'
+        verbose_name_plural = 'Generic Forms'
+
+    def __str__(self):
+        """To be returned by admin actions."""
+        return self.form_guid
 
 
 class ListQuestions(models.Model):
@@ -145,8 +155,13 @@ class ListQuestions(models.Model):
     question_text = models.CharField(max_length=255, null=True, blank=True)
     question_code = models.CharField(max_length=50)
     form_type_id = models.CharField(max_length=4, null=True, blank=True)
-    answer_type_id = models.CharField(max_length=4, null=True, blank=True)
-    answer_set_id = models.IntegerField(db_index=True, null=True)
+    answer_type_id = models.CharField(
+        max_length=4, choices=F_TYPE_CHOICES, null=True, blank=True)
+    answer_field_id = models.CharField(max_length=60, null=True, blank=True)
+    answer_set_id = models.IntegerField(
+        db_index=True, null=True, choices=F_SET_CHOICES)
+    form = models.ForeignKey(Forms, on_delete=models.CASCADE, null=True)
+    question_required = models.BooleanField(default=True)
     the_order = models.IntegerField(db_index=True, null=True)
     timestamp_created = models.DateTimeField(auto_now=True, null=True)
     timestamp_updated = models.DateTimeField(auto_now=True, null=True)
@@ -156,6 +171,8 @@ class ListQuestions(models.Model):
         """Override some params."""
 
         db_table = 'list_questions'
+        verbose_name = 'Generic Question'
+        verbose_name_plural = 'Generic Questions'
 
 
 class ListAnswers(models.Model):
@@ -213,7 +230,8 @@ class FormGenAnswers(models.Model):
 
     form = models.ForeignKey(Forms, on_delete=models.CASCADE)
     question = models.ForeignKey(ListQuestions, on_delete=models.CASCADE)
-    answer = models.ForeignKey(ListAnswers, on_delete=models.CASCADE, null=True)
+    answer = models.ForeignKey(
+        ListAnswers, on_delete=models.CASCADE, null=True)
 
     class Meta:
         """Override some params."""
@@ -486,7 +504,8 @@ class ListReports(models.Model):
 class ListReportsParameters(models.Model):
     """Reports parameters."""
 
-    report = models.ForeignKey(ListReports, on_delete=models.CASCADE, null=True)
+    report = models.ForeignKey(
+        ListReports, on_delete=models.CASCADE, null=True)
     parameter = models.CharField(max_length=50, null=True, blank=True)
     filter = models.CharField(max_length=50, null=True, blank=True)
     initially_visible = models.BooleanField(default=False)

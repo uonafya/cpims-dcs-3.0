@@ -1,0 +1,404 @@
+cpims_id,monitoring_date,sex,age,agerange,question_id,question_text,item_value,ovccount
+16882,2022-06-25,Male,21.0,e.[18+ yrs],qf6A1_txt,Number of visit,1,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",there has been no major challenge,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,good,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,15-Jul-2022,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),increased responsibilities,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,the minor has bonded with the caregiver,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",the minor says that he is happy and comfortable,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A17_txt,Protection and safety,family is secure,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",the minor is coping well and he is adjusting to the new enviroment,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,the minor is safe,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A15_txt,Psychosocial health and emotional well-being,stable,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A16_txt,Education,access to education,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A19_txt,Social well-being and community belonging,well embraced,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A14_txt,Health and development,the family looks healthy,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),the minor is that his provision is guaranteed,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A10_txt,Social well-being and community belonging,well integrated into  the community,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,the  child is healthy and is growing  normally,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,stable,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A7_txt,Education,ongoing,1
+466638,2022-07-15,Male,15.0,c.[10 - 15 yrs],qf6A13_txt,How have these changes affected your family/life,financial adjustment,1
+466640,2022-07-03,Male,14.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?","bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+
+
+
+
+
+",1
+466640,2022-07-03,Male,14.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,15-Jul-2022,1
+466640,2022-07-03,Male,14.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,-18,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,15-Jul-2022,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",N/A,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),the child is well fed and happy,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",He is well settled ,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,Good,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,1,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,Fair,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,Good,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,good,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A7_txt,Education,Fair,1
+466655,2022-06-03,Male,4.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,Excellent,1
+71,2022-08-24,Male,6.0,b.[6 - 9 yrs],qf6A1_txt,Number of visit,1,1
+450649,2022-08-25,Female,6.0,b.[6 - 9 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),ok,1
+450649,2022-08-25,Female,6.0,b.[6 - 9 yrs],qf6A1_txt,Number of visit,1,1
+466711,2022-07-01,Male,16.0,d.[16 - 18 yrs],qf6A20_txt,Proposed date of next monitoring visit,01-Aug-2022,1
+466711,2022-07-01,Male,16.0,d.[16 - 18 yrs],qf6A1_txt,Number of visit,2,1
+466718,2022-08-26,Male,12.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+466718,2022-08-25,Male,12.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,30-Sep-2022,1
+466718,2022-08-25,Male,12.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,3,1
+466720,2022-08-26,Female,14.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,31-Aug-2022,1
+466720,2022-08-26,Female,14.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+76725,2022-08-26,Male,11.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,2,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A20_txt,Proposed date of next monitoring visit,24-Nov-2022,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),CHILD IS GROWING FAT,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",HEALTHY HAPPY,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),CHILD HAS MADE NEW FRIENDS,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",POSITIVELY,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A8_txt, Protection and safety,SECURE,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",FAMILY IS LOVING,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A13_txt,How have these changes affected your family/life,THEY ARE MORE UNITED,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A1_txt,Number of visit,2,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A10_txt,Social well-being and community belonging,POSITIVE INTERACTION,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A5_txt,Health and development,POSITIVE GROWTH,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A6_txt,Psychosocial health and emotional well-being,HEALTHY,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A7_txt,Education,PROGRESSIVE,1
+222343,2022-09-13,Male,16.0,d.[16 - 18 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,POSIYTIVE ATTACHMENT,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A20_txt,Proposed date of next monitoring visit,02-Jan-2023,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),positive,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",child has enjoyed the food here,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),has made friends ,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",positively,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A8_txt, Protection and safety,safe,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",the child is very disciplined,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A13_txt,How have these changes affected your family/life,we have grown closer,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A1_txt,Number of visit,2,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A10_txt,Social well-being and community belonging,positive interaction,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A5_txt,Health and development,positive growth,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A6_txt,Psychosocial health and emotional well-being,healthy,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A7_txt,Education,progressive,1
+2522,2022-09-01,Female,9.0,b.[6 - 9 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,positive,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",Child doing ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,27-Dec-2022,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),None,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe","Yes, am ok, feel really involved",1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A17_txt,Protection and safety,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,3,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",none,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A15_txt,Psychosocial health and emotional well-being,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A16_txt,Education,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A19_txt,Social well-being and community belonging,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A14_txt,Health and development,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),None,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A10_txt,Social well-being and community belonging,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,ok,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A7_txt,Education,Very fine,1
+371693,2022-09-04,Male,11.0,c.[10 - 15 yrs],qf6A13_txt,How have these changes affected your family/life,None,1
+19203,2022-09-01,Male,18.0,d.[16 - 18 yrs],qf6A1_txt,Number of visit,3,1
+655,2022-09-13,Female,6.0,b.[6 - 9 yrs],qf6A20_txt,Proposed date of next monitoring visit,12-Sep-2022,1
+655,2022-09-13,Female,6.0,b.[6 - 9 yrs],qf6A1_txt,Number of visit,3,1
+152,2022-09-13,Male,20.0,e.[18+ yrs],qf6A1_txt,Number of visit,2,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,13-Oct-2022,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",enrolled in school and attending frequently,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),Happy and confident,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,Guardian cares for her,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",Family is loving and supports,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A14_txt,Health and development,Have a NHIF card,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",Expresses herself confidently,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,looks bright and healthy,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,emotionally stable and is no longer fearful,1
+134,2022-09-13,Female,11.0,c.[10 - 15 yrs],qf6A7_txt,Education,Attending school ,1
+450649,2022-08-25,Female,6.0,b.[6 - 9 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",ok,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,14-Sep-2022,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",no,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),no,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",yes,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,ok,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,3,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A10_txt,Social well-being and community belonging,ok,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,yes,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,ok,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A7_txt,Education,ok,1
+371693,2022-09-01,Male,11.0,c.[10 - 15 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+3062,2022-09-05,Female,16.0,d.[16 - 18 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",HAPPY,1
+3062,2022-09-05,Female,16.0,d.[16 - 18 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),IMPRESSED,1
+3062,2022-09-05,Female,16.0,d.[16 - 18 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",POSITIVE,1
+3062,2022-09-05,Female,16.0,d.[16 - 18 yrs],qf6A1_txt,Number of visit,8,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A20_txt,Proposed date of next monitoring visit,22-Oct-2022,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",ALREADY JOINED SCHOOL AND PROGRESSING WELL,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),NONE,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",N/A,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A8_txt, Protection and safety,SAFE,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A1_txt,Number of visit,1,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A10_txt,Social well-being and community belonging,THE CHILD HAS FITTED IN THE COMMUNITY,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A5_txt,Health and development,THE CHILDIS HEALTHY,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A6_txt,Psychosocial health and emotional well-being,EMOTIONALLY STABLE AFTER COUNSELLING SESSIONS,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A7_txt,Education,ENROLLED AND DOING WELL IN SCHOOL,1
+12917,2022-09-01,Female,19.0,e.[18+ yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,GOOD,1
+3867,2022-09-13,Male,6.0,b.[6 - 9 yrs],qf6A1_txt,Number of visit,10,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,improved,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,01-Oct-2022,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),positive impact,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,at medium level,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",child misses her mother,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,ok,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,1,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?","health and development improved, self esteem improved, hygiene improved",1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,safe,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A15_txt,Psychosocial health and emotional well-being,ok,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",bonding is happening but slow,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,okay,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),"she is healing from the physical abuse/scars, taking medicine and improving",1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,not yet ,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,improved,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A7_txt,Education,not yet,1
+466887,2022-09-01,Female,4.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,made us aware about inclusive parenting,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",The child is coping well,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,starting to grow,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,30-Aug-2022,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),His withdrawal is going away,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,starting to develop,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe","No, am ok",1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,1,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",OK,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A15_txt,Psychosocial health and emotional well-being,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A16_txt,Education,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A19_txt,Social well-being and community belonging,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),The family is caring,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,still not known,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,ok,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A7_txt,Education,Going to school,1
+466881,2022-08-01,Male,5.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,child ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,30-Sep-2022,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,2,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A15_txt,Psychosocial health and emotional well-being,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A16_txt,Education,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A19_txt,Social well-being and community belonging,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A7_txt,Education,ok,1
+466881,2022-08-30,Male,5.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,16-Sep-2022,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,3,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A15_txt,Psychosocial health and emotional well-being,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A16_txt,Education,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A19_txt,Social well-being and community belonging,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A7_txt,Education,ok,1
+466881,2022-09-16,Male,5.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,ok,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,01-Dec-2022,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),the other children are about to go to high school,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",child is healthy,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),child is able to walk,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,child not undergoing discrimination as she has albinism,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,no,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,2,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",N/A,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",the family is psoitive with the new addition of a child,1
+466883,2022-09-02,Female,1.0,a.[0 - 5 yrs],qf6A7_txt,Education,n/a,1
+466902,2022-09-14,Male,5.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,28-Sep-2022,1
+466902,2022-09-14,Male,5.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,3,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",child crawling ,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,20-Oct-2022,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),no,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",child achieved milestones,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,2,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",N/A,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A15_txt,Psychosocial health and emotional well-being,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A16_txt,Education,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A19_txt,Social well-being and community belonging,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,good ,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),none,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,good,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A7_txt,Education,N/A,1
+466882,2022-09-05,Male,0.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,N/A,1
+466918,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,07-Oct-2022,1
+466918,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A14_txt,Health and development,Basic health counseling done to grandmother,1
+466918,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+466918,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,Grandmother received basic health counseling,1
+466918,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,Basic counseling to child and grandmother provided,1
+466918,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A7_txt,Education,Preparation to re-enroll child back to school underway,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,16-Sep-2022,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,Good,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,3,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,Good,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,Good,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A7_txt,Education,Good,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,Good,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",generally the family is going good though  the child have had cold the past few weeks though he is on medication,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,good,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,16-Sep-2022,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),The household members have fully accepted the child ,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,GOOD,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",NO,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,good,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,GOOD,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A15_txt,Psychosocial health and emotional well-being,good,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A16_txt,Education,fair,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A19_txt,Social well-being and community belonging,good,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,good,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,2,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,GOOD,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,GOOD,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,GOOD,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A7_txt,Education,FAIR,1
+466915,2022-09-14,Female,2.0,a.[0 - 5 yrs],qf6A13_txt,How have these changes affected your family/life,positively,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",feeling good,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",am comfortable here,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),she is happy,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,well protected ,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",well,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,good,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,good,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A7_txt,Education,attending school regularly,1
+466892,2022-09-16,Female,10.0,c.[10 - 15 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,good,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,30-Sep-2022,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),no,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",no,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),no,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A13_txt,How have these changes affected your family/life,no,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,4,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",okay,1
+466893,2022-09-13,Female,12.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",no,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",the child is  is coping  well,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,noticeable,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,21-Oct-2022,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),child has begun school,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,good,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",No.,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A17_txt,Protection and safety,child safe,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,3,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",no,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,child is safe,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A15_txt,Psychosocial health and emotional well-being,better,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A16_txt,Education,enrolled,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A19_txt,Social well-being and community belonging,present,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A14_txt,Health and development,good,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),none,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A10_txt,Social well-being and community belonging,child has a sense of self belonging,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,child Developing well and is physically healthy,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,good and very good,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A7_txt,Education,child enrolled in school,1
+466897,2022-08-25,Female,10.0,c.[10 - 15 yrs],qf6A13_txt,How have these changes affected your family/life,positively,1
+466911,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,2,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,07-Oct-2022,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A8_txt, Protection and safety,well protected,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,1,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A10_txt,Social well-being and community belonging,good,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A5_txt,Health and development,doing well,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A6_txt,Psychosocial health and emotional well-being,doing well,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A7_txt,Education,enrolled and performing well,1
+466890,2022-09-16,Female,4.0,a.[0 - 5 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,well bonding,1
+466904,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,01-Oct-2022,1
+466904,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,1,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A15_txt,Psychosocial health and emotional well-being,Stable,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A16_txt,Education,Progressing well,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",They receive positive reports from the child,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,Friends and he is supported,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A20_txt,Proposed date of next monitoring visit,16-Oct-2022,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),Happy and no longer stressed,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",Training is progressing on well and the trainer is supportive,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A17_txt,Protection and safety,Safe,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A1_txt,Number of visit,1,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",He understands the budgeting process & saving ,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A8_txt, Protection and safety,Feels safe and neighbours supportive,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A19_txt,Social well-being and community belonging,community supportive,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A14_txt,Health and development,Nourished,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),He was able to purchase household items,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A10_txt,Social well-being and community belonging,Friendly,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A5_txt,Health and development,Healthy,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A6_txt,Psychosocial health and emotional well-being,Strong willed and hopeful,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A7_txt,Education,Takes his vocational training seriously,1
+466895,2022-09-14,Male,16.0,d.[16 - 18 yrs],qf6A13_txt,How have these changes affected your family/life,Hopeful once again,1
+466913,2022-09-16,Male,3.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,1,1
+466896,2022-09-15,Female,0.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",N/A,1
+466896,2022-09-15,Female,0.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,15-Sep-2022,1
+466896,2022-09-15,Female,0.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,3,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",POSITIVE CHANGE ,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A20_txt,Proposed date of next monitoring visit,12-Sep-2022,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),POSITIVE CHANGE ,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",THERE HAS BEEN A GREAT IMPROVEMENT ,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A17_txt,Protection and safety,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A1_txt,Number of visit,1,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",NO,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A8_txt, Protection and safety,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A15_txt,Psychosocial health and emotional well-being,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A16_txt,Education,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A19_txt,Social well-being and community belonging,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A14_txt,Health and development,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),NONE ,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A10_txt,Social well-being and community belonging,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A5_txt,Health and development,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A6_txt,Psychosocial health and emotional well-being,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A7_txt,Education,GOOD,1
+466906,2022-09-16,Male,14.0,c.[10 - 15 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,GOOD,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A20_txt,Proposed date of next monitoring visit,15-Sep-2022,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),positive development,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe",N/A,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A17_txt,Protection and safety,no discrimination,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A14_txt,Health and development,Healthy,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A16_txt,Education,education milestones achieved,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A1_txt,Number of visit,2,1
+466905,2022-09-15,Male,0.0,a.[0 - 5 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",nothing,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A18_txt,Childcaregiver/young adultmentor relationship and attachment,YES,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A20_txt,Proposed date of next monitoring visit,01-Oct-2022,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A12_txt,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),A NEW FAMILY MEMBER HAS BROUGHT JOY TO THE FAMILY,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A9_txt,Childcaregiver/young adultmentor relationship and attachment,GOOD,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A2_txt,"Since our last visit, is there anything that you would like to share with me? Please describe","YES, THE CHILD IS HAPPY ABOUT HIS NEW SCHOOL AND TEACHERS",1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A17_txt,Protection and safety,THE CHILD IS SAFE,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A1_txt,Number of visit,1,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A4_txt,"How have these changes affected you (e.g., how is the child currently coping)?",THE CHILD HAS BLENDED WELL WITH THE OTHER FAMILY MEMBERS,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A8_txt, Protection and safety,THE CHILD FEELS SAFE WITHIN THE FAMILY AND THE SCHOOL,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A15_txt,Psychosocial health and emotional well-being,THE CHILD IS POSITIVELY ADJUSTING,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A16_txt,Education,"GOOD, ALREADY IN SCHOOL AND PROGRESSING WELL",1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A11_txt,"Since our last visit, is there anything that you would like to share with me? Please describe below",THE CHILD IS COPING WELL ,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A14_txt,Health and development,GOOD,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A3_txt, Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),NONE,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A10_txt,Social well-being and community belonging,THE CHILD HAS A SENSE OF BELONGING WITHIN THE COMMUNITY,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A5_txt,Health and development,GOOD,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A6_txt,Psychosocial health and emotional well-being,COPING WELL,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A7_txt,Education,GOOD,1
+466886,2022-09-01,Male,8.0,b.[6 - 9 yrs],qf6A13_txt,How have these changes affected your family/life,"YES, THERE IS JOY AND UNITY AMONG THE CHIDREN. ",1

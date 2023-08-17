@@ -1,0 +1,3362 @@
+[
+    {
+        "pk": 41000,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_ed_goals",
+            "item_category": "Education Goals",
+            "item_id": "GH1ED",
+            "item_description": "GH1ED. All school going children/young person enrolled in school/education program",
+            "item_description_short": "GH1ED. All school going children/young person enrolled in school/education program",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41001,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_ed_goals",
+            "item_category": "Education Goals",
+            "item_id": "GH2ED",
+            "item_description": "GH2ED. All school going children/young person access and retained in school/education institution.",
+            "item_description_short": "GH2ED. All school going children/young person access and retained in school/education institution.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41002,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_ed_goals",
+            "item_category": "Education Goals",
+            "item_id": "GH3ED",
+            "item_description": "GH3ED. All school going children/young person progressing and transitioning apropriately.",
+            "item_description_short": "GH3ED. All school going children/young person progressing and transitioning apropriately.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41003,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_ed_goals",
+            "item_category": "Education Goals",
+            "item_id": "GH4ED",
+            "item_description": "GH4ED. All school going children/young person with disability are enrolled and regulary attend a disability friendly learning institutions",
+            "item_description_short": "GH4ED. All school going children/young person with disability are enrolled",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41004,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_hd_goals",
+            "item_category": "Health and Dev Goals",
+            "item_id": "GH1HD",
+            "item_description": "GH1HD. Children have atleast three balanced meals per day",
+            "item_description_short": "GH1HD. Children have atleast three balanced meals per day",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41005,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_hd_goals",
+            "item_category": "Health and Dev Goals",
+            "item_id": "GH2HD",
+            "item_description": "GH2HD. Children have access to medical services as needed",
+            "item_description_short": "GH2HD. Children have access to medical services as needed",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41006,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_hd_goals",
+            "item_category": "Health and Dev Goals",
+            "item_id": "GH3HD",
+            "item_description": "GH3HD. children are fully immunized",
+            "item_description_short": "GH3HD. children are fully immunized",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41007,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_hd_goals",
+            "item_category": "Health and Dev Goals",
+            "item_id": "GH4HD",
+            "item_description": "GH4HD. Families live in drug and substance free environment",
+            "item_description_short": "GH4HD. Families live in drug and substance free environment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41008,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_hd_goals",
+            "item_category": "Health and Dev Goals",
+            "item_id": "GH5HD",
+            "item_description": "GH5HD. Families / children live in Clean and healthy environment",
+            "item_description_short": "GH5HD. Families / children live in Clean and healthy environment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41009,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_hd_goals",
+            "item_category": "Health and Dev Goals",
+            "item_id": "GH6HD",
+            "item_description": "GH6HD. Child developing normally in physical,cognitive \u00e2nd milestones",
+            "item_description_short": "GH6HD. Child developing normally in physical,cognitive \u00e2nd milestones",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41010,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_ps_goals",
+            "item_category": "Protection and safety Goals",
+            "item_id": "GH1PS",
+            "item_description": "GH1PS. The child is protected  from all forms violence and abuse",
+            "item_description_short": "GH1PS. The child is protected  from all forms violence and abuse",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41011,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_ps_goals",
+            "item_category": "Protection and safety Goals",
+            "item_id": "GH2PS",
+            "item_description": "GH2PS. Availability and accessibility of functional reporting mechanism (Child Helpline 116, Police & referral services)",
+            "item_description_short": "GH2PS. Availability and accessibility of functional reporting mechanism",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41012,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_ps_goals",
+            "item_category": "Protection and safety Goals",
+            "item_id": "GH3PS",
+            "item_description": "GH3PS. Reduced stigma in families and communities",
+            "item_description_short": "GH3PS. Reduced stigma in families and communities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41013,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_ps_goals",
+            "item_category": "Protection and safety Goals",
+            "item_id": "GH4PS",
+            "item_description": "GH4PS. Children and caregivers have basic statutory documents i.e birth certificate, notifications, death certificates, burial permit, wills, land title deeds and  baptism card.",
+            "item_description_short": "GH4PS. Children and caregivers have basic statutory documents",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41014,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_es_goals",
+            "item_category": "Economic stability Goals",
+            "item_id": "GH1ES",
+            "item_description": "GH1ES. Increase Caregivers/Young person's ability  to meet  basic needs",
+            "item_description_short": "GH1ES. Increase Caregivers/Young person's ability  to meet  basic needs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41015,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH1PW",
+            "item_description": "GH1PW. To promote children participation in community activities",
+            "item_description_short": "GH1PW. To promote children participation in community activities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41016,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH2PW",
+            "item_description": "GH2PW. Children & families access social protection services",
+            "item_description_short": "GH2PW. Children & families access social protection services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41017,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH3PW",
+            "item_description": "GH3PW. All children and young persons are living in inclusivie families & communities",
+            "item_description_short": "GH3PW. All children and young persons are living in inclusivie families & communities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41018,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH4PW",
+            "item_description": "GH4PW. Children and young persons are able to build inner strength, personal skills, and healthy social relationships",
+            "item_description_short": "GH4PW. Children and young persons are able to build inner strength, personal skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41019,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH5PW",
+            "item_description": "GH5PW. Children/young person spends quality time with caregivers/mentor",
+            "item_description_short": "GH5PW. Children/young person spends quality time with caregivers/mentor",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41020,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH6PW",
+            "item_description": "GH6PW. Children and caregiver have positive communication",
+            "item_description_short": "GH6PW. Children and caregiver have positive communication",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41021,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_pw_goals",
+            "item_category": "PSS Goals",
+            "item_id": "GH7PW",
+            "item_description": "GH7PW. Children have consistent caregiver",
+            "item_description_short": "GH7PW. Children have consistent caregiver",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41022,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN1.1ED",
+            "item_description": "GN1.1ED. Lack of scholastic materials (School bag, stationary, uniform)",
+            "item_description_short": "GN1.1ED. Lack of scholastic materials (School bag, stationary, uniform)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41023,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN1.2ED",
+            "item_description": "GN1.2ED. Lack of school levies.",
+            "item_description_short": "GN1.2ED. Lack of school levies.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41024,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN1.3ED",
+            "item_description": "GN1.3ED. Lack of child birth certificate",
+            "item_description_short": "GN1.3ED. Lack of child birth certificate",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41025,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN1.4ED",
+            "item_description": "GN1.4ED. Child/young person/Caregiver illness",
+            "item_description_short": "GN1.4ED. Child/young person/Caregiver illness",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41026,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN2.1ED",
+            "item_description": "GN2.1ED. Child dropped out of school/education program",
+            "item_description_short": "GN2.1ED. Child dropped out of school/education program",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41027,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN2.2ED",
+            "item_description": "GN2.2ED. Child does not want to go to school",
+            "item_description_short": "GN2.2ED. Child does not want to go to school",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41028,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN2.3ED",
+            "item_description": "GN2.3ED. Lack of hygiene facilities for adolescent girls",
+            "item_description_short": "GN2.3ED. Lack of hygiene facilities for adolescent girls",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41029,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN2.4ED",
+            "item_description": "GN2.4ED. Lack of dignity packs",
+            "item_description_short": "GN2.4ED. Lack of dignity packs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41030,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN2.5ED",
+            "item_description": "GN2.5ED. Child/young person/Caregiver illness",
+            "item_description_short": "GN2.5ED. Child/young person/Caregiver illness",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41031,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN3.1ED",
+            "item_description": "GN3.1ED. Negative cultural believes",
+            "item_description_short": "GN3.1ED. Negative cultural believes",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41032,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN3.2ED",
+            "item_description": "GN3.2ED. Child headed house hold",
+            "item_description_short": "GN3.2ED. Child headed house hold",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41033,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN4.1ED",
+            "item_description": "GN4.1ED. Education insitution lacks disability friendly services",
+            "item_description_short": "GN4.1ED. Education insitution lacks disability friendly services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41034,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_ed_gaps",
+            "item_category": "Education needs",
+            "item_id": "GN4.2ED",
+            "item_description": "GN4.2ED. Lack of caregiver and teacher awareness on special needs categorization",
+            "item_description_short": "GN4.2ED. Lack of caregiver and teacher awareness on special needs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41035,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN1.1HD",
+            "item_description": "GN1.1HD. Inadequate meals",
+            "item_description_short": "GN1.1HD. Inadequate meals",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41036,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN1.2HD",
+            "item_description": "GN1.2HD. lack of balanced diet",
+            "item_description_short": "GN1.2HD. lack of balanced diet",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41037,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN1.3HD",
+            "item_description": "GN1.3HD. lack of special diet for chronically  ill and children with disability",
+            "item_description_short": "GN1.3HD. lack of special diet for chronically  ill and children with disability",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41038,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN2.1HD",
+            "item_description": "GN2.1HD. Long distance to health facilities",
+            "item_description_short": "GN2.1HD. Long distance to health facilities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41039,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN2.2HD",
+            "item_description": "GN2.2HD. Financial incapacity for medical services",
+            "item_description_short": "GN2.2HD. Financial incapacity for medical services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41040,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN2.3HD",
+            "item_description": "GN2.3HD. Lack of health supplies in health facilities",
+            "item_description_short": "GN2.3HD. Lack of health supplies in health facilities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41041,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN2.4HD",
+            "item_description": "GN2.4HD. Poor road networks to health facilities",
+            "item_description_short": "GN2.4HD. Poor road networks to health facilities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41042,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN2.5HD",
+            "item_description": "GN2.5HD. low uptake  of  enrollment in medical insurance",
+            "item_description_short": "GN2.5HD. low uptake  of  enrollment in medical insurance",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41043,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN2.6HD",
+            "item_description": "GN2.6HD. Accessibility to  disability friendly  /inclusive  services",
+            "item_description_short": "GN2.6HD. Accessibility to  disability friendly  /inclusive  services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41044,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN3.1HD",
+            "item_description": "GN3.1HD. low uptake of immunization",
+            "item_description_short": "GN3.1HD. low uptake of immunization",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41045,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN4.1HD",
+            "item_description": "GN4.1HD. drug and substance",
+            "item_description_short": "GN4.1HD. drug and substance",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41046,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN4.2HD",
+            "item_description": "GN4.2HD. lack of sufficient information on drug and substance abuse",
+            "item_description_short": "GN4.2HD. lack of sufficient information on drug and substance abuse",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41047,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN4.3HD",
+            "item_description": "GN4.3HD. inaquate drug and rehabilitation facilities",
+            "item_description_short": "GN4.3HD. inaquate drug and rehabilitation facilities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41048,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN4.4HD",
+            "item_description": "GN4.4HD. low uptake of medical insurance to cater for rehabilitation services",
+            "item_description_short": "GN4.4HD. low uptake of medical insurance to cater for rehabilitation services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41049,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN4.5HD",
+            "item_description": "GN4.5HD. peer pressure leading to drug and substance abuse",
+            "item_description_short": "GN4.5HD. peer pressure leading to drug and substance abuse",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41050,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN5.1HD",
+            "item_description": "GN5.1HD. inadequate clean water",
+            "item_description_short": "GN5.1HD. inadequate clean water",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41051,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN5.2HD",
+            "item_description": "GN5.2HD. poor solid waste management",
+            "item_description_short": "GN5.2HD. poor solid waste management",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41052,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN5.3HD",
+            "item_description": "GN5.3HD. poor abblution facilities(open defeacation)",
+            "item_description_short": "GN5.3HD. poor abblution facilities(open defeacation)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41053,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 19,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN6.1HD",
+            "item_description": "GN6.1HD. milestone in growth and development",
+            "item_description_short": "GN6.1HD. milestone in growth and development",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41054,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 20,
+            "field_name": "afc_domain_hd_gaps",
+            "item_category": "Health needs",
+            "item_id": "GN6.2HD",
+            "item_description": "GN6.2HD. stunting / wasting",
+            "item_description_short": "GN6.2HD. stunting / wasting",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41055,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN1.1PS",
+            "item_description": "GN1.1PS. Exploitation, -Sexual abuse, -Physical abuse, -Emotional abuse,",
+            "item_description_short": "GN1.1PS. Exploitation, -Sexual abuse, -Physical abuse, -Emotional abuse,",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41056,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN1.2PS",
+            "item_description": "GN1.2PS. Child labour, -Gender Based Violence(GBV)",
+            "item_description_short": "GN1.2PS. Child labour, -Gender Based Violence(GBV)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41057,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN2.1PS",
+            "item_description": "GN2.1PS. Low levels of  awareness on available reporting mechanisms",
+            "item_description_short": "GN2.1PS. Low levels of  awareness on available reporting mechanisms",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41058,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN2.2PS",
+            "item_description": "GN2.2PS. Inaccessibility to institutions of reporting  i.e distance and services,",
+            "item_description_short": "GN2.2PS. Inaccessibility to institutions of reporting  i.e distance and services,",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41059,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN2.3PS",
+            "item_description": "GN2.3PS. dysfunctional reporting mechanisms",
+            "item_description_short": "GN2.3PS. dysfunctional reporting mechanisms",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41060,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.1PS",
+            "item_description": "GN3.1PS. Special needs",
+            "item_description_short": "GN3.1PS. Special needs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41061,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.2PS",
+            "item_description": "GN3.2PS. FGM",
+            "item_description_short": "GN3.2PS. FGM",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41062,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.3PS",
+            "item_description": "GN3.3PS. Harmful Cultural practices",
+            "item_description_short": "GN3.3PS. Harmful Cultural practices",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41063,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.4PS",
+            "item_description": "GN3.4PS. child truancy and delinquency",
+            "item_description_short": "GN3.4PS. child truancy and delinquency",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41064,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.5PS",
+            "item_description": "GN3.5PS. Terminal illnesses(HIV/AIDS, cancer)",
+            "item_description_short": "GN3.5PS. Terminal illnesses(HIV/AIDS, cancer)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41065,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.6PS",
+            "item_description": "GN3.6PS. Child offenders, -Street children",
+            "item_description_short": "GN3.6PS. Child offenders, -Street children",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41066,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN3.7PS",
+            "item_description": "GN3.7PS. Reintegrating children from CCIs",
+            "item_description_short": "GN3.7PS. Reintegrating children from CCIs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41067,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN4.1PS",
+            "item_description": "GN4.1PS. Lack of basic statutory documents",
+            "item_description_short": "GN4.1PS. Lack of basic statutory documents",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41068,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN4.2PS",
+            "item_description": "GN4.2PS. Inheritance/succession disputes",
+            "item_description_short": "GN4.2PS. Inheritance/succession disputes",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41069,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_ps_gaps",
+            "item_category": "Protection needs",
+            "item_id": "GN4.3PS",
+            "item_description": "GN4.3PS. Inaccessibility of institutions providing documents",
+            "item_description_short": "GN4.3PS. Inaccessibility of institutions providing documents",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41070,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.1ES",
+            "item_description": "GN1.1ES. Inadequate source of income",
+            "item_description_short": "GN1.1ES. Inadequate source of income",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41071,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.2ES",
+            "item_description": "GN1.2ES. Lack of regular savings",
+            "item_description_short": "GN1.2ES. Lack of regular savings",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41072,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.3ES",
+            "item_description": "GN1.3ES. Inadequate finacial literacy (planning, budgeting, savings & responsible spending)",
+            "item_description_short": "GN1.3ES. Inadequate finacial literacy (planning, budgeting, savings & responsible spen",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41073,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.4ES",
+            "item_description": "GN1.4ES. Inability to meet emergency expenses(drought,food)",
+            "item_description_short": "GN1.4ES. Inability to meet emergency expenses(drought,food)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41074,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.5ES",
+            "item_description": "GN1.5ES. Inability to meet medical expanses",
+            "item_description_short": "GN1.5ES. Inability to meet medical expanses",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41075,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.6ES",
+            "item_description": "GN1.6ES. Lack of access to loans and credit",
+            "item_description_short": "GN1.6ES. Lack of access to loans and credit",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41076,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.7ES",
+            "item_description": "GN1.7ES. Inadeqaute assets",
+            "item_description_short": "GN1.7ES. Inadeqaute assets",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41077,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.8ES",
+            "item_description": "GN1.8ES. Lack of  basic technical skills",
+            "item_description_short": "GN1.8ES. Lack of  basic technical skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41078,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.9ES",
+            "item_description": "GN1.9ES. Lack of sustainable means of livelihoods",
+            "item_description_short": "GN1.9ES. Lack of sustainable means of livelihoods",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41079,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_es_gaps",
+            "item_category": "Economic stable needs",
+            "item_id": "GN1.10ES",
+            "item_description": "GN1.10ES. Inability to Meet legal and other administrative fees",
+            "item_description_short": "GN1.10ES. Inability to Meet legal and other administrative fees",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41080,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN1.1PW",
+            "item_description": "GN1.1PW. Child does not belong in any community group setups e.g Church/mosque, local sports club & school clubs",
+            "item_description_short": "GN1.1PW. Child does not belong in any community group setups e.g Church/mosque, l",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41081,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN1.2PW",
+            "item_description": "GN1.2PW. Child faces stigma from the community",
+            "item_description_short": "GN1.2PW. Child faces stigma from the community",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41082,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN1.3PW",
+            "item_description": "GN1.3PW. Community activities not disability friendly",
+            "item_description_short": "GN1.3PW. Community activities not disability friendly",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41083,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN1.4PW",
+            "item_description": "GN1.4PW. Child not aware of their rights (eg Right to leisure)",
+            "item_description_short": "GN1.4PW. Child not aware of their rights (eg Right to leisure)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41084,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN1.5PW",
+            "item_description": "GN1.5PW. Community not provided safe places for play & leisure",
+            "item_description_short": "GN1.5PW. Community not provided safe places for play & leisure",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41085,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN2.1PW",
+            "item_description": "GN2.1PW. Caregiver not bale to provide basic needs due to poverty",
+            "item_description_short": "GN2.1PW. Caregiver not bale to provide basic needs due to poverty",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41086,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN2.2PW",
+            "item_description": "GN2.2PW. Families not able to articulate where to access support services for themselves",
+            "item_description_short": "GN2.2PW. Families not able to articulate where to access support services for themselves",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41087,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN2.3PW",
+            "item_description": "GN2.3PW. Families not able to access support services when needed",
+            "item_description_short": "GN2.3PW. Families not able to access support services when needed",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41088,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN2.4PW",
+            "item_description": "GN2.4PW. Children/young persons lack relavant identification document eg birth certificate, national ID",
+            "item_description_short": "GN2.4PW. Children/young persons lack relavant identification document eg birth certif",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41089,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.1PW",
+            "item_description": "GN3.1PW. The family does not feel connected to the culture of the",
+            "item_description_short": "GN3.1PW. The family does not feel connected to the culture of the",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41090,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.2PW",
+            "item_description": "GN3.2PW. The family does not participate in community activities ie dont feel socially connected",
+            "item_description_short": "GN3.2PW. The family does not participate in community activities ie dont feel socially c",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41091,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.3PW",
+            "item_description": "GN3.3PW. The family does not have relatives or friends living in close proximity",
+            "item_description_short": "GN3.3PW. The family does not have relatives or friends living in close proximity",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41092,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.4PW",
+            "item_description": "GN3.4PW. The child is facing stigma from the community",
+            "item_description_short": "GN3.4PW. The child is facing stigma from the community",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41093,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.5PW",
+            "item_description": "GN3.5PW. The family does not have a good relationship with the extended family",
+            "item_description_short": "GN3.5PW. The family does not have a good relationship with the extended family",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41094,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.6PW",
+            "item_description": "GN3.6PW. The family does not have a good relationship with the neigbours",
+            "item_description_short": "GN3.6PW. The family does not have a good relationship with the neigbours",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41095,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.7PW",
+            "item_description": "GN3.7PW. There is low level of acceptance of relatives and community towards the child",
+            "item_description_short": "GN3.7PW. There is low level of acceptance of relatives and community towards the child",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41096,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.8PW",
+            "item_description": "GN3.8PW. Local leaders do not know the family",
+            "item_description_short": "GN3.8PW. Local leaders do not know the family",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41097,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.9PW",
+            "item_description": "GN3.9PW. Young person is not a member of any community group e.g church/mosque, peer support group, savings group etc",
+            "item_description_short": "GN3.9PW. Young person is not a member of any community group e.g church/mosque,",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41098,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 19,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN3.10PW",
+            "item_description": "GN3.10PW. The caregivers family is dysfunctional",
+            "item_description_short": "GN3.10PW. The caregivers family is dysfunctional",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41099,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 20,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN4.1PW",
+            "item_description": "GN4.1PW. Freedom of expression",
+            "item_description_short": "GN4.1PW. Freedom of expression",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41100,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 21,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN4.2PW",
+            "item_description": "GN4.2PW. Child/young person does not seek support and comfort from the caregiver/mentor in response to stressors",
+            "item_description_short": "GN4.2PW. Child/young person does not seek support and comfort from the caregiver/ment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41101,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 22,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN4.3PW",
+            "item_description": "GN4.3PW. The caregiver/mentor does not know the childs/young persons likes, dislikes,what makes them happy/sad etc",
+            "item_description_short": "GN4.3PW. The caregiver/mentor does not know the childs/young persons likes, dislikes,w",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41102,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 23,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN4.4PW",
+            "item_description": "GN4.4PW. Communication between the child/young person & caregiver/mentor is not frequent and open and not satisfying",
+            "item_description_short": "GN4.4PW. Communication between the child/young person & caregiver/mentor is not f",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41103,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 24,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN4.5PW",
+            "item_description": "GN4.5PW. The child/young person is not able to articulate the rules of the house and the consequences of breaking the rules",
+            "item_description_short": "GN4.5PW. The child/young person is not able to articulate the rules of the house and",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41104,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 25,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN5.1PW",
+            "item_description": "GN5.1PW. Parental abseentism",
+            "item_description_short": "GN5.1PW. Parental abseentism",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41105,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 26,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN5.2PW",
+            "item_description": "GN5.2PW. The child does not spend quality time with the caregiver/mentor",
+            "item_description_short": "GN5.2PW. The child does not spend quality time with the caregiver/mentor",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41106,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 27,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN5.3PW",
+            "item_description": "GN5.3PW. The child is not involved in decision making on matters involving them.",
+            "item_description_short": "GN5.3PW. The child is not involved in decision making on matters involving them.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41107,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 28,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN5.4PW",
+            "item_description": "GN5.4PW. the child is exposed to abuse/neglect from the family",
+            "item_description_short": "GN5.4PW. the child is exposed to abuse/neglect from the family",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41108,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 29,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN6.1PW",
+            "item_description": "GN6.1PW. The child is unable to confide and seek comfort with the caregiver",
+            "item_description_short": "GN6.1PW. The child is unable to confide and seek comfort with the caregiver",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41109,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 30,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN6.2PW",
+            "item_description": "GN6.2PW. Caregiver does not encourage the chilld postively",
+            "item_description_short": "GN6.2PW. Caregiver does not encourage the chilld postively",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41110,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 31,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN6.3PW",
+            "item_description": "GN6.3PW. Communication between the child and the care giver is wanting",
+            "item_description_short": "GN6.3PW. Communication between the child and the care giver is wanting",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41111,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 32,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN6.4PW",
+            "item_description": "GN6.4PW. The child is unable to confide and seek comfort with the caregiver",
+            "item_description_short": "GN6.4PW. The child is unable to confide and seek comfort with the caregiver",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41112,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 33,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN7.1PW",
+            "item_description": "GN7.1PW. Relationship between the adults in the household is not good",
+            "item_description_short": "GN7.1PW. Relationship between the adults in the household is not good",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41113,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 34,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN7.2PW",
+            "item_description": "GN7.2PW. The relationship between the child and the caregiver is wanting",
+            "item_description_short": "GN7.2PW. The relationship between the child and the caregiver is wanting",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41114,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 35,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN7.3PW",
+            "item_description": "GN7.3PW. Caregiver does not respond to the child misbehaviour or fails to discipline him/her positively",
+            "item_description_short": "GN7.3PW. Caregiver does not respond to the child misbehaviour or fails to discipline him",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41115,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 36,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN7.4PW",
+            "item_description": "GN7.4PW. The child is not involved in decision making on matters involving them.",
+            "item_description_short": "GN7.4PW. The child is not involved in decision making on matters involving them.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41116,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 37,
+            "field_name": "afc_domain_pw_gaps",
+            "item_category": "PSS needs",
+            "item_id": "GN7.5PW",
+            "item_description": "GN7.5PW. The child is not free when with the caregiver",
+            "item_description_short": "GN7.5PW. The child is not free when with the caregiver",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41120,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP1.1ED",
+            "item_description": "CP1.1ED. Provide scholastic materials",
+            "item_description_short": "CP1.1ED. Provide scholastic materials",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41121,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP1.2ED",
+            "item_description": "CP1.2ED. Pay school levies/bursary",
+            "item_description_short": "CP1.2ED. Pay school levies/bursary",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41122,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP1.3ED",
+            "item_description": "CP1.3ED. Caregiver to acquire birth certificate for the child",
+            "item_description_short": "CP1.3ED. Caregiver to acquire birth certificate for the child",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41123,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP1.4ED",
+            "item_description": "CP1.4ED. Refer child/young person/caregiver for medical services",
+            "item_description_short": "CP1.4ED. Refer child/young person/caregiver for medical services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41124,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.1ED",
+            "item_description": "CP2.1ED. Enforce back to school policy",
+            "item_description_short": "CP2.1ED. Enforce back to school policy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41125,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.2ED",
+            "item_description": "CP2.2ED. Monitor child to regulary attend school/education program",
+            "item_description_short": "CP2.2ED. Monitor child to regulary attend school/education program",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41126,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.3ED",
+            "item_description": "CP2.3ED. Caregiver to support children/young person with homework",
+            "item_description_short": "CP2.3ED. Caregiver to support children/young person with homework",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41127,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.4ED",
+            "item_description": "CP2.4ED. Pay school levies/provision of bursary",
+            "item_description_short": "CP2.4ED. Pay school levies/provision of bursary",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41128,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.5ED",
+            "item_description": "CP2.5ED. School provide bins for disposing sanitary pads",
+            "item_description_short": "CP2.5ED. School provide bins for disposing sanitary pads",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41129,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.6ED",
+            "item_description": "CP2.6ED. Provision of dignity packs",
+            "item_description_short": "CP2.6ED. Provision of dignity packs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41130,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP2.7ED",
+            "item_description": "CP2.7ED. Referral to support services for Child headed house holds",
+            "item_description_short": "CP2.7ED. Referral to support services for Child headed house holds",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41131,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP3.1ED",
+            "item_description": "CP3.1ED. Pay school levies/provision of bursary/Vocation support for young person",
+            "item_description_short": "CP3.1ED. Pay school levies/provision of bursary/Vocation support for young person",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41132,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP3.2ED",
+            "item_description": "CP3.2ED. Caregiver and child sensitized on the importance of education",
+            "item_description_short": "CP3.2ED. Caregiver and child sensitized on the importance of education",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41133,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP3.3ED",
+            "item_description": "CP3.3ED. Referral to support services for Child headed house holds",
+            "item_description_short": "CP3.3ED. Referral to support services for Child headed house holds",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41134,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP3.4ED",
+            "item_description": "CP3.4ED. Child linked to an adult caregiver",
+            "item_description_short": "CP3.4ED. Child linked to an adult caregiver",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41135,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP3.5ED",
+            "item_description": "CP3.5ED. Child caregiver supported to access education program",
+            "item_description_short": "CP3.5ED. Child caregiver supported to access education program",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41136,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP4.1ED",
+            "item_description": "CP4.1ED. Referral for disability friendly services",
+            "item_description_short": "CP4.1ED. Referral for disability friendly services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41137,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "afc_domain_ed_services",
+            "item_category": "Education services",
+            "item_id": "CP4.2ED",
+            "item_description": "CP4.2ED. Complete referral for disability friendly services",
+            "item_description_short": "CP4.2ED. Complete referral for disability friendly services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41138,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP1.1HD",
+            "item_description": "CP1.1HD. Empowering families to afford three balanced meals per day",
+            "item_description_short": "CP1.1HD. Empowering families to afford three balanced meals per day",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41139,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP1.2HD",
+            "item_description": "CP1.2HD. Linkages to service providers for families in need of food supplies* School feeding programme",
+            "item_description_short": "CP1.2HD. Linkages to service providers for families in need of food supplies* School feedin",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41140,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP1.3HD",
+            "item_description": "CP1.3HD. Provision of special diet for chronically ill and children with disability",
+            "item_description_short": "CP1.3HD. Provision of special diet for chronically ill and children with disability",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41141,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP2.1HD",
+            "item_description": "CP2.1HD. Capacity building community health workers to offer basic health interventions in hard to reach areas",
+            "item_description_short": "CP2.1HD. Capacity building community health workers to offer basic health interventio",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41142,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP2.2HD",
+            "item_description": "CP2.2HD. Development of IGAs to economically empower families",
+            "item_description_short": "CP2.2HD. Development of IGAs to economically empower families",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41143,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP2.3HD",
+            "item_description": "CP2.3HD. Develop networks with County Governments, NHIF and partners to support health insurance",
+            "item_description_short": "CP2.3HD. Develop networks with County Governments, NHIF and partners to support h",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41144,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP2.4HD",
+            "item_description": "CP2.4HD. Awareness creation on importance of KEPI vaccinnations",
+            "item_description_short": "CP2.4HD. Awareness creation on importance of KEPI vaccinnations",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41145,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP2.5HD",
+            "item_description": "CP2.5HD. Awareness creation on registration with NCPWD and other disability friendly services",
+            "item_description_short": "CP2.5HD. Awareness creation on registration with NCPWD and other disability friendly",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41146,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP4.1HD",
+            "item_description": "CP4.1HD. Awareness creation on dangers of drug/substance abuse",
+            "item_description_short": "CP4.1HD. Awareness creation on dangers of drug/substance abuse",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41147,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP4.2HD",
+            "item_description": "CP4.2HD. Psychosocial support provision to children/young people to resist negative peer influence",
+            "item_description_short": "CP4.2HD. Psychosocial support provision to children/young people to resist negative peer i",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41148,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP5.1HD",
+            "item_description": "CP5.1HD. Empowering families to afford clean water (Protection ofwater sources,treatment)",
+            "item_description_short": "CP5.1HD. Empowering families to afford clean water (Protection ofwater sources,treatmen",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41149,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP5.2HD",
+            "item_description": "CP5.2HD. Capacity building families/ community groups on waste management",
+            "item_description_short": "CP5.2HD. Capacity building families/ community groups on waste management",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41150,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP6.1HD",
+            "item_description": "CP6.1HD. Regular child clinic attendance",
+            "item_description_short": "CP6.1HD. Regular child clinic attendance",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41151,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_hd_services",
+            "item_category": "Health services",
+            "item_id": "CP6.2HD",
+            "item_description": "CP6.2HD. Sensitizing parents in early detection of delayed milestones",
+            "item_description_short": "CP6.2HD. Sensitizing parents in early detection of delayed milestones",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41152,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP1.1PS",
+            "item_description": "CP1.1PS. Awareness creation for children, caregivers and the community on children\u2019s rights.",
+            "item_description_short": "CP1.1PS. Awareness creation for children, caregivers and the community on children\u2019s",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41153,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP1.2PS",
+            "item_description": "CP1.2PS. Prompt response to cases of violence against children.",
+            "item_description_short": "CP1.2PS. Prompt response to cases of violence against children.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41154,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP1.3PS",
+            "item_description": "CP1.3PS. Availability of emergency interventions.",
+            "item_description_short": "CP1.3PS. Availability of emergency interventions.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41155,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP1.4PS",
+            "item_description": "CP1.4PS. Availability of a directory/list with contacts of essential service providers.",
+            "item_description_short": "CP1.4PS. Availability of a directory/list with contacts of essential service providers.",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41156,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP1.5PS",
+            "item_description": "CP1.5PS. Referral for post violence services. i.e counseling and restorative justice",
+            "item_description_short": "CP1.5PS. Referral for post violence services. i.e counseling and restorative justice",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41157,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP2.1PS",
+            "item_description": "CP2.1PS. Awareness creation on child rights & responsibilities",
+            "item_description_short": "CP2.1PS. Awareness creation on child rights & responsibilities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41158,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP2.2PS",
+            "item_description": "CP2.2PS. Accessibility to referral services",
+            "item_description_short": "CP2.2PS. Accessibility to referral services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41159,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP2.3PS",
+            "item_description": "CP2.3PS. Documents( Birth Notification, birth certificate & Death certificate)",
+            "item_description_short": "CP2.3PS. Documents( Birth Notification, birth certificate & Death certificate)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41160,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP2.4PS",
+            "item_description": "CP2.4PS. Positive  forms of discipline",
+            "item_description_short": "CP2.4PS. Positive  forms of discipline",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41161,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP2.5PS",
+            "item_description": "CP2.5PS. Restorative justice",
+            "item_description_short": "CP2.5PS. Restorative justice",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41162,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP3.1PS",
+            "item_description": "CP3.1PS. Awareness raising and advocacy for inclusive families/communities",
+            "item_description_short": "CP3.1PS. Awareness raising and advocacy for inclusive families/communities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41163,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP3.2PS",
+            "item_description": "CP3.2PS. Providing disability friendly & inclusive services such as barrier-free buildings",
+            "item_description_short": "CP3.2PS. Providing disability friendly & inclusive services such as barrier-free buildings",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41164,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP3.3PS",
+            "item_description": "CP3.3PS. Restorative justice mechanisms",
+            "item_description_short": "CP3.3PS. Restorative justice mechanisms",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41165,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP3.4PS",
+            "item_description": "CP3.4PS. Alternative Dispute Resolution or mediation",
+            "item_description_short": "CP3.4PS. Alternative Dispute Resolution or mediation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41166,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP4.1PS",
+            "item_description": "CP4.1PS. Awareness raising on importance of statutory documents",
+            "item_description_short": "CP4.1PS. Awareness raising on importance of statutory documents",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41167,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP4.2PS",
+            "item_description": "CP4.2PS. Mobilizing the community for birth registrations and writing of wills",
+            "item_description_short": "CP4.2PS. Mobilizing the community for birth registrations and writing of wills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41168,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP4.3PS",
+            "item_description": "CP4.3PS. Child rights clubs",
+            "item_description_short": "CP4.3PS. Child rights clubs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41169,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "afc_domain_ps_services",
+            "item_category": "Protection services",
+            "item_id": "CP4.4PS",
+            "item_description": "CP4.4PS. child participation",
+            "item_description_short": "CP4.4PS. child participation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41170,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.1ES",
+            "item_description": "CP1.1ES. IGA",
+            "item_description_short": "CP1.1ES. IGA",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41171,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.2ES",
+            "item_description": "CP1.2ES. Enroll to savings group",
+            "item_description_short": "CP1.2ES. Enroll to savings group",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41172,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.3ES",
+            "item_description": "CP1.3ES. Linkages to social security safet nets (cash tranfers)",
+            "item_description_short": "CP1.3ES. Linkages to social security safet nets (cash tranfers)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41173,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.4ES",
+            "item_description": "CP1.4ES. Financial training",
+            "item_description_short": "CP1.4ES. Financial training",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41174,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.5ES",
+            "item_description": "CP1.5ES. Enterprenuership training",
+            "item_description_short": "CP1.5ES. Enterprenuership training",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41175,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.6ES",
+            "item_description": "CP1.6ES. Joining savings and credit societies/organizations",
+            "item_description_short": "CP1.6ES. Joining savings and credit societies/organizations",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41176,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.7ES",
+            "item_description": "CP1.7ES. Linkages to medical cover shemes(NHIF)",
+            "item_description_short": "CP1.7ES. Linkages to medical cover shemes(NHIF)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41177,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.8ES",
+            "item_description": "CP1.8ES. Enroll savings and credit societies/organizations.Link to financial institutions",
+            "item_description_short": "CP1.8ES. Enroll savings and credit societies/organizations.Link to financial institutions",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41178,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.9ES",
+            "item_description": "CP1.9ES. Linkages to organization supporting asset growth",
+            "item_description_short": "CP1.9ES. Linkages to organization supporting asset growth",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41179,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.10ES",
+            "item_description": "CP1.10ES. Link caregiver for bussiness support start up kit/bussiness boost",
+            "item_description_short": "CP1.10ES. Link caregiver for bussiness support start up kit/bussiness boost",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41180,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.11ES",
+            "item_description": "CP1.11ES. Linkages to technical training",
+            "item_description_short": "CP1.11ES. Linkages to technical training",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41181,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.12ES",
+            "item_description": "CP1.12ES. Referral to vocational training/apprenticeships",
+            "item_description_short": "CP1.12ES. Referral to vocational training/apprenticeships",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41182,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.13ES",
+            "item_description": "CP1.13ES. Refer for agri bussiness skills",
+            "item_description_short": "CP1.13ES. Refer for agri bussiness skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41183,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.14ES",
+            "item_description": "CP1.14ES. Referral to enterprenuership training",
+            "item_description_short": "CP1.14ES. Referral to enterprenuership training",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41184,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.15ES",
+            "item_description": "CP1.15ES. Linkage to internship and job opportunities",
+            "item_description_short": "CP1.15ES. Linkage to internship and job opportunities",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41185,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.16ES",
+            "item_description": "CP1.16ES. Link caregiver for bussiness support start up kit/bussiness boost",
+            "item_description_short": "CP1.16ES. Link caregiver for bussiness support start up kit/bussiness boost",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41186,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "afc_domain_es_services",
+            "item_category": "Economic stability services",
+            "item_id": "CP1.17ES",
+            "item_description": "CP1.17ES. Referral for legal and other administrative fees support e.g civil registratios or inheritance",
+            "item_description_short": "CP1.17ES. Referral for legal and other administrative fees support e.g civil registratios or i",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41187,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP1.1PW",
+            "item_description": "CP1.1PW. involve/engage children in community activities ie play groups",
+            "item_description_short": "CP1.1PW. involve/engage children in community activities ie play groups",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41188,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP1.2PW",
+            "item_description": "CP1.2PW. Prioritize child friendly school and community programmes e.g. clubs",
+            "item_description_short": "CP1.2PW. Prioritize child friendly school and community programmes e.g. clubs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41189,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP1.3PW",
+            "item_description": "CP1.3PW. Provide child-friendly services to the child with special needs",
+            "item_description_short": "CP1.3PW. Provide child-friendly services to the child with special needs",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41190,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP1.4PW",
+            "item_description": "CP1.4PW. Community sensitization & awareness on promotion of child participation in community activities & child rights",
+            "item_description_short": "CP1.4PW. Community sensitization & awareness on promotion of child participation in",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41191,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP2.1PW",
+            "item_description": "CP2.1PW. Linkages to social protection services e.g cash transers, bursaries etc",
+            "item_description_short": "CP2.1PW. Linkages to social protection services e.g cash transers, bursaries etc",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41192,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP2.2PW",
+            "item_description": "CP2.2PW. Referals to stakeholders for household for economic strenthening",
+            "item_description_short": "CP2.2PW. Referals to stakeholders for household for economic strenthening",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41193,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP2.3PW",
+            "item_description": "CP2.3PW. Provide asset support e.g goats, poultry",
+            "item_description_short": "CP2.3PW. Provide asset support e.g goats, poultry",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41194,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP2.4PW",
+            "item_description": "CP2.4PW. Linking the household to savings & lending groups/IGAS & startup capital",
+            "item_description_short": "CP2.4PW. Linking the household to savings & lending groups/IGAS & startup capital",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41195,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP2.5PW",
+            "item_description": "CP2.5PW. Capacity building on business skills, financial literacy",
+            "item_description_short": "CP2.5PW. Capacity building on business skills, financial literacy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41196,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP2.6PW",
+            "item_description": "CP2.6PW. Provide livelihood skills/support",
+            "item_description_short": "CP2.6PW. Provide livelihood skills/support",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41197,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP3.1PW",
+            "item_description": "CP3.1PW. Awareness and availability of support services",
+            "item_description_short": "CP3.1PW. Awareness and availability of support services",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41198,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP3.2PW",
+            "item_description": "CP3.2PW. Sensitization of the family & community",
+            "item_description_short": "CP3.2PW. Sensitization of the family & community",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41199,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP3.3PW",
+            "item_description": "CP3.3PW. Establishing accessible community reconciliation committees",
+            "item_description_short": "CP3.3PW. Establishing accessible community reconciliation committees",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41200,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP3.4PW",
+            "item_description": "CP3.4PW. Positive parenting skills",
+            "item_description_short": "CP3.4PW. Positive parenting skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41201,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP3.5PW",
+            "item_description": "CP3.5PW. Mediation & Arbitration",
+            "item_description_short": "CP3.5PW. Mediation & Arbitration",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41202,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP4.1PW",
+            "item_description": "CP4.1PW. Participation in children assemblies, capacity building, school clubs, mentorship",
+            "item_description_short": "CP4.1PW. Participation in children assemblies, capacity building, school clubs, mentorsh",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41203,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP4.2PW",
+            "item_description": "CP4.2PW. child/parent communication skills",
+            "item_description_short": "CP4.2PW. child/parent communication skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41204,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP4.3PW",
+            "item_description": "CP4.3PW. Mentorship",
+            "item_description_short": "CP4.3PW. Mentorship",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41205,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 19,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP4.4PW",
+            "item_description": "CP4.4PW. Counselling",
+            "item_description_short": "CP4.4PW. Counselling",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41206,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 20,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP5.1PW",
+            "item_description": "CP5.1PW. Sensitize caregiver/child/young person/mentor on importance of spending quality time together",
+            "item_description_short": "CP5.1PW. Sensitize caregiver/child/young person/mentor on importance of spending quali",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41207,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 21,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP5.2PW",
+            "item_description": "CP5.2PW. Positive parenting",
+            "item_description_short": "CP5.2PW. Positive parenting",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41208,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 22,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP5.3PW",
+            "item_description": "CP5.3PW. Positive discpline",
+            "item_description_short": "CP5.3PW. Positive discpline",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41209,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 23,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP6.1PW",
+            "item_description": "CP6.1PW. Effective role modelling",
+            "item_description_short": "CP6.1PW. Effective role modelling",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41210,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 24,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP7.1PW",
+            "item_description": "CP7.1PW. Arbitration & mediation",
+            "item_description_short": "CP7.1PW. Arbitration & mediation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41211,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 25,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP7.2PW",
+            "item_description": "CP7.2PW. child/caregiver/young person to be sensitized on their rights and responsibilities",
+            "item_description_short": "CP7.2PW. child/caregiver/young person to be sensitized on their rights and responsibiliti",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41212,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 26,
+            "field_name": "afc_domain_pw_services",
+            "item_category": "PSS services",
+            "item_id": "CP7.3PW",
+            "item_description": "CP7.3PW. promote caregiver child dialogue",
+            "item_description_short": "CP7.3PW. promote caregiver child dialogue",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    }
+]

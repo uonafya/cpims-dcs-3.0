@@ -7,7 +7,7 @@ from cpovc_registry.functions import (
     get_geo_list, get_all_geo_list, get_all_location_list,
     get_all_sublocation_list)
 from cpovc_registry.models import RegOrgUnit
-from .functions import get_questions
+from .functions import get_questions, get_related_geos
 # Added for CTiP
 from cpovc_main.country import OCOUNTRIES
 
@@ -1169,14 +1169,75 @@ class ResidentialSearchForm(forms.Form):
 class OVC_FT3hForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
+        self.sc_id = kwargs.pop('sub_county_id', 0)
+        self.loc_id = kwargs.pop('location_id', 0)
         super(OVC_FT3hForm, self).__init__(*args, **kwargs)
-        org_units_list___ = get_org_units_list('Please Select Unit')
+        org_units_list = get_org_units_list('Please Select Unit')
+        pslt = [('', 'Please Select')]
+        sub_county_list = pslt + list(get_geo_list(all_list, 'GDIS'))
+        ward_list = pslt + list(get_geo_list(all_list, 'GWRD'))
+        location_list = pslt
+        sublocation_list = pslt
+
+        related_geos = get_related_geos(self.sc_id, self.loc_id)
+        # Return only sub counties within this county
+        if related_geos and 'sub_counties' in related_geos and self.sc_id:
+            sub_county_list = pslt + related_geos['sub_counties']
+
+        # Return only wards within this sub county
+        if related_geos and 'wards' in related_geos and self.sc_id:
+            ward_list = pslt + related_geos['wards']
+        # Return only locations within this sub county
+        if related_geos and 'locations' in related_geos and self.sc_id:
+            location_list = pslt + related_geos['locations']
+
+        # Return only sub locations within this location - TODO
+        if related_geos and 'sub_locations' in related_geos and self.loc_id:
+            sublocation_list = pslt + related_geos['sub_locations']
+
+        occurence_subcounty = forms.ChoiceField(
+            choices=sub_county_list,
+            required=False,
+            widget=forms.Select(
+                attrs={'class': 'form-control',
+                       'id': 'occurence_subcounty',
+                       'data-parsley-required': "true",
+                       'data-parsley-group': "group0"}))
+        self.fields['occurence_subcounty'] = occurence_subcounty
+
+        occurence_ward = forms.ChoiceField(
+            choices=ward_list, label=_('Select ward'),
+            required=False,
+            widget=forms.Select(
+                attrs={'id': 'occurence_ward',
+                       'class': 'form-control',
+                       'data-parsley-group': "group0"}))
+        self.fields['occurence_ward'] = occurence_ward
+
+        occurence_location = forms.ChoiceField(
+            choices=location_list, label=_('Select Location'),
+            required=False,
+            widget=forms.Select(
+                attrs={'id': 'occurence_location',
+                       'class': 'form-control',
+                       'data-parsley-group': "group0"}))
+        self.fields['occurence_location'] = occurence_location
+
+        occurence_sublocation = forms.ChoiceField(
+            choices=sublocation_list, label=_('Select Sub-Location'),
+            required=False,
+            widget=forms.Select(
+                attrs={'id': 'occurence_sublocation',
+                       'class': 'form-control',
+                       'data-parsley-group': "group0"}))
+        self.fields['occurence_sublocation'] = occurence_sublocation
 
         report_orgunit = forms.ChoiceField(
-            choices=org_units_list___, label=_('Select orgunit'),
+            choices=org_units_list,
+            initial='0',
             widget=forms.Select(
-                attrs={'id': 'report_orgunit',
-                       'class': 'form-control',
+                attrs={'class': 'form-control',
+                       'id': 'report_orgunit',
                        'data-parsley-required': "true",
                        'data-parsley-group': "group0"}))
         self.fields['report_orgunit'] = report_orgunit
@@ -1316,44 +1377,11 @@ class OVC_FT3hForm(forms.Form):
                    'data-parsley-required': "true",
                    'data-parsley-group': "group0"}))
 
-    occurence_subcounty = forms.ChoiceField(
-        choices=sub_county_list,
-        required=False,
-        widget=forms.Select(
-            attrs={'class': 'form-control',
-                   'id': 'occurence_subcounty',
-                   'data-parsley-required': "true",
-                   'data-parsley-group': "group0"}))
-
-    occurence_ward = forms.ChoiceField(
-        choices=ward_list, label=_('Select ward'),
-        required=False,
-        widget=forms.Select(
-            attrs={'id': 'occurence_ward',
-                   'class': 'form-control',
-                   'data-parsley-group': "group0"}))
-
     occurence_village = forms.CharField(
         required=False, widget=forms.TextInput(
             attrs={'placeholder': _('Village/Estate'),
                    'class': 'form-control',
                    'id': 'occurence_village',
-                   'data-parsley-group': "group0"}))
-
-    occurence_location = forms.ChoiceField(
-        choices=location_list, label=_('Select Location'),
-        required=False,
-        widget=forms.Select(
-            attrs={'id': 'occurence_location',
-                   'class': 'form-control',
-                   'data-parsley-group': "group0"}))
-
-    occurence_sublocation = forms.ChoiceField(
-        choices=sublocation_list, label=_('Select Sub-Location'),
-        required=False,
-        widget=forms.Select(
-            attrs={'id': 'occurence_sublocation',
-                   'class': 'form-control',
                    'data-parsley-group': "group0"}))
 
     # About Child Info

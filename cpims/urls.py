@@ -24,6 +24,7 @@ from cpovc_help import urls as help_urls
 from notifications import urls as noti_urls
 from cpovc_ctip import urls as ctip_urls
 from cpovc_afc import urls as ac_urls
+from cpovc_stat_inst import urls as si_urls
 
 from django.views.generic import TemplateView
 # For dashboard
@@ -51,6 +52,8 @@ urlpatterns = [
     path('help/', include(help_urls)),
     path('forms/ctip/', include(ctip_urls)),
     path('forms/altcare/', include(ac_urls)),
+    # SI Module
+    path('forms/si/', include(si_urls)),
     path('notifications/', include(noti_urls, namespace='notifications')),
     re_path(r'^dashboard/(?P<did>[A-Z{2}]+)/$',
             registry_views.dashboard, name='dashboard'),

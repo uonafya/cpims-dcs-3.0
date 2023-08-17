@@ -139,7 +139,7 @@
                                 <tr>
                                 	<td></td>
                                     <td colspan="5">
-                                        <strong>Place of Occurence</strong></strong>
+                                        <strong>PLACE OF OCCURENCE</strong></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -150,6 +150,15 @@
                                     <td>{{ ovcgeo.occurence_subcounty.area_id|gen_areaname }}</td>
                                     <td><strong>Ward</strong></td>
                                     <td>{% if ovcgeo.occurence_ward %}{{ ovcgeo.occurence_ward|gen_areaname }}{% else %}N/A{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <strong>Location</strong><br />                                        
+                                    </td>
+                                    <td>{% if ovclocs.report_location %}{{ ovclocs.report_location.area_name }}{% else %}N/A{% endif %}</td>
+                                    <td><strong>Sub location</strong></td>
+                                    <td>{% if ovclocs.report_sublocation %}{{ ovclocs.report_sublocation.area_name }}{% else %}N/A{% endif %}</td>
                                 </tr>
                                 <tr>
                                 	<td></td>
@@ -163,7 +172,7 @@
                                 <tr>
                                 	<td></td>
                                     <td colspan="5">
-                                        <strong>Place of Reporting</strong>
+                                        <strong>PLACE OF REPORTING</strong>
                                     </td>
                                 </tr>
                                 <tr>

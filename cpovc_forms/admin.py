@@ -371,7 +371,7 @@ class OVCCaseLoadAdmin(admin.ModelAdmin):
 
 admin.site.register(OVCCaseLoadView, OVCCaseLoadAdmin)
 
-'''
+
 class OVCCaseLocationAdmin(admin.ModelAdmin):
     """Admin back end for Geo data management."""
 
@@ -389,7 +389,7 @@ class OVCCaseLocationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OVCCaseLocation, OVCCaseLocationAdmin)
-'''
+
 
 class OVCCaseInformationAdmin(admin.ModelAdmin):
     """Admin back end for Geo data management."""

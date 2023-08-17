@@ -353,9 +353,9 @@ def get_settings(request, param='', filter_id=''):
         if param_id:
             itms = SetupList.objects.filter(
                 item_id=param_id, field_name__istartswith='afc_domain')
-            field_name = itms[0].field_name
+            # field_name = itms[0].field_name
             field_sub_cat = itms[0].item_sub_category
-            print('field name', field_name, field_sub_cat)
+            # print('field name', field_name, field_sub_cat)
             goals_id = '%s_goals' % (field_sub_cat)
             gaps_id = '%s_gaps' % (field_sub_cat)
             services_id = '%s_services' % (field_sub_cat)
@@ -365,7 +365,7 @@ def get_settings(request, param='', filter_id=''):
                 item_id = item.item_id
                 item_name = item.item_description
                 item_field = item.field_name
-                print('Field', item_field)
+                # print('Field', item_field)
                 itm_dict = {'item_id': item_id, 'item_name': item_name}
                 if item_field == goals_id:
                     goals.append(itm_dict)

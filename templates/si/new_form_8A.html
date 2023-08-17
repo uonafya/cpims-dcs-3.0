@@ -1,0 +1,731 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care - Forms </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ case.care_type|gen_value:vals }} - {{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if care %}
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% else %}
+                    <a href="{% url 'new_alt_care' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% endif %}
+                    </span>
+                    Case No: {{ case.case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-8A" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Child Names<span class="asteriskField">*</span></label>
+                        <div class="col-md-3">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <label class="col-md-2 control-label">Sex<span class="asteriskField">*</span></label>
+                        <div class="col-md-3">{{ case.person.sex_id|gen_value:vals }}</div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"> Date of Birth<span class="asteriskField">*</span></label>
+                        <div class="col-md-3">
+                            {{ case.person.date_of_birth }}
+                        </div>
+                        <label class="col-md-2 control-label">Age<span class="asteriskField">*</span></label>
+                        <div class="col-md-3">{{ case.person.age }}</div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <hr>
+                    <div id="wizard">
+                        <ol>
+                            <li>
+                                A.&nbsp;EDUCATION
+                                <small>Education.</small>
+                            </li>
+                            <li>
+                                B. PROTECTION AND SAFETY
+                                <small>Protection and safety</small>
+                            </li>
+                            <li>
+                                C. PSYCHOSOCIAL WELL-BEING
+                                <small>Psychosocial Well-Being and Community Belonging</small>
+                            </li>
+                            <li>
+                                D. HEALTH AND DEVELOPMENT
+                                <small>Health and development</small>
+                            </li>
+                            <li>
+                                E. RELATIONSHIP AND ATTACHMENT
+                                <small>Young Person–Caregiver/Mentor Relationship and Attachment.</small>
+                            </li>
+                            <li>
+                                F. ECONOMIC STABILITY
+                                <small>Economic stability.</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div>
+                        <fieldset>
+                            <legend class="pull-left width-full">Education</legend>
+                            <hr>
+                            <div class="note note-info">
+                                <h4 class="block">Education: Accessing, attending and progressing.</h4>
+                                <p>The young person is accessing and regularly attending an education program; performing to a level that is similar to, or that is improved, as compared to his/her performance before placement; is progressing appropriately and enjoys education.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8 pull-left"> 1.1 The Young Person can move safely to education facility/school. (Note. If child cannot move safely, then case cannot be closed.)<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A11_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A11_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.2 There is evidence of education program enrolment (i.e., receipt)<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A12_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A12_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.3 The Young Person’s report card confirms regular attendance (i.e., not missing more than 5 days per month) and shows appropriate progression.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A13_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A13_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.4 The Young Person has all the required education materials (e.g., uniform, shoes, books, toolkits).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A14_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A14_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.5 The Young Person reports feeling positive about his/her school or college performance.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A15_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A15_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.6 The Young Person reports enjoying education.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A16_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A16_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.7 The school has hygiene facilities inclusive for adolescent girls. <small>(Hint: Observe and ask Young Person directly to confirm that menstruation does not present a barrier to attendance. This question is not applicable to boys; therefore, score 1.)</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A17_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A17_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Education: Inclusive.</h4>
+                                <p>All young persons, including those with a disability or disabilities, are attending an education institution that is inclusive and equipped to meet the unique needs of the child. Note. Caseworker is to verify information provided by the young person with teachers, the education facility, or both.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 2.1 The school is physically accessible for the child (including classrooms, washrooms, recreational areas, and so forth).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A21_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A21_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 2.2 The teacher is aware of Young Person’s special needs and/or circumstances.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A22_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A22_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 2.3 The teachers are using inclusive teaching practices to meet the Young Person’s specific needs or circumstances.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A23_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A23_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">2.4 Stigma is not a barrier to Young Person attending school.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">{{ form.qf8A24_rdo }}</div>
+                                <div class="col-md-2"><span id="qf8A24_rdo_error"></span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Education domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="ed-totals"></div>
+                                <div class="col-md-1" id="ids"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!-- end wizard step-1 -->
+                    <!-- begin wizard step-2 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">PROTECTION AND SAFETY</legend>
+                        <hr>
+                        <div class="note note-info">
+                            <h4 class="block">Protection and Safety: Safe.</h4>
+                            <p>young person is not currently experiencing nor is in immediate danger of violence at home, at school or in the community. A young person who has experienced violence has received appropriate and beneficial support services (e.g., health, protection, psychosocial, legal).</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">3.1 The Young Person is currently free of violence, exploitation or exposure to violence at home, at school, in the community, and online. <small>(Note. If there is presence of violence, initiate child protection reporting protocol.)</small><span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A31_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A31_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">3.2 The Young Person can articulate appropriate ways to report and respond to violence.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A32_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A32_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">3.3 The Young Person can clearly articulate and give examples of how to manage stress in nonviolent manner.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A33_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A33_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">3.4 The Young Person can articulate appropriate ways to keep himself/herself safe.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A34_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A34_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">3.5 The Young Person can report an absence of violent discipline.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A35_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A35_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">3.6 When there has been violence, the case plan and referral documentation confirm services have been accessed and met the intended purpose.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A36_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A36_rdo_error"></span></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-8"><b>Total score for Safe domain</b><span class="asteriskField">*</span></label>
+                            <div class="col-md-3" id="pr-totals"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-2 -->
+                    <!-- begin wizard step-3 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">PSYCHOSOCIAL WELL-BEING</legend>
+                        <hr>
+                        <div class="note note-info">
+                            <h4 class="block">Psychosocial Well-Being and Community Belonging: Self-esteem and resilience</h4>
+                            <p>young person expresses healthy self-esteem, self-worth and an overall sense of positive identity. He/she demonstrates confidence in problem solving and use of positive coping strategies, and expresses hope for the future.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">4.1 The Young Person can provide examples of how he/she problem solves in constructive ways.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A41_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A41_rdo_error"></span></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">4.2 The Young Person is able to provide examples of how he/she independently solved challenges in his/her life in the past 3 months.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A42_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A42_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">4.3 The Young Person displays an overall positive demeanor.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A43_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A43_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">4.4 The Young Person expresses a vision and his/her hopes for his/her family’s future life.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A44_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A44_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">4.5 There is an absence of (a) extreme sadness all the time, (b) no interest in enjoyable activities, (c) change of appetite for food.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A45_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A45_rdo_error"></span></div>
+                        </div>
+                        <div class="note note-info">
+                            <h4 class="block">Psychosocial Well-Being and Community Belonging: Accessing social support services.</h4>
+                            <p>young person has access to social protection services. All young persons have been registered with the Department of Civil Registration.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">5.1 The Young Person is able to articulate where to access support services for himself/herself.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A51_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A51_rdo_error"></span></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">5.2 Where services were needed, the Young Person is able to access them.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A52_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A52_rdo_error"></span></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">5.3 The case plan and referral documentation confirm services have been accessed and met for the intended purpose.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A53_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A53_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">5.4 The Young Person has a national identification card (ID), where necessary.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A54_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A54_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">5.5 The Young Person has a birth certificate.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A55_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A55_rdo_error"></span></div>
+                        </div>
+
+                        <div class="note note-info">
+                            <h4 class="block">Psychosocial Well-Being and Community Belonging: Accepted</h4>
+                            <p>The young person participates and is included in daily activities. He/she regularly engages with mentor, other adults and peers within the community. He/she has a sense of shared identity with his/her community and a sense of belonging to the community, and can identify individuals or groups recognized as providing social and emotional support.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">6.1 The Young Person participated in a community activity in the past 3 months (e.g., extended family, football matches, fundraising, wedding, funeral).<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A61_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A61_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">6.2 The Young Person is able to participate in daily activities in the community (e.g., playing or talking with other family members or friends).<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A62_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A62_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">6.3 The Young Person is a member of a community group (e.g., church, mosque, peer support group, adolescent club, adolescent savings group).<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A63_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A63_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">6.4 The Young Person can identify people in his/her community that he/she can talk to and/or seek help from.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A64_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A64_rdo_error"></span></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-8"><b>Total score for Psychosocial domain</b><span class="asteriskField">*</span></label>
+                            <div class="col-md-3" id="ps-totals"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-3 -->
+                    <!-- begin wizard step-4 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">HEALTH AND DEVELOPMENT</legend>
+                        <hr>
+                        <div class="note note-info">
+                            <h4 class="block">Health and Development: Nourished.</h4>
+                            <p>In the past 6 months, young person has been able to get a minimum of two meals per day, and the meals meet the nutritional needs of the all members of the household.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">7.1 The Young Person eats a balanced meal (must have proteins, carbohydrates and vitamins) at least twice per day.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A71_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A71_rdo_error"></span></div>
+                        </div>
+                        <div class="note note-info">
+                            <h4 class="block">Health and Development: Developing.</h4>
+                            <p>The young person is meeting physical and cognitive developmental milestones, or when these milestones are not being met, is accessing appropriate services to support development.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">8.1 The Young Person is aware of and able to articulate adolescent development changes (e.g., physical, emotional, identity).<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A81_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A81_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">8.2 If Young Person has a developmental delay, the case plan and referral documentation confirm that services have been accessed and have met the intended purpose.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A82_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A82_rdo_error"></span></div>
+                        </div>
+
+                        <div class="note note-info">
+                            <h4 class="block">Health and Development: Accessing.</h4>
+                            <p>The young person has access to health information and services, and is able to use services as required and without delay to ensure maintenance of overall good physical health. He/she has access to health insurance, where available.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">9.1 If the Young Person was referred for treatment, services were accessed and met the intended purpose. (Hint: Look for evidence of complete referral, such as returned referral slips, report from caregiver/mentor/service providers.)<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A91_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A91_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">9.2 If the Young Person has a chronic illness or disability, he/she is conversant in her/his treatment regimen, as necessary.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A92_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A92_rdo_error"></span></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-8"><b>Total score for Health domain</b><span class="asteriskField">*</span></label>
+                            <div class="col-md-3" id="hd-totals"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-4 -->
+                    <!-- begin wizard step-5 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">RELATIONSHIP AND ATTACHMENT</legend>
+                        <hr>
+                        <div class="note note-info">
+                            <h4 class="block">Young Person–Caregiver/Mentor Relationship and Attachment: Quality time and positive communication</h4>
+                            <p>The young person spends consistent time with caregiver/mentor whom he/she values and enjoys. Communication between the young person and caregiver/mentor is frequent and open. Both the young person and caregiver/mentor feel understood and feel satisfied with the communication.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">10.1 The Young Person feels his/her mentor know his/her likes, dislikes and what makes him/her happy or sad.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A101_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A101_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">10.2 The Young Person expresses that he/she spends time with his/her caregiver/mentor and enjoys this time. <small>(Hint: Probe into what kind of activities they do together and how frequently, and observe the Young Person’s nonverbal cues.).</small><span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A102_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A102_rdo_error"></span></div>
+                        </div>
+
+                        <div class="note note-info">
+                            <h4 class="block">Young Person–Caregiver/Mentor Relationship and Attachment: Consistency.</h4>
+                            <p>There is consistency in the relationship between the young person and caregiver/mentor in terms of level of supervision, responsiveness, boundaries and discipline that leads to increasing trust.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">11.1 If the Young Person was sick in the past 3 months, he/she confirms that his/her caregiver/mentor took care of him/her.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A111_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A111_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">11.2 The Young Person seeks support and comfort from the caregiver/mentor in response to stressors.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A112_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A112_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">11.3 The Young Person easily articulates the rules of the house and the consequences should the rules be broken.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A113_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A113_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">11.4 The Young Person feels that rules and consequences are applied consistently.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A114_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A114_rdo_error"></span></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-8"><b>Total score for Relationship & Attachment domain</b><span class="asteriskField">*</span></label>
+                            <div class="col-md-3" id="ra-totals"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                    <!-- end wizard step-5 -->
+                    <!-- begin wizard step-6 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">ECONOMIC STABILITY</legend>
+                        <hr>
+                        <div class="note note-info">
+                            <h4 class="block">Economic Stability: Stable</h4>
+                            <p>During the past 6 months, the young person in supported independent living (SIL) or supported child-headed household (CHH) has been able to meet the costs of basic needs (e.g., rent expenses, clothes) over the past 6 months. The young person has a regular savings and basic financial literacy (e.g., planning, saving, budgeting, responsible spending). The young person has been able to anticipate and meet emergency expenses (e.g., medical expenses, drought, flood) in the past 6 months via savings or access to loan or credit. Note. Not applicable for young person not in SIL or CHH.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-8">12.1 The Young Person has a stable source of income (e.g., business, formal employment, cash transfer) and/or productive assets (e.g. livestock, poultry).<br> <small>(Note. This is not applicable for Young Person younger than age 18 years.)</small><span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A121_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A121_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">12.2 The Young Person has regular savings (e.g., active participation in a village savings and loan association or Savings and Internal Lending Community).<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A122_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A122_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">12.3 The Young Person can provide examples of how he/she met regular and planned expenses (e.g., food, clothing, shelter, school) in the past 3 months.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A123_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A123_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">12.4 The Young Person can provide examples of how he/she met emergency expenses in the past 3 months.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A124_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A124_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">12.5 The Young Person was able to pay all the required medical expenses in the past 3 months.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A125_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A125_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">12.6 The Young Person can articulate plans to meet emergency expenses for the household.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A126_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A126_rdo_error"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8">12.7 The Young Person can articulate plans for regular (e.g., food) and periodic (e.g., school fees) expenses.<span class="asteriskField">*</span></label>
+                            <div class="col-md-2">{{ form.qf8A127_rdo }}</div>
+                            <div class="col-md-2"><span id="qf8A127_rdo_error"></span></div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-md-8"><b>Total score for Stable domain</b><span class="asteriskField">*</span></label>
+                            <div class="col-md-3" id="es-totals"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </fieldset>
+                    </div>
+                </div>
+                    <!-- end wizard step-6 -->
+                    <div class="form-group">
+                        <div class="col-md-1"></div>
+                        
+                        <div class="col-md-10">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th colspan="5"><label class="control-labels">Total Benchmark Scores<span class="asteriskField">*</span></label><br></th>
+                                </tr>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Domain</th>
+                                    <th>Total Score</th>
+                                    <th>Scored</th>
+                                    <th>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>1</td>
+                                    <td>Education</td>
+                                    <td>11</td>
+                                    <td class="ed-totals-table"></td>
+                                    <td class="ed-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>2</td>
+                                    <td>Protection & Safety</td>
+                                    <td>6</td>
+                                    <td class="pr-totals-table"></td>
+                                    <td class="pr-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>3</td>
+                                    <td>Psychosocial Well-Being</td>
+                                    <td>14</td>
+                                    <td class="ps-totals-table"></td>
+                                    <td class="ps-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>4</td>
+                                    <td>Health and Development</td>
+                                    <td>5</td>
+                                    <td class="hd-totals-table"></td>
+                                    <td class="hd-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>5</td>
+                                    <td>Relationship and Attachment</td>
+                                    <td>6</td>
+                                    <td class="ra-totals-table"></td>
+                                    <td class="ra-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>6</td>
+                                    <td>Economic Stability</td>
+                                    <td>7</td>
+                                    <td class="es-totals-table"></td>
+                                    <td class="es-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <th></th>
+                                    <th>Total Score</th>
+                                    <th>49</th>
+                                    <th class="totals-table"></th>
+                                    <th class="totals-status"></th>
+                                  </tr>                                
+                                </tbody>
+                                </table>
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Date review completed<span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-md-4"><span class="asteriskField">*</span></label>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+
+$(document).ready(function() {
+    $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard").bwizard();
+
+
+    benchmarks();
+
+    $("form input:radio").change(function (event) {
+        benchmarks();
+        console.log(event.target.id);
+   });
+
+    
+    function benchmarks(){
+
+        var bmarks = 0;
+        var ed_marks = 0;
+        var pr_marks = 0;
+        var ps_marks = 0;
+        var hd_marks = 0;
+        var ra_marks = 0;
+        var es_marks = 0;
+
+        var ed = ['qf8A11', 'qf8A12', 'qf8A13', 'qf8A14', 'qf8A15', 'qf8A16', 
+                    'qf8A17', 'qf8A21', 'qf8A22', 'qf8A23', 'qf8A24' ];
+        var pr = ['qf8A31', 'qf8A32', 'qf8A33', 'qf8A34', 'qf8A35', 'qf8A36' ];
+        var ps = ['qf8A41','qf8A42','qf8A43','qf8A44','qf8A45','qf8A51',
+                    'qf8A52','qf8A53','qf8A54','qf8A55','qf8A61','qf8A62','qf8A63','qf8A64' ];
+        var hd = ['qf8A71','qf8A81','qf8A82','qf8A91','qf8A92'];
+        var ra = ['qf8A101', 'qf8A102', 'qf8A111', 'qf8A112', 'qf8A113', 'qf8A114' ];
+        var es = ['qf8A121', 'qf8A122', 'qf8A123', 'qf8A124', 'qf8A125', 'qf8A126', 'qf8A127'];
+
+        $("#new-form-8A input[type=radio]:checked").each(function(event) {
+            if(this.value == "AYES" && this.checked == true){
+                console.log('Yes option '+ this.name + ' >> ' +this.value)
+                 bmarks = 1;
+            }else if(this.value == "ANNA" && this.checked == true){
+                console.log('Not Applicable'+ this.name + ' >> ' +this.value)
+                 bmarks = 1;
+            }else if (this.value == "ANNO" && this.checked == true){
+                console.log('No option '+ this.name + ' >> ' +this.value)
+                bmarks = 0
+            }
+
+            var qid = this.id.split('_')[1];
+            if (ed.includes(qid)){
+                ed_marks += bmarks;
+            }else if (pr.includes(qid)){
+                pr_marks += bmarks;
+            }else if (ps.includes(qid)){
+                ps_marks += bmarks;
+            }else if (hd.includes(qid)){
+                hd_marks += bmarks;
+            }else if (ra.includes(qid)){
+                ra_marks += bmarks;
+            }else if (es.includes(qid)){
+                es_marks += bmarks;
+            }
+            console.log('Benchmark Score' + qid + ":" + bmarks);
+        });
+
+        var ed_grad = (ed_marks < 11) ? " Not Ready for Closure" :" Ready for Closure";
+        var pr_grad = (pr_marks < 6) ? " Not Ready for Closure" :" Ready for Closure";
+        var ps_grad = (ps_marks < 13) ? " Not Ready for Closure" :" Ready for Closure";
+        var hd_grad = (hd_marks < 5) ? " Not Ready for Closure" :" Ready for Closure";
+        var ra_grad = (ra_marks < 6) ? " Not Ready for Closure" :" Ready for Closure";
+        var es_grad = (es_marks < 6) ? " Not Ready for Closure" :" Ready for Closure";
+
+        var ed_score = (ed_marks < 11) ? 0 : 1;
+        var pr_score = (pr_marks < 6) ? 0 : 1;
+        var ps_score = (ps_marks < 13) ? 0 : 1;
+        var hd_score = (hd_marks < 5) ? 0 : 1;
+        var ra_score = (ra_marks < 6) ? 0 : 1;
+        var es_score = (es_marks < 6) ? 0 : 1;
+
+        var total_score = (ed_score + pr_score + ps_score + hd_score + ra_score + es_score)
+
+        if (total_score >= 3 && ed_score == 1 && pr_score == 1 && ra_score == 1){
+            var total_status = 'Ready for Closure';
+        }else {
+            var total_status = 'Not Ready for Closure';
+        }
+
+        $("#ed-totals").html("<b>" + ed_marks + " / 11 : " + ed_grad + "<b>");         
+        $("#pr-totals").html("<b>" + pr_marks + " / 6 : " + pr_grad + "<b>");         
+        $("#ps-totals").html("<b>" + ps_marks + " / 14 : " + ps_grad + "<b>");         
+        $("#hd-totals").html("<b>" + hd_marks + " / 5 : " + hd_grad + "<b>");         
+        $("#ra-totals").html("<b>" + ra_marks + " / 6 : " + ra_grad + "<b>");         
+        $("#es-totals").html("<b>" + es_marks + " / 7 : " + es_grad + "<b>");
+
+        $(".ed-totals-table").html(ed_marks);
+        $(".pr-totals-table").html(pr_marks);        
+        $(".ps-totals-table").html(ps_marks);         
+        $(".hd-totals-table").html(hd_marks);         
+        $(".ra-totals-table").html(ra_marks);
+        $(".es-totals-table").html(es_marks);        
+        $('.totals-table').html(total_score + ' (By domain)');
+        //Status
+        $(".ed-totals-status").html(ed_grad);
+        $(".pr-totals-status").html(pr_grad);        
+        $(".ps-totals-status").html(ps_grad);         
+        $(".hd-totals-status").html(hd_grad);         
+        $(".ra-totals-status").html(ra_grad);
+        $(".es-totals-status").html(es_grad);        
+        $('.totals-status').html(total_status);
+
+        }
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,949 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Alternative Care - Forms </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">{{ case.care_type|gen_value:vals }} - {{ form_name }}</h4>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if care %}
+                    <a href="{% url 'view_alt_care' care_id=case.care_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% else %}
+                    <a href="{% url 'new_alt_care' case_id=case.case_id|stringformat:'s' %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    {% endif %}
+                    </span>
+                    Case No: {{ case.case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Child Names<span class="asteriskField">*</span></label>
+                        <div class="col-md-1">
+                            {{ case.person.first_name }} {{ case.person.surname }}
+                        </div>
+                        <label class="col-md-2 control-label">Sex<span class="asteriskField">*</span></label>
+                        <div class="col-md-1">{{ case.person.sex_id|gen_value:vals }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"> Date of Birth<span class="asteriskField">*</span></label>
+                        <div class="col-md-1">
+                            {{ case.person.date_of_birth }}
+                        </div>
+                        <label class="col-md-2 control-label">Age<span class="asteriskField">*</span></label>
+                        <div class="col-md-1">{{ case.person.age }}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    
+                    <hr>
+                    <div id="wizard">
+                        <ol>
+                            <li>
+                                A.&nbsp;EDUCATION
+                                <small>Education access and inclusion</small>
+                            </li>
+                            <li>
+                                B. PROTECTION AND SAFETY
+                                <small>Protection and safety</small>
+                            </li>
+                            <li>
+                                C. PSYCHOSOCIAL WELL-BEING
+                                <small>Psychosocial Well-Being and Community Belonging</small>
+                            </li>
+                            <li>
+                                D. HEALTH AND DEVELOPMENT
+                                <small>Health and development</small>
+                            </li>
+                            <li>
+                                E. RELATIONSHIP AND ATTACHMENT
+                                <small>Child – Caregiver / Mentor Relationship and Attachment.</small>
+                            </li>
+                            <li>
+                                F. ECONOMIC STABILITY
+                                <small>Economic stability.</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div>
+                        <fieldset>
+                            <legend class="pull-left width-full">Education</legend>
+                            <hr>
+                            <div class="note note-info">
+                                <h4 class="block">Education: Accessing, attending and progressing.</h4>
+                                <p>The child of school-going age or young adult is accessing and regularly attending an education program; performing to a level that is similar to, or that is improved, as compared to his/her performance before placement; is progressing appropriately and enjoys education.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8 pull-left"> 1.1 The child can move safely to education facility/school. (Note. If child cannot move safely, then case cannot be closed.)<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A11_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A11_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.2 There is evidence of school enrolment (i.e., receipt)<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A12_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A12_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.3 The child’s report card confirms regular attendance (i.e., not missing more than 5 days per month) and shows appropriate progression.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A13_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A13_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.4 The child has all required uniform, shoes, books and so on.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A14_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A14_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.5 The child reports feeling positive about his/her school performance.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A15_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A15_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.6 The child reports enjoying education.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A16_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A16_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 1.7 The school has hygiene facilities inclusive for adolescent girls. <small>(Hint: Observe and ask child directly to confirm that menstruation does not present a barrier to attendance. This question is not applicable to boys; therefore, score 1.)</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A17_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A17_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Education: Inclusive.</h4>
+                                <p>All children, including those with a disability or disabilities, are attending an education institution that is inclusive and equipped to meet the unique needs of the child.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 2.1 The school is physically accessible for the child (including classrooms, washrooms, recreational areas, etc.).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A21_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A21_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 2.2 The child’s teacher is aware of the child’s special needs and/or circumstances.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A22_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A22_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8"> 2.3 The teachers are using inclusive teaching practices to meet the child’s specific needs or circumstances.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A23_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A23_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">2.4 Stigma is not a barrier to the child attending school.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A24_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A24_rdo_error"></span></div>
+                            </div>
+                           <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Education domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="ed-totals"></div>
+                                <div class="col-md-1" id="ids"></div>
+                            </div>                            
+                        </fieldset>
+                    </div>
+                    <!-- end wizard step-1 -->
+                    <!-- begin wizard step-2 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">PROTECTION AND SAFETY</legend>
+                            <hr>
+                            <div class="note note-info">
+                                <h4 class="block">Protection and Safety: Based on information from caregivers.</h4>
+                                <p>Children and caregivers are not currently experiencing nor are in immediate danger of violence at home, at school or in the community. Children who have experienced violence have received appropriate and beneficial support services (e.g., health, protection, psychosocial, legal).</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.1 The caregiver is currently free of violence, exploitation or exposure to violence at home, at school, in the community and online.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A31_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A31_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.2 The caregiver can articulate appropriate ways to report and respond to violence.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A32_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A32_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.3 The caregiver can articulate positive and negative forms of discipline.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A33_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A33_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.4 The caregiver can clearly articulate and give examples of how to manage stress in a nonviolent manner..<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A34_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A34_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.5 When there has been violence, the case plan and referral documentation confirm services have been accessed and met the intended purpose.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A35_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A35_rdo_error"></span></div>
+                            </div>
+                            <div class="note note-info">
+                                <h4 class="block">Protection and Safety: Based on information from the child.</h4>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.6 The child is currently free of violence, exploitation or exposure to violence at home, at school, in the community and online. <small>(Note: If there is presence of violence, initiate child protection reporting protocol.)</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A36_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A36_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.7 If child aged is 5 years or older, the child can articulate appropriate ways to report violence.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A37_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A37_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">3.8 The child can report an absence of violent discipline.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A38_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A38_rdo_error"></span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Safe domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="pr-totals"></div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            </fieldset>
+                    </div>
+                    <!-- end wizard step-2 -->
+                    <!-- begin wizard step-3 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">PSYCHOSOCIAL WELL-BEING</legend>
+                            <hr>
+                            <div class="note note-info">
+                                <h4 class="block">Psychosocial Well-Being and Community Belonging: Self-esteem and resilience</h4>
+                                <p>Children and caregivers express healthy self-esteem, self-worth and an overall sense of positive identity. They demonstrate confidence in problem solving and use of positive coping strategies, and express hope for the future.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">4.1 The caregiver can provide examples of how he/she problem solves in constructive ways.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A41_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A41_rdo_error"></span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8">4.2 The caregiver displays an overall positive demeanor.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A42_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A42_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">4.3 The caregiver can express a vision and his/her hopes for his/her family’s future life.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A43_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A43_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">4.4 The child displays an overall positive demeanor, which is confirmed by the caregiver or siblings.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A44_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A44_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">4.5 There is an absence of (a) extreme sadness all the time, (b) no interest in play or enjoyable activities, (c) change of appetite for food.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A45_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A45_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">4.6 If the child is 5 years or older, the child is able to express his/her hopes for his/her future life.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A46_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A46_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Psychosocial Well-Being and Community Belonging: Accessing social support services.</h4>
+                                <p>Children and caregivers have access to social protection services. All children have been registered with the Department of Civil Registration.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8">5.1 The caregiver is able to articulate where to access support services for himself/herself and his/her family.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A51_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A51_rdo_error"></span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8">5.2 When services were needed, the caregiver was able to access them.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A52_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A52_rdo_error"></span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8">5.3 The case plan and referral documentation confirm services have been accessed and met for the intended purpose.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A53_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A53_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">5.4 The caregiver has a national identification card (ID).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A54_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A54_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">5.5 The child has a birth certificate.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A55_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A55_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Psychosocial Well-Being and Community Belonging: Accepted</h4>
+                                <p>Children and caregivers participate and are included in daily activities. They regularly engage with caregivers, mentor, other adults and peers within the community. They have a sense of shared identity with their community and a sense of belonging to the community, and can identify individuals or groups recognized as providing social and emotional support.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">6.1 The caregiver has participated in a community activity in the past 3 months (e.g. fundraising, wedding, funeral, baraza).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A61_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A61_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">6.2 The caregiver is a member of any community group (e.g., church, mosque, caregiver group, savings group).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A62_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A62_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">6.3 The child can identify and name people in his/her community to whom the child can talk and/or from whom he/she can seek help.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A63_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A63_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">6.4 The child is able to participate in daily activities in the community (e.g., eating, playing, talking with other family members or friends).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A64_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A64_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">6.5 The child has participated in a community activity in the past 3 months (e.g., extended family gatherings, football match, religious services).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A65_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A65_rdo_error"></span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Psychosocial domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="ps-totals"></div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            </fieldset>
+                    </div>
+                    <!-- end wizard step-3 -->
+                    <!-- begin wizard step-4 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">HEALTH AND DEVELOPMENT</legend>
+                        <hr>
+                           <div class="note note-info">
+                                <h4 class="block">Health and Development: Nourished.</h4>
+                                <p>In the past 6 months, family has been able to provide a minimum of two meals per day to all household members, and the meals meet the nutritional needs of all members of the household.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">7.1 The child eats balanced meals at least twice per day.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A71_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A71_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">7.2 All members of the family eat balanced meals at least twice per day.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A72_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A72_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Health and Development: Developing.</h4>
+                                <p>The child is meeting physical and cognitive developmental milestones, or when these milestones are not being met, is accessing appropriate services to support development.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">8.1 If the child is 5 years or younger, the caregiver confirms the child is walking, talking and showing increasingly independent behaviors at a level similar to that of his/her age mates in the community.<small>(Hint: Also, directly observe the child’s development.)</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A81_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A81_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">8.2 If caregiver notes (and observation confirms) developmental delays, is there evidence of accessing appropriate support services (i.e., a copy of receipt of services received, confirmation from service provider of services delivered)?<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A82_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A82_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">8.3 If child is between 6 years and 9 years old, the caregiver confirms the child is physically and mentally developing in a manner similar to his/her age mates in the community.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A83_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A83_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">8.4 If there are concerns about the child’s physical or mental development, the child has accessed services.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A84_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A84_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Health and Development: Accessing.</h4>
+                                <p>Children and caregivers have access to health information and services, and are able to use services as required and without delay to ensure maintenance of overall good physical health. They have access to health insurance, where available. Children younger than age 5 years are fully immunized per the Kenya Expanded Program for Immunization (KEPI).</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">9.1 If the caregiver or any child in the household was referred for treatment, services were accessed and met the intended purpose. <small>(Hint: Look for evidence of a complete referral, such as returned referral slips, report from child/caregiver/service providers.)</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A91_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A91_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">9.2 The child is up to date on immunizations. (Hint: Look for the immunization card to confirm.)<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A92_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A92_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">9.3 If the caregiver, any child or any member of the household has a chronic illness or disability, the caregiver is conversant in the treatment/therapy regimen, as necessary.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A93_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A93_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">9.4 All members of the household are free from substance abuse.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A94_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A94_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">9.5 If the child has a chronic illness or disability and is age 10 years or older, the child is conversant in her/his treatment regimen, as necessary.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A95_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A95_rdo_error"></span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Health domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="hd-totals"></div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!-- end wizard step-4 -->
+                    <!-- begin wizard step-5 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">RELATIONSHIP AND ATTACHMENT</legend>
+                        <hr>
+                            <div class="note note-info">
+                                <h4 class="block">Child – Caregiver / Mentor Relationship and Attachment: Quality time and positive communication</h4>
+                                <p>The child spends consistent time with the caregiver whom he/she values and enjoys. Communication between the child and the caregiver or between the young adult and the mentor is frequent and open. Both child and caregiver feel understood and feel satisfied with the communication.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8">10.1 The caregiver can describe the child’s dislikes, what makes the child happy or sad, school performance, names of friends, and so on.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A101_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A101_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">10.2 The caregiver provides examples of how and when he/she spends time with the child in age-appropriate way.</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A102_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A102_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">10.3 The caregiver speaks of the child with general positive regard in an age-appropriate way.</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A103_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A103_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">10.4 If the child is age 5 years or older, the child reports feeling his/her caregiver know his/her likes, dislikes, what makes him/her happy or sad.</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A104_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A104_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">10.5 If the child is age 5 years or older, the child reports that he/she spends time with his/her caregiver and enjoys this time. (Hint: Probe into what kind of activities they do together and how frequently, and observe the child’s nonverbal cues.)</small><span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A105_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A105_rdo_error"></span></div>
+                            </div>
+
+                            <div class="note note-info">
+                                <h4 class="block">Child – Caregiver / Mentor Relationship and Attachment: Consistency.</h4>
+                                <p>There is consistency in the relationship between the child and caregiver in terms of level of supervision, responsiveness, boundaries, and discipline that leads to increasing trust.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.1 The caregiver applies household rules and consequences for breaking the rules consistently across all children in the household.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A111_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A111_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.2 The caregiver involves children to an ability and age-appropriate level in decisions that affect them.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A112_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A112_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.3 The caregiver responds to the child when the caregiver hears the child or the child comes to the caregiver for help or comfort.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A113_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A113_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.4 If the child is age 5 years or older and was hurt or sick in the past 3 months, does the child confirm that the caregiver took care of him/her?<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A114_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A114_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.5 The child seeks support and comfort from the caregiver in response to stressors.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A115_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A115_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.6 The child easily articulates the rules of the house and the consequences should the rules be broken.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A116_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A116_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">11.7 If the child is age 5 years or older, he/she feels that the rules and consequences are applied consistently.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A117_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A117_rdo_error"></span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Relationship & Attachment domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="ra-totals"></div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            </fieldset>
+                    </div>
+                    <!-- end wizard step-5 -->
+                    <!-- begin wizard step-6 -->
+                    <div>
+                    <fieldset>
+                        <legend class="pull-left width-full">ECONOMIC STABILITY</legend>
+                            <hr>
+                            <div class="note note-info">
+                                <h4 class="block">Economic Stability: Stable</h4>
+                                <p>Caregivers have been able to meet the cost of the children’s basic needs (e.g., rent expenses, clothes) over the past 6 months. Caregivers have a regular savings and basic financial literacy (e.g., planning, saving, budgeting, responsible spending). Caregivers have been able to anticipate and meet emergency expenses (e.g., medical expenses, drought, flood) in the past 6 months via savings or access to a loan or credit.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-8">12.1 The household has a stable source of income (e.g., business, formal employment, cash transfer), and/or productive assets (e.g., livestock, poultry).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A121_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A121_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">12.2 The household has regular savings (e.g., active participation in a village savings and loan association or Savings and Internal Lending Community).<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A122_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A122_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">12.3 The caregiver or other family members can provide examples of how they met regular and planned expenses (e.g., food, clothing, shelter, school) in the past 3 months.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A123_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A123_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">12.4 The caregiver or other family members can provide examples of how they met emergency expenses in the past 3 months.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A124_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A124_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">12.5 The caregiver was able to pay all required medical expenses for family members in the past 3 months.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A125_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A125_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">12.6 The caregiver can articulate plans to meet emergency expenses for the household.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A126_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A126_rdo_error"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-8">12.7 The caregiver can articulate plans for regular (e.g., food) and periodic (e.g., school fees) expenses.<span class="asteriskField">*</span></label>
+                                <div class="col-md-2">
+                                    {{ form.qf7A127_rdo }}
+                                </div>
+                                <div class="col-md-2"><span id="qf7A127_rdo_error"></span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-md-8"><b>Total score for Stable domain</b><span class="asteriskField">*</span></label>
+                                <div class="col-md-3" id="es-totals"></div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    </div>
+                    <!-- end wizard step-6 -->
+
+                    <div class="form-group">
+                        <div class="col-md-1"></div>
+                        
+                        <div class="col-md-10">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th colspan="5"><label class="control-labels">Total Benchmark Scores</label><br></th>
+                                </tr>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Domain</th>
+                                    <th>Total Score</th>
+                                    <th>Scored</th>
+                                    <th>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>1</td>
+                                    <td>Education</td>
+                                    <td>11</td>
+                                    <td class="ed-totals-table"></td>
+                                    <td class="ed-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>2</td>
+                                    <td>Protection & Safety</td>
+                                    <td>8</td>
+                                    <td class="pr-totals-table"></td>
+                                    <td class="pr-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>3</td>
+                                    <td>Psychosocial Well-Being</td>
+                                    <td>16</td>
+                                    <td class="ps-totals-table"></td>
+                                    <td class="ps-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>4</td>
+                                    <td>Health and Development</td>
+                                    <td>11</td>
+                                    <td class="hd-totals-table"></td>
+                                    <td class="hd-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>5</td>
+                                    <td>Relationship and Attachment</td>
+                                    <td>12</td>
+                                    <td class="ra-totals-table"></td>
+                                    <td class="ra-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <td>6</td>
+                                    <td>Economic Stability</td>
+                                    <td>7</td>
+                                    <td class="es-totals-table"></td>
+                                    <td class="es-totals-status"></td>
+                                  </tr>
+                                  <tr>
+                                    <th></th>
+                                    <th>Total Score</th>
+                                    <th>65</th>
+                                    <th class="totals-table"></th>
+                                    <th class="totals-status"></th>
+                                  </tr>                                
+                                </tbody>
+                                </table>
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Date review completed<span class="asteriskField">*</span></label>
+                        <div class="col-md-2">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>                   
+                    
+                    <div class="form-group">
+                        <label class="col-md-4"></label>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+
+$(document).ready(function() {
+    $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard").bwizard();
+
+    benchmarks();
+
+    $("form input:radio").change(function (event) {
+        benchmarks();
+        console.log(event.target.id);
+   });
+
+    
+    function benchmarks(){
+
+        var bmarks = 0;
+        var ed_marks = 0;
+        var pr_marks = 0;
+        var ps_marks = 0;
+        var hd_marks = 0;
+        var ra_marks = 0;
+        var es_marks = 0;
+
+        var ed = ['qf7A11', 'qf7A12', 'qf7A13', 'qf7A14', 'qf7A15', 'qf7A16', 'qf7A17',
+                  'qf7A21', 'qf7A22', 'qf7A23', 'qf7A24'];
+        var pr = ['qf7A31', 'qf7A32', 'qf7A33', 'qf7A34', 'qf7A35', 'qf7A36', 'qf7A37', 'qf7A38'];
+        var ps = ['qf7A41', 'qf7A42', 'qf7A43', 'qf7A44', 'qf7A45', 'qf7A46',
+                  'qf7A51', 'qf7A52', 'qf7A53', 'qf7A54', 'qf7A55',
+                  'qf7A61', 'qf7A62', 'qf7A63', 'qf7A64', 'qf7A65'];
+        var hd = ['qf7A71', 'qf7A72', 'qf7A81', 'qf7A82', 'qf7A83', 'qf7A84',
+                  'qf7A91', 'qf7A92', 'qf7A93', 'qf7A94', 'qf7A95'];
+        var ra = ['qf7A101', 'qf7A102', 'qf7A103', 'qf7A104', 'qf7A105',
+                  'qf7A111', 'qf7A112', 'qf7A113', 'qf7A114', 'qf7A115', 'qf7A116', 'qf7A117'];
+        var es = ['qf7A121', 'qf7A122', 'qf7A123', 'qf7A124', 'qf7A125', 'qf7A126', 'qf7A127'];
+
+        $("#new-form-a input[type=radio]:checked").each(function(event) {
+            if(this.value == "AYES" && this.checked == true){
+                console.log('Yes option '+ this.name + ' >> ' +this.value)
+                 bmarks = 1;
+            }else if(this.value == "ANNA" && this.checked == true){
+                console.log('Not Applicable'+ this.name + ' >> ' +this.value)
+                 bmarks = 1;
+            }else if (this.value == "ANNO" && this.checked == true){
+                console.log('No option '+ this.name + ' >> ' +this.value)
+                bmarks = 0
+            }
+
+            var qid = this.id.split('_')[1];
+            if (ed.includes(qid)){
+                ed_marks += bmarks;
+            }else if (pr.includes(qid)){
+                pr_marks += bmarks;
+            }else if (ps.includes(qid)){
+                ps_marks += bmarks;
+            }else if (hd.includes(qid)){
+                hd_marks += bmarks;
+            }else if (ra.includes(qid)){
+                ra_marks += bmarks;
+            }else if (es.includes(qid)){
+                es_marks += bmarks;
+            }
+            console.log('Benchmark Score' + qid + ":" + bmarks);
+        });
+
+        var ed_grad = (ed_marks < 11) ? " Not Ready for Closure" :" Ready for Closure";
+        var pr_grad = (pr_marks < 8) ? " Not Ready for Closure" :" Ready for Closure";
+        var ps_grad = (ps_marks < 14) ? " Not Ready for Closure" :" Ready for Closure";
+        var hd_grad = (hd_marks < 10) ? " Not Ready for Closure" :" Ready for Closure";
+        var ra_grad = (ra_marks < 12) ? " Not Ready for Closure" :" Ready for Closure";
+        var es_grad = (es_marks < 6) ? " Not Ready for Closure" :" Ready for Closure";
+
+        var ed_score = (ed_marks < 11) ? 0 : 1;
+        var pr_score = (pr_marks < 8) ? 0 : 1;
+        var ps_score = (ps_marks < 14) ? 0 : 1;
+        var hd_score = (hd_marks < 10) ? 0 : 1;
+        var ra_score = (ra_marks < 12) ? 0 : 1;
+        var es_score = (es_marks < 6) ? 0 : 1;
+
+        var total_score = (ed_score + pr_score + ps_score + hd_score + ra_score + es_score)
+
+        if (total_score >= 3 && ed_score == 1 && pr_score == 1 && ra_score == 1){
+            var total_status = 'Ready for Closure';
+        }else {
+            var total_status = 'Not Ready for Closure';
+        }
+
+        $("#ed-totals").html("<b>" + ed_marks + " / 11 : " + ed_grad + "<b>");         
+        $("#pr-totals").html("<b>" + pr_marks + " / 8 : " + pr_grad + "<b>");         
+        $("#ps-totals").html("<b>" + ps_marks + " / 16 : " + ps_grad + "<b>");         
+        $("#hd-totals").html("<b>" + hd_marks + " / 11 : " + hd_grad + "<b>");         
+        $("#ra-totals").html("<b>" + ra_marks + " / 12 : " + ra_grad + "<b>");         
+        $("#es-totals").html("<b>" + es_marks + " / 7 : " + es_grad + "<b>");
+
+        $(".ed-totals-table").html(ed_marks);
+        $(".pr-totals-table").html(pr_marks);        
+        $(".ps-totals-table").html(ps_marks);         
+        $(".hd-totals-table").html(hd_marks);         
+        $(".ra-totals-table").html(ra_marks);
+        $(".es-totals-table").html(es_marks);        
+        $('.totals-table').html(total_score + ' (By domain)');
+        //Status
+        $(".ed-totals-status").html(ed_grad);
+        $(".pr-totals-status").html(pr_grad);        
+        $(".ps-totals-status").html(ps_grad);         
+        $(".hd-totals-status").html(hd_grad);         
+        $(".ra-totals-status").html(ra_grad);
+        $(".es-totals-status").html(es_grad);        
+        $('.totals-status').html(total_status);
+    }
+
+});
+
+</script>
+{% endblock %}

@@ -119,4 +119,3 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         model = OVCFacility
         fields = ('id', 'facility_code', 'facility_name')
         read_only_fields = ('id')
-

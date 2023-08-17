@@ -1,0 +1,52 @@
+pk,the_order,field_name,item_category,item_id,item_description,item_description_short,item_sub_category,user_configurable,sms_keyword,is_void
+42000,1,si_holding_place_id,Holding places,HPPST,Police station,Police station,,FALSE,FALSE,FALSE
+42001,2,si_holding_place_id,Holding places,HPCRH,Remand Home,Remand Home,,FALSE,FALSE,FALSE
+42002,3,si_holding_place_id,Holding places,HPCCI,Charitable Children Institution,CCI,,FALSE,FALSE,FALSE
+42003,1,si_risk_assess_a1,Risk Assessment 1,SRAA1A,a. Three or more prior arrests,a. Three or more prior arrests,,FALSE,FALSE,FALSE
+42004,2,si_risk_assess_a1,Risk Assessment 1,SRAA1B,b. Two or more prior findings of guilty,b. Two or more prior findings of guilty,,FALSE,FALSE,FALSE
+42005,3,si_risk_assess_a1,Risk Assessment 1,SRAA1C,c. Two or more failures to comply,c. Two or more failures to comply,,FALSE,FALSE,FALSE
+42006,4,si_risk_assess_a1,Risk Assessment 1,SRAA1D,d. Prior SCCO's supervision/Probation,d. Prior SCCO's supervision/Probation,,FALSE,FALSE,FALSE
+42007,5,si_risk_assess_a1,Risk Assessment 1,SRAA1E,e. Prior custody,e. Prior custody,,FALSE,FALSE,FALSE
+42008,1,si_risk_assess_a2,Risk Assessment 2,SRAA2A,a. Inadequate supervision,a. Inadequate supervision,,FALSE,FALSE,FALSE
+42009,2,si_risk_assess_a2,Risk Assessment 2,SRAA2B,b. Difficulty in controlling behaviour,b. Difficulty in controlling behaviour,,FALSE,FALSE,FALSE
+42010,3,si_risk_assess_a2,Risk Assessment 2,SRAA2C,c. Inappropriate discipline,c. Inappropriate discipline,,FALSE,FALSE,FALSE
+42011,4,si_risk_assess_a2,Risk Assessment 2,SRAA2D,d. Inconsistent parenting,d. Inconsistent parenting,,FALSE,FALSE,FALSE
+42012,5,si_risk_assess_a2,Risk Assessment 2,SRAA2E,e. Poor relations/father-child,e. Poor relations/father-child,,FALSE,FALSE,FALSE
+42013,6,si_risk_assess_a2,Risk Assessment 2,SRAA2F,f. Poor relations/mother-child,f. Poor relations/mother-child,,FALSE,FALSE,FALSE
+42014,1,si_risk_assess_a3,Risk Assessment 3,SRAA3A,a. Disruptive classroom behaviour,a. Disruptive classroom behaviour,,FALSE,FALSE,FALSE
+42015,2,si_risk_assess_a3,Risk Assessment 3,SRAA3B,b. Disruptive behaviour on school property,b. Disruptive behaviour on school property,,FALSE,FALSE,FALSE
+42016,3,si_risk_assess_a3,Risk Assessment 3,SRAA3C,c. Low Achievement,c. Low Achievement,,FALSE,FALSE,FALSE
+42017,4,si_risk_assess_a3,Risk Assessment 3,SRAA3D,d. Problems with peers,d. Problems with peers,,FALSE,FALSE,FALSE
+42018,5,si_risk_assess_a3,Risk Assessment 3,SRAA3E,e. Problems with teachers,e. Problems with teachers,,FALSE,FALSE,FALSE
+42019,6,si_risk_assess_a3,Risk Assessment 3,SRAA3F,f. Truancy,f. Truancy,,FALSE,FALSE,FALSE
+42020,7,si_risk_assess_a3,Risk Assessment 3,SRAA3G,g. Unemployed/not seeking employment,g. Unemployed/not seeking employment,,FALSE,FALSE,FALSE
+42021,1,si_risk_assess_a4,Risk Assessment 4,SRAA4A,a. Some delinquent acquaintances,a. Some delinquent acquaintances,,FALSE,FALSE,FALSE
+42022,2,si_risk_assess_a4,Risk Assessment 4,SRAA4B,b. Some delinquent friends,b. Some delinquent friends,,FALSE,FALSE,FALSE
+42023,3,si_risk_assess_a4,Risk Assessment 4,SRAA4C,c. No or few positive acquaintances,c. No or few positive acquaintances,,FALSE,FALSE,FALSE
+42024,4,si_risk_assess_a4,Risk Assessment 4,SRAA4D,d. Nor or few positive friends,d. Nor or few positive friends,,FALSE,FALSE,FALSE
+42025,1,si_risk_assess_a5,Risk Assessment 5,SRAA5A,a. Occasional drug use,a. Occasional drug use,,FALSE,FALSE,FALSE
+42026,2,si_risk_assess_a5,Risk Assessment 5,SRAA5B,b. Chronic drug use,b. Chronic drug use,,FALSE,FALSE,FALSE
+42027,3,si_risk_assess_a5,Risk Assessment 5,SRAA5C,c. Chronic alcohol abuse,c. Chronic alcohol abuse,,FALSE,FALSE,FALSE
+42028,4,si_risk_assess_a5,Risk Assessment 5,SRAA5D,d. Substance abuse interferes with life,d. Substance abuse interferes with life,,FALSE,FALSE,FALSE
+42029,5,si_risk_assess_a5,Risk Assessment 5,SRAA5E,e. Substance abuse linked to the offence(s),e. Substance abuse linked to the offence(s),,FALSE,FALSE,FALSE
+42030,1,si_risk_assess_a6,Risk Assessment 6,SRAA6A,a. Limited organized activities,a. Limited organized activities,,FALSE,FALSE,FALSE
+42031,2,si_risk_assess_a6,Risk Assessment 6,SRAA6B,b. Could make better use of time,b. Could make better use of time,,FALSE,FALSE,FALSE
+42032,3,si_risk_assess_a6,Risk Assessment 6,SRAA6C,c. No personal interests,c. No personal interests,,FALSE,FALSE,FALSE
+42033,1,si_risk_assess_a7,Risk Assessment 7,SRAA7A,a. Away from home for more than one month,a. Away from home for more than one month,,FALSE,FALSE,FALSE
+42034,2,si_risk_assess_a7,Risk Assessment 7,SRAA7B,b. Sleep on the street,b. Sleep on the street,,FALSE,FALSE,FALSE
+42035,3,si_risk_assess_a7,Risk Assessment 7,SRAA7C,c. Changed name/age,c. Changed name/age,,FALSE,FALSE,FALSE
+42036,4,si_risk_assess_a7,Risk Assessment 7,SRAA7D,d. Scavenging,d. Scavenging,,FALSE,FALSE,FALSE
+42037,5,si_risk_assess_a7,Risk Assessment 7,SRAA7E,e. Tattooing,e. Tattooing,,FALSE,FALSE,FALSE
+42038,6,si_risk_assess_a7,Risk Assessment 7,SRAA7F,f. Identification with a base,f. Identification with a base,,FALSE,FALSE,FALSE
+42039,1,si_risk_assess_a8,Risk Assessment 8,SRAA8A,a. Inflated self-esteem,a. Inflated self-esteem,,FALSE,FALSE,FALSE
+42040,2,si_risk_assess_a8,Risk Assessment 8,SRAA8B,b. Physically aggressive,b. Physically aggressive,,FALSE,FALSE,FALSE
+42041,3,si_risk_assess_a8,Risk Assessment 8,SRAA8C,c. Tantrums,c. Tantrums,,FALSE,FALSE,FALSE
+42042,4,si_risk_assess_a8,Risk Assessment 8,SRAA8D,d. Short attention span,d. Short attention span,,FALSE,FALSE,FALSE
+42043,5,si_risk_assess_a8,Risk Assessment 8,SRAA8E,e. Poor frustration tolerance,e. Poor frustration tolerance,,FALSE,FALSE,FALSE
+42044,6,si_risk_assess_a8,Risk Assessment 8,SRAA8F,f. Inadequate guilt feelings,f. Inadequate guilt feelings,,FALSE,FALSE,FALSE
+42045,7,si_risk_assess_a8,Risk Assessment 8,SRAA8G,"g. Verbally aggressive, impudent","g. Verbally aggressive, impudent",,FALSE,FALSE,FALSE
+42046,1,si_risk_assess_a9,Risk Assessment 9,SRAA9A,a. Antisocial/pro-criminal attitudes,a. Antisocial/pro-criminal attitudes,,FALSE,FALSE,FALSE
+42047,2,si_risk_assess_a9,Risk Assessment 9,SRAA9B,b. Not seeking help,b. Not seeking help,,FALSE,FALSE,FALSE
+42048,3,si_risk_assess_a9,Risk Assessment 9,SRAA9C,c. Actively rejecting help,c. Actively rejecting help,,FALSE,FALSE,FALSE
+42049,4,si_risk_assess_a9,Risk Assessment 9,SRAA9D,d. Defies Authority,d. Defies Authority,,FALSE,FALSE,FALSE
+42050,5,si_risk_assess_a9,Risk Assessment 9,SRAA9E,"e. Callous, little concern for others","e. Callous, little concern for others",,FALSE,FALSE,FALSE

@@ -43,5 +43,4 @@ urlpatterns = [
          'template_name': 'registration/password_change.html',
          'password_change_form': StrictPasswordChangeForm},
         name='password_change'),
-
 ]

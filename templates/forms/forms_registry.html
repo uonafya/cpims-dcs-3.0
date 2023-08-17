@@ -145,13 +145,15 @@
                             <td>
                                 <div class="pull-right">
                                 <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick="window.location.href='{% url 'view_case_record_sheet' id=result.form_id %}'">
-                                <b>View</b>&nbsp;&nbsp;<i class="fa fa-binoculars"></i></a>
+                                <i class="fa fa-binoculars"></i> <b>View</b></a>
 
                                 <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick="window.location.href='{% url 'edit_case_record_sheet' id=result.form_id %}'">
-                                <b>Edit</b>&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
+                                <i class="fa fa-edit"></i> <b>Edit</b></a>
                                 
                                <a href="#" class="btn  btn-sm btn-primary m-r-5" data-toggle="modal" onClick="window.location.href='{% url 'case_events' id=result.form_id %}'">
-                                <b>Follow-up</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
+                                <i class="fa fa-paw"></i> <b>Follow-up</b></a>
+
+                                <a href="{% url 'case_info' case_id=result.case_id %}" class="btn  btn-sm btn-primary m-r-5" > <i class="fa fa-cogs"></i> Case Info </a>
                             </div>
                            </td>
                            <td><input type="checkbox" value="{{ result.case_id }}" name="case_id[]" /></td>
@@ -222,10 +224,16 @@
                             {% if result.discharged or result.dead %}
                                 <a href="#" class="btn  btn-sm btn-danger m-r-5">
                                 <b>No Follow-ups !</b></a>                              
-                            {% else %} 
+                            {% else %}
+                            <!--
                                 <a href="#" class="btn  btn-sm btn-primary m-r-5" onClick="window.location.href='{% url 'placement_followup' id=result.id %}'">
                                 <b>Follow-up</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
-                            {% endif %} 
+                            -->
+                                <a href="{% url 'placement_follow_up' id=result.placement_id %}" class="btn  btn-sm btn-primary m-r-5">
+                                <b>Follow-up</b>&nbsp;&nbsp;<i class="fa fa-paw"></i></a>
+                            {% endif %}
+
+                            
                             </td>
                         </tr>
                         {% endfor %}
