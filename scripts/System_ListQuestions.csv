@@ -1,0 +1,419 @@
+id,question_text,question_code,form_type_id,answer_type_id,answer_field_id,answer_set_id,form,question_required,the_order,timestamp_created,timestamp_updated,is_void
+418,Details,qf9A6B,,FMTA,,1,24,FALSE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+417,6. If the child was removed or referred copies of the relevant paperwork have been attached to the child’s case file and provided to statutory authority and new care,qf9A6A,,FMRD,yesno_id,1,24,TRUE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+416,Details,qf9A5B,,FMTA,,1,24,FALSE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+415,5. The Sub-County Children’s Officer has reviewed the closure plan and provided final approval,qf9A5A,,FMRD,yesno_id,1,24,TRUE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+414,Details,qf9A4B,,FMTA,,1,24,FALSE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+413,4. The child(ren) and the family have been informed of available relevant support services in case support is needed in the future and contact information has been provided.,qf9A4A,,FMRD,yesno_id,1,24,TRUE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+412,Details,qf9A3B,,FMTA,,1,24,FALSE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+411,3. Referrals have been completed and case closure plans have been developed with the child and family. Caseworker has recognized and appreciated the achievements of the child(ren) and family.,qf9A3A,,FMRD,yesno_id,1,24,TRUE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+410,Details,qf9A2B,,FMTA,,1,24,FALSE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+409,2. Recommendation for closure made by caseworker; closure approved by alternative care committee.,qf9A2A,,FMRD,yesno_id,1,24,TRUE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+408,Details,qf9A1B,,FMTA,,1,24,FALSE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+407,1. Final visit scheduled with the child and the family.,qf9A1A,,FMRD,yesno_id,1,24,TRUE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+406,If Yes,qf9AC2,,FMRD,satisfied_level_ids,1,24,TRUE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+405,Caregiver provided feedback on the case management services.,qf9AC1,,FMRD,yesno_id,1,24,TRUE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+404,If Yes,qf9AB2,,FMRD,satisfied_level_ids,1,24,TRUE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+403,Children or person provided feedback on the case management services.,qf9AB1,,FMRD,yesno_id,1,24,TRUE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+402,Reason for case closure,qf9AA,,FMSL,case_closure_reasons,1,24,TRUE,1,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+401,Proposed date of next monitoring visit,qf6A20,,FMTF,,3,13,TRUE,20,2023-08-18 14:58:01.824548+00:00,2023-08-18 14:58:01.824552+00:00,FALSE
+400,Social well-being and community belonging,qf6A19,,FMTA,,1,13,FALSE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+399,Child–caregiver/young adult–mentor relationship and attachment,qf6A18,,FMTA,,1,13,FALSE,18,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+398,Protection and safety,qf6A17,,FMTA,,1,13,FALSE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+397,Education,qf6A16,,FMTA,,1,13,FALSE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+396,Psychosocial health and emotional well-being,qf6A15,,FMTA,,1,13,FALSE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+395,Health and development,qf6A14,,FMTA,,1,13,FALSE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+394,How have these changes affected your family/life,qf6A13,,FMTA,,1,13,FALSE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+393,Any major changes in your life? Please describe below (Hint: Look for both positive and negative changes.),qf6A12,,FMTA,,1,13,FALSE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+392,Since our last visit is there anything that you would like to share with me? Please describe below,qf6A11,,FMTA,,1,13,FALSE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+391,Social well-being and community belonging,qf6A10,,FMTA,,1,13,FALSE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+390,Child–caregiver/young adult–mentor relationship and attachment,qf6A9,,FMTA,,1,13,FALSE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+389,Protection and safety,qf6A8,,FMTA,,1,13,FALSE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+388,Education,qf6A7,,FMTA,,1,13,FALSE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+387,Psychosocial health and emotional well-being,qf6A6,,FMTA,,1,13,FALSE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+386,Health and development,qf6A5,,FMTA,,1,13,FALSE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+385,How have these changes affected you (e.g. how is the child currently coping)?,qf6A4,,FMTA,,1,13,FALSE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+384,Any major changes in your life? Please describe below <small>(Hint: Look for both positive and negative changes.)</small>,qf6A3,,FMTA,,1,13,FALSE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+383,Since our last visit is there any concern that you would like to share with me?,qf6A2,,FMTA,,1,13,FALSE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+382,Number of visit,qf6A1,,FMTF,,2,13,TRUE,1,2023-08-18 14:57:53.885526+00:00,2023-08-18 14:57:53.885530+00:00,FALSE
+381,Things to be achieved,qf1B33,,FMTA,,1,31,FALSE,51,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+380,Additional observations,qf1B32,,FMTA,,1,31,FALSE,50,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+379,Needs or concerns,qf1B31,,FMTA,,1,31,FALSE,49,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+378,Strengths Identified,qf1B30,,FMTA,,1,31,FALSE,48,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+377,Details,qf1B28B,,FMTA,,1,31,FALSE,47,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+376,Does the child express concerns about reunification/placement?,qf1B28A,,FMRD,yesno_na,1,31,TRUE,46,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+375,Does the child express a preference for reunification/placement?,qf1B27A,,FMRD,yesno_na,1,31,TRUE,45,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+374,Skills and strength,qf1B26,,FMTA,,1,31,FALSE,44,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+373,Fears,qf1B25,,FMTA,,1,31,FALSE,43,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+372,Dislikes,qf1B24,,FMTA,,1,31,FALSE,42,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+371,Likes,qf1B23,,FMTA,,1,31,FALSE,41,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+370,Degree of independence <small> (i.e. what can the child do for himself/herself and what help does the child need?)</small>,qf1B22,,FMRD,list_range_level,1,31,TRUE,40,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+369,Daily Routine,qf1B21,,FMTA,,1,31,FALSE,39,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+368,Does the child exhibit any of the following? (tick all that apply) ,qf1B20,,FMCB,list_child_exhibits,1,31,TRUE,38,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+367,Details,qf1B19B,,FMTA,,1,31,FALSE,37,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+366,Level of attachment to previous primary caregiver,qf1B19A,,FMRD,list_range_level,1,31,TRUE,36,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+365,Details,qf1B18B,,FMTA,,1,31,FALSE,35,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+364,Level of attachment between the child and current caregiver:,qf1B18A,,FMRD,list_range_level,1,31,TRUE,34,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+363,Are the perceived friends much older younger or same age?,qf1B17,,FMTA,,1,31,FALSE,33,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+362,What is the quality of these friendships?,qf1B16,,FMTA,,1,31,FALSE,32,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+361,What are the childs's views on these peer friendships?,qf1B15,,FMTA,,1,31,FALSE,31,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+360,How often do they interact?,qf1B14C,,FMTA,,1,31,FALSE,30,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+359,What kind of things do they do together,qf1B14B,,FMTA,,1,31,FALSE,29,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+358,Who are the child's friends?,qf1B14A,,FMTA,,1,31,FALSE,28,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+357,Extracurricular activity and behavior<br><small>(Hint: Contact school directly.)</small>,qf1B13,,FMTA,,1,31,FALSE,27,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+356,Academic perfomance,qf1B12,,FMRD,list_education_perf,1,31,TRUE,26,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+355,School attendance,qf1B11,,FMRD,yesno_na,1,31,TRUE,25,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+354,Access to scholastic materials,qf1B10,,FMRD,yesno_na,1,31,TRUE,24,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+353,Admission Type,school_class,,FMSL,,1,31,TRUE,23,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+352,Class Level,admission_type,,FMSL,admission_list,1,31,TRUE,22,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+351,School Name,school,,FMTF,,1,31,FALSE,21,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+350,School ID,school_name,,FMTF,,1,31,FALSE,20,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+349,School Level,school_level,,FMSL,school_level_list,1,31,TRUE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+348,Details,qf1B9B,,FMTA,,1,31,FALSE,18,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+347,Previously attended any School?,qf1B9A,,FMRD,yesno_na,1,31,TRUE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+346,Feeding routine and special needs?,qf1B8,,FMTA,,1,31,FALSE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+345,Details,qf1B7B,,FMTA,,1,31,FALSE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+344,Any allergy,qf1B7A,,FMRD,yesno_una,1,31,TRUE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+343,Details,qf1B6B,,FMTA,,1,31,FALSE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+342,Immunization status,qf1B6A,,FMSL,immunization_list,1,31,TRUE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+341,Details,qf1B5B,,FMTA,,1,31,FALSE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+340,Currently on any medication?,qf1B5A,,FMRD,yesno_id,1,31,TRUE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+339,Details,qf1B4B,,FMTA,,1,31,FALSE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+338,Any chronic health conditions,qf1B4A,,FMRD,yesno_id,1,31,TRUE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+337,Details,qf1B3B,,FMTA,,1,31,FALSE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+336,Any current health conditions?,qf1B3A,,FMRD,yesno_id,1,31,TRUE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+335,Frequency of hospitalization?,qf1B2C,,FMRD,list_frequency,1,31,TRUE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+334,Details,qf1B2B,,FMTA,,1,31,FALSE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+333,Any history of medical issues / hospitalization?,qf1B2A,,FMRD,yesno_id,1,31,TRUE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+332,Details,qf1B1B,,FMTA,,1,31,FALSE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+331,Is the child growing appropriately for his/her age? For example is he/she walking speaking developing self-help skills? (Describe physical skills and needs intellectual skills and needs social skills and needs.),qf1B1A,,FMRD,yesno_id,1,31,TRUE,1,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+330,Does the child express a preference for a caregiver?,qf1A28,,FMRD,yesno_na,1,8,TRUE,31,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+329,If Yes How often do they visit?,qf1A27A,,FMTF,,1,8,FALSE,30,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+328,Does family visit?,qf1A27,,FMRD,yesno_id,1,8,TRUE,29,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+327,Does child go home on school holidays?,qf1A26,,FMRD,yesno_id,1,8,TRUE,28,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+326,If yes does the child remember the date (or how long ago) the last visit occurred?,qf1A25B,,FMTF,,1,8,FALSE,27,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+325,If yes Name,qf1A25A,,FMTF,,1,8,FALSE,26,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+324,Is there any contact with family / parent(s) ?,qf1A25,,FMRD,yesno_id,1,8,TRUE,25,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+323,Are mother and father living together?,qf1A24,,FMRD,yesno_na,1,8,TRUE,24,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+322,Are there other sibling(s) admitted into care elsewhere?,qf1A23,,FMRD,yesno_id,1,8,TRUE,23,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+321,Are there other sibling(s) living with the child now in this form of care?,qf1A22,,FMRD,yesno_id,1,8,TRUE,22,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+320,Relationship?,qf1A21A,,FMSL,list_relationship,1,8,TRUE,21,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+319,With whom and where was the child living before admission to care?  <small>(Name of person and place)</small>,qf1A21,,FMTF,,1,8,FALSE,20,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+318,If child is not in any institution indicate the type of vulnerability:,qf1A20,,FMSL,list_other_vulnerability,1,8,TRUE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+317,Referrer Title,qf1A19,,FMTF,,1,8,FALSE,18,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+316,Who referred the child (Name),qf1A18,,FMTF,,1,8,FALSE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+315,Committal Order date,qf1A17,,FMTF,,3,8,FALSE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+314,Committal Order No.,qf1A16,,FMTF,,1,8,FALSE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+313,Has Committal Order,qf1A15,,FMRD,yesno_id,1,8,TRUE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+312,Other forms of admission,qf1A14,,FMSL,list_other_adms,1,8,TRUE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+311,Age of child at admission,qf1A13,,FMTF,,1,8,FALSE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+310,Disability severity,qf1A12,,FMSL,severity_list,1,8,TRUE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+309,Type of Disability ,qf1A11,,FMSL,disability_list,1,8,TRUE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+308,Has disability,qf1A10,,FMRD,yesno_id,1,8,TRUE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+307,Languages,qf1A8,,FMTF,,1,8,FALSE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+306,Distinguishing Marks,qf1A7,,FMTF,,1,8,FALSE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+305,Ethnicity,qf1A6,,FMTF,,1,8,FALSE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+304,Complexion,qf1A5,,FMTF,,1,8,FALSE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+303,Weight (kg),qf1A4,,FMTF,,1,8,FALSE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+302,Height (cm),qf1A3,,FMTF,,1,8,FALSE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+301,Certificate No.,qf1A2,,FMTF,,1,8,FALSE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+300,Child Has Birth Certificate,qf1A1,,FMRD,yesno_id,1,8,TRUE,1,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+299,Family relatives and community acceptance towards the child Select One,qf2A64,,FMSL,list_range_level,1,9,TRUE,91,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+298,Other(s):,qf2A63,,FMTA,,1,9,TRUE,90,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+297,What support does the family need? (information gathered here should be used to develop the case plan.),qf2A62,,FMTA,,1,9,TRUE,89,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+296,What other information does the family need?,qf2A61,,FMTA,,1,9,TRUE,88,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+295,Does family want reunification / placement with the child,qf2A60,,FMRD,YESNO_UN_CHOICES,1,9,TRUE,87,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+294,Do local leaders know the family?,qf2A59,,FMRD,YESNO_CHOICES,1,9,TRUE,86,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+293,Describe the level of acceptance of relatives and the community toward the child:,qf2A58,,FMTA,,1,9,TRUE,85,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+292,Describe the family’s relationship with neighbors:,qf2A57,,FMTA,,1,9,TRUE,84,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+291,Describe the family’s relationship with their extended family(ies),qf2A56,,FMTA,,1,9,TRUE,83,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+290,Does the family have relatives and/or friends living in close proximity?,qf2A55,,FMRD,YESNO_CHOICES,1,9,TRUE,82,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+289,Details,qf2A54B,,FMTA,,1,9,TRUE,81,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+288,Does the family feel socially connected? <br><small>(Hint: participate in community activities.)</small>,qf2A54A,,FMRD,YESNO_CHOICES,1,9,TRUE,80,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+287,Does the family feel connected to the culture of the community?,qf2A53,,FMRD,YESNO_CHOICES,1,9,TRUE,79,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+286,Are the children involved in decision on matters concerning them?,qf2A52,,FMRD,YESNO_CHOICES,1,9,TRUE,78,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+285,Are the children free around the caregiver? <br><small>(Observe)</small>,qf2A51,,FMRD,YESNO_CHOICES,1,9,TRUE,77,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+284,How does the caregiver respond to a child’s misbehavior? (including type of discipline)?,qf2A50,,FMTA,,1,9,TRUE,76,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+283,Details,qf2A49B,,FMTA,,1,9,TRUE,75,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+282,Does caregiver encourage the child positively?,qf2A49A,,FMRD,YESNO_CHOICES,1,9,TRUE,74,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+281,Describe how the caregiver communicates with children,qf2A48,,FMTA,,1,9,TRUE,73,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+280,Does caregiver spend time with their children?,qf2A47,,FMRD,YESNO_CHOICES,1,9,TRUE,72,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+279,How do the children react when separated from caregiver?,qf2A46,,FMTA,,1,9,TRUE,71,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+278,Do the children seek comfort from caregiver ?<br><small>(Observe)</small>,qf2A45,,FMRD,YESNO_CHOICES,1,9,TRUE,70,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+277,Do the children confide in caregiver if having challenges?,qf2A44,,FMRD,YESNO_CHOICES,1,9,TRUE,69,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+276,Describe the current relationship between the current caregiver and the child?,qf2A43,,FMRD,list_ratings,1,9,TRUE,68,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+275,Describe the relationship between adults in the house. <br><small>(Hint: Engage support people.)</small>,qf2A42,,FMTA,,1,9,TRUE,67,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+274,Details,qf2A41B,,FMTA,,1,9,TRUE,66,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+273,Has the family been through a significant life event recently?,qf2A41A,,FMRD,YESNO_CHOICES,1,9,TRUE,65,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+272,Details,qf2A40B,,FMTA,,1,9,TRUE,64,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+271,Are there mental health concerns? <br><small>(Hint: Use indirect methodologies: Observe probe neighbors and children etc.)</small>,qf2A40A,,FMRD,YESNO_CHOICES,1,9,TRUE,63,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+270,Details,qf2A39B,,FMTA,,1,9,TRUE,62,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+269,Are there signs of tension and/or conflict within family?,qf2A39A,,FMRD,YESNO_CHOICES,1,9,TRUE,61,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+268,Type of relationship being assessed?,qf2A39,,FMSL,list_attachment_assessment,1,9,TRUE,60,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+267,Does the family live on the land legally?,qf2A38B,,FMRD,YESNO_CHOICES,1,9,TRUE,59,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+266,Does the family live in a rented home?,qf2A38A,,FMRD,YESNO_CHOICES,1,9,TRUE,58,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+265,Describe the condition of the household <br><small>(i.e. level of safety roof/wall/floor ventilation number of rooms?)</small>,qf2A37,,FMTA,,1,9,TRUE,57,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+264,Is there an accessible local administrative office<br><small> (e.g. Chief Assistant Chief village elder nyumba kumi)?</small>,qf2A36,,FMRD,YESNO_CHOICES,1,9,TRUE,56,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+263,Details,qf2A35B,,FMTA,,1,9,TRUE,55,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+262,Are there concerns of potential violence or abuse in community or school environment?,qf2A35A,,FMRD,YESNO_CHOICES,1,9,TRUE,54,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+261,Are there signs/reports of drug / alcohol abuse in the family?,qf2A34,,FMRD,YESNO_CHOICES,1,9,TRUE,53,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+260,Details,qf2A33B,,FMTA,,1,9,TRUE,52,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+259,Are there signs of violence (including harsh physical punishment) abuse or neglect in the home?,qf2A33A,,FMRD,YESNO_CHOICES,1,9,TRUE,51,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+258,Assets owned by family (list all you can observe including land),qf2A32,,FMTA,,1,9,TRUE,50,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+257,Details,qf2A31B,,FMTA,,1,9,TRUE,49,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+256,Is there any financial/material support provided by people living outside of the household?,qf2A31A,,FMRD,YESNO_CHOICES,1,9,TRUE,48,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+255,Estimated monthly income (< KES 3000 3000-10000 >10000),qf2A30,,FMSL,list_income_range,1,9,TRUE,47,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+254,Type of employment/occupation (casual informalformal),qf2A29,,FMSL,list_employment_type,1,9,TRUE,46,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+253,Who in household is involved in economic activity?,qf2A28,,FMTA,,1,9,TRUE,45,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+252,Do caregivers show interest in children’s education?,qf2A27,,FMRD,YESNO_CHOICES,1,9,TRUE,44,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+251,If yes is their class appropriate for their age and evolving capacity?,qf2A26B,,FMRD,YESNO_CHOICES,1,9,TRUE,43,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+250,Are children in the household currently attending school?,qf2A26A,,FMRD,YESNO_CHOICES,1,9,TRUE,42,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+249,Details,qf2A25B,,FMTA,,1,9,TRUE,41,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+248,Is the school inclusive and able to meet unique needs of child,qf2A25A,,FMRD,YESNO_CHOICES,1,9,TRUE,40,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+247,The school type,qf2A24,,FMSL,list_school_category,1,9,TRUE,39,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+246,(Hours),qf2A23D,,FMTF,,1,9,TRUE,38,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+245,OR Driving :(Minutes),qf2A23C,,FMTF,,1,9,TRUE,37,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+244,(Hours),qf2A23B,,FMTF,,1,9,TRUE,36,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+243,Distance to school? Walking:(Minutes),qf2A23A,,FMTF,,1,9,TRUE,35,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+242,Is there access to education facilities?,qf2A22,,FMRD,YESNO_CHOICES,1,9,TRUE,34,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+241,Are these community services easily accessible?,qf2A21,,FMRD,YESNO_CHOICES,1,9,TRUE,33,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+240,Are there functional community services (tick all that apply),qf2A20,,FMCB,list_community_services,1,9,TRUE,32,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+239,Details,qf2A19B,,FMTA,,1,9,TRUE,31,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+238,Are there religious/cultural practices that hinder/could hinder children from accessing health services?,qf2A19A,,FMRD,YESNO_CHOICES,1,9,TRUE,30,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+237,Details,qf2A18B,,FMTA,,1,9,TRUE,29,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+236,What type of additional support does the household need?,qf2A18A8,,FMCB,list_special_support,1,9,TRUE,28,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+235,Is the household able to take care of a child with a disability (if child returning home has a disability)? ,qf2A18A7,,FMRD,list_disability_handling,1,9,TRUE,27,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+234,Using their usual language has difficulty communicating (e.g. understanding or being understood by others)? ,qf2A18A6,,FMRD,list_disability_assessment,1,9,TRUE,26,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+233,Has difficulty (with self-care such as) washing all over or dressing? ,qf2A18A5,,FMRD,list_disability_assessment,1,9,TRUE,25,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+232,Has difficulty remembering or concentrating? ,qf2A18A4,,FMRD,list_disability_assessment,1,9,TRUE,24,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+231,Has difficulty walking or climbing steps? ,qf2A18A3,,FMRD,list_disability_assessment,1,9,TRUE,23,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+230,Has difficulty hearing even if using a hearing aid? ,qf2A18A2,,FMRD,list_disability_assessment,1,9,TRUE,22,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+229,Has difficulty seeing even if wearing glasses?,qf2A18A1,,FMRD,list_disability_assessment,1,9,TRUE,21,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+228,Details,qf2A17B,,FMTF,,1,9,TRUE,20,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+227,Is there anyone in the family who has any disability?,qf2A17A,,FMRD,YESNO_CHOICES,1,9,TRUE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+226,Details,qf2A16B,,FMTA,,1,9,TRUE,18,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+225,Is there any household member with a chronic illness (e.g. diabetes hypertension)?,qf2A16A,,FMRD,YESNO_CHOICES,1,9,TRUE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+224,Does the family have medical insurance?,qf2A15,,FMRD,YESNO_CHOICES,1,9,TRUE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+223,Does the family have access to health services?,qf2A14,,FMRD,YESNO_CHOICES,1,9,TRUE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+222,Describe the availability disposal knowledge of sanitary items,qf2A13,,FMTA,,1,9,TRUE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+221,Describe the bathing arrangements/habits (including hand-washing),qf2A12,,FMTA,,1,9,TRUE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+220,Describe the home environment (inside outside and surrounding— ventilation cleanliness size of the house rooms roof walls and floor including materials used),qf2A11,,FMTA,,1,9,TRUE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+219,Describe access to and source of clean water,qf2A10,,FMTA,,1,9,TRUE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+218,Describe the latrine (shared distance from house pit/flush/none),qf2A9,,FMTA,,1,9,TRUE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+217,Reliability of source,qf2A8,,FMTA,,1,9,TRUE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+216,Source of Food,qf2A7,,FMTA,,1,9,TRUE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+215,Access to balanced diet food(s) consumed ,qf2A6,,FMRD,YESNO_CHOICES,1,9,TRUE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+214,Access to Food / Meals,qf2A5,,FMSL,list_items_count,1,9,TRUE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+213,How does this family/household feel about potential reunification/placement with the child,qf2A4,,FMTA,,1,9,TRUE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+212,If family of origin what is the family’s perspective on the reasons for the separation?,qf2A3,,FMTA,,1,9,TRUE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+211,Marital status of the parent(s) ,qf2A2,,FMSL,list_marriage_type,1,9,TRUE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+210,Number of Children in the houseshold,qf2A1,,FMTF,,1,9,TRUE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+209,Family being assessed,qf2A65,,FMSL,list_family_types,1,9,TRUE,1,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+208,12.7 The Young Person can articulate plans for regular (e.g. food) and periodic (e.g. school fees) expenses.,qf8A127,,FMRD,yesno_na,1,32,TRUE,49,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+207,12.6 The Young Person can articulate plans to meet emergency expenses for the household.,qf8A126,,FMRD,yesno_na,1,32,TRUE,48,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+206,12.5 The Young Person was able to pay all the required medical expenses in the past 3 months.,qf8A125,,FMRD,yesno_na,1,32,TRUE,47,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+205,12.4 The Young Person can provide examples of how he/she met emergency expenses in the past 3 months.,qf8A124,,FMRD,yesno_na,1,32,TRUE,46,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+204,12.3 The Young Person can provide examples of how he/she met regular and planned expenses (e.g. food clothing shelter school) in the past 3 months.,qf8A123,,FMRD,yesno_na,1,32,TRUE,45,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+203,12.2 The Young Person has regular savings (e.g. active participation in a village savings and loan association or Savings and Internal Lending Community).,qf8A122,,FMRD,yesno_na,1,32,TRUE,44,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+202,12.1 The Young Person has a stable source of income (e.g. business formal employment cash transfer) and/or productive assets (e.g. livestock poultry).,qf8A121,,FMRD,yesno_na,1,32,TRUE,43,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+201,11.4 The Young Person feels that rules and consequences are applied consistently.,qf8A114,,FMRD,yesno_na,1,32,TRUE,42,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+200,11.3 The Young Person easily articulates the rules of the house and the consequences should the rules be broken.,qf8A113,,FMRD,yesno_na,1,32,TRUE,41,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+199,11.2 The Young Person seeks support and comfort from the caregiver/mentor in response to stressors.,qf8A112,,FMRD,yesno_na,1,32,TRUE,40,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+198,11.1 If the Young Person was sick in the past 3 months he/she confirms that his/her caregiver/mentor took care of him/her.,qf8A111,,FMRD,yesno_na,1,32,TRUE,39,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+197,10.2 The Young Person expresses that he/she spends time with his/her caregiver/mentor and enjoys this time.,qf8A102,,FMRD,yesno_na,1,32,TRUE,38,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+196,10.1 The Young Person feels his/her mentor know his/her likes dislikes and what makes him/her happy or sad.,qf8A101,,FMRD,yesno_na,1,32,TRUE,37,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+195,9.2 If the Young Person has a chronic illness or disability he/she is conversant in her/his treatment regimen as necessary.,qf8A92,,FMRD,yesno_na,1,32,TRUE,36,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+194,9.1 If the Young Person was referred for treatment services were accessed and met the intended purpose. (Hint: Look for evidence of complete referral such as returned referral slips report from caregiver/mentor/service providers.),qf8A91,,FMRD,yesno_na,1,32,TRUE,35,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+193,8.2 If Young Person has a developmental delay the case plan and referral documentation confirm that services have been accessed and have met the intended purpose.,qf8A82,,FMRD,yesno_na,1,32,TRUE,34,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+192,8.1 The Young Person is aware of and able to articulate adolescent development changes (e.g. physical emotional identity).,qf8A81,,FMRD,yesno_na,1,32,TRUE,33,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+191,7.1 The Young Person eats a balanced meal (must have proteins carbohydrates and vitamins) at least twice per day.,qf8A71,,FMRD,yesno_na,1,32,TRUE,32,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+190,6.4 The Young Person can identify people in his/her community that he/she can talk to and/or seek help from.,qf8A64,,FMRD,yesno_na,1,32,TRUE,31,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+189,6.3 The Young Person is a member of a community group (e.g. church mosque peer support group adolescent club adolescent savings group).,qf8A63,,FMRD,yesno_na,1,32,TRUE,30,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+188,6.2 The Young Person is able to participate in daily activities in the community (e.g. playing or talking with other family members or friends).,qf8A62,,FMRD,yesno_na,1,32,TRUE,29,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+187,6.1 The Young Person participated in a community activity in the past 3 months (e.g. extended family football matches fundraising wedding funeral).,qf8A61,,FMRD,yesno_na,1,32,TRUE,28,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+186,5.5 The Young Person has a birth certificate.,qf8A55,,FMRD,yesno_na,1,32,TRUE,27,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+185,5.4 The Young Person has a national identification card (ID) where necessary.,qf8A54,,FMRD,yesno_na,1,32,TRUE,26,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+184,5.3 The case plan and referral documentation confirm services have been accessed and met for the intended purpose.,qf8A53,,FMRD,yesno_na,1,32,TRUE,25,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+183,5.2 Where services were needed the Young Person is able to access them.,qf8A52,,FMRD,yesno_na,1,32,TRUE,24,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+182,5.1 The Young Person is able to articulate where to access support services for himself/herself.,qf8A51,,FMRD,yesno_na,1,32,TRUE,23,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+181,4.5 There is an absence of (a) extreme sadness all the time (b) no interest in enjoyable activities (c) change of appetite for food.,qf8A45,,FMRD,yesno_na,1,32,TRUE,22,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+180,4.4 The Young Person expresses a vision and his/her hopes for his/her family’s future life.,qf8A44,,FMRD,yesno_na,1,32,TRUE,21,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+179,4.3 The Young Person displays an overall positive demeanor.,qf8A43,,FMRD,yesno_na,1,32,TRUE,20,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+178,4.2 The Young Person is able to provide examples of how he/she independently solved challenges in his/her life in the past 3 months.,qf8A42,,FMRD,yesno_na,1,32,TRUE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+177,4.1 The Young Person can provide examples of how he/she problem solves in constructive ways.,qf8A41,,FMRD,yesno_na,1,32,TRUE,18,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+176,3.6 When there has been violence the case plan and referral documentation confirm services have been accessed and met the intended purpose.,qf8A36,,FMRD,yesno_na,1,32,TRUE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+175,3.5 The Young Person can report an absence of violent discipline.,qf8A35,,FMRD,yesno_na,1,32,TRUE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+174,3.4 The Young Person can articulate appropriate ways to keep himself/herself safe.,qf8A34,,FMRD,yesno_na,1,32,TRUE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+173,3.3 The Young Person can clearly articulate and give examples of how to manage stress in nonviolent manner.,qf8A33,,FMRD,yesno_na,1,32,TRUE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+172,3.2 The Young Person can articulate appropriate ways to report and respond to violence.,qf8A32,,FMRD,yesno_na,1,32,TRUE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+171,3.1 The Young Person is currently free of violence exploitation or exposure to violence at home at school in the community and online. <small>(Note. If there is presence of violence initiate child protection reporting protocol.)</small>,qf8A31,,FMRD,yesno_na,1,32,TRUE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+170,2.4 Stigma is not a barrier to Young Person attending school.,qf8A24,,FMRD,yesno_na,1,32,TRUE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+169,2.3 The teachers are using inclusive teaching practices to meet the Young Person’s specific needs or circumstances.,qf8A23,,FMRD,yesno_na,1,32,TRUE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+168,2.2 The teacher is aware of Young Person’s special needs and/or circumstances.,qf8A22,,FMRD,yesno_na,1,32,TRUE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+167,2.1 The school is physically accessible for the child (including classrooms washrooms recreational areas and so forth).,qf8A21,,FMRD,yesno_na,1,32,TRUE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+166,1.7 The school has hygiene facilities inclusive for adolescent girls.,qf8A17,,FMRD,yesno_na,1,32,TRUE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+165,1.6 The Young Person reports enjoying education.,qf8A16,,FMRD,yesno_na,1,32,TRUE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+164,1.5 The Young Person reports feeling positive about his/her school or college performance.,qf8A15,,FMRD,yesno_na,1,32,TRUE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+163,1.4 The Young Person has all the required education materials (e.g. uniform shoes books toolkits).,qf8A14,,FMRD,yesno_na,1,32,TRUE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+162,1.3 The Young Person’s report card confirms regular attendance (i.e. not missing more than 5 days per month) and shows appropriate progression.,qf8A13,,FMRD,yesno_na,1,32,TRUE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+161,1.2 There is evidence of education program enrolment (i.e. receipt),qf8A12,,FMRD,yesno_na,1,32,TRUE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+160,1.1 The Young Person can move safely to education facility/school. (Note. If child cannot move safely then case cannot be closed.),qf8A11,,FMRD,yesno_na,1,32,TRUE,1,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+159,12.7 The caregiver can articulate plans for regular (e.g. food) and periodic (e.g. school fees) expenses.,qf7A127,,FMRD,yesno_na,1,7,TRUE,65,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+158,12.6 The caregiver can articulate plans to meet emergency expenses for the household.,qf7A126,,FMRD,yesno_na,1,7,TRUE,64,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+157,12.5 The caregiver was able to pay all required medical expenses for family members in the past 3 months.,qf7A125,,FMRD,yesno_na,1,7,TRUE,63,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+156,12.4 The caregiver or other family members can provide examples of how they met emergency expenses in the past 3 months.,qf7A124,,FMRD,yesno_na,1,7,TRUE,62,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+155,12.3 The caregiver or other family members can provide examples of how they met regular and planned expenses (e.g. food clothing shelter school) in the past 3 months.,qf7A123,,FMRD,yesno_na,1,7,TRUE,61,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+154,12.2 The household has regular savings (e.g. active participation in a village savings and loan association or Savings and Internal Lending Community).,qf7A122,,FMRD,yesno_na,1,7,TRUE,60,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+153,12.1 The household has a stable source of income (e.g. business formal employment cash transfer) and/or productive assets (e.g. livestock poultry).,qf7A121,,FMRD,yesno_na,1,7,TRUE,59,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+152,11.7 If the child is age 5 years or older he/she feels that the rules and consequences are applied consistently.,qf7A117,,FMRD,yesno_na,1,7,TRUE,58,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+151,11.6 The child easily articulates the rules of the house and the consequences should the rules be broken.,qf7A116,,FMRD,yesno_na,1,7,TRUE,57,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+150,11.5 The child seeks support and comfort from the caregiver in response to stressors.,qf7A115,,FMRD,yesno_na,1,7,TRUE,56,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+149,11.4 If the child is age 5 years or older and was hurt or sick in the past 3 months does the child confirm that the caregiver took care of him/her?,qf7A114,,FMRD,yesno_na,1,7,TRUE,55,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+148,11.3 The caregiver responds to the child when the caregiver hears the child or the child comes to the caregiver for help or comfort.,qf7A113,,FMRD,yesno_na,1,7,TRUE,54,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+147,11.2 The caregiver involves children to an ability and age-appropriate level in decisions that affect them.,qf7A112,,FMRD,yesno_na,1,7,TRUE,53,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+146,11.1 The caregiver applies household rules and consequences for breaking the rules consistently across all children in the household.,qf7A111,,FMRD,yesno_na,1,7,TRUE,52,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+145,10.5 If the child is age 5 years or older the child reports that he/she spends time with his/her caregiver and enjoys this time.,qf7A105,,FMRD,yesno_na,1,7,TRUE,51,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+144,10.4 If the child is age 5 years or older the child reports feeling his/her caregiver know his/her likes dislikes what makes him/her happy or sad.,qf7A104,,FMRD,yesno_na,1,7,TRUE,50,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+143,10.3 The caregiver speaks of the child with general positive regard in an age-appropriate way.,qf7A103,,FMRD,yesno_na,1,7,TRUE,49,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+142,10.2 The caregiver provides examples of how and when he/she spends time with the child in age-appropriate way.,qf7A102,,FMRD,yesno_na,1,7,TRUE,48,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+141,10.1 The caregiver can describe the child’s dislikes what makes the child happy or sad school performance names of friends and so on.,qf7A101,,FMRD,yesno_na,1,7,TRUE,47,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+140,9.5 If the child has a chronic illness or disability and is age 10 years or older the child is conversant in her/his treatment regimen as necessary.,qf7A95,,FMRD,yesno_na,1,7,TRUE,46,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+139,9.4 All members of the household are free from substance abuse.,qf7A94,,FMRD,yesno_na,1,7,TRUE,45,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+138,9.3 If the caregiver any child or any member of the household has a chronic illness or disability the caregiver is conversant in the treatment/therapy regimen as necessary.,qf7A93,,FMRD,yesno_na,1,7,TRUE,44,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+137,9.2 The child is up to date on immunizations. (Hint: Look for the immunization card to confirm.),qf7A92,,FMRD,yesno_na,1,7,TRUE,43,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+136,9.1 If the caregiver or any child in the household was referred for treatment services were accessed and met the intended purpose.,qf7A91,,FMRD,yesno_na,1,7,TRUE,42,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+135,8.4 If there are concerns about the child’s physical or mental development the child has accessed services.,qf7A84,,FMRD,yesno_na,1,7,TRUE,41,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+134,8.3 If child is between 6 years and 9 years old the caregiver confirms the child is physically and mentally developing in a manner similar to his/her age mates in the community.,qf7A83,,FMRD,yesno_na,1,7,TRUE,40,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+133,8.2 If caregiver notes (and observation confirms) developmental delays is there evidence of accessing appropriate support services (i.e. a copy of receipt of services received confirmation from service provider of services delivered)?,qf7A82,,FMRD,yesno_na,1,7,TRUE,39,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+132,8.1 If the child is 5 years or younger the caregiver confirms the child is walking talking and showing increasingly independent behaviors at a level similar to that of his/her age mates in the community.,qf7A81,,FMRD,yesno_na,1,7,TRUE,38,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+131,7.2 All members of the family eat balanced meals at least twice per day.,qf7A72,,FMRD,yesno_na,1,7,TRUE,37,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+130,7.1 The child eats balanced meals at least twice per day.,qf7A71,,FMRD,yesno_na,1,7,TRUE,36,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+129,6.5 The child has participated in a community activity in the past 3 months (e.g. extended family gatherings football match religious services).,qf7A65,,FMRD,yesno_na,1,7,TRUE,35,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+128,6.4 The child is able to participate in daily activities in the community (e.g. eating playing talking with other family members or friends).,qf7A64,,FMRD,yesno_na,1,7,TRUE,34,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+127,6.3 The child can identify and name people in his/her community to whom the child can talk and/or from whom he/she can seek help.,qf7A63,,FMRD,yesno_na,1,7,TRUE,33,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+126,6.2 The caregiver is a member of any community group (e.g. church mosque caregiver group savings group).,qf7A62,,FMRD,yesno_na,1,7,TRUE,32,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+125,6.1 The caregiver has participated in a community activity in the past 3 months (e.g. fundraising wedding funeral baraza).,qf7A61,,FMRD,yesno_na,1,7,TRUE,31,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+124,5.5 The child has a birth certificate.,qf7A55,,FMRD,yesno_na,1,7,TRUE,30,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+123,5.4 The caregiver has a national identification card (ID).,qf7A54,,FMRD,yesno_na,1,7,TRUE,29,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+122,5.3 The case plan and referral documentation confirm services have been accessed and met for the intended purpose.,qf7A53,,FMRD,yesno_na,1,7,TRUE,28,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+121,5.2 When services were needed the caregiver was able to access them.,qf7A52,,FMRD,yesno_na,1,7,TRUE,27,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+120,5.1 The caregiver is able to articulate where to access support services for himself/herself and his/her family.,qf7A51,,FMRD,yesno_na,1,7,TRUE,26,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+119,4.6 If the child is 5 years or older the child is able to express his/her hopes for his/her future life.,qf7A46,,FMRD,yesno_na,1,7,TRUE,25,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+118,4.5 There is an absence of (a) extreme sadness all the time (b) no interest in play or enjoyable activities (c) change of appetite for food.,qf7A45,,FMRD,yesno_na,1,7,TRUE,24,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+117,4.4 The child displays an overall positive demeanor which is confirmed by the caregiver or siblings.,qf7A44,,FMRD,yesno_na,1,7,TRUE,23,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+116,4.3 The caregiver can express a vision and his/her hopes for his/her family’s future life.,qf7A43,,FMRD,yesno_na,1,7,TRUE,22,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+115,4.2 The caregiver displays an overall positive demeanor.,qf7A42,,FMRD,yesno_na,1,7,TRUE,21,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+114,4.1 The caregiver can provide examples of how he/she problem solves in constructive ways.,qf7A41,,FMRD,yesno_na,1,7,TRUE,20,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+113,3.8 The child can report an absence of violent discipline.,qf7A38,,FMRD,yesno_na,1,7,TRUE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+112,3.7 If child aged is 5 years or older the child can articulate appropriate ways to report violence.,qf7A37,,FMRD,yesno_na,1,7,TRUE,18,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+111,3.6 The child is currently free of violence exploitation or exposure to violence at home at school in the community and online. <small>(Note: If there is presence of violence initiate child protection reporting protocol.)</small>,qf7A36,,FMRD,yesno_na,1,7,TRUE,17,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+110,3.5 When there has been violence the case plan and referral documentation confirm services have been accessed and met the intended purpose.,qf7A35,,FMRD,yesno_na,1,7,TRUE,16,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+109,3.4 The caregiver can clearly articulate and give examples of how to manage stress in a nonviolent manner..,qf7A34,,FMRD,yesno_na,1,7,TRUE,15,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+108,3.3 The caregiver can articulate positive and negative forms of discipline.,qf7A33,,FMRD,yesno_na,1,7,TRUE,14,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+107,3.2 The caregiver can articulate appropriate ways to report and respond to violence.,qf7A32,,FMRD,yesno_na,1,7,TRUE,13,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+106,3.1 The caregiver is currently free of violence exploitation or exposure to violence at home at school in the community and online.,qf7A31,,FMRD,yesno_na,1,7,TRUE,12,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+105,2.4 Stigma is not a barrier to the child attending school.,qf7A24,,FMRD,yesno_na,1,7,TRUE,11,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+104,2.3 The teachers are using inclusive teaching practices to meet the child’s specific needs or circumstances.,qf7A23,,FMRD,yesno_na,1,7,TRUE,10,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+103,2.2 The child’s teacher is aware of the child’s special needs and/or circumstances.,qf7A22,,FMRD,yesno_na,1,7,TRUE,9,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+102,2.1 The school is physically accessible for the child (including classrooms washrooms recreational areas etc.).,qf7A21,,FMRD,yesno_na,1,7,TRUE,8,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+101,1.7 The school has hygiene facilities inclusive for adolescent girls. <small>(Hint: Observe and ask child directly to confirm that menstruation does not present a barrier to attendance. This question is not applicable to boys; therefore score 1.)</small>,qf7A17,,FMRD,yesno_na,1,7,TRUE,7,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+100,1.6 The child reports enjoying education.,qf7A16,,FMRD,yesno_na,1,7,TRUE,6,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+99,1.5 The child reports feeling positive about his/her school performance.,qf7A15,,FMRD,yesno_na,1,7,TRUE,5,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+98,1.4 The child has all required uniform shoes books and so on.,qf7A14,,FMRD,yesno_na,1,7,TRUE,4,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+97,1.3 The child’s report card confirms regular attendance (i.e. not missing more than 5 days per month) and shows appropriate progression.,qf7A13,,FMRD,yesno_na,1,7,TRUE,3,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+96,1.2 There is evidence of school enrolment (i.e. receipt),qf7A12,,FMRD,yesno_na,1,7,TRUE,2,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+95,1.1 The child can move safely to education facility/school. (Note. If child cannot move safely then case cannot be closed.),qf7A11,,FMRD,yesno_na,1,7,TRUE,1,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+94,Application approved,Q19_approved,,FMRD,yesno_id,1,1,TRUE,19,2023-08-17 18:35:14.016892+00:00,2023-08-17 18:35:14.016905+00:00,FALSE
+93,Name of the officer,Q18_officer_name,,FMTF,,1,1,TRUE,18,2023-08-17 18:34:30.327718+00:00,2023-08-17 18:34:30.327735+00:00,FALSE
+92,Declaring officer,Q17_declare_officer,,FMSL,legal_declare_officer,1,1,TRUE,17,2023-08-17 18:49:20.667046+00:00,2023-08-17 18:49:20.667053+00:00,FALSE
+91,Any Special Circumstances,Q16_special_details,,FMTA,,1,1,TRUE,16,2023-08-17 18:29:06.881366+00:00,2023-08-17 18:29:06.881378+00:00,FALSE
+90,Case Summary,Q15_case_summary,,FMTA,,1,1,TRUE,15,2023-08-17 18:28:04.642719+00:00,2023-08-17 18:28:04.642732+00:00,FALSE
+89,Court Decision,Q14_court_decision,,FMSL,court_decision_id,1,1,TRUE,14,2023-08-17 18:26:06.455682+00:00,2023-08-17 18:26:06.455698+00:00,FALSE
+88,Representation,Q13_representation,,FMSL,legal_rep_id,1,1,TRUE,13,2023-08-17 18:26:45.321052+00:00,2023-08-17 18:26:45.321058+00:00,FALSE
+87,Number of times applicant attended court,Q12_court_appearance_count,,FMTF,,2,1,TRUE,12,2023-08-17 10:25:57.440065+00:00,2023-08-17 10:25:57.440076+00:00,FALSE
+86,Case Status,Q11_case_status,,FMSL,case_status_id,1,1,TRUE,11,2023-08-17 10:24:21.023605+00:00,2023-08-17 10:24:21.023617+00:00,FALSE
+85,Case Number,Q10_case_number,,FMTF,,1,1,TRUE,9,2023-08-17 10:22:38.503553+00:00,2023-08-17 10:22:38.503559+00:00,FALSE
+84,Court Station,Q9_court_station,,FMTF,,1,1,TRUE,9,2023-08-17 07:02:03.184347+00:00,2023-08-17 07:02:03.184357+00:00,FALSE
+83,Date the case filed,Q8_date_case_filed,,FMTF,,3,1,TRUE,8,2023-08-17 07:00:09.616218+00:00,2023-08-17 07:00:09.616229+00:00,FALSE
+82,State the understanding of the client on the nature of assistance given,Q7_other_legal_detail,,FMTA,,1,1,TRUE,6,2023-08-17 06:56:26.656231+00:00,2023-08-17 06:56:26.656237+00:00,FALSE
+81,State the name of the Institution from which it was sought,Q6_other_legal_provider,,FMTF,,1,1,TRUE,6,2023-08-17 06:54:39.558679+00:00,2023-08-17 06:54:39.558700+00:00,FALSE
+80,Has legal aid been sought on the same matter,Q5_other_legal_aid,,FMSL,yesno_id,1,1,TRUE,5,2023-08-17 06:44:51.130121+00:00,2023-08-17 06:44:51.130137+00:00,FALSE
+79,Name of the service provider,Q4_service_provider_name,,FMTF,,1,1,TRUE,5,2023-08-17 06:44:07.673473+00:00,2023-08-17 06:44:07.673479+00:00,FALSE
+78,Category of service provider,Q3_service_provider_type,,FMSL,legal_services_provider_id,1,1,TRUE,3,2023-08-17 06:42:51.617953+00:00,2023-08-17 06:42:51.617964+00:00,FALSE
+77,Type of Offence / Case Category,Q1_case_category,,FMSL,case_category_id,1,1,TRUE,2,2023-08-17 06:40:30.978625+00:00,2023-08-17 06:40:30.978632+00:00,FALSE
+76,Case History,Q2_case_history,,FMTA,,1,6,TRUE,2,2023-08-16 18:33:28.063982+00:00,2023-08-16 18:33:28.063993+00:00,FALSE
+75,Investigating Officer,Q1_inv_officer,,FMTF,,1,6,TRUE,1,2023-08-16 18:32:53.419829+00:00,2023-08-16 18:32:53.419845+00:00,FALSE
+74,Previous Orders Issued details,Q14_previous_order_details,,FMTA,,1,5,FALSE,14,2023-08-16 15:26:16.813942+00:00,2023-08-16 15:26:16.813947+00:00,FALSE
+73,Previous Orders Issued,Q13_previous_order,,FMSL,yesno_id,1,5,FALSE,13,2023-08-16 15:23:48.321404+00:00,2023-08-16 15:23:48.321414+00:00,FALSE
+72,Committal count,Q12_committal_period,,FMTF,,2,5,FALSE,12,2023-08-16 16:23:07.463786+00:00,2023-08-16 16:23:07.463792+00:00,FALSE
+71,Committal Period,Q11_committal_period_units,,FMSL,period_id,1,5,FALSE,11,2023-08-16 16:23:44.127994+00:00,2023-08-16 16:23:44.128000+00:00,FALSE
+70,Court Name,Q10_court_name,,FMTF,,1,5,FALSE,10,2023-08-16 15:26:02.211678+00:00,2023-08-16 15:26:02.211683+00:00,FALSE
+69,Court Order date,Q9_court_order_date,,FMTF,,3,5,FALSE,9,2023-08-16 15:16:01.826229+00:00,2023-08-16 15:16:01.826242+00:00,FALSE
+68,Court Order Number,Q8_court_order_num,,FMTF,,1,5,FALSE,8,2023-08-16 15:17:03.471635+00:00,2023-08-16 15:17:03.471646+00:00,FALSE
+67,OB Number,Q7_ob_number,,FMTF,,1,5,FALSE,7,2023-08-16 15:25:53.910567+00:00,2023-08-16 15:25:53.910570+00:00,FALSE
+66,Number of days being held,Q6_holding_days,,FMTF,,2,5,FALSE,6,2023-08-16 15:13:05.463101+00:00,2023-08-16 15:13:05.463110+00:00,FALSE
+65,Has Committal,Q5_has_committal,,FMRD,yesno_id,1,5,TRUE,5,2023-08-16 13:00:30.828720+00:00,2023-08-16 13:00:30.828725+00:00,FALSE
+64,Admission Reason,Q4_admission_reason,,FMSL,admission_reason_id,1,5,TRUE,4,2023-08-16 12:58:46.215733+00:00,2023-08-16 12:58:46.215743+00:00,FALSE
+63,Admission Type,Q3_admission_type,,FMSL,admission_type_id,1,5,TRUE,3,2023-08-16 12:56:59.012637+00:00,2023-08-16 12:56:59.012647+00:00,FALSE
+62,Institution Name,Q2_admission_inst,,FMSL,,2,5,TRUE,2,2023-08-16 15:37:44.346530+00:00,2023-08-16 15:37:44.346536+00:00,FALSE
+61,Admission Number,Q1_admission_num,,FMTF,,1,5,TRUE,1,2023-08-16 12:40:55.668360+00:00,2023-08-16 12:40:55.668373+00:00,FALSE
+60,Area 9 : Comment,Q9_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+59,Area 9 : Attitudes / Orientation,Q9_area,,FMCB,si_risk_assess_a9,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+58,Area 8 : Comment,Q8_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+57,Area 8 : Personality / Behaviour,Q8_area,,FMCB,si_risk_assess_a8,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+56,Area 7 : Comment,Q7_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+55,Area 7 : Street Experience,Q7_area,,FMCB,si_risk_assess_a7,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+54,Area 6 : Comment,Q6_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+53,Area 6: Leisure / Recreation,Q6_area,,FMCB,si_risk_assess_a6,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+52,Area 5 : Comment,Q5_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+51,Area 5 : Substance Abuse,Q5_area,,FMCB,si_risk_assess_a5,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+50,Area 4 : Comment,Q4_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+49,Area 4 : Peer Relations,Q4_area,,FMCB,si_risk_assess_a4,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+48,Area 3 : Comment,Q3_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+47,Area 3 : Education / Employment,Q3_area,,FMCB,si_risk_assess_a3,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+46,Area 2 : Comment,Q2_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+45,Area 2 : Family Circumstances / Parenting,Q2_area,,FMCB,si_risk_assess_a2,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+44,Area 1 : Comment,Q1_area_comment,,FMTA,,1,4,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+43,Area 1 : Prior or Current Offences / Dispositions,Q1_area,,FMCB,si_risk_assess_a1,1,4,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+42,Q15 Comment,Q15_development_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+41,"Who is exposed to any circumstances likely to interfere with his physical, mental, and social development, without the existence of appropriate intervention strategies",Q15_development,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+40,Q14 Comment,Q4_disabled_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+39,"Who is displaced as a consequence of war, civil disturbances or natural disasters",Q14_displaced,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+38,Q13 Comment,Q13_harmful_work_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+37,"Who is engaged in any work likely to harm his health, education, mental or moral development",Q13_harmful_work,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+36,Q12 Comment,Q12_sexual_abuse_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+35,Who has been sexually abused or is likely to be exposed to sexual abuse and exploitation including prostitution and pornography,Q12_sexual_abuse,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+34,Q11 Comment,Q11_disabled_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+33,Who is disabled and is being unlawfully confined or ill-treated,Q11_disabled,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+32,Q10 Comment,Q10_no_alt_care_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+31,Whose parent is terminally ill with no access to alternative care,Q10_no_alt_care,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+30,Q9 Comment,Q9_terminal_illness_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+29,Who is pregnant and living within the same household as the perpetrator who committed the offence,Q9_terminal_illness,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+28,Q8 Comment,Q8_violence_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+27,Who is exposed to domestic violence,Q8_violence,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+26,Q7 Comment,Q7_premise_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+25,"Who is being kept in any premises which, in the opinion of a medical officer, are overcrowded, unsanitary or dangerous;",Q7_premise,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+24,Q6 Comment,Q6_fgm_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+23,"Who, being a female is subjected or is likely to be subjected to female circumcision or early marriage or customs and practices prejudicial to the child’s life, education, and health;",Q6_fgm,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+22,Q5 Comment,Q5_education_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+21,Who is prevented from receiving education and there are no proper interventions in place,Q5_education,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+20,Q4 Comment,Q4_parent_unfit_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+19,"Whose parent or guardian does not, or is unable or unfit to exercise proper care and guardianship and there is no alternative care option",Q4_parent_unfit,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+18,Q3 Comment,Q3_parent_imprisoned_comment,,FMTA,,1,3,FALSE,3,2023-08-16 07:29:08.285777+00:00,2023-08-16 07:29:08.285790+00:00,FALSE
+17,The parent has been imprisoned and there are no alternative care options,Q3_parent_imprisoned,,FMRD,yesno_id,1,3,TRUE,3,2023-08-16 07:28:33.459644+00:00,2023-08-16 07:28:33.459654+00:00,FALSE
+16,Q2 Comment,Q2_found_begging_comment,,FMTA,,1,3,FALSE,2,2023-08-16 07:29:15.281085+00:00,2023-08-16 07:29:15.281093+00:00,FALSE
+15,Found begging or receiving alms and parents or guardians cannot be traced,Q2_found_begging,,FMRD,yesno_id,1,3,TRUE,2,2023-08-16 07:19:50.780418+00:00,2023-08-16 07:19:50.780429+00:00,FALSE
+14,Q1 - Comment,Q1_no_parent_comment,,FMTA,,1,3,FALSE,2,2023-08-16 07:16:26.900241+00:00,2023-08-16 07:16:26.900245+00:00,FALSE
+13,"Has no parent or guardian, or has been abandoned by his parent or guardian, or is destitute",Q1_no_parent,,FMRD,yesno_id,1,3,TRUE,1,2023-08-16 07:13:06.683762+00:00,2023-08-16 07:13:06.683766+00:00,FALSE
+12,Sub County Children Officer,Q11_scco,,FMTF,,1,2,TRUE,11,2023-08-15 08:47:10.675629+00:00,2023-08-15 08:47:10.675639+00:00,FALSE
+11,Designation,Q10_designation,,FMTF,,1,2,TRUE,10,2023-08-15 08:46:38.210964+00:00,2023-08-15 08:46:38.210973+00:00,FALSE
+10,Requesting Officer,Q9_request_officer,,FMTF,,1,2,TRUE,9,2023-08-15 08:45:56.745827+00:00,2023-08-15 08:45:56.745837+00:00,FALSE
+9,Child held at name,Q8_child_held_at_name,,FMTF,,1,2,TRUE,8,2023-08-15 08:39:53.902611+00:00,2023-08-15 08:39:53.902624+00:00,FALSE
+8,Child held at,Q7_child_held_at,,FMSL,si_holding_place_id,1,2,TRUE,7,2023-08-15 12:14:10.095663+00:00,2023-08-15 12:14:10.095669+00:00,FALSE
+7,Date of next mention,Q6_next_mention_date,,FMTF,,3,2,TRUE,5,2023-08-15 08:40:07.922430+00:00,2023-08-15 08:40:07.922435+00:00,FALSE
+6,Magistrate / Judge Name,Q5_magistrate_name,,FMTF,,1,2,TRUE,5,2023-08-15 08:29:54.812102+00:00,2023-08-15 08:29:54.812116+00:00,FALSE
+5,Court Number,Q4_court_num,,FMTF,,1,2,TRUE,4,2023-08-15 08:33:47.449698+00:00,2023-08-15 08:33:47.449704+00:00,FALSE
+4,P&C Number,Q3_pnc_num,,FMTF,,1,2,TRUE,3,2023-08-15 08:27:25.631698+00:00,2023-08-15 08:27:25.631709+00:00,FALSE
+3,CRC Number,Q2_crc_num,,FMTF,,1,2,TRUE,2,2023-08-15 08:23:27.318875+00:00,2023-08-15 08:23:27.318888+00:00,FALSE
+2,Reference No,Q1_ref_num,,FMTF,,1,2,TRUE,1,2023-08-15 08:12:37.311354+00:00,2023-08-15 08:12:37.311365+00:00,FALSE
+1,Type of legal aid services required,Q2_aid_type,,FMSL,legal_services_id,1,1,TRUE,1,2023-08-17 06:40:48.740074+00:00,2023-08-17 06:40:48.740082+00:00,FALSE

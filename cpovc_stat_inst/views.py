@@ -20,7 +20,7 @@ from .functions import (
 from cpovc_main.functions import convert_date, get_dict
 
 from cpovc_forms.functions import get_person_ids
-from cpovc_registry.models import RegPerson
+from cpovc_registry.models import RegPerson, RegOrgUnit
 
 from .models import SI_Admission, SI_VacancyApp, SIEvents
 
@@ -28,6 +28,7 @@ from cpovc_forms.models import OVCCaseRecord, OVCPlacement
 from cpovc_forms.forms import OVCSearchForm
 
 # Create your views here.
+from cpovc_afc.forms import AFCForm2A
 
 
 def si_home(request):
@@ -124,7 +125,6 @@ def SI_admissions(request, id):
 
 
 def SI_childIdentification(request, person_id):
-
 
     form = SIChildIdentification()
     context = {
@@ -367,22 +367,22 @@ def si_childprofile(request, id):
 
 
 def SI_child_view(request, id):
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    child = person_id.values()[0]
-
-    creg = {}
-    creg['is_active '] = True
-
-    form = ""
+    """ Child View"""
     try:
-        if request.method == 'POST':
-            pass
-
-        context = {
-            'form': form,
-            'child': child
-        }
+        person_id = RegPerson.objects.filter(id=id, is_void=False)
+        placement = OVCPlacement.objects.filter(
+            person_id=id, is_void=False, is_active=True).first()
+        unit_type = None
+        unit_name = 'Not placed'
+        if placement:
+            org_unit_id = placement.residential_institution_id
+            org_unit = RegOrgUnit.objects.get(id=org_unit_id)
+            unit_type = org_unit.org_unit_type_id
+            unit_name = org_unit.org_unit_name
+        # unit_type = 'XXXX'
+        child = person_id.values()[0]
+        context = {'child': child, 'placement': placement,
+                   'unit_type': unit_type, 'unit_name': unit_name}
         return render(request, 'stat_inst/view_child.html', context)
 
     except Exception as e:
@@ -396,7 +396,9 @@ def si_forms(request, form_id, id):
         person_id = int(id)
         form = SIForm(form_id)
         form_data = get_form(form_id)
-        form_name = form_data['form_name'] if 'form_name' in form_data else ''
+        form_name = form_data['form_name']
+        f_code = form_data['form_code']
+        form_code = f_code if f_code else form_id
         if request.method == 'POST':
             save_form(request, form_id, id)
             url = reverse(SI_child_view, kwargs={'id': id})
@@ -416,12 +418,16 @@ def si_forms(request, form_id, id):
         case.vacancies = vacancies
         case.events = events
         case.cases = cases
+        org_types = ['TNRR', 'TNAP']
+        orgs = RegOrgUnit.objects.filter(
+            org_unit_type_id__in=org_types,
+            is_void=False).order_by('org_unit_type_id')
         # tmpls = ['FMSI001F', 'FMSI024F']
         # tmpl = form_id if form_id in tmpls else 'FMSI000F'
         tmpl = '%s.html' % form_id
         context = {'form': form, 'case': case, 'vals': vals,
                    'form_id': form_id, 'form_name': form_name,
-                   'edit_form': 1}
+                   'edit_form': 1, 'orgs': orgs, 'form_code': form_code}
         return render(request, 'si/%s' % tmpl, context)
 
     except Exception as e:
@@ -506,6 +512,20 @@ def si_forms_action(request):
                     "message": "Error changing record %s" % (str(e))}
         return JsonResponse(
             response, content_type='application/json', safe=False)
+    else:
+        return JsonResponse(
+            response, content_type='application/json', safe=False)
+
+
+def si_test(request):
+    """Method to Test"""
+    try:
+        form = AFCForm2A()
+        for f in form:
+            print(f.choices)
+        response = []
+    except Exception as e:
+        raise e
     else:
         return JsonResponse(
             response, content_type='application/json', safe=False)

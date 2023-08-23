@@ -2062,12 +2062,6 @@ class SIForm(forms.Form):
                     widget=forms.CheckboxSelectMultiple(
                         attrs={'data-parsley-errors-container': err_id}))
             else:
-                f_data = forms.CharField(
-                    required=is_required,
-                    label=f_label,
-                    widget=forms.TextInput(
-                        attrs={'placeholder': '',
-                               'class': 'form-control', 'id': f_id}))
                 if set_id == 3:
                     f_data = forms.DateField(
                         required=is_required,
@@ -2076,6 +2070,21 @@ class SIForm(forms.Form):
                             attrs={'placeholder': '',
                                    'class': 'form-control event_date',
                                    'id': f_id}))
+                elif set_id == 2:
+                    f_data = forms.IntegerField(
+                        required=is_required,
+                        label=f_label,
+                        widget=forms.NumberInput(
+                            attrs={'placeholder': '',
+                                   'class': 'form-control',
+                                   'id': f_id}))
+                else:
+                    f_data = forms.CharField(
+                        required=is_required,
+                        label=f_label,
+                        widget=forms.TextInput(
+                            attrs={'placeholder': '',
+                                   'class': 'form-control', 'id': f_id}))
 
             self.fields[f_id] = f_data
 

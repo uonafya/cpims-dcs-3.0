@@ -235,8 +235,8 @@ table {
                                 </div>
                                 <div class="form-group">                                      
                                         <div class="col-md-12">
-                                            <b>If case was filed;</b>
                                             <hr>
+                                            <b>If case was filed;</b>
                                         </div>
                                 </div>
                                 <div class="form-group">                                      
@@ -248,8 +248,77 @@ table {
                                             {{ form.Q8_date_case_filed }}
                                         </div>
                                 </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q9_court_station.label }}
+                                            {% if form.Q9_court_station.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-3">
+                                            {{ form.Q9_court_station }}
+                                        </div>
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q10_case_number.label }}
+                                            {% if form.Q10_case_number.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-3">
+                                            {{ form.Q10_case_number }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q11_case_status.label }}
+                                            {% if form.Q11_case_status.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-3">
+                                            {{ form.Q11_case_status }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q12_court_appearance_count.label }}
+                                            {% if form.Q12_court_appearance_count.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-3">
+                                            {{ form.Q12_court_appearance_count }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q13_representation.label }}
+                                            {% if form.Q13_representation.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-3">
+                                            {{ form.Q13_representation }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q14_court_decision.label }}
+                                            {% if form.Q14_court_decision.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-3">
+                                            {{ form.Q14_court_decision }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q15_case_summary.label }}
+                                            {% if form.Q15_case_summary.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-8">
+                                            {{ form.Q15_case_summary }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q16_special_details.label }}
+                                            {% if form.Q16_special_details.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-8">
+                                            {{ form.Q16_special_details }}
+                                        </div>
+                                </div>
 
-                                
                             </fieldset>
                         </div>
                         <!-- end wizard step-2 -->
@@ -258,11 +327,31 @@ table {
                         <div class="tab-pane">
                             <fieldset>
                                 <legend class="pull-left width-full">Section 3 : Declaration</legend>
-                                <div class="form-group">
-                                      
-                                        <label class="col-md-2 control-label">School Admission No</label>
-                                        <div class="col-md-3">
-                                            {{ form.admission_no }}
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q17_declare_officer.label }}
+                                            {% if form.Q17_declare_officer.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-8">
+                                            {{ form.Q17_declare_officer }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q18_officer_name.label }}
+                                            {% if form.Q18_officer_name.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-8">
+                                            {{ form.Q18_officer_name }}
+                                        </div>
+                                </div>
+                                <div class="form-group">                                      
+                                        <label class="col-md-2 control-label">
+                                            {{ form.Q19_approved.label }}
+                                            {% if form.Q19_approved.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        </label>
+                                        <div class="col-md-8">
+                                            {{ form.Q19_approved }}
                                         </div>
                                 </div>
                             </fieldset>
@@ -287,6 +376,90 @@ table {
                         </div>
                     </div>
                 </form>
+                {% if edit_form > 0 %}
+
+                <div class="row">
+                    <!-- begin col-12 -->
+                    <div class="col-md-12">
+                        <!-- begin panel -->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-heading-btn">
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                </div>                          
+                                <h4 class="panel-title"><b>Past Events</b></h4>                    
+                            </div>
+
+                            <div class="panel-body">
+                                <div  class="panel panel-inverse">
+                                    <div id="case-events"  class="table-responsive">
+                                        <table id="tableData" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr> 
+                                                    <th>#</th>                                 
+                                                    <th>Event Date</th>                
+                                                    <th>Officer</th> 
+                                                    <th width="25%">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if case.events %}
+                                                {% for vacancy in case.events %}
+                                                <tr id="si_row-{{ vacancy.pk }}"> 
+                                                    <td>{{ forloop.counter }}</td>                                 
+                                                    <td>{{ vacancy.event_date }}</td>
+                                                    <td>N/A</td>
+        
+                                                    <td>
+                                                        <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
+                                                            <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View Details</button>
+                                                        </a>
+
+                                                        <!-- Modal -->
+                                                         <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div style="background-color:#d9edf7" class="modal-header">
+                                                                    <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete Vacancy Application - {{ vacancy.date_of_application }}</strong></h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                    <p>Are you sure you want to delete this Assessment dated {{ vacancy.date_of_application }} ? </p>
+                                                                    <br>
+                                                                    <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                                    <hr>
+                                                                    <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                                    <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                        <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
+                                                            <i class="fa fa-trash"></i> Delete
+                                                        </a>                                                        
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                {% else %}
+                                                <tr>
+                                                    <td colspan="6">No previous events available</td>
+                                                </tr>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <br><br>                           
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end panel -->
+                    </div>
+                    <!-- end col-12 -->
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -296,6 +469,38 @@ table {
 </div>
 <!-- end row -->
 
+<!-- Modal -->
+<div  class="modal fade" id="successMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #8f9191">
+            <div style="background-color: #d9edf7" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Successful Deletion of Event</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>Deleted successfully!</p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="errorMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div style="background-color: #ff9966" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Deletion NOT completed.</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>This item can not be deleted. <span id="msg_id"></span></p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block lazy_javascript_code %}
@@ -303,6 +508,35 @@ table {
 
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script>
+// Delete Django Ajax Call
+function deleteEvent(form_id, event_id) {
+    var csrftoken = $.cookie('csrftoken');
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'si_form_delete' %}",
+        
+        data: {'form_id': form_id, 'event_id': event_id,
+               'csrfmiddlewaretoken': csrftoken },
+        dataType: 'json',
+        
+        success: function (data) {
+            if (data.deleted == 1) {
+                console.log(data);
+              $("#tableData #si_row-" + event_id).remove();
+              $("#successMsg").modal('show');
+            }
+            if(data.deleted == 0){
+                console.log(data.days)
+                $("#msg_id").html(data.message);
+                $("#errorMsg").modal('show');
+    
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
 
 $(document).ready(function() {
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });

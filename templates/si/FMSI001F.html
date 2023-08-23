@@ -354,6 +354,17 @@ table {
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr class="highlight">
+                                                                                        <td class="field">Institution Name</td>
+                                                                                        <td>
+                                                                                            <select class="form-control" name="org_unit">
+                                                                                                <option value="">Please Select</option>
+                                                                                                {% for org in orgs %}
+                                                                                                <option value="{{ org.id }}">{{ org.org_unit_name }}</option>
+                                                                                                {% endfor %}
+                                                                                            </select>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr class="highlight">
                                                                                         <td class="field">Reason</td>
                                                                                         <td><textarea class="form-control" name="reason-{{ vacancy.pk }}" id="reason-{{ vacancy.pk }}" placeholder="Textarea" rows="5"></textarea></td>
                                                                                     </tr>

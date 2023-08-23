@@ -1,0 +1,21 @@
+court_reason_id,As a child witness
+court_reason_id,Hostile witness
+court_reason_id,Perpetrator
+health_condition_id,Appears healthy
+health_condition_id,Appears normal      
+health_condition_id,Appears challenged
+health_condition_id,Challenged verified   
+court_services_id,Interpreter
+court_services_id,Sign language interpreter     
+court_services_id,Assistive devices
+court_services_id,Pre- trial 
+court_session_id,Physical
+court_session_id,Virtual
+court_session_type_id,Camera
+court_session_type_id,Open court
+court_session_type_id,At the remand
+court_session_type_id,Mobile court
+court_recommend_services_id,Counseling
+court_recommend_services_id,Medical care
+court_recommend_services_id,Age assessment   
+court_recommend_services_id,Other

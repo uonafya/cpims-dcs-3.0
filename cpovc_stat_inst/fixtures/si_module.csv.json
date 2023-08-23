@@ -814,5 +814,3397 @@
             "sms_keyword": false,
             "is_void": false
         }
+    },
+    {
+        "pk": 42051,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "legal_services_id",
+            "item_category": "Legal services",
+            "item_id": "LSPRB",
+            "item_description": "Pro-bono",
+            "item_description_short": "Pro-bono",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42052,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "legal_services_id",
+            "item_category": "Legal services",
+            "item_id": "LSLPR",
+            "item_description": "Legal representation",
+            "item_description_short": "Legal representation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42053,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "legal_services_id",
+            "item_category": "Legal services",
+            "item_id": "LSPBA",
+            "item_description": "Plea bargaining",
+            "item_description_short": "Plea bargaining",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42054,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "legal_services_id",
+            "item_category": "Legal services",
+            "item_id": "LSSBB",
+            "item_description": "Sensitization on bail and bond",
+            "item_description_short": "Sensitization on bail and bond",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42055,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "legal_services_id",
+            "item_category": "Legal services",
+            "item_id": "LSTSR",
+            "item_description": "Training in self-representation",
+            "item_description_short": "Training in self-representation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42056,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "legal_services_provider_id",
+            "item_category": "Legal services provider",
+            "item_id": "LSPGV",
+            "item_description": "Government Institution",
+            "item_description_short": "Government Institution",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42057,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "legal_services_provider_id",
+            "item_category": "Legal services provider",
+            "item_id": "LSPNG",
+            "item_description": "Non-State Institution",
+            "item_description_short": "Non-State Institution",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42058,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "case_status_id",
+            "item_category": "Case status",
+            "item_id": "LCSFR",
+            "item_description": "Fresh",
+            "item_description_short": "Fresh",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42059,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "case_status_id",
+            "item_category": "Case status",
+            "item_id": "LCSPH",
+            "item_description": "Partly heard",
+            "item_description_short": "Partly heard",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42060,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "case_status_id",
+            "item_category": "Case status",
+            "item_id": "LCSFI",
+            "item_description": "Finalized",
+            "item_description_short": "Finalized",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42061,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "case_status_id",
+            "item_category": "Case status",
+            "item_id": "LCSUK",
+            "item_description": "Unknown",
+            "item_description_short": "Unknown",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42062,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "legal_rep_id",
+            "item_category": "Legal representation",
+            "item_id": "LPPRP",
+            "item_description": "Pro bono",
+            "item_description_short": "Pro bono",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42063,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "legal_rep_id",
+            "item_category": "Legal representation",
+            "item_id": "LPPUP",
+            "item_description": "Paid-up advocate",
+            "item_description_short": "Paid-up advocate",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42064,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "legal_rep_id",
+            "item_category": "Legal representation",
+            "item_id": "LPPRS",
+            "item_description": "Pro se",
+            "item_description_short": "Pro se",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42065,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "court_decision_id",
+            "item_category": "Court decision",
+            "item_id": "CDINT",
+            "item_description": "Interim",
+            "item_description_short": "Interim",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42066,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "court_decision_id",
+            "item_category": "Court decision",
+            "item_id": "CDFIN",
+            "item_description": "Final",
+            "item_description_short": "Final",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42067,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "legal_declare_officer",
+            "item_category": "Legal declaration officer",
+            "item_id": "LDCO",
+            "item_description": "Secretary/Children officer",
+            "item_description_short": "Secretary/Children officer",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42068,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "legal_declare_officer",
+            "item_category": "Legal declaration officer",
+            "item_id": "LDPA",
+            "item_description": "Power of Attorney",
+            "item_description_short": "Power of Attorney",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42069,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "legal_declare_officer",
+            "item_category": "Legal declaration officer",
+            "item_id": "LDPR",
+            "item_description": "Parent",
+            "item_description_short": "Parent",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42070,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "legal_declare_officer",
+            "item_category": "Legal declaration officer",
+            "item_id": "LDGD",
+            "item_description": "Guardian",
+            "item_description_short": "Guardian",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42071,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "ref_reasons_id",
+            "item_category": "Referral reasons",
+            "item_id": "RFRCO",
+            "item_description": "By Court Order",
+            "item_description_short": "By Court Order",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42072,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "ref_reasons_id",
+            "item_category": "Referral reasons",
+            "item_id": "RFRSP",
+            "item_description": "Supervision",
+            "item_description_short": "Supervision",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42073,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "ref_reasons_id",
+            "item_category": "Referral reasons",
+            "item_id": "RFROT",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42074,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDCR",
+            "item_description": "Case Record Sheet",
+            "item_description_short": "Case Record Sheet",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42075,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDSI",
+            "item_description": "Social Inquiry Report",
+            "item_description_short": "Social Inquiry Report",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42076,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDCO",
+            "item_description": "Court Order",
+            "item_description_short": "Court Order",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42077,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDAF",
+            "item_description": "Assessment form",
+            "item_description_short": "Assessment form",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42078,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDWP",
+            "item_description": "Written promise",
+            "item_description_short": "Written promise",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42079,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDOT",
+            "item_description": "Any other document,  e.g. Medical Report / Birth Certificate",
+            "item_description_short": "Any other document,  e.g. Medical Report / Birth Certificate",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42080,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDIP",
+            "item_description": "Individual Treatment Plan",
+            "item_description_short": "Individual Treatment Plan",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42081,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "ref_documents_id",
+            "item_category": "Referral documents",
+            "item_id": "RFDMP",
+            "item_description": "Monthly progress report",
+            "item_description_short": "Monthly progress report",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42082,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "reunification_basis_id",
+            "item_category": "Reunification basis",
+            "item_id": "REUCO",
+            "item_description": "Court order (Expiry of the order,  Express order)",
+            "item_description_short": "Court order (Expiry of the order,  Express order)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42083,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "reunification_basis_id",
+            "item_category": "Reunification basis",
+            "item_id": "REUSC",
+            "item_description": "Authorization letter from SCCO",
+            "item_description_short": "Authorization letter from SCCO",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42084,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "reunification_how_id",
+            "item_category": "Reunification basis",
+            "item_id": "REHRP",
+            "item_description": "Release to the parent at the institution",
+            "item_description_short": "Release to the parent at the institution",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42085,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "reunification_how_id",
+            "item_category": "Reunification basis",
+            "item_id": "REHTF",
+            "item_description": "Taken to the family",
+            "item_description_short": "Taken to the family",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42086,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "reunification_followup_ids",
+            "item_category": "Reunification follow up",
+            "item_id": "RFUSU",
+            "item_description": "Supervision",
+            "item_description_short": "Supervision",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42087,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "reunification_followup_ids",
+            "item_category": "Reunification follow up",
+            "item_id": "RFUFS",
+            "item_description": "Family Strengthening",
+            "item_description_short": "Family Strengthening",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42088,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "reunification_followup_ids",
+            "item_category": "Reunification follow up",
+            "item_id": "RFUCO",
+            "item_description": "Counselling",
+            "item_description_short": "Counselling",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42089,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "reunification_followup_ids",
+            "item_category": "Reunification follow up",
+            "item_id": "RFUES",
+            "item_description": "Education Support",
+            "item_description_short": "Education Support",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42090,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "reunification_followup_ids",
+            "item_category": "Reunification follow up",
+            "item_id": "RFUEE",
+            "item_description": "Economic Empowerment: Assistive Devices",
+            "item_description_short": "Economic Empowerment: Assistive Devices",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42091,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "reunification_followup_ids",
+            "item_category": "Reunification follow up",
+            "item_id": "RFUTK",
+            "item_description": "Income Generating Tool Kits",
+            "item_description_short": "Income Generating Tool Kits",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42092,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counselling_type_id",
+            "item_category": "Counselling type",
+            "item_id": "COTIC",
+            "item_description": "Individual counselling",
+            "item_description_short": "Individual counselling",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42093,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counselling_type_id",
+            "item_category": "Counselling type",
+            "item_id": "COTGC",
+            "item_description": "Group counselling",
+            "item_description_short": "Group counselling",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42094,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counselling_reason_id",
+            "item_category": "Counselling type",
+            "item_id": "CRRO",
+            "item_description": "Routine",
+            "item_description_short": "Routine",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42095,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counselling_reason_id",
+            "item_category": "Counselling type",
+            "item_id": "CRCI",
+            "item_description": "Child Initiated",
+            "item_description_short": "Child Initiated",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42096,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counselling_reason_id",
+            "item_category": "Counselling type",
+            "item_id": "CRII",
+            "item_description": "Institute Initiated",
+            "item_description_short": "Institute Initiated",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42097,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "counselling_reason_id",
+            "item_category": "Counselling type",
+            "item_id": "CRPI",
+            "item_description": "Parent Initiated",
+            "item_description_short": "Parent Initiated",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42098,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "counselling_reason_id",
+            "item_category": "Counselling type",
+            "item_id": "CRCOI",
+            "item_description": "Court Initiated",
+            "item_description_short": "Court Initiated",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42099,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "counselling_reason_id",
+            "item_category": "Counselling type",
+            "item_id": "CROT",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42100,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counselling_attendance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CATPU",
+            "item_description": "Punctual",
+            "item_description_short": "Punctual",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42101,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counselling_attendance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CATOT",
+            "item_description": "Occasionally Tardy",
+            "item_description_short": "Occasionally Tardy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42102,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counselling_attendance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CATHL",
+            "item_description": "Habitual Late",
+            "item_description_short": "Habitual Late",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42103,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counselling_attendance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CATOT",
+            "item_description": "Other",
+            "item_description_short": "Other",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42104,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counselling_appearance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CAPNC",
+            "item_description": "Neat - Clean",
+            "item_description_short": "Neat - Clean",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42105,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "counselling_appearance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CAUNK",
+            "item_description": "Unkempt",
+            "item_description_short": "Unkempt",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42106,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "counselling_appearance_id",
+            "item_category": "Counselling attendance",
+            "item_id": "CAOTH",
+            "item_description": "Other",
+            "item_description_short": "Other",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42107,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counselling_attitude_id",
+            "item_category": "Couselling attitude",
+            "item_id": "CATTW",
+            "item_description": "Willing",
+            "item_description_short": "Willing",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42108,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counselling_attitude_id",
+            "item_category": "Couselling attitude",
+            "item_id": "CATTE",
+            "item_description": "Eager",
+            "item_description_short": "Eager",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42109,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counselling_attitude_id",
+            "item_category": "Couselling attitude",
+            "item_id": "CATTP",
+            "item_description": "Pleasant",
+            "item_description_short": "Pleasant",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42110,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counselling_attitude_id",
+            "item_category": "Couselling attitude",
+            "item_id": "CATTO",
+            "item_description": "Other",
+            "item_description_short": "Other",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42111,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI01",
+            "item_description": "Attitude",
+            "item_description_short": "Attitude",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42112,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI02",
+            "item_description": "Neurodevelopmental Disorders",
+            "item_description_short": "Neurodevelopmental Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42113,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI03",
+            "item_description": "Depressive Disorders",
+            "item_description_short": "Depressive Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42114,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI04",
+            "item_description": "Anxiety Disorders",
+            "item_description_short": "Anxiety Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42115,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI05",
+            "item_description": "Feeding and Eating Disorders",
+            "item_description_short": "Feeding and Eating Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42116,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI06",
+            "item_description": "Elimination Disorders",
+            "item_description_short": "Elimination Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42117,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI07",
+            "item_description": "Gender Dysphoria",
+            "item_description_short": "Gender Dysphoria",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42118,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI08",
+            "item_description": "Sexual Dysfunctions",
+            "item_description_short": "Sexual Dysfunctions",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42119,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI09",
+            "item_description": "Sleep-Wake Disorders",
+            "item_description_short": "Sleep-Wake Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42120,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI10",
+            "item_description": "Dissociative Disorders",
+            "item_description_short": "Dissociative Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42121,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI11",
+            "item_description": "Neurocognitive Disorders",
+            "item_description_short": "Neurocognitive Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42122,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI12",
+            "item_description": "Personality Disorders",
+            "item_description_short": "Personality Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42123,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI13",
+            "item_description": "Paraphilic Disorders",
+            "item_description_short": "Paraphilic Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42124,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI14",
+            "item_description": "Bipolar and Related Disorders",
+            "item_description_short": "Bipolar and Related Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42125,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI15",
+            "item_description": "Other Mental Disorders",
+            "item_description_short": "Other Mental Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42126,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI16",
+            "item_description": "Schizophrenia Spectrum and Other Psychotic Disorders",
+            "item_description_short": "Schizophrenia Spectrum and Other Psychotic Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42127,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI17",
+            "item_description": "Obsessive-Compulsive and Related Disorders",
+            "item_description_short": "Obsessive-Compulsive and Related Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42128,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI18",
+            "item_description": "Trauma- and Stressor-Related Disorders",
+            "item_description_short": "Trauma- and Stressor-Related Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42129,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 19,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI19",
+            "item_description": "Somatic Symptom and Related Disorders",
+            "item_description_short": "Somatic Symptom and Related Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42130,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 20,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI20",
+            "item_description": "Disruptive, Impulse-Control, and Conduct Disorders",
+            "item_description_short": "Disruptive, Impulse-Control, and Conduct Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42131,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 21,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI21",
+            "item_description": "Substance-Related and Addictive Disorders",
+            "item_description_short": "Substance-Related and Addictive Disorders",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42132,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 22,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI22",
+            "item_description": "Medication-Induced Movement Disorders and Other Adverse Effects of Medication",
+            "item_description_short": "Medication-Induced Movement Disorders and Other Adverse Effects of Medication",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42133,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 23,
+            "field_name": "counsel_main_issues_id",
+            "item_category": "Main issues",
+            "item_id": "CMI23",
+            "item_description": "Other Conditions That May Be a Focus of Clinical Attention",
+            "item_description_short": "Other Conditions That May Be a Focus of Clinical Attention",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42134,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI01",
+            "item_description": "Abandonment issues",
+            "item_description_short": "Abandonment issues",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42135,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI02",
+            "item_description": "Academic concerns",
+            "item_description_short": "Academic concerns",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42136,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI03",
+            "item_description": "Adoption and foster care issue",
+            "item_description_short": "Adoption and foster care issue",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42137,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI04",
+            "item_description": "Anxiety",
+            "item_description_short": "Anxiety",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42138,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI05",
+            "item_description": "Health",
+            "item_description_short": "Health",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42139,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI06",
+            "item_description": "Blended family issues",
+            "item_description_short": "Blended family issues",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42140,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI07",
+            "item_description": "Bullying",
+            "item_description_short": "Bullying",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42141,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI08",
+            "item_description": "Child neglect",
+            "item_description_short": "Child neglect",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42142,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI09",
+            "item_description": "Child abuse",
+            "item_description_short": "Child abuse",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42143,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI10",
+            "item_description": "Depression",
+            "item_description_short": "Depression",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42144,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI11",
+            "item_description": "Disruptive mood dysregulation",
+            "item_description_short": "Disruptive mood dysregulation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42145,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 12,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI12",
+            "item_description": "Family issues (divorce, separation)",
+            "item_description_short": "Family issues (divorce, separation)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42146,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 13,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI13",
+            "item_description": "Sickness",
+            "item_description_short": "Sickness",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42147,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 14,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI14",
+            "item_description": "Intellectual disability",
+            "item_description_short": "Intellectual disability",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42148,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 15,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI15",
+            "item_description": "Oppositional and defiant behavior (odd)",
+            "item_description_short": "Oppositional and defiant behavior (odd)",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42149,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 16,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI16",
+            "item_description": "self-harm",
+            "item_description_short": "self-harm",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42150,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 17,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI17",
+            "item_description": "sibling issue",
+            "item_description_short": "sibling issue",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42151,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 18,
+            "field_name": "counsel_underly_issues_id",
+            "item_category": "Underlying issues",
+            "item_id": "CUI18",
+            "item_description": "others",
+            "item_description_short": "others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42152,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counsel_qualification_id",
+            "item_category": "Qualification",
+            "item_id": "CQPH",
+            "item_description": "PhD",
+            "item_description_short": "PhD",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42153,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counsel_qualification_id",
+            "item_category": "Qualification",
+            "item_id": "CQMA",
+            "item_description": "Masters",
+            "item_description_short": "Masters",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42154,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counsel_qualification_id",
+            "item_category": "Qualification",
+            "item_id": "CQDE",
+            "item_description": "Degree",
+            "item_description_short": "Degree",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42155,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counsel_qualification_id",
+            "item_category": "Qualification",
+            "item_id": "CQDI",
+            "item_description": "Diploma",
+            "item_description_short": "Diploma",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42156,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counsel_qualification_id",
+            "item_category": "Qualification",
+            "item_id": "CQCT",
+            "item_description": "Certificate",
+            "item_description_short": "Certificate",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42157,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counsel_services_id",
+            "item_category": "Counselling services",
+            "item_id": "CSVPT",
+            "item_description": "Play therapy",
+            "item_description_short": "Play therapy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42158,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counsel_services_id",
+            "item_category": "Counselling services",
+            "item_id": "CSVAT",
+            "item_description": "Art therapy",
+            "item_description_short": "Art therapy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42159,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counsel_services_id",
+            "item_category": "Counselling services",
+            "item_id": "CSVCT",
+            "item_description": "Child Centered Therapy",
+            "item_description_short": "Child Centered Therapy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42160,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counsel_services_id",
+            "item_category": "Counselling services",
+            "item_id": "CSVBT",
+            "item_description": "Behavior therapy",
+            "item_description_short": "Behavior therapy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42161,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counsel_services_id",
+            "item_category": "Counselling services",
+            "item_id": "CSVCB",
+            "item_description": "Cognitive behavioral therapy",
+            "item_description_short": "Cognitive behavioral therapy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42162,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "counsel_services_id",
+            "item_category": "Counselling services",
+            "item_id": "CSVOT",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42163,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counsel_cost_id",
+            "item_category": "Counselling cost",
+            "item_id": "CCSTF",
+            "item_description": "Free",
+            "item_description_short": "Free",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42164,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counsel_cost_id",
+            "item_category": "Counselling cost",
+            "item_id": "CCSTP",
+            "item_description": "Paid",
+            "item_description_short": "Paid",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42165,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS2K",
+            "item_description": "Ksh. 2,000",
+            "item_description_short": "Ksh. 2,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42166,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS4K",
+            "item_description": "Ksh. 4,000",
+            "item_description_short": "Ksh. 4,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42167,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS6K",
+            "item_description": "Ksh. 6,000",
+            "item_description_short": "Ksh. 6,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42168,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS8K",
+            "item_description": "Ksh. 8,000",
+            "item_description_short": "Ksh. 8,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42169,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS10K",
+            "item_description": "Ksh. 10,000",
+            "item_description_short": "Ksh. 10,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42170,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS12K",
+            "item_description": "Ksh. 12,000",
+            "item_description_short": "Ksh. 12,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42171,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS14K",
+            "item_description": "Ksh. 14,000",
+            "item_description_short": "Ksh. 14,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42172,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "counsel_amount_id",
+            "item_category": "Counselling amount",
+            "item_id": "CS16K",
+            "item_description": "Ksh. 16,000",
+            "item_description_short": "Ksh. 16,000",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42173,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "court_reason_id",
+            "item_category": "Court reason",
+            "item_id": "CRCW",
+            "item_description": "As a child witness",
+            "item_description_short": "As a child witness",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42174,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "court_reason_id",
+            "item_category": "Court reason",
+            "item_id": "CRHW",
+            "item_description": "Hostile witness",
+            "item_description_short": "Hostile witness",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42175,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "court_reason_id",
+            "item_category": "Court reason",
+            "item_id": "CRPE",
+            "item_description": "Perpetrator",
+            "item_description_short": "Perpetrator",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42176,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "health_condition_id",
+            "item_category": "Health Condition",
+            "item_id": "HCAH",
+            "item_description": "Appears healthy",
+            "item_description_short": "Appears healthy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42177,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "health_condition_id",
+            "item_category": "Health Condition",
+            "item_id": "HCAN",
+            "item_description": "Appears normal",
+            "item_description_short": "Appears normal",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42178,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "health_condition_id",
+            "item_category": "Health Condition",
+            "item_id": "HCAC",
+            "item_description": "Appears challenged",
+            "item_description_short": "Appears challenged",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42179,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "health_condition_id",
+            "item_category": "Health Condition",
+            "item_id": "HCCV",
+            "item_description": "Challenged verified",
+            "item_description_short": "Challenged verified",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42180,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "court_services_id",
+            "item_category": "Court services",
+            "item_id": "CSII",
+            "item_description": "Interpreter",
+            "item_description_short": "Interpreter",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42181,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "court_services_id",
+            "item_category": "Court services",
+            "item_id": "CSSL",
+            "item_description": "Sign language interpreteR",
+            "item_description_short": "Sign language interpreteR",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42182,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "court_services_id",
+            "item_category": "Court services",
+            "item_id": "CSAD",
+            "item_description": "Assistive devices",
+            "item_description_short": "Assistive devices",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42183,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "court_services_id",
+            "item_category": "Court services",
+            "item_id": "CSPT",
+            "item_description": "Pre-trial",
+            "item_description_short": "Pre-trial",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42184,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "court_session_id",
+            "item_category": "Court session",
+            "item_id": "CSEPH",
+            "item_description": "Physical",
+            "item_description_short": "Physical",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42185,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "court_session_id",
+            "item_category": "Court session",
+            "item_id": "CSEVT",
+            "item_description": "Virtual",
+            "item_description_short": "Virtual",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42186,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "court_session_type_id",
+            "item_category": "Court session type",
+            "item_id": "CSTCM",
+            "item_description": "Camera",
+            "item_description_short": "Camera",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42187,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "court_session_type_id",
+            "item_category": "Court session type",
+            "item_id": "CSTOC",
+            "item_description": "Open court",
+            "item_description_short": "Open court",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42188,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "court_session_type_id",
+            "item_category": "Court session type",
+            "item_id": "CSTRM",
+            "item_description": "At the remand",
+            "item_description_short": "At the remand",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42189,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "court_session_type_id",
+            "item_category": "Court session type",
+            "item_id": "CSTMC",
+            "item_description": "Mobile court",
+            "item_description_short": "Mobile court",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42190,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "court_recommend_services_id",
+            "item_category": "Court recommend services",
+            "item_id": "CRSCO",
+            "item_description": "Counseling",
+            "item_description_short": "Counseling",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42191,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "court_recommend_services_id",
+            "item_category": "Court recommend services",
+            "item_id": "CRSMC",
+            "item_description": "Medical care",
+            "item_description_short": "Medical care",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42192,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "court_recommend_services_id",
+            "item_category": "Court recommend services",
+            "item_id": "CRSAA",
+            "item_description": "Age assessment",
+            "item_description_short": "Age assessment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42193,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "court_recommend_services_id",
+            "item_category": "Court recommend services",
+            "item_id": "CRSOT",
+            "item_description": "Other",
+            "item_description_short": "Other",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42194,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMTB",
+            "item_description": "Text Books",
+            "item_description_short": "Text Books",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42195,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMEB",
+            "item_description": "Exercise books",
+            "item_description_short": "Exercise books",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42196,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMPN",
+            "item_description": "Pens",
+            "item_description_short": "Pens",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42197,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMPE",
+            "item_description": "Pencils",
+            "item_description_short": "Pencils",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42198,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMGS",
+            "item_description": "Geometrical set",
+            "item_description_short": "Geometrical set",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42199,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMUN",
+            "item_description": "Uniform",
+            "item_description_short": "Uniform",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42200,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMTE",
+            "item_description": "Training equipment",
+            "item_description_short": "Training equipment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42201,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "si_learning_materials_id",
+            "item_category": "SI learning materials",
+            "item_id": "SLMOT",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42202,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "exams_bodies_id",
+            "item_category": "SI exam bodies",
+            "item_id": "EKEYA",
+            "item_description": "KEYA",
+            "item_description_short": "KEYA",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42203,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "exams_bodies_id",
+            "item_category": "SI exam bodies",
+            "item_id": "EKPSEA",
+            "item_description": "KPSEA",
+            "item_description_short": "KPSEA",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42204,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "exams_bodies_id",
+            "item_category": "SI exam bodies",
+            "item_id": "EKMYA",
+            "item_description": "KMYA",
+            "item_description_short": "KMYA",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42205,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "exams_bodies_id",
+            "item_category": "SI exam bodies",
+            "item_id": "EKCBE",
+            "item_description": "KCBE",
+            "item_description_short": "KCBE",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42206,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "exams_bodies_id",
+            "item_category": "SI exam bodies",
+            "item_id": "EKCPE",
+            "item_description": "KCPE",
+            "item_description_short": "KCPE",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42207,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "exams_bodies_id",
+            "item_category": "SI exam bodies",
+            "item_id": "EKCSE",
+            "item_description": "KCSE",
+            "item_description_short": "KCSE",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42208,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_lit_skills_id",
+            "item_category": "SI Literacy skills",
+            "item_id": "SLSRE",
+            "item_description": "Reading",
+            "item_description_short": "Reading",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42209,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_lit_skills_id",
+            "item_category": "SI Literacy skills",
+            "item_id": "SLSWR",
+            "item_description": "Writing",
+            "item_description_short": "Writing",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42210,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_lit_skills_id",
+            "item_category": "SI Literacy skills",
+            "item_id": "SLSNU",
+            "item_description": "Numeracy",
+            "item_description_short": "Numeracy",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42211,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_lit_skills_id",
+            "item_category": "SI Literacy skills",
+            "item_id": "SLSCO",
+            "item_description": "Computer",
+            "item_description_short": "Computer",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42212,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "cbc_skills_level_id",
+            "item_category": "SI Skills levels",
+            "item_id": "SSLBE",
+            "item_description": "Below expectation",
+            "item_description_short": "Below expectation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42213,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "cbc_skills_level_id",
+            "item_category": "SI Skills levels",
+            "item_id": "SSLAE",
+            "item_description": "Approaching expectation",
+            "item_description_short": "Approaching expectation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42214,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "cbc_skills_level_id",
+            "item_category": "SI Skills levels",
+            "item_id": "SSLME",
+            "item_description": "Meet expectation",
+            "item_description_short": "Meet expectation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42215,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "cbc_skills_level_id",
+            "item_category": "SI Skills levels",
+            "item_id": "SSLEE",
+            "item_description": "Exceed Expectation",
+            "item_description_short": "Exceed Expectation",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42216,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSPH",
+            "item_description": "Personal hygiene",
+            "item_description_short": "Personal hygiene",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42217,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSEC",
+            "item_description": "Environmental  Cleanliness",
+            "item_description_short": "Environmental  Cleanliness",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42218,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSPS",
+            "item_description": "Problem solving",
+            "item_description_short": "Problem solving",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42219,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSIS",
+            "item_description": "Interpersonal Skills",
+            "item_description_short": "Interpersonal Skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42220,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSOS",
+            "item_description": "Organization skills",
+            "item_description_short": "Organization skills",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42221,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSPE",
+            "item_description": "Personal Etiquette",
+            "item_description_short": "Personal Etiquette",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42222,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "si_life_skills_id",
+            "item_category": "SI Life skills",
+            "item_id": "SLSOT",
+            "item_description": "Other",
+            "item_description_short": "Other",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42223,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_spiritual_skills",
+            "item_category": "SI Spiritual skills",
+            "item_id": "SSSIS",
+            "item_description": "Islamic",
+            "item_description_short": "Islamic",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42224,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_spiritual_skills",
+            "item_category": "SI Spiritual skills",
+            "item_id": "SSSCH",
+            "item_description": "Christian",
+            "item_description_short": "Christian",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42225,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_spiritual_skills",
+            "item_category": "SI Spiritual skills",
+            "item_id": "SSSOT",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42226,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_cocurricular_skills",
+            "item_category": "SI co-curricular skills",
+            "item_id": "SCCGS",
+            "item_description": "Games and sports  (Football, Swimming, Netball e.t.c)",
+            "item_description_short": "Games and sports",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42227,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_cocurricular_skills",
+            "item_category": "SI co-curricular skills",
+            "item_id": "SCCMD",
+            "item_description": "Music and drama (Poetry, Music, Instrumental etc)",
+            "item_description_short": "Music and drama",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42228,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_cocurricular_skills",
+            "item_category": "SI co-curricular skills",
+            "item_id": "SCCOT",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42229,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_examiner_id",
+            "item_category": "SI examiner",
+            "item_id": "EKNEC",
+            "item_description": "KNEC",
+            "item_description_short": "KNEC",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42230,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_examiner_id",
+            "item_category": "SI examiner",
+            "item_id": "ETVET",
+            "item_description": "TVET",
+            "item_description_short": "TVET",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42231,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_examiner_id",
+            "item_category": "SI examiner",
+            "item_id": "ENITA",
+            "item_description": "NITA",
+            "item_description_short": "NITA",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42232,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_examiner_id",
+            "item_category": "SI examiner",
+            "item_id": "EOTH",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42233,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_course_type_id",
+            "item_category": "SI course types",
+            "item_id": "SCTVO",
+            "item_description": "Vocational",
+            "item_description_short": "Vocational",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42234,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_course_type_id",
+            "item_category": "SI course types",
+            "item_id": "SCTPR",
+            "item_description": "Proficiency",
+            "item_description_short": "Proficiency",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42235,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC01",
+            "item_description": "Electrical and wireman",
+            "item_description_short": "Electrical and wireman",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42236,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC02",
+            "item_description": "Tailoring and dressmaking",
+            "item_description_short": "Tailoring and dressmaking",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42237,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC03",
+            "item_description": "Motor vehicle and Mechanic",
+            "item_description_short": "Motor vehicle and Mechanic",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42238,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC04",
+            "item_description": "Plumbing and pipe fitters",
+            "item_description_short": "Plumbing and pipe fitters",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42239,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC05",
+            "item_description": "Carpentry and joinery",
+            "item_description_short": "Carpentry and joinery",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42240,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC06",
+            "item_description": "Masonry",
+            "item_description_short": "Masonry",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42241,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC07",
+            "item_description": "Shoe making and leather work",
+            "item_description_short": "Shoe making and leather work",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42242,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC08",
+            "item_description": "Beauty and hairdressing",
+            "item_description_short": "Beauty and hairdressing",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42243,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC09",
+            "item_description": "Barbery",
+            "item_description_short": "Barbery",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42244,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC10",
+            "item_description": "Solar installation and repair",
+            "item_description_short": "Solar installation and repair",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42245,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 11,
+            "field_name": "si_vocational_course_id",
+            "item_category": "SI vocational course",
+            "item_id": "SVC11",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42246,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC01",
+            "item_description": "Bakery and confectionary",
+            "item_description_short": "Bakery and confectionary",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42247,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC02",
+            "item_description": "Poultry",
+            "item_description_short": "Poultry",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42248,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC03",
+            "item_description": "Agriculture",
+            "item_description_short": "Agriculture",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42249,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 4,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC04",
+            "item_description": "Terrace laying",
+            "item_description_short": "Terrace laying",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42250,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 5,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC05",
+            "item_description": "Nursery management",
+            "item_description_short": "Nursery management",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42251,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 6,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC06",
+            "item_description": "Puncture making and repair",
+            "item_description_short": "Puncture making and repair",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42252,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 7,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC07",
+            "item_description": "Wheel alignment",
+            "item_description_short": "Wheel alignment",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42253,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 8,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC08",
+            "item_description": "Bead making",
+            "item_description_short": "Bead making",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42254,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "si_proficiency_course_id",
+            "item_category": "SI Proficiency course",
+            "item_id": "SPC09",
+            "item_description": "Others",
+            "item_description_short": "Others",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42255,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_course_grade_id",
+            "item_category": "Si course grades",
+            "item_id": "SCG3",
+            "item_description": "Grade III",
+            "item_description_short": "Grade III",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42256,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_course_grade_id",
+            "item_category": "Si course grades",
+            "item_id": "SCG2",
+            "item_description": "Grade II",
+            "item_description_short": "Grade II",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42257,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_course_grade_id",
+            "item_category": "Si course grades",
+            "item_id": "SCG1",
+            "item_description": "Grade I",
+            "item_description_short": "Grade I",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42258,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_exam_results_id",
+            "item_category": "SI exam results",
+            "item_id": "SERPA",
+            "item_description": "Pass",
+            "item_description_short": "Pass",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42259,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_exam_results_id",
+            "item_category": "SI exam results",
+            "item_id": "SERFA",
+            "item_description": "Fail",
+            "item_description_short": "Fail",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42260,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 1,
+            "field_name": "si_education_level",
+            "item_category": "SI education level",
+            "item_id": "SIELC",
+            "item_description": "Class",
+            "item_description_short": "Class",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42261,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 2,
+            "field_name": "si_education_level",
+            "item_category": "SI education level",
+            "item_id": "SIELG",
+            "item_description": "Grade",
+            "item_description_short": "Grade",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42262,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 3,
+            "field_name": "si_education_level",
+            "item_category": "SI education level",
+            "item_id": "SIELF",
+            "item_description": "Form",
+            "item_description_short": "Form",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
     }
 ]
