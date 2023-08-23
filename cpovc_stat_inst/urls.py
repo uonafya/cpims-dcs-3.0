@@ -54,5 +54,6 @@ urlpatterns = [
         views.si_forms_edit, name='si_form_edit'),
     path('delete/', views.si_forms_delete, name='si_form_delete'),
     path('action/', views.si_forms_action, name='si_form_action'),
+    path('test/', views.si_test, name='si_test'),
 
 ]

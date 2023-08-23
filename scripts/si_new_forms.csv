@@ -1,0 +1,103 @@
+ref_reasons_id,By Court Order
+ref_reasons_id,Supervision
+ref_reasons_id,Others
+ref_documents_id,Case Record Sheet
+ref_documents_id,Social Inquiry Report
+ref_documents_id,Court Order
+ref_documents_id,Assessment form
+ref_documents_id,Written promise
+ref_documents_id,"Any other document,  e.g. Medical Report / Birth Certificate"
+ref_documents_id,Individual Treatment Plan
+ref_documents_id,Monthly progress report
+reunification_basis_id,"Court order (Expiry of the order,  Express order)"
+reunification_basis_id,Authorization letter from SCCO
+reunification_how_id,Release to the parent at the institution
+reunification_how_id,Taken to the family
+reunification_followup_ids,Supervision
+reunification_followup_ids,Family Strengthening
+reunification_followup_ids,Counselling
+reunification_followup_ids,Education Support
+reunification_followup_ids,Economic Empowerment: Assistive Devices
+reunification_followup_ids,Income Generating Tool Kits
+counselling_type_id,Individual counselling
+counselling_type_id,Group counselling
+counselling_reason_id,Routine
+counselling_reason_id,Child Initiated
+counselling_reason_id,Institute Initiated
+counselling_reason_id,Parent Initiated
+counselling_reason_id,Court Initiated
+counselling_reason_id,Others
+counselling_attendance_id,Punctual
+counselling_attendance_id,Occasionally Tardy
+counselling_attendance_id,Habitual Late
+counselling_attendance_id,Other
+counselling_appearance_id,Neat - Clean
+counselling_appearance_id,Unkempt
+counselling_appearance_id,Other
+counselling_attitude_id,Willing
+counselling_attitude_id,Eager
+counselling_attitude_id,Pleasant
+counselling_attitude_id,Other
+counsel_main_issues_id,Attitude
+counsel_main_issues_id,Neurodevelopmental Disorders
+counsel_main_issues_id,Depressive Disorders
+counsel_main_issues_id,Anxiety Disorders
+counsel_main_issues_id,Feeding and Eating Disorders
+counsel_main_issues_id,Elimination Disorders
+counsel_main_issues_id,Gender Dysphoria
+counsel_main_issues_id,Sexual Dysfunctions
+counsel_main_issues_id,Sleep-Wake Disorders
+counsel_main_issues_id,Dissociative Disorders
+counsel_main_issues_id,Neurocognitive Disorders
+counsel_main_issues_id,Personality Disorders
+counsel_main_issues_id,Paraphilic Disorders
+counsel_main_issues_id,Bipolar and Related Disorders
+counsel_main_issues_id,Other Mental Disorders
+counsel_main_issues_id,Schizophrenia Spectrum and Other Psychotic Disorders
+counsel_main_issues_id,Obsessive-Compulsive and Related Disorders
+counsel_main_issues_id,Trauma- and Stressor-Related Disorders
+counsel_main_issues_id,Somatic Symptom and Related Disorders
+counsel_main_issues_id,"Disruptive, Impulse-Control, and Conduct Disorders"
+counsel_main_issues_id,Substance-Related and Addictive Disorders
+counsel_main_issues_id,Medication-Induced Movement Disorders and Other Adverse Effects of Medication
+counsel_main_issues_id,Other Conditions That May Be a Focus of Clinical Attention
+counsel_underly_issues_id,Abandonment issues
+counsel_underly_issues_id,Academic concerns
+counsel_underly_issues_id,Adoption and foster care issue
+counsel_underly_issues_id,Anxiety
+counsel_underly_issues_id,Health
+counsel_underly_issues_id,Blended family issues
+counsel_underly_issues_id,Bullying
+counsel_underly_issues_id,Child neglect
+counsel_underly_issues_id,Child abuse
+counsel_underly_issues_id,Depression
+counsel_underly_issues_id,Disruptive mood dysregulation
+counsel_underly_issues_id,Family issues (divorce, separation)
+counsel_underly_issues_id,Sickness
+counsel_underly_issues_id,Intellectual disability
+counsel_underly_issues_id,Oppositional and defiant behavior (odd)
+counsel_underly_issues_id,self-harm
+counsel_underly_issues_id,sibling issue
+counsel_underly_issues_id,others
+counsel_qualification_id,PhD
+counsel_qualification_id,Masters
+counsel_qualification_id,Degree
+counsel_qualification_id,Diploma
+counsel_qualification_id,Certificate
+counsel_services_id,Play therapy
+counsel_services_id,Art therapy
+counsel_services_id,Child Centered Therapy
+counsel_services_id,Behavior therapy
+counsel_services_id,Cognitive behavioral therapy
+counsel_services_id,Others
+counsel_cost_id,Free
+counsel_cost_id,Paid
+counsel_amount_id,"Ksh. 2,000"
+counsel_amount_id,"Ksh. 4,000"
+counsel_amount_id,"Ksh. 6,000"
+counsel_amount_id,"Ksh. 8,000"
+counsel_amount_id,"Ksh. 10,000"
+counsel_amount_id,"Ksh. 12,000"
+counsel_amount_id,"Ksh. 14,000"
+counsel_amount_id,"Ksh. 16,000"
+

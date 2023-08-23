@@ -69,7 +69,7 @@ class ListQuestionsAdmin(admin.ModelAdmin):
 
     search_fields = ['question_code', 'question_text']
     list_display = ['form', 'question_code', 'question_text',
-                    'answer_type_id', 'answer_set_id',
+                    'answer_type_id', 'answer_set_id', 'answer_field_id',
                     'question_required', 'is_void']
     list_filter = ['answer_type_id', 'answer_set_id', 'form_id']
 
@@ -85,6 +85,7 @@ class FormsAdmin(admin.ModelAdmin):
     search_fields = ['form_title']
     list_display = ['form_guid', 'form_type_id', 'form_title', 'is_void']
     list_filter = ['form_type_id']
+    actions = [dump_to_csv]
 
 
 admin.site.register(Forms, FormsAdmin)

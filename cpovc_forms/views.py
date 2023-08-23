@@ -2041,6 +2041,7 @@ def view_case_record_sheet(request, id):
         ovccr = OVCCaseRecord.objects.get(case_id=id, is_void=False)
         person_id = int(ovccr.person_id)
         # init_data = RegPerson.objects.filter(pk=person_id)
+        appuser = AppUser.objects.filter(pk=ovccr.created_by).first()
         f = {'form_id': id}
 
         # Get Siblings
@@ -2189,7 +2190,8 @@ def view_case_record_sheet(request, id):
                        'ovcfam': ovcfam,
                        'resultsets': resultsets,
                        'resultsets2': resultsets2,
-                       'ovclocs': ovclocs.first()
+                       'ovclocs': ovclocs.first(),
+                       'app_user': appuser
                        })
     except Exception as e:
         msg = 'An error occured trying to view OVCCaseRecord - %s' % (str(e))

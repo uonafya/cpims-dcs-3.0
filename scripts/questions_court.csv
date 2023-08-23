@@ -1,0 +1,32 @@
+COURT FILE NO:,
+P & C:,
+CR FILE NO:,
+DATE:,
+SCCO involved:,
+Was the child charged jointly with an Adult?,yesno_id
+For what reason was the child taken to court?court_reason_id      ,
+State of the Child before court visit:,health_condition_id
+Extra services needed for court session:,court_services_id
+COURT PARTICULARS,
+Court Station:,
+Court No:,
+Type of Court Session:              ,
+If Physical  court session was held in:,court_session_type_id
+,
+DETAILS OF OFFICER ESCORTING THE CHILD TO COURT,
+Name:,
+Designation:,
+Station:,
+Sex:,sex_id
+Phone No.,
+PF/Service No.,
+Did the case proceed?,yesno_id
+If Yes what are the interim Orders (C.A 2022; 135-138)?,court_orders_id
+If No give reason:,
+Court recommended services:,court_recommend_services_id
+Other details,
+Other notable issues from the Court’s Decision:,
+Next Date of Mention/ hearing:,
+Date of return:,
+Describe the State of the Child after court visit:,health_condition_id
+HEAD OF STATION:,

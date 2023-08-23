@@ -50,3 +50,215 @@ pk,the_order,field_name,item_category,item_id,item_description,item_description_
 42048,3,si_risk_assess_a9,Risk Assessment 9,SRAA9C,c. Actively rejecting help,c. Actively rejecting help,,FALSE,FALSE,FALSE
 42049,4,si_risk_assess_a9,Risk Assessment 9,SRAA9D,d. Defies Authority,d. Defies Authority,,FALSE,FALSE,FALSE
 42050,5,si_risk_assess_a9,Risk Assessment 9,SRAA9E,"e. Callous, little concern for others","e. Callous, little concern for others",,FALSE,FALSE,FALSE
+42051,1,legal_services_id,Legal services,LSPRB,Pro-bono,Pro-bono,,FALSE,FALSE,FALSE
+42052,2,legal_services_id,Legal services,LSLPR,Legal representation,Legal representation,,FALSE,FALSE,FALSE
+42053,3,legal_services_id,Legal services,LSPBA,Plea bargaining,Plea bargaining,,FALSE,FALSE,FALSE
+42054,4,legal_services_id,Legal services,LSSBB,Sensitization on bail and bond,Sensitization on bail and bond,,FALSE,FALSE,FALSE
+42055,5,legal_services_id,Legal services,LSTSR,Training in self-representation,Training in self-representation,,FALSE,FALSE,FALSE
+42056,1,legal_services_provider_id,Legal services provider,LSPGV,Government Institution,Government Institution,,FALSE,FALSE,FALSE
+42057,2,legal_services_provider_id,Legal services provider,LSPNG,Non-State Institution,Non-State Institution,,FALSE,FALSE,FALSE
+42058,1,case_status_id,Case status,LCSFR,Fresh,Fresh,,FALSE,FALSE,FALSE
+42059,2,case_status_id,Case status,LCSPH,Partly heard,Partly heard,,FALSE,FALSE,FALSE
+42060,3,case_status_id,Case status,LCSFI,Finalized,Finalized,,FALSE,FALSE,FALSE
+42061,4,case_status_id,Case status,LCSUK,Unknown,Unknown,,FALSE,FALSE,FALSE
+42062,1,legal_rep_id,Legal representation,LPPRP,Pro bono,Pro bono,,FALSE,FALSE,FALSE
+42063,2,legal_rep_id,Legal representation,LPPUP,Paid-up advocate,Paid-up advocate,,FALSE,FALSE,FALSE
+42064,3,legal_rep_id,Legal representation,LPPRS,Pro se,Pro se,,FALSE,FALSE,FALSE
+42065,1,court_decision_id,Court decision,CDINT,Interim,Interim,,FALSE,FALSE,FALSE
+42066,2,court_decision_id,Court decision,CDFIN,Final,Final,,FALSE,FALSE,FALSE
+42067,1,legal_declare_officer,Legal declaration officer,LDCO,Secretary/Children officer,Secretary/Children officer,,FALSE,FALSE,FALSE
+42068,2,legal_declare_officer,Legal declaration officer,LDPA,Power of Attorney,Power of Attorney,,FALSE,FALSE,FALSE
+42069,3,legal_declare_officer,Legal declaration officer,LDPR,Parent,Parent,,FALSE,FALSE,FALSE
+42070,4,legal_declare_officer,Legal declaration officer,LDGD,Guardian,Guardian,,FALSE,FALSE,FALSE
+42071,1,ref_reasons_id,Referral reasons,RFRCO,By Court Order,By Court Order,,FALSE,FALSE,FALSE
+42072,2,ref_reasons_id,Referral reasons,RFRSP,Supervision,Supervision,,FALSE,FALSE,FALSE
+42073,3,ref_reasons_id,Referral reasons,RFROT,Others,Others,,FALSE,FALSE,FALSE
+42074,1,ref_documents_id,Referral documents,RFDCR,Case Record Sheet,Case Record Sheet,,FALSE,FALSE,FALSE
+42075,2,ref_documents_id,Referral documents,RFDSI,Social Inquiry Report,Social Inquiry Report,,FALSE,FALSE,FALSE
+42076,3,ref_documents_id,Referral documents,RFDCO,Court Order,Court Order,,FALSE,FALSE,FALSE
+42077,4,ref_documents_id,Referral documents,RFDAF,Assessment form,Assessment form,,FALSE,FALSE,FALSE
+42078,5,ref_documents_id,Referral documents,RFDWP,Written promise,Written promise,,FALSE,FALSE,FALSE
+42079,6,ref_documents_id,Referral documents,RFDOT,"Any other document,  e.g. Medical Report / Birth Certificate","Any other document,  e.g. Medical Report / Birth Certificate",,FALSE,FALSE,FALSE
+42080,7,ref_documents_id,Referral documents,RFDIP,Individual Treatment Plan,Individual Treatment Plan,,FALSE,FALSE,FALSE
+42081,8,ref_documents_id,Referral documents,RFDMP,Monthly progress report,Monthly progress report,,FALSE,FALSE,FALSE
+42082,1,reunification_basis_id,Reunification basis,REUCO,"Court order (Expiry of the order,  Express order)","Court order (Expiry of the order,  Express order)",,FALSE,FALSE,FALSE
+42083,2,reunification_basis_id,Reunification basis,REUSC,Authorization letter from SCCO,Authorization letter from SCCO,,FALSE,FALSE,FALSE
+42084,3,reunification_how_id,Reunification basis,REHRP,Release to the parent at the institution,Release to the parent at the institution,,FALSE,FALSE,FALSE
+42085,4,reunification_how_id,Reunification basis,REHTF,Taken to the family,Taken to the family,,FALSE,FALSE,FALSE
+42086,1,reunification_followup_ids,Reunification follow up,RFUSU,Supervision,Supervision,,FALSE,FALSE,FALSE
+42087,2,reunification_followup_ids,Reunification follow up,RFUFS,Family Strengthening,Family Strengthening,,FALSE,FALSE,FALSE
+42088,3,reunification_followup_ids,Reunification follow up,RFUCO,Counselling,Counselling,,FALSE,FALSE,FALSE
+42089,4,reunification_followup_ids,Reunification follow up,RFUES,Education Support,Education Support,,FALSE,FALSE,FALSE
+42090,5,reunification_followup_ids,Reunification follow up,RFUEE,Economic Empowerment: Assistive Devices,Economic Empowerment: Assistive Devices,,FALSE,FALSE,FALSE
+42091,6,reunification_followup_ids,Reunification follow up,RFUTK,Income Generating Tool Kits,Income Generating Tool Kits,,FALSE,FALSE,FALSE
+42092,1,counselling_type_id,Counselling type,COTIC,Individual counselling,Individual counselling,,FALSE,FALSE,FALSE
+42093,2,counselling_type_id,Counselling type,COTGC,Group counselling,Group counselling,,FALSE,FALSE,FALSE
+42094,3,counselling_reason_id,Counselling type,CRRO,Routine,Routine,,FALSE,FALSE,FALSE
+42095,4,counselling_reason_id,Counselling type,CRCI,Child Initiated,Child Initiated,,FALSE,FALSE,FALSE
+42096,5,counselling_reason_id,Counselling type,CRII,Institute Initiated,Institute Initiated,,FALSE,FALSE,FALSE
+42097,6,counselling_reason_id,Counselling type,CRPI,Parent Initiated,Parent Initiated,,FALSE,FALSE,FALSE
+42098,7,counselling_reason_id,Counselling type,CRCOI,Court Initiated,Court Initiated,,FALSE,FALSE,FALSE
+42099,8,counselling_reason_id,Counselling type,CROT,Others,Others,,FALSE,FALSE,FALSE
+42100,1,counselling_attendance_id,Counselling attendance,CATPU,Punctual,Punctual,,FALSE,FALSE,FALSE
+42101,2,counselling_attendance_id,Counselling attendance,CATOT,Occasionally Tardy,Occasionally Tardy,,FALSE,FALSE,FALSE
+42102,3,counselling_attendance_id,Counselling attendance,CATHL,Habitual Late,Habitual Late,,FALSE,FALSE,FALSE
+42103,4,counselling_attendance_id,Counselling attendance,CATOT,Other,Other,,FALSE,FALSE,FALSE
+42104,5,counselling_appearance_id,Counselling attendance,CAPNC,Neat - Clean,Neat - Clean,,FALSE,FALSE,FALSE
+42105,6,counselling_appearance_id,Counselling attendance,CAUNK,Unkempt,Unkempt,,FALSE,FALSE,FALSE
+42106,7,counselling_appearance_id,Counselling attendance,CAOTH,Other,Other,,FALSE,FALSE,FALSE
+42107,1,counselling_attitude_id,Couselling attitude,CATTW,Willing,Willing,,FALSE,FALSE,FALSE
+42108,2,counselling_attitude_id,Couselling attitude,CATTE,Eager,Eager,,FALSE,FALSE,FALSE
+42109,3,counselling_attitude_id,Couselling attitude,CATTP,Pleasant,Pleasant,,FALSE,FALSE,FALSE
+42110,4,counselling_attitude_id,Couselling attitude,CATTO,Other,Other,,FALSE,FALSE,FALSE
+42111,1,counsel_main_issues_id,Main issues,CMI01,Attitude,Attitude,,FALSE,FALSE,FALSE
+42112,2,counsel_main_issues_id,Main issues,CMI02,Neurodevelopmental Disorders,Neurodevelopmental Disorders,,FALSE,FALSE,FALSE
+42113,3,counsel_main_issues_id,Main issues,CMI03,Depressive Disorders,Depressive Disorders,,FALSE,FALSE,FALSE
+42114,4,counsel_main_issues_id,Main issues,CMI04,Anxiety Disorders,Anxiety Disorders,,FALSE,FALSE,FALSE
+42115,5,counsel_main_issues_id,Main issues,CMI05,Feeding and Eating Disorders,Feeding and Eating Disorders,,FALSE,FALSE,FALSE
+42116,6,counsel_main_issues_id,Main issues,CMI06,Elimination Disorders,Elimination Disorders,,FALSE,FALSE,FALSE
+42117,7,counsel_main_issues_id,Main issues,CMI07,Gender Dysphoria,Gender Dysphoria,,FALSE,FALSE,FALSE
+42118,8,counsel_main_issues_id,Main issues,CMI08,Sexual Dysfunctions,Sexual Dysfunctions,,FALSE,FALSE,FALSE
+42119,9,counsel_main_issues_id,Main issues,CMI09,Sleep-Wake Disorders,Sleep-Wake Disorders,,FALSE,FALSE,FALSE
+42120,10,counsel_main_issues_id,Main issues,CMI10,Dissociative Disorders,Dissociative Disorders,,FALSE,FALSE,FALSE
+42121,11,counsel_main_issues_id,Main issues,CMI11,Neurocognitive Disorders,Neurocognitive Disorders,,FALSE,FALSE,FALSE
+42122,12,counsel_main_issues_id,Main issues,CMI12,Personality Disorders,Personality Disorders,,FALSE,FALSE,FALSE
+42123,13,counsel_main_issues_id,Main issues,CMI13,Paraphilic Disorders,Paraphilic Disorders,,FALSE,FALSE,FALSE
+42124,14,counsel_main_issues_id,Main issues,CMI14,Bipolar and Related Disorders,Bipolar and Related Disorders,,FALSE,FALSE,FALSE
+42125,15,counsel_main_issues_id,Main issues,CMI15,Other Mental Disorders,Other Mental Disorders,,FALSE,FALSE,FALSE
+42126,16,counsel_main_issues_id,Main issues,CMI16,Schizophrenia Spectrum and Other Psychotic Disorders,Schizophrenia Spectrum and Other Psychotic Disorders,,FALSE,FALSE,FALSE
+42127,17,counsel_main_issues_id,Main issues,CMI17,Obsessive-Compulsive and Related Disorders,Obsessive-Compulsive and Related Disorders,,FALSE,FALSE,FALSE
+42128,18,counsel_main_issues_id,Main issues,CMI18,Trauma- and Stressor-Related Disorders,Trauma- and Stressor-Related Disorders,,FALSE,FALSE,FALSE
+42129,19,counsel_main_issues_id,Main issues,CMI19,Somatic Symptom and Related Disorders,Somatic Symptom and Related Disorders,,FALSE,FALSE,FALSE
+42130,20,counsel_main_issues_id,Main issues,CMI20,"Disruptive, Impulse-Control, and Conduct Disorders","Disruptive, Impulse-Control, and Conduct Disorders",,FALSE,FALSE,FALSE
+42131,21,counsel_main_issues_id,Main issues,CMI21,Substance-Related and Addictive Disorders,Substance-Related and Addictive Disorders,,FALSE,FALSE,FALSE
+42132,22,counsel_main_issues_id,Main issues,CMI22,Medication-Induced Movement Disorders and Other Adverse Effects of Medication,Medication-Induced Movement Disorders and Other Adverse Effects of Medication,,FALSE,FALSE,FALSE
+42133,23,counsel_main_issues_id,Main issues,CMI23,Other Conditions That May Be a Focus of Clinical Attention,Other Conditions That May Be a Focus of Clinical Attention,,FALSE,FALSE,FALSE
+42134,1,counsel_underly_issues_id,Underlying issues,CUI01,Abandonment issues,Abandonment issues,,FALSE,FALSE,FALSE
+42135,2,counsel_underly_issues_id,Underlying issues,CUI02,Academic concerns,Academic concerns,,FALSE,FALSE,FALSE
+42136,3,counsel_underly_issues_id,Underlying issues,CUI03,Adoption and foster care issue,Adoption and foster care issue,,FALSE,FALSE,FALSE
+42137,4,counsel_underly_issues_id,Underlying issues,CUI04,Anxiety,Anxiety,,FALSE,FALSE,FALSE
+42138,5,counsel_underly_issues_id,Underlying issues,CUI05,Health,Health,,FALSE,FALSE,FALSE
+42139,6,counsel_underly_issues_id,Underlying issues,CUI06,Blended family issues,Blended family issues,,FALSE,FALSE,FALSE
+42140,7,counsel_underly_issues_id,Underlying issues,CUI07,Bullying,Bullying,,FALSE,FALSE,FALSE
+42141,8,counsel_underly_issues_id,Underlying issues,CUI08,Child neglect,Child neglect,,FALSE,FALSE,FALSE
+42142,9,counsel_underly_issues_id,Underlying issues,CUI09,Child abuse,Child abuse,,FALSE,FALSE,FALSE
+42143,10,counsel_underly_issues_id,Underlying issues,CUI10,Depression,Depression,,FALSE,FALSE,FALSE
+42144,11,counsel_underly_issues_id,Underlying issues,CUI11,Disruptive mood dysregulation,Disruptive mood dysregulation,,FALSE,FALSE,FALSE
+42145,12,counsel_underly_issues_id,Underlying issues,CUI12,"Family issues (divorce, separation)","Family issues (divorce, separation)",,FALSE,FALSE,FALSE
+42146,13,counsel_underly_issues_id,Underlying issues,CUI13,Sickness,Sickness,,FALSE,FALSE,FALSE
+42147,14,counsel_underly_issues_id,Underlying issues,CUI14,Intellectual disability,Intellectual disability,,FALSE,FALSE,FALSE
+42148,15,counsel_underly_issues_id,Underlying issues,CUI15,Oppositional and defiant behavior (odd),Oppositional and defiant behavior (odd),,FALSE,FALSE,FALSE
+42149,16,counsel_underly_issues_id,Underlying issues,CUI16,self-harm,self-harm,,FALSE,FALSE,FALSE
+42150,17,counsel_underly_issues_id,Underlying issues,CUI17,sibling issue,sibling issue,,FALSE,FALSE,FALSE
+42151,18,counsel_underly_issues_id,Underlying issues,CUI18,others,others,,FALSE,FALSE,FALSE
+42152,1,counsel_qualification_id,Qualification,CQPH,PhD,PhD,,FALSE,FALSE,FALSE
+42153,2,counsel_qualification_id,Qualification,CQMA,Masters,Masters,,FALSE,FALSE,FALSE
+42154,3,counsel_qualification_id,Qualification,CQDE,Degree,Degree,,FALSE,FALSE,FALSE
+42155,4,counsel_qualification_id,Qualification,CQDI,Diploma,Diploma,,FALSE,FALSE,FALSE
+42156,5,counsel_qualification_id,Qualification,CQCT,Certificate,Certificate,,FALSE,FALSE,FALSE
+42157,1,counsel_services_id,Counselling services,CSVPT,Play therapy,Play therapy,,FALSE,FALSE,FALSE
+42158,2,counsel_services_id,Counselling services,CSVAT,Art therapy,Art therapy,,FALSE,FALSE,FALSE
+42159,3,counsel_services_id,Counselling services,CSVCT,Child Centered Therapy,Child Centered Therapy,,FALSE,FALSE,FALSE
+42160,4,counsel_services_id,Counselling services,CSVBT,Behavior therapy,Behavior therapy,,FALSE,FALSE,FALSE
+42161,5,counsel_services_id,Counselling services,CSVCB,Cognitive behavioral therapy,Cognitive behavioral therapy,,FALSE,FALSE,FALSE
+42162,6,counsel_services_id,Counselling services,CSVOT,Others,Others,,FALSE,FALSE,FALSE
+42163,1,counsel_cost_id,Counselling cost,CCSTF,Free,Free,,FALSE,FALSE,FALSE
+42164,2,counsel_cost_id,Counselling cost,CCSTP,Paid,Paid,,FALSE,FALSE,FALSE
+42165,1,counsel_amount_id,Counselling amount,CS2K,"Ksh. 2,000","Ksh. 2,000",,FALSE,FALSE,FALSE
+42166,2,counsel_amount_id,Counselling amount,CS4K,"Ksh. 4,000","Ksh. 4,000",,FALSE,FALSE,FALSE
+42167,3,counsel_amount_id,Counselling amount,CS6K,"Ksh. 6,000","Ksh. 6,000",,FALSE,FALSE,FALSE
+42168,4,counsel_amount_id,Counselling amount,CS8K,"Ksh. 8,000","Ksh. 8,000",,FALSE,FALSE,FALSE
+42169,5,counsel_amount_id,Counselling amount,CS10K,"Ksh. 10,000","Ksh. 10,000",,FALSE,FALSE,FALSE
+42170,6,counsel_amount_id,Counselling amount,CS12K,"Ksh. 12,000","Ksh. 12,000",,FALSE,FALSE,FALSE
+42171,7,counsel_amount_id,Counselling amount,CS14K,"Ksh. 14,000","Ksh. 14,000",,FALSE,FALSE,FALSE
+42172,8,counsel_amount_id,Counselling amount,CS16K,"Ksh. 16,000","Ksh. 16,000",,FALSE,FALSE,FALSE
+42173,1,court_reason_id,Court reason,CRCW,As a child witness,As a child witness,,FALSE,FALSE,FALSE
+42174,2,court_reason_id,Court reason,CRHW,Hostile witness,Hostile witness,,FALSE,FALSE,FALSE
+42175,3,court_reason_id,Court reason,CRPE,Perpetrator,Perpetrator,,FALSE,FALSE,FALSE
+42176,1,health_condition_id,Health Condition,HCAH,Appears healthy,Appears healthy,,FALSE,FALSE,FALSE
+42177,2,health_condition_id,Health Condition,HCAN,Appears normal,Appears normal,,FALSE,FALSE,FALSE
+42178,3,health_condition_id,Health Condition,HCAC,Appears challenged,Appears challenged,,FALSE,FALSE,FALSE
+42179,4,health_condition_id,Health Condition,HCCV,Challenged verified,Challenged verified,,FALSE,FALSE,FALSE
+42180,1,court_services_id,Court services,CSII,Interpreter,Interpreter,,FALSE,FALSE,FALSE
+42181,2,court_services_id,Court services,CSSL,Sign language interpreteR,Sign language interpreteR,,FALSE,FALSE,FALSE
+42182,3,court_services_id,Court services,CSAD,Assistive devices,Assistive devices,,FALSE,FALSE,FALSE
+42183,4,court_services_id,Court services,CSPT,Pre-trial,Pre-trial,,FALSE,FALSE,FALSE
+42184,5,court_session_id,Court session,CSEPH,Physical,Physical,,FALSE,FALSE,FALSE
+42185,6,court_session_id,Court session,CSEVT,Virtual,Virtual,,FALSE,FALSE,FALSE
+42186,1,court_session_type_id,Court session type,CSTCM,Camera,Camera,,FALSE,FALSE,FALSE
+42187,2,court_session_type_id,Court session type,CSTOC,Open court,Open court,,FALSE,FALSE,FALSE
+42188,3,court_session_type_id,Court session type,CSTRM,At the remand,At the remand,,FALSE,FALSE,FALSE
+42189,4,court_session_type_id,Court session type,CSTMC,Mobile court,Mobile court,,FALSE,FALSE,FALSE
+42190,1,court_recommend_services_id,Court recommend services,CRSCO,Counseling,Counseling,,FALSE,FALSE,FALSE
+42191,2,court_recommend_services_id,Court recommend services,CRSMC,Medical care,Medical care,,FALSE,FALSE,FALSE
+42192,3,court_recommend_services_id,Court recommend services,CRSAA,Age assessment,Age assessment,,FALSE,FALSE,FALSE
+42193,4,court_recommend_services_id,Court recommend services,CRSOT,Other,Other,,FALSE,FALSE,FALSE
+42194,1,si_learning_materials_id,SI learning materials,SLMTB,Text Books,Text Books,,FALSE,FALSE,FALSE
+42195,2,si_learning_materials_id,SI learning materials,SLMEB,Exercise books,Exercise books,,FALSE,FALSE,FALSE
+42196,3,si_learning_materials_id,SI learning materials,SLMPN,Pens,Pens,,FALSE,FALSE,FALSE
+42197,4,si_learning_materials_id,SI learning materials,SLMPE,Pencils,Pencils,,FALSE,FALSE,FALSE
+42198,5,si_learning_materials_id,SI learning materials,SLMGS,Geometrical set,Geometrical set,,FALSE,FALSE,FALSE
+42199,6,si_learning_materials_id,SI learning materials,SLMUN,Uniform,Uniform,,FALSE,FALSE,FALSE
+42200,7,si_learning_materials_id,SI learning materials,SLMTE,Training equipment,Training equipment,,FALSE,FALSE,FALSE
+42201,8,si_learning_materials_id,SI learning materials,SLMOT,Others,Others,,FALSE,FALSE,FALSE
+42202,1,exams_bodies_id,SI exam bodies,EKEYA,KEYA,KEYA,,FALSE,FALSE,FALSE
+42203,2,exams_bodies_id,SI exam bodies,EKPSEA,KPSEA,KPSEA,,FALSE,FALSE,FALSE
+42204,3,exams_bodies_id,SI exam bodies,EKMYA,KMYA,KMYA,,FALSE,FALSE,FALSE
+42205,4,exams_bodies_id,SI exam bodies,EKCBE,KCBE,KCBE,,FALSE,FALSE,FALSE
+42206,5,exams_bodies_id,SI exam bodies,EKCPE,KCPE,KCPE,,FALSE,FALSE,FALSE
+42207,6,exams_bodies_id,SI exam bodies,EKCSE,KCSE,KCSE,,FALSE,FALSE,FALSE
+42208,1,si_lit_skills_id,SI Literacy skills,SLSRE,Reading,Reading,,FALSE,FALSE,FALSE
+42209,2,si_lit_skills_id,SI Literacy skills,SLSWR,Writing,Writing,,FALSE,FALSE,FALSE
+42210,3,si_lit_skills_id,SI Literacy skills,SLSNU,Numeracy,Numeracy,,FALSE,FALSE,FALSE
+42211,4,si_lit_skills_id,SI Literacy skills,SLSCO,Computer,Computer,,FALSE,FALSE,FALSE
+42212,1,cbc_skills_level_id,SI Skills levels,SSLBE,Below expectation,Below expectation,,FALSE,FALSE,FALSE
+42213,2,cbc_skills_level_id,SI Skills levels,SSLAE,Approaching expectation,Approaching expectation,,FALSE,FALSE,FALSE
+42214,3,cbc_skills_level_id,SI Skills levels,SSLME,Meet expectation,Meet expectation,,FALSE,FALSE,FALSE
+42215,4,cbc_skills_level_id,SI Skills levels,SSLEE,Exceed Expectation,Exceed Expectation,,FALSE,FALSE,FALSE
+42216,1,si_life_skills_id,SI Life skills,SLSPH,Personal hygiene,Personal hygiene,,FALSE,FALSE,FALSE
+42217,2,si_life_skills_id,SI Life skills,SLSEC,Environmental  Cleanliness,Environmental  Cleanliness,,FALSE,FALSE,FALSE
+42218,3,si_life_skills_id,SI Life skills,SLSPS,Problem solving,Problem solving,,FALSE,FALSE,FALSE
+42219,4,si_life_skills_id,SI Life skills,SLSIS,Interpersonal Skills,Interpersonal Skills,,FALSE,FALSE,FALSE
+42220,5,si_life_skills_id,SI Life skills,SLSOS,Organization skills,Organization skills,,FALSE,FALSE,FALSE
+42221,6,si_life_skills_id,SI Life skills,SLSPE,Personal Etiquette,Personal Etiquette,,FALSE,FALSE,FALSE
+42222,7,si_life_skills_id,SI Life skills,SLSOT,Other,Other,,FALSE,FALSE,FALSE
+42223,1,si_spiritual_skills,SI Spiritual skills,SSSIS,Islamic,Islamic,,FALSE,FALSE,FALSE
+42224,2,si_spiritual_skills,SI Spiritual skills,SSSCH,Christian,Christian,,FALSE,FALSE,FALSE
+42225,3,si_spiritual_skills,SI Spiritual skills,SSSOT,Others,Others,,FALSE,FALSE,FALSE
+42226,1,si_cocurricular_skills,SI co-curricular skills,SCCGS,"Games and sports  (Football, Swimming, Netball e.t.c)",Games and sports,,FALSE,FALSE,FALSE
+42227,2,si_cocurricular_skills,SI co-curricular skills,SCCMD,"Music and drama (Poetry, Music, Instrumental etc)",Music and drama,,FALSE,FALSE,FALSE
+42228,3,si_cocurricular_skills,SI co-curricular skills,SCCOT,Others,Others,,FALSE,FALSE,FALSE
+42229,1,si_examiner_id,SI examiner,EKNEC,KNEC,KNEC,,FALSE,FALSE,FALSE
+42230,2,si_examiner_id,SI examiner,ETVET,TVET,TVET,,FALSE,FALSE,FALSE
+42231,3,si_examiner_id,SI examiner,ENITA,NITA,NITA,,FALSE,FALSE,FALSE
+42232,4,si_examiner_id,SI examiner,EOTH,Others,Others,,FALSE,FALSE,FALSE
+42233,1,si_course_type_id,SI course types,SCTVO,Vocational,Vocational,,FALSE,FALSE,FALSE
+42234,2,si_course_type_id,SI course types,SCTPR,Proficiency,Proficiency,,FALSE,FALSE,FALSE
+42235,1,si_vocational_course_id,SI vocational course,SVC01,Electrical and wireman,Electrical and wireman,,FALSE,FALSE,FALSE
+42236,2,si_vocational_course_id,SI vocational course,SVC02,Tailoring and dressmaking,Tailoring and dressmaking,,FALSE,FALSE,FALSE
+42237,3,si_vocational_course_id,SI vocational course,SVC03,Motor vehicle and Mechanic,Motor vehicle and Mechanic,,FALSE,FALSE,FALSE
+42238,4,si_vocational_course_id,SI vocational course,SVC04,Plumbing and pipe fitters,Plumbing and pipe fitters,,FALSE,FALSE,FALSE
+42239,5,si_vocational_course_id,SI vocational course,SVC05,Carpentry and joinery,Carpentry and joinery,,FALSE,FALSE,FALSE
+42240,6,si_vocational_course_id,SI vocational course,SVC06,Masonry,Masonry,,FALSE,FALSE,FALSE
+42241,7,si_vocational_course_id,SI vocational course,SVC07,Shoe making and leather work,Shoe making and leather work,,FALSE,FALSE,FALSE
+42242,8,si_vocational_course_id,SI vocational course,SVC08,Beauty and hairdressing,Beauty and hairdressing,,FALSE,FALSE,FALSE
+42243,9,si_vocational_course_id,SI vocational course,SVC09,Barbery,Barbery,,FALSE,FALSE,FALSE
+42244,10,si_vocational_course_id,SI vocational course,SVC10,Solar installation and repair,Solar installation and repair,,FALSE,FALSE,FALSE
+42245,11,si_vocational_course_id,SI vocational course,SVC11,Others,Others,,FALSE,FALSE,FALSE
+42246,1,si_proficiency_course_id,SI Proficiency course,SPC01,Bakery and confectionary,Bakery and confectionary,,FALSE,FALSE,FALSE
+42247,2,si_proficiency_course_id,SI Proficiency course,SPC02,Poultry,Poultry,,FALSE,FALSE,FALSE
+42248,3,si_proficiency_course_id,SI Proficiency course,SPC03,Agriculture,Agriculture,,FALSE,FALSE,FALSE
+42249,4,si_proficiency_course_id,SI Proficiency course,SPC04,Terrace laying,Terrace laying,,FALSE,FALSE,FALSE
+42250,5,si_proficiency_course_id,SI Proficiency course,SPC05,Nursery management,Nursery management,,FALSE,FALSE,FALSE
+42251,6,si_proficiency_course_id,SI Proficiency course,SPC06,Puncture making and repair,Puncture making and repair,,FALSE,FALSE,FALSE
+42252,7,si_proficiency_course_id,SI Proficiency course,SPC07,Wheel alignment,Wheel alignment,,FALSE,FALSE,FALSE
+42253,8,si_proficiency_course_id,SI Proficiency course,SPC08,Bead making,Bead making,,FALSE,FALSE,FALSE
+42254,9,si_proficiency_course_id,SI Proficiency course,SPC09,Others,Others,,FALSE,FALSE,FALSE
+42255,1,si_course_grade_id,Si course grades,SCG3,Grade III,Grade III,,FALSE,FALSE,FALSE
+42256,2,si_course_grade_id,Si course grades,SCG2,Grade II,Grade II,,FALSE,FALSE,FALSE
+42257,3,si_course_grade_id,Si course grades,SCG1,Grade I,Grade I,,FALSE,FALSE,FALSE
+42258,1,si_exam_results_id,SI exam results,SERPA,Pass,Pass,,FALSE,FALSE,FALSE
+42259,2,si_exam_results_id,SI exam results,SERFA,Fail,Fail,,FALSE,FALSE,FALSE
+42260,1,si_education_level,SI education level,SIELC,Class,Class,,FALSE,FALSE,FALSE
+42261,2,si_education_level,SI education level,SIELG,Grade,Grade,,FALSE,FALSE,FALSE
+42262,3,si_education_level,SI education level,SIELF,Form,Form,,FALSE,FALSE,FALSE

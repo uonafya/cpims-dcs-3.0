@@ -543,7 +543,7 @@
                 </div>
                 <div class="invoice-footer text-muted">
                     <p class="text-right">
-                        <span class="m-r-10"> Case ID: <strong>{{ ovccr.case_id }}</strong>; Case Created by: <strong>{{ app_user.reg_person.first_name }} {{ app_user.reg_person.surname }}</strong>; Date and Time: <strong>{{ ovccr.timestamp_created }}</strong></span>
+                        <span class="m-r-10"> Case ID: <strong>{{ ovccr.case_id }}</strong>; Case Created by: ({{app_user.reg_person.id}}) <strong>{{ app_user.reg_person.first_name }} {{ app_user.reg_person.surname }}</strong>; Date and Time: <strong>{{ ovccr.timestamp_created }}</strong></span>
                     </p>
                     <p><a href="javascript:history.go(-1)" class="history btn btn-sm btn-primary">Back to Follow Ups</a></p>
                 </div>
