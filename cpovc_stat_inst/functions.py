@@ -1,11 +1,12 @@
 from django.utils import timezone
 from cpovc_main.models import ListQuestions
 from cpovc_main.functions import convert_date
-from .parameters import SI_FORMS
+from .parameters import SI_FORMS, SI_CODES
 
 from .models import SIMain, SI_VacancyApp, SIEvents, SIForms
 
 from cpovc_forms.models import OVCPlacement
+from cpovc_registry.models import RegOrgUnit
 
 
 class CaseObj(object):
@@ -17,9 +18,11 @@ def get_form(form_id):
     try:
         form_data = {}
         form_name = SI_FORMS[form_id] if form_id in SI_FORMS else ''
+        form_code = SI_CODES[form_id] if form_id in SI_CODES else ''
         form_data['form_name'] = form_name
+        form_data['form_code'] = form_code
     except Exception:
-        return {'form_name': 'SI Forms'}
+        return {'form_name': 'SI Forms', 'form_code': ''}
     else:
         return form_data
 
@@ -108,41 +111,6 @@ def save_form(request, form_id, person_id, edit_id=1):
                           'sub_county_children_officer': scco,
                           'created_by_id': user_id},
             )
-        elif form_id == 'FMSI004F':
-            print('OK')
-            inst_name = get_data(request, 'Q2_admission_inst')
-            adm_number = get_data(request, 'Q1_admission_num')
-            adm_date = event_date
-            adm_type = get_data(request, 'Q3_admission_type')
-            adm_reason = get_data(request, 'Q4_admission_reason')
-            holding_period = get_data(request, 'Q6_holding_days')
-            has_committal = get_data(request, 'Q5_has_committal')
-            ob_number = get_data(request, 'Q7_ob_number')
-            court_order_num = get_data(request, 'Q8_court_order_num')
-            court_order_date = get_data(request, 'Q9_court_order_date')
-            court_name = get_data(request, 'Q10_court_name')
-            comm_period = get_data(request, 'Q12_committal_period')
-            comm_period_units = get_data(request, 'Q11_committal_period_units')
-            crs_id = request.POST.get('case_record_id')
-            obj, created = OVCPlacement.objects.update_or_create(
-                person_id=person_id, is_active=False,
-                defaults={'residential_institution_id': inst_name,
-                          'residential_institution_name': inst_name,
-                          'admission_number': adm_number,
-                          'admission_date': adm_date,
-                          'admission_type': adm_type,
-                          'admission_reason': adm_reason,
-                          'holding_period': holding_period,
-                          'has_court_committal_order': has_committal,
-                          'court_order_number': court_order_num,
-                          'court_order_issue_date': court_order_date,
-                          'committing_court': court_name,
-                          'committing_period': comm_period,
-                          'committing_period_units': comm_period_units,
-                          'ob_number': ob_number,
-                          'case_record_id': crs_id,
-                          'created_by': user_id})
-
         else:
             print('Save the form %s' % (form_id))
             care_id = si_obj.pk
@@ -170,6 +138,51 @@ def save_form(request, form_id, person_id, edit_id=1):
                             event_id=event_id, question_id=qid,
                             item_value=q_val,
                             defaults={'item_detail': itdl})
+            # Special case of Admission form
+            if form_id == 'FMSI004F':
+                print('OK')
+                inst_name = get_data(request, 'Q2_admission_inst')
+                adm_number = get_data(request, 'Q1_admission_num')
+                adm_date = event_date
+                adm_type = get_data(request, 'Q3_admission_type')
+                adm_reason = get_data(request, 'Q4_admission_reason')
+                holding_period = get_data(request, 'Q6_holding_days')
+                has_committal = get_data(request, 'Q5_has_committal')
+                ob_number = get_data(request, 'Q7_ob_number')
+                court_order_num = get_data(request, 'Q8_court_order_num')
+                co_date = get_data(request, 'Q9_court_order_date')
+                court_order_date = convert_date(co_date) if co_date else None
+                court_name = get_data(request, 'Q10_court_name')
+                comm_period = get_data(request, 'Q12_committal_period')
+                comm_period_units = get_data(
+                    request, 'Q11_committal_period_units')
+                crs_id = request.POST.get('case_record_id')
+                obj, created = OVCPlacement.objects.update_or_create(
+                    person_id=person_id, is_active=True,
+                    defaults={'residential_institution_id': inst_name,
+                              'residential_institution_name': inst_name,
+                              'admission_number': adm_number,
+                              'admission_date': adm_date,
+                              'admission_type': adm_type,
+                              'admission_reason': adm_reason,
+                              'holding_period': holding_period,
+                              'has_court_committal_order': has_committal,
+                              'court_order_number': court_order_num,
+                              'court_order_issue_date': court_order_date,
+                              'committing_court': court_name,
+                              'committing_period': comm_period,
+                              'committing_period_units': comm_period_units,
+                              'ob_number': ob_number,
+                              'case_record_id': crs_id,
+                              'created_by': user_id})
+                # update institute type on Main Table
+                si_reg_id = si_obj.pk
+                org_unit_id = int(inst_name)
+                org_unit = RegOrgUnit.objects.get(id=org_unit_id)
+                org_type = org_unit.org_unit_type_id
+                SIMain.objects.filter(
+                    person_id=person_id, pk=si_reg_id).update(
+                    org_unit_id=org_unit_id, org_type=org_type)
 
     except Exception as e:
         raise e

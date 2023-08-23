@@ -115,10 +115,7 @@ table {
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
                     <input type="hidden" name="person_id" value="{{ case.person.id }}">
                     <input type="hidden" name="care_id" value="{{ case.care_id }}">
-
-                    <div class="row">
-                        <!-- begin wizard step-1 -->
-                        <div class="tab-pane">
+                        <div class="row">
                             <fieldset>
                                 <legend class="pull-left width-full">Section 1 : Personal Information</legend>
                                 <div class="form-group">
@@ -148,128 +145,239 @@ table {
                                     <div class="col-md-3">{{ case.person.date_of_birth }}</div>
                                     <div class="col-md-1"></div>
                                 </div>
-
                             </fieldset>
-                        </div>
-                        <!-- end wizard step-1 -->
-
-                        <!-- begin wizard step-2 -->
-                        <div class="tab-pane">
                             <fieldset>
-                                <legend class="pull-left width-full">Section 2 : ICP details</legend>
+                                <legend class="pull-left width-full">Section 2 : Details</legend>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q1_needs.label }}
-                                        {% if form.Q1_needs.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q1_adm_number.label }}
+                                        {% if form.Q1_adm_number.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
                                     <div class="col-md-5">
-                                        {{ form.Q1_needs }}
+                                        {{ form.Q1_adm_number }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q2_risks.label }}
-                                        {% if form.Q2_risks.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q2_identity_no.label }}
+                                        {% if form.Q2_identity_no.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
                                     <div class="col-md-5">
-                                        {{ form.Q2_risks }}
+                                        {{ form.Q2_identity_no }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q3_resources.label }}
-                                        {% if form.Q3_resources.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q3_court_file_no.label }}
+                                        {% if form.Q3_court_file_no.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
                                     <div class="col-md-5">
-                                        {{ form.Q3_resources }}
+                                        {{ form.Q3_court_file_no }}
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Domain <span class="asteriskField">*</span></label>
-                                    <div class="col-md-3">{{ form.Q4_domain }}</div>
-                                    <div class="col-md-6"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-3"><b>Goals <span class="asteriskField">*</span></b></div>
-                                    <div class="col-md-4"><b>Sub-goals <span class="asteriskField">*</span></b></div>
-                                    <div class="col-md-4"><b>Proposed actions <span class="asteriskField">*</span></b></div>
-                                    <div class="col-md-1"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3">{{ form.Q5_goals }}</div>
-                                    <div class="col-md-4">{{ form.Q6_sub_goals }}</div>
-                                    <div class="col-md-4">{{ form.Q7_action }}</div>
-                                    <div class="col-md-1"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3"><b>Start date <span class="asteriskField">*</span></b></div>
-                                    <div class="col-md-4"><b>End date <span class="asteriskField">*</span></b></div>
-                                    <div class="col-md-4"><b>Officer's Comment</b></div>
-                                    <div class="col-md-1"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3">{{ form.Q8_start_date }}</div>
-                                    <div class="col-md-4">{{ form.Q9_end_date }}</div>
-                                    <div class="col-md-4">{{ form.Q10_comment }}</div>
-                                    <div class="col-md-1"><button id="btnAddCasePlan" type="button" class="btn btn-sm btn-inverse m-r-5" onClick="AddCasePlan()"> <i class="fa fa-plus" aria-hidden="true"></i> Add Goal</button></div>
-                                </div>
                                 <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q4_police_file_no.label }}
+                                        {% if form.Q4_police_file_no.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
                                     <div class="col-md-5">
-                                        <p>FAMILY CONFERENCING RESULT</p>
+                                        {{ form.Q4_police_file_no }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q11_reccomend.label }}
-                                        {% if form.Q11_reccomend.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q5_ethnic_group.label }}
+                                        {% if form.Q5_ethnic_group.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-9">
-                                        {{ form.Q11_reccomend }}
+                                    <div class="col-md-5">
+                                        {{ form.Q5_ethnic_group }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q12_date.label }}
-                                        {% if form.Q12_date.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q6_clan.label }}
+                                        {% if form.Q6_clan.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-3">
-                                        {{ form.Q12_date }}
-                                    </div>
-                                    <label class="col-md-2 control-label">
-                                        {{ form.Q13_venue.label }}
-                                        {% if form.Q13_venue.field.required %}<span class="asteriskField">*</span>{% endif %}
-                                    </label>
-                                    <div class="col-md-3">
-                                        {{ form.Q13_venue }}
+                                    <div class="col-md-5">
+                                        {{ form.Q6_clan }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q14_participants.label }}
-                                        {% if form.Q14_participants.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q7_location.label }}
+                                        {% if form.Q7_location.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-9">
-                                        {{ form.Q14_participants }}
+                                    <div class="col-md-5">
+                                        {{ form.Q7_location }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-2 control-label">
-                                        {{ form.Q15_result.label }}
-                                        {% if form.Q15_result.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        {{ form.Q8_sub_location.label }}
+                                        {% if form.Q8_sub_location.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-9">
-                                        {{ form.Q15_result }}
+                                    <div class="col-md-5">
+                                        {{ form.Q8_sub_location }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q9_village.label }}
+                                        {% if form.Q9_village.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q9_village }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q10_chief.label }}
+                                        {% if form.Q10_chief.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q10_chief }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q11_sub_chief.label }}
+                                        {% if form.Q11_sub_chief.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q11_sub_chief }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q12_origin_police.label }}
+                                        {% if form.Q12_origin_police.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q12_origin_police }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q13_order_period.label }}
+                                        {% if form.Q13_order_period.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q13_order_period }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q14_order_date.label }}
+                                        {% if form.Q14_order_date.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q14_order_date }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q15_case_number.label }}
+                                        {% if form.Q15_case_number.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q15_case_number }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q16_escape_date.label }}
+                                        {% if form.Q16_escape_date.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q16_escape_date }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q17_remand_name.label }}
+                                        {% if form.Q17_remand_name.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q17_remand_name }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q18_escape_mode.label }}
+                                        {% if form.Q18_escape_mode.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q18_escape_mode }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q19_recapture.label }}
+                                        {% if form.Q19_recapture.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q19_recapture }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q20_govt_cloth.label }}
+                                        {% if form.Q20_govt_cloth.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q20_govt_cloth }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q21_escapee_desc.label }}
+                                        {% if form.Q21_escapee_desc.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q21_escapee_desc }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q22_escape_reasons.label }}
+                                        {% if form.Q22_escape_reasons.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q22_escape_reasons }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q23_supervisor.label }}
+                                        {% if form.Q23_supervisor.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q23_supervisor }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q24_date.label }}
+                                        {% if form.Q24_date.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q24_date }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q25_station.label }}
+                                        {% if form.Q25_station.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q25_station }}
                                     </div>
                                 </div>
                             </fieldset>
                         </div>
-                        <!-- end wizard step-2 -->
-
-                    </div>
                     <hr>                    
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Date of ICP <span class="asteriskField">*</span></label>
+                        <label class="col-md-2 control-label">Date of Event <span class="asteriskField">*</span></label>
                         <div class="col-md-3">
                             {{ form.event_date }}
                         </div>

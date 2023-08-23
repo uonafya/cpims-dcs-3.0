@@ -75,7 +75,7 @@ table {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<h1 class="page-header"> Form {{ form_code }} - {{ form_name }} <small>Home</small></h1>
 <!-- end page-header -->
 {% if messages %}
 <div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
@@ -321,7 +321,7 @@ table {
                     </div>
                     <hr>                    
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Date of Admission yyyy{% if case.placement %}Newton{% endif %}<span class="asteriskField">*</span></label>
+                        <label class="col-md-2 control-label">Date of Admission<span class="asteriskField">*</span></label>
                         <div class="col-md-3">
                             {{ form.event_date }}
                         </div>

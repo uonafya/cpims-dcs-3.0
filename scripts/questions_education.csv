@@ -1,0 +1,83 @@
+si_learning_materials_id,Text Books
+si_learning_materials_id,Exercise books
+si_learning_materials_id,Pens
+si_learning_materials_id,Pencils
+si_learning_materials_id,Geometrical set
+si_learning_materials_id,Uniform
+si_learning_materials_id,Training equipment
+si_learning_materials_id,Others
+
+exams_bodies_id,KEYA
+exams_bodies_id,KPSEA
+exams_bodies_id,KMYA
+exams_bodies_id,KCBE
+exams_bodies_id,KCPE
+exams_bodies_id,KCSE
+
+si_lit_skills_id,Reading
+si_lit_skills_id,Writing
+si_lit_skills_id,Numeracy
+si_lit_skills_id,Computer
+  
+
+cbc_skills_level_id,Below expectation
+cbc_skills_level_id,Approaching expectation
+cbc_skills_level_id,Meet expectation
+cbc_skills_level_id,Exceed Expectation
+
+si_life_skills_id,Personal hygiene
+si_life_skills_id,Environmental  Cleanliness
+si_life_skills_id,Problem solving
+si_life_skills_id,Interpersonal Skills
+si_life_skills_id,Organization skills
+si_life_skills_id,Personal Etiquette
+si_life_skills_id,Other
+
+
+si_spiritual_skills,Islamic
+si_spiritual_skills,Christian
+si_spiritual_skills,Others
+
+
+si_cocurricular_skills,Games and sports  (Football, Swimming, Netball e.t.c)         
+si_cocurricular_skills,Music and drams (poetry, music, instrumental etc)
+si_cocurricular_skills,Others
+
+
+si_examiner_id,KNEC 
+si_examiner_id,TVET
+si_examiner_id,NITA
+si_examiner_id,Others
+
+si_course_type_id,Vocational
+si_course_type_id,Proficiency
+
+
+si_vocational_course_id,Electrical and wireman
+si_vocational_course_id,Tailoring and dressmaking
+si_vocational_course_id,Motor vehicle and Mechanic
+si_vocational_course_id,Plumbing and pipe fitters
+si_vocational_course_id,Carpentry and joinery
+si_vocational_course_id,Masonry
+si_vocational_course_id,Shoe making and leather work
+si_vocational_course_id,Beauty and hairdressing
+si_vocational_course_id,Barbery
+si_vocational_course_id,Solar installation and repair
+si_vocational_course_id,Others
+
+si_proficiency_course_id,Bakery and confectionary
+si_proficiency_course_id,Poultry
+si_proficiency_course_id,Agriculture
+si_proficiency_course_id,Terrace laying
+si_proficiency_course_id,Nursery management
+si_proficiency_course_id,Puncture making and repair
+si_proficiency_course_id,Wheel alignment
+si_proficiency_course_id,Bead making
+si_proficiency_course_id,Others
+
+si_course_grade_id,Grade III
+si_course_grade_id,Grade II
+si_course_grade_id,Grade I
+
+si_exam_results_id,Pass
+si_exam_results_id,Fail

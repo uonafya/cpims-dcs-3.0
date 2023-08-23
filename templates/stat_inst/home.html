@@ -81,11 +81,11 @@
                        <td>{{ case.case_serial }}</td>
                        <td>{{ case.case_date }}</td>
                        <td>
-                            {% comment %} {% if case.case_level == 2 %} {% endcomment %}
-                                <a href="{% url 'new_si_child_view' case.id %}" class="btn  btn-sm btn-primary m-r-5">View Case</a>
-                             {% comment %} {% elif case.case_level == 1 %} {% endcomment %}
-                                <a href="{% url 'new_si_admit' case.id %}" class="btn  btn-sm btn-primary m-r-5">Enroll </a>
-                            {% comment %} {% endif %}  {% endcomment %}
+                            {% if case.case_serial != 'N/A' %}
+                                <a href="{% url 'new_si_child_view' case.id %}" class="btn  btn-sm btn-primary m-r-5">View Details</a>
+                             {% else %}
+                                <a href="{% url 'new_case_record_sheet' id=case.id %}" class="btn  btn-sm btn-danger m-r-5">Fill Case Record sheet </a>
+                            {% endif %}
                         </td>
                    </tr>
                     

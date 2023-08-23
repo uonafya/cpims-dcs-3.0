@@ -64,17 +64,17 @@ Child details
         <table class="text-inverse m-b-20 width-full">
             <tr>
                 <td>
-                    <br><div class="m-b-10 text-inverse f-s-12"><b>SI Forms</b></div>
+                    <br><div class="m-b-10 text-inverse f-s-12"><b>SI Forms {{ unit_type }}</b></div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="{% url 'si_form' form_id='FMSI001F' id=child.id %}">
+                    <a href="{% url 'si_form' form_id='FMSI005F' id=child.id %}">
                     <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
-                    <div class="m-t-4">Application for a Vacancy</div></a>
+                    <div class="m-t-4">Social Enquiry Form</div></a>
                 </td>
-            </tr>
+            </tr>            
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI002F' id=child.id %}">
@@ -93,20 +93,365 @@ Child details
             </tr>
             <tr>
                 <td>
-                    <a href="{% url 'si_form' form_id='FMSI004F' id=child.id %}">
+                    <a href="{% url 'si_form' form_id='FMSI001F' id=child.id %}">
                     <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
-                    <div class="m-t-4">Admission Form</div></a>
+                    <div class="m-t-4">Application for a Vacancy</div></a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="{% url 'si_form' form_id='FMSI005F' id=child.id %}">
+                    <a href="{% url 'si_form' form_id='FMSI004F' id=child.id %}">
                     <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
-                    <div class="m-t-4">Social Enquiry Form</div></a>
+                    <div class="m-t-4">Admission Form {{ case.placement }}</div></a>
                 </td>
             </tr>
+            {% if placement %}
+
+            {% if unit_type == 'TNRH' %}
+            <!-- Remand -->
+
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI007F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Identification Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI031F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI009F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Individual Treatment Plan</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI016F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Joint Family Agreement Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI018F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Record of Visits and Correspondence</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI019F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Escape Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI020F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Referral Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI021F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Release form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI022F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Certificate of Exit for Children</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI028F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Court Attendance Form</div></a>
+                </td>
+            </tr>
+            {% elif unit_type == 'TNRR' %}
+            <!-- Rescue -->
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI006F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child and Caregiver Case Review Tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI032F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Young Person and Caregiver Case Review Tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI007F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Identification Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI031F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI008F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Family Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI010F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Individual Care Plan</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI011F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Medical Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI012F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Monitoring tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI014F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Change in the Profile of a Child Under Environmental Adjustment</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI015F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Family Conferencing Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI020F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Referral Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI021F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Release form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI023F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Closure Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI025F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Re-unification Form</div></a>
+                </td>
+            </tr>
+
+            {% elif unit_type == 'TNRS' or unit_type == 'TNAP' %}
+            <!-- Rehab -->
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI007F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Identification Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI031F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI008F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Family Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI009F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Individual Treatment Plan</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI011F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Medical Assessment Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI012F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Monitoring tool</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI013F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Request for Revocation of Committal Order</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI015F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Family Conferencing Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI017F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Leave of Absence Assessment Form</div></a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI019F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Escape Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI020F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Referral Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI023F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Case Closure Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI024F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Access to Legal Aid Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI026F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Child Participation Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI027F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Counselling Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI029F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Education Form</div></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{% url 'si_form' form_id='FMSI030F' id=child.id %}">
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
+                    <span class="badge pull-right">N</span>
+                    <div class="m-t-4">Vocational and Proficiency Form</div></a>
+                </td>
+            </tr>
+
+            {% elif unit_type == 'TNAP' %}
+            <!-- Classification Center -->
+
+            {% else %}
+            <!-- Other -->
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI006F' id=child.id %}">
@@ -150,7 +495,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI009F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Individual Treatment Plan</div></a>
                 </td>
@@ -158,7 +503,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI010F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Individual Care Plan</div></a>
                 </td>
@@ -166,7 +511,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI011F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Medical Assessment Form</div></a>
                 </td>
@@ -182,7 +527,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI013F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Request for Revocation of Committal Order</div></a>
                 </td>
@@ -190,7 +535,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI014F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Change in the Profile of a Child Under Environmental Adjustment</div></a>
                 </td>
@@ -198,7 +543,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI015F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Family Conferencing Form</div></a>
                 </td>
@@ -206,7 +551,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI016F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Joint Family Agreement Form</div></a>
                 </td>
@@ -214,7 +559,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI017F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Leave of Absence Assessment Form</div></a>
                 </td>
@@ -222,7 +567,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI018F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Record of Visits and Correspondence</div></a>
                 </td>
@@ -230,7 +575,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI019F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Escape Form</div></a>
                 </td>
@@ -238,7 +583,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI020F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Case Referral Form</div></a>
                 </td>
@@ -246,7 +591,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI021F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Release form</div></a>
                 </td>
@@ -254,7 +599,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI022F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Certificate of Exit for Children</div></a>
                 </td>
@@ -278,7 +623,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI025F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Re-unification Form</div></a>
                 </td>
@@ -286,7 +631,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI026F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Child Participation Form</div></a>
                 </td>
@@ -294,7 +639,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI027F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Counselling Form</div></a>
                 </td>
@@ -302,7 +647,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI028F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Court Attendance Form</div></a>
                 </td>
@@ -310,7 +655,7 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI029F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Education Form</div></a>
                 </td>
@@ -318,11 +663,13 @@ Child details
             <tr>
                 <td>
                     <a href="{% url 'si_form' form_id='FMSI030F' id=child.id %}">
-                    <i class="fa fa-file fa-1x pull-left fa-fw m-t-4"></i>
+                    <i class="fa fa-file-o fa-1x pull-left fa-fw m-t-4"></i>
                     <span class="badge pull-right">N</span>
                     <div class="m-t-4">Vocational and Proficiency Form</div></a>
                 </td>
             </tr>
+            {% endif %}
+            {% endif %}
 
         </table>
         <div class="alert alert-warning">
@@ -370,7 +717,7 @@ Child details
                         </tr>
                         <tr>
                             <td class="field">Other Names</td>
-                            <td>{{ child.other_names }}</td>
+                            <td>{% if child.other_names %}{{ child.other_names }}{% else %}Not Provided{% endif %}</td>
                             <td class="field">DOB</td>
                             <td>{{ child.date_of_birth }}
                             ({{ child.years }})
@@ -378,15 +725,15 @@ Child details
                         </tr>
                         <tr>
                             <td class="field">Name of Institution</td>
-                            <td>{{ creg.child_cbo.org_unit_name }}</td>
+                            <td>{{ unit_name }}</td>
                             <td class="field">Type</td>
-                            <td>{{ creg.child_chv.full_name }}</td>
+                            <td>{{ unit_type }}</td>
                         </tr>
                         <tr>
                             <td class="field">OVC CPIMS ID</td>
                             <td>{{ child.id }}</td>
                             <td class="field">Admission&nbsp;Date</td>
-                            <td>{{ creg.registration_date }}</td>
+                            <td>{{ placement.admission_date }}</td>
                         </tr>
 
                         <tr>
