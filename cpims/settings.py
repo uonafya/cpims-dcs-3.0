@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DCS = ""
+
 
 # Application definition
 
@@ -96,9 +98,9 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims_live',
-        'USER': 'cpimsdbuser',
-        'PASSWORD': 'Xaen!ee8',
+        'NAME': 'cpims_dcs',
+        'USER': 'admin',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '5432', }
 }
