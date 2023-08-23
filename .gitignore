@@ -1,1 +1,4 @@
 venv
+cpims/settings.py
+.history
+.history/*
