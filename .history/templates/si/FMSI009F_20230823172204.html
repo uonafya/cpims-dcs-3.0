@@ -1,0 +1,437 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Institutions Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  @media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId{
+    display: none;
+  }
+  #wizard_a ol { display: none; }
+  .bwizard-buttons { display: none; }
+  .bwizard-steps { display: none; }
+  #wizard_a ol li { display: none; }
+  #step2, #step3  { display: block !important; }
+  .control-label {margin-bottom: 5px;}
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,td{
+    padding: 10px;
+    text-align: left; 
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+.custom-margin {
+      margin-left: 10em;
+    }
+.table-margin {
+        margin-left: 10px;
+      }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Institutions </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
+            <b>Statutory Institution - FORM {{ form_id }} - {{ form_name }}</b></div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                    <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    </span>
+                    Case No: {{ case.person.id }}
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+
+                    <div classs="row">
+                        <!-- begin wizard step-1 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">Section 1 : Personal Information</legend>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">First Name</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.first_name }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Other Names</label>
+                                    <div class="col-md-3">{% if case.person.other_names %}{{ case.person.other_names }}{% else %} Not Provided {% endif %}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Surname</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.surname }}
+                                    </div>
+                                    <label class="col-md-2 control-label">Nickname or given name</label>
+                                    <div class="col-md-3">Not Provided</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Sex</label>
+                                    <div class="col-md-3">
+                                        {{ case.person.sex_id|gen_value:vals }}
+                                    </div>
+                                    <label class="col-md-2 control-label">DOB</label>
+                                    <div class="col-md-3">{{ case.person.date_of_birth }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+
+                        <!-- begin wizard step-2 -->
+                        <div class="tab-pane">
+                            <fieldset>
+                                <legend class="pull-left width-full">Section 2 : ITP details</legend>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q1_needs.label }}
+                                        {% if form.Q1_needs.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q1_needs }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q2_risks.label }}
+                                        {% if form.Q2_risks.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q2_risks }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q3_resources.label }}
+                                        {% if form.Q3_resources.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-5">
+                                        {{ form.Q3_resources }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3"><b>Goals <span class="asteriskField">*</span></b></div>
+                                    <div class="col-md-4"><b>Sub-goals <span class="asteriskField">*</span></b></div>
+                                    <div class="col-md-2"><b>Start date <span class="asteriskField">*</span></b></div>
+                                    <div class="col-md-2"><b>End date <span class="asteriskField">*</span></b></div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">{{ form.Q4_goals }}</div>
+                                    <div class="col-md-4">{{ form.Q5_sub_goals }}</div>
+                                    <div class="col-md-2">{{ form.Q6_start_date }}</div>
+                                    <div class="col-md-2">{{ form.Q6_end_date }}</div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q7_comment.label }}
+                                        {% if form.Q7_comment.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-9">
+                                        {{ form.Q7_comment }}
+                                    </div>
+                                    <div class="col-md-1"><button id="btnAddCasePlan" type="button" class="btn btn-sm btn-inverse m-r-5" onClick="AddCasePlan()"> <i class="fa fa-plus" aria-hidden="true"></i> Add Goal</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table class="table table-condensed slimtable" id="holding_table">
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group">                                      
+                                    <div class="col-md-5">
+                                        <p>FAMILY CONFERENCING RESULT</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q8_reccomend.label }}
+                                        {% if form.Q8_reccomend.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-9">
+                                        {{ form.Q8_reccomend }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q9_date.label }}
+                                        {% if form.Q9_date.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q9_date }}
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q10_venue.label }}
+                                        {% if form.Q10_venue.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q10_venue }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q11_participants.label }}
+                                        {% if form.Q11_participants.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-9">
+                                        {{ form.Q11_participants }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                      
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q12_result.label }}
+                                        {% if form.Q12_result.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-9">
+                                        {{ form.Q12_result }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-2 -->
+                    </div>
+                    <hr>                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Date of ITP <span class="asteriskField">*</span></label>
+                        <div class="col-md-3">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+                    <div class="form-group" id="printId">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                        <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        <a href="{% url 'new_si_child_view' case.person.id %}">
+                            <button type="button" class="btn btn-default">Cancel</button>
+                        </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- end panel -->
+    </div>
+    
+</div>
+<!-- end row -->
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+
+
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script>
+
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    $("#wizard_a").bwizard({ validating: function (e, ui) { }            
+    });
+
+    
+    // Handle disability
+    var aval = $("input[name='qf1A10_rdo']:checked").val();
+        handle_disability(aval);
+    $('input[type=radio][name=qf1A10_rdo]').change(function() {
+        handle_disability(this.value);
+    });
+
+    // Handle toggle for birth certificate
+    var avalr = $("input[name='qf1A1_rdo']:checked").val();
+        handle_toggle(avalr, 1);
+    $('input[type=radio][name=qf1A1_rdo]').change(function() {
+        handle_toggle(this.value, 1);
+    });
+    // Handle toggle for committal
+    var avalr2 = $("input[name='qf1A15_rdo']:checked").val();
+        handle_toggle(avalr2, 2);
+    $('input[type=radio][name=qf1A15_rdo]').change(function() {
+        handle_toggle(this.value, 2);
+    }); 
+
+});
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+
+function handle_disability(has_disb){
+    if (has_disb == 'ANNO') {
+        $('#disability_details_div').hide();
+        $('#disability_severity').attr("data-parsley-required", "false");
+        $('#disability_type').attr("data-parsley-required", "false");
+    }else{
+        $('#disability_details_div').show();
+        $('#disability_severity').attr("data-parsley-required", "true");
+        $('#disability_type').attr("data-parsley-required", "true");
+    }
+
+}
+
+function handle_toggle(elem, itm){
+    console.log('here '+ elem)
+    if (itm == 1){
+        if (elem == 'ANNO') {
+            $("#qf1A2").prop("readonly", true);
+        }else{
+            $("#qf1A2").prop("readonly", false);
+        }
+    }else if (itm == 2){
+        if (elem == 'ANNO') {
+            $("#id_qf1A16").prop("readonly", true);
+            $("#id_qf1A17").prop("readonly", true);
+        }else{
+            $("#id_qf1A16").prop("readonly", false);
+            $("#id_qf1A17").prop("readonly", false);
+        }
+    }
+    
+
+}
+
+function AddCasePlan(){
+    {% comment %} $('#id_Q4_goals, #id_Q5_sub_goals, #Q6_start_date, #Q6_end_date, #id_Q7_comment').removeAttr('required', 'data-parsley-id') {% endcomment %}
+
+    // Validate form first
+    var parsley = $('#new-form-4A').parsley();
+    var validate = parsley.validate();
+    var isValid = parsley.isValid();
+
+    answers['goals'] = [];
+    answers['subgoals'] = [];
+    answers['startdate'] = [];
+    answers['enddate'] = [];
+    answers['othercomment'] = [];
+
+
+
+        var goal = $('#id_Q4_goals')
+        var subgoal = $('#id_Q5_sub_goals')
+        var startdate = $('#Q6_start_date')
+        var genddate = $('#Q6_end_date')
+        var othercomment = $('#id_Q7_comment')
+
+        console.log({goal,subgoal,startdate,genddate,othercomment})
+}
+</script>
+{% endblock %}
