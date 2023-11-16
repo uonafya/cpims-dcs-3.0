@@ -11,60 +11,7 @@
 <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 
 <link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-<style type="text/css">
-form#new-form-b ul {
-      list-style-type: none;
-    }
-  form#new-form-b li {
-      padding-left: 1em;
-      text-indent: -2em;
-  }
-  @media screen {
-  div.divHeader {
-    display: none;
-  }
-}
-@media print {
-  div.divHeader {
-    text-align: center;
-    font-size: 16px;
-    top: 0;
-  }
-  div.invoice-footer {
-    bottom: 0 !important;
-  }
-  div#printId{
-    display: none;
-  }
-  #wizard_a ol { display: none; }
-  .bwizard-buttons { display: none; }
-  .bwizard-steps { display: none; }
-  #wizard_a ol li { display: none; }
-  #step2, #step3  { display: block !important; }
-  .control-label {margin-bottom: 5px;}
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th,td{
-    padding: 10px;
-    text-align: left; 
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-.custom-margin {
-      margin-left: 10em;
-    }
-.table-margin {
-        margin-left: 10px;
-      }
-</style>
+<link href="{% static 'css/si_forms.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block primary %}
@@ -100,11 +47,13 @@ table {
             <div class="cinvoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if edit_form == 0 %}
+                    <a href="{% url 'si_document' form_id=form_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% endif %}
                     <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
                     <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
                     </span>
-                    Case No: {{ case.person.id }}
+                    Case No: {{ case.si_case.case_serial }}
 
                 </div>
             </div>
@@ -474,8 +423,8 @@ table {
                     </div>
                     <div class="form-group" id="printId">
                         <label class="col-md-2 control-label"></label>
-                        <div class="col-md-3">
-                        <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        <div class="col-md-8">
+                        <button type="submit" class="btn btn-success">Submit Form {{ form_code }} details</button>
                         <a href="{% url 'new_si_child_view' case.person.id %}">
                             <button type="button" class="btn btn-default">Cancel</button>
                         </a>
@@ -485,19 +434,153 @@ table {
             </div>
         </div>
     </div>
-        <!-- end panel -->
+    {% if edit_form > 0 %}
+    <div class="row">
+        <!-- begin col-12 -->
+        <div class="col-md-12">
+            <!-- begin panel -->
+            <div class="panel panel-default" data-sortable-id="ui-general-1">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>                          
+                    <h4 class="panel-title"><b>Past Events </b></h4>                    
+                </div>
+                <div class="panel-body">
+                    <table id="tableData" class="table table-striped table-bordered">
+                        <thead>
+                            <tr> 
+                                <th>#</th>                                 
+                                <th>Event Date</th>                
+                                <th>Officer</th> 
+                                <th width="25%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if case.events %}
+                            {% for vacancy in case.events %}
+                            <tr id="si_row-{{ vacancy.pk }}"> 
+                                <td>{{ forloop.counter }}</td>                                 
+                                <td>{{ vacancy.event_date }}</td>
+                                <td>N/A</td>
+
+                                <td>
+                                    <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
+                                        <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View / Edit Details </button>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div style="background-color:#d9edf7" class="modal-header">
+                                                    <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete {{ form_name }} - {{ vacancy.event_date }}</strong></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this {{ form_name }} dated {{ vacancy.event_date }} ? </p>
+                                                        <br>
+                                                        <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                        <hr>
+                                                        <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                        <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>                                                        
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6">No previous events available</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>                  
+                </div>
+                <!-- end panel -->
+            </div>
+            <!-- end col-12 -->
+        </div>
+        {% endif %}
+        </div>
     </div>
-    
+    <!-- end panel -->  
 </div>
 <!-- end row -->
+
+<!-- Modal -->
+<div  class="modal fade" id="successMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #8f9191">
+            <div style="background-color: #d9edf7" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Successful Deletion of Event</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>Deleted successfully!</p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="errorMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div style="background-color: #ff9966" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Deletion NOT completed.</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>This item can not be deleted. <span id="msg_id"></span></p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block lazy_javascript_code %}
 
-
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script>
+// Delete Django Ajax Call
+function deleteEvent(form_id, event_id) {
+    var csrftoken = $.cookie('csrftoken');
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'si_form_delete' %}",
+        
+        data: {'form_id': form_id, 'event_id': event_id,
+               'csrfmiddlewaretoken': csrftoken },
+        dataType: 'json',
+        
+        success: function (data) {
+            if (data.deleted == 1) {
+                console.log(data);
+              $("#tableData #si_row-" + event_id).remove();
+              $("#successMsg").modal('show');
+            }
+            if(data.deleted == 0){
+                console.log(data.days)
+                $("#msg_id").html(data.message);
+                $("#errorMsg").modal('show');
+    
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
 
 $(document).ready(function() {
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });

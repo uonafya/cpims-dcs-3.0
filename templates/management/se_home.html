@@ -24,8 +24,8 @@ table.display {
 {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-	<li><a href="#">Home</a></li>
-	<li class="active">Staff Establishment</li>
+    <li><a href="#">Home</a></li>
+    <li class="active">Staff Establishment</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -52,29 +52,36 @@ table.display {
             <!-- start panel body -->
             <div class="panel-body">
                 <form id="dqcases" method="POST" action=".">
-                    {% csrf_token %}
-                    
-                <div class="row">
-                    
+                    {% csrf_token %}                    
+                <div class="row">                    
                     <div class="col-md-6">
                         <div class="form-group">
-                        <label for="age">Organization Unit</label>
+                        <label for="age">Organization Unit <span class="asteriskField">*</span></label>
                         {{ form.org_unit }}
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <div class="form-group">
                         <label for="age">County</label>
                         {{ form.county }}
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-sm btn-primary m-r-5 ddash"> Filter </button>
-                        <button type="reset" class="btn btn-sm btn-default"> Reset </button>
-                        <span id="mng_messages">Pick None of the Organization unit or County to use ALL.</span>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                        <label for="age">-</label>
+                        <div>
+                            <input type="checkbox" name="child_unit" id="id_child_unit" /> Include Sub-Units / LIP
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="age">-</label>
+                            <div>
+                                <button type="button" class="btn btn-sm btn-primary m-r-5 ddash"> Filter </button>
+                                <button type="reset" class="btn btn-sm btn-default"> Reset </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 </form>
@@ -87,9 +94,12 @@ table.display {
                         <tr>
                         <th>CPIMS ID</th>
                         <th>Names of Officer</th>
+                        <th>Username</th>
                         <th>DOB</th>
                         <th>Sex</th>
                         <th>Age</th>
+                        <th>Active</th>
+                        <th>Last Login</th>
                         <th>Designation</th>
                         <th>County</th>
                         <th>Org Unit / Station</th>                        
@@ -136,7 +146,11 @@ $(document).ready(function() {
         // var hashValue = location.hash.replace(/^#/, '');
         var id = $(this).attr('id');
         var org_unit = $( "#id_org_unit" ).val();
+        var child_unit = $( "#id_child_unit" ).val();
+        var org_unit_name = $( "#id_org_unit option:selected" ).text();
         var county = $( "#county" ).val();
+
+        $(document).prop('title', 'Staff Establishment - ' + org_unit_name + ' ({% now "jS F Y H:i" %})');
         $('#data-table > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
 
         var buttonCommon = {
@@ -155,14 +169,18 @@ $(document).ready(function() {
                   "data": function ( d ) {
                         d.org_unit = org_unit;
                         d.county = county;
+                        d.child_unit = child_unit;
                  }
              },
             columns: [
                 { data: 'cpims_id' },
                 { data: 'names' },
+                { data: 'uname' },
                 { data: 'dob' },
                 { data: 'sex' },
                 { data: 'age' },
+                { data: 'active' },
+                { data: 'last_login' },
                 { data: 'designation' },                
                 { data: 'county' },
                 { data: 'org_unit' }

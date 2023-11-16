@@ -11,7 +11,9 @@
 
 
 {% block javascript_code %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/c3/c3.min.css' %}">
+<script type="text/javascript" src="{% static 'plugins/d3/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/c3/c3.min.js' %}"></script>
 {% endblock javascript_code %}
 
 {% block primary%}
@@ -59,6 +61,7 @@
                         <label class="control-label col-md-4 col-sm-4">Report Region :</label>
                         <div class="col-md-6 col-sm-6">
                             <label><input data-parsley-required="true" data-parsley-errors-container="#type_error" id="report_type_0" name="report_region" class="report_region" type="radio" value="1" checked="checked" /> National</label>
+                            <label><input data-parsley-required="true" data-parsley-errors-container="#type_error" id="report_type_6" name="report_region" class="report_region" type="radio" value="6" /> Region</label>
                             <label><input data-parsley-required="true" data-parsley-errors-container="#type_error" id="report_type_1" name="report_region" class="report_region" type="radio" value="2" /> County</label>
                             <label><input data-parsley-required="true" data-parsley-errors-container="#type_error" id="report_type_2" name="report_region" class="report_region" type="radio" value="3" /> Sub-county</label>
                             <label><input data-parsley-required="true" data-parsley-errors-container="#type_error" id="report_type_3" name="report_region" class="report_region" type="radio" value="4" /> Organisation Unit</label>
@@ -100,6 +103,13 @@
                             {{ form.cluster }}
                         </div>
                         <a href="#" data-toggle="tooltip" title="Select your preset cluster."><i class="fa fa-info-circle fa-lg"></i></a>
+                    </div>
+                    <div class="form-group" id="report_region">
+                        <label class="control-label col-md-4 col-sm-4">Region Name :</label>
+                        <div class="col-md-6 col-sm-6">
+                            {{ form.region }}
+                        </div>
+                        <a href="#" data-toggle="tooltip" title="Select the region."><i class="fa fa-info-circle fa-lg"></i></a>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4 col-sm-4">Reporting period :</label>
@@ -157,6 +167,7 @@
                         <div class="col-md-2 col-sm-2">
                             <button type="submit" class="btn btn-sm btn-primary m-r-5">
                             <i class="fa fa-check-square-o"></i> View </button>
+                            <span  id="pdates"></span>
                         </div>
                     </div>
                     {% endif %}
@@ -180,6 +191,11 @@
 
 {% block lazy_javascript_code %}
 <script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
+<!-- PivotTable.js libs from ../dist -->
+<script type="text/javascript" src="{% static 'plugins/pivot-table/dist/pivot.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/pivot-table/dist/export_renderers.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/pivot-table/dist/d3_renderers.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/pivot-table/dist/c3_renderers.js' %}"></script>
 <script>
 {% if report_name == 'CPIMS' %}
     //Invalid report
@@ -214,10 +230,15 @@ jQuery(document).ready(function() {
             data: $("#cpims_std_reports").serialize()+ "&org_unit_name="+oname,
             // handle a successful response
             success : function(response) {
+                var data = response.data;
                 var file_name = response.file_name;
                 var excel_name = response.excel_file;
                 var status = response.status;
                 var message = response.message;
+                var pdates = response.dates;
+                var tpl = $.pivotUtilities.aggregatorTemplates;
+                var numberFormat = $.pivotUtilities.numberFormat;
+                var intFormat = numberFormat({digitsAfterDecimal: 0});
                 var url = '<a href="{% url "download_reports" file_name="0000" %}">';
                 var pdf_url = '<a href="{% url "print_pdf" file_name="0000" %}">';
                 // PDF
@@ -235,10 +256,30 @@ jQuery(document).ready(function() {
                 xlsx += '<i class="fa fa-file-excel-o"></i> Excel</button></a>';
                 // Printing
                 var prnt = '<button type="button" class="btn btn-success m-r-5 m-b-5"';
-                prnt += ' onclick="printReport()"><i class="fa fa-print">';
+                prnt += ' onclick="printChart()"><i class="fa fa-print">';
                 prnt += '</i> Print report</button>';
+                $('#pdates').html(pdates);
+                var renderers = $.extend(
+                    $.pivotUtilities.renderers,
+                    $.pivotUtilities.d3_renderers,
+                    $.pivotUtilities.c3_renderers
+                    );
                 if (status == 0){
                     $('#report_results').html(prnt + csvf + xlsx + pdf);//Available exts
+                    $("#report_html").pivotUI(data, {
+                        renderers: renderers,
+                        cols: ["agerange", "sex"],
+                        rows: ["case category"],
+                        aggregators: {
+                            "Number of OVC":  function() { 
+                                return tpl.count()()
+                            },
+                            "Sum of OVC":  function() { 
+                                return tpl.sum(intFormat)(["ovccount"]) 
+                            }
+                        },
+                        rendererName: "Table"
+                    }, true);
                 }else{
                     $('#report_results').html(message);                
                 }
@@ -270,11 +311,13 @@ jQuery(document).ready(function() {
     $('#sub_county').attr('data-parsley-required', 'false');
     $('#report_reg_unit').hide();
     $('#report_cluster').hide();
+    $('#report_region').hide();
     
     $(".report_region").click(function(e) {
         var res = $('input[name=report_region]:checked', '#cpims_std_reports').val();
         if (res == '1'){
             $('#report_cluster').hide();
+            $('#report_region').hide();
             $('#report_county').hide();
             $('#county').attr('data-parsley-required', 'false');
             $('#report_sub_county').hide();
@@ -285,6 +328,7 @@ jQuery(document).ready(function() {
             $('#id_institution_type').attr('data-parsley-required', 'true');
         }else if (res == '2'){
             $('#report_cluster').hide();
+            $('#report_region').hide();
             $('#report_county').show();
             $('#county').attr('data-parsley-required', 'true');
             $('#county').val('');
@@ -297,6 +341,7 @@ jQuery(document).ready(function() {
             $('#id_institution_type').attr('data-parsley-required', 'true');
         }else if (res == '3'){
             $('#report_cluster').hide();
+            $('#report_region').hide();
             $('#report_county').show();
             $('#county').attr('data-parsley-required', 'true');
             $('#county').val('');
@@ -311,6 +356,7 @@ jQuery(document).ready(function() {
             $('#id_institution_type').attr('data-parsley-required', 'true');
         }else if (res == '4'){
             $('#report_cluster').hide();
+            $('#report_region').hide();
             $('#report_reg_unit').show();
             $('#id_org_unit').attr('data-parsley-required', 'true');
             $('#report_county').hide();
@@ -321,7 +367,19 @@ jQuery(document).ready(function() {
             $('#id_institution_type').attr('data-parsley-required', 'false');
         }else if (res == '5'){
             $('#report_cluster').show();
+            $('#report_region').hide();
             $('#id_cluster').attr('data-parsley-required', 'true');
+            $('#report_reg_unit').hide();
+            $('#id_org_unit').attr('data-parsley-required', 'false');
+            $('#report_county').hide();
+            $('#county').attr('data-parsley-required', 'false');
+            $('#report_sub_county').hide();
+            $('#sub_county').attr('data-parsley-required', 'false');
+        }else if (res == '6'){
+            $('#report_cluster').hide();
+            $('#report_region').show();
+            $('#id_region').attr('data-parsley-required', 'true');
+            $('#id_cluster').attr('data-parsley-required', 'false');
             $('#report_reg_unit').hide();
             $('#id_org_unit').attr('data-parsley-required', 'false');
             $('#report_county').hide();
@@ -465,48 +523,33 @@ jQuery(document).ready(function() {
 
 });
 
-function PrintElem(elem)
-    {
-        Popup($(elem).html());
-    }
 
-    function Popup(data) 
-    {
-        var lscape = '<style type="text/css" media="print">@page { size: landscape; }</style>';
-        var bstrap = '<link href="{% static "plugins/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" />';
-        var mywindow = window.open('', 'report_html', 'height=400,width=600');
-        mywindow.document.write('<html><head><title>Case Load Report</title>');
-        mywindow.document.write(bstrap);
-        mywindow.document.write('<link href="{% static "css/style.css" %}" rel="stylesheet" />');
-        mywindow.document.write(lscape);
-        mywindow.document.write('</head><body >');
-        mywindow.document.write(data);
-        mywindow.document.write('</body></html>');
-        // IE Handlers
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10
-        // Other browsers handlers
-        mywindow.print();
-        mywindow.close();
-
-        return true;
-    }
-
-function printReport() {
+function printChart() {
+      //Print Chart
+      var mapContainer;
       var body               = $('body');
-      var reportContainer       = $('#report_vhtml');
-      var reportContainerParent = reportContainer.parent();
+      mapContainer       = $('td.pvtRendererArea div');
+      if (mapContainer.length == 0){
+          mapContainer = $('td.pvtRendererArea table');
+      }
+      var mapContainerParent = mapContainer.parent();
       var printContainer     = $('<div>');
-      var inithtml = $('#report_vhtml').html();
-
-      console.log(reportContainer.height());
+      var prnt = '<center><img src="{% static 'img/gok_logo.jpg' %}" alt="" /></center>';
+      prnt += '<center><b>{{ dcs.MINISTRY }}<br>';
+      prnt += '{{ dcs.STATE_DEPT }}<br>';
+      prnt += '{{ dcs.NAME }}<br></b></center><br>';
+      var pdts = $('#pdates').text();
+      var rnm = $( "#id_report_vars option:selected" ).text();
+      prnt += rnm + ' report for dates '+ pdts
+      //$("#print_title").val();
 
       printContainer
         .addClass('print-container')
         .css('width', '100%')
         .css('height', '800px')
-        .height(reportContainer.height())
-        .append(reportContainer)
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
         .prependTo(body);
 
       var content = body
@@ -515,7 +558,8 @@ function printReport() {
         .not(printContainer)
         .detach();
       
-
+      body.prepend("<div id='print_title'>"+ prnt +"</div><br/>");
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
       var patchedStyle = $('<style>')
         .attr('media', 'print')
         .text('img { max-width: auto !important; }' +
@@ -525,14 +569,12 @@ function printReport() {
       window.print();
 
       body.prepend(content);
-      reportContainerParent.prepend(reportContainer);
+      mapContainerParent.prepend(mapContainer);
+      mapContainer.append(mapContainer);
 
       printContainer.remove();
       patchedStyle.remove();
-      //Rewrite the html back to the page
-      $('#report_html').hide();
-      $('#report_vhtml').html(inithtml);
-      $('#report_html').show();
+      $('#print_title').remove();
 }
 {% endif %}
 </script>

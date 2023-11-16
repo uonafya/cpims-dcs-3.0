@@ -1,64 +1,46 @@
 SI_FORMS = {}
 SI_FORMS['FMSI001F'] = "Application for a Vacancy"
-SI_FORMS['FMSI002F'] = "Needs and Risk Assessment Form"
-SI_FORMS['FMSI003F'] = "Needs Risk Assessment Scale"
-SI_FORMS['FMSI004F'] = "Admission Form"
-SI_FORMS['FMSI005F'] = "General Social Inquiry Form"
-SI_FORMS['FMSI006F'] = "Child and Caregiver Case Review Tool"
-SI_FORMS['FMSI007F'] = "Child Identification Form"
-SI_FORMS['FMSI008F'] = "Family Assessment Form"
+SI_FORMS['FMSI002F'] = "Needs Assessment"
+SI_FORMS['FMSI003F'] = "Needs and Risk Assessment Scale"
+SI_FORMS['FMSI004F'] = "Admission"
+SI_FORMS['FMSI005F'] = "General Social Inquiry"
+SI_FORMS['FMSI006F'] = "Child and Caregiver Case Review"
+SI_FORMS['FMSI007F'] = "Child Identification"
+SI_FORMS['FMSI008F'] = "Family Assessment"
 SI_FORMS['FMSI009F'] = "Individual Treatment Plan"
 SI_FORMS['FMSI010F'] = "Individual Care Plan"
-SI_FORMS['FMSI011F'] = "Medical Assessment Form"
-SI_FORMS['FMSI012F'] = "Monitoring tool"
+SI_FORMS['FMSI011F'] = "Medical Assessment"
+SI_FORMS['FMSI012F'] = "Supervision"
 SI_FORMS['FMSI013F'] = "Request for Revocation of Committal Order"
-SI_FORMS['FMSI014F'] = "Change in the Profile of a Child Under Environmental Adjustment"
-SI_FORMS['FMSI015F'] = "Family Conferencing form"
-SI_FORMS['FMSI016F'] = "Joint Family Agreement Form"
-SI_FORMS['FMSI017F'] = "Leave of Absence Assessment Form"
+SI_FORMS['FMSI014F'] = "Change in the Profile of a Child Under EAR"
+SI_FORMS['FMSI015F'] = "Family Conferencing"
+SI_FORMS['FMSI016F'] = "Joint Family Agreement"
+SI_FORMS['FMSI017F'] = "Leave of Absence Assessment"
 SI_FORMS['FMSI018F'] = "Record of Visits and Correspondence"
-SI_FORMS['FMSI019F'] = "Escape Form"
-SI_FORMS['FMSI020F'] = "Case Referral Form"
-SI_FORMS['FMSI021F'] = "Release Form"
-SI_FORMS['FMSI022F'] = "Certificate of Exit for Children"
-SI_FORMS['FMSI023F'] = "Case Closure Form"
+SI_FORMS['FMSI019F'] = "Escape"
+SI_FORMS['FMSI020F'] = "Case Referral"
+SI_FORMS['FMSI021F'] = "Release"
+SI_FORMS['FMSI022F'] = "Leaving Certificate"
+SI_FORMS['FMSI023F'] = "Case Closure"
 # New forms
-SI_FORMS['FMSI024F'] = "Access to Legal Aid Form"
-SI_FORMS['FMSI025F'] = "Re-unification Form"
-SI_FORMS['FMSI026F'] = "Child Participation Form"
-SI_FORMS['FMSI027F'] = "Counselling Form"
-SI_FORMS['FMSI028F'] = "Court Attendance Form"
-SI_FORMS['FMSI029F'] = "Education Form"
-SI_FORMS['FMSI030F'] = "Vocational and Proficiency Form"
-SI_FORMS['FMSI031F'] = "Child Assessment Form"
-SI_FORMS['FMSI032F'] = "Young Person and Caregiver Case Review Tool"
-# Coodes
-
-
+SI_FORMS['FMSI024F'] = "Access to Legal Aid"
+SI_FORMS['FMSI025F'] = "Re-unification"
+SI_FORMS['FMSI026F'] = "Child Participation"
+SI_FORMS['FMSI027F'] = "Counselling"
+SI_FORMS['FMSI028F'] = "Court Attendance"
+SI_FORMS['FMSI029F'] = "Education"
+SI_FORMS['FMSI030F'] = "Vocational and Proficiency"
+SI_FORMS['FMSI031F'] = "Child Assessment"
+SI_FORMS['FMSI032F'] = "Young Person and Caregiver Case Review"
+# Missed Forms
+SI_FORMS['FMSI033R'] = "Confirmation for Vacancy"
+SI_FORMS['FMSI034R'] = "Environmental Adjustment Report"
+SI_FORMS['FMSI035R'] = "Progress Report"
+SI_FORMS['FMSI036F'] = "Case Conference"
+SI_FORMS['FMSI037F'] = "Summary assessment of newly admitted child"
+SI_FORMS['FMSI038F'] = "Transfer"
+# Codes
 SI_CODES = {}
-SI_CODES['FMSI005F'] = 'CRC1'
-SI_CODES['FMSI002F'] = 'CRC2'
-SI_CODES['FMSI001F'] = 'CRC3'
-SI_CODES['FMSI033F'] = 'CRC4'
-SI_CODES['FMSI011F'] = 'CRC5'
-SI_CODES['FMSI000F'] = 'CRC6'
-SI_CODES['FMSI010F'] = 'CRC7'
-SI_CODES['FMSI034F'] = 'CRC8'
-SI_CODES['FMSI035F'] = 'CRC9'
-SI_CODES['FMSI036F'] = 'CRC10'
-SI_CODES['FMSI021F'] = 'CRC11'
-'''
-CRC1 – Social Inquiry Report
-CRC2 – Needs/Risk Assessment Form
-CRC3 – Request for Vacancy Form
-CRC4 – Confirmation of Vacancy Form
-CRC5 – Medical Assessment Report
-CRC6 – Case Record Sheet
-CRC7 – CRC Individual Care Plan
-CRC8 – Family Group Decision Making Form
-CRC9 – Progress Report
-CRC10 – Environmental Adjustment Report
-CRC11 – Release Form
 '''
 SI_CODES['FMSI007F'] = 'F1A'
 SI_CODES['FMSI031F'] = 'F1B'
@@ -67,3 +49,93 @@ SI_CODES['FMSI032F'] = 'F8'
 SI_CODES['FMSI008F'] = 'F2'
 SI_CODES['FMSI012F'] = 'F6'
 SI_CODES['FMSI023F'] = 'F9'
+'''
+
+DASHES = {}
+DASHES[1] = 'Population'
+DASHES[2] = 'Due for Discharge'
+DASHES[3] = 'Vacancy Confirmations'
+DASHES[4] = 'Pending and Overstays'
+DASHES[5] = 'Other Summaries'
+
+# Forms dependancies
+FDEP = {}
+FDEP['FMSI001F'] = ['FMSI002F', 'FMSI003F', 'FMSI005F']
+FDEP['FMSI002F'] = ['FMSI005F']
+FDEP['FMSI003F'] = ['FMSI005F']
+FDEP['FMSI004F'] = ['FMSI033R']
+FDEP['FMSI005F'] = []
+FDEP['FMSI006F'] = ['FMSI004F']
+FDEP['FMSI007F'] = ['FMSI004F']
+FDEP['FMSI008F'] = ['FMSI004F']
+FDEP['FMSI009F'] = ['FMSI004F']
+FDEP['FMSI010F'] = ['FMSI004F']
+FDEP['FMSI011F'] = ['FMSI004F']
+FDEP['FMSI012F'] = ['FMSI004F']
+FDEP['FMSI013F'] = ['FMSI004F']
+FDEP['FMSI014F'] = ['FMSI004F']
+FDEP['FMSI015F'] = ['FMSI004F']
+FDEP['FMSI016F'] = ['FMSI004F']
+FDEP['FMSI017F'] = ['FMSI004F']
+FDEP['FMSI018F'] = ['FMSI004F']
+FDEP['FMSI019F'] = ['FMSI004F']
+FDEP['FMSI020F'] = ['FMSI004F']
+FDEP['FMSI021F'] = ['FMSI004F']
+FDEP['FMSI022F'] = ['FMSI004F']
+FDEP['FMSI023F'] = ['FMSI004F']
+FDEP['FMSI024F'] = ['FMSI004F']
+FDEP['FMSI025F'] = ['FMSI004F']
+FDEP['FMSI026F'] = ['FMSI004F']
+FDEP['FMSI027F'] = ['FMSI004F']
+FDEP['FMSI028F'] = ['FMSI004F']
+FDEP['FMSI029F'] = ['FMSI004F']
+FDEP['FMSI030F'] = ['FMSI004F']
+FDEP['FMSI031F'] = ['FMSI004F']
+FDEP['FMSI032F'] = ['FMSI004F']
+FDEP['FMSI033R'] = ['FMSI001F']
+FDEP['FMSI034R'] = ['FMSI004F']
+FDEP['FMSI035R'] = ['FMSI004F']
+FDEP['FMSI036F'] = ['FMSI004F']
+FDEP['FMSI037F'] = ['FMSI004F']
+FDEP['FMSI038F'] = ['FMSI004F']
+
+# Access Matrix
+FPERM = {}
+FPERM['FMSI001F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI002F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI003F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI004F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI005F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI006F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI007F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI008F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI009F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI010F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI011F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI012F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI013F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI014F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI015F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI016F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI017F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI018F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI019F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI020F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI021F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI022F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI023F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI024F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI025F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI026F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI027F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI028F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI029F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI030F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI031F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI032F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI033R'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['CRUD']}
+FPERM['FMSI034R'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI035R'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI036F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI037F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
+FPERM['FMSI038F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}

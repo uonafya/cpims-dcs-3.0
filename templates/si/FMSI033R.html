@@ -1,0 +1,523 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} Institutions Forms - {{ form_name }}{% endblock %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/si_forms.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-multiselect/dist/css/bootstrap-multiselect.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Institutions </li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Report {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<!-- end page-header -->
+{% if messages %}
+<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-check fa-2x pull-left"></i>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.info %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<!-- begin row -->
+<div class="row">
+   <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN'S SERVICES <br/><br/>
+            </div>
+            <div class="cinvoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">
+                   {% if edit_form == 0 and case.vacancy.application_status %}
+                    <a href="{% url 'si_file' event_id=case.event_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% endif %}
+                    <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
+                    <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
+                    </span>
+                    Report No: {{ case.si_case.case_serial }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_id" value="{{ form_id }}">
+                    <input type="hidden" name="case_id" value="{{ case.case_id }}">
+                    <input type="hidden" name="person_id" value="{{ case.person.id }}">
+                    <input type="hidden" name="care_id" value="{{ case.care_id }}">
+                    <input type="hidden" name="event_id" value="{{ case.event_id }}">
+                    <div class="row">
+                        {% if user_level == 3 %}
+                        {% if edit_form == 0 %}
+                        <fieldset>
+                            <legend class="pull-left width-full">Section 1 : Personal Information </legend>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">First Name</label>
+                                <div class="col-md-3">
+                                    {{ case.person.first_name }}
+                                </div>
+                                <label class="col-md-2 control-label">Other Names</label>
+                                <div class="col-md-3">{% if case.person.other_names %}{{ case.person.other_names }}{% else %} Not Provided {% endif %}</div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Surname</label>
+                                <div class="col-md-3">
+                                    {{ case.person.surname }}
+                                </div>
+                                <label class="col-md-2 control-label">Sex</label>
+                                <div class="col-md-3">{{ case.person.sex_id|gen_value:vals }}</div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">DOB</label>
+                                <div class="col-md-3">{{ case.person.date_of_birth }}</div>
+                                <label class="col-md-2 control-label">Age</label>
+                                <div class="col-md-3">
+                                    {{ case.person.age }}
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend class="pull-left width-full">Section 2 : Approval details</legend>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    {{ form.Q1_status.label }}
+                                    {% if form.Q1_status.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                </label>
+                                <div class="col-md-6">
+                                    {{ form.Q1_status }}
+                                </div>
+                            </div>
+                            <div class="form-group" id="Q2_institution_div">
+                                <label class="col-md-2 control-label">
+                                    {{ form.Q2_institution.label }}
+                                    {% if form.Q2_institution.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                </label>
+                                <div class="col-md-6">
+                                    {{ form.Q2_institution }}
+                                </div>
+                            </div>
+                            <div class="form-group" id="Q3_months_div">
+                                <label class="col-md-2 control-label">
+                                    {{ form.Q3_months.label }}
+                                    {% if form.Q3_months.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                </label>
+                                <div class="col-md-6">
+                                    {{ form.Q3_months }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    {{ form.Q4_comment.label }}
+                                    {% if form.Q4_comment.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                </label>
+                                <div class="col-md-6">
+                                    {{ form.Q4_comment }}
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <hr>                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Date of Approval <span class="asteriskField">*</span></label>
+                        <div class="col-md-3">
+                            {{ form.event_date }}
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+                    <div class="form-group" id="printId">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-8">
+                        <button type="submit" class="btn btn-success">Submit Form {{ form_code }} details</button>
+                        <a href="{% url 'new_si_child_view' case.person.id %}">
+                            <button type="button" class="btn btn-default">Cancel</button>
+                        </a>
+                        </div>
+                    </div>                        
+                        {% else %}
+                        <p>Click on the existing applications to approve the request.</p>
+                        {% endif %}
+
+                        {% else %}
+                        {% if edit_form == 0 %}
+                        <table width="100%">
+                            <tbody>
+                                {% if case.vacancy.application_status %}
+                                {% if case.vacancy.institution %}
+                                <tr>
+                                    <td width="70%">
+                                        Tel: +254 (0) 2729800/2727980-4<br>
+                                        Fax: +254 (0) 2726222/2734417<br>
+                                        Email: watotoidara@gmail.com<br>
+                                        Institution2014@yahoo.com<br><br>
+                                        When replying, please quote<br>             
+                                        Ref: {{ case.vacancy.ref_no }}<br>
+                                    </td>
+                                    <td valign="top" align="right">
+                                        Social Security House,<br>
+                                        Bishops Road<br>
+                                        P.O. Box 46205 – 00100<br>
+                                        Nairobi.<br><br>
+                                        Date : {{ case.vacancy.date_of_approved }}<br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        THE SUB-COUNTY CHILDREN OFFICER,<br>
+                                        {{ case.scco.name }},<br>
+                                        {{ scco_address }}<br>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <b>RE: CONFIRMATION OF VACANCY FOR THE COMMITTAL OF CHILDREN IN A {{ case.si.type }}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>(Registrar of the high court circular No. 49/69 dated 24th December 1982)</p>
+                                        <p>Please refer to your letter Refence No.<b>{{ case.vacancy.ref_no }}</b> dated <b>{{ case.vacancy.date_of_application }}</b> which you applied for a vacancy in a Statutory Institution for committal of a child
+                                        named <b>{{ case.person.first_name }} {{ case.person.surname }}</b> aged <b>{{ case.person.years }} years</b> case no <b>{{ case.vacancy.pnc_no }}</b> before the magistrates' court <b>{{ case.vacancy.magistrate_court }}</b>. This is to confirm that there is vacancy at <b>{{ case.vacancy.institution.org_unit_name }} </b> for a period of <b>{{ case.vacancy.months_approved}} months</b>.</p>
+
+
+                                        <p>Please inform the magistrate accordingly.</p>
+
+                                        <p>Kindly monitor to ensure that through care guidelines are followed from entry to exit and reintegration of the subject</p>
+
+                                        <p><b>FOR: SECRETARY, CHILDREN'S SERVICES.</b></p>
+                                        <br>
+                                        <p>
+                                        CC.<br>
+                                        Manager<br>
+                                        {{ case.vacancy.institution.org_unit_name }}<br>
+                                        {{ si_address }} </p>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td class="field" width="40%">Status</td>
+                                    <td>Declined</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">Reason</td>
+                                    <td>{{ case.vacancy.comment }}</td>
+                                </tr>
+
+                                {% endif %}
+                                {% else %}
+                                {% if case.vacancy.date_of_approved %}
+                                <tr>
+                                    <td class="field" width="40%">Status</td>
+                                    <td>Rejected</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">Reason</td>
+                                    <td>{{ case.vacancy.comment }}</td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td class="field" width="40%">Status</td>
+                                    <td>Pending</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">Reason</td>
+                                    <td><p> This application made on {{ case.vacancy.created_at }} has not been approved</p></td>
+                                </tr>
+                                {% endif %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                            <p>Click on the existing applications to view the status and download the document.</p>
+                        {% endif %}
+                        {% endif %}                          
+                    </div>             
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if edit_form > 0 %}
+    <div class="row">
+        <!-- begin col-12 -->
+        <div class="col-md-12">
+            <!-- begin panel -->
+            <div class="panel panel-default" data-sortable-id="ui-general-1">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>                          
+                    <h4 class="panel-title"><b>Past Events </b></h4>                    
+                </div>
+                <div class="panel-body">
+                    <table id="tableData" class="table table-striped table-bordered">
+                        <thead>
+                            <tr> 
+                                <th>#</th>                                 
+                                <th>Event Date</th>                
+                                <th>Officer</th>
+                                <th>Status</th>
+                                <th width="25%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if case.vacancies %}
+                            {% for vacancy in case.vacancies %}
+                            <tr id="si_row-{{ vacancy.pk }}"> 
+                                <td>{{ forloop.counter }}</td>                                 
+                                <td>{{ vacancy.date_of_application }}</td>
+                                <td>N/A</td>
+                                <td>
+                                    {% if vacancy.application_status %}
+                                    {% if vacancy.institution %} Approved {% else %} Declined{% endif %}
+                                    {% else %}
+                                        Pending
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
+                                        <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View / Edit Details</button>
+                                    </a>
+
+                                    <!-- Modal -->
+                                     <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div style="background-color:#d9edf7" class="modal-header">
+                                                <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete Vacancy Confirmation - {{ vacancy.date_of_application }}</strong></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                <p>Are you sure you want to delete this Vacancy Confirmation dated {{ vacancy.date_of_application }} ? </p>
+                                                <br>
+                                                <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                <hr>
+                                                <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>                                                        
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6">No previous events available</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>                  
+                </div>
+                <!-- end panel -->
+            </div>
+            <!-- end col-12 -->
+        </div>
+        {% endif %}
+        </div>
+    </div>
+    <!-- end panel -->  
+</div>
+<!-- end row -->
+
+<!-- Modal -->
+<div  class="modal fade" id="successMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #8f9191">
+            <div style="background-color: #d9edf7" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Successful Deletion of Event</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>Deleted successfully!</p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="errorMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div style="background-color: #ff9966" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Deletion NOT completed.</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>This item can not be deleted. <span id="msg_id"></span></p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js' %}"></script>
+<script>
+// Delete Django Ajax Call
+function deleteEvent(form_id, event_id) {
+    var csrftoken = $.cookie('csrftoken');
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'si_form_delete' %}",
+        
+        data: {'form_id': form_id, 'event_id': event_id,
+               'csrfmiddlewaretoken': csrftoken },
+        dataType: 'json',
+        
+        success: function (data) {
+            if (data.deleted == 1) {
+                console.log(data);
+              $("#tableData #si_row-" + event_id).remove();
+              $("#successMsg").modal('show');
+            }
+            if(data.deleted == 0){
+                console.log(data.days)
+                $("#msg_id").html(data.message);
+                $("#errorMsg").modal('show');
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+
+    
+    // Handle Approval
+    var aval = $("#Q1_status").val();
+        handle_approval(aval);
+    $("#Q1_status").change(function() {
+        handle_approval(this.value);
+    });
+
+
+    // Load organization units
+    $("#Q2_institution").append('<option value="">Please Select</option>');
+    {% for org in orgs %}
+        $("#Q2_institution").append('<option value="{{ org.id }}">{{ org.org_unit_name }}</option>');
+    {% endfor %}
+
+    $('#Q2_institution').val({{ idata.Q2_institution }}); 
+
+
+});
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
+
+function handle_approval(appr){
+    console.log(appr);
+    if (appr == 'RVAA') {
+        // Enable institution
+        $('#Q2_institution_div').show();
+        $('#Q2_institution').attr("data-parsley-required", "true");
+        // Enable Months
+        $('#Q3_months_div').show();
+        $('#Q3_months').attr("data-parsley-required", "true");
+    }else{        
+        // Block institution
+        $('#Q2_institution_div').hide();
+        $('#Q2_institution').attr("data-parsley-required", "false");
+        $("#Q2_institution").removeAttr("required");
+        // Block Months
+        $('#Q3_months_div').hide();
+        $('#Q3_months').attr("data-parsley-required", "false");
+        $("#Q3_months").removeAttr("required");
+    }
+}
+
+function handle_toggle(elem, itm){
+    console.log('here '+ elem)
+    if (itm == 1){
+        if (elem == 'ANNO') {
+            $("#qf1A2").prop("readonly", true);
+        }else{
+            $("#qf1A2").prop("readonly", false);
+        }
+    }else if (itm == 2){
+        if (elem == 'ANNO') {
+            $("#id_qf1A16").prop("readonly", true);
+            $("#id_qf1A17").prop("readonly", true);
+        }else{
+            $("#id_qf1A16").prop("readonly", false);
+            $("#id_qf1A17").prop("readonly", false);
+        }
+    }
+}
+</script>
+{% endblock %}

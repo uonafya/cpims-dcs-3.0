@@ -10,39 +10,7 @@
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
 <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 <link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-<style type="text/css">
-form#new-form-b ul {
-      list-style-type: none;
-    }
-  form#new-form-b li {
-      padding-left: 1em;
-      text-indent: -2em;
-  }
-  @media screen {
-  div.divHeader {
-    display: none;
-  }
-}
-@media print {
-  div.divHeader {
-    text-align: center;
-    font-size: 16px;
-    top: 0;
-  }
-  div.invoice-footer {
-    bottom: 0 !important;
-  }
-  div#printId{
-    display: none;
-  }
-  #wizard_a ol { display: none; }
-  .bwizard-buttons { display: none; }
-  .bwizard-steps { display: none; }
-  #wizard_a ol li { display: none; }
-  #step2, #step3  { display: block !important; }
-  .control-label {margin-bottom: 5px;}
-}
-</style>
+<link href="{% static 'css/si_forms.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block primary %}
@@ -78,11 +46,13 @@ form#new-form-b ul {
             <div class="cinvoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if edit_form == 0 %}
+                    <a href="{% url 'si_document' form_id=form_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% endif %}
                     <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
                     <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
                     </span>
-                    Case No: {{ case.person.id }}
+                    Case No: {{ case.si_case.case_serial }}
                 </div>
             </div>
             <div class="panel-body">
@@ -359,7 +329,7 @@ form#new-form-b ul {
                                 <div class="form-group">
                                     <label class="col-md-5 control-label">Does the child exhibit any of the following? (tick all that apply) </label>
                                     <div class="col-md-6">
-                                        {{ form.qf1B20_msc }}
+                                        {{ form.qf1B20 }}
                                         <span id="qf1B20_rdo_error"></span>
                                     </div>
                                     <div class="col-md-1"></div>
@@ -473,8 +443,11 @@ form#new-form-b ul {
                     
                     <div class="form-group">
                         <label class="col-md-5 control-label"></label>
-                        <div class="col-md-3">
-                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-success">Submit Form {{ form_code }} details</button>
+                            <a href="{% url 'new_si_child_view' case.person.id %}">
+                                <button type="button" class="btn btn-default">Cancel</button>
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -511,33 +484,31 @@ form#new-form-b ul {
                                                 <tr id="si_row-{{ vacancy.pk }}"> 
                                                     <td>{{ forloop.counter }}</td>                                 
                                                     <td>{{ vacancy.event_date }}</td>
-                                                    <td>N/A</td>
-        
+                                                    <td>N/A</td>        
                                                     <td>
                                                         <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
-                                                            <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View Details</button>
+                                                            <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View / Edit Details</button>
                                                         </a>
-
                                                         <!-- Modal -->
-                                                         <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                                        <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
                                                             <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
                                                                     <div style="background-color:#d9edf7" class="modal-header">
-                                                                    <button type="button" class="close " data-dismiss="modal">&times;</button>
-                                                                    <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete Vacancy Application - {{ vacancy.date_of_application }}</strong></h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                    <p>Are you sure you want to delete this Assessment dated {{ vacancy.date_of_application }} ? </p>
-                                                                    <br>
-                                                                    <p>Click Yes to proceed to delete or Close to Cancel.</p>
-                                                                    <hr>
-                                                                    <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
-                                                                    <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                    </div>
+                                                                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                                        <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete {{ form_name }} - {{ vacancy.event_date }}</strong></h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Are you sure you want to delete this {{ form_name }} dated {{ vacancy.event_date }} ? </p>
+                                                                            <br>
+                                                                            <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                                            <hr>
+                                                                            <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                                            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div> 
+                                                        </div>
                                                         <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
                                                             <i class="fa fa-trash"></i> Delete
                                                         </a>                                                        
@@ -664,7 +635,7 @@ $(document).ready(function() {
       minLength: 4,
       select: function( event, ui ) {
          $('#school_name').val(ui.item.name);
-         $('#school_id').val(ui.item.id);
+         $('#school').val(ui.item.id);
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );

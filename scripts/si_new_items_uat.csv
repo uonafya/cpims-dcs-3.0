@@ -1,0 +1,28 @@
+
+ear_acceptance_id,Keen to Accept
+ear_acceptance_id,Accept
+ear_acceptance_id,Not Ready to Accept but there is a Possibility to Accept
+ear_acceptance_id,Refuse to Accept
+
+ear_tosi_id,Come to the Institution
+ear_tosi_id,Not Come
+ear_tosi_id,Pending
+
+ear_relatives_cond_id,Mental disease
+ear_relatives_cond_id,Deviant personality
+ear_relatives_cond_id,Alcohol and drug addiction
+ear_relatives_cond_id,Criminal
+ear_relatives_cond_id,Others
+
+ear_appropriate_id,Appropriate
+ear_appropriate_id,Not Appropriate
+ear_appropriate_id,Pending
+
+
+si_conference_loc_id,Child’s Home
+si_conference_loc_id,Children’s Office
+si_conference_loc_id,Other
+
+si_conference_aim_id,During assessment
+si_conference_aim_id,Routine monitoring
+si_conference_aim_id,Support

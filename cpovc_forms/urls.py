@@ -17,6 +17,8 @@ urlpatterns = [
          name='case_record_sheet'),
     path('crs/new/<int:id>/', views.new_case_record_sheet,
          name='new_case_record_sheet'),
+    path('crs/<uuid:id>/', views.check_case_record_sheet,
+         name='check_case_record_sheet'),
     re_path(r'^crs/view/(?P<id>\w+)/$', views.view_case_record_sheet,
             name='view_case_record_sheet'),
     re_path(r'^crs/edit/(?P<id>\w+)/$', views.edit_case_record_sheet,

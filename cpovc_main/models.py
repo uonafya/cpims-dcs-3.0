@@ -8,7 +8,8 @@ from cpovc_registry.models import RegPerson
 import uuid
 
 F_TYPE_CHOICES = (("FMSL", "Select"), ("FMRD", "Radio"), ("FMCB", "Checkbox"),
-                  ("FMTF", "TextField"), ("FMTA", "TextArea"),)
+                  ("FMTF", "TextField"), ("FMTA", "TextArea"),
+                  ("FMRO", "Read Only"), ("FMFL", "File"),)
 F_SET_CHOICES = ((1, "Text"), (2, "Number"), (3, "Date"),)
 
 
@@ -166,6 +167,9 @@ class ListQuestions(models.Model):
     timestamp_created = models.DateTimeField(auto_now=True, null=True)
     timestamp_updated = models.DateTimeField(auto_now=True, null=True)
     is_void = models.BooleanField(default=False)
+    # For App forms, scalability and re-use
+    db_field_name = models.CharField(max_length=60, null=True, blank=True)
+    question_number = models.CharField(max_length=10, null=True, blank=True)
 
     class Meta:
         """Override some params."""
@@ -173,6 +177,10 @@ class ListQuestions(models.Model):
         db_table = 'list_questions'
         verbose_name = 'Generic Question'
         verbose_name_plural = 'Generic Questions'
+
+    def __str__(self):
+        """To be returned by admin actions."""
+        return '%s:%s' % (self.form, self.question_code)
 
 
 class ListAnswers(models.Model):

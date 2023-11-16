@@ -11,60 +11,7 @@
 <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 
 <link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-<style type="text/css">
-form#new-form-b ul {
-      list-style-type: none;
-    }
-  form#new-form-b li {
-      padding-left: 1em;
-      text-indent: -2em;
-  }
-  @media screen {
-  div.divHeader {
-    display: none;
-  }
-}
-@media print {
-  div.divHeader {
-    text-align: center;
-    font-size: 16px;
-    top: 0;
-  }
-  div.invoice-footer {
-    bottom: 0 !important;
-  }
-  div#printId{
-    display: none;
-  }
-  #wizard_a ol { display: none; }
-  .bwizard-buttons { display: none; }
-  .bwizard-steps { display: none; }
-  #wizard_a ol li { display: none; }
-  #step2, #step3  { display: block !important; }
-  .control-label {margin-bottom: 5px;}
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th,td{
-    padding: 10px;
-    text-align: left; 
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-.custom-margin {
-      margin-left: 10em;
-    }
-.table-margin {
-        margin-left: 10px;
-      }
-</style>
+<link href="{% static 'css/si_forms.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block primary %}
@@ -75,10 +22,10 @@ table {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<h1 class="page-header"> Form {{ form_code }} - {{ form_name }} <small>Home</small></h1>
 <!-- end page-header -->
 {% if messages %}
-<div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
+<div id="messages" class="alert alert-success fade in">
     <span class="close" data-dismiss="alert">×</span>
     <i class="fa fa-check fa-2x pull-left"></i>
     <ul class="messages">
@@ -88,6 +35,10 @@ table {
     </ul>
 </div>
 {% endif %}
+
+{% if events.FMSI005F <= 0 %}
+    <p>Missing Social Inquiry</p>
+{% endif %}
 <!-- begin row -->
 <div class="row">
    <div class="col-md-12">
@@ -95,21 +46,23 @@ table {
         <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
             <div class="myForm">
             <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
-            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
+            <br/>STATE DEPARTMENT FOR SOCIAL PROTECTION AND SENIOR CITIZENS AFFAIRS<br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
             <b>Statutory Institution - FORM {{ form_id }} - {{ form_name }}</b></div>
             <div class="cinvoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if edit_form == 0 %}
+                    <a href="{% url 'si_document' form_id=form_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% endif %}
                     <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
                     <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
                     </span>
-                    Case No: {{ case.person.id }}
+                    Case No: {{ case.si_case.case_serial }}
 
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-1F" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-1F" action="." data-parsley-validate="true" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -148,6 +101,7 @@ table {
                             </div>
                         </fieldset>
                     </div>
+                    <br>
                     <div class="row">
                         <fieldset>
                             <legend class="pull-left width-full">Section 2 : Application details</legend>
@@ -157,22 +111,34 @@ table {
                                         {{ form.Q1_ref_num.label }}
                                         {% if form.Q1_ref_num.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{ form.Q1_ref_num }}
                                     </div>
-                                    <label class="col-md-1 control-label">
-                                        {{ form.Q2_crc_num.label }}
-                                        {% if form.Q2_crc_num.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q1B_case_type.label }}
+                                        {% if form.Q1B_case_type.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">{{ form.Q2_crc_num }}</div>
+                                    <div class="col-md-3">
+                                        {{ form.Q1B_case_type }}
+                                    </div>
+                                </div>
+                                <div class="form-group">                                  
 
                                     <label class="col-md-2 control-label">
                                         {{ form.Q3_pnc_num.label }}
                                         {% if form.Q3_pnc_num.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{ form.Q3_pnc_num }}
                                     </div>
+
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q2_crc_num.label }}
+                                        {% if form.Q2_crc_num.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">{{ form.Q2_crc_num }}</div>
                                     <div class="col-md-1"></div>
                                 </div>
 
@@ -181,36 +147,57 @@ table {
                                         {{ form.Q4_court_num.label }}
                                         {% if form.Q4_court_num.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">{{ form.Q4_court_num }}</div>
-                                    <label class="col-md-1 control-label">
+                                    <div class="col-md-3">{{ form.Q4_court_num }}</div>
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q4B_court_station.label }}
+                                        {% if form.Q4B_court_station.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-4">{{ form.Q4B_court_station }}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
                                         {{ form.Q5_magistrate_name.label }}
                                         {% if form.Q5_magistrate_name.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{ form.Q5_magistrate_name }}
                                     </div>
                                     <label class="col-md-2 control-label">
                                         {{ form.Q6_next_mention_date.label }}
                                         {% if form.Q6_next_mention_date.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">{{ form.Q6_next_mention_date }}</div>
+                                    <div class="col-md-3">{{ form.Q6_next_mention_date }}</div>
                                     <div class="col-md-1"></div>
                                 </div>
+
+
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         {{ form.Q7_child_held_at.label }}
                                         {% if form.Q7_child_held_at.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{ form.Q7_child_held_at }}
                                     </div>
-                                    <label class="col-md-1 control-label">
+                                    <label class="col-md-2 control-label">
                                         {{ form.Q8_child_held_at_name.label }}
                                         {% if form.Q8_child_held_at_name.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         {{ form.Q8_child_held_at_name }}
                                     </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        {{ form.Q8A_child_held_at_tel.label }}
+                                        {% if form.Q8A_child_held_at_tel.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                    </label>
+                                    <div class="col-md-3">
+                                        {{ form.Q8A_child_held_at_tel }}
+                                    </div>
+                                    <div class="col-md-6"></div>
                                     <div class="col-md-1"></div>
                                 </div>
                                 <div class="form-group">
@@ -218,39 +205,56 @@ table {
                                         {{ form.Q9_request_officer.label }}
                                         {% if form.Q9_request_officer.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {{ form.Q9_request_officer }}
                                     </div>
-                                    <label class="col-md-1 control-label">
+                                    <label class="col-md-2 control-label">
                                         {{ form.Q10_designation.label }}
                                         {% if form.Q10_designation.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">{{ form.Q10_designation }}</div>
+                                    <div class="col-md-3">{{ form.Q10_designation }}</div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         {{ form.Q11_scco.label }}
                                         {% if form.Q11_scco.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-2">{{ form.Q11_scco }} </div>
+                                    <div class="col-md-5">{{ form.Q11_scco }} </div>
                                 </div>
                         </fieldset>
                     </div>
+                    <br>
                     <div class="row">
                         <fieldset>
                             <legend class="pull-left width-full">Section 3 : Supporting documents</legend>
-                            <p>Please make sure the Social Enquiry and Risk Assesment have also been filled in the system.</p>
+                            <p>Please make sure the Social Inquiry and Risk Assesment have also been filled in the system.</p>
+                            <br>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">Birth certificate</label>
-                                <div class="col-md-3">
-                                    <input type="file" class="form-control" name="b_cert" multiple>
-                                </div>
-                                <div class="col-md-7"></div>
+                                <label class="col-md-2 control-label">
+                                {{ form.Q12A_document_type.label }}
+                                {% if form.Q12A_document_type.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                                <div class="col-md-5">{{ form.Q12A_document_type }}</div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">Age assessment Report</label>
-                                <div class="col-md-3">
-                                    <input type="file" class="form-control" name="age_assess" multiple>
+                                <label class="col-md-2 control-label">
+                                {{ form.Q12B_document_file.label }}
+                                {% if not idata.Q12B_document_file %}
+                                {% if form.Q12B_document_file.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                {% endif %}
+                            </label>
+                                <div class="col-md-5">{{ form.Q12B_document_file }}</div>
+                                <div class="col-md-4">
+                                    {% if idata.Q12B_document_file %}<a class="btn btn-sm btn-success" href="/static/si_docs/{{ idata.Q12B_document_file }}" target="blank">  View File</a>
+                                    {% endif %}
                                 </div>
-                                <div class="col-md-7"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                {{ form.Q12C_document_number.label }}
+                                {% if form.Q12C_document_number.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                                <div class="col-md-5">{{ form.Q12C_document_number }}</div>
                             </div>
                         </fieldset>
                         
@@ -266,176 +270,98 @@ table {
 
                     <div class="form-group" id="printId">
                         <label class="col-md-2 control-label"></label>
-                        <div class="col-md-3">
-                        <button type="submit" class="btn btn-success">Submit Form {{ form_id }} details</button>
+                        <div class="col-md-8">
+                        <button type="submit" class="btn btn-success">Submit Form {{ form_code }} details</button>
                         <a href="{% url 'new_si_child_view' case.person.id %}">
                             <button type="button" class="btn btn-default">Cancel</button>
                         </a>
                         </div>
                     </div>
                 </form>
-                {% if edit_form > 0 %}
-
-                <div class="row">
-                    <!-- begin col-12 -->
-                    <div class="col-md-12">
-                        <!-- begin panel -->
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <div class="panel-heading-btn">
-                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                </div>                          
-                                <h4 class="panel-title"><b>Vacancy Applications</b></h4>                    
-                            </div>
-
-                            <div class="panel-body">
-                                <div  class="panel panel-inverse">
-                                    <div id="case-events"  class="table-responsive">
-                                        <table id="tableData" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr> 
-                                                    <th>#</th>                                 
-                                                    <th>P&C</th> 
-                                                    <th>Date Applied</th>                
-                                                    <th>Institution Applied</th>
-                                                    <th>Approval Status</th> 
-                                                    <th width="25%">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% if case.vacancies %}
-                                                {% for vacancy in case.vacancies %}
-                                                <tr id="si_row-{{ vacancy.pk }}"> 
-                                                    <td>{{ forloop.counter }}</td>                                 
-                                                    <td>{{ vacancy.pnc_no }}</td> 
-                                                    <td>{{ vacancy.date_of_application }}</td>
-                                                    <td>N/A</td>
-                                                    <td><span id="stt-{{ vacancy.pk }}">{% if vacancy.application_status %}Approved{% else %}Pending{% endif %}</span></td>            
-                                                    <td>
-                                                        <a href="{% url 'si_form_edit' form_id='FMSI001F' id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
-                                                            <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View Details</button>
-                                                        </a>
-
-                                                        <!-- #modal-approve-reject -->
-                                                        <div class="modal fade" id="si-approve-reject-{{ vacancy.pk }}">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                        <h4 class="modal-title">Approve / Reject Application</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                         <div class="table-responsive">
-                                                                            <table class="table table-profile">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th></th>
-                                                                                        <th>
-                                                                                            <h4>{{ vacancy.person.first_name }} {{ vacancy.person.surname }}
-                                                                                                <small>DOB {{ vacancy.person.date_of_birth }} / Age {{ vacancy.person.age }}</small></h4>
-                                                                                        </th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <tr class="highlight">
-                                                                                        <td class="field">P&C</td>
-                                                                                        <td>{{ vacancy.pnc_no }}</td>
-                                                                                    </tr>
-                                                                                    <tr class="highlight">
-                                                                                        <td class="field">Date</td>
-                                                                                        <td>{{ vacancy.date_of_application }}</td>
-                                                                                    </tr>
-                                                                                    <tr class="highlight">
-                                                                                        <td class="field">Verdict</td>
-                                                                                        <td>
-                                                                                            <input type="radio" name="verdict-{{ vacancy.pk }}" value="AYES" /> Approved
-                                                                                            <input type="radio" name="verdict-{{ vacancy.pk }}" value="ANNO" /> Rejected
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="highlight">
-                                                                                        <td class="field">Institution Name</td>
-                                                                                        <td>
-                                                                                            <select class="form-control" name="org_unit">
-                                                                                                <option value="">Please Select</option>
-                                                                                                {% for org in orgs %}
-                                                                                                <option value="{{ org.id }}">{{ org.org_unit_name }}</option>
-                                                                                                {% endfor %}
-                                                                                            </select>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="highlight">
-                                                                                        <td class="field">Reason</td>
-                                                                                        <td><textarea class="form-control" name="reason-{{ vacancy.pk }}" id="reason-{{ vacancy.pk }}" placeholder="Textarea" rows="5"></textarea></td>
-                                                                                    </tr>
-                                                                                    <tr class="highlight">
-                                                                                        <td></td>
-                                                                                        <td><button onclick="actionEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-sm btn-success" data-dismiss="modal">Submit</button></td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#si-approve-reject-{{ vacancy.pk }}" class="btn btn-success" data-toggle="modal">
-                                                            <i class="fa fa-check"></i> Approve / Reject
-                                                        </a>
-
-                                                        <!-- Modal -->
-                                                         <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div style="background-color:#d9edf7" class="modal-header">
-                                                                    <button type="button" class="close " data-dismiss="modal">&times;</button>
-                                                                    <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete Vacancy Application - {{ vacancy.date_of_application }}</strong></h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                    <p>Are you sure you want to delete this Assessment dated {{ vacancy.date_of_application }} ? </p>
-                                                                    <br>
-                                                                    <p>Click Yes to proceed to delete or Close to Cancel.</p>
-                                                                    <hr>
-                                                                    <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
-                                                                    <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                    </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> 
-                                                        <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
-                                                            <i class="fa fa-trash"></i> Delete
-                                                        </a>                                                        
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                                {% else %}
-                                                <tr>
-                                                    <td colspan="6">No previous applications available</td>
-                                                </tr>
-                                                {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <br><br>                           
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- end panel -->
-                    </div>
-                    <!-- end col-12 -->
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
-        <!-- end panel -->
+    {% if edit_form > 0 %}
+    <div class="row">
+        <!-- begin col-12 -->
+        <div class="col-md-12">
+            <!-- begin panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>                          
+                    <h4 class="panel-title"><b>Vacancy Applications</b></h4>                    
+                </div>
+
+                <div class="panel-body">
+                    <table id="tableData" class="table table-striped table-bordered">
+                        <thead>
+                            <tr> 
+                                <th>#</th>                                 
+                                <th>P&C</th> 
+                                <th>Date Applied</th>                
+                                <th>Institution Applied</th>
+                                <th>Approval Status</th> 
+                                <th width="25%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if case.vacancies %}
+                            {% for vacancy in case.vacancies %}
+                            <tr id="si_row-{{ vacancy.pk }}"> 
+                                <td>{{ forloop.counter }}</td>                                 
+                                <td>{{ vacancy.pnc_no }}</td> 
+                                <td>{{ vacancy.date_of_application }}</td>
+                                <td>N/A</td>
+                                <td><span id="stt-{{ vacancy.pk }}">{% if vacancy.application_status %}Approved{% else %}Pending{% endif %}</span></td>            
+                                <td>
+                                    <a href="{% url 'si_form_edit' form_id='FMSI001F' id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
+                                        <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View / Edit Details</button>
+                                    </a>
+                                    <!-- Modal -->
+                                     <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div style="background-color:#d9edf7" class="modal-header">
+                                                <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete Vacancy Confirmation - {{ vacancy.date_of_application }}</strong></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                <p>Are you sure you want to delete this Vacancy Confirmation dated {{ vacancy.date_of_application }} ? </p>
+                                                <br>
+                                                <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                <hr>
+                                                <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>                                                        
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6">No previous applications available</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end panel -->
+            </div>
+            <!-- end col-12 -->
+        </div>
+        {% endif %}
+        </div>
     </div>
-    
+    <!-- end panel -->  
 </div>
 <!-- end row -->
 
@@ -478,6 +404,10 @@ table {
 
 <script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
 <script>
+    {% if idata.Q12B_document_file %}
+    $('#id_Q12B_document_file').attr("data-parsley-required", "false");
+    $('#id_Q12B_document_file').removeAttr("required");
+    {% endif %}
 // Delete Django Ajax Call
 function deleteEvent(form_id, event_id) {
     var csrftoken = $.cookie('csrftoken');
@@ -533,7 +463,6 @@ function actionEvent(form_id, event_id) {
                 console.log(data.days)
                 $("#msg_id").html(data.message);
                 $("#errorMsg").modal('show');
-    
             }
         },
         error: function(error){
@@ -544,34 +473,21 @@ function actionEvent(form_id, event_id) {
 
 
 $(document).ready(function() {
-    {% if not request.user.is_superuser and status == 1 %}
+    {% if not request.user.is_superuser and status == 1 and vacancy_status == 1 and allow_edit == 0 %}
     $("#new-form-1F :input").prop("disabled", true);
     {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+    $('.other_date').datepicker({ format: 'dd-M-yyyy' });
 
     $("#wizard_a").bwizard({ validating: function (e, ui) { }            
     });
 
-    
-    // Handle disability
-    var aval = $("input[name='qf1A10_rdo']:checked").val();
-        handle_disability(aval);
-    $('input[type=radio][name=qf1A10_rdo]').change(function() {
-        handle_disability(this.value);
+    // Handle toggle
+    var aval = $("#Q1B_case_type").val();
+        handle_related(aval);
+    $('#Q1B_case_type').change(function() {
+        handle_related(this.value);
     });
-
-    // Handle toggle for birth certificate
-    var avalr = $("input[name='qf1A1_rdo']:checked").val();
-        handle_toggle(avalr, 1);
-    $('input[type=radio][name=qf1A1_rdo]').change(function() {
-        handle_toggle(this.value, 1);
-    });
-    // Handle toggle for committal
-    var avalr2 = $("input[name='qf1A15_rdo']:checked").val();
-        handle_toggle(avalr2, 2);
-    $('input[type=radio][name=qf1A15_rdo]').change(function() {
-        handle_toggle(this.value, 2);
-    }); 
 
 });
 
@@ -619,38 +535,18 @@ function printChart() {
       $('#print_title').remove();
 }
 
-function handle_disability(has_disb){
-    if (has_disb == 'ANNO') {
-        $('#disability_details_div').hide();
-        $('#disability_severity').attr("data-parsley-required", "false");
-        $('#disability_type').attr("data-parsley-required", "false");
+function handle_related(has_disb){
+    if (has_disb == 'RAOF') {
+        //$('#Q2_crc_num_div').show();
+        $('#Q2_crc_num').attr("data-parsley-required", "true");
+        $('#Q2_crc_num').prop("readonly", false);
     }else{
-        $('#disability_details_div').show();
-        $('#disability_severity').attr("data-parsley-required", "true");
-        $('#disability_type').attr("data-parsley-required", "true");
+        //$('#Q2_crc_num_div').hide();
+        $('#Q2_crc_num').attr("data-parsley-required", "false");
+        $('#Q2_crc_num').prop("readonly", true);
     }
 
 }
 
-function handle_toggle(elem, itm){
-    console.log('here '+ elem)
-    if (itm == 1){
-        if (elem == 'ANNO') {
-            $("#qf1A2").prop("readonly", true);
-        }else{
-            $("#qf1A2").prop("readonly", false);
-        }
-    }else if (itm == 2){
-        if (elem == 'ANNO') {
-            $("#id_qf1A16").prop("readonly", true);
-            $("#id_qf1A17").prop("readonly", true);
-        }else{
-            $("#id_qf1A16").prop("readonly", false);
-            $("#id_qf1A17").prop("readonly", false);
-        }
-    }
-    
-
-}
 </script>
 {% endblock %}

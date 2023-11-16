@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %} SI Module : details {% endblock %}
+
+{% load app_filters %}
+
+{% block style_code %}
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet" />
+<style type="text/css">
+  table.text-inverse tr{
+    margin: 25px 0 25px 0;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  td.field{
+    text-align: right;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Home</a></li>
+    <li class="active">SI Module</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+
+<h1 class="page-header"><i class="fa fa-child"></i> Institutions Dashboard - <small> {{ dashboard }} </small></h1>
+<!-- end page-header -->
+{% if messages %}
+    {% for message in messages %}
+    {% if 'error' in message.tags %}
+        <div id="messages" class="alert alert-danger fade in">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-info fa-2x pull-left"></i>
+    {% else %}
+        <div id="messages" class="alert alert-success fade in">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-check fa-2x pull-left"></i>
+    {% endif %}    
+        <p>{{ message }}</p>
+    </div>
+   {% endfor %}
+{% endif %}
+    <div id="message" class="alert alert-success fade in" style="display: none">
+        <span class="close" data-dismiss="alert">×</span>
+        <i class="fa fa-check fa-2x pull-left"></i>
+  
+        <span id="response"></span>
+    </div>
+<!-- begin row -->
+
+
+<!-- begin row -->
+    <div class="row">
+        <!-- begin col-2 -->
+        <div class="col-md-2">
+            <h5>Other Summary dashboards</h5>
+            <ul class="p-l-25 m-b-15">
+                <li><a href="{% url 'si_dash_view' id=1 %}">Today's population</a></li>
+                <li><a href="{% url 'si_dash_view' id=2 %}">Due for discharge</a></li>
+                <li><a href="{% url 'si_dash_view' id=3 %}">Vacancy applications</a></li>
+                <li><a href="{% url 'si_dash_view' id=4 %}">Pending / Overstays</a></li>
+                <li><a href="{% url 'si_dash_view' id=5 %}">Other Summaries</a></li>
+            </ul>
+            <p class="m-b-20">
+                <a href="{% url 'SI_home' %}" class="btn btn-inverse btn-sm">Back to search</a>
+            </p>
+        </div>
+        <!-- end col-2 -->
+        <!-- begin col-10 -->
+        <div class="col-md-10">
+            <!-- begin panel -->
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title">{{ dashboard }}</h4>
+                </div>
+                <div class="alert alert-info fade in">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    Preview of the institution summaries for Field Offices, HQ and Institutions.
+                </div>
+                <div class="panel-body">
+                    <table id="data-table" class="table table-striped table-bordered">
+                        {% if user_level > 2 %}
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Institution</th>
+                                <th align="right">Count</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        {% else %}
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Institution</th>
+                                <th>CPIMS ID</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        {% endif %}
+                        <tbody>
+                            {% if summaries %}
+                            {% if user_level > 2 %}
+                            {% for  summary in summaries %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    {{ summary.residential_institution__org_unit_type_id|gen_value:vals }}
+                                    {{ summary.residential_institution__org_unit_name }}
+                                </td>
+                                <td>{{ summary.dcount }}</td>
+                                <td>
+                                    {% if summary.residential_institution__org_unit_type_id %}
+                                    <a href="{% url 'si_dash_view' id=5 %}?si={{ summary.residential_institution__org_unit_type_id }}" class="btn btn-sm btn-primary"> <i class="fa fa-folder-open-o"></i> View </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            {% else %}
+
+                            {% for  summary in summaries %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{% if summary.institution %}{{ summary.institution.org_unit_name }}{% else %} N/A {% endif %}</td>
+                                <td>{{ summary.person_id }}</td>
+                                <td>{{ summary.person.first_name }} {{ summary.person.surname }}</td>
+                                <td>
+                                    {% if did == 2 %}
+                                    <a href="{% url 'si_form' form_id='FMSI033R' id=summary.person_id %}" class="btn btn-sm btn-primary"> <i class="fa fa-folder-open-o"></i> View </a>
+                                    {% else %}
+                                    <a href="{% url 'new_si_child_view' id=summary.person_id %}" class="btn btn-sm btn-primary"> <i class="fa fa-folder-open-o"></i> View </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                            {% else %}                         
+                            <tr>
+                                <td colspan="5"><p>No summary data exists.</p></td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+        <!-- end col-10 -->
+    </div>
+    <!-- end row -->
+</div>
+<!-- end row -->
+<!-- #modal-dialog -->
+      <div class="modal fade" id="modal-checkins">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">My Check ins</h4>
+            </div>
+            <div class="modal-body">
+                <div id="msg"></div>
+                <div class="form-horizontal row">
+                  <div class="form-group">
+                      <div class="col-md-12">
+                          <table width="100%" id="mycheckins" class="table table-striped table-bordered"></table>
+                      </div>
+                  </div>
+                </div>  
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- #modal-dialog -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'js/bootstrap-table.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-table-locale-all.min.js' %}"></script>  
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#data-table').bootstrapTable(
+            { 
+                toggle: 'table', 
+                search: 'true',
+                locale: 'en-US',
+                pagination: 'true',
+                pageNumber: 1,
+                pageSize: 15,
+                //showRefresh: true,
+                showToggle: true,
+                //showColumns: true,
+                singleSelect: true,
+                clickToSelect:true,
+                maintainSelected: true                
+            });
+
+    $('#checkin').click(function() {
+        $('#message').show();
+        $.ajax({
+               type: "POST",
+               url: "{{ request.get_full_path }}",
+               dataType: "json",
+               data: $("#ovcreg_form").serialize() + "&id=1",
+               success: function(data)
+               {
+                   var status = data.status;
+                   if (status == 0){
+                       $("#message").addClass( "alert alert-success fade in" );
+                       $('#response').html(data.message);
+                    }else{
+                       $("#message").addClass( "alert alert-danger fade in" );
+                       $('#response').html(data.message);
+                    }
+               },
+                error: function(){
+                    $("#message").addClass( "alert alert-danger fade in" );
+                    $('#response').html("Error checking in. Please try again.");
+                }
+             });
+    });
+    $('#checkins').click(function() {
+        $('#modal-checkins').modal('toggle');
+        $('#mycheckins').bootstrapTable({
+            url: '{{ request.get_full_path }}',
+            method: 'get',
+            queryParams: function (p) {
+                return { 'id': 2, 'limit': p.limit, 'offset': p.offset };
+            },
+            columns: [{
+                field: 'ovc_id',
+                title: 'OVC ID'
+            }, {
+                field: 'ovc_name',
+                title: 'OVC Name'
+            }, {
+                field: 'ctime',
+                title: 'Time'
+            }, {
+                field: 'caction',
+                title: 'Action'
+            }, ],
+            search: 'true',
+            sortable: 'true',
+            locale: 'en-US',
+            pagination: 'true',
+            pageNumber: 1,
+            pageSize: 10,
+            showRefresh: true,
+            showToggle: true,
+            singleSelect: true,
+            clickToSelect:true,
+            maintainSelected: true
+        });
+    });
+
+    $("#mycheckins").delegate(".removecheckin", "click", function() {
+        var ovcid = $(this).attr('id');
+        $.ajax({
+               type: "POST",
+               url: "{{ request.get_full_path }}",
+               dataType: "json",
+               data: $("#ovcreg_form").serialize() + "&id=3&ovc_out_id="+ovcid,
+               success: function(data)
+               {
+                   var status = data.status;
+                   if (status == 0){
+                       $("#msg").addClass( "alert alert-success fade in" );
+                       $('#msg').html(data.message);
+                       $("#mycheckins").bootstrapTable('refresh');
+                    }else{
+                       $("#msg").addClass( "alert alert-danger fade in" );
+                       $('#msg').html(data.message);
+                    }
+               },
+                error: function(){
+                    $("#msg").addClass( "alert alert-danger fade in" );
+                    $('#msg').html("Error getting check ins. Please try again.");
+                }
+             });
+    });
+});
+</script>
+
+{% endblock %}

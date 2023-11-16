@@ -1,4 +1,4 @@
-h{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block page_title %} Alternative Care Forms - {{ form_name }}{% endblock %}
 
@@ -11,15 +11,7 @@ h{% extends 'base.html' %}
 <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 
 <link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-<style type="text/css">
-form#new-form-b ul {
-      list-style-type: none;
-    }
-  form#new-form-b li {
-      padding-left: 1em;
-      text-indent: -2em;
-  }
-</style>
+<link href="{% static 'css/si_forms.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block primary %}
@@ -30,7 +22,7 @@ form#new-form-b ul {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header"> Form {{ form_id }} - {{ form_name }} <small>Home</small></h1>
+<h1 class="page-header"> Form {{ form_code }} - {{ form_name }} <small>Home</small></h1>
 <!-- end page-header -->
 {% if messages %}
 <div id="messages" class="alert alert-suc{{ form_name }}cess fade in">
@@ -48,23 +40,21 @@ form#new-form-b ul {
    <div class="col-md-12">
         <!-- begin panel -->
         <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
-            <div class="panel-heading">
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>
-                <h4 class="panel-title">{{ case.care_type|gen_value:vals }} - {{ form_name }}</h4>
-            </div>
+            <div class="myForm">
+            <div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+            <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DIRECTORATE OF CHILDREN SERVICES <br/><br/>
+            <b>Statutory Institution - FORM {{ form_id }} - {{ form_name }}</b></div>
             <div class="cinvoice">
                 <div class="invoice-company">
                     <span class="pull-right hidden-print">
-                    <a href="javascript:;" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% if edit_form == 0 %}
+                    <a href="{% url 'si_document' form_id=form_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+                    {% endif %}
                     <button type="button" id="map-print" class="btn btn-sm btn-danger m-b-10" onclick="printChart()"><i class="fa fa-print"></i> Print Form</button>
                     <a href="{% url 'new_si_child_view' case.person.id %}" class="btn btn-sm btn-success m-b-10"><i class="fa fa-mail-reply-all m-r-5"></i> Back to Care details</a>
                     </span>
-                    Case No: {{ case.case.case_num }}
+                    Case No: {{ case.si_case.case_serial }}
+
                 </div>
             </div>
             <div class="panel-body">
@@ -96,7 +86,7 @@ form#new-form-b ul {
                     <div class="form-group">
                         <label class="col-md-2 control-label">Family being assessed <span class="asteriskField">*</span></label>
                         <div class="col-md-3">
-                            {{ form.qf2A65_sdd }}
+                            {{ form.qf2A65 }}
                         </div>
                         <div class="col-md-7"></div>
                     </div>
@@ -143,7 +133,7 @@ form#new-form-b ul {
                                 <label class="col-md-4 control-label">Number of Children in the houseshold</label>
                                 <div class="col-md-2">
                                     {{ form.qf2A1 }}
-                                    <span id="qf1B1_rdo_error"></span>
+                                    <span id="qf1B1_error"></span>
                                 </div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-1"></div>
@@ -173,8 +163,8 @@ form#new-form-b ul {
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Marital status of the parent(s) <span class="asteriskField">*</span></label>
                                 <div class="col-md-7">
-                                    {{ form.qf2A2_sdd }}
-                                    <span id="qf2A2_sdd_error"></span>
+                                    {{ form.qf2A2 }}
+                                    <span id="qf2A2_error"></span>
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -206,15 +196,15 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Access to Food / Meals <span class="asteriskField">*</span></label>
                             <div class="col-md-6">
-                                {{ form.qf2A5_sdd }}
+                                {{ form.qf2A5 }}
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Access to balanced diet food(s) consumed <span class="asteriskField">*</span></label>
                             <div class="col-md-6">
-                                {{ form.qf2A6_rdo }}
-                                <span id="qf26_rdo_error"></span>
+                                {{ form.qf2A6 }}
+                                <span id="qf26_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
@@ -236,9 +226,32 @@ form#new-form-b ul {
                             <h4 class="block">Hygiene and sanitation</h4>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label">Describe the latrine (shared, distance from house, pit/flush/none)</label>
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A9A.label }}
+                                {% if form.qf2A9A.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A9A }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A9.label }}
+                                {% if form.qf2A9.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-6">
                                 {{ form.qf2A9 }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A10A.label }}
+                                {% if form.qf2A10A.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A10A }}
                             </div>
                             <div class="col-md-1"></div>
                         </div>
@@ -250,21 +263,60 @@ form#new-form-b ul {
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label">Describe the home environment (inside, outside and surrounding— ventilation, cleanliness, size of the house, rooms, roof, walls and floor, including materials used)</label>
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A11A.label }}
+                                {% if form.qf2A11A.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-6">
-                                {{ form.qf2A11 }}
+                                {{ form.qf2A11A }}
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label">Describe the bathing arrangements/habits (including hand-washing)</label>
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A11B.label }}
+                                {% if form.qf2A11B.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-6">
-                                {{ form.qf2A12 }}
+                                {{ form.qf2A11B }}
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label">Describe the availability, disposal, knowledge of sanitary items</label>
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A11C.label }}
+                                {% if form.qf2A11C.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A11C }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A12A.label }}
+                                {% if form.qf2A12A.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A12A }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A12B.label }}
+                                {% if form.qf2A12B.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-6">
+                                {{ form.qf2A12B }}
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A13.label }}
+                                {% if form.qf2A13.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-6">
                                 {{ form.qf2A13 }}
                             </div>
@@ -277,8 +329,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Does the family have access to health services? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A14_rdo }}
-                                <span id="qf2A14_rdo_error"></span>
+                                {{ form.qf2A14 }}
+                                <span id="qf2A14_error"></span>
                             </div>
                             <div class="col-md-3"></div>
                             <div class="col-md-1"></div>
@@ -286,8 +338,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Does the family have medical insurance? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A15_rdo }}
-                                <span id="qf2A15_rdo_error"></span>
+                                {{ form.qf2A15 }}
+                                <span id="qf2A15_error"></span>
                             </div>
                             <div class="col-md-3"></div>
                             <div class="col-md-1"></div>
@@ -295,8 +347,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Is there any household member with a chronic illness (e.g. diabetes, hypertension)? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A16A_rdo }}
-                                <span id="qf2A16A_rdo_error"></span>
+                                {{ form.qf2A16A }}
+                                <span id="qf2A16A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A16B }}</div>
                             <div class="col-md-1"></div>
@@ -305,8 +357,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Is there anyone in the family who has any disability? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A17A_rdo }}
-                                <span id="qf2A17A_rdo_error"></span>
+                                {{ form.qf2A17A }}
+                                <span id="qf2A17A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A17B }}</div>
                             <div class="col-md-1"></div>
@@ -320,56 +372,56 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Has difficulty seeing, even if wearing glasses?</label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A1_rdo }}
-                                <span id="qf2A18A1_rdo_error"></span>
+                                {{ form.qf2A18A1 }}
+                                <span id="qf2A18A1_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Has difficulty hearing, even if using a hearing aid? </label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A2_rdo }}
-                                <span id="qf2A17A2_rdo_error"></span>
+                                {{ form.qf2A18A2 }}
+                                <span id="qf2A17A2_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Has difficulty walking or climbing steps? </label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A3_rdo }}
-                                <span id="qf2A17A2_rdo_error"></span>
+                                {{ form.qf2A18A3 }}
+                                <span id="qf2A17A2_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Has difficulty remembering or concentrating? </label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A4_rdo }}
-                                <span id="qf2A17A2_rdo_error"></span>
+                                {{ form.qf2A18A4 }}
+                                <span id="qf2A17A2_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Has difficulty (with self-care, such as) washing all over or dressing? </label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A5_rdo }}
-                                <span id="qf2A17A2_rdo_error"></span>
+                                {{ form.qf2A18A5 }}
+                                <span id="qf2A17A2_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Using their usual language, has difficulty communicating (e.g., understanding or being understood by others)? </label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A6_rdo }}
-                                <span id="qf2A17A2_rdo_error"></span>
+                                {{ form.qf2A18A6 }}
+                                <span id="qf2A17A2_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Is the household able to take care of a child with a disability (if child returning home has a disability)? </label>
                             <div class="col-md-6">
-                                {{ form.qf2A18A7_rdo }}
-                                <span id="qf2A17A2_rdo_error"></span>
+                                {{ form.qf2A18A7 }}
+                                <span id="qf2A17A2_error"></span>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
@@ -377,8 +429,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">What type of additional support does the household need?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A18A8_msc }}
-                                <span id="qf2A18A_rdo_error"></span>
+                                {{ form.qf2A18A8 }}
+                                <span id="qf2A18A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A18B }}</div>
                             <div class="col-md-1"></div>
@@ -387,8 +439,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there religious/cultural practices that hinder/could hinder children from accessing health services? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A19A_rdo }}
-                                <span id="qf2A19A_rdo_error"></span>
+                                {{ form.qf2A19A }}
+                                <span id="qf2A19A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A19B }}</div>
                             <div class="col-md-1"></div>
@@ -396,20 +448,27 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there functional community services (tick all that apply)</label>
                             <div class="col-md-2">
-                                {{ form.qf2A20_msc }}
-                                <span id="qf2A20_rdo_error"></span>
+                                {{ form.qf2A20 }}
+                                <span id="qf2A20_error"></span>
                             </div>
                             <div class="col-md-3"></div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label">Are these community services easily accessible? <span class="asteriskField">*</span></label>
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A21.label }}
+                                {% if form.qf2A21.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-2">
-                                {{ form.qf2A21_rdo }}
-                                <span id="qf2A21_rdo_error"></span>
+                                {{ form.qf2A21 }}
+                                <span id="qf2A21_error"></span>
                             </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4">
+                                {{ form.qf2A21A }}
+                            </div>
                             <div class="col-md-1"></div>
+
+
                         </div>
                     </fieldset>
                     </div>
@@ -421,39 +480,33 @@ form#new-form-b ul {
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Is there access to education facilities? <span class="asteriskField">*</span></label>
-                            <div class="col-md-2">
-                                {{ form.qf2A22_rdo }}
-                                <span id="qf2A22_rdo_error"></span>
+                            <div class="col-md-1">
+                                {{ form.qf2A22 }}
+                                <span id="qf2A22_error"></span>
                             </div>
-                            <label class="col-md-2 control-label"></label>
-                            <div class="col-md-3"></div>
+                            <label class="col-md-2 control-label">
+                                {{ form.qf2A22A.label }}
+                                {% if form.qf2A22A.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-4">{{ form.qf2A22A }}</div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Distance to school? Walking: </label>
-                            <div class="col-md-2">
-                                {{ form.qf2A23A }}
+                            <label class="col-md-4 control-label">
+                                {{ form.qf2A23.label }}
+                                {% if form.qf2A23.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
+                            <div class="col-md-3">
+                                {{ form.qf2A23 }}
                             </div>
-                            <label class="col-md-1 control-label">(Minutes)</label>
-                            <div class="col-md-2">{{ form.qf2A23B }}</div>
-                            <label class="col-md-1 control-label">(Hours)</label>
-                            <div class="col-md-1"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">OR Driving : </label>
-                            <div class="col-md-2">
-                                {{ form.qf2A23C }}
-                            </div>
-                            <label class="col-md-1 control-label">(Minutes)</label>
-                            <div class="col-md-2">{{ form.qf2A23D }}</div>
-                            <label class="col-md-1 control-label">(Hours)</label>
+                            <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">The school type</label>
                             <div class="col-md-3">
-                                {{ form.qf2A24_sdd }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A24 }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-3"></div>
                             <div class="col-md-1"></div>
@@ -461,30 +514,39 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-4 control-label">Is the school inclusive and able to meet unique needs of child <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A25A_rdo }}
-                                <span id="qf2A25A_rdo_error"></span>
+                                {{ form.qf2A25A }}
+                                <span id="qf2A25A_error"></span>
                             </div>
+                            <label class="col-md-1 control-label">
+                                {{ form.qf2A25B.label }}
+                                {% if form.qf2A25B.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-4">{{ form.qf2A25B }}</div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Are children in the household currently attending school? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A26A_rdo }}
-                                <span id="qf2A26A_rdo_error"></span>
+                                {{ form.qf2A26A }}
+                                <span id="qf2A26A_error"></span>
                             </div>
-                            <label class="col-md-3 control-label">If yes, is their class appropriate for their age and evolving capacity?</label>
+                            <div class="col-md-5"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">If yes, is their class appropriate for their age and evolving capacity?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A26B_rdo }}
-                                <span id="qf2A26B_rdo_error"></span>
+                                {{ form.qf2A26B }}
+                                <span id="qf2A26B_error"></span>
                             </div>
+                            <div class="col-md-5"></div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label">Do caregivers show interest in children’s education? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A27_rdo }}
-                                <span id="qf2A27_rdo_error"></span>
+                                {{ form.qf2A27 }}
+                                <span id="qf2A27_error"></span>
                             </div>
                             <label class="col-md-2 control-label"></label>
                             <div class="col-md-3"></div>
@@ -503,7 +565,7 @@ form#new-form-b ul {
                             <label class="col-md-5 control-label">Who in household is involved in economic activity? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
                                 {{ form.qf2A28 }}
-                                <span id="qf2A1_rdo_error"></span>
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -511,8 +573,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Type of employment/occupation (casual, informal,formal) <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A29_sdd }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A29 }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -520,8 +582,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Estimated monthly income (< KES 3000, 3000-10000, >10000) <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A30_sdd }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A30 }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -529,19 +591,40 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Is there any financial/material support provided by people living outside of the household? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A31A_rdo }}
-                                <span id="qf2A31A_rdo_error"></span>
+                                {{ form.qf2A31A }}
+                                <span id="qf2A31A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A31B }}</div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label">Assets owned by family (list all you can observe, including land) <span class="asteriskField">*</span></label>
+                            <label class="col-md-5 control-label">
+                                {{ form.qf2A38A.label }}
+                                {% if form.qf2A38A.field.required %}<span class="asteriskField">*</span>{% endif %}
+                            </label>
                             <div class="col-md-2">
-                                {{ form.qf2A32 }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A38A }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Does the family live on the land legally?</label>
+                            <div class="col-md-2">
+                                {{ form.qf2A38B }}
+                                <span id="qf2A1_error"></span>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">Assets owned by family (list all you can observe, including land) <span class="asteriskField">*</span></label>
+                            <div class="col-md-6">
+                                {{ form.qf2A32 }}
+                                <span id="qf2A1_error"></span>
+                            </div>
                             <div class="col-md-1"></div>
                         </div>
                     </fieldset>
@@ -555,8 +638,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there signs of violence (including harsh physical punishment), abuse or neglect in the home? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A33A_rdo }}
-                                <span id="qf2A33A_rdo_error"></span>
+                                {{ form.qf2A33A }}
+                                <span id="qf2A33A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A33B }}</div>
                             <div class="col-md-1"></div>
@@ -564,8 +647,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there signs/reports of drug / alcohol abuse in the family? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A34_rdo }}
-                                <span id="qf2A34_rdo_error"></span>
+                                {{ form.qf2A34 }}
+                                <span id="qf2A34_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -573,8 +656,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there concerns of potential violence or abuse in community or school environment? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A35A_rdo }}
-                                <span id="qf2A35A_rdo_error"></span>
+                                {{ form.qf2A35A }}
+                                <span id="qf2A35A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A35B }}</div>
                             <div class="col-md-1"></div>
@@ -582,8 +665,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Is there an accessible local administrative office<br><small> (e.g., Chief, Assistant Chief, village elder, nyumba kumi)?</small></label>
                             <div class="col-md-2">
-                                {{ form.qf2A36_rdo }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A36 }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -593,26 +676,6 @@ form#new-form-b ul {
                             <div class="col-md-6">{{ form.qf2A37 }}</div>
                             <div class="col-md-1"></div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-5 control-label">Does the family live in a rented home?</label>
-                            <div class="col-md-2">
-                                {{ form.qf2A38A_rdo }}
-                                <span id="qf2A1_rdo_error"></span>
-                            </div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-1"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-5 control-label">Does the family live on the land legally?</label>
-                            <div class="col-md-2">
-                                {{ form.qf2A38B_rdo }}
-                                <span id="qf2A1_rdo_error"></span>
-                            </div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-1"></div>
-                        </div>
-
                     </fieldset>
                     </div>
                     <!-- end wizard step-5 -->
@@ -623,7 +686,7 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Type of relationship being assessed? <span class="asteriskField">*</span></label>
                             <div class="col-md-6">
-                                {{ form.qf2A39_sdd }}
+                                {{ form.qf2A39 }}
                             </div>
                             <div class="col-md-1"></div>
                         </div>
@@ -631,8 +694,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there signs of tension and/or conflict within family? <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A39A_rdo }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A39A }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A39B }}</div>
                             <div class="col-md-1"></div>
@@ -640,8 +703,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are there mental health concerns? <br><small>(Hint: Use indirect methodologies: Observe, probe neighbors and children, etc.)</small></label>
                             <div class="col-md-2">
-                                {{ form.qf2A40A_rdo }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A40A }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A40B }}</div>
                             <div class="col-md-1"></div>
@@ -649,8 +712,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Has the family been through a significant life event recently?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A41A_rdo }}
-                                <span id="qf2A41A_rdo_error"></span>
+                                {{ form.qf2A41A }}
+                                <span id="qf2A41A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A41B }}</div>
                             <div class="col-md-1"></div>
@@ -662,14 +725,14 @@ form#new-form-b ul {
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Describe the current relationship between the current caregiver and the child? <span class="asteriskField">*</span></label>
-                            <div class="col-md-6">{{ form.qf2A43_rdo }}</div>
+                            <div class="col-md-6">{{ form.qf2A43 }}</div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-5 control-label">Do the children confide in caregiver if having challenges?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A44_rdo }}
-                                <span id="qf2A44_rdo_error"></span>
+                                {{ form.qf2A44 }}
+                                <span id="qf2A44_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -677,8 +740,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Do the children seek comfort from caregiver ?<br><small>(Observe)</small></label>
                             <div class="col-md-2">
-                                {{ form.qf2A45_rdo }}
-                                <span id="qf2A44_rdo_error"></span>
+                                {{ form.qf2A45 }}
+                                <span id="qf2A44_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -691,8 +754,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Does caregiver spend time with their children?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A47_rdo }}
-                                <span id="qf2A47A_rdo_error"></span>
+                                {{ form.qf2A47 }}
+                                <span id="qf2A47A_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -705,8 +768,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Does caregiver encourage the child positively?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A49A_rdo }}
-                                <span id="qf2A49A_rdo_error"></span>
+                                {{ form.qf2A49A }}
+                                <span id="qf2A49A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A49B }}</div>
                             <div class="col-md-1"></div>
@@ -719,8 +782,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are the children free around the caregiver? <br><small>(Observe)</small> <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A51_rdo }}
-                                <span id="qf2A50_rdo_error"></span>
+                                {{ form.qf2A51 }}
+                                <span id="qf2A50_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -728,8 +791,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Are the children involved in decision on matters concerning them?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A52_rdo }}
-                                <span id="qf2A50_rdo_error"></span>
+                                {{ form.qf2A52 }}
+                                <span id="qf2A50_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -745,8 +808,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Does the family feel connected to the culture of the community?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A53_rdo }}
-                                <span id="qf2A53_rdo_error"></span>
+                                {{ form.qf2A53 }}
+                                <span id="qf2A53_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -754,8 +817,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label"> Does the family feel socially connected? <br><small>(Hint: participate in community activities.)</small></label>
                             <div class="col-md-2">
-                                {{ form.qf2A54A_rdo }}
-                                <span id="qf2A54A_rdo_error"></span>
+                                {{ form.qf2A54A }}
+                                <span id="qf2A54A_error"></span>
                             </div>
                             <div class="col-md-4">{{ form.qf2A54B }}</div>
                             <div class="col-md-1"></div>
@@ -763,8 +826,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label"> Does the family have relatives and/or friends living in close proximity?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A55_rdo }}
-                                <span id="qf2A55_rdo_error"></span>
+                                {{ form.qf2A55 }}
+                                <span id="qf2A55_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -788,8 +851,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Do local leaders know the family?</label>
                             <div class="col-md-2">
-                                {{ form.qf2A59_rdo }}
-                                <span id="qf2A59_rdo_error"></span>
+                                {{ form.qf2A59 }}
+                                <span id="qf2A59_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -805,10 +868,10 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label"> Does family want reunification / placement with the child<span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A60_rdo }}
-                                <span id="qf2A60_rdo_error"></span>
+                                {{ form.qf2A60 }}
+                                <span id="qf2A60_error"></span>
                             </div>
-                            <div class="col-md-4"></div>
+                            <div class="col-md-4">{{ form.qf2A60A }}</div>
                             <div class="col-md-1"></div>
                         </div>
                         <div class="form-group">
@@ -854,8 +917,8 @@ form#new-form-b ul {
                         <div class="form-group">
                             <label class="col-md-5 control-label">Select One <span class="asteriskField">*</span></label>
                             <div class="col-md-2">
-                                {{ form.qf2A64_sdd }}
-                                <span id="qf2A1_rdo_error"></span>
+                                {{ form.qf2A64 }}
+                                <span id="qf2A1_error"></span>
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-1"></div>
@@ -874,20 +937,131 @@ form#new-form-b ul {
                         <div class="col-md-2"></div>
                     </div>               
                     
-                    <div class="form-group">
+                    <div class="form-group" id="printId">
                         <label class="col-md-4 control-label"></label>
-                        <div class="col-md-3">
-                            <button type="submit" class="btn btn-sm btn-success">Submit Form {{ form_id }} details</button>
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-success">Submit Form {{ form_code }} details</button>
+                            <a href="{% url 'new_si_child_view' case.person.id %}">
+                                <button type="button" class="btn btn-default">Cancel</button>
+                            </a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <!-- end panel -->
     </div>
-    
+    {% if edit_form > 0 %}
+
+    <div class="row">
+        <!-- begin col-12 -->
+        <div class="col-md-12">
+            <!-- begin panel -->
+            <div class="panel panel-default" data-sortable-id="ui-general-1">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>                          
+                    <h4 class="panel-title"><b>Past Events </b></h4>                    
+                </div>
+                <div class="panel-body">
+                    <table id="tableData" class="table table-striped table-bordered">
+                        <thead>
+                            <tr> 
+                                <th>#</th>                                 
+                                <th>Event Date</th>                
+                                <th>Officer</th> 
+                                <th width="25%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if case.events %}
+                            {% for vacancy in case.events %}
+                            <tr id="si_row-{{ vacancy.pk }}"> 
+                                <td>{{ forloop.counter }}</td>                                 
+                                <td>{{ vacancy.event_date }}</td>
+                                <td>N/A</td>
+
+                                <td>
+                                    <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
+                                        <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View / Edit Details</button>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="si-{{ vacancy.pk }}" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div style="background-color:#d9edf7" class="modal-header">
+                                                    <button type="button" class="close " data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Delete {{ form_name }} - {{ vacancy.event_date }}</strong></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this {{ form_name }} dated {{ vacancy.event_date }} ? </p>
+                                                        <br>
+                                                        <p>Click Yes to proceed to delete or Close to Cancel.</p>
+                                                        <hr>
+                                                        <a><button onclick="deleteEvent('{{ form_id }}', '{{ vacancy.pk }}')" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button></a>
+                                                        <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#si-{{ vacancy.pk }}" class="btn btn-danger" data-toggle="modal">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>                                                        
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6">No previous events available</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>                  
+                </div>
+                <!-- end panel -->
+            </div>
+            <!-- end col-12 -->
+        </div>
+        {% endif %}
+        </div>
+    </div>
+    <!-- end panel -->  
 </div>
 <!-- end row -->
+
+<!-- Modal -->
+<div  class="modal fade" id="successMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #8f9191">
+            <div style="background-color: #d9edf7" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Successful Deletion of Event</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>Deleted successfully!</p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="errorMsg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div style="background-color: #ff9966" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-weight: 100; color: #696969"><strong>Deletion NOT completed.</strong></h4>
+            </div>
+            <div class="modal-body">
+            <p>This item can not be deleted. <span id="msg_id"></span></p>
+            <button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
@@ -899,9 +1073,84 @@ form#new-form-b ul {
 
 $(document).ready(function() {
     $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
+    $('.other_date').datepicker({ format: 'dd-M-yyyy' });
 
     $("#wizard").bwizard();
 });
+
+// Delete Django Ajax Call
+function deleteEvent(form_id, event_id) {
+    var csrftoken = $.cookie('csrftoken');
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'si_form_delete' %}",
+        
+        data: {'form_id': form_id, 'event_id': event_id,
+               'csrfmiddlewaretoken': csrftoken },
+        dataType: 'json',
+        
+        success: function (data) {
+            if (data.deleted == 1) {
+                console.log(data);
+              $("#tableData #si_row-" + event_id).remove();
+              $("#successMsg").modal('show');
+            }
+            if(data.deleted == 0){
+                console.log(data.days)
+                $("#msg_id").html(data.message);
+                $("#errorMsg").modal('show');
+    
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+function printChart() {
+      //Print Chart
+      var mapContainer;
+      var body               = $('body');
+      mapContainer       = $('div.myForm');
+      if (mapContainer.length == 0){
+          mapContainer = $('div.myForm');
+      }
+      var mapContainerParent = mapContainer.parent();
+      var printContainer     = $('<div>');
+      $(':input').removeAttr('placeholder');
+
+      printContainer
+        .addClass('print-container')
+        .css('width', '100%')
+        .css('height', '800px')
+        .css('-webkit-print-color-adjust','exact')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+      var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+      
+      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
+      var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: auto !important; }' +
+              'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+      window.print();
+
+      body.prepend(content);
+      mapContainerParent.prepend(mapContainer);
+
+      printContainer.remove();
+      patchedStyle.remove();
+      $('#print_title').remove();
+}
 
 </script>
 {% endblock %}

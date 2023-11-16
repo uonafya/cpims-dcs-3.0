@@ -25,7 +25,7 @@ from .functions import (
     get_case_data, org_unit_tree, get_performance, get_performance_detail,
     get_pivot_data, get_pivot_ovc, get_variables, get_sql_data, write_xls,
     csvxls_data, get_cluster, edit_cluster, create_pepfar,
-    get_dashboard_summary, write_csv, write_pdf)
+    get_dashboard_summary, write_csv, write_pdf, get_region_counties)
 
 from cpovc_registry.models import RegOrgUnit
 from cpovc_registry.functions import get_contacts, merge_two_dicts
@@ -42,7 +42,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .parameters import ORPTS, ACRPTS
+from .parameters import ORPTS, ACRPTS, SI_RPTS
 
 from cpovc_forms.models import OVCGokBursary
 from .documents import search_child, generate_form, validate_case
@@ -76,7 +76,7 @@ def reports_cpims(request, id):
         return render(request, 'reports/reports_index.html',
                       {'form': form, 'status': 200, 'doc_id': doc_id,
                        'report_name': report_name, 'cyears': cyear_list,
-                       'fyears': fyear_list})
+                       'fyears': fyear_list, 'dcs': DCS_HDS})
     except Exception as e:
         raise e
 
@@ -109,7 +109,7 @@ def reports_home(request):
         if request.method == 'POST':
             action = request.POST.get('action_id')
             name = str(request.POST.get('child'))
-            action_id = int(action_id) if action else 0
+            action_id = int(action) if action else 0
             if action_id > 0:
                 results = {'file_name': 'test.pdf'}
                 return JsonResponse(results, content_type='application/json',
@@ -325,6 +325,8 @@ def reports_caseload(request):
             report_region = int(request.POST.get('report_region'))
             report_unit = request.POST.get('org_unit')
             org_unit_name = request.POST.get('org_unit_name')
+            # Handle regions
+            region = request.POST.get('region')
             results = {'res': sub_county_ids}
             case_categories = get_case_details(
                 ['case_category_id', 'core_item_id', 'intervention_id',
@@ -334,7 +336,9 @@ def reports_caseload(request):
                 case_id = case_category.item_id
                 case_name = case_category.item_description
                 categories[case_id] = case_name
-            my_county = county if int(report_region) == 2 else False
+            my_county = [county] if int(report_region) == 2 else []
+            if int(report_region) == 6:
+                my_county = get_region_counties(region)
             if report_region == 1 or report_region == 4:
                 sub_county_ids = []
             sub_counties = get_sub_county_info(
@@ -543,6 +547,7 @@ def reports_generate(request):
     """Case load views."""
     results, html = {}, None
     try:
+        print('Shenzi')
         if not request.user.is_authenticated:
             msg = 'You have been logged out. Please log in again to proceed.'
             results = {'status': 9, 'file_name': '', 'message': msg}
@@ -578,11 +583,18 @@ def reports_generate(request):
                 report_cat = "%s-Sub-County" % (report_variables['sub_county'])
             elif report_region == 2:
                 report_cat = "%s-County" % (report_variables['county'])
-
+            elif report_region == 6:
+                report_cat = "%s" % (report_variables['region_name'])
             report_cat = re.sub('[^A-Za-z0-9]+', '-', report_cat)
+            sdate = report_variables['start_date'].strftime("%Y%m%d")
+            edate = report_variables['end_date'].strftime("%Y%m%d")
+            # Report year
+            r_year = report_variables['year']
+            if report_variables['report_id'] == 5:
+                r_year = '%s-%s' % (sdate, edate)
             file_name = '%s_%s_%s_%s_%s' % (
                 report_cat, report_variables['label'],
-                report_variables['year'], report_id, user_id)
+                r_year, report_id, user_id)
             # Prepare the data
             # html = all_data.format(**report_variables)
             # Write the csv
@@ -594,9 +606,19 @@ def reports_generate(request):
                 html = "File too big to render on the browser."
                 html += "Please download the appropriate format above."
             # Write xlsx with macros
-            results = {'status': 0, 'file_name': file_name, 'report': html,
-                       'message': 'No data matching your query.',
-                       'excel_file': excel_file}
+            status = 9
+            msg = "No data matching your query."
+            if len(raw_data) > 1:
+                status = 0
+                msg = "Query executed successfully"
+            # Dates
+            s_date = report_variables['start_date']
+            e_date = report_variables['end_date']
+            dates = '%s to %s' % (s_date.strftime("%d-%b-%Y"),
+                                  e_date.strftime("%d-%b-%Y"))
+            results = {'status': status, 'file_name': file_name,
+                       'report': html, 'message': msg, 'dates': dates,
+                       'excel_file': excel_file, 'data': raw_data}
             return JsonResponse(results, content_type='application/json',
                                 safe=False)
         else:
@@ -695,6 +717,7 @@ def reports_download_old(request, file_name):
 def print_pdf(request, file_name):
     """Download without printing."""
     fname = file_name.replace('.csv', '.pdf')
+    print('File name', fname)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="%s"' % (fname)
     write_pdf(request, response, file_name)
@@ -1222,6 +1245,22 @@ def reports_afc(request, id=0):
         name = ACRPTS[rpt_id] if rpt_id in ACRPTS else ACRPTS[1]
         form = CaseLoad(request.user)
         return render(request, 'reports/pivot_afc.html',
+                      {'form': form, 'name': name,
+                       'report_id': rpt_id})
+    except Exception as e:
+        raise e
+    else:
+        pass
+
+
+@login_required
+def reports_si(request, id=0):
+    """Method to do pivot reports."""
+    try:
+        rpt_id = int(id)
+        name = SI_RPTS[rpt_id] if rpt_id in SI_RPTS else SI_RPTS[1]
+        form = CaseLoad(request.user)
+        return render(request, 'reports/pivot_si.html',
                       {'form': form, 'name': name,
                        'report_id': rpt_id})
     except Exception as e:

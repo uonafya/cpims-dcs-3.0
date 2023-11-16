@@ -30,7 +30,7 @@
 	    <ul class="sub-menu">
 			<li><a href="{% url 'case_record_sheet' %}">Case Record Sheet</a></li>
 			<li><a href="{% url 'residential_placement' %}">Institutional Placement</a></li>
-			<li><a href="{% url 'SI_home' %}">Statutory Institution</a></li>
+			<li class="{{ request.path|get_class:'/forms/si/' }}"><a href="{% url 'SI_home' %}">Statutory Institution</a></li>
 			<li><a href="{% url 'alternative_family_care' %}">Alternative Family Care</a></li>
 			<li><a href="{% url 'alternative_care' %}">Alternative Care</a></li>
 			<li><a href="{% url 'background_details' %}">School and Bursary</a></li>
@@ -74,6 +74,20 @@
 					<li><a href="{% url 'reports_afc' id=7 %}">Monitoring</a></li>
 					<li><a href="{% url 'reports_afc' id=8 %}">Case Review - Child</a></li>
 					<li><a href="{% url 'reports_afc' id=9 %}">Case Review - Caregiver</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="#">
+				    <b class="caret pull-right"></b>
+				    <i class="fa fa-align-left"></i> 
+				    <span>SI Reports</span>
+				</a>
+				<ul class="sub-menu">
+					<li><a href="{% url 'reports_si' id=1 %}">Summary report</a></li>
+					<li><a href="{% url 'reports_si' id=2 %}">Social Inquiry</a></li>
+					<li><a href="{% url 'reports_si' id=3 %}">Needs and Risk Assessment</a></li>
+					<li><a href="{% url 'reports_si' id=4 %}">Needs and Risk Assessment - Scale</a></li>
+					<li><a href="{% url 'reports_si' id=5 %}">Admission</a></li>
 				</ul>
 			</li>
 		    <li class="has-sub">

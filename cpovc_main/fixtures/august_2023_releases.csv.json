@@ -62,5 +62,37 @@
             "sms_keyword": false,
             "is_void": false
         }
+    },
+    {
+        "pk": 41304,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 9,
+            "field_name": "ogo_cadre_type_id",
+            "item_category": "Employee cadre",
+            "item_id": "OGNPS",
+            "item_description": "Police Officer",
+            "item_description_short": "Police Officer",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41305,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "the_order": 10,
+            "field_name": "ogo_cadre_type_id",
+            "item_category": "Employee cadre",
+            "item_id": "OGPRO",
+            "item_description": "Probation Officer",
+            "item_description_short": "Probation Officer",
+            "item_sub_category": "",
+            "user_configurable": false,
+            "sms_keyword": false,
+            "is_void": false
+        }
     }
 ]

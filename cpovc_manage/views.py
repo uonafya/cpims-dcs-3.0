@@ -22,6 +22,7 @@ from .functions import (
     travel_pdf, handle_integration, get_geo, get_person_geo,
     get_person_orgs, generate_document, report_bug)
 from cpovc_main.models import SetupGeography
+from cpovc_auth.models import AppUser
 
 from .params import PARAMS
 
@@ -581,9 +582,9 @@ def se_data(request):
     try:
         cases = []
         ou_ids = []
+        users_pids = {}
         org_unit = request.GET.get('org_unit')
         county = request.GET.get('county')
-
         persons = RegPersonsOrgUnits.objects.filter(
             is_void=False, date_delinked__isnull=True).exclude(
             person__designation__isnull=True, person__designation='',
@@ -619,7 +620,21 @@ def se_data(request):
                 ous[geo.org_unit_id] = geo.area.parent_area_id
         if county_id > 0:
             persons = persons.filter(org_unit_id__in=ous)
+        users = AppUser.objects.all()
+        for user in users:
+            last_login = 'Never'
+            llog = user.last_login
+            if llog:
+                last_login = llog.strftime("%d-%b-%Y, %H:%M:%S")
+            is_active = 'Yes' if user.is_active else 'No'
+            users_pids[user.reg_person_id] = {'id': user.id,
+                                              'uname': user.username,
+                                              'last_login': last_login,
+                                              'active': is_active}
+        user_ids = users.values_list('reg_person_id')
+        persons = persons.filter(person_id__in=user_ids)
         for person in persons:
+            pid = person.person_id
             fname = person.person.first_name
             sname = person.person.surname
             o_name = person.person.other_names
@@ -630,7 +645,7 @@ def se_data(request):
             cid = ous[ou_id] if ou_id in ous else None
             ccd = str(cid).zfill(3) if cid else None
             cname = PARAMS[ccd] if cid else None
-            des = vals[did] if did in vals else 'N/A'
+            des = vals[did] if did in vals else 'Volunteer'
             age = person.person.years
             dob = str(person.person.date_of_birth)
             dt = {"cpims_id": person.person_id}
@@ -641,6 +656,9 @@ def se_data(request):
             dt['county'] = cname if cname else 'N/A'
             dt['org_unit'] = person.org_unit.org_unit_name
             dt['names'] = '%s %s%s' % (fname, sname, oname)
+            dt['last_login'] = users_pids[pid]['last_login']
+            dt['active'] = users_pids[pid]['active']
+            dt['uname'] = users_pids[pid]['uname']
             cases.append(dt)
         result = {"data": cases}
         return JsonResponse(result, content_type='application/json',

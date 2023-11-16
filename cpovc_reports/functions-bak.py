@@ -3401,5 +3401,22 @@ def write_pdf(request, response, file_name):
         pass
 
 
+def get_regions(default_txt=False):
+    """Method to return clusters."""
+    initial_list = {'': default_txt} if default_txt else {}
+    all_list = collections.OrderedDict(initial_list)
+    try:
+        regions = RegOrgUnit.objects.filter(
+            org_unit_type_id='TNRG', is_void=False)
+        for a_list in my_list:
+            all_list[a_list.id] = a_list.org_unit_name
+    except Exception as e:
+        error = 'Error getting list - %s' % (str(e))
+        print error
+        return ()
+    else:
+        return all_list.items
+
+
 if __name__ == '__main__':
     pass
