@@ -585,7 +585,7 @@ def draw_page(canvas, doc):
     canvas.restoreState()
 
 
-def get_sub_county_info(sub_county_ids, a_type='GDIS', icounty=None):
+def get_sub_county_info(sub_county_ids, a_type='GDIS', icounty=[]):
     """Get selected sub-counties info and attached counties."""
     area_ids, counties = {}, {}
     try:
@@ -594,9 +594,10 @@ def get_sub_county_info(sub_county_ids, a_type='GDIS', icounty=None):
         for county in county_set:
             counties[county.area_id] = county.area_name
         if icounty:
-            sub_county_ids = SetupGeography.objects.filter(
-                parent_area_id=icounty, area_type_id='GDIS',
+            sids = SetupGeography.objects.filter(
+                parent_area_id__in=icounty, area_type_id='GDIS',
                 is_void=False).values_list('area_id', flat=True)
+            sub_county_ids = list(sids)
         if sub_county_ids:
             areas = SetupGeography.objects.filter(
                 area_id__in=sub_county_ids, is_void=False)
@@ -1458,7 +1459,7 @@ def get_raw_values(params, data_type=1):
             adhoc_name = 'GOK_%s' % (adhoc_type)
             params['other_params'] = ''
             report_region = params['report_region']
-            if report_region in [2, 3]:
+            if report_region in [2, 3, 6]:
                 pms = params['sub_county_id']
                 sc_list = [str(o_list) for o_list in pms]
                 sc_ids = ','.join(sc_list)
@@ -2037,6 +2038,11 @@ def get_variables(request):
         cluster = request.POST.get('cluster')
         report_ovc = request.POST.get('report_ovc')
         report_ovc_id = request.POST.get('rpt_ovc_id')
+        region = request.POST.get('region')
+        region_obj = None
+        if region:
+            region_obj = RegOrgUnit.objects.filter(
+                is_void=False, id=region).first()
         if not report_type:
             report_type = request.POST.get('report_type_other')
         rpt_ovc = int(report_ovc) if report_ovc else 1
@@ -2055,16 +2061,20 @@ def get_variables(request):
             rpt_years = rpt_iyears
         region_names = {1: 'National', 2: 'County',
                         3: 'Sub-county', 4: 'Organisation Unit',
-                        5: 'Cluster'}
+                        5: 'Cluster', 6: 'Region'}
         is_fin = '/' in rpt_years if rpt_years else False
         report_year = rpt_years.split('/')[0] if is_fin else rpt_years
         for case_category in case_categories:
             case_id = case_category.item_id
             case_name = case_category.item_description
             categories[case_id] = case_name
-        my_county = county if report_region == 2 else False
+        my_county = [county] if report_region == 2 else []
+        print('heloooooooooooooooooooo', report_region)
         if report_region == 1 or report_region == 4:
             sub_county_ids = []
+        if int(report_region) == 6:
+            sub_county_ids = get_region_counties(region)
+            print('My region yyyyyyyyy', region, my_county, sub_county_ids)
         sub_counties = get_sub_county_info(
             sub_county_ids, icounty=my_county)
         variables = {'sub_county_id': [], 'sub_county': []}
@@ -2074,6 +2084,8 @@ def get_variables(request):
             variables['sub_county_id'].append(rep_var['sub_county_id'])
             variables['sub_county'].append(rep_var['sub_county'])
         # Report variables
+        if region_obj:
+            variables['region_name'] = region_obj.org_unit_name
         if int(report_region) == 1:
             variables = {'county': 'National', 'sub_county': ['National']}
         variables['sub_county'] = ', '.join(variables['sub_county'])
@@ -2787,7 +2799,7 @@ def write_csv_old(data, file_name, params):
                 excel_file = excel_file.replace('xlsx', 'xlsm')
                 workbook.filename = xlsm_file
                 workbook.add_vba_project(vba_file)
-            writer.save()
+            writer.close()
             # writer.close()
             print('Excel Files', xlsm_file, xlsx_file)
     except Exception as e:
@@ -2808,6 +2820,7 @@ def write_csv(data, file_name, params):
                                    quoting=csv.QUOTE_MINIMAL)
             csvwriter.writerows(data)
         # Save excel to flat file
+        print(params)
         report_id = params['report_id'] if 'report_id' in params else 1
         s_name = RPTS[report_id] if report_id in RPTS else 1
         vba_file = '%s/%s/vbaProject.bin' % (DOC_ROOT, s_name)
@@ -2815,7 +2828,6 @@ def write_csv(data, file_name, params):
         if 'archive' in params:
             epoch_time = int(time.time())
             file_name = file_name.replace('tmp-', '')
-            print('ffffffffff', file_name)
             if '_' not in file_name:
                 file_name = base64.urlsafe_b64decode(str(file_name))
             # rnames = base64.urlsafe_b64decode(file_name.encode('ascii'))
@@ -2827,6 +2839,7 @@ def write_csv(data, file_name, params):
             fname = '%s-%s' % (uid, s_name)
             excel_file = '%s.xlsx' % (fname)
             excel_file_path = '%s/xlsx/%s.xlsx' % (MEDIA_ROOT, fname)
+            print('f 4', excel_file_path, csv_file)
             writer = pd.ExcelWriter(excel_file_path, engine='xlsxwriter')
             data = pd.read_csv(csv_file, low_memory=False)
             data.to_excel(writer, sheet_name='Sheet1', index=False)
@@ -2838,7 +2851,7 @@ def write_csv(data, file_name, params):
                 excel_file_path = excel_file_path.replace('.xlsx', '.xlsm')
                 workbook.filename = excel_file_path
                 workbook.add_vba_project(vba_file)
-            writer.save()
+            writer.close()
     except Exception as e:
         print('Error creating csv Results - %s' % (str(e)))
         pass
@@ -2891,6 +2904,9 @@ def get_sql_data(request, params):
     qname = REPORTS[rpt_ovc] if rpt_ovc in REPORTS else df_rpt
     if rpt_ovc == 7:
         qid = 'AFC_%s' % (rpt_id)
+        qname = REPORTS[qid] if qid in REPORTS else df_rpt
+    if rpt_ovc == 8:
+        qid = 'SI_%s' % (rpt_id)
         qname = REPORTS[qid] if qid in REPORTS else df_rpt
     sql = QUERIES[qname]
     sql = sql.format(**params)
@@ -3319,7 +3335,7 @@ def get_header(element, report_name, region, dates, styles):
         # Handle headers
         address = '<b>MINISTRY OF LABOUR AND SOCIAL PROTECTION'
         address += "<br />STATE DEPARTMENT FOR SOCIAL PROTECTION"
-        address += "<br />DEPARTMENT OF CHILDREN'S SERVICES</b>"
+        address += "<br />DIRECTORATE OF CHILDREN'S SERVICES</b>"
         report_number = '%s\n%s CPIMS Report\n%s' % (url, report_name, tarehe)
         bar_code = BarCode(value='%s' % (report_number))
         # Logo
@@ -3366,11 +3382,12 @@ def write_pdf(request, response, file_name):
     try:
 
         # datas = pd.DataFrame(data)
+        print('to pdf', file_name)
         rparams = file_name.split('_')
         rid = int(rparams[3])
         region = rparams[0].replace('-', ' ')
         report_name = rparams[1].replace('-', ' ')
-        ou = None
+        # ou = None
         if 'OU ' in region:
             ou_id = region.replace('OU ', '')
             ou_name = get_org_unit(request, ou_id)
@@ -3378,10 +3395,17 @@ def write_pdf(request, response, file_name):
         styles = get_styles()
         element = []
         # Get headers for the report
-        mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-        #dates = mc.get(file_name.replace('.pdf', ''))
+        # mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+        # dates = mc.get(file_name.replace('.pdf', ''))
         fname = str(file_name)
-        dates = mc.get(fname.replace('.pdf', ''))
+        # dates = mc.get(fname.replace('.pdf', ''))
+        dates = fname.split('_')[2].split('-')
+        sdate_obj = datetime.strptime(dates[0], "%Y%m%d")
+        edate_obj = datetime.strptime(dates[1], "%Y%m%d")
+        s_date = sdate_obj.strftime("%d %B, %Y")
+        e_date = edate_obj.strftime("%d %B, %Y")
+        dates = '%s to %s' % (s_date, e_date)
+        # dates = fname.replace('.pdf', '')
         get_header(element, report_name, region, dates, styles)
         csv_file = '%s/%s' % (MEDIA_ROOT, file_name)
         df = pd.read_csv(csv_file.replace('.pdf', '.csv'), na_filter=False)
@@ -3478,6 +3502,35 @@ def write_pdf(request, response, file_name):
         raise
     else:
         pass
+
+
+def get_regions(default_txt=False):
+    """Method to return clusters."""
+    initial_list = {'': default_txt} if default_txt else {}
+    all_list = collections.OrderedDict(initial_list)
+    try:
+        regions = RegOrgUnit.objects.filter(
+            org_unit_type_id='TNRG', is_void=False)
+        for region in regions:
+            all_list[region.id] = region.org_unit_name
+    except Exception as e:
+        error = 'Error getting list - %s' % (str(e))
+        print(error)
+        return ()
+    else:
+        return all_list.items
+
+
+def get_region_counties(region_id):
+    """Method to get regions county ids."""
+    try:
+        counties = RegOrgUnitGeography.objects.filter(
+            org_unit_id=region_id, is_void=False).values_list(
+            'area_id', flat=True)
+    except Exception as e:
+        print('Error getting counties - %s' % str(e))
+    else:
+        return list(counties)
 
 
 if __name__ == '__main__':

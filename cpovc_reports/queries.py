@@ -50,6 +50,39 @@ REPORTS['AFC_13'] = 'afc_referral'
 REPORTS['AFC_14'] = 'afc_disability'
 REPORTS['AFC_15'] = 'afc_feedback_caregiver'
 REPORTS['AFC_16'] = 'afc_feedback_child'
+# SI
+REPORTS['SI_1'] = 'si_summary'
+REPORTS['SI_2'] = 'si_social'
+REPORTS['SI_3'] = 'si_assessment'
+REPORTS['SI_4'] = 'si_assessment_scale'
+REPORTS['SI_5'] = 'si_vacancy_application'
+REPORTS['SI_6'] = 'si_admission'
+REPORTS['SI_7'] = 'si_child_caregiver_case_review'
+REPORTS['SI_8'] = 'si_child_identification'
+REPORTS['SI_9'] = 'si_family_assessment'
+REPORTS['SI_10'] = 'si_itp'
+REPORTS['SI_11'] = 'si_icp'
+REPORTS['SI_12'] = 'si_medical_assessment'
+REPORTS['SI_13'] = 'si_monitoring'
+REPORTS['SI_14'] = 'si_request_revocation'
+REPORTS['SI_15'] = 'si_change_in_profile'
+REPORTS['SI_16'] = 'si_family_conference'
+REPORTS['SI_17'] = 'si_jfa'
+REPORTS['SI_18'] = 'si_leave_of_absence'
+REPORTS['SI_19'] = 'si_record_visits'
+REPORTS['SI_20'] = 'si_escape'
+REPORTS['SI_21'] = 'si_case_referral'
+REPORTS['SI_22'] = 'si_release'
+REPORTS['SI_23'] = 'si_exit_cert'
+REPORTS['SI_24'] = 'si_case_closure'
+REPORTS['SI_25'] = 'si_re_unification'
+REPORTS['SI_26'] = 'si_child_participation'
+REPORTS['SI_27'] = 'si_counselling'
+REPORTS['SI_28'] = 'si_court_attendance'
+REPORTS['SI_29'] = 'si_education'
+REPORTS['SI_30'] = 'si_vocation'
+REPORTS['SI_31'] = 'si_child_assesment'
+REPORTS['SI_32'] = 'si_youngp_caregiver_case_review'
 
 QUERIES['org_units'] = '''
 select
@@ -1164,7 +1197,6 @@ QUERIES['form1b_summary'] = '''
 '''
 
 
-
 # List of OVC Served
 
 # List of OVC Served
@@ -1173,8 +1205,6 @@ select * from vw_cpims_list_served where cbo_id in ({cbos})
 AND date_of_service between '{start_date}' and '{end_date}'
 AND service != '' and service is not null;
 '''
-
-
 
 
 QUERIES['pivot_report'] = '''
@@ -1491,7 +1521,8 @@ WHEN  date_part('year', age(case_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN
 ELSE 'e.[18+ yrs]' END AS agerange,
 c_type.item_description as "care type",
 c_cat.item_description as "case category",
-CASE ovc_afc_main.case_status WHEN 'TRUE' THEN 'Active' ELSE 'Closed' END AS Status,
+CASE ovc_afc_main.case_status WHEN 'TRUE' THEN 'Active'
+ELSE 'Closed' END AS Status,
 1 as ovccount
 from ovc_afc_main
 inner join reg_person as pp on person_id = pp.id
@@ -1503,7 +1534,7 @@ where ovc_afc_main.is_void = False and case_date between '{start_date}' and '{en
 and org_unit_id = '{org_unit}'
 '''
 
-QUERIES['afc_identification'] = '''
+QUERIES['afc_forms'] = '''
 SELECT pp.id as cpims_id, event_date as Identification_date,
 CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
 date_part('year', age(event_date, pp.date_of_birth)) AS Age,
@@ -1523,11 +1554,56 @@ FROM ovc_afc_event as oae
 inner join reg_person as pp on oae.person_id = pp.id
 inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
 left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '1A' and event_date between '{start_date}' and '{end_date}'
+where oae.form_id = '%s' and event_date between '{start_date}' and '{end_date}'
 '''
 
-QUERIES['afc_assessment_child'] = '''
-SELECT pp.id as cpims_id, event_date as Assessment_date,
+QUERIES['afc_identification'] = QUERIES['afc_forms'] % ('1A')
+QUERIES['afc_assessment_child'] = QUERIES['afc_forms'] % ('1B')
+QUERIES['afc_assessment_family'] = QUERIES['afc_forms'] % ('2A')
+QUERIES['afc_case_plan'] = QUERIES['afc_forms'] % ('4A')
+QUERIES['afc_placement'] = QUERIES['afc_forms'] % ('5A')
+QUERIES['afc_monitoring'] = QUERIES['afc_forms'] % ('6A')
+QUERIES['afc_case_review'] = QUERIES['afc_forms'] % ('7A')
+QUERIES['afc_case_review_ya'] = QUERIES['afc_forms'] % ('8A')
+QUERIES['afc_closure'] = QUERIES['afc_forms'] % ('9A')
+QUERIES['afc_consent'] = QUERIES['afc_forms'] % ('3A')
+QUERIES['afc_transfer'] = QUERIES['afc_forms'] % ('10A')
+QUERIES['afc_referral'] = QUERIES['afc_forms'] % ('12A')
+QUERIES['afc_disability'] = QUERIES['afc_forms'] % ('14A')
+QUERIES['afc_feedback_caregiver'] = QUERIES['afc_forms'] % ('15A')
+QUERIES['afc_feedback_child'] = QUERIES['afc_forms'] % ('16A')
+
+# SI Reports
+QUERIES['si_summary'] = '''
+SELECT
+ROW_NUMBER () OVER (ORDER BY ovc_si_registration.timestamp_created) as SNO,
+concat(pp.first_name,' ',pp.surname,' ',pp.other_names) as Names,
+date_part('year', age(case_date, pp.date_of_birth)) AS Age,
+CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
+case_date as "case date",
+CASE
+WHEN  date_part('year', age(case_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
+WHEN  date_part('year', age(case_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
+WHEN  date_part('year', age(case_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
+WHEN  date_part('year', age(case_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
+ELSE 'e.[18+ yrs]' END AS agerange,
+c_type.item_description as "care type",
+c_cat.item_description as "case category",
+CASE ovc_si_registration.case_status WHEN 'TRUE' THEN 'Active'
+ELSE 'Closed' END AS Status,
+1 as ovccount
+from ovc_si_registration
+inner join reg_person as pp on person_id = pp.id
+left outer join ovc_case_record as cr on cr.case_id = ovc_si_registration.case_id
+left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id
+left outer join list_general c_cat on c_cat.item_id=cc.case_category and c_cat.field_name = 'case_category_id'
+left outer join list_general c_type on c_type.item_id=ovc_si_registration.org_type and c_type.field_name = 'alternative_family_care_type_id'
+where ovc_si_registration.is_void = False and case_date between '{start_date}' and '{end_date}'
+and org_unit_id = '{org_unit}'
+'''
+
+QUERIES['si_forms'] = '''
+SELECT pp.id as cpims_id, event_date as Event_date,
 CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
 date_part('year', age(event_date, pp.date_of_birth)) AS Age,
 CASE
@@ -1537,316 +1613,52 @@ WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THE
 WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
 ELSE 'e.[18+ yrs]' END AS agerange,
 oaf.question_id,
+ilq.question_text,
 CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
+WHEN oaf.item_value = 'FMTF' THEN oaf.item_detail
+WHEN oaf.item_value = 'FMTA' THEN oaf.item_detail
+ELSE itd.item_description END AS answer_value,
 1 as ovccount
-FROM ovc_afc_event as oae
+FROM ovc_si_event as oae
 inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
+inner join ovc_si_registration as maf on oae.care_id = maf.si_id
+inner join ovc_si_form as oaf on oae.event_id = oaf.event_id
 left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '1B' and event_date between '{start_date}' and '{end_date}'
+left outer join list_questions ilq on ilq.question_code = oaf.question_id
+where oae.form_id = '%s'
+and event_date between '{start_date}' and '{end_date}'
 '''
 
-QUERIES['afc_assessment_family'] = '''
-SELECT pp.id as cpims_id, event_date as Assessment_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '2A' and event_date between '{start_date}' and '{end_date}'
-'''
+QUERIES['si_social'] = QUERIES['si_forms'] % ('FMSI005F')
+QUERIES['si_assessment'] = QUERIES['si_forms'] % ('FMSI002F')
+QUERIES['si_assessment_scale'] = QUERIES['si_forms'] % ('FMSI003F')
+QUERIES['si_vacancy_application'] = QUERIES['si_forms'] % ('FMSI001F')
+QUERIES['si_admission'] = QUERIES['si_forms'] % ('FMSI004F')
+QUERIES['si_child_caregiver_case_review'] = QUERIES['si_forms'] % ('FMSI006F')
+QUERIES['si_child_identification'] = QUERIES['si_forms'] % ('FMSI007F')
+QUERIES['si_family_assessment'] = QUERIES['si_forms'] % ('FMSI008F')
+QUERIES['si_itp'] = QUERIES['si_forms'] % ('FMSI009F')
+QUERIES['si_icp'] = QUERIES['si_forms'] % ('FMSI010F')
+QUERIES['si_medical_assessment'] = QUERIES['si_forms'] % ('FMSI011F')
+QUERIES['si_monitoring'] = QUERIES['si_forms'] % ('FMSI012F')
 
-QUERIES['afc_case_plan'] = '''
-SELECT pp.id as cpims_id, event_date as Case_plan_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '4A' and event_date between '{start_date}' and '{end_date}'
-'''
+QUERIES['si_request_revocation'] = QUERIES['si_forms'] % ('FMSI013F')
+QUERIES['si_change_in_profile'] = QUERIES['si_forms'] % ('FMSI014F')
+QUERIES['si_family_conference'] = QUERIES['si_forms'] % ('FMSI015F')
+QUERIES['si_jfa'] = QUERIES['si_forms'] % ('FMSI016F')
+QUERIES['si_leave_of_absence'] = QUERIES['si_forms'] % ('FMSI017F')
+QUERIES['si_record_visits'] = QUERIES['si_forms'] % ('FMSI018F')
+QUERIES['si_escape'] = QUERIES['si_forms'] % ('FMSI019F')
+QUERIES['si_case_referral'] = QUERIES['si_forms'] % ('FMSI020F')
+QUERIES['si_release'] = QUERIES['si_forms'] % ('FMSI021F')
 
-QUERIES['afc_placement'] = '''
-SELECT pp.id as cpims_id, event_date as Placement_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '5A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_monitoring'] = '''
-SELECT pp.id as cpims_id, event_date as Monitoring_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-oaq.question_text,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-left outer join ovc_afc_questions oaq on oaq.question_code = oaf.question_id
-where oae.form_id = '6A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_case_review'] = '''
-SELECT pp.id as cpims_id, event_date as Case_review_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '7A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-
-QUERIES['afc_case_review_ya'] = '''
-SELECT pp.id as cpims_id, event_date as Case_review_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '8A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_closure'] = '''
-SELECT pp.id as cpims_id, event_date as Identification_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '9A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_consent'] = '''
-SELECT pp.id as cpims_id, event_date as Consent_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '3A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_transfer'] = '''
-SELECT pp.id as cpims_id, event_date as Transfer_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '10A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_referral'] = '''
-SELECT pp.id as cpims_id, event_date as Referral_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '12A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_disability'] = '''
-SELECT pp.id as cpims_id, event_date as Case_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '14A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_feedback_caregiver'] = '''
-SELECT pp.id as cpims_id, event_date as Feedback_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '15A' and event_date between '{start_date}' and '{end_date}'
-'''
-
-QUERIES['afc_feedback_child'] = '''
-SELECT pp.id as cpims_id, event_date as Feedback_date,
-CASE pp.sex_id WHEN 'SFEM' THEN 'Female' ELSE 'Male' END AS Sex,
-date_part('year', age(event_date, pp.date_of_birth)) AS Age,
-CASE
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) < 6 THEN 'a.[0 - 5 yrs]'
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 6 AND 9 THEN 'b.[6 - 9 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 10 AND 15 THEN 'c.[10 - 15 yrs]' 
-WHEN  date_part('year', age(event_date, pp.date_of_birth)) BETWEEN 16 AND 18 THEN 'd.[16 - 18 yrs]' 
-ELSE 'e.[18+ yrs]' END AS agerange,
-oaf.question_id,
-CASE
-WHEN oaf.item_value = 'QTXT' THEN oaf.item_detail
-WHEN oaf.item_value != 'QTXT' THEN itd.item_description
-ELSE itd.item_description END AS item_value,
-1 as ovccount
-FROM ovc_afc_event as oae
-inner join reg_person as pp on oae.person_id = pp.id
-inner join ovc_afc_form as oaf on oae.event_id = oaf.event_id
-left outer join list_general itd on itd.item_id = oaf.item_value
-where oae.form_id = '16A' and event_date between '{start_date}' and '{end_date}'
-'''
+QUERIES['si_exit_cert'] = QUERIES['si_forms'] % ('FMSI022F')
+QUERIES['si_case_closure'] = QUERIES['si_forms'] % ('FMSI023F')
+QUERIES['si_re_unification'] = QUERIES['si_forms'] % ('FMSI025F')
+QUERIES['si_child_participation'] = QUERIES['si_forms'] % ('FMSI026F')
+QUERIES['si_counselling'] = QUERIES['si_forms'] % ('FMSI027F')
+QUERIES['si_court_attendance'] = QUERIES['si_forms'] % ('FMSI028F')
+QUERIES['si_education'] = QUERIES['si_forms'] % ('FMSI029F')
+QUERIES['si_vocation'] = QUERIES['si_forms'] % ('FMSI30F')
+QUERIES['si_child_assesment'] = QUERIES['si_forms'] % ('FMSI031F')
+QUERIES['si_youngp_caregiver_case_review'] = QUERIES['si_forms'] % ('FMSI032F')

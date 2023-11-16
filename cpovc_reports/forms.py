@@ -4,12 +4,14 @@ from cpovc_registry.functions import (
     get_all_geo_list, get_geo_list, get_specific_orgs)
 from cpovc_main.functions import get_org_units_list
 
-from .functions import create_year_list, get_clusters
+from .functions import create_year_list, get_clusters, get_regions
 
 
 all_list = get_all_geo_list()
 county_list = get_geo_list(all_list, 'GPRV', 'Please Select County')
 sub_county_list = get_geo_list(all_list, 'GDIS', 'Please Select Sub-county')
+
+region_list = get_regions("Please Select Region")
 '''
 document_type = get_list('document_type_id', 'Select report/document type')
 '''
@@ -112,6 +114,16 @@ class CaseLoad(forms.Form):
                    'data-parsley-required': 'true',
                    'data-parsley-errors-container': "#county_error",
                    'id': 'county'}))
+
+    region = forms.ChoiceField(
+        choices=region_list,
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'form-control',
+                   'data-parsley-required': 'false',
+                   'data-parsley-errors-container': "#region_error",
+                   'id': 'id_region'}))
+
     sub_county = forms.ChoiceField(
         choices=sub_county_list,
         required=False,

@@ -4,38 +4,45 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from django.db.models import Count
 
-from .forms import (
-    SIAdmission, SICaseReferral, RemandHomeEscape, MedicalAssesmentForm,
-    SICertificateofExit, SIRecordofVisits, IndividualCarePlanForm,
-    SIFamilyConference, SIReleaseForm, SIChildProfile, SIAdmission,
-    SINeedRiskAssessment, SINeedRiskScale, SIVacancyApp,
-    SIVacancyConfirm, SISocialInquiry, LeaveOfAbsenceForm,
-    SIForm)
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+
+import barcode
+from barcode import EAN13, Code128
+import segno
+
+from .forms import (SIForm)
 
 from .functions import (
     CaseObj, get_form, save_form, get_event_data, delete_event_data,
-    action_event_data)
+    action_event_data, get_placement, get_events, get_user_level,
+    dash_summary)
 
-from cpovc_main.functions import convert_date, get_dict
+from cpovc_main.functions import get_dict
 
 from cpovc_forms.functions import get_person_ids
 from cpovc_registry.models import RegPerson, RegOrgUnit
 
-from .models import SI_Admission, SI_VacancyApp, SIEvents
+from .models import SI_VacancyApp, SIEvents, SIMain
 
-from cpovc_forms.models import OVCCaseRecord, OVCPlacement
+from cpovc_forms.models import (
+    OVCCaseRecord, OVCPlacement, OVCCaseCategory, OVCCaseGeo)
 from cpovc_forms.forms import OVCSearchForm
 
-# Create your views here.
-from cpovc_afc.forms import AFCForm2A
+from .parameters import DASHES, FDEP, SI_FORMS, FPERM
+
+from django.conf import settings
+DOC_ROOT = settings.DOC_ROOT
 
 
+@login_required
 def si_home(request):
 
     try:
         form = OVCSearchForm(data=request.GET)
-
         search_string = request.GET.get('search_name')
         pids = get_person_ids(request, search_string)
 
@@ -43,10 +50,13 @@ def si_home(request):
         cases = RegPerson.objects.filter(is_void=False, id__in=pids)
 
         # Get case record sheet details
-        crss = OVCCaseRecord.objects.filter(is_void=False, person_id__in=pids)
+        dash = dash_summary(request)
+        crss = OVCCaseGeo.objects.filter(is_void=False, person_id__in=pids)
         for crs in crss:
             case_ids[crs.person_id] = {
-                'clv': 1, 'cs': crs.case_serial, 'cid': crs.case_id}
+                'clv': 1, 'cs': crs.case_id.case_serial,
+                'cid': crs.case_id.case_id,
+                'org_unit': crs.report_orgunit.org_unit_name}
 
         for case in cases:
             pid = case.id
@@ -56,6 +66,7 @@ def si_home(request):
             clv = ctip_ids[pid]['clv'] if pid in ctip_ids else clvf
             csn = case_ids[pid]['cs'] if pid in case_ids else 'N/A'
             ccid = case_ids[pid]['cid'] if pid in case_ids else 'N/A'
+            ou = case_ids[pid]['org_unit'] if pid in case_ids else 'N/A'
 
             setattr(case, 'case_t', str(cid))
             setattr(case, 'case_date', cdt)
@@ -63,327 +74,75 @@ def si_home(request):
             setattr(case, 'case_id', cid)
             setattr(case, 'case_cid', str(ccid))
             setattr(case, 'case_serial', csn)
+            setattr(case, 'org_unit', ou)
         context = {
             'status': 200,
             'cases': cases,
-            'form': form
-        }
-
-        return render(request, 'stat_inst/home.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def SI_admissions(request, id):
-
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    child = person_id.values()[0]
-
-    form = SIAdmission()
-    try:
-        if(request.method == "POST"):
-            data = request.POST
-
-            print(data)
-            SI_Admission(
-                person_id=data.get('person_id'),
-                institution_type=data.get('institution_type'),
-                date_of_admission=convert_date(data.get('date_of_admission')),
-                current_year_of_school=data.get('current_year_of_school'),
-                type_of_entry=data.get('type_of_entry'),
-                referral_source=data.get('referral_source'),
-                child_category=data.get('child_category'),
-                abused_child_desc=data.get('abused_child_desc'),
-                referral_source_others=data.get('referral_source_others'),
-                referrer_name=data.get('referrer_name'),
-                referrer_address=data.get('referrer_address'),
-                referrer_phone=data.get('referrer_phone'),
-                not_contact_child=data.get('not_contact_child'),
-                name_not_contact_child=data.get('name_not_contact_child'),
-                relationship_to_child_not_contact_child=data.get(
-                    'relationship_to_child_not_contact_child'),
-                consent_form_signed=data.get('consent_form_signed'),
-                commital_court_order=data.get('commital_court_order'),
-                school_name=data.get('school_name'),
-                health_status=data.get('health_status'),
-                special_needs=data.get('special_needs'),
-                workforce_id=data.get('workforce_id'),
-                audit_date=convert_date(data.get('audit_date'))
-            ).save()
-
-            HttpResponseRedirect(reverse(si_home))
-        context = {
             'form': form,
-            'child': child
-        }
-        return render(request, 'stat_inst/admission.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def SI_childIdentification(request, person_id):
-
-    form = SIChildIdentification()
-    context = {
-        'form': form
-    }
-    return render(request, 'stat_inst/childIdentification.html', context)
-
-
-def si_casereferral(request, id):
-
-    form = SICaseReferral()
-    try:
-
-        context = {
-            'form': form
+            'dash': dash
         }
 
-        return render(request, 'stat_inst/case_referral.html', context)
-    except Exception as e:
-        raise e
-
-
-def SI_needriskform(request, id):
-
-    form = SINeedRiskAssessment()
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    child = person_id.values()[0]
-
-    try:
-
-        context = {
-            'form': form,
-            'child': child
-        }
-        return render(request, 'stat_inst/needriskform.html', context)
+        return render(request, 'si/home.html', context)
 
     except Exception as e:
         raise e
 
 
-def SI_medicalassesment(request, id):
-
-    form = MedicalAssesmentForm()
-    context = {
-        'form': form
-    }
-
-    return render(request, 'stat_inst/medicalassesmentform.html', context)
-
-
-def si_certificateofexit(request, id):
-
-    form = SICertificateofExit()
-
-    try:
-
-        context = {
-            'form': form
-        }
-
-        return render(request, 'stat_inst/certificate_of_exit.html', context)
-#       return render(request,'stat_inst/certificate_of_exit.html',context)
-
-    except Exception as e:
-        raise e
-
-
-def SI_individualCarePlan(request, id):
-
-    form = IndividualCarePlanForm()
-
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    child = person_id.values()[0]
-    try:
-
-        context = {
-            'id': id,
-            'form': form,
-            "child": child
-        }
-        return render(
-            request, 'stat_inst/individualtreatmentplan.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def SI_LeaveOfAbscence(request, id):
-
-    form = LeaveOfAbsenceForm()
-    try:
-
-        context = {
-            'id': id,
-            'form': form
-        }
-        return render(
-            request, 'stat_inst/leaveofabsenceassesmentform.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def SI_RemandHomeEscape(request, id):
-
-    form = RemandHomeEscape()
-    try:
-
-        context = {
-            'id': id,
-            'form': form
-        }
-        return render(request, 'stat_inst/escapeform.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def SI_needriskscale(request, id):
-
-    form = SINeedRiskScale()
-    context = {
-        "form": form
-    }
-
-    return render(request, 'stat_inst/needriskscale.html', context)
-
-
-def si_remandhomeescape(request, id):
-
-    form = RemandHomeEscape()
-    context = {
-        'form': form
-    }
-
-    return render(request, 'stat_inst/remand_home_escape.html', context)
-
-
-def SI_vacancyapplication(request, id):
-
-    form = SIVacancyApp()
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    print(dir(request))
-
-    child = person_id.values()[0]
-
-    try:
-
-        context = {
-            'form': form,
-            "child": child
-        }
-
-        return render(request, 'stat_inst/vacancy_app.html', context)
-    except Exception as e:
-        raise e
-
-
-def si_recordofvisits(request, id):
-
-    form = SIRecordofVisits()
-    try:
-
-        context = {
-            'form': form
-        }
-        return render(request, 'stat_inst/record_of_visits.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def si_familyconference(request, id):
-
-    form = SIFamilyConference()
-    context = {
-        'form': form
-    }
-
-    return render(request, 'stat_inst/family_conference.html', context)
-
-
-def SI_vacancyconfirmation(request, id):
-
-    try:
-        pass
-    except Exception as e:
-        raise e
-
-
-def SI_social_inquiry(request, id):
-
-    form = SISocialInquiry()
-    person_id = RegPerson.objects.filter(id=id, is_void=False)
-
-    child = person_id.values()[0]
-
-    try:
-
-        context = {
-            'form': form,
-            'child': child
-        }
-
-        return render(request, 'stat_inst/social_inquiry.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def si_releaseform(request, id):
-
-    form = SIReleaseForm()
-    try:
-
-        context = {
-            'form': form
-        }
-        return render(request, 'stat_inst/release_form.html', context)
-
-    except Exception as e:
-        raise e
-
-
-def si_childprofile(request, id):
-
-    form = SIChildProfile()
-    try:
-
-        context = {
-            'form': form
-        }
-        return render(request, 'stat_inst/change_in_profile.html', context)
-
-    except Exception as e:
-        raise e
-
-
+@login_required
 def SI_child_view(request, id):
     """ Child View"""
     try:
+        forms, cases = {}, {}
+        # TNRC is CCI
+        ou_pri = request.session.get('ou_primary')
+        user_level = get_user_level(request)
         person_id = RegPerson.objects.filter(id=id, is_void=False)
-        placement = OVCPlacement.objects.filter(
-            person_id=id, is_void=False, is_active=True).first()
+        placements = OVCPlacement.objects.filter(
+            person_id=id, is_void=False)
+        placement = placements.filter(is_active=True).first()
+        si_data = SIMain.objects.filter(
+            person_id=id, case_status=None, is_void=False)
+        case_id = None
+        if si_data:
+            case_id = si_data.first().case_id
+            if case_id:
+                cases = OVCCaseCategory.objects.filter(
+                    person_id=id, case_id_id=case_id)
         unit_type = None
         unit_name = 'Not placed'
+        org_unit_id = 0
         if placement:
             org_unit_id = placement.residential_institution_id
             org_unit = RegOrgUnit.objects.get(id=org_unit_id)
             unit_type = org_unit.org_unit_type_id
             unit_name = org_unit.org_unit_name
-        unit_type = 'XXXX'
-        child = person_id.values()[0]
-        context = {'child': child, 'placement': placement,
-                   'unit_type': unit_type, 'unit_name': unit_name}
-        return render(request, 'stat_inst/view_child.html', context)
+        # unit_type = 'XXXX'
+        child = person_id.first()
+        is_allowed = False
+        allow_edit = 1
+        if user_level == 2 and ou_pri == org_unit_id:
+            is_allowed = True
+        if org_unit_id == 0:
+            is_allowed = True
+        if ou_pri == 2:
+            user_level = 3
+            is_allowed = True
+            allow_edit = 0
+        if request.user.is_superuser:
+            user_level = 3
+            is_allowed = True
+        # Events count
+        forms = get_events(request, id, 1)
+        check_fields = ['sex_id', 'si_unit_type_id', 'case_category_id',
+                        'cci_unit_type_id']
+        vals = get_dict(field_name=check_fields)
+        context = {'child': child, 'placement': placement, 'events': forms,
+                   'unit_type': unit_type, 'unit_name': unit_name,
+                   'placements': placements, 'vals': vals,
+                   'si_data': si_data, 'cases': cases,
+                   'allow_edit': allow_edit, 'case_id': case_id,
+                   'user_level': user_level, 'is_allowed': is_allowed}
+        return render(request, 'si/view_child.html', context)
 
     except Exception as e:
         raise e
@@ -393,8 +152,27 @@ def SI_child_view(request, id):
 def si_forms(request, form_id, id):
 
     try:
+        idata = {}
         person_id = int(id)
-        form = SIForm(form_id)
+        if form_id == 'FMSI004F':
+            idata = get_placement(request, id, 2)
+        # Main
+        si_main = SIMain.objects.filter(person_id=id, is_void=False).first()
+        vacancy = None
+        if si_main:
+            vacancy = SI_VacancyApp.objects.filter(
+                person_id=id, case_id=si_main.case_id).first()
+        print('Vac', vacancy)
+        user_level = get_user_level(request)
+        care_id = None
+        case_id = None
+        if si_main:
+            care_id = si_main.pk
+            case_id = si_main.case_id
+            if si_main.case:
+                idata['Q1_ref_num'] = si_main.case.case_serial
+        placement = get_placement(request, id)
+        form = SIForm(form_id, data=idata)
         form_data = get_form(form_id)
         form_name = form_data['form_name']
         f_code = form_data['form_code']
@@ -405,42 +183,83 @@ def si_forms(request, form_id, id):
             msg = 'SI Form (%s) details saved successfully' % form_name
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(url)
-        check_fields = ['sex_id']
+        check_fields = ['sex_id', 'yesno_id']
         vals = get_dict(field_name=check_fields)
         case = CaseObj()
         person = RegPerson.objects.get(id=id, is_void=False)
         vacancies = SI_VacancyApp.objects.filter(person_id=id)
         events = SIEvents.objects.filter(
-            person_id=person_id, is_void=False, form_id=form_id)
+            person_id=person_id, is_void=False,
+            form_id=form_id, related_to_id=None)
         cases = OVCCaseRecord.objects.filter(
             person_id=person_id, is_void=False)
         case.person = person
         case.vacancies = vacancies
         case.events = events
         case.cases = cases
+        case.care_id = care_id
+        case.si_case = si_main
+        case.vacancy = vacancy
+        # Cases
+        if case_id:
+            case.case_id = case_id
+        case.placement = placement
         org_types = ['TNRR', 'TNAP']
+        allow_edit = 0 if user_level == 3 else 1
+        # Past events
+        forms = get_events(request, id, 1)
+        # Form dependancies logic
+        ffill, dep_forms = [], []
+        fdeps = FDEP[form_id] if form_id in FDEP else []
+        for f in forms:
+            if forms[f] > 0:
+                ffill.append(f)
+        all_filled = set(fdeps).issubset(ffill)
+        for fdep in fdeps:
+            dep_forms.append(SI_FORMS[fdep])
+        # Forms permissions
+        perms = False
+        form_perms = FPERM[form_id] if form_id in FPERM else {}
+        pss = form_perms[user_level] if user_level in form_perms else ['']
+        ps = pss[0]
+        print('PS', ps)
+        if 'C' in ps:
+            perms = True
         orgs = RegOrgUnit.objects.filter(
             org_unit_type_id__in=org_types,
             is_void=False).order_by('org_unit_type_id')
-        # tmpls = ['FMSI001F', 'FMSI024F']
-        # tmpl = form_id if form_id in tmpls else 'FMSI000F'
         tmpl = '%s.html' % form_id
         context = {'form': form, 'case': case, 'vals': vals,
                    'form_id': form_id, 'form_name': form_name,
-                   'edit_form': 1, 'orgs': orgs, 'form_code': form_code}
+                   'edit_form': 1, 'orgs': orgs, 'form_code': form_code,
+                   'events': forms, 'user_level': user_level,
+                   'vacancy_status': 0, 'allow_edit': allow_edit}
+        if not all_filled or not perms:
+            context['dep_forms'] = dep_forms
+            context['dep_perms'] = perms
+            context['all_perms'] = ps
+            return render(request, 'si/FMSI000R.html', context)
         return render(request, 'si/%s' % tmpl, context)
 
     except Exception as e:
         raise e
 
 
+@login_required
 def si_forms_edit(request, form_id, id, ev_id):
     try:
         person_id = int(id)
+        user_id = request.user.id
         idata = get_event_data(form_id, ev_id)
-        form = SIForm(form_id, data=idata)
+        print('idata', idata)
+        all_answers = idata['all_answers'] if 'all_answers' in idata else []
+        user_level = get_user_level(request)
+        # Uploads
+        form = SIForm(form_id, idata)
         form_data = get_form(form_id)
-        form_name = form_data['form_name'] if 'form_name' in form_data else ''
+        form_name = form_data['form_name']
+        f_code = form_data['form_code']
+        form_code = f_code if f_code else form_id
         if request.method == 'POST':
             save_form(request, form_id, id, 2)
             url = reverse(SI_child_view, kwargs={'id': id})
@@ -450,30 +269,76 @@ def si_forms_edit(request, form_id, id, ev_id):
         check_fields = ['sex_id']
         vals = get_dict(field_name=check_fields)
         case = CaseObj()
+        # Case main table
+        # si_case = SIMain.objects.get(person_id=person_id)
+        si_case = SIMain.objects.filter(
+            person_id=person_id, is_void=False).first()
+        care_id = si_case.pk
+        case_id = si_case.case_id
         person = RegPerson.objects.get(id=id, is_void=False)
-        vacancies = SI_VacancyApp.objects.filter(person_id=id, is_void=False)
+        vacancy = SI_VacancyApp.objects.filter(
+            person_id=id, pk=ev_id, is_void=False).first()
         placement = OVCPlacement.objects.filter(
             person_id=id, is_void=False, is_active=True).first()
         events = SIEvents.objects.filter(
-            person_id=person_id, is_void=False, form_id=form_id)
+            person_id=person_id, is_void=False,
+            form_id=form_id, related_to_id=None)
         cases = OVCCaseRecord.objects.filter(
             person_id=person_id, is_void=False)
         case.person = person
-        case.vacancies = vacancies
+        case.vacancy = vacancy
         case.events = events
         case.placement = placement
         case.cases = cases
+        case.all_answers = all_answers
         case.event_id = ev_id
+        case.care_id = care_id
+        case.si_case = si_case
+        si, scco = {}, {}
+        print('check case_id', si_case)
+        vac_status = 0
+        allow_edit = 0 if user_level == 3 else 1
+        if case_id:
+            case.case_id = case_id
+            if vacancy and vacancy.institution:
+                si_type = vacancy.institution.org_unit_type_id
+                si['type'] = si_type
+                vac_status = 1
+            casegeo = OVCCaseGeo.objects.filter(case_id_id=case_id).first()
+            if casegeo:
+                scco['name'] = casegeo.report_orgunit.org_unit_name
+        case.si = si
+        case.scco = scco
+        # Get Organization details
+        org_types = ['TNRR', 'TNAP']
+        orgs = RegOrgUnit.objects.filter(
+            org_unit_type_id__in=org_types,
+            is_void=False).order_by('org_unit_type_id')
+        # Permission matrix
+        form_perms = FPERM[form_id] if form_id in FPERM else {}
+        pss = form_perms[user_level] if user_level in form_perms else ['']
+        perms = pss[0]
+        # User overwrite
+        record_user_id = idata['user_id'] if 'user_id' in idata else 0
+        if record_user_id == user_id:
+            perms = 'CRUD'
+        if record_user_id == user_id and user_level < 3:
+            perms = 'CR'
         tmpl = '%s.html' % form_id
         context = {'form': form, 'case': case, 'vals': vals,
                    'form_id': form_id, 'form_name': form_name,
-                   'edit_form': 0, 'event_id': ev_id, 'status': 1}
+                   'edit_form': 0, 'event_id': ev_id, 'status': 1,
+                   'form_code': form_code, 'all_answers': all_answers,
+                   'user_level': user_level, 'orgs': orgs,
+                   'vacancy_status': vac_status, 'idata': idata,
+                   'allow_edit': allow_edit, 'all_perms': perms}
         return render(request, 'si/%s' % tmpl, context)
 
     except Exception as e:
         raise e
 
 
+@login_required
 def si_forms_delete(request):
     """Method to delete forms."""
     try:
@@ -485,6 +350,9 @@ def si_forms_delete(request):
             if idata == 0:
                 response["deleted"] = 0
                 response["message"] = "Error deleting record"
+            elif idata == 2:
+                response["deleted"] = 0
+                response["message"] = "90+ old days events can not be deleted"
     except Exception as e:
         response = {"deleted": 0,
                     "message": "Error deleting record %s" % (str(e))}
@@ -495,6 +363,7 @@ def si_forms_delete(request):
             response, content_type='application/json', safe=False)
 
 
+@login_required
 def si_forms_action(request):
     """Method to delete forms."""
     try:
@@ -517,15 +386,153 @@ def si_forms_action(request):
             response, content_type='application/json', safe=False)
 
 
-def si_test(request):
-    """Method to Test"""
+def si_document(request, form_id):
+    """Method to Generate PDF."""
     try:
-        form = AFCForm2A()
-        for f in form:
-            print(f.choices)
-        response = []
+        # html_string = '<p>Sample</p>'
+        if request.method == 'POST':
+            person_id = request.POST.get('person_id')
+            fdata = request.POST.get('form_data')
+            # doc_id = '%s_%s' % (form_id, person_id)
+            print('session', person_id, form_id)
+            request.session[form_id] = fdata
+        form_data = get_form(form_id)
+        form_name = form_data['form_name']
+        fname = '%s.pdf' % (form_id)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="%s"' % fname
+
+        # Render the template with the data from the Django model
+        context = {'form_id': form_id, 'form_name': form_name}
+        # Bar code
+        # rv = BytesIO()
+        # EAN13("100000902922", writer=barcode.writer.SVGWriter()).write(rv)
+        '''
+        svg = "img/tmp_somefile.svg"
+        code = form_id
+        with open('static/%s' % svg, "wb") as f:
+            Code128(
+                code,
+                writer=barcode.writer.SVGWriter()).write(f)
+        context['svg'] = svg
+        '''
+        # doc_id = '%s_9427' % (form_id)
+        form_data = request.session.get(form_id, '<p>TO DO</p>')
+        context['form_data'] = form_data
+        html_string = render_to_string('si/document.html', context)
+        # Create the PDF from the HTML string
+        HTML(
+            string=html_string,
+            base_url=request.build_absolute_uri()).write_pdf(response)
     except Exception as e:
         raise e
     else:
-        return JsonResponse(
-            response, content_type='application/json', safe=False)
+        return response
+
+
+def si_file(request, event_id):
+    """Method to Generate PDF."""
+    try:
+        form_id = 'FMSI033R'
+        vacancy = SI_VacancyApp.objects.filter(
+            pk=event_id, is_void=False).first()
+        case_id = vacancy.case_id
+        print('GET Case file ', case_id)
+        form_data = get_form(form_id)
+        form_name = form_data['form_name']
+        fname = '%s.pdf' % (form_id)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="%s"' % fname
+        # Render the template with the data
+        context = {'form_id': form_id, 'form_name': form_name}
+        case = CaseObj()
+        case.vacancy = vacancy
+        print('case', vacancy.case_id)
+        # Geo
+        scco = {}
+        casegeo = OVCCaseGeo.objects.filter(case_id_id=case_id).first()
+        if casegeo:
+            scco['name'] = casegeo.report_orgunit.org_unit_name
+        case.scco = scco
+        context['case'] = case
+        # Generate QR code
+        pid = vacancy.person.id
+        fname = vacancy.person.first_name
+        sname = vacancy.person.surname
+        pnc = vacancy.pnc_no
+        names = '%s %s' % (fname, sname)
+        uid = None
+        if vacancy.approved_by:
+            uid = vacancy.approved_by.reg_person_id
+        qrcode = segno.make_qr(
+            "F.No:%s\nCPIMS.ID:%s\n%s\nAID:%s" % (
+                pnc, pid, names, uid))
+        qrcode.save(
+            "%s/img/qr_code_%s.png" % (DOC_ROOT, pid),
+            scale=3,
+        )
+        context['qr_code'] = 'img/qr_code_%s.png' % (pid)
+        html_string = render_to_string('si/document.html', context)
+        # Create the PDF from the HTML string
+        HTML(
+            string=html_string,
+            base_url=request.build_absolute_uri()).write_pdf(response)
+    except Exception as e:
+        raise e
+    else:
+        return response
+
+
+@login_required
+def SI_dash_view(request, id):
+    """ Child View"""
+    try:
+        did = int(id)
+        summaries = []
+        user_id = request.user.id
+        dash = DASHES[did] if did in DASHES else DASHES[1]
+        check_fields = ['sex_id', 'si_unit_type_id', 'case_category_id',
+                        'cci_unit_type_id', 'si_unit_type_id']
+        vals = get_dict(field_name=check_fields)
+        user_level = get_user_level(request)
+        ou_pri = request.session.get('ou_primary')
+        ou_id = int(ou_pri) if ou_pri else 0
+        if did == 1:
+            summaries = OVCPlacement.objects.filter(
+                is_void=False, is_active=True)
+            if user_level < 3:
+                summaries = summaries.filter(residential_institution_id=ou_id)
+            else:
+                sis = ['TNRH', 'TNRR', 'TNRS', 'TNAP']
+                summaries = OVCPlacement.objects.filter(
+                    is_void=False, is_active=True,
+                    residential_institution__org_unit_type_id__in=sis).values(
+                    'residential_institution__org_unit_type_id').annotate(
+                    dcount=Count('residential_institution__org_unit_type_id'))
+        if did == 5:
+            sis = ['TNRH', 'TNRR', 'TNRS', 'TNAP']
+            si = request.GET.get('si')
+            if si:
+                sis = [si]
+            summaries = OVCPlacement.objects.filter(
+                is_void=False, is_active=True)
+            if user_level < 3:
+                summaries = summaries.filter(residential_institution_id=ou_id)
+            else:
+                summaries = OVCPlacement.objects.filter(
+                    is_void=False, is_active=True,
+                    residential_institution__org_unit_type_id__in=sis).values(
+                    'residential_institution__org_unit_name').annotate(
+                    dcount=Count('residential_institution__org_unit_name'))
+        elif did == 3:
+            # Vacancies
+            summaries = SI_VacancyApp.objects.filter(
+                application_status=False, is_void=False)
+            if user_level < 3:
+                summaries = summaries.filter(created_by_id=user_id)
+        context = {'vals': vals, 'dashboard': dash, 'summaries': summaries,
+                   'user_level': user_level, 'did': did}
+        return render(request, 'si/dashboard.html', context)
+
+    except Exception as e:
+        raise e

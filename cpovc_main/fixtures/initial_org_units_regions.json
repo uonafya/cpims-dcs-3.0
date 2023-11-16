@@ -1,0 +1,130 @@
+[
+ {
+   "pk": 321,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003211",
+   "org_unit_name": "Coast Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ },
+ {
+   "pk": 322,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003221",
+   "org_unit_name": "North Eastern Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ },
+ {
+   "pk": 323,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003231",
+   "org_unit_name": "Eastern Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ },
+ {
+   "pk": 324,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003241",
+   "org_unit_name": "Central Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+  }
+ },
+ {
+  "pk": 325,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003251",
+   "org_unit_name": "Nairobi Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ },
+ {
+   "pk": 326,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003261",
+   "org_unit_name": "Rift Valley Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ },
+ {
+   "pk": 327,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+   "org_unit_id_vis": "U003271",
+   "org_unit_name": "Nyanza Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ },
+ {
+   "pk": 328,
+   "model": "cpovc_registry.RegOrgUnit",
+   "fields": {
+      "org_unit_id_vis": "U003281",
+   "org_unit_name": "Western Region Children Office",
+   "org_unit_type_id": "TNRG",
+   "date_operational": null,
+   "date_closed": null,
+   "handle_ovc": false,
+   "is_void": false,
+   "parent_org_unit_id": 2,
+   "created_at": "2023-09-01",
+   "created_by_id": 1
+ }
+ }
+]

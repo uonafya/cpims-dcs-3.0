@@ -1,0 +1,1717 @@
+{% extends 'base.html' %}
+{% block page_title %} {{block.super}} Statutoy Institutions -  Application for a Vacancy {% endblock page_title%}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+
+<link href="{% static 'css/si_module.css' %}" rel="stylesheet" />
+{% endblock style_code%}
+
+    
+{% block primary %}  
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+    <li><a href="#">Home</a></li>
+    <li><a href="{% url 'SI_home' %}">SI</a></li>
+    <li class="active"> Vacancy</li>
+</ol>
+<h1 class="page-header"> Application for a Vacancy to an Institution</h1>
+<!-- end breadcrumb -->
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+    <span class="close" data-dismiss="alert">×</span>
+    <i class="fa fa-info fa-2x pull-left"></i>
+    <span id="invalid-form-message"></span>
+    <span class="validation-errors"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>                      
+                <h4 class="panel-title">Vacancy Aplication &nbsp;<i class="fa fa-snowflake-0"></i> <span id="person_name"></span></h4>
+                </div>
+                <div class="alert alert-info fade in">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div id="mng_messages">
+                        <b>INFO!</b>  
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal form-bordered" action="{% url 'new_person' %}" method="POST" data-parsley-validate="true" name="form-wizard" id="new_person">
+                            {% csrf_token %}
+                            {% if request.session.reg_ovc %}
+                            <input type="hidden" name="ovc_program" id="ovc_program" value="1">
+                            {% else %}
+                            <input type="hidden" name="ovc_program" id="ovc_program" value="0">
+                            {% endif %}
+                            <input type="hidden" name="person_uid" id="person_uid" value="{{ person_uid }}">
+                        <div class="row">
+                            <fieldset>
+                                <legend class="pull-left width-full">Child details</legend>
+                                <div class="divider pull-left width-full"></div>
+                                <div class="divider pull-left width-full"></div>
+                                <div class="row">
+                                    <div id="" class="col-md-2">
+                                        <div class="form-group block1">
+                                            <label for="previous_institution">CPIMS ID</label><br>
+                                            {{child.id}}
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">NAME </label><br>
+                                            {{child.first_name}}  {{child.surname}}  {{child.other_names}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Age </label><br>
+                                            {{ child.date_of_birth}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Sex </label><br>
+                                            {{child.sex_id}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Guardian Name </label><br>
+                                            ####
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div id="dob_div" class="form-group">
+                                            <label for="prev_inst_release_date">Institution Name </label><br>
+                                            ####
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="divider pull-left width-full"></div>
+                                <div class="row">
+                                    <legend class="pull-left width-full">Form details</legend>
+                                    <div class="divider pull-left width-full"></div>
+                                <div class="divider pull-left width-full"></div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="ref_no">Reference No</label><br>
+                                            {{ form.ref_no }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="crc_no">CRC NO:</label><br>
+                                            {{ form.crc_no }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="pnc_no">P&C NO:</label><br>
+                                            {{ form.pnc_no }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="date_of_application">Date of application</label><br>
+                                            {{ form.date_of_application }}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="divider pull-left width-full"></div>
+                                <div class="row">
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="court_number">Court Number </label><br>
+                                            {{ form.court_number }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="judge_name">Magistrate/Judge Name</label><br>
+                                            {{ form.judge_name }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="child_held_at">Child held at: </label><br>
+                                            {{ form.child_held_at }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-3">
+                                        <div class="form-group block1">
+                                            <label for="date_of_next_mention">Date of next mention </label><br>
+                                            {{ form.date_of_next_mention }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="" class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label for="requesting_officer">Requesting Officer </label><br>
+                                            {{ form.requesting_officer }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label for="designation">Designation </label><br>
+                                            {{ form.designation }}
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label for="sub_county_children_officer">Sub County Children Officer</label><br>
+                                            {{ form.sub_county_children_officer }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>                            
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <button type="submit" class="btn btn-primary" value="submit" id="s1">Submit</button>
+                                    <a href="{% url 'new_si_child_view' child.id %}">
+                                    <button type="button" class="btn btn-default">Cancel</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="caregiver_new"></div>
+                    </div>
+                </div>
+                <!-- end panel -->
+            </div>        
+        </form>
+    </div>
+    <div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>                          
+                <h4 class="panel-title"><b>Vacancy Application </b></h4>                    
+            </div>
+
+            <div class="panel-body">
+                <div  class="panel panel-inverse">
+                    <div id="case-events"  class="table-responsive">
+                        <table id="f1a_events_data_table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr> 
+                                    <th>Event Type</th>                                 
+                                    <th>Details</th> 
+                                    <th>Date Recorded</th>                
+                                    <th>Institution Applied</th> 
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> 
+                                    <td></td>                                 
+                                    <td></td> 
+                                    <td></td>                
+                                    <td>
+                                        <button type="button" class="btn btn-primary">Approve</button >
+                                        <button type="button" class="btn btn-danger">Deny</button >
+                                        <button type="button" class="btn btn-secondary">View Details</button >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br><br>                           
+                </div>
+            </div>
+
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+</div>
+<!-- end row -->
+{% endblock primary %}
+
+{% block lazy_javascript_code %}
+<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>
+<script src="{% static 'js/form-wizards.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
+<script>
+jQuery(document).ready(function() {
+    // instantiate datepicker
+    #('#date_of_application').datepicker()
+
+
+
+
+    //Hide these <divs> on page_load()
+    var hashes = window.location.hash.substr(1);
+    $('#person_type').val(hashes);
+    //No need for check window load
+    $("#org_unit_primary").val('');
+    $("#cbo_chv_add").hide();
+    var person_type = $("#person_type").val();
+    var person_text = $("#person_type option:selected").text();
+    
+    handle_persons(person_type, person_text);
+    {% comment %} handle_titles(person_type); {% endcomment %}
+    var country_id = $("#country_id").val();
+    handle_country(country_id);
+
+    //Handle cadres
+    var title_type = $('#title_type').val();
+    {% comment %} handle_cadres(title_type); {% endcomment %}
+
+    $("#country_id").change(function(e) {
+        var country_id = $("#country_id").val();
+        handle_country(country_id);
+    });
+
+    $("#title_type").change(function(e) {
+        var title_type = $("#title_type").val();
+        {% comment %} handle_cadres(title_type); {% endcomment %}
+    });
+    $("#institution_type").change(function(e) {
+        var inst_type = $("#institution_type").val();
+        if (inst_type != 'Remand'){
+            $('#div_admission').hide()
+        }else{
+            $('#div_admission').show()
+        }
+        
+    });
+
+    var child_ovc = $('input[name=child_ovc]:checked').val();
+    ovc_program(child_ovc);
+
+    $(':input[name="child_ovc"]').click(function(){
+        var child_ovc = $('input[name=child_ovc]:checked').val();
+        ovc_program(child_ovc);
+    });
+
+    FormWizardValidation.init();
+    $('#working_in_subcounty').empty();
+    $('#working_in_ward').empty();
+
+    // autofill with today that iis
+    $('#audit_date').val('{{ todate }}');
+
+    $('#org_unit_id, #working_in_subcounty, #working_in_county, #living_in_country').multiselect({
+        enableCaseInsensitiveFiltering: true,
+        numberDisplayed: 1,
+        maxHeight: 300,
+        buttonWidth: '100%',
+        disableIfEmpty: true,
+        enableClickableOptGroups: true,
+        buttonClass: 'btn btn-white'
+    });
+    $('#working_in_ward, #cbo_unit_id, #chv_unit_id').multiselect({
+        selectAllValue: 'multiselect-all',
+        includeSelectAllOption: true,
+        enableCaseInsensitiveFiltering: true,
+        numberDisplayed: 1,
+        maxHeight: 300,
+        buttonWidth: '100%',
+        disableIfEmpty: true,
+        enableClickableOptGroups: true,
+        buttonClass: 'btn btn-white'
+    });
+    // Default behaviour
+    if ($('#id_is_cpims_sibling').is(":checked")){
+        $('#sibling_search_div').show();
+    }else{
+        $('#sibling_search_div').hide();
+    }
+    // Default behaviour for caregivers
+    if ($('#id_is_cpims_caregiver').is(":checked")){
+        $('#caregiver_search_div').show();
+    }else{
+        $('#caregiver_search_div').hide();
+    }
+    // Rebuild this
+    $('#org_unit_id').multiselect('rebuild');
+    // Event for checking if CPIMS sibling
+    $("#id_is_cpims_sibling").change(function() {
+        if(this.checked) {
+            $('#sibling_search_div').show();
+        }else{
+            $('#sibling_search_div').hide();
+        }
+    });
+    // Event for checking if CPIMS caregiver
+    $("#id_is_cpims_caregiver").change(function() {
+        if(this.checked) {
+            $('#caregiver_search_div').show();
+        }else{
+            $('#caregiver_search_div').hide();
+        }
+    });
+
+    //Duplicates buttons
+    $('#s2').hide();
+    $('#proc_sibling').hide();
+
+    $('#person_type').change(function() {
+        var person_type = $("#person_type").val();
+        var person_text = $("#person_type option:selected").text();
+        handle_persons(person_type, person_text);
+        {% comment %} handle_titles(person_type); {% endcomment %}
+        $('#cadre_type').empty();
+    });
+
+    $('#living_in_subcounty, #living_in_ward, #living_in_county, #country_id, #living_in_country, #id_tribe').multiselect({
+            selectAllValue: 'multiselect-all',
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            maxHeight: 300,
+            checked: false,
+            deselectAll: true,
+            buttonWidth: '100%',
+            disableIfEmpty: true,
+            enableClickableOptGroups: true,
+            buttonClass: 'btn btn-white'
+            });
+
+    $('#add_caregiver').click(function() {
+        //id_no_adult_caregiver
+        var rel_type_id = $("#relationship_type_id").val();
+        var rel_type = $("#relationship_type_id option:selected").text();
+        var caregiver_cpims = $("#caregiver_cpims_id").val();
+        var grid_cpims = $("#cc_"+caregiver_cpims+"_cpid").val();
+
+        var c_fname = $("#id_caregiver_firstname").val();
+        var c_sname = $("#id_caregiver_surname").val();
+        var c_oname = $("#id_caregiver_othernames").val();
+        var c_gender = $("#caregiver_gender_id").val();
+        var c_dob = $("#caregiver_dob").val();
+        var child_subcounty = $("#living_in_subcounty").val();
+
+        if ($('#id_is_cpims_caregiver').is(":checked")){
+            var is_cpims = 'Yes';
+            var caregiver = $("#caregiver_id").val();
+        }else{
+            var is_cpims = 'No';
+            var caregiver = c_fname + ' ' + c_sname;
+        }
+
+        if ($('#id_no_adult_caregiver').is(":checked")){
+            var is_adult = 'No';
+        }else{
+            var is_adult = 'Yes';
+        }
+        var c_idno;
+        $('#log').empty();
+        $("#log").addClass( "alert alert-danger fade in" );
+        if ((c_fname == '') || (c_sname == '')){
+           $('#log').html('Please provide first name and surname.');
+           return false;
+        }
+        if (is_cpims == 'Yes'){
+            if ((caregiver_cpims == '') || (caregiver_cpims_id == '')){
+               $('#log').html('Search for caregiver.');
+               return false;
+            }
+        }else{
+            $("#caregiver_cpims_id").val('0');
+        }
+        if (c_gender == ''){
+           $('#log').html('Please select Sex');
+           return false;
+        }
+        if (rel_type_id == ''){
+           $('#log').html('Please select Relationship');
+           return false;
+        }
+        {% if request.session.reg_ovc %}
+        c_idno = $("#caregiver_idno").val();
+        c_tel = $("#caregiver_tel").val();
+        if (c_idno == ''){
+           $('#log').html('Please enter National ID for Caregiver.');
+           return false;
+        }
+        {% else %}
+        var c_idno = '';
+        var c_tel = '';
+        {% endif %}
+
+        if (child_subcounty == ''){
+           $('#log').html('Please select living in sub county for the child first before attaching caregiver.');
+           return false;
+        }
+        if (typeof grid_cpims !== 'undefined'){
+           $('#log').html('Caregiver already added.');
+           clear_guardian();
+           return false;
+        }
+       //var caregiver_cpims = $("#caregiver_cpims_id").val();
+       var ccpims = '0';
+       $("#log").removeClass( "alert alert-danger fade in" );
+
+       chtml = '<input id="cc_'+ccpims+'_cpid" name="cc_'+ccpims+'_cpid" value="'+ccpims+'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_ctype" name="cc_'+ccpims+'_ctype" value="'+rel_type_id+'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_adult" name="cc_'+ccpims+'_adult" value="'+is_adult +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_gender" name="cc_'+ccpims+'_gender" value="'+ c_gender +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_dob" name="cc_'+ccpims+'_dob" value="'+ c_dob +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_fname" name="cc_'+ccpims+'_fname" value="'+ c_fname +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_sname" name="cc_'+ccpims+'_sname" value="'+ c_sname +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_oname" name="cc_'+ccpims+'_oname" value="'+ c_oname +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_idno" name="cc_'+ccpims+'_idno" value="'+ c_idno +'" type="hidden">';
+       chtml += '<input id="cc_'+ccpims+'_tel" name="cc_'+ccpims+'_tel" value="'+ c_tel +'" type="hidden">';
+       $('#caregiver_new').html(chtml);
+       
+       $.ajax({
+           type: "POST",
+           url: "{% url 'person_actions' %}",
+           data: $("#new_person").serialize() + "&edit_type=6",
+           success: function(data)
+           {
+               var caregiver_cpims = data.caregiver_id;
+               $('#caregiver_new').empty();
+               //$("#cc_0_cpid").val(cp_id);
+               //$("#cc_0_did").html(cp_id);
+               var cbtn = '<button id = "'+caregiver_cpims+'" type="button" class="btn btn-danger remove_cg"><i class="fa fa-trash-o"></i></button>';
+
+               chtml = '<tr id="gd_tr_'+caregiver_cpims+'">';
+               chtml += '<td><input id="cc_'+caregiver_cpims+'_cpid" name="cc_'+caregiver_cpims+
+               '_cpid" value="'+caregiver_cpims+'" type="hidden">';
+               chtml += '<span id="cc_'+caregiver_cpims+'_did">'+ caregiver_cpims +
+               '</span></td><td>'+ caregiver +'</td>';
+               chtml += '<td><input id="cc_'+caregiver_cpims+'_ctype" name="cc_'+caregiver_cpims+
+               '_ctype" value="'+rel_type_id+'" type="hidden">'+ rel_type +'</td>';
+               chtml += '<td><input id="cc_'+caregiver_cpims+'_adult" name="cc_'+caregiver_cpims+
+               '_adult" value="'+is_adult +'" type="hidden">';
+               chtml += '<input id="cc_'+caregiver_cpims+'_gender" name="cc_'+caregiver_cpims+
+               '_gender" value="'+ c_gender +'" type="hidden">';
+               chtml += '<input id="cc_'+caregiver_cpims+'_dob" name="cc_'+caregiver_cpims+
+               '_dob" value="'+ c_dob +'" type="hidden">';
+               chtml += '<input id="cc_'+caregiver_cpims+'_fname" name="cc_'+caregiver_cpims+
+                '_fname" value="'+ c_fname +'" type="hidden">';
+               chtml += '<input id="cc_'+caregiver_cpims+'_sname" name="cc_'+caregiver_cpims+
+               '_sname" value="'+ c_sname +'" type="hidden">';
+               chtml += '<input id="cc_'+caregiver_cpims+'_oname" name="cc_'+
+                caregiver_cpims+'_oname" value="'+ c_oname +'" type="hidden">';
+               chtml += is_adult +'</td><td>'+ cbtn +'</td></tr>';
+               $('#caregivers tbody').append(chtml);
+               $("#log_cgiver").addClass( "alert alert-success fade in" );
+               $('#log_cgiver').html('Caregiver attached Successfully');
+               // Set all fields to blank
+               clear_guardian();
+           },
+            error: function(){
+                $("#log_cgiver").addClass( "alert alert-danger fade in" );
+                $('#log_cgiver').html("Error attaching caregiver")
+            }
+         });
+       $('#modal-caregiver').modal('hide');
+    });
+    $('#add_sibling, #proc_sibling').click(function() {
+        //id_no_adult_caregiver
+        var clicked = $(this).attr('id');
+        var sibling_fname = $("#id_sibling_firstname").val();
+        var sibling_sname = $("#id_sibling_surname").val();
+        var sibling_oname = $("#id_sibling_othernames").val();
+        var gender_id = $("#sibling_gender_id").val();
+        var gender = $("#sibling_gender_id option:selected").text();
+        var sclass_id = $("#sibling_class_id").val();
+        var sclass = $("#sibling_class_id option:selected").text();
+        var remarks = $("#id_sibling_remark").val();
+        var sibling_dob = $("#sibling_dob").val();
+        var cpims_child_id = $("#sibling_cpims_id").val();
+        var child_subcounty = $("#living_in_subcounty").val();
+        //Will use names for validation
+        var names = sibling_fname +' '+ sibling_sname +' '+ sibling_oname;
+        var sibling_cpims = names.replace(/\W/g, '').toLowerCase();
+        //var sibling_cpims = $("#sibling_cpims_id").val();
+        var grid_sibling = $("#sb_"+ sibling_cpims +"_names").val();
+        $("#log_cg").addClass( "alert alert-danger fade in" );
+
+        if ($('#id_is_cpims_sibling').is(":checked")){
+            var is_cpims = cpims_child_id;
+        }else{
+            var is_cpims = '-';
+        }
+        $('#log_cg').empty();
+        if ((is_cpims == 'Yes') && (cpims_child_id == '')){
+           $('#log_cg').html('Please use the search if child exists in CPIMS.');
+           return false;
+        }
+        if ((sibling_fname == '') || (sibling_sname == '')){
+           $('#log_cg').html('Please provide first name and surname.');
+           return false;
+        }
+        if (gender_id == ''){
+           $('#log_cg').html('Please select Sex.');
+           return false;
+        }
+        if (child_subcounty == ''){
+           $('#log_cg').html('Please select living in sub county for the child first before attaching siblings.');
+           return false;
+        }
+        if (typeof grid_sibling !== 'undefined'){
+           $('#log_cg').html('Sibling '+ names +' already added.');
+           clear_siblings();
+           return false;
+        }
+        // Check if this child is a duplicate
+        $("#log_cg").removeClass( "alert alert-danger fade in" );
+        var sibArray = new Array();
+        sibArray[0] = sibling_cpims;
+        sibArray[1] = cpims_child_id;
+        sibArray[2] = is_cpims;
+        sibArray[3] = names;
+        sibArray[4] = gender_id;
+        sibArray[5] = gender;
+        sibArray[6] = sibling_dob;
+        sibArray[7] = remarks;
+        sibArray[8] = sclass_id;
+        if (clicked == 'add_sibling'){
+            $.ajax({
+               type: "POST",
+               url: "{% url 'person_actions' %}",
+               data: $("#new_person").serialize() + "&edit_type=8",
+               success: function(data)
+               {
+                   var status_id = data.status;
+                   attach_sibling(status_id, sibArray);
+               },
+                error: function(){
+                    $("#log_cg").addClass( "alert alert-danger fade in" );
+                    $('#log_cg').html("Error checking if child is duplicate");
+                }
+             });
+        }else{
+            attach_sibling(0, sibArray);
+        }
+
+    });
+
+    $('#add_org_unit').click(function() {
+        $('#log_unit').empty();
+        var org_unit_id = $("#org_unit_id").val();
+        var check_primary = $("#org_unit_primary").val();
+        var org_unit = $("#org_unit_id option:selected").text();
+        var primary_unit = $('input[name=unit_parent]:checked', '#new_person').val();
+        var reg_assistant = $('input[name=unit_reg_assistant]:checked', '#new_person').val();
+        var org_unit_vals = org_unit.split(/ - (.+)?/);
+        var org_unit_id_vis = org_unit_vals[0];
+        var org_unit_name = org_unit_vals[1];
+        var grid_oid = $("#ou_"+org_unit_id+"_oid").val();       
+        var btn = '<button id = "'+org_unit_id+'" type="button" class="btn btn-danger remove_org"><i class="fa fa-trash-o"></i></button>';
+
+        $("#log_unit").addClass( "alert alert-danger fade in" );
+        if (org_unit_id == '') {
+           $('#log_unit').html('Please select organisation unit.');
+           return false;
+        }       
+        if (typeof primary_unit === 'undefined'){
+           $('#log_unit').html('Please check if unit is primary');
+           return false;
+        }
+        if (typeof reg_assistant === 'undefined'){
+           $('#log_unit').html('Please person is registration assistant.');
+           return false;
+        }
+        if (typeof grid_oid !== 'undefined'){
+           $('#log_unit').html('Organizational unit already added.');
+           return false;
+        }
+        if ((check_primary != '') && (primary_unit == 'AYES')) {
+           $('#log_unit').html('Primary organisation unit is already set.');
+           return false;
+        }
+        // For controlling Primary check
+        if (primary_unit == 'AYES'){
+            $("#org_unit_primary").val(org_unit_id);  
+        }
+        $("#log_unit").removeClass( "alert alert-danger fade in" );
+        var pri_unt = (primary_unit == 'AYES' ? "Yes" : "No");
+        var reg_ass = (reg_assistant == 'AYES' ? "Yes" : "No");
+        var bdt = '';
+        bdt += '<tr id="unit_tr_'+ org_unit_id +'" unit_name="'+ org_unit_name +'">';
+        bdt += '<td><input id="ou_'+org_unit_id+'_oid" name="ou_'+org_unit_id+'_oid" value="';
+        bdt += org_unit_id+'" type="hidden">'+ org_unit_id_vis +'</td>';
+        bdt += '<td>'+ org_unit_name +'</td><td><input id="ou_'+org_unit_id+'_pri" name="ou_';
+        bdt += org_unit_id+'_pri" value="'+primary_unit+'" type="hidden">';
+        bdt += pri_unt + '</td><td><input id="ou_'+org_unit_id+'_reg" name="ou_';
+        bdt += org_unit_id+'_reg" value="'+reg_assistant+'" type="hidden">';
+        bdt += reg_ass + '</td><td>'+ btn + '</td></tr>';
+        $('#org_units tbody').append(bdt);
+       var sel_orgs = $("#id_orgs_selected").val();
+       if (sel_orgs != ''){
+           var newText = sel_orgs.split(",");
+        }else{
+            var newText = [];
+        }
+       var newtxt = newText.push(org_unit_name);
+       var conv = [];
+
+        for(var i = 0; i < newtxt.length; ++i)
+        {
+            conv.push(newtxt[i]);
+        }
+       // var ftxt = conv.join();
+       $("#id_orgs_selected").val(newText);
+    });
+
+    $("#org_units").delegate(".remove_org", "click", function() {
+        var id = $(this).attr('id');
+        var org_unit_name = $(this).attr('unit_name');
+        var check_primary = $("#org_unit_primary").val();
+        if (id == check_primary){
+            $("#org_unit_primary").val('');   
+        }
+       $("#unit_tr_"+id+"").remove();
+       // Remove some values from the display div
+       var sel_orgs = $("#id_orgs_selected").val();
+       if (sel_orgs != ''){
+           var newText = sel_orgs.split(",");
+        }else{
+            var newText = [];
+        }
+       var newtxt = newText.pop(org_unit_name);
+       var conv = [];
+
+        for(var i = 0; i < newtxt.length; ++i)
+        {
+            conv.push(newtxt[i]);
+        }
+       // var ftxt = conv.join();
+       $("#id_orgs_selected").val(newText);
+    });
+
+    $( "#caregiver_id" ).autocomplete({
+        source: function( request, response ) {
+        $.ajax({
+          url: "{% url 'registry' %}",
+          dataType: "json",
+          data: {q: request.term, id: 0},
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 4,
+      select: function( event, ui ) {
+        $('#log').empty();
+        $('#caregiver_cpims_id').val(ui.item.id);
+        $("#caregiver_gender_id").val(ui.item.gender);
+        $("#caregiver_dob").val(ui.item.dob);
+        $("#id_caregiver_firstname").val(ui.item.fname);
+        $("#id_caregiver_surname").val(ui.item.sname);
+        $("#id_caregiver_othernames").val(ui.item.onames);
+        $("#caregiver_idno").val(ui.item.idno);
+        $("#caregiver_tel").val(ui.item.tel);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    // To get workforce
+    $( "#audit_workforce_id" ).autocomplete({
+        source: function( request, response ) {
+        $.ajax({
+          url: "{% url 'registry' %}",
+          dataType: "json",
+          data: {q: request.term, id: 3},
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 4,
+      select: function( event, ui ) {
+         $('#workforce_id').val(ui.item.id);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+
+    // To get siblings
+    $( "#cpims_child_id" ).autocomplete({
+        source: function( request, response ) {
+        $.ajax({
+          url: "{% url 'registry' %}",
+          dataType: "json",
+          data: {q: request.term, id: 1},
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 4,
+      appendTo: "#my-siblings",
+      select: function( event, ui ) {
+        $('#log_cg').empty();
+        $('#sibling_cpims_id').val(ui.item.id);
+        $("#sibling_gender_id").val(ui.item.gender);
+        $("#sibling_dob").val(ui.item.dob);
+        $("#id_sibling_firstname").val(ui.item.fname);
+        $("#id_sibling_surname").val(ui.item.sname);
+        $("#id_sibling_othernames").val(ui.item.onames);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    // Cascading drop down for working in counties
+    $("#working_in_county").change(function(e) {
+        var county = $("#working_in_county").val();
+        var sub_county = $("#working_in_subcounty").val();
+        var csrftoken = $.cookie('csrftoken');
+        var values = {'sub_county': sub_county, 'filter': 1,
+                      'county': county, 'action': 2,
+                      'csrfmiddlewaretoken': csrftoken };
+        $('#working_in_subcounty').empty();
+        $.ajax({
+            type: "POST",
+            data: values,
+            dataType: "json",
+            url: "{% url 'reg_lookup' %}",
+            success: function(data){
+                var wards = data.wards;
+                //$('#working_in_ward').html("<option value=''>Please Select</option>");           
+                $.each(wards, function(i, record) {
+                    var ward_attribs = wards[i].split(",");
+                    $('#working_in_subcounty')
+                        .append($("<option></option>")
+                        .attr("value", ward_attribs[0])
+                        .text(ward_attribs[1]));
+                 });
+                $('#working_in_subcounty').multiselect('rebuild');
+            },
+            error: function(){
+                $('#messages').html("Error")
+            }
+        });
+    });
+
+    // Cascading drop down for working in sub-county
+    $("#working_in_subcounty").change(function(e) {
+        var sub_county = $("#working_in_subcounty").val();
+        var csrftoken = $.cookie('csrftoken');
+        var values = {'sub_county': sub_county,
+                      'county': 0, 'action': 1, 'filter': 1,
+                      'csrfmiddlewaretoken': csrftoken };
+        $('#working_in_ward').empty();
+        $.ajax({
+            type: "POST",
+            data: values,
+            dataType: "json",
+            url: "{% url 'reg_lookup' %}",
+            success: function(data){
+                var wards = data.wards;
+                //$('#working_in_ward').html("<option value=''>Please Select</option>");           
+                $.each(wards, function(i, record) {
+                    var ward_attribs = wards[i].split(",");
+                    $('#working_in_ward')
+                        .append($("<option></option>")
+                        .attr("value", ward_attribs[0])
+                        .text(ward_attribs[1]));
+                 });
+                 $('#working_in_ward').multiselect('rebuild');
+            },
+            error: function(){
+                $('#messages').html("Error")
+            }
+        });
+    });
+
+    // Cascading drop down for living in counties
+    $("#living_in_county").change(function(e) {
+        var county = $("#living_in_county").val();
+        var sub_county = $("#living_in_subcounty").val();
+        var csrftoken = $.cookie('csrftoken');
+        var values = {'sub_county': sub_county,
+                      'county': county, 'action': 6,
+                      'csrfmiddlewaretoken': csrftoken };
+        $('#living_in_subcounty').empty();
+        $.ajax({
+            type: "POST",
+            data: values,
+            dataType: "json",
+            url: "{% url 'reg_lookup' %}",
+            success: function(data){
+                var wards = data.wards;
+                $('#living_in_subcounty').html("<option value=''>Please Select</option>");           
+                $.each(wards, function(i, record) {
+                    var ward_attribs = wards[i].split(",");
+                    $('#living_in_subcounty')
+                        .append($("<option></option>")
+                        .attr("value", ward_attribs[0])
+                        .text(ward_attribs[1]));
+                 });
+                 $('#living_in_subcounty').multiselect('rebuild');
+            },
+            error: function(){
+                $('#messages').html("Error")
+            }
+        });
+    });
+
+    // Cascading drop down
+    $("#living_in_subcounty").change(function(e) {
+        var sub_county = $("#living_in_subcounty").val();
+        var csrftoken = $.cookie('csrftoken');
+        var values = {'sub_county': sub_county,
+                      'county': 0, 'action': 4,
+                      'csrfmiddlewaretoken': csrftoken };
+        $('#living_in_ward').empty();
+        $.ajax({
+            type: "POST",
+            data: values,
+            dataType: "json",
+            url: "{% url 'reg_lookup' %}",
+            success: function(data){
+                var wards = data.wards;
+                $('#living_in_ward').html("<option value=''>Please Select</option>");           
+                $.each(wards, function(i, record) {
+                    var ward_attribs = wards[i].split(",");
+                    $('#living_in_ward')
+                        .append($("<option></option>")
+                        .attr("value", ward_attribs[0])
+                        .text(ward_attribs[1]));
+                 });
+                 $('#living_in_ward').multiselect('rebuild');
+            },
+            error: function(){
+                $('#messages').html("Error")
+            }
+        });
+    });
+
+});
+
+function clear_siblings(){
+   $("#id_sibling_firstname").val('');
+   $("#id_sibling_surname").val('');
+   $("#id_sibling_othernames").val('');
+   $("#sibling_gender_id").val('');
+   $("#sibling_class_id").val('');
+   $("#id_sibling_remark").val('');
+   $("#sibling_dob").val('');
+   $("#sibling_cpims_id").val('');
+   $("#cpims_child_id").val('');
+   $('#id_is_cpims_sibling').attr('checked', false);
+   $('#sibling_search_div').hide();
+   //Reset the add/proceed buttons
+   $('#proc_sibling').hide();
+   $('#add_sibling').show();
+}
+
+function clear_guardian(){
+   $("#relationship_type_id").val('');
+   $("#caregiver_cpims_id").val('');
+   $("#id_caregiver_firstname").val('');
+   $("#id_caregiver_surname").val('');
+   $("#id_caregiver_othernames").val('');
+   $("#caregiver_gender_id").val('');
+   $("#caregiver_dob").val('');
+   $('#caregiver_search_div').hide();
+   $('#id_is_cpims_caregiver').attr('checked', false);
+   $('#caregiver_search_div').hide();
+   $('#caregiver_idno').val('');
+   $('#caregiver_tel').val('');
+}
+
+function attach_sibling(status_id, sibArray){
+    if (status_id == 0){
+        $('#proc_sibling').hide();
+        $('#add_sibling').show();
+        $('#log_cg').empty();
+        // Need to populate my grid here
+        sib_ims = sibArray[0];
+        cpims_child_id = sibArray[1];
+        is_cpims = sibArray[2];
+        names = sibArray[3];
+        gender_id = sibArray[4];
+        gender = sibArray[5];
+        sibling_dob = sibArray[6];
+        remarks = sibArray[7];
+        sclass_id = sibArray[8];
+        var sib_names = names.replace(/\s+/g, '|').toLowerCase();
+        $('#child_siblings tbody').append(
+              '<tr><td><input id="sb_'+sib_ims+'_sbid" name="sb_'+sib_ims+'_sbid" value="'+cpims_child_id+
+              '" type="hidden">'+ is_cpims +
+              '</td><input id="sb_'+sib_ims+'_names" name="sb_'+sib_ims+'_names" value="'+sib_names+
+              '" type="hidden"><td>'+ names +
+              '</td><td><input id="sb_'+sib_ims+'_sex" name="sb_'+sib_ims+'_sex" value="'+gender_id+
+              '" type="hidden">'+ gender +
+              '</td><td><input id="sb_'+sib_ims+'_dob" name="sb_'+sib_ims+'_dob" value="'+sibling_dob+
+              '" type="hidden">'+ sibling_dob +
+              '<input id="sb_'+sib_ims+'_rmk" name="sb_'+sib_ims+'_rmk" value="'+remarks+
+              '" type="hidden"><input id="sb_'+sib_ims+'_slevel" name="sb_'+sib_ims+'_slevel" value="'+sclass_id+
+            '" type="hidden"></td></tr>');
+        clear_siblings();
+        $('#modal-sibling').modal('hide');
+    }else{
+        $('#proc_sibling').show();
+        $('#add_sibling').hide();
+        $("#log_cg").addClass( "alert alert-danger fade in" );
+        $('#log_cg').html('Child is a possible duplicate ('+status_id+'). Proceed if OK.');
+    }
+}
+
+function ovc_program(child_ovc){
+    if (child_ovc == 'AYES'){
+            $('#other_names').attr('data-parsley-required', 'true');
+            $('#cbo_unit_id').attr('data-parsley-required', 'true');
+            $('#chv_unit_id').attr('data-parsley-required', 'true');
+            $('#cp_ovc_div').hide();
+            $('#cbo_id_div').show();
+            $('#chv_id_div').show();
+        }else{
+            $('#other_names').attr('data-parsley-required', 'false');
+            $('#cbo_unit_id').attr('data-parsley-required', 'false');
+            $('#chv_unit_id').attr('data-parsley-required', 'false');
+            $('#cp_ovc_div').show();
+            $('#cbo_id_div').hide();
+            $('#chv_id_div').hide();
+        }
+}
+
+
+function handle_persons(person_type, person_text){
+    var person_type = (typeof person_type === 'undefined') ? 'default' : person_type;
+    handle_ovc(person_type);
+    $("#child_services_0").prop("checked", true);
+    $("#living_in_nationality_0").prop("checked", true);
+    //Child
+    if (person_type == 'TBVC')
+    {
+        handle_child();
+    }
+
+    //Caregiver
+    else if (person_type == 'TBGR')
+    {
+        handle_caregiver(person_text);
+    }
+
+    //Volunteer
+    else if (person_type == 'TWVL')
+    {
+         handle_volunteer(person_text);
+    }
+
+    //Government Employee
+    else if (person_type == 'TWGE')
+    {
+        handle_government(person_text); 
+    }
+
+    //NGO/private sector employee
+    else if (person_type == 'TWNE')
+    {
+        handle_ngo_private(person_text);
+    }
+
+    //Default page
+    else
+    {
+        handle_default();
+    }
+}
+
+//Added for CTiP
+handle_nationality('0');
+$('#new_person input[name=living_in_nationality]').on('change', function() {
+   var ntn = $('input[name=living_in_nationality]:checked', '#new_person').val();
+   handle_nationality(ntn);
+});
+
+function handle_nationality(ntn){
+    console.log(ntn);
+    var person_type = $("#person_type").val();
+    if (person_type == 'TBVC'){
+        if (ntn == '1'){
+            $('#living_in_county_div').hide();
+            $('#living_in_county').attr('data-parsley-required', 'false');
+            $('#living_in_subcounty_div').hide();
+            $('#living_in_subcounty').attr('data-parsley-required', 'false');
+            $('#living_in_ward_div').hide();
+            //Foreigners
+            $('#living_in_country_div').show();
+            $('#living_in_country').attr('data-parsley-required', 'true');
+            $('#living_in_city_div').show();
+            $('#living_in_city').attr('data-parsley-required', 'true');
+        }else{
+            $('#living_in_county_div').show();
+            $('#living_in_county').attr('data-parsley-required', 'true');
+            $('#living_in_subcounty_div').show();
+            $('#living_in_subcounty').attr('data-parsley-required', 'true');
+            $('#living_in_ward_div').show();
+            //Foreigners
+            $('#living_in_country_div').hide();
+            $('#living_in_country').attr('data-parsley-required', 'false');
+            $('#living_in_city_div').hide();
+            $('#living_in_city').attr('data-parsley-required', 'false');
+        }
+
+    }else{
+
+        $('#living_in_county_div').show();
+        $('#living_in_county').attr('data-parsley-required', 'false');
+        $('#living_in_subcounty_div').show();
+        $('#living_in_subcounty').attr('data-parsley-required', 'false');
+        $('#living_in_ward_div').show();
+        //Foreigners
+        $('#living_in_country_div').hide();
+        $('#living_in_country').attr('data-parsley-required', 'false');
+        $('#living_in_city_div').hide();
+        $('#living_in_city').attr('data-parsley-required', 'false');
+
+    }
+    
+
+}
+
+function handle_default(){
+    $('#national_id_div').show();
+    $('#national_id').attr('data-parsley-required', 'false');
+    $('#national_id_m').hide();
+
+    $('#staff_id_div').hide();
+    $('#staff_id').attr('data-parsley-required', 'false');
+    $('#staff_id_m').hide();
+
+    $('#birth_reg_id_div').hide();
+    $('#given_name_div').hide();
+    $('#birth_reg_id').attr('data-parsley-required', 'false');
+
+    $('#caregiver_add').hide();
+    $('#caregiver_id').attr('data-parsley-required', 'false');
+    $('#relationship_type_id').attr('data-parsley-required', 'false');
+    $('#caregiver_info').empty();
+
+    $('#cadre_type_div').hide(); 
+    $('#cadre_type').attr('data-parsley-required', 'false');
+    $('#title_type_div').hide(); 
+    $('#title_type').attr('data-parsley-required', 'false');
+    $('#id_orgs_selected').attr('data-parsley-required', 'false');
+
+    $('#provides_service').show();
+    $('#child_services_0').attr('data-parsley-required', 'true');
+    $('#child_services_1').attr('data-parsley-required', 'true');
+
+    $('#is_ovc').hide(); 
+    $('#child_ovc_0').attr('data-parsley-required', 'false');
+    $('#child_ovc_1').attr('data-parsley-required', 'false');
+    
+    $('#working_in_region_div').show();
+    $('.working_region').attr('data-parsley-required', 'true');
+    $('#working_in_div').show();
+    $('#working_in_subcounty').attr('data-parsley-required', 'true');
+    $('#living_in_div').hide();
+    $('#living_in_subcounty').attr('data-parsley-required', 'false');
+
+    $('#is_caregiver_div').show();
+    $('#date_of_birth').datepicker("remove");
+    $('#date_of_birth').datepicker({ endDate: '-18y', format: 'dd-M-yyyy' });
+    $('#date_of_birth').val('');
+    $('#date_warning').hide();
+
+    $('#audit_detail_div').show();
+    $('#audit_workforce_id').attr('data-parsley-required', 'true');
+    $('#audit_date').attr('data-parsley-required', 'true');
+    
+    $('#parent_org_add').show();
+    $('#add_org_info').empty();
+    $('#org_unit_id').attr('data-parsley-required', 'true');
+
+    $('#tribe_id_div').hide();
+    $('#religion_id_div').hide();
+    $('#nation_id_div').hide();
+    $('#des_phone_number').attr('data-parsley-required', 'false');
+    $('#des_phone_m').hide();
+    $('#email_m').hide();
+
+}
+
+function handle_child(){
+    $('#national_id_div').show();
+    $('#national_id').attr('data-parsley-required', 'false');
+    $('#national_id_m').hide();
+
+    $('#staff_id_div').hide();
+    $('#staff_id').attr('data-parsley-required', 'false');
+    $('#staff_id_m').hide();
+
+    $('#birth_reg_id_div').show();
+    $('#given_name_div').show();
+    $('#birth_reg_id').attr('data-parsley-required', 'false');
+
+    $('#caregiver_add').show();
+    $('#caregiver_id').attr('data-parsley-required', 'true');
+    $('#relationship_type_id').attr('data-parsley-required', 'true');
+    $('#caregiver_info').empty();
+
+    $('#cadre_type_div').hide(); 
+    $('#cadre_type').attr('data-parsley-required', 'false');
+    $('#title_type_div').hide(); 
+    $('#title_type').attr('data-parsley-required', 'false');
+    $('#id_orgs_selected').attr('data-parsley-required', 'false');
+
+    $('#provides_service').hide(); 
+    $('#child_services_0').attr('data-parsley-required', 'false');
+    $('#child_services_1').attr('data-parsley-required', 'false');
+
+    $('#is_ovc').show(); 
+    $('#child_ovc_0').attr('data-parsley-required', 'true');
+    $('#child_ovc_1').attr('data-parsley-required', 'true');
+
+    $('#working_in_region_div').hide();
+    $('.working_region').attr('data-parsley-required', 'false');
+    $('#working_in_div').hide();
+    $('#working_in_subcounty').attr('data-parsley-required', 'false');
+    $('#living_in_div').show();
+    $('#living_in_subcounty').attr('data-parsley-required', 'true');
+
+    $('#is_caregiver_div').show();
+    $('#dob_div').show();
+    $('#date_of_birth').datepicker("remove");
+    $('#date_of_birth').datepicker({ startDate: "-50y",
+                                     endDate: '+0d', 
+                                     format: 'dd-M-yyyy' });
+    $('#date_of_birth').val('');
+
+    $('#audit_detail_div').show();
+    $('#audit_workforce_id').attr('data-parsley-required', 'true');
+    $('#audit_date').attr('data-parsley-required', 'true');
+    $('#parent_org_add').hide();
+    
+    $('#org_unit_id').attr('data-parsley-required', 'false');
+
+    $('#tribe_id_div').show();
+    $('#religion_id_div').show();
+    $('#nation_id_div').show();    
+    $('#des_phone_number').attr('data-parsley-required', 'false');
+    $('#des_phone_m').hide();
+    $('#email_m').hide();
+
+    $('#date_of_birth').datepicker().on('changeDate', function (ev) {
+        var mdate = $('#date_of_birth').val();
+        var currentDate = new Date();
+        var selectedDate = new Date(ev.date.toString());
+        var age = currentDate.getFullYear() - selectedDate.getFullYear();
+        if (age > 18){
+            var msg = '<label>Warning</label><p>Child is above 18 ( ' + age + ' years).</p>'
+            $('#date_warning').show();
+            $('#date_warning').html(msg);
+            $("#date_warning").addClass( "alert alert-danger fade in" );
+         }else{
+            $('#date_warning').hide();
+            $('#date_warning').html('');
+            $("#date_warning").removeClass( "alert alert-danger fade in" );
+         }
+    });
+
+    var child_ovc = $('#child_ovc').val();
+    if (child_ovc == 'AYES'){
+        $('#other_names').attr('data-parsley-required', 'true');   
+    }
+}
+
+function handle_caregiver(person_text){
+    $('#national_id_div').show();
+    $('#national_id').attr('data-parsley-required', 'true');
+    $('#national_id_m').show();
+
+    $('#staff_id_div').hide();
+    $('#staff_id').attr('data-parsley-required', 'false');
+    $('#staff_id_m').hide();
+
+    $('#birth_reg_id_div').hide();
+    $('#given_name_div').hide();
+    $('#birth_reg_id').attr('data-parsley-required', 'false');
+
+    $('#caregiver_add').hide();
+    $('#caregiver_id').attr('data-parsley-required', 'false');
+    $('#relationship_type_id').attr('data-parsley-required', 'false');
+    $('#caregiver_info').html('- Not required for ' + person_text);
+
+    $('#cadre_type_div').hide(); 
+    $('#cadre_type').attr('data-parsley-required', 'false');
+    $('#title_type_div').hide(); 
+    $('#title_type').attr('data-parsley-required', 'false');
+    $('#id_orgs_selected').attr('data-parsley-required', 'false');
+
+    $('#provides_service').hide(); 
+    $('#child_services_0').attr('data-parsley-required', 'false');
+    $('#child_services_1').attr('data-parsley-required', 'false');
+    
+    $('#is_ovc').hide(); 
+    $('#child_ovc_0').attr('data-parsley-required', 'false');
+    $('#child_ovc_1').attr('data-parsley-required', 'false');
+
+    $('#working_in_region_div').hide();
+    $('.working_region').attr('data-parsley-required', 'false');
+    $('#working_in_div').hide();
+    $('#working_in_subcounty').attr('data-parsley-required', 'false');
+    $('#living_in_div').show();
+    $('#living_in_subcounty').attr('data-parsley-required', 'true');
+
+    $('#is_caregiver_div').hide();
+    $('#id_is_caregiver').attr('checked', false);
+    $('#dob_div').show();
+    $('#date_of_birth').datepicker("remove");
+    $('#date_of_birth').datepicker({ endDate: '-18y', format: 'dd-M-yyyy' });
+    $('#date_of_birth').val('');
+    $('#date_warning').hide();
+
+    $('#audit_detail_div').show();
+    $('#audit_workforce_id').attr('data-parsley-required', 'true');
+    $('#audit_date').attr('data-parsley-required', 'true');
+
+    {% if request.session.reg_ovc %}
+    $("#cbo_chv_add").show();
+    $('#add_org_info').html('');
+    $('#chv_id_div').hide();    
+    $('#chv_unit_id').attr('data-parsley-required', 'false');
+    {% endif %}
+    $('#parent_org_add').hide();
+    $('#add_org_info').html(' - Not required');
+    $('#org_unit_id').attr('data-parsley-required', 'false');
+
+    $('#tribe_id_div').hide();
+    $('#religion_id_div').hide();
+    $('#nation_id_div').hide();
+    $('#des_phone_number').attr('data-parsley-required', 'false');
+    $('#des_phone_m').hide();
+    $('#email_m').hide();
+}
+
+function handle_volunteer(person_text){
+    $('#national_id_div').show();
+    $('#national_id').attr('data-parsley-required', 'true');
+    $('#national_id_m').show();
+
+    $('#staff_id_div').show();
+    $('#staff_id').attr('data-parsley-required', 'false');
+    $('#staff_id_m').hide();
+
+    $('#birth_reg_id_div').hide();
+    $('#given_name_div').hide(); 
+    $('#birth_reg_id').attr('data-parsley-required', 'false');
+
+    $('#caregiver_add').hide();
+    $('#caregiver_id').attr('data-parsley-required', 'false');
+    $('#relationship_type_id').attr('data-parsley-required', 'false');
+    $('#caregiver_info').html('- Not required for ' + person_text);
+
+    $('#cadre_type_div').hide(); 
+    $('#cadre_type').attr('data-parsley-required', 'false');
+    $('#title_type_div').hide(); 
+    $('#title_type').attr('data-parsley-required', 'false');
+    $('#id_orgs_selected').attr('data-parsley-required', 'true');
+
+    $('#provides_service').show();
+    $('#child_services_0').attr('data-parsley-required', 'true');
+    $('#child_services_1').attr('data-parsley-required', 'true');
+    
+    $('#is_ovc').hide(); 
+    $('#child_ovc_0').attr('data-parsley-required', 'false');
+    $('#child_ovc_1').attr('data-parsley-required', 'false');
+
+    $('#working_in_region_div').show();
+    $('.working_region').attr('data-parsley-required', 'true');
+    $('#working_in_div').show();
+    $('#working_in_subcounty').attr('data-parsley-required', 'true');
+    $('#living_in_div').hide();
+    $('#living_in_subcounty').attr('data-parsley-required', 'false');
+
+    $('#is_caregiver_div').show();
+    $('#dob_div').hide();
+    $('#date_of_birth').datepicker("remove");
+    $('#date_of_birth').datepicker({ endDate: '-18y', format: 'dd-M-yyyy' });
+    $('#date_of_birth').val('01-Jan-1900');
+    $('#date_warning').hide();
+
+    $('#audit_detail_div').hide();
+    $('#audit_workforce_id').attr('data-parsley-required', 'false');
+    $('#audit_date').attr('data-parsley-required', 'false');
+    $('#parent_org_add').show();
+    $('#add_org_info').empty();
+    $('#org_unit_id').attr('data-parsley-required', 'true');
+
+    $('#tribe_id_div').hide();
+    $('#religion_id_div').hide();
+    $('#nation_id_div').hide();
+    $('#des_phone_number').attr('data-parsley-required', 'true');
+    $('#des_phone_m').show();
+    $('#email_m').show();
+    {% if request.session.reg_ovc %}
+    $("#cbo_chv_add").show();
+    $('#add_org_info').html('');
+    $('#chv_id_div').hide();    
+    $('#chv_unit_id').attr('data-parsley-required', 'false');
+    {% endif %}
+}
+
+function handle_government(person_text){
+    $('#national_id_div').show();
+    $('#national_id').attr('data-parsley-required', 'true');
+    $('#national_id_m').show();
+
+    $('#staff_id_div').show();
+    $('#staff_id').attr('data-parsley-required', 'true');
+    $('#staff_id_m').show();
+
+    $('#birth_reg_id_div').hide();
+    $('#given_name_div').hide();
+    $('#birth_reg_id').attr('data-parsley-required', 'false');
+
+    $('#caregiver_add').hide();
+    $('#caregiver_id').attr('data-parsley-required', 'false');
+    $('#relationship_type_id').attr('data-parsley-required', 'false');
+    $('#caregiver_info').html('- Not required for ' + person_text);
+
+    $('#cadre_type_div').show(); 
+    $('#cadre_type').attr('data-parsley-required', 'true');
+    $('#title_type_div').show(); 
+    $('#title_type').attr('data-parsley-required', 'true');
+    $('#id_orgs_selected').attr('data-parsley-required', 'true');
+
+    $('#provides_service').show();
+    $('#child_services_0').attr('data-parsley-required', 'true');
+    $('#child_services_1').attr('data-parsley-required', 'true');
+    
+    $('#is_ovc').hide(); 
+    $('#child_ovc_0').attr('data-parsley-required', 'false');
+    $('#child_ovc_1').attr('data-parsley-required', 'false');
+
+    $('#working_in_region_div').show();
+    $('.working_region').attr('data-parsley-required', 'true');
+    $('#working_in_div').show();
+    $('#working_in_subcounty').attr('data-parsley-required', 'true');
+    $('#living_in_div').hide();
+    $('#living_in_subcounty').attr('data-parsley-required', 'false');
+
+    $('#is_caregiver_div').show();
+    $('#dob_div').hide();
+    $('#date_of_birth').datepicker("remove");
+    $('#date_of_birth').datepicker({ endDate: '-18y', format: 'dd-M-yyyy' });
+    $('#date_of_birth').attr('data-parsley-required', 'false');
+    $('#date_of_birth').val('01-Jan-1900');
+    $('#date_warning').hide();
+
+    $('#audit_detail_div').hide();
+    $('#audit_workforce_id').attr('data-parsley-required', 'false');
+    $('#audit_date').attr('data-parsley-required', 'false');
+    $('#parent_org_add').show();
+    $('#add_org_info').empty();
+    $('#org_unit_id').attr('data-parsley-required', 'true');
+
+    $('#tribe_id_div').hide();
+    $('#religion_id_div').hide();
+    $('#nation_id_div').hide();
+    $('#des_phone_number').attr('data-parsley-required', 'true');
+    $('#des_phone_m').show();
+    $('#email_m').show();
+}
+
+function handle_ngo_private(person_text){
+    $('#national_id_div').show();
+    $('#national_id').attr('data-parsley-required', 'true');
+    $('#national_id_m').show();
+
+    $('#staff_id_div').show();
+    $('#staff_id').attr('data-parsley-required', 'true');
+    $('#staff_id_m').show();
+
+    $('#birth_reg_id_div').hide(); 
+    $('#given_name_div').hide();
+    $('#birth_reg_id').attr('data-parsley-required', 'false');
+
+    $('#caregiver_add').hide();
+    $('#caregiver_id').attr('data-parsley-required', 'false');
+    $('#relationship_type_id').attr('data-parsley-required', 'false');
+    $('#caregiver_info').html('- Not required for ' + person_text);
+
+    $('#cadre_type_div').show(); 
+    $('#cadre_type').attr('data-parsley-required', 'true');
+    $('#title_type_div').show(); 
+    $('#title_type').attr('data-parsley-required', 'true');
+    $('#id_orgs_selected').attr('data-parsley-required', 'true');
+
+    $('#provides_service').show();
+    $('#child_services_0').attr('data-parsley-required', 'true');
+    $('#child_services_1').attr('data-parsley-required', 'true');
+    
+    $('#is_ovc').hide(); 
+    $('#child_ovc_0').attr('data-parsley-required', 'false');
+    $('#child_ovc_1').attr('data-parsley-required', 'false');
+
+    $('#working_in_region_div').show();
+    $('.working_region').attr('data-parsley-required', 'true');
+    $('#working_in_div').show();
+    $('#working_in_subcounty').attr('data-parsley-required', 'true');
+    $('#living_in_div').hide();
+    $('#living_in_subcounty').attr('data-parsley-required', 'false');
+
+    $('#is_caregiver_div').show();
+    $('#dob_div').hide();
+    $('#date_of_birth').datepicker("remove");
+    $('#date_of_birth').datepicker({ endDate: '-18y', format: 'dd-M-yyyy' });
+    $('#date_of_birth').attr('data-parsley-required', 'false');
+    $('#date_of_birth').val('01-Jan-1900');
+    $('#date_warning').hide();
+
+    $('#audit_detail_div').hide();
+    $('#audit_workforce_id').attr('data-parsley-required', 'false');
+    $('#audit_date').attr('data-parsley-required', 'false');
+    $('#parent_org_add').show();
+    $('#add_org_info').empty();
+    $('#org_unit_id').attr('data-parsley-required', 'true');
+
+    $('#tribe_id_div').hide();
+    $('#religion_id_div').hide();
+    $('#nation_id_div').hide();
+    $('#des_phone_number').attr('data-parsley-required', 'true');
+    $('#des_phone_m').show();
+    $('#email_m').show();
+}
+
+{% for key, values in titles.items %}
+    var {{ key }} = {{ values|safe }};
+{% endfor %}
+
+function handle_ovc(person_type){
+    
+    if (person_type == 'TBVC')
+    {
+        {% if request.session.reg_ovc %}
+            $("#cbo_chv_add").show();
+            $('#add_org_info').html('');
+            $('#cbo_unit_id').attr('data-parsley-required', 'true');
+            $('#chv_unit_id').attr('data-parsley-required', 'true');
+            $("#cbo_chv_add").show();
+            $("#cbo_chv_div").show();
+            $("#cbo_chv_ndiv").hide();
+            $('#ou_ovc').html('CBO / CHV details');
+        {% else %}
+            $("#cbo_chv_add").hide();
+            $('#add_org_info').html(' - Not required');
+            $('#cbo_unit_id').attr('data-parsley-required', 'false');
+            $('#chv_unit_id').attr('data-parsley-required', 'false');
+            $("#cbo_chv_add").hide();
+            $("#cbo_chv_ndiv").show();
+            $("#cbo_chv_div").hide();
+            $('#ou_ovc').html('Organizational unit details');
+        {% endif %}
+            
+    }else{
+        $("#cbo_chv_add").hide();
+        $('#add_org_info').html(' - Not required');
+        $('#cbo_unit_id').attr('data-parsley-required', 'false');
+        $('#chv_unit_id').attr('data-parsley-required', 'false');
+        $("#cbo_chv_add").hide();
+        $("#cbo_chv_ndiv").show();
+        $("#cbo_chv_div").hide();
+        $('#ou_ovc').html('Organizational unit details');
+    }
+
+}
+
+function handle_country(country_id){
+    var person_type = $("#person_type").val();
+    if ((country_id == 'KE') && (person_type == 'TBVC')){
+        $('#tribe_id_div').show();
+    }else{
+        $('#tribe_id_div').hide();
+    }
+}
+
+{% comment %} function handle_titles(person_type){
+    var default_txt = "<option value=''>Select title</option>";
+    if (person_type != ''){
+        var person_txt = ((eval(person_type)).length == 1) ? '' : default_txt;
+    }else{
+        var person_txt = "<option value=''>Select title</option>";
+    }
+    $('#title_type').html(person_txt);
+    if (person_type != ''){
+        eval(person_type).forEach(function(tts) {
+            var tts_attribs = tts.split(",");
+            $('#title_type')
+                .append($("<option></option>")
+                .attr("value", tts_attribs[0])
+                .text(tts_attribs[1]));
+        });
+    }else{
+         $('#title_type').append('<option></option>'); 
+    }
+}
+
+function handle_cadres(title_type){
+    var person_type = $("#person_type").val();
+    var default_txt = "<option value=''>Select cadre</option>";
+    if (person_type == 'TWGE'){
+        if (title_type != ''){
+            var cadre_txt = ((eval(title_type)).length == 1) ? '' : default_txt;
+        }else{
+            var cadre_txt = "<option value=''>Select cadre</option>";
+        }
+        $('#cadre_type').html(cadre_txt);   
+    }else{
+        $('#cadre_type').empty();
+    }
+    if (title_type != ''){
+        eval(title_type).forEach(function(ttp) {
+            var ttp_attribs = ttp.split(",");
+            $('#cadre_type')
+                .append($("<option></option>")
+                .attr("value", ttp_attribs[0])
+                .text(ttp_attribs[1]));
+        });
+    }else{
+         $('#cadre_type').append('<option></option>'); 
+    }
+} {% endcomment %}
+
+function displayVals(area_value) {
+      var area_name = [];
+      area_value = (typeof area_value === 'undefined') ? 'working_in_county' : area_value;
+      $("#"+area_value+" option:selected").each(function () {
+           var $this = $(this);
+           if ($this.length) {
+            var selText = $this.text();
+            area_name.push(selText);
+           }
+        });
+
+      $( "#sel_"+area_value ).html(area_name.join( ", " ) );
+}
+$("#working_in_county").change(function(event) { 
+    displayVals();
+});
+$("#working_in_subcounty").change(function(event) { 
+    displayVals("working_in_subcounty");
+});
+$("#working_in_ward").change(function(event) { 
+    displayVals("working_in_ward");
+});
+displayVals();
+displayVals("working_in_subcounty");
+displayVals("working_in_ward");
+
+window.Parsley.on('form:validate', function() {
+   $('.validation-errors').html('');
+});
+
+
+window.Parsley.on('field:error', function(fieldInstance) {
+  // Get the error messages
+    var messages = ParsleyUI.getErrorsMessages(fieldInstance);
+
+    // Get the field's name
+    var fieldName = fieldInstance.$element.attr('name');
+    //var fieldLabel = fieldInstance.$element.attr('label');
+    //'+ fieldInstance.$element.attr('name') +'
+    var fieldLabel = $('label[for="'+ fieldName +'"]').text();
+
+    // Loop through all the messages
+    var fmsg = '';
+    for (var i in messages) {
+        // Create a message for each error
+        var message = (fieldLabel + ': ' + messages[i]).replace('*', '');
+        //var msg = $('<p><a class="focus-' + fieldName + '" href="#">' + message + '</a><p>');
+        var msg = $('<p><a class="focus-' + fieldName + '" href="#">' + message + '</a><p>');
+
+        // Append the errors to the div
+        fmsg += fieldLabel.replace('*', '') + ' - '+ messages[i] +'; ';
+        if (fieldLabel != ''){
+            //$('.validation-errors').append(', ' + fieldLabel);
+            fmsgs = fieldLabel.replace('*', '') + ' - '+ messages[i] +'; ';
+        }   
+    }
+    if (fmsg != ''){
+       $('.validation-errors').append(fmsg.replace(':', ''));
+       $('#messages').show();  
+    }else{
+        $('#messages').hide();
+    }     
+});
+
+function person_dup_check(status_id, form){
+    if (status_id == 0){
+        $('#messages').show();
+        form.submit();     
+   }else{
+       $('#s1').hide();
+       $('#s2').show();
+       $('#invalid-form-message').html('Child is a possible duplicate ('+status_id+'). Proceed if OK.');
+       $('#messages').show();
+   }
+}
+
+$(".working_region").click(function(e) {
+    var region_id = $('input[name=working_in_region]:checked', '#new_person').val();
+    check_region(region_id);
+    console.log('rid', region_id);
+});
+
+function check_region(region_id){
+    if (region_id == '2'){
+        $('#county_div').show();
+        $('#working_in_county').attr('data-parsley-required', 'true');
+        $('#subcounty_div').show();
+        $('#working_in_subcounty').attr('data-parsley-required', 'true');
+        $('#ward_div').show();
+        $('#working_in_ward').attr('data-parsley-required', 'false');        
+    }else if (region_id == '1'){
+        $('#county_div').show();
+        $('#working_in_county').attr('data-parsley-required', 'true');
+        $('#subcounty_div').hide();
+        $('#working_in_subcounty').attr('data-parsley-required', 'false');
+        $('#ward_div').hide();
+        $('#working_in_ward').attr('data-parsley-required', 'false');
+        //$('#working_in_subcounty').multiselect('rebuild');
+    }else{
+        //$('#sub_county').multiselect('rebuild');
+        $('#county_div').hide();
+        $('#working_in_county').attr('data-parsley-required', 'false');
+        $('#subcounty_div').hide();
+        $('#working_in_subcounty').attr('data-parsley-required', 'false');
+        $('#ward_div').hide();
+        $('#working_in_ward').attr('data-parsley-required', 'false');
+    }
+}
+</script>
+{% endblock lazy_javascript_code %}

@@ -240,7 +240,7 @@ def userorgunits_lookup(request):
                         jsonOrgUnitsResults.append(
                             {'id': regorgunit.id,
                              'org_unit_name': str(regorgunit.org_unit_name)})
-            if types == 3:
+            if types == 3 or types == 31:
                 # This will be used for Residential Placements
                 ou_types = ['TNRH', 'TNRC', 'TNAP', 'TNRR', 'TNRB', 'TNRS']
                 orgunits = []
@@ -255,6 +255,8 @@ def userorgunits_lookup(request):
                     for regpersongeo in regpersonsgeo:
                         area_ids.append(regpersongeo.area_id)
                 print('AREAS', area_ids, appuser.reg_person.id)
+                if types == 31:
+                    area_ids = []
 
                 if area_ids:
                     # print 'Non-national users ..'
@@ -2198,6 +2200,13 @@ def view_case_record_sheet(request, id):
         messages.add_message(request, messages.ERROR, msg)
     redirect_url = reverse(forms_registry)
     return HttpResponseRedirect(redirect_url)
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def check_case_record_sheet(request, id):
+    cid = str(id).replace('-', '')
+    return view_case_record_sheet(request, cid)
 
 
 @login_required

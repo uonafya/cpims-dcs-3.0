@@ -262,3 +262,156 @@ pk,the_order,field_name,item_category,item_id,item_description,item_description_
 42260,1,si_education_level,SI education level,SIELC,Class,Class,,FALSE,FALSE,FALSE
 42261,2,si_education_level,SI education level,SIELG,Grade,Grade,,FALSE,FALSE,FALSE
 42262,3,si_education_level,SI education level,SIELF,Form,Form,,FALSE,FALSE,FALSE
+42263,1,ear_acceptance_id,EAR acceptance,EARKA,Keen to Accept,Keen to Accept,,FALSE,FALSE,FALSE
+42264,2,ear_acceptance_id,EAR acceptance,EARAC,Accept,Accept,,FALSE,FALSE,FALSE
+42265,3,ear_acceptance_id,EAR acceptance,EARNR,Not Ready to Accept but there is a Possibility to Accept,Not Ready to Accept but there is a Possibility to Accept,,FALSE,FALSE,FALSE
+42266,4,ear_acceptance_id,EAR acceptance,EARRA,Refuse to Accept,Refuse to Accept,,FALSE,FALSE,FALSE
+42267,1,ear_tosi_id,Visit SI,SIVC,Come to the Institution,Come to the Institution,,FALSE,FALSE,FALSE
+42268,2,ear_tosi_id,Visit SI,SIVN,Not Come,Not Come,,FALSE,FALSE,FALSE
+42269,3,ear_tosi_id,Visit SI,SIVP,Pending,Pending,,FALSE,FALSE,FALSE
+42270,1,ear_relatives_cond_id,EAR Relatives,ERRMD,Mental disease,Mental disease,,FALSE,FALSE,FALSE
+42271,2,ear_relatives_cond_id,EAR Relatives,ERRDP,Deviant personality,Deviant personality,,FALSE,FALSE,FALSE
+42272,3,ear_relatives_cond_id,EAR Relatives,ERRAA,Alcohol and drug addiction,Alcohol and drug addiction,,FALSE,FALSE,FALSE
+42273,4,ear_relatives_cond_id,EAR Relatives,ERRCR,Criminal,Criminal,,FALSE,FALSE,FALSE
+42274,5,ear_relatives_cond_id,EAR Relatives,ERROT,Others,Others,,FALSE,FALSE,FALSE
+42275,1,ear_appropriate_id,EAR appropriate,EARAP,Appropriate,Appropriate,,FALSE,FALSE,FALSE
+42276,2,ear_appropriate_id,EAR appropriate,EARNA,Not Appropriate,Not Appropriate,,FALSE,FALSE,FALSE
+42277,3,ear_appropriate_id,EAR appropriate,EARPE,Pending,Pending,,FALSE,FALSE,FALSE
+42278,1,si_conference_loc_id,Case conference location,CCLCH,Child’s Home,Child’s Home,,FALSE,FALSE,FALSE
+42279,2,si_conference_loc_id,Case conference location,CCLCO,Children’s Office,Children’s Office,,FALSE,FALSE,FALSE
+42280,3,si_conference_loc_id,Case conference location,CCLOT,Other,Other,,FALSE,FALSE,FALSE
+42281,1,si_conference_aim_id,Case conference aim,CCAAS,During assessment,During assessment,,FALSE,FALSE,FALSE
+42282,2,si_conference_aim_id,Case conference aim,CCARM,Routine monitoring,Routine monitoring,,FALSE,FALSE,FALSE
+42283,3,si_conference_aim_id,Case conference aim,CCASU,Support,Support,,FALSE,FALSE,FALSE
+42284,4,si_holding_place_id,Holding places,HPCRC,Rescue centre,Rescue centre,,FALSE,FALSE,FALSE
+42285,1,si_support_docs_id,SI support documents,SIDBC,Birth certificate,Birth certificate,,FALSE,FALSE,FALSE
+42286,2,si_support_docs_id,SI support documents,SIDAA,Age assessment,Age assessment,,FALSE,FALSE,FALSE
+42287,3,si_support_docs_id,SI support documents,SIDBN,Birth Notification,Birth Notification,,FALSE,FALSE,FALSE
+42288,1,si_approval_status_id,SI Vacancy approval,RVAA,Approved,Approved,,FALSE,FALSE,FALSE
+42289,2,si_approval_status_id,SI Vacancy approval,RVAR,Rejected,Rejected,,FALSE,FALSE,FALSE
+42290,3,si_approval_status_id,SI Vacancy approval,RVAD,Declined,Declined,,FALSE,FALSE,FALSE
+42291,1,si_court_orders_id,Court orders,CORES,Residence,Residence,,FALSE,FALSE,FALSE
+42292,2,si_court_orders_id,Court orders,COACC,Access,Access,,FALSE,FALSE,FALSE
+42293,3,si_court_orders_id,Court orders,COEXC,Exclusion,Exclusion,,FALSE,FALSE,FALSE
+42294,4,si_court_orders_id,Court orders,CODIS,Discharge,Discharge,,FALSE,FALSE,FALSE
+42295,5,si_court_orders_id,Court orders,COCHA,Child assessment,Child assessment,,FALSE,FALSE,FALSE
+42296,6,si_court_orders_id,Court orders,COFAS,Family assistance,Family assistance,,FALSE,FALSE,FALSE
+42297,7,si_court_orders_id,Court orders,COWAR,Wardship,Wardship,,FALSE,FALSE,FALSE
+42298,8,si_court_orders_id,Court orders,COPRO,Production,Production,,FALSE,FALSE,FALSE
+42299,9,si_court_orders_id,Court orders,COPDA,Protection for children involved in drug abuse,Protection for children involved in drug abuse,,FALSE,FALSE,FALSE
+42300,10,si_court_orders_id,Court orders,COPVA,Protection for children victims of ideological radicalization,Protection for children victims of ideological radicalization,,FALSE,FALSE,FALSE
+42301,11,si_court_orders_id,Court orders,COPCG,Protection for children in criminal gangs,Protection for children in criminal gangs,,FALSE,FALSE,FALSE
+42302,12,si_court_orders_id,Court orders,CONIT,Non-interference,Non-interference,,FALSE,FALSE,FALSE
+42303,13,si_court_orders_id,Court orders,COSUP,Supervision,Supervision,,FALSE,FALSE,FALSE
+42304,14,si_court_orders_id,Court orders,CODIV,Diversion,Diversion,,FALSE,FALSE,FALSE
+42305,15,si_court_orders_id,Court orders,COMAI,Maintenance,Maintenance,,FALSE,FALSE,FALSE
+42306,16,si_court_orders_id,Court orders,COFGC,Family group conference,Family group conference,,FALSE,FALSE,FALSE
+42307,17,si_court_orders_id,Court orders,COCRS,Committal to Rehabilitation School,Committal to Rehabilitation School,,FALSE,FALSE,FALSE
+42308,18,si_court_orders_id,Court orders,COCRC,Committal to Rescue Centre,Committal to Rescue Centre,,FALSE,FALSE,FALSE
+42309,19,si_court_orders_id,Court orders,CODRC,Committal to Drug Rehabilitation Centre,Committal to Drug Rehabilitation Centre,,FALSE,FALSE,FALSE
+42310,20,si_court_orders_id,Court orders,COCFP,Committal to Fit Person,Committal to Fit Person,,FALSE,FALSE,FALSE
+42311,21,si_court_orders_id,Court orders,COBOS,Committal to Borstal,Committal to Borstal,,FALSE,FALSE,FALSE
+42312,22,si_court_orders_id,Court orders,COPHO,Committal to Probation Hostel,Committal to Probation Hostel,,FALSE,FALSE,FALSE
+42313,23,si_court_orders_id,Court orders,COPRB,Probation,Probation,,FALSE,FALSE,FALSE
+42314,24,si_court_orders_id,Court orders,COCOS,Community service,Community service,,FALSE,FALSE,FALSE
+42315,25,si_court_orders_id,Court orders,COREJ,Restorative justice,Restorative justice,,FALSE,FALSE,FALSE
+42316,26,si_court_orders_id,Court orders,COPFC,"Pay fine, compensation, cost","Pay fine, compensation, cost",,FALSE,FALSE,FALSE
+42317,27,si_court_orders_id,Court orders,COSGB,Security for his/her good behavior,Security for his/her good behavior,,FALSE,FALSE,FALSE
+42318,28,si_court_orders_id,Court orders,CONCM,Nullification of child marriage order,Nullification of child marriage order,,FALSE,FALSE,FALSE
+42319,29,si_court_orders_id,Court orders,CODOC,Discharge of care,Discharge of care,,FALSE,FALSE,FALSE
+42320,30,si_court_orders_id,Court orders,COCOR,Children officer’s report,Children officer’s report,,FALSE,FALSE,FALSE
+42321,31,si_court_orders_id,Court orders,COPOR,Probation officer’s report,Probation officer’s report,,FALSE,FALSE,FALSE
+42322,32,si_court_orders_id,Court orders,COAOR,Authorized officer’s report,Authorized officer’s report,,FALSE,FALSE,FALSE
+42323,33,si_court_orders_id,Court orders,COMOR,Medical officer’s report,Medical officer’s report,,FALSE,FALSE,FALSE
+42324,34,si_court_orders_id,Court orders,COPRA,Professional advice,Professional advice,,FALSE,FALSE,FALSE
+42325,35,si_court_orders_id,Court orders,COGUA,Guardianship,Guardianship,,FALSE,FALSE,FALSE
+42326,43,si_court_orders_id,Court orders,COOLO,Other lawful orders (Specify),Other lawful orders,,FALSE,FALSE,FALSE
+42327,5,si_holding_place_id,Holding places,HPPHF,Health Facility,Health Facility,,FALSE,FALSE,FALSE
+42328,6,si_holding_place_id,Holding places,HPPFP,Fit Person,Fit Person,,FALSE,FALSE,FALSE
+42329,1,co_designation_id,CO Designation,CODSC,Secretary of Children's Services,Secretary of Children's Services,,FALSE,FALSE,FALSE
+42330,2,co_designation_id,CO Designation,CODDR,Director of Children's Services,Director of Children's Services,,FALSE,FALSE,FALSE
+42331,3,co_designation_id,CO Designation,CODAD,Assistant Director of Children's Services,Assistant Director of Children's Services,,FALSE,FALSE,FALSE
+42332,4,co_designation_id,CO Designation,CODPC,Principal Children's Officer,Principal Children's Officer,,FALSE,FALSE,FALSE
+42333,5,co_designation_id,CO Designation,CODSO,Senior Children's Officer,Senior Children's Officer,,FALSE,FALSE,FALSE
+42334,6,co_designation_id,CO Designation,CODC1,Children Officer I,Children Officer I,,FALSE,FALSE,FALSE
+42335,7,co_designation_id,CO Designation,CODC2,Children Officer II,Children Officer II,,FALSE,FALSE,FALSE
+42336,8,co_designation_id,CO Designation,CODSA,Senior Children's Assistant,Senior Children's Assistant,,FALSE,FALSE,FALSE
+42337,9,co_designation_id,CO Designation,CODA3,Children's Assistant I,Children's Assistant I,,FALSE,FALSE,FALSE
+42338,10,co_designation_id,CO Designation,CODA2,Children's Assistant II,Children's Assistant II,,FALSE,FALSE,FALSE
+42339,11,co_designation_id,CO Designation,COSA3,Children's Assistant III,Children's Assistant III,,FALSE,FALSE,FALSE
+42340,36,si_court_orders_id,Court orders,COPCC,Provisional Child Care Order,Provisional Child Care Order,,FALSE,FALSE,FALSE
+42341,37,si_court_orders_id,Court orders,COEOC,Extension of Committal,Extension of Committal,,FALSE,FALSE,FALSE
+42342,38,si_court_orders_id,Court orders,COROO,Revocation Order,Revocation Order,,FALSE,FALSE,FALSE
+42343,39,si_court_orders_id,Court orders,COREU,Reunification,Reunification,,FALSE,FALSE,FALSE
+42344,40,si_court_orders_id,Court orders,COCUO,Custody Order,Custody Order,,FALSE,FALSE,FALSE
+42345,41,si_court_orders_id,Court orders,COCAO,Care Order,Care Order,,FALSE,FALSE,FALSE
+42346,42,si_court_orders_id,Court orders,COQCO,Qualified Counsellor,Qualified Counsellor,,FALSE,FALSE,FALSE
+42347,1,ac_toilet_type_id,Toilet type,TOTPL,Pit latrine,Pit latrine,,FALSE,FALSE,FALSE
+42348,2,ac_toilet_type_id,Toilet type,TOTFT,Flash Toilet,Flash Toilet,,FALSE,FALSE,FALSE
+42349,3,ac_toilet_type_id,Toilet type,TOVPL,Ventilated Improved pit latrine,Ventilated Improved pit latrine,,FALSE,FALSE,FALSE
+42350,4,ac_toilet_type_id,Toilet type,TOTOT,Others,Others,,FALSE,FALSE,FALSE
+42351,1,ac_water_source_id,Water source,WSTAP,Tap,Tap,,FALSE,FALSE,FALSE
+42352,3,ac_water_source_id,Water source,WSWEL,Wells,Wells,,FALSE,FALSE,FALSE
+42353,4,ac_water_source_id,Water source,WSOTH,Others,Others,,FALSE,FALSE,FALSE
+42354,1,ac_house_type_id,House type,HTPER,Permanent,Permanent,,FALSE,FALSE,FALSE
+42355,2,ac_house_type_id,House type,HTSPE,Semi-permanent,Semi-permanent,,FALSE,FALSE,FALSE
+42356,3,ac_house_type_id,House type,HSETH,Eartherned,Eartherned,,FALSE,FALSE,FALSE
+42357,4,ac_house_type_id,House type,HSTMP,Temporary,Temporary,,FALSE,FALSE,FALSE
+42358,1,ac_house_rooms,House rooms no.,HR12R,1 - 2 rooms,1 - 2 rooms,,FALSE,FALSE,FALSE
+42359,2,ac_house_rooms,House rooms no.,HR34R,3 - 4 rooms,3 - 4 rooms,,FALSE,FALSE,FALSE
+42360,3,ac_house_rooms,House rooms no.,HROTH,Others,Others,,FALSE,FALSE,FALSE
+42361,1,gmp_ratings_id,GMP ratings,GMPG,Good,Good,,FALSE,FALSE,FALSE
+42362,2,gmp_ratings_id,GMP ratings,GMPM,Moderate,Moderate,,FALSE,FALSE,FALSE
+42363,3,gmp_ratings_id,GMP ratings,GMPP,Poor,Poor,,FALSE,FALSE,FALSE
+42364,1,ac_gabbage_disp_id,Gabbage disposal,GDRPT,Rubbish pit,Rubbish pit,,FALSE,FALSE,FALSE
+42365,2,ac_gabbage_disp_id,Gabbage disposal,GDGC,Garbage collection,Garbage collection,,FALSE,FALSE,FALSE
+42366,3,ac_gabbage_disp_id,Gabbage disposal,GDNO,None,None,,FALSE,FALSE,FALSE
+42367,1,ac_school_access_means_id,School access,SAWAL,Walking,Walking,,FALSE,FALSE,FALSE
+42368,2,ac_school_access_means_id,School access,SADRI,Driving,Driving,,FALSE,FALSE,FALSE
+42369,3,ac_school_access_means_id,School access,SACYC,Cycling,Cycling,,FALSE,FALSE,FALSE
+42370,4,ac_school_access_means_id,School access,SAOTH,Others,Others,,FALSE,FALSE,FALSE
+42371,1,ac_land_ownership_id,Land ownership,LOOWN,Owned,Owned,,FALSE,FALSE,FALSE
+42372,2,ac_land_ownership_id,Land ownership,LOREN,Rented,Rented,,FALSE,FALSE,FALSE
+42373,3,ac_land_ownership_id,Land ownership,LOLEA,Leased,Leased,,FALSE,FALSE,FALSE
+42374,4,ac_land_ownership_id,Land ownership,LOSQU,Squatter,Squatter,,FALSE,FALSE,FALSE
+42375,5,ac_land_ownership_id,Land ownership,LOOTH,Other,Other,,FALSE,FALSE,FALSE
+42376,3,attachment_assessment_id,Attachment assessment,FACHM,Child and mentor,Child and mentor,,FALSE,FALSE,FALSE
+42377,1,local_leader_id,Local leader,LLCHI,Chief,Chief,,FALSE,FALSE,FALSE
+42378,2,local_leader_id,Local leader,LLACH,Assistant Chief,Assistant Chief,,FALSE,FALSE,FALSE
+42379,3,local_leader_id,Local leader,LLVEL,Village elder,Village elder,,FALSE,FALSE,FALSE
+42380,4,local_leader_id,Local leader,LLREL,Religious leaders,Religious leaders,,FALSE,FALSE,FALSE
+42381,5,local_leader_id,Local leader,LLNYK,Nyumba Kumi,Nyumba Kumi,,FALSE,FALSE,FALSE
+42382,6,local_leader_id,Local leader,LLOPL,Opinion leaders,Opinion leaders,,FALSE,FALSE,FALSE
+42383,7,local_leader_id,Local leader,LLOTH,Others,Others,,FALSE,FALSE,FALSE
+42384,1,ac_support_id,Support,STECE,Economic empowerment,Economic empowerment,,FALSE,FALSE,FALSE
+42385,2,ac_support_id,Support,STPSS,Psychosocial support,Psychosocial support,,FALSE,FALSE,FALSE
+42386,3,ac_support_id,Support,STMES,Medical support,Medical support,,FALSE,FALSE,FALSE
+42387,4,ac_support_id,Support,STBUR,Bursaries,Bursaries,,FALSE,FALSE,FALSE
+42388,5,ac_support_id,Support,STSCH,Scholarship,Scholarship,,FALSE,FALSE,FALSE
+42389,6,ac_support_id,Support,STASG,Assistive devices Linking to support groups,Assistive devices Linking to support groups,,FALSE,FALSE,FALSE
+42390,7,ac_support_id,Support,STOTH,Others,Others,,FALSE,FALSE,FALSE
+42391,2,escape_mode_id,Escape mode,ESMDE,Deception,Deception,,FALSE,FALSE,FALSE
+42392,3,escape_mode_id,Escape mode,ESMFT,Failure to Return,Failure to Return,,FALSE,FALSE,FALSE
+42393,4,escape_mode_id,Escape mode,ESMBO,Break Out,Break Out,,FALSE,FALSE,FALSE
+42394,5,escape_mode_id,Escape mode,ESMBU,Burst Out,Burst Out,,FALSE,FALSE,FALSE
+42395,6,escape_mode_id,Escape mode,ESMDB,Dorm Break,Dorm Break,,FALSE,FALSE,FALSE
+42396,7,escape_mode_id,Escape mode,ESMCP,Containment Penetration,Containment Penetration,,FALSE,FALSE,FALSE
+42397,8,escape_mode_id,Escape mode,ESMPF,Physical Force,Physical Force,,FALSE,FALSE,FALSE
+42398,9,escape_mode_id,Escape mode,ESMEW,Exploitation of Weakness,Exploitation of Weakness,,FALSE,FALSE,FALSE
+42399,10,escape_mode_id,Escape mode,ESMEC,Exploitation of Corruption,Exploitation of Corruption,,FALSE,FALSE,FALSE
+42400,11,escape_mode_id,Escape mode,ESMOA,Outside Aid,Outside Aid,,FALSE,FALSE,FALSE
+42401,1,si_loa_risk_id,LOA Risk,LOAFR,Flight risk,Flight risk,,FALSE,FALSE,FALSE
+42402,2,si_loa_risk_id,LOA Risk,LOAEH,Exposure to harm,Exposure to harm,,FALSE,FALSE,FALSE
+42403,1,loa_condition_id,LOA Conditions,LOCRC,Report to a chief,Report to a chief,,FALSE,FALSE,FALSE
+42404,2,loa_condition_id,LOA Conditions,LOPOR,Period of return,Period of return,,FALSE,FALSE,FALSE
+42405,3,loa_condition_id,LOA Conditions,LOBOC,Behaviour of the Child,Behaviour of the Child,,FALSE,FALSE,FALSE
+42406,4,loa_condition_id,LOA Conditions,LOHEI,Home Environment (Major issue still active),Home Environment (Major issue still active),,FALSE,FALSE,FALSE
+42407,1,loa_reason_grant_id,LOA reasons,LORFI,Family issues (Bereavement),Family issues,,FALSE,FALSE,FALSE
+42408,2,loa_reason_grant_id,LOA reasons,LORHO,Holiday,Holiday,,FALSE,FALSE,FALSE
+42409,3,loa_reason_grant_id,LOA reasons,LORSE,Sitting for the National Exam,Sitting for the National Exam,,FALSE,FALSE,FALSE
+42410,4,loa_reason_grant_id,LOA reasons,LORBO,Bonding,Bonding,,FALSE,FALSE,FALSE
+42411,5,loa_reason_grant_id,LOA reasons,LORRP,Request from the Parents,Request from the Parents,,FALSE,FALSE,FALSE
+42412,1,si_transfer_reason_id,Transfer reason,SITVT,Vocational and Proficiency Training,Vocational and Proficiency Training,,FALSE,FALSE,FALSE
+42413,2,si_transfer_reason_id,Transfer reason,SITCE,Continuity of formal education,Continuity of formal education,,FALSE,FALSE,FALSE
+42414,3,si_transfer_reason_id,Transfer reason,SITPC,Protection and Care,Protection and Care,,FALSE,FALSE,FALSE
+42415,2,ac_water_source_id,Water source,WSRWA,Rain,Rain,,FALSE,FALSE,FALSE

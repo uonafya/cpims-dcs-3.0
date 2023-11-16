@@ -1,0 +1,118 @@
+{% load static %}
+<header>
+<link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" />
+<link href="{% static 'css/style-responsive.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/theme/default.css' %}" rel="stylesheet" id="theme" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/si_forms.css' %}" rel="stylesheet" />
+
+<style>
+    .body {
+        display: block;
+        margin: 5px;
+        top: 0;
+        font-size: 13px;
+        line-height: 1.5em;
+    }
+    .svg_class{
+        width: 100%;
+    }
+    .sub_div {
+        position: absolute;
+        bottom: 0px;
+    }
+    p.rights {
+        font-size: 10px;
+    }
+    .divHeader {
+        margin: 0px;
+    }
+    .qr{
+        text-align: right;
+    }
+    .addr{
+        margin-left: 60px;
+    }
+</style>
+</header>
+<body>
+<div id="page-container">
+<div class="register register-with-news-feed">
+{% if form_id == 'FMSI033R' %}
+<div class="divHeader">
+    <center>
+    <img src="{% static 'img/logo_gok.png' %}"><br/>
+    MINISTRY OF LABOUR AND SOCIAL PROTECTION<br/>
+    STATE DEPARTMENT OF SOCIAL PROTECTION <br/>
+    DIRECTORATE OF CHILDREN'S SERVICES <br/><br/>
+</center>
+</div>
+<table width="100%">
+    <tbody>
+        <tr>
+            <td valign="top" width="400">
+                Tel: +254 (0) 2729800/2727980-4<br>
+                Fax: +254 (0) 2726222/2734417<br>
+                Email: watotoidara@gmail.com<br>
+                Institution2014@yahoo.com<br><br>
+                When replying, please quote<br>             
+                Ref: <b>{{ case.vacancy.ref_no }}</b><br>
+            </td>
+            <td valign="top" align="right">
+                <div class="addr">
+                    Social Security House,<br>
+                    Bishops Road<br>
+                    P.O. Box 46205 – 00100<br>
+                    Nairobi.<br><br>
+                    Date: <b>{{ case.vacancy.date_of_approved }}</b><br>
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                THE SUB-COUNTY CHILDREN OFFICER,<br>
+                {{ case.scco.name }}<br>
+                {{ scco_address }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>RE: CONFIRMATION OF VACANCY FOR THE COMMITTAL OF A CHILD IN A STATUTORY INSTITUTION</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p>(Registrar of the high court circular No. 49/69 dated 24th December 1982)</p>
+                <p>Please refer to your letter Refence No.<b>{{ case.vacancy.ref_no }}</b> dated <b>{{ case.vacancy.date_of_application }}</b> which you applied for a vacancy in a Statutory Institution for committal of a child named <b>{{ case.vacancy.person.first_name }} {{ case.vacancy.person.surname }}</b> aged <b>{{ case.vacancy.person.years }} years</b> case no <b>{{ case.vacancy.pnc_no }}</b> before the magistrates' court <b>{{ case.vacancy.magistrate_court }}</b>. This is to confirm that there is vacancy at <b>{{ case.vacancy.institution.org_unit_name }} </b> for a period of <b>{{ case.vacancy.months_approved}} months</b>.</p>
+
+                <p>Please inform the magistrate accordingly.</p>
+
+                <p>Kindly monitor to ensure that through care guidelines are followed from entry to exit and reintegration of the subject</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <img height="50px" src="{% static 'img/sign.png' %}"><br><br>
+                <b>FOR: SECRETARY, CHILDREN'S SERVICES.</b><br><br>
+                CC.<br>
+                Manager<br>
+                {{ case.vacancy.institution.org_unit_name }}<br>
+                {{ si_address }}<br><br>
+            </td>
+            <td valign="top"><div class="qr"><img src="{% static qr_code %}"></div></td>
+        </tr>
+    </tbody>
+</table>
+{% else %}
+{{ form_data|safe }}
+{% endif %}
+<div class="sub_div">
+    <p class="rights">Child Protection Information Management System (CPIMS). Timestamp: <b>{% now "jS F Y h:iA" %}</b></p>
+</div>
+</div>
+</div>
+</body>

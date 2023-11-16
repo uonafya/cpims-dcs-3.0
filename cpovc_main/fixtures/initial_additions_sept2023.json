@@ -1,0 +1,18 @@
+[
+    {
+        "pk": 2000,
+        "model": "cpovc_main.SetupList",
+        "fields": {
+            "item_category": "Government Type",
+            "user_configurable": "False",
+            "sms_keyword": "True",
+            "item_sub_category": "",
+            "is_void": "False",
+            "item_id": "TNRG",
+            "item_description_short": "Regional Children Office",
+            "field_name": "government_unit_type_id",
+            "item_description": "Regional Children Office",
+            "the_order": 11
+        }
+    }
+]

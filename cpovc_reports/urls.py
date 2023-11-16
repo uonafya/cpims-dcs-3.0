@@ -33,4 +33,5 @@ urlpatterns = [
     path('cluster/', views.cluster, name='cluster'),
     path('docs/<int:id>/', views.get_docs, name='get_docs'),
     path('afc/<int:id>/', views.reports_afc, name='reports_afc'),
+    path('si/<int:id>/', views.reports_si, name='reports_si'),
 ]

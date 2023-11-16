@@ -1,0 +1,56 @@
+form#new-form-b ul {
+      list-style-type: none;
+    }
+  form#new-form-b li {
+      padding-left: 1em;
+      text-indent: -2em;
+  }
+  @media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+  div#printId, button {
+    display: none;
+  }
+  label{
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  #wizard_a ol { display: none; }
+  .bwizard-buttons { display: none; }
+  .bwizard-steps { display: none; }
+  #wizard_a ol li { display: none; }
+  #step2, #step3  { display: block !important; }
+  .control-label {margin-bottom: 5px;}
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,td{
+    padding: 10px;
+    text-align: left; 
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+.custom-margin {
+      margin-left: 10em;
+    }
+.table-margin {
+        margin-left: 10px;
+}

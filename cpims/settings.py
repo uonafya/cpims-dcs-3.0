@@ -28,8 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DCS = ""
-
 
 # Application definition
 
@@ -53,6 +51,7 @@ INSTALLED_APPS = [
     'cpovc_help',
     'cpovc_ctip',
     'cpovc_afc',
+    'cpovc_api',
     'cpovc_missing_child',
     'notifications',
     'crispy_forms',
@@ -98,9 +97,9 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims_dcs',
-        'USER': 'admin',
-        'PASSWORD': '123456',
+        'NAME': 'cpims_gok',
+        'USER': 'cpimsdbuser',
+        'PASSWORD': 'Xaen!ee8',
         'HOST': '127.0.0.1',
         'PORT': '5432', }
 }
@@ -222,11 +221,13 @@ DCS = {}
 DCS['MINISTRY'] = 'MINISTRY OF LABOUR AND SOCIAL PROTECTION'
 DCS['STATE_DEPT'] = 'STATE DEPARTMENT FOR SOCIAL PROTECTION '
 DCS['STATE_DEPT'] += 'AND SENIOR CITIZENS AFFAIRS'
-DCS['NAME'] = 'DIRECTORATE OF CHILDREN SERVICES'
+DCS['NAME'] = "DIRECTORATE OF CHILDREN'S SERVICES"
 
 MEDIA_PHOTOS = os.path.join(BASE_DIR, 'photos')
 
-STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "photos", ]
+STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "photos",
+                    BASE_DIR / "reports", ]
 
 # Do not include forward slash at the end
 PHOTO_URL = '/static'
+DOC_ROOT = os.path.join(BASE_DIR, 'static')
