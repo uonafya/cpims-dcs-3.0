@@ -16,33 +16,6 @@ def ovc_mobile_home(request):
     else:
         pass
 
-@api_view(['GET'])
-def ovc_mobile_caseload(request):
-    """Method to handle Mobile endpoints."""
-    try:
-        results = []
-        res = {"case_id": "",
-               "ovc_cpims_id": 1,
-			   "case_serial": "CCO/42/241/5/29/387/2024",
-			   "parents": [{"cpims_id": 2, "first_name": "", "surname": "", "other_names": "", "relationship_type":""}],
-			   "siblings": [{"cpims_id": 3,"first_name": "", "surname": "", "other_names": "", "relationship_type":""}],
-			   "perpetrators" : [{"status": "", "first_name": "", "surname": "", "other_names": "", "relationship_type":""}],
-			   "risk_level": "",
-			   "date_case_opened": "2021-01-01",
-			   "case_reporter": "",
-			   "case_reporter_details" : [{"first_name": "", "surname": "", "other_names": "", "contacts": ""}],
-			   "case_category" : [{'place_of_event': 'PESE', 'category': 'CSSO', 'nature_of_event': 'OCGE', 'date_of_event': '2021-01-01'},],
-			   "case_status": "",
-			   "referral": "", 
-			   "case_remarks": "", 
-			   "summon": "", "date_of_summon": ""}
-        results.append(res)
-        return(Response(results, status=status.HTTP_200_OK ))
-    except Exception as e:
-        raise e
-    else:
-        pass
-
 
 class CaseloadViewSet(generics.ListAPIView):
     serializer_class = CaseRecordSerializer
@@ -57,3 +30,29 @@ class CaseloadViewSet(generics.ListAPIView):
         case_obj = OVCCaseRecord.objects.filter(
         	case_id__in=cases, case_status='ACTIVE')
         return case_obj
+
+
+@api_view(['POST'])
+def ovc_mobile_crs(request):
+    """Method to handle Mobile CRS endpoints."""
+    try:
+        results = {"message": "Saved Successfull"}
+
+        return(Response(results, status=201 ))
+    except Exception as e:
+        raise e
+    else:
+        pass
+
+
+@api_view(['POST'])
+def ovc_mobile_follow_up(request):
+    """Method to handle Mobile CRS endpoints."""
+    try:
+        results = {"message": "Saved Successfull"}
+
+        return(Response(results, status=201 ))
+    except Exception as e:
+        raise e
+    else:
+        pass
