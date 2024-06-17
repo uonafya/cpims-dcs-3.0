@@ -25,16 +25,25 @@ from notifications import urls as noti_urls
 from cpovc_ctip import urls as ctip_urls
 from cpovc_afc import urls as ac_urls
 from cpovc_stat_inst import urls as si_urls
+from cpovc_institutions import urls as cci_urls
+from cpovc_mobile import urls as mobile_urls
 
 from django.views.generic import TemplateView
 # For dashboard
 from cpovc_dashboard import urls as dashboard_api_urls
 from cpovc_dashboard import views as dash_views
 
+from drf_spectacular.views import (
+    SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView)
+from cpovc_api import views as api_views
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView, TokenRefreshView, TokenVerifyView
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url(r'^$', 'cpovc_auth.views.log_in', name='home'),
     path('', views.home, name='home'),
     path('accounts/request/', views.access, name='access'),
     path('accounts/terms/<int:id>/', cpovc_access.views.terms,
@@ -52,8 +61,6 @@ urlpatterns = [
     path('help/', include(help_urls)),
     path('forms/ctip/', include(ctip_urls)),
     path('forms/altcare/', include(ac_urls)),
-    # SI Module
-    path('forms/si/', include(si_urls)),
     path('notifications/', include(noti_urls, namespace='notifications')),
     re_path(r'^dashboard/(?P<did>[A-Z{2}]+)/$',
             registry_views.dashboard, name='dashboard'),
@@ -63,9 +70,24 @@ urlpatterns = [
     path('login/', cpovc_auth.views.log_in, name='login'),
     path('logout/', cpovc_auth.views.log_out, name='logout'),
     path('d/', dash_views.ovc_dashboard, name='ovc_dashboard'),
-    re_path(r'^api/v2/', include(dashboard_api_urls)),
+    path('api/v2/', include(dashboard_api_urls)),
+    # SI Module
+    path('institutions/si/', include(si_urls)),
+    path('institutions/cci/', include(cci_urls)),
     re_path(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
-                                                   content_type='text/plain'))]
+                                                   content_type='text/plain')),
+    # API Documentations
+    path('api/', api_views.APIRoot.as_view(), name='api_home'),
+    path('api/docs/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    # API Authentication
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    # Mobile App
+    path('api/mobile/', include(mobile_urls)),
+    ]
 
 handler400 = 'cpims.views.handler_400'
 handler404 = 'cpims.views.handler_404'

@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-38F" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -349,8 +349,10 @@ function deleteEvent(form_id, event_id) {
     });
 }
 $(document).ready(function() {
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-38F :input").prop("disabled", true);
+    {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
-
     $("#wizard_a").bwizard({ validating: function (e, ui) { }            
     });
 

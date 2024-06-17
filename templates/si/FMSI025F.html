@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-25F" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -133,17 +133,15 @@
                                         {{ form.Q2_re_name.label }}
                                         {% if form.Q2_re_name.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-7">
                                         {{ form.Q2_re_name }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-3 control-label">
-                                        {{ form.Q3_re_address.label }}
-                                        {% if form.Q3_re_address.field.required %}<span class="asteriskField">*</span>{% endif %}
+                                        <b>Physical Location</b>
                                     </label>
                                     <div class="col-md-3">
-                                        {{ form.Q3_re_address }}
                                     </div>
                                 </div>
                                 <div class="form-group">                                      
@@ -162,10 +160,8 @@
                                     </label>
                                     <div class="col-md-3">
                                         {{ form.Q5_county }}
-                                    </div>
-                                </div>
-                                <div class="form-group">                                      
-                                    <label class="col-md-3 control-label">
+                                    </div>                                 
+                                    <label class="col-md-1 control-label">
                                         {{ form.Q6_sub_county.label }}
                                         {% if form.Q6_sub_county.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
@@ -189,10 +185,8 @@
                                     </label>
                                     <div class="col-md-3">
                                         {{ form.Q8_location }}
-                                    </div>
-                                </div>
-                                <div class="form-group">                                      
-                                    <label class="col-md-3 control-label">
+                                    </div>                                    
+                                    <label class="col-md-1 control-label">
                                         {{ form.Q9_sub_location.label }}
                                         {% if form.Q9_sub_location.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
@@ -205,7 +199,7 @@
                                         {{ form.Q10_land_mark.label }}
                                         {% if form.Q10_land_mark.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-7">
                                         {{ form.Q10_land_mark }}
                                     </div>
                                 </div>
@@ -266,7 +260,7 @@
                                         {{ form.Q16_no_caregiver_reason.label }}
                                         {% if form.Q16_no_caregiver_reason.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-7">
                                         {{ form.Q16_no_caregiver_reason }}
                                     </div>
                                 </div>
@@ -306,12 +300,13 @@
                                         {{ form.Q19B_follow_details }}
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="form-group">                                      
                                     <label class="col-md-3 control-label">
-                                        {{ form.Q20_person_name.label }}
+                                        <b>Form filled by :</b> {{ form.Q20_person_name.label }}
                                         {% if form.Q20_person_name.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-7">
                                         {{ form.Q20_person_name }}
                                     </div>
                                 </div>
@@ -322,10 +317,8 @@
                                     </label>
                                     <div class="col-md-3">
                                         {{ form.Q21_person_tel }}
-                                    </div>
-                                </div>
-                                <div class="form-group">                                      
-                                    <label class="col-md-3 control-label">
+                                    </div>                                    
+                                    <label class="col-md-1 control-label">
                                         {{ form.Q22_person_id.label }}
                                         {% if form.Q22_person_id.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
@@ -335,10 +328,10 @@
                                 </div>
                                 <div class="form-group">                                      
                                     <label class="col-md-3 control-label">
-                                        {{ form.Q23_witness_name.label }}
+                                        <b>Witness :</b> {{ form.Q23_witness_name.label }}
                                         {% if form.Q23_witness_name.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-7">
                                         {{ form.Q23_witness_name }}
                                     </div>
                                 </div>
@@ -349,10 +342,8 @@
                                     </label>
                                     <div class="col-md-3">
                                         {{ form.Q21_person_tel }}
-                                    </div>
-                                </div>
-                                <div class="form-group">                                      
-                                    <label class="col-md-3 control-label">
+                                    </div>                                     
+                                    <label class="col-md-1 control-label">
                                         {{ form.Q25_witness_id.label }}
                                         {% if form.Q25_witness_id.field.required %}<span class="asteriskField">*</span>{% endif %}
                                     </label>
@@ -366,7 +357,7 @@
                     </div>
                     <hr>                    
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Date of Event <span class="asteriskField">*</span></label>
+                        <label class="col-md-3 control-label">Date of Reunification <span class="asteriskField">*</span></label>
                         <div class="col-md-3">
                             {{ form.event_date }}
                         </div>
@@ -534,8 +525,10 @@ function deleteEvent(form_id, event_id) {
 }
 
 $(document).ready(function() {
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-25F :input").prop("disabled", true);
+    {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
-
     $("#wizard_a").bwizard({ validating: function (e, ui) { }            
     });
 

@@ -10,15 +10,6 @@
 <link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
 <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
 <link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
-<style type="text/css">
-form#new-form-b ul {
-      list-style-type: none;
-    }
-  form#new-form-b li {
-      padding-left: 1em;
-      text-indent: -2em;
-  }
-</style>
 {% endblock %}
 
 {% block primary %}
@@ -74,7 +65,7 @@ form#new-form-b ul {
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-12F" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -387,6 +378,9 @@ form#new-form-b ul {
 <script>
 
 $(document).ready(function() {
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-12F :input").prop("disabled", true);
+    {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
     $('.other_date').datepicker({ format: 'dd-M-yyyy' });
 

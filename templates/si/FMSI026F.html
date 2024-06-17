@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-FMSI026F" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-26F" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -603,8 +603,10 @@ function deleteEvent(form_id, event_id) {
 
 
 $(document).ready(function() {
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-26F :input").prop("disabled", true);
+    {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
-
     $("#wizard_a").bwizard({ validating: function (e, ui) { }            
     });
 
@@ -694,7 +696,7 @@ function handleScores(){
     var sc4 = ['Q41_legal_aid', 'Q42_legal_aid', 'Q43_legal_aid', 'Q44_legal_aid', 'Q45_legal_aid', 'Q46_legal_aid'];
     var sc5 = ['Q51_inst', 'Q52_inst', 'Q53_inst', 'Q54_inst', 'Q55_inst', 'Q56_inst'];
 
-    $("#new-form-FMSI026F input[type=radio]:checked").each(function(event) {
+    $("#new-form-26F input[type=radio]:checked").each(function(event) {
         if(this.value == "AYES" && this.checked == true){
             console.log('Yes option '+ this.name + ' >> ' +this.value)
             score = 1;

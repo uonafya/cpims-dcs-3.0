@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 
 from pathlib import Path
+from datetime import timedelta
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,12 +28,15 @@ SECRET_KEY = 'f1&qcqi&cfbt)yfz0hco)^4qlenw7(kd1j#i18jpkta(oj8)if'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+SITE_ID = 1
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,13 +56,15 @@ INSTALLED_APPS = [
     'cpovc_help',
     'cpovc_ctip',
     'cpovc_afc',
-    'cpovc_api',
-    'cpovc_missing_child',
+    'cpovc_stat_inst',
+    'cpovc_institutions',
     'notifications',
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
-    'cpovc_stat_inst',
+    'rest_framework_simplejwt',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 ]
 
 MIDDLEWARE = [
@@ -97,7 +104,7 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims_gok',
+        'NAME': 'cpims_live',
         'USER': 'cpimsdbuser',
         'PASSWORD': 'Xaen!ee8',
         'HOST': '127.0.0.1',
@@ -107,20 +114,18 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-PWD_VALIDATOR = 'django.contrib.auth.password_validation.'
-
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': PWD_VALIDATOR + 'UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': PWD_VALIDATOR + 'MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': PWD_VALIDATOR + 'CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': PWD_VALIDATOR + 'NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -177,10 +182,10 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 AXES_LOCKOUT_TEMPLATE = 'locked.html'
@@ -216,18 +221,45 @@ CSRF_FAILURE_VIEW = 'cpims.views.csrf_failure'
 
 LOGIN_URL = '/login'
 
-# Ministry, State Dept and Directorate/Dept Details
+# Ministry Details
 DCS = {}
 DCS['MINISTRY'] = 'MINISTRY OF LABOUR AND SOCIAL PROTECTION'
-DCS['STATE_DEPT'] = 'STATE DEPARTMENT FOR SOCIAL PROTECTION '
-DCS['STATE_DEPT'] += 'AND SENIOR CITIZENS AFFAIRS'
-DCS['NAME'] = "DIRECTORATE OF CHILDREN'S SERVICES"
+DCS['STATE_DEPT'] = 'STATE DEPARTMENT FOR SOCIAL SECURITY AND PROTECTION'
+DCS['NAME'] = 'DIRECTORATE OF CHILDREN SERVICES'
 
 MEDIA_PHOTOS = os.path.join(BASE_DIR, 'photos')
 
-STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "photos",
-                    BASE_DIR / "reports", ]
+STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "photos", ]
 
 # Do not include forward slash at the end
 PHOTO_URL = '/static'
 DOC_ROOT = os.path.join(BASE_DIR, 'static')
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'UPDATE_LAST_LOGIN': True,
+}
+
+SPEC_DESC = """Various APIs for child protection workflows. Registration and Management
+               of organization Unit (Government and Non Government),
+               Persons (Workforce, Children and Caregivers).
+               Case Management for DCS (Case Record sheet, Alternative Care,
+               Statutory, Charitable Institution care and Follow up (Summons, Referrals,
+               Court sessions, Services & encounters and case closure. Other forms include
+               ESR Harmonized Targeting Tool, Social Inquiry Form and CCI Transitioning Form
+               <hr><br><a href='/api/'>API Home (Click here)</a>"""
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Child Protection Information Management System",
+    "DESCRIPTION": SPEC_DESC,
+    "VERSION": "1.0.0",
+    "PREPROCESSING_HOOKS": [],
+    # Custom Spectacular Settings
+    "EXCLUDE_PATH": [reverse_lazy("schema")],
+}
+# "spectacular.hooks.remove_apis_from_list"
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"

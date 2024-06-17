@@ -74,19 +74,6 @@
     height: 100%;
   }
 }
-@media print {
-    body,
-    .content,
-    .page-header-fixed {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    .sidebar,
-    .header,
-    .theme-panel {
-        display: none !important;
-    }
-}
 </style>
 {% endblock %}
 {% load app_filters %}
@@ -151,111 +138,105 @@
             <form class="form-horizontal" id="formCaseinfo" data-parsley-validate="true" method="POST">
                 {% csrf_token %}
 
-                        <h3 class="m-t-10">Case details - {{ form_name }}</h3>
-                        <table class="table table-profile">
-                            <tbody>
-                                <tr class="highlight">
-                                    <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
-                                    <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
-                                </tr>
-                                <tr class="highlight">                                        
-                                    <td class="field">DOB</td><td>{% if case.person.date_of_birth %}{{ case.person.date_of_birth }}{% else %}Not Provided{% endif %}</td>
-                                    <td class="field"></td><td></td>
-                                </tr>
-                                <tr class="highlight">
-                                    <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
-                                    <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
-                                </tr>
-                                <tr class="highlight">
-                                    <td class="field">Case Category</td>
-                                    <td>
-                                        {% for cat in cats %}
-                                            {{ cat.case_category|gen_value:vals }}
-                                        {% endfor %}
-                                    </td>
-                                    <td class="field">Sub Category</td>
-                                    <td>
-                                        {% for cat in sub_cats %}
-                                            {{ cat.case_category.case_category|gen_value:vals }} - {{ cat.sub_category_id|gen_value:vals }}
-                                        {% endfor %}
-                                    </td>
-                                </tr>
-                                {% if 4 in cids %}
-                                <tr class="highlight">
-                                    <td class="field">Photo</td>
-                                    <td colspan="3">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="nav-pills-tab-1">
+                            <h3 class="m-t-10">Case details - {{ form_name }}</h3>
+                            <table class="table table-profile">
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
+                                        <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
+                                        <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
+                                        <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">Case Category</td>
+                                        <td>
+                                            {% for cat in cats %}
+                                                {{ cat.case_category|gen_value:vals }}
+                                            {% endfor %}
+                                        </td>
+                                        <td class="field">Sub Category</td><td></td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td colspan="6">
 
-                                        <div class="row" style="min-height: 320px;">
-                                            <div class="col-md-6">
-                                                <div class="picture-container">
-                                                     <div class="polaroid image1" polaroid-caption="#Passport size">
-                                                        <a href="#modal-passport" data-toggle="modal">
-                                                             <img id="Photo1" src="{{ photo_pp }}" height="220px" alt="Passport size">
-                                                         </a>
-                                                     </div>
+                                            <div class="row" style="min-height: 400px;">
+                                                <div class="col-md-4">
+                                                    <div class="picture-container">
+                                                         <div class="polaroid image1" polaroid-caption="#Passport size">
+                                                            <a href="#modal-passport" data-toggle="modal">
+                                                                 <img id="Photo1" src="{{ photo_pp }}" height="250px" alt="Passport size">
+                                                             </a>
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="picture-container">
+                                                         <div class="polaroid image1" polaroid-caption="#Full size">
+                                                         <img id="Photo2" src="{{ photo_fs }}" height="270px" alt="Full size">
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="note note-info">
+                                                        <h4>Photo settings and details</h4>
+                                                        <ul>
+                                                            <li>The maximum file size for uploads is <strong>10 MB</strong>.</li>
+                                                            <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed.</li>
+                                                            <li>All metadata from the original photos will be wiped</li>
+                                                            <li>All photos will be scaled down to max {} width as specified by DCS</li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <a href="#modal-dialog" class="btn btn-primary" data-toggle="modal">
+                                                    <i class="fa fa-upload"></i>
+                                                        <span>Upload photos</span>
+                                                    </a>
+                                                    <button type="button" class="btn btn-success start">
+                                                        <i class="fa fa-file-o"></i>
+                                                        <span>Poster</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-inverse ">
+                                                        <i class="fa fa-plus"></i>
+                                                        <span>Case update</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger ">
+                                                        <i class="fa fa-file"></i>
+                                                        <span>Close case</span>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="picture-container">
-                                                     <div class="polaroid image1" polaroid-caption="#Full size">
-                                                        <a href="#modal-fullsize" data-toggle="modal">
-                                                             <img id="Photo2" src="{{ photo_fs }}" height="220px" alt="Full size">
-                                                         </a>
-                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">                                                
-                                            <ul>
-                                                <li>The maximum file size for uploads is <strong>10 MB</strong> and all photos will be scaled down to max 780px width as specified by DCS.</li>
-                                                <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed and all metadata from the original photos will be wiped</li>
-                                            </ul>                                                             
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                        <a href="#modal-dialog" class="btn btn-primary" data-toggle="modal">
-                                            <i class="fa fa-upload"></i>
-                                                <span>Upload photos</span>
-                                            </a>
-                                            <a href="#modal-poster" class="btn btn-success" data-toggle="modal">
-                                                    <i class="fa fa-file-o"></i>
-                                                    <span>Poster</span>
-                                            </a>
-                                            <button type="button" class="btn btn-inverse ">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Case update</span>
-                                            </button>
-                                            <button type="button" class="btn btn-danger ">
-                                                <i class="fa fa-file"></i>
-                                                <span>Close case</span>
-                                            </button>
-                                            <a href="{% url 'case_info' case_id=case_uid %}" class="btn btn-default"> <i class="fa fa-level-up"></i> Cancel</a>
-                                            
-                                        </div>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <p>This module has children photos that are are supposed to be destroyed as per the data protection and archiving policies.</p>
-                                    </td>
-                                </tr>
-                                {% else %}
-                                <tr>
-                                    <td colspan="4">
-                                       <div class="alert alert-danger fade in m-b-15">
-                                            <strong>Error!</strong>
-                                            Case category does not qualify for this additional Information.
-                                            <span class="close" data-dismiss="alert">&times;</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            </tbody>
-                        </table>                                                
-                               
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Other addtional details</label>
+                                <div class="col-md-10">
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <button type="submit" class="btn btn-sm btn-success btnCaseinfo">Update Information</button>
+                                    <a href="{% url 'case_info' case_id=case_uid %}" class="btn btn-sm btn-default"> Cancel</a>
+                                </div>
+                            </div>                           
+                            
+                        </div>
+
+                    </div>                                     
                 </form>
                 
             </div>
@@ -279,7 +260,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="person_id" value="{{ case.person.id }}">
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Type</label>
+                        <label class="col-md-1 control-label">Type</label>
                         <div class="col-md-9">
                             <select id="photo_type" name="photo_type" class="form-control" required>
                                 <option value="">Please select</option>
@@ -289,19 +270,8 @@
                         </div>
                         <div class="col-md-1"></div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Consent provided</label>
-                        <div class="col-md-9">
-                            <select id="photo_consent" name="photo_consent" class="form-control" required>
-                                <option value="">Please select</option>
-                                <option value="AYES">Yes</option>
-                                <option value="ANNO">No</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
                     <div class="form-group" style="min-height: 640px;">
-                        <label class="col-md-2 control-label">Photo</label>
+                        <label class="col-md-1 control-label">Photo</label>
                         <div class="col-md-10">
                             <div class="picture-container">
                                  <div class="polaroid image1" polaroid-caption="#Photo preview">
@@ -311,8 +281,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Properties</label>
-                        <div class="col-md-9" style="background-color: #ddd; min-height: 40px;">
+                        <label class="col-md-1 control-label">Properties</label>
+                        <div class="col-md-10" style="background-color: #ddd; min-height: 40px;">
                             <ul id="ulList"></ul>
                             <span class="fileupload-process"></span>
                         </div>
@@ -334,6 +304,10 @@
                         <i class="fa fa-upload"></i>
                         <span>Start upload</span>
                     </button>
+                    <button type="reset" class="btn btn-warning cancel">
+                        <i class="fa fa-ban"></i>
+                        <span>Cancel upload</span>
+                    </button>
                     <button type="button" class="btn btn-danger delete">
                         <i class="glyphicon glyphicon-trash"></i>
                         <span>Delete</span>
@@ -344,130 +318,22 @@
         </div>
     </div>
 </div>
-
-<!-- start #modal-passport -->
+<!-- end #modal-dialog -->
+<!-- start #modal-dialog -->
 <div class="modal fade" id="modal-passport">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-body" style="min-height: 780px;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">#Passport size</h4>
-            </div>
-            <div class="modal-body" style="min-height: 640px;">
-               <img src="{{ photo_pp }}" alt="Passport size" width="100%">
-
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-            </div>
-        </div>
+                <div class="picture-container">
+                     <div class="polaroid image1" polaroid-caption="#Passport size">
+                        <a href="#modal-passport" data-toggle="modal">
+                             <img src="{{ photo_pp }}" alt="Passport size">
+                         </a>
+                     </div>
+                </div> 
     </div>
 </div>
-
-<!-- end #modal-passport -->
-
-<!-- start #modal-fullsize -->
-<div class="modal fade" id="modal-fullsize">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">#Full size</h4>
-            </div>
-            <div class="modal-body" style="min-height: 640px;">
-               <img src="{{ photo_fs }}" alt="Full size" width="100%">
-
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end #modal-fullsize -->
-
-<!-- start #modal-poster -->
-<div class="modal fade" id="modal-poster">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Poster</h4>
-            </div>
-            <div id="mcPoster" class="modal-body" style="min-height: 640px;">
-                <table width="100%" class="table">
-                    <thead>
-                        <tr>
-                            <th colspan="2"><p style="font-size: 48px; text-align: center; color: #ff0000;">MISSING CHILD ALERT</p></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                            <td colspan="2"><img src="{{ photo_fs }}" alt="Full size" width="100%"></td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Name : </td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Sex : </td><td>{{ case.person.sex_id|gen_value:vals }}</td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Age when child went missing : </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Current age : </td>
-                            <td>{{ case.person.age }}</td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Place last seen : </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Date when child went missing : </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Child in company of : </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td width="30%">Description : </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" bgcolor="#ffc000">
-                                <center>
-                                <p>IF YOU HAVE INFORMATION ABOUT THIS CHILD<br>
-                                  CALL 116, OR CONTACT (……..)  POLICE STATION, (…….) SUB COUNTY CHILDREN'S OFFICE</p>
-                                </center>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">
-                                <center>
-                                <img src="/static/img/logo.png"><br>
-                                DIRECTORATE OF CHILDREN'S SERVICES
-                                </center>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-sm btn-success"><i class="fa fa-file"></i> JPEG</a>
-                <a href="javascript:;" class="btn btn-sm btn-success"><i class="fa fa-file"></i> PDF</a>
-                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success"><i class="fa fa-file"></i> Print</a>
-                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end #modal-poster -->
+<!-- end #modal-dialog -->
 {% endblock %}
 
 {% block lazy_javascript_code %}

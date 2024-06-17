@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-8A" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-32F" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -739,8 +739,10 @@ function deleteEvent(form_id, event_id) {
 }
 
 $(document).ready(function() {
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-32F :input").prop("disabled", true);
+    {% endif %}
     $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
-
     $("#wizard").bwizard();
 
 
@@ -771,7 +773,7 @@ $(document).ready(function() {
         var ra = ['qf8A101', 'qf8A102', 'qf8A111', 'qf8A112', 'qf8A113', 'qf8A114' ];
         var es = ['qf8A121', 'qf8A122', 'qf8A123', 'qf8A124', 'qf8A125', 'qf8A126', 'qf8A127'];
 
-        $("#new-form-8A input[type=radio]:checked").each(function(event) {
+        $("#new-form-32F input[type=radio]:checked").each(function(event) {
             if(this.value == "AYES" && this.checked == true){
                 console.log('Yes option '+ this.name + ' >> ' +this.value)
                  bmarks = 1;

@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-1a" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-33R" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -206,7 +206,7 @@
 
                                         <p>Kindly monitor to ensure that through care guidelines are followed from entry to exit and reintegration of the subject</p>
 
-                                        <p><b>FOR: SECRETARY, CHILDREN'S SERVICES.</b></p>
+                                        <p><b>SECRETARY, CHILDREN'S SERVICES.</b></p>
                                         <br>
                                         <p>
                                         CC.<br>
@@ -414,9 +414,13 @@ function deleteEvent(form_id, event_id) {
 }
 
 $(document).ready(function() {
-    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
-
-    
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-33R :input").prop("disabled", true);
+    {% endif %}
+    {% if case.vacancy.application_status %}
+    $("#new-form-33R :input").prop("disabled", true);
+    {% endif %}
+    $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });    
     // Handle Approval
     var aval = $("#Q1_status").val();
         handle_approval(aval);

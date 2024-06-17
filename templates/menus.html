@@ -30,8 +30,16 @@
 	    <ul class="sub-menu">
 			<li><a href="{% url 'case_record_sheet' %}">Case Record Sheet</a></li>
 			<li><a href="{% url 'residential_placement' %}">Institutional Placement</a></li>
-			<li class="{{ request.path|get_class:'/forms/si/' }}"><a href="{% url 'SI_home' %}">Statutory Institution</a></li>
-			<li><a href="{% url 'alternative_family_care' %}">Alternative Family Care</a></li>
+                        <li class="has-sub">
+	<a href="#">
+	    <b class="caret pull-right"></b>
+	    <span>Institutions</span>
+	</a>
+	<ul class="sub-menu">
+		<li class="{{ request.path|get_class:'/forms/si/' }}"><a href="{% url 'SI_home' %}">Statutory (SI)</a></li>
+	</ul>
+</li>
+			<!--<li><a href="{% url 'alternative_family_care' %}">Alternative Family Care</a></li>-->
 			<li><a href="{% url 'alternative_care' %}">Alternative Care</a></li>
 			<li><a href="{% url 'background_details' %}">School and Bursary</a></li>
 			<li><a href="{% url 'forms_registry' %}">Follow-ups</a></li>
@@ -65,7 +73,7 @@
 				    <span>Alternative Care Reports</span>
 				</a>
 				<ul class="sub-menu">
-					<li><a href="{% url 'reports_afc' id=1 %}">Summary report</a></li>
+					<li><a href="{% url 'reports_afc' id=1 %}">AFC Summpary report</a></li>
 					<li><a href="{% url 'reports_afc' id=2 %}">Identification Report</a></li>
 					<li><a href="{% url 'reports_afc' id=3 %}">Assessment Report - Child</a></li>
 					<li><a href="{% url 'reports_afc' id=4 %}">Assessment Report - Family</a></li>
@@ -74,20 +82,6 @@
 					<li><a href="{% url 'reports_afc' id=7 %}">Monitoring</a></li>
 					<li><a href="{% url 'reports_afc' id=8 %}">Case Review - Child</a></li>
 					<li><a href="{% url 'reports_afc' id=9 %}">Case Review - Caregiver</a></li>
-				</ul>
-			</li>
-			<li class="has-sub">
-				<a href="#">
-				    <b class="caret pull-right"></b>
-				    <i class="fa fa-align-left"></i> 
-				    <span>SI Reports</span>
-				</a>
-				<ul class="sub-menu">
-					<li><a href="{% url 'reports_si' id=1 %}">Summary report</a></li>
-					<li><a href="{% url 'reports_si' id=2 %}">Social Inquiry</a></li>
-					<li><a href="{% url 'reports_si' id=3 %}">Needs and Risk Assessment</a></li>
-					<li><a href="{% url 'reports_si' id=4 %}">Needs and Risk Assessment - Scale</a></li>
-					<li><a href="{% url 'reports_si' id=5 %}">Admission</a></li>
 				</ul>
 			</li>
 		    <li class="has-sub">
@@ -177,7 +171,9 @@
 	    <i class="fa fa-angle-double-left"></i></a>
 	</li>
     <!-- end sidebar minify button -->
-    <li><a href="/static/d/Vurugumapper.1.0.3.apk">
+    <li><a href="https://play.google.com/store/apps/details?id=com.poimapper.vurugumapper">
     	<i class="fa fa-download"></i> <span>Vurugu Mapper(Android)</span></a>
+    </li>
+    <li><img width="220px" src="/static/img/qr-vm.png">
     </li>
 </ul>

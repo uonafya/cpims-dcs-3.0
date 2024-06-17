@@ -28,7 +28,7 @@ class OrgUnitSerializer(serializers.HyperlinkedModelSerializer):
         model = RegOrgUnit
         fields = ('id', 'org_unit_id_vis', 'org_unit_name',
                   'org_unit_type_id')
-        read_only_fields = ('org_unit_id_vis', 'org_unit_name')
+        read_only_fields = ('org_unit_id_vis', 'org_unit_name', )
 
 
 class SettingsSerializer(serializers.HyperlinkedModelSerializer):
@@ -107,7 +107,7 @@ class SchoolSerializer(serializers.HyperlinkedModelSerializer):
 
         model = OVCSchool
         fields = ('id', 'school_level', 'school_name')
-        read_only_fields = ('id', 'school_name')
+        read_only_fields = ('id', 'school_name', )
 
 
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
@@ -118,4 +118,4 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
 
         model = OVCFacility
         fields = ('id', 'facility_code', 'facility_name')
-        read_only_fields = ('id')
+        read_only_fields = ('id', )
