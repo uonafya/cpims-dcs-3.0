@@ -1,12 +1,20 @@
 import json
 import uuid
 from django.utils import timezone
+from django.db.models import Count
+
 from cpovc_main.models import ListQuestions
 from cpovc_main.functions import convert_date, get_days_difference
 from cpovc_afc.models import AFCMain, AFCEvents
 
-from cpovc_forms.models import OVCPlacement
-from cpovc_registry.models import RegOrgUnit
+from cpovc_forms.models import OVCPlacement, OVCCaseCategory, OVCCaseRecord
+from cpovc_registry.models import (
+    RegOrgUnit, RegPerson, RegPersonsOrgUnits, RegPersonsTypes,
+    RegPersonsExternalIds)
+
+from cpovc_auth.models import AppUser
+from cpovc_ovc.models import OVCRegistration
+
 
 from django.conf import settings
 MEDIA_ROOT = settings.MEDIA_ROOT
@@ -357,3 +365,233 @@ def get_data(request, f_id, f_type=1):
         return None
     else:
         return f_data
+
+
+def get_child_units(org_ids):
+    """Method to do the organisation tree."""
+    try:
+        # print org_ids
+        orgs = RegOrgUnit.objects.filter(
+            parent_org_unit_id__in=org_ids).values_list('id', flat=True)
+        print('Check Org Unit level - %s' % (str(orgs)))
+    except Exception as e:
+        print('No parent unit - %s' % (str(e)))
+        return []
+    else:
+        return list(orgs)
+
+
+def get_attached_orgs(request):
+    """Method to get attached units."""
+    try:
+        orgs = []
+        dcs = 'Directorate of Children Services (DCS)'
+        person_id = request.user.reg_person_id
+        person_orgs = RegPersonsOrgUnits.objects.filter(
+            person_id=person_id, is_void=False)
+        reg_pri, reg_ovc, reg_pri_name = 2, False, dcs
+        all_roles, all_ous = [], []
+        for p_org in person_orgs:
+            p_roles = []
+            org_id = p_org.org_unit_id
+            org_name = p_org.org_unit.org_unit_name
+            reg_assist = p_org.reg_assistant
+            if reg_assist:
+                p_roles.append('REGA')
+                all_roles.append('REGA')
+            reg_prim = p_org.primary_unit
+            if reg_prim:
+                reg_pri = org_id
+                reg_pri_name = org_name
+            reg_ovc = p_org.org_unit.handle_ovc
+            if reg_ovc:
+                p_roles.append('ROVC')
+                all_roles.append('ROVC')
+                reg_ovc = True
+            pvals = {org_id: p_roles}
+            orgs.append(pvals)
+            all_ous.append(str(org_id))
+        # allroles = ','.join(list(set(all_roles)))
+        # allous = ','.join(all_ous)
+        child_ous = get_child_units([reg_pri])
+        vals = {'perms': orgs, 'ou_id': reg_pri,
+                'attached_ou': all_ous, 'perms_ou': all_roles,
+                'reg_ovc': reg_ovc, 'ou_name': reg_pri_name,
+                'ou_attached': child_ous}
+    except Exception as e:
+        print('Error with dashboard - %s' % (str(e)))
+        return {}
+    else:
+        return vals
+
+
+def dcs_dashboard(request, params):
+    """Method to get dashboard totals."""
+    try:
+        dash = {}
+        vals = {'TBVC': 0, 'TBGR': 0, 'TWGE': 0, 'TWNE': 0}
+        pr_ouid = int(request.session.get('ou_primary', 0))
+        if request.user.is_superuser or pr_ouid == 2:
+            person_types = RegPersonsTypes.objects.filter(
+                is_void=False, date_ended=None).values(
+                    'person_type_id').annotate(dc=Count('person_type_id'))
+            for person_type in person_types:
+                vals[person_type['person_type_id']] = person_type['dc']
+            dash['children'] = vals['TBVC']
+            dash['caregivers'] = vals['TBGR']
+            dash['government'] = vals['TWGE']
+            dash['ngo'] = vals['TWNE']
+            # Get org units
+            org_units = RegOrgUnit.objects.filter(is_void=False).count()
+            dash['org_units'] = org_units
+            # Case categories to find pending cases
+            cases_category = OVCCaseCategory.objects.filter(is_void=False)
+            # Case records counts
+            case_records = OVCCaseRecord.objects.filter(is_void=False)
+            case_counts = cases_category.count()
+            dash['case_records'] = case_counts
+            # Workforce members
+            workforce_members = RegPersonsExternalIds.objects.filter(
+                identifier_type_id='IWKF', is_void=False).count()
+            workforce_members = AppUser.objects.distinct(
+                'reg_person_id').count()
+            dash['workforce_members'] = workforce_members
+            # Get pending
+            cases = case_records.filter(case_stage=0).values_list(
+                'case_id', flat=True).distinct()
+            pending_count = cases_category.filter(
+                case_id_id__in=cases).count()
+            dash['pending_cases'] = pending_count
+            # Child registrations
+            ptypes = RegPersonsTypes.objects.filter(
+                person_type_id='TBVC', is_void=False,
+                date_ended=None).values_list('person_id', flat=True)
+            cregs = RegPerson.objects.filter(id__in=ptypes).values(
+                'created_at').annotate(unit_count=Count('created_at'))
+            # Institution Population
+            dash['inst_pop'] = {'B': 0, 'G': 0}
+        else:
+            # Org units
+            cbo_id = request.session.get('ou_primary', 0)
+            cbo_ids = request.session.get('ou_attached', [])
+            print(cbo_ids)
+            org_id = int(cbo_id)
+            org_ids = get_orgs_child(org_id)
+            # Workforce members using Appuser
+            person_orgs = RegPersonsOrgUnits.objects.select_related().filter(
+                org_unit_id__in=org_ids, is_void=False,
+                date_delinked=None).values_list('person_id', flat=True)
+            users = AppUser.objects.filter(
+                reg_person_id__in=person_orgs)
+            user_ids = users.values_list('id', flat=True)
+            print('user ids', user_ids)
+            users_count = users.count()
+            dash['workforce_members'] = users_count
+            person_types = RegPersonsTypes.objects.filter(
+                is_void=False, date_ended=None,
+                person__created_by_id__in=user_ids).values(
+                    'person_type_id').annotate(dc=Count('person_type_id'))
+            for person_type in person_types:
+                vals[person_type['person_type_id']] = person_type['dc']
+            dash['children'] = vals['TBVC']
+            dash['caregivers'] = vals['TBGR']
+            dash['government'] = vals['TWGE']
+            dash['ngo'] = vals['TWNE']
+            # Get org units
+            orgs_count = len(org_ids) - 1 if len(org_ids) > 1 else 1
+            dash['org_units'] = orgs_count
+            # Org unit cases
+            case_ids = OVCCaseGeo.objects.select_related().filter(
+                report_orgunit_id__in=org_ids,
+                is_void=False).values_list('case_id_id', flat=True)
+            # Case records counts
+            case_records = OVCCaseRecord.objects.filter(
+                case_id__in=case_ids, is_void=False)
+            # Case categories to find pending cases
+            cases_category = OVCCaseCategory.objects.filter(
+                is_void=False, case_id_id__in=case_ids)
+            case_counts = cases_category.count()
+            dash['case_records'] = case_counts
+            # Get pending
+            cases = case_records.filter(
+                case_stage=0, case_id__in=case_ids).values_list(
+                'case_id', flat=True).distinct()
+            pending_count = cases_category.filter(
+                case_id_id__in=cases).count()
+            dash['pending_cases'] = pending_count
+            # Child registrations
+            ptypes = RegPersonsTypes.objects.filter(
+                person_type_id='TBVC', is_void=False,
+                date_ended=None).values_list('person_id', flat=True)
+            cregs = RegPerson.objects.filter(
+                id__in=ptypes, created_by_id__in=user_ids).values(
+                'created_at').annotate(unit_count=Count('created_at'))
+            # Institution Population
+            inst_pop = {'B': 0, 'G': 0}
+            ou_type = request.session.get('ou_type', None)
+            print('OU TYPE', ou_type)
+            if ou_type:
+                inst_id = request.session.get('ou_primary', 0)
+                ou_attached = request.session.get('ou_attached', 0)
+                print('OU ID', inst_id, ou_attached)
+                inst_pops = OVCPlacement.objects.filter(
+                    residential_institution_name=str(inst_id),
+                    is_active=True, is_void=False).values(
+                    'person__sex_id').annotate(
+                    dcount=Count('person__sex_id'))
+                for ipop in inst_pops:
+                    if str(ipop['person__sex_id']) == 'SFEM':
+                        inst_pop['G'] = ipop['dcount']
+                    else:
+                        inst_pop['B'] = ipop['dcount']
+            dash['inst_pop'] = inst_pop
+        # OVC
+        oregs = OVCRegistration.objects.values(
+            'registration_date').annotate(
+            unit_count=Count('registration_date'))
+        child_regs, case_regs, ovc_regs = {}, {}, {}
+        for creg in cregs:
+            the_date = creg['created_at']
+            # cdate = '1900-01-01'
+            cdate = the_date.strftime('%d-%b-%y')
+            # child_regs[str(cdate)] = creg['unit_count']
+        for oreg in oregs:
+            the_date = oreg['registration_date']
+            # cdate = the_date.strftime('%d-%b-%y')
+            # ovc_regs[str(cdate)] = oreg['unit_count']
+        # Case Records
+        ovc_regs = case_records.values(
+            'date_case_opened').annotate(unit_count=Count('date_case_opened'))
+        for ovc_reg in ovc_regs:
+            the_date = ovc_reg['date_case_opened']
+            # cdate = '1900-01-01'
+            # cdate = the_date.strftime('%d-%b-%y')
+            # case_regs[str(cdate)] = ovc_reg['unit_count']
+        # Case categories Top 5
+        case_categories = cases_category.values(
+            'case_category').annotate(unit_count=Count(
+                'case_category')).order_by('-unit_count')
+        dash['child_regs'] = child_regs
+        dash['ovc_regs'] = []
+        dash['case_regs'] = case_regs
+        dash['case_cats'] = []
+    except Exception as e:
+        print('error with dash - %s' % (str(e)))
+        dash = {}
+        dash['children'] = 0
+        dash['caregivers'] = 0
+        dash['government'] = 0
+        dash['ngo'] = 0
+        dash['org_units'] = 0
+        dash['case_records'] = 0
+        dash['workforce_members'] = 0
+        dash['pending_cases'] = 0
+        dash['child_regs'] = []
+        dash['ovc_regs'] = []
+        dash['case_regs'] = []
+        dash['case_cats'] = 0
+        # Institution Population
+        dash['inst_pop'] = {'B': 0, 'G': 0}
+        return dash
+    else:
+        return dash

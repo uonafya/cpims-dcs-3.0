@@ -2,7 +2,9 @@ from django.db import models
 from rest_framework import serializers
 
 from cpovc_forms.models import OVCCaseRecord, OVCCaseCategory
-from cpovc_registry.models import RegPerson, RegPersonsGuardians, RegPersonsSiblings
+from cpovc_registry.models import (
+    RegPerson, RegPersonsGuardians, RegPersonsSiblings,
+    RegPersonsOrgUnits)
 
 
 class PerpetratorField(serializers.Field):
@@ -70,3 +72,15 @@ class CaseRecordSerializer(serializers.ModelSerializer):
             is_void=False, case_id_id=obj.case_id)
         return categories.values(
             'case_category', 'date_of_event', 'place_of_event', 'case_nature')
+
+
+class MobileUserSerializer(serializers.ModelSerializer):
+
+    org_unit_name = serializers.CharField(source='org_unit_id')
+
+    class Meta:
+        model = RegPersonsOrgUnits
+        fields = ('person_id', 'org_unit_id', 'org_unit_name')
+
+    def get_org_unit_name(self, obj):
+        return obj

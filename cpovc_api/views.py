@@ -455,3 +455,41 @@ def dreams(request):
         return Response({'details': msg})
     else:
         return Response(results)
+
+
+@api_view(['GET', 'POST'])
+def user_account(request):
+    try:
+        results = {'status': 0, 'message': 'Does not exist'}
+        if request.method == 'GET':
+            # account_id = request.user.id
+            print(request.query_params)
+            cpims_id = request.query_params.get('person_id')
+            username = request.query_params.get('username')
+            if username and cpims_id:
+                user = AppUser.objects.filter(username=username)
+                if user.exists():
+                    results = {'status': 1, 'message': 'Existing username'}
+                else:
+                    regp = AppUser.objects.filter(reg_person_id=cpims_id)
+                    if regp.exists():
+                        results = {'status': 2, 'message': 'Existing account'}
+            else:
+                results = {'status': 3, 'message': 'Missing Params'}
+        if request.method == 'POST':
+            cpims_id = request.data.get('person_id')
+            username = request.data.get('username')
+            password = request.data.get('password')
+            if username and cpims_id and password:
+                user = AppUser.objects.create_user(
+                    username=username, reg_person=cpims_id,
+                    password=password)
+                results = {'status': 4, 'message': 'Success', 'user_id': user.id}
+            else:
+                results = {'status': 5, 'message': 'Missing Params', 'user_id': 0}
+    except Exception as e:
+        msg = 'Error getting OVC details - %s' % (str(e))
+        print(msg)
+        return Response({'status': 9, 'message': 'Error'})
+    else:
+        return Response(results)
