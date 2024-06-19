@@ -11,4 +11,6 @@ urlpatterns = [
     # path('follow_up/', views.CaseloadViewSet.as_view()),
     path('crs/', views.ovc_mobile_crs, name='ovc_mobile_crs'),
     path('follow_up/', views.ovc_mobile_follow_up, name='ovc_mobile_follow_up'),
+    path('crs-mobile/', views.basic_crs, name='mobile_crs'),
+    
 ]
