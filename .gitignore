@@ -6,3 +6,6 @@ cpims/settings.py
 __pycache__
 *.pyc
 migrations
+requirements.txt
+.gitignore
+**/migrations/*
