@@ -3,7 +3,9 @@ from rest_framework import serializers
 
 from cpovc_forms.models import OVCCaseRecord, OVCCaseCategory
 from cpovc_mobile.models import OVCBasicCRSMobile, OVCBasicCategoryMobile, OVCBasicPersonMobile
-from cpovc_registry.models import RegPerson, RegPersonsGuardians, RegPersonsSiblings
+from cpovc_registry.models import (
+    RegPerson, RegPersonsGuardians, RegPersonsSiblings,
+    RegPersonsOrgUnits)
 
 
 class PerpetratorField(serializers.Field):
@@ -72,6 +74,7 @@ class CaseRecordSerializer(serializers.ModelSerializer):
         return categories.values(
             'case_category', 'date_of_event', 'place_of_event', 'case_nature')
 
+
 class CRSSerializerMobile(serializers.ModelSerializer):
     """Case Serializer."""
 
@@ -102,3 +105,18 @@ class CRSPersonserializerMobile(serializers.ModelSerializer):
         fields = ('person_id', 'relationship', 'person_type',
                   'first_name', 'surname', 'other_names',
                   'dob', 'sex', 'case')
+
+
+
+
+
+class MobileUserSerializer(serializers.ModelSerializer):
+
+    org_unit_name = serializers.CharField(source='org_unit_id')
+
+    class Meta:
+        model = RegPersonsOrgUnits
+        fields = ('person_id', 'org_unit_id', 'org_unit_name')
+
+    def get_org_unit_name(self, obj):
+        return obj

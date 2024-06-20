@@ -18,5 +18,6 @@ urlpatterns = [
     # path('crs-old/', views.BasicCRSView.as_view()),
     path('crs/', views.basic_crs),
     path('lookup/', views.get_settings, name='settings_lookup'),
-    path('dreams/', views.dreams),  
+    path('dreams/', views.dreams),
+    path('user/', views.user_account),
 ]
