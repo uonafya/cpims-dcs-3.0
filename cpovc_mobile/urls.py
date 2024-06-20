@@ -14,7 +14,7 @@ urlpatterns = [
     path('forms/', views.ovc_mobile_forms, name='ovc_mobile_forms'),
     # Follow ups
     path('follow_up/', views.ovc_mobile_follow_up, name='ovc_mobile_follow_up'),
-    path('crs-mobile/', views.basic_crs, name='mobile_crs'),
+
     
     # Others
     path('notifications/', views.MobileNotifications.as_view()),
