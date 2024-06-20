@@ -73,21 +73,21 @@ class CaseloadViewSet(generics.ListAPIView):
         return case_obj
 
 
-@api_view(['POST', 'PUT', 'PATCH', 'DELETE'])
-def ovc_mobile_crs(request):
-    """Method to handle Mobile CRS endpoints."""
-    try:
-        results = {"message": "Saved Successfull"}
+# @api_view(['POST', 'PUT', 'PATCH', 'DELETE'])
+# def ovc_mobile_crs(request):
+#     """Method to handle Mobile CRS endpoints."""
+#     try:
+#         results = {"message": "Saved Successfull"}
 
-        return(Response(results, status=201 ))
-    except Exception as e:
-        raise e
-    else:
-        pass
+#         return(Response(results, status=201 ))
+#     except Exception as e:
+#         raise e
+#     else:
+#         pass
 
 
 @api_view(['GET', 'POST', 'PATCH'])
-def basic_crs(request):
+def ovc_mobile_crs(request):
     try:
         print(request.method)
         if request.method == 'GET':
@@ -225,7 +225,7 @@ def basic_crs(request):
                 print('CASE ERROR', serializer.errors)
                 return Response(serializer.errors,
                                 status=status.HTTP_400_BAD_REQUEST)
-        # update is_accepted field only
+        # update 
         elif request.method == 'PATCH':
             case_id = request.data.get('case_id')
             is_accepted = request.data.get('is_accepted')
