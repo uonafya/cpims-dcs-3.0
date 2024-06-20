@@ -78,20 +78,21 @@ def ovc_mobile_crs(request):
         pass
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'PATCH'])
 def basic_crs(request):
     try:
         print(request.method)
         if request.method == 'GET':
             account_id = request.user.id
-            queryset = OVCBasicCRSMobile.objects.filter(account=account_id)
+            queryset = OVCBasicCRSMobile.objects.filter(account=account_id,is_accepted=1).values()
             case_id = request.query_params.get('case_id')
             if case_id:
                 queryset = queryset.filter(case_id=case_id)
+            response_list = []
             if queryset:
                 for  query in queryset:
-                    print("here8990",query.objects.all())
-                    cases = list(queryset.values())[0]
+                    # print("here8990",query.objects.all())
+                    cases = query
                     print("cases...........",cases)
                     
                     qs = OVCBasicCategoryMobile.objects.filter(case_id=case_id)
@@ -121,7 +122,8 @@ def basic_crs(request):
                             cases['children'].append(person)
                         if ptype == 'PTRD':
                             cases['reporters'].append(person)
-                return Response(cases)
+                    response_list.append(cases)
+                return Response(response_list)
             else:
                 return Response({'details': 'Case Does not Exist'})
         # Insert a new record for CRS
@@ -215,6 +217,16 @@ def basic_crs(request):
                 print('CASE ERROR', serializer.errors)
                 return Response(serializer.errors,
                                 status=status.HTTP_400_BAD_REQUEST)
+        # update is_accepted field only
+        elif request.method == 'PATCH':
+            case_id = request.data.get('case_id')
+            is_accepted = request.data.get('is_accepted')
+            case_data = OVCBasicCRSMobile.objects.get(case_id=case_id)
+            case_data.is_accepted = is_accepted
+            
+            case_data.save()
+            return Response({'Case Updated': 'Is accepted field updated'},)
+    
     except Exception as e:
         print('Error submitting API Case - %s' % str(e))
         return Response({'details': 'Error saving Case details'})
