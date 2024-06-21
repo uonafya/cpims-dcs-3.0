@@ -55,6 +55,7 @@ class OVCBasicCRSMobile(models.Model):
         choices=[(status.value, status.name) for status in ApprovalStatus],
         default=ApprovalStatus.NEUTRAL.value
     )
+    app_form_metadata = models.CharField(max_length=500, default="{}")
 
     class Meta:
         db_table = 'ovc_basic_case_record_mobile'
