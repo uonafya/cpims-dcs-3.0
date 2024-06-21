@@ -1,0 +1,742 @@
+{% extends 'base.html' %}
+{% load app_filters %}
+{% load static %}
+{% block page_title %} Case Record Sheet - Preview {% endblock %}
+{% block style_code %}
+<link href="{% static 'plugins/parsley/src/parsley.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-wizard/css/bwizard.min.css' %}" rel="stylesheet" />
+<link href="{% static 'plugins/bootstrap-multiselect/dist/css/bootstrap-multiselect.css' %}" rel="stylesheet">
+<link href="{% static 'css/jquery.tagit.css' %}" rel="stylesheet">
+<link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/print.css' %}" rel="stylesheet" />
+<style type="text/css">
+.dialog_paragraph {
+  color: #f00;
+}
+@media screen {
+  div.divHeader {
+    display: none;
+  }
+}
+@media print {
+  div.divHeader {
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+  }
+  div.invoice-footer {
+    bottom: 0 !important;
+  }
+}
+</style>
+{% endblock %}
+
+{% block javascript_code%}
+{% endblock javascript_code%}
+
+{% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+	<li><a href="#">Home</a></li>
+	<li class="active">Mobile Approval</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+
+<h1 class="page-header btn-info p5 p-5"><strong> Case Record Sheet - Approval </strong> <small> <b>
+{% for data in init_data %}
+       {{ data.first_name }} 
+
+       {{ data.surname }} 
+         | 
+       {{ data.sex_id|gen_value:vals }} 
+         | {% if data.date_of_birth|gen_age == 0 %}
+                            UNDER 1 YEAR
+                        {% else %}
+                            
+                       {{ data.date_of_birth|gen_age }} 
+                         YRS 
+                        {% endif %}</b></small></h1>
+{% endfor %}
+<div class="divHeader"><img src="{% static 'img/logo_gok.png' %}"><br/>REPUBLIC OF KENYA <br/>MINISTRY OF LABOUR AND SOCIAL PROTECTION
+    <br/>STATE DEPARTMENT OF SOCIAL PROTECTION <br/>DEPARTMENT OF CHILDREN'S SERVICES <br/><br/><b>CASE RECORD SHEET SUMMARY</b></div>
+<!-- begin invoice -->
+			<div class="invoice">
+                <div class="invoice-company">
+                    <span class="pull-right hidden-print">                    
+                    {% if ovccr.case_status == 'ACTIVE' %}
+                        <button class="btn btn-sm btn-success m-b-10">Active</button>
+                    {% else %}
+                        <button class="btn btn-sm btn-danger m-b-10">
+                           {{ ovccr.case_status }} 
+                        </button> 
+                    {% endif %}
+                   <a href="{% url 'edit_case_record_sheet' id=result.form_id %}" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-pencil m-r-5"></i> Edit</a> 
+                    <a href="{% url 'cpims_document' doc_id='CRS' case_id=ovccr.case_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-file-pdf-o m-r-5"></i> Export CRS to PDF</a> 
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print Summary</a> 
+                    <a href="{% url 'case_events' id=result.form_id %}" class="btn  btn-sm btn-primary m-b-10">Follow-up &nbsp; &nbsp;<i class="fa fa-paw"></i></a>  
+                    </span>
+                    SERIAL NO. 
+                   {{ ovccr.case_serial }} 
+
+                </div>
+                <div class="invoice-header">
+                	<strong>CASE REPORTING</strong>
+                </div>
+                <div class="invoice-content">
+                    <div class="table-responsive">
+                        <table class="table table-invoice">
+                            <tbody>
+                                <tr>
+                                	<td width="3%"></td>
+                                    <td width="22%">
+                                        <strong>Case Reporter/Originator</strong><br />
+                                        
+                                    </td>
+                                    <td colspan="3">
+                                       {{ ovccr.case_reporter|gen_value:vals }} 
+                                    </td> 
+                                </tr>
+                                {% if ovccr.court_name %}
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Court Name</strong><br />
+                                        
+                                    </td>
+                                    <td>
+                                       {{ ovccr.court_name }} 
+                                    </td> 
+                                    <td><strong>Court / File Number</strong></td>
+                                    <td>
+                                       {{ ovccr.court_number }} 
+                                    </td> 
+                                </tr>
+                                {% endif %}
+                                {% if ovccr.police_station %}
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Police Station</strong><br />
+                                        
+                                    </td>
+                                    <td>
+                                       {{ ovccr.police_station }} 
+                                    </td> 
+                                    <td><strong>OB Number</strong></td>
+                                    <td>
+                                       {{ ovccr.ob_number }} 
+                                    </td> 
+                                </tr>
+                                {% endif %}
+                                {% if ovccr.case_reporter_first_name %}
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Reporter Name(s)</strong><br />
+                                        
+                                    </td>
+                                    <td>
+                                       {{ ovccr.case_reporter_first_name }} 
+
+                                       {{ ovccr.case_reporter_surname }} 
+
+                                    	{% if ovccr.case_reporter_other_names %}
+                                            
+                                       {{ ovccr.case_reporter_other_names }} 
+
+                                        {% endif %}
+                                   </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                {% endif %}
+                                {% if ovccr.case_reporter_contacts %}
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Reporter Phone Number</strong><br />
+                                        
+                                    </td>
+                                    <td width="25%">
+                                       {{ ovccr.case_reporter_contacts }} 
+                                    </td> 
+                                    <td><strong>Date of Reporting</strong></td>
+                                    <td>
+                                       {{ ovccr.date_case_opened }} 
+                                    </td> 
+                                </tr>
+                                {% endif %}
+                                <tr>
+                                	<td></td>
+                                    <td colspan="5">
+                                        <strong>Place of Occurence</strong></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Sub County</strong><br />                                        
+                                    </td>
+                                    <td>
+                                       {{ ovcgeo.occurence_subcounty.area_id|gen_areaname }} 
+                                    </td>
+                                    <td><strong>Ward</strong></td>
+                                    <td>{% if ovcgeo.occurence_ward %}
+                                       {{ ovcgeo.occurence_ward|gen_areaname }} 
+                                        {% else %}N/A{% endif %}</td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Village/Estate</strong><br />                                        
+                                    </td>
+                                    <td>{% if ovcgeo.occurence_village %}
+                                       {{ ovcgeo.occurence_village }} 
+                                        {% else %}N/A{% endif %}</td>
+                                    <td><strong>Landmark</strong></td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td colspan="5">
+                                        <strong>Place of Reporting</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Sub County</strong><br />
+                                        
+                                    </td>
+                                    <td colspan="4">
+                                       {{ ovcgeo.report_subcounty.area_id|gen_areaname }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><strong>Place of Reporting</strong></td>
+                                    <td colspan="4">
+                                        
+                                       {{ ovcgeo.report_orgunit }} 
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="invoice-header">
+                	<strong>ABOUT THE CHILD</strong>
+                </div>
+                <br />
+                <div class="invoice-content">
+	                <div class="table-responsive">
+                    <table class="table table-invoice">
+                    <tbody>
+                        {% for data in init_data %}
+                        <tr>
+                        	<td width="3%"></td>
+                			<td width="22%"><strong>Child Names</strong></td><td width="25%">
+                               {{ data.first_name }} 
+
+                               {{ data.surname }} 
+                            </td>
+                			<td><strong>Date of Birth</strong></td><td>
+                               {{ data.date_of_birth }} 
+                            </td>
+                		</tr>
+                		<tr>
+                			<td></td>
+                			<td><strong>Sex</strong></td><td>
+                               {{ data.sex_id|gen_value:vals }} 
+                            </td>
+                			<td><strong>Age</strong></td><td>
+                			{% if data.date_of_birth|gen_age == 0 %}
+						                UNDER 1 YEAR
+						            {% else %}
+						                
+                                   {{ data.date_of_birth|gen_age }} 
+                                     YRS 
+						            {% endif %}
+                		    </td>
+                		</tr>
+                		{% endfor %}
+        				<tr>
+        					<td></td>
+                            <td colspan="4">
+                                <strong>Siblings</strong>
+                            </td>
+                        </tr>
+                        {% if init_data.siblingpersons|length %}
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Firstname</th>
+                            <th>Surname</th>
+                            <th>Sex</th>
+                        </tr>
+
+                    	{% for result in init_data.siblingpersons %}
+                    	<tr>
+							<td>
+                               {{ forloop.counter }} 
+                            </td>
+							<td>
+                               {{ result.id }} 
+                            </td>
+	                        <td>
+                               {{ result.first_name }} 
+                            </td>
+	                        <td>
+                               {{ result.surname }} 
+                            </td>
+	                        <td>
+                               {{ result.sex_id|gen_value:vals }} 
+                            </td>
+						</tr>
+						{% endfor %}
+						{% else %}
+	                    <tr>
+	                    	<td></td>
+                            <td colspan="4">
+                                <strong>No Siblings</strong>
+                            </td>
+                        </tr>
+						{% endif %}
+
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>House Economic Status</strong><br />                                        
+                                    </td>
+                                    <td>
+                                       {{ ovcd.household_economic_status|gen_value:vals }} 
+                                    </td> 
+                                    <td>
+                                        <strong>Family Status</strong><br />                                        
+                                    </td>
+                                    <td>
+                                         {% for ovcf in ovcfam %}										
+										
+                                        {{ ovcf.family_status|gen_value:vals }} 
+                                         <br>
+									{% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Close Friends</strong><br />                                        
+                                    </td>
+                                    <td colspan="3">
+                                        {% for ovcfrnd in ovcfrnds %}
+											{% if not ovcfrnd.friend_other_names == 'XXXX' %}
+												
+                                           {{ovcfrnd.friend_firstname}} 
+
+                                               {{ovcfrnd.friend_other_names}} 
+                                                ; &nbsp;
+											{% else %}
+												
+                                           {{ovcfrnd.friend_firstname}} 
+                                            ; &nbsp;
+											{% endif %}
+										{% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Hobbies</strong><br />                                        
+                                    </td>
+                                    <td colspan="3">
+                                        {% for ovchob in ovchobs %}													
+											
+                                       {{ovchob.hobby}} 
+                                        ; &nbsp;
+										{% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Mental Condition</strong><br />                                        
+                                    </td>
+                                    <td>
+                                       {{ ovcmed.mental_condition|gen_value:vals }} 
+                                    </td> 
+                                    <td colspan="2">
+                                        {% for ovcmentmed in ovcmentmeds %}													
+											
+                                       {{ovcmentmed.medical_subcondition|gen_value:vals}} 
+                                        ; &nbsp;
+										{% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Physical Condition</strong><br />                                        
+                                    </td>
+                                    <td>
+                                       {{ ovcmed.physical_condition|gen_value:vals }} 
+                                    </td>
+                                    <td colspan="2">
+                                        {% for ovcphymed in ovcphymeds %}													
+											
+                                       {{ovcphymed.medical_subcondition|gen_value:vals}} 
+                                        ; &nbsp;
+										{% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Other Conditions</strong><br />                                        
+                                    </td>
+                                    <td>
+                                       {{ ovcmed.other_condition|gen_value:vals }} 
+                                    </td>
+                                    <td colspan="2">
+                                        {% for ovcothermed in ovcothermeds %}												
+											
+                                       {{ovcothermed.medical_subcondition|gen_value:vals}} 
+                                        ; &nbsp;
+										{% endfor %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="invoice-header">
+                	<strong>CASE DETAILS</strong>
+                </div>
+                <div class="invoice-content">
+
+	                <div class="table-responsive">
+                        <table class="table table-invoice">
+                            <tbody>
+                                <tr>
+                                	<td width="3%"></td>
+                                    <td width="20%">
+                                        <strong>Case Serial</strong><br />                                        
+                                    </td>
+                                    <td width="20%">
+                                       {{ ovccr.case_serial }} 
+                                    </td> 
+                                    <td width="17%">
+                                        <strong>Alleged Perpetrator / Offender Name(s)</strong><br />
+                                        
+                                    </td>
+                                    <td colspan="2">
+                                        <i class="fa fa-caret-right"></i>
+                                        
+                                       {{ ovccr.perpetrator_first_name }} 
+
+                                       {{ ovccr.perpetrator_surname }} 
+
+                                        {% if ovccr.perpetrator_other_names %} 
+                                       {{ ovccr.perpetrator_other_names }} 
+                                         {% endif %} 
+                                        - 
+                                       {{ ovccr.perpetrator_relationship_type|gen_value:vals }} 
+                                        <br/> 
+                                        {% for perpetrator in perpetrators %}
+                                        <i class="fa fa-caret-right"></i>
+                                        
+                                       {{ perpetrator.person_first_name }} 
+
+                                       {{ perpetrator.person_surname }} 
+
+                                        {% if perpetrator.person_other_names %} 
+                                       {{ perpetrator.person_other_names }} 
+                                         {% endif %}
+                                        - 
+                                       {{ perpetrator.person_relation|gen_value:vals }} 
+                                        <br/>
+
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                				<tr>
+                					<td></td>
+                                    <td colspan="5">
+                                        <strong>Case Categories</strong>
+                                    </td>
+                                </tr>
+	                                <tr>
+	                                    <th>#</th>
+	                                    <th>Case Category</th>
+	                                    <th>Case SubCategory(s)</th>
+                                        <th>Date Of Event</th>
+                                        <th>Place Of Event</th>
+                                        <th>Case Nature</th>
+	                                </tr>
+	                            	{% for resultset in resultsets %}
+	                                	{% regroup resultset by case_grouping_id as case_grouping_id_list %}
+		                                	{% for case_grouping_id in case_grouping_id_list %}	
+			                                <tr>
+			                                	<td>
+                                                   {{ forloop.counter }} 
+                                                </td>
+			                                    <td>
+				                                	{% for item in case_grouping_id.list %}
+				                                		
+                                                   {{ item.case_category|gen_value2 }} 
+                                                    <br>
+					                            	{% endfor %}
+					                            </td>
+			                                    <td>
+					                            	{% for item in case_grouping_id.list %}
+				                                		
+                                                   {{ item.case_subcategorys }} 
+
+				                                		<br>
+					                            	{% endfor %}
+					                            </td>
+
+					                            <td>
+					                                
+                                                   {{ case_grouping_id.list|gen_date_of_event }} 
+
+					                            </td>
+
+					                            <td>
+				                                	{% for item in case_grouping_id.list %}
+				                                		
+                                                   {{ item.place_of_event|gen_value2 }} 
+
+				                                		<br>
+					                            	{% endfor %}
+					                            </td>
+
+					                            <td>
+				                                	{% for item in case_grouping_id.list %}
+				                                		
+                                                   {{ item.case_nature|gen_value2 }} 
+
+				                                		<br>
+					                            	{% endfor %}
+					                            </td>
+			                                </tr>
+			                                {% endfor %}
+			                        {% endfor %}
+
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Risk Level</strong><br />
+                                        
+                                    </td>
+                                    <td colspan="4">
+                                       {{ ovccr.risk_level|gen_value:vals }} 
+                                    </td> 
+                                </tr>
+                                <tr>
+                                	<td></td>
+                                    <td>
+                                        <strong>Immediate Needs</strong><br />
+                                        
+                                    </td>
+                                    <td>
+										{% for ovcneed in ovcneeds %}
+											{% if ovcneed.need_type == 'IMMEDIATE'%}											
+												<i class="fa fa-caret-right"></i> 
+                                               {{ ovcneed.need_description|gen_value:vals }} 
+                                                <br>
+											{% endif %}	
+										{% endfor %}	
+                                    </td>
+                                    <td>
+                                        <strong>Future Needs</strong><br />
+                                        
+                                    </td>
+                                    <td colspan="2">
+										{% for ovcneed in ovcneeds %}
+											{% if ovcneed.need_type == 'FUTURE'%}											
+												<i class="fa fa-caret-right"></i> 
+                                               {{ ovcneed.need_description|gen_value:vals }} 
+                                                <br>
+											{% endif %}	
+										{% endfor %}	
+                                    </td>
+                                </tr>
+                				<tr>
+                                    <td></td>
+                                    <td colspan="5">
+                                        <strong>Referrals</strong>
+                                    </td>
+                                </tr>
+
+                                {% if ovccr.referral_present == 'AYES' %}
+                                <tr>
+                                    <th>#</th>
+                                    <th>Referral Actor</th>
+                                    <th>Specification</th>
+                                    <th colspan="2">Reason</th>
+                                </tr>
+
+                            	{% for resultset in resultsets2 %}
+                                	{% regroup resultset by referral_grouping_id as referral_grouping_id_list %}
+	                                	{% for referral_grouping_id in referral_grouping_id_list %}	              	
+			                                <tr id="id_inputElements">
+			                                	<td>
+			                                	
+                                                   {{ forloop.counter }} 
+
+			                                	</td>
+
+			                                	<td>
+			                                	{% for item in referral_grouping_id.list %}
+			                                		
+                                               {{ item.refferal_actor_type|gen_value2 }} 
+                                                <br>
+				                            	{% endfor %}
+				                            	</td>
+
+				                                <td>
+				                                {% for item in referral_grouping_id.list %}
+				                                	
+                                               {{  item.refferal_actor_specify }} 
+
+				                                {% endfor %}
+				                            	</td>
+
+				                            	<td>
+			                                	{% for item in referral_grouping_id.list %}
+			                                		
+                                               {{ item.refferal_to|gen_value2 }} 
+                                                <br>
+				                            	{% endfor %}
+				                            	</td>
+				                            <tr>
+			                            {% endfor %}
+		                        {% endfor %}
+		            {% else %}
+	                    <tr>
+	                    	<td></td>
+	                        <td colspan="5">No referrals found</td>
+	                    </tr>
+                    {% endif %}
+        				<tr>
+                            <td></td>
+                            <td colspan="5"><strong>Summons</strong></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><strong>Summon Date</strong></td>
+                            <td>
+                            	{% if ovccr.date_of_summon %}
+								    
+                               {{ ovccr.date_of_summon }} 
+
+								{% else %}
+			                         No Summons Issued
+			                    {% endif %}
+			                </td>
+			                <td><strong>Summon Status</strong></td>
+			                <td colspan="2">
+			                	{% if ovccr.summon_status %}
+									Summon Honoured
+								{% else %}											 
+									{% if ovccr.summon_status != None %}
+										Pending Summon
+									{% else %}
+										No Summons Issued
+									{% endif %}
+								{% endif %}
+			                </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><strong>Case Remarks</strong></td>
+                            <td colspan="4">
+                               {{ ovccr.case_remarks }} 
+                            </td> 
+                        </tr>
+                        </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div>
+                    * Case remains pending if no follow up is made after registration. Cases are dropped out after 90 days (but not automatic).
+                </div>
+                <div class="invoice-footer text-muted">
+                    <p class="text-right">
+                        <span class="m-r-10"> Case ID: <strong>
+                           {{ ovccr.case_id }} 
+                        </strong>; Case Created by: <strong>
+                           {{ app_user.reg_person.first_name }} 
+
+                           {{ app_user.reg_person.surname }} 
+                        </strong>; Date and Time: <strong>
+                           {{ ovccr.timestamp_created }} 
+                        </strong></span> 
+                    </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><a href="javascript:history.go(-1)" class="history btn btn-info">Back to Serach</a></p>                            
+                    </div>
+                    <div class="col-md-4">
+                        <button id="btn-scr-accept" onclick="ApproveCSR('accept')" class="history btn btn-primary">Approve CSR</button>
+                        <button id="btn-scr-reject" onclick="ApproveCSR('reject')" class="history btn btn-danger">Reject  CSR</button>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+			<!-- end invoice -->
+<!-- End content area -->
+{% endblock %}
+
+{% block lazy_javascript_code %}
+	<script src="{% static 'plugins/parsley/dist/parsley.js' %}"></script>
+	<script src="{% static 'plugins/bootstrap-wizard/js/bwizard.js' %}"></script>	
+	<script src="{% static 'plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js' %}"></script>
+	<script src="{% static 'js/apps.js' %}"></script>
+	<script src="{% static 'js/form-wizards.js' %}"></script>
+	<script src="{% static 'js/tag-it.js' %}"></script>
+	<script src="{% static 'js/bootstrap-table.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-table-locale-all.min.js' %}"></script>
+	<script type="text/javascript">	
+	jQuery(document).ready(function() 
+	{		
+		/* Get Case Owner
+	    var pfirst_name = localStorage.getItem("person_fname");
+	    var psurname = localStorage.getItem("person_sname");
+	    var person_name = pfirst_name + ' ' + psurname;
+	    $('#person_name')[0].innerHTML = person_name;*/
+        
+
+
+	});
+
+    const ApproveCSR = (type) =>{
+        console.log({type})
+        var approResp = apiCall("csr", "POST").then(data =>{
+            
+        })
+        .catch(error => {
+            console.error('Error fetching initial data:', error);
+          });     }
+
+    const apiCall = async (url, pMethod) => {
+        var settings = {
+          url: window.location.origin + '/api/mobile/' + url,
+          method: pMethod,
+          timeout: 0,
+          headers: {},
+        };
+        return $.ajax(settings).done(function (response) {
+          return response;
+        });
+      };
+	</script>
+{% endblock %}
