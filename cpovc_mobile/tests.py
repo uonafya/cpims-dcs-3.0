@@ -23,7 +23,7 @@ headers = {'Authorization': 'Bearer %s' % token}
 
 print(token)
 
-url = base_url + '/mobile/caseload/'
+url = base_url + '/mobile/settings/'
 # url = base_url + '/form/HMF/'
 
 response = requests.get(url, headers=headers)

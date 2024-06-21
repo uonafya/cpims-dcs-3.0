@@ -140,7 +140,11 @@ FPERM['FMSI036F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
 FPERM['FMSI037F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
 FPERM['FMSI038F'] = {0: [''], 1: ['CRU'], 2: ['CRU'], 3: ['RUD']}
 
+<<<<<<< HEAD
+INSTM={}
+=======
 
 # missing
 INSTM = {}
 INSTM[''] = ['']
+>>>>>>> mobile_approval

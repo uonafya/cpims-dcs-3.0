@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'cpovc_help',
     'cpovc_ctip',
     'cpovc_afc',
+    'cpovc_mobile',
     'cpovc_stat_inst',
     'cpovc_institutions',
     'notifications',
@@ -105,8 +106,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cpims_gok',
+<<<<<<< HEAD
+        'USER': 'postgres',
+        'PASSWORD': 'test',
+=======
         'USER': 'cpimsdbuser',
         'PASSWORD': 'Xaen!ee8',
+>>>>>>> mobile_approval
         'HOST': '127.0.0.1',
         'PORT': '5432', }
 }
