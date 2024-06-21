@@ -14,8 +14,13 @@ urlpatterns = [
     # Approval urls UI
     path("mobile-approval/", views.mobile_app_home, name="mobile_app_home"),
     re_path(
-        r"^crs/view/(?P<id>\w+)/$",
+        r"^crs/view/(?P<id>[0-9a-f]{8}-[0-9a-f]{4}-1[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12})/$",
         views.view_mobile_case_record_sheet,
         name="view_mobile_case_record_sheet",
     ),
+#      re_path(
+#         r"^crs/view/(?P<id>\w+)/$",
+#         views.view_mobile_case_record_sheet,
+#         name="view_mobile_case_record_sheet",
+#     ),
 ]
