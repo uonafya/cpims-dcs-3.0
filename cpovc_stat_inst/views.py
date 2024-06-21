@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 
 import barcode
-from barcode import EAN13, Code128
+# from barcode import EAN13, Code128
 import segno
 
 from .forms import (SIForm)
