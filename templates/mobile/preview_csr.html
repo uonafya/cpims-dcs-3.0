@@ -684,8 +684,8 @@
                             <p><a href="javascript:history.go(-1)" class="history btn btn-info">Back to Serach</a></p>                            
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="history btn btn-primary">Approve CSR</a>
-                        <a href="" class="history btn btn-danger">Reject  CSR</a>
+                        <button id="btn-scr-accept" onclick="ApproveCSR('accept')" class="history btn btn-primary">Approve CSR</button>
+                        <button id="btn-scr-reject" onclick="ApproveCSR('reject')" class="history btn btn-danger">Reject  CSR</button>
                     </div>
                     <div class="col-md-4">
 
@@ -713,6 +713,13 @@
 	    var psurname = localStorage.getItem("person_sname");
 	    var person_name = pfirst_name + ' ' + psurname;
 	    $('#person_name')[0].innerHTML = person_name;*/
+        
+
+
 	});
+
+    const ApproveCSR = (type) =>{
+        console.log({type})
+    }
 	</script>
 {% endblock %}

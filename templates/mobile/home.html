@@ -1,135 +1,207 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block page_title %} CPIMS Mobile Approval Workflow {% endblock %}
-
-{% load app_filters %}
-
-{% load crispy_forms_tags %}
-
-{% block style_code %}
-<link href="{% static 'plugins/datatables/css/data-table.css' %}" rel="stylesheet" />
-{% endblock %}
-
-{% block primary %}
+{% extends 'base.html' %} {% load static %} {% block page_title %} CPIMS Mobile
+Approval Workflow {% endblock %} {% load app_filters %} {% load
+crispy_forms_tags %} {% block style_code %}
+<link
+  href="{% static 'plugins/datatables/css/data-table.css' %}"
+  rel="stylesheet"
+/>
+{% endblock %} {% block primary %}
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-	<li><a href="#">Home</a></li>
-	<li class="active">Approval</li>
+  <li><a href="#">Home</a></li>
+  <li class="active">Approval</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header"> Mobile Aproval <small>Home</small></h1>
+<h1 class="page-header">Mobile Aproval <small>Home</small></h1>
 <!-- end page-header -->
-<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
-    <span class="close" data-dismiss="alert">×</span>
-    <i class="fa fa-check fa-2x pull-left"></i>
-    <span class="invalid-form-message" id="invalid-form-message"></span>
+<div
+  id="messages"
+  class="alert alert-danger fade in"
+  style="display: none"
+  tabindex="1"
+>
+  <span class="close" data-dismiss="alert">×</span>
+  <i class="fa fa-check fa-2x pull-left"></i>
+  <span class="invalid-form-message" id="invalid-form-message"></span>
 </div>
 <!-- begin row -->
 <div class="row">
   <!-- begin col-12 -->
-    <div class="col-md-12">
-        <!-- begin panel -->
-        <div class="panel panel-inverse">
-            <div class="panel-heading">
-                <div class="panel-heading-btn">
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="#" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>                      
-                <h4 class="panel-title">Mobile Approval - Workflow</h4>
-            </div>
-            <!-- start panel body -->
-            <div class="panel-body">
-                <div class="row">
-                    
-                </div>
-                <hr>
-                <table class="table" id="data-table">
-                    <thead>
-                        <tr><th>#</th><th>CPIMS ID</th><th>Names</th><th>Case ID</th><th>Case Date</th><th></th></tr>
-                    </thead>
-                {% for case in cases %}
-                   <tr>
-                       <td>{{ forloop.counter }}</td>
-                       <td>{{ case.id }}</td>
-                       <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
-                       <td>{{ case.case }} {{ case.case_t }}</td>
-                       <td>{{ case.case_date }}</td>
-                       <td>
-                        {% if case.case_level == 2 %}
-                           <a href="{% url 'view_mobile_case_record_sheet' id=case.care_id %}" class="btn btn-sm btn-primary m-r-5">View Care details</a>
-                        {% elif case.case_level == 1 %}
-                           <a href="{% url 'new_alt_care' case_id=case.case_id %}" class="btn btn-sm btn-primary m-r-5">New Alternative Care</a>
-                        {% else %}
-                            <a href="" class="btn btn-sm btn-danger m-r-5">New Case Record Sheet</a>
-                        {% endif %}
-                           
-                       </td>
-                   </tr>
-                {% endfor %}
-                </table>
-            </div>
-            <!-- end panel body -->
+  <div class="col-md-12">
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <a
+            href="#"
+            class="btn btn-xs btn-icon btn-circle btn-warning"
+            data-click="panel-collapse"
+            ><i class="fa fa-minus"></i
+          ></a>
+          <a
+            href="#"
+            class="btn btn-xs btn-icon btn-circle btn-danger"
+            data-click="panel-remove"
+            ><i class="fa fa-times"></i
+          ></a>
         </div>
-        <!-- end panel -->  
+        <h4 class="panel-title">Mobile Approval - Workflow</h4>
+      </div>
+      <!-- start panel body -->
+      <div class="panel-body">
+        <div class="row"></div>
+        <hr />
+        <table class="table" id="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Origin</th>
+              <th>County</th>
+              <th>Constituency</th>
+              <th>Case Reporter</th>
+              <th>Telephone</th>
+              <th>Case Category</th>
+              <th>Child Name</th>
+              <th>Child Sex</th>
+              <th>Child DOB</th>
+              <th>Case Date</th>
+              <th>TimeStamp</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+   
+          </tbody>
+           {% comment %} {% for case in cases %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ case.id }}</td>
+            <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
+            <td>{{ case.case }} {{ case.case_t }}</td>
+            <td>{{ case.case_date }}</td>
+            <td>{{ case.id }}</td>
+            <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
+            <td>{{ case.case }} {{ case.case_t }}</td>
+            <td>{{ case.case_date }}</td>
+            <td>{{ case.id }}</td>
+            <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
+            <td>{{ case.case }} {{ case.case_t }}</td>
+            <td>{{ case.case_date }}</td>
+            <td>
+              {% if case.case_level == 2 %}
+              <a
+                href="{% url 'view_mobile_case_record_sheet' id=case.care_id %}"
+                class="btn btn-sm btn-primary m-r-5"
+                >View Care details</a
+              >
+              {% elif case.case_level == 1 %}
+              <a
+                href="{% url 'new_alt_care' case_id=case.case_id %}"
+                class="btn btn-sm btn-primary m-r-5"
+                >New Alternative Care</a
+              >
+              {% else %}
+              <a href="" class="btn btn-sm btn-danger m-r-5"
+                >New Case Record Sheet</a
+              >
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}  {% endcomment %}
+        </table>
+      </div>
+      <!-- end panel body -->
     </div>
-    <!-- end col-12 -->
+    <!-- end panel -->
+  </div>
+  <!-- end col-12 -->
 </div>
 <!-- end row -->
 
-{% endblock %}
-
-{% block lazy_javascript_code %}
+{% endblock %} {% block lazy_javascript_code %}
 <script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
 <script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
 <script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
 <script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
 
 <script>
-$(document).ready(function() {
-    $('#data-table').DataTable( {
-        "order": [[ 0, "asc" ]]
-    } );
+    $(document).ready(function () {
+      var table = $('#data-table').DataTable({
+        columns: [
+            {data: "case_id"},
+            {data: "case_serial"},
+            {data: "risk_level"},
+            {data: "perpetrator_status"},
+            {data: "case_status"},
+            {data: "case_reporter"},
+            {data: "case_remarks"},
+            {data: "ovc_cpims_id"},
+            {data: "ovc_first_name"},
+            {data: "ovc_other_names"},
+            {data: "ovc_sex"},
+            {data: "siblings"},
+            {data: "sibling_date_linked"},
+            {data: "sibling_date_delinked"}
+        ]
+      });
 
-    $('.ddash').on('click', function(ev) {
-        // var hashValue = location.hash.replace(/^#/, '');
-        var id = $(this).attr('id');
-        var cname = $(this).attr('rel');
-        var cdate = $(this).attr('rel1');
-        $('#cname').html(cname);
-        $('#cdate').html(cdate);
-        $('#item_cid').val(id);
-        $('#mywork > tbody').html('<tr><td colspan="3">Loading data</td></tr>');
-        $.ajax({
-           type: "POST",
-           url: "{{ request.get_full_path }}",
-           data: $("#icases").serialize()+ "&item_id="+ id + "&did=1",
-           success: function(response)
-           {
-               var msg = response.message;
-               var status_id = response.status;
-               var cdates = response.dates;
-               if (status_id == 0){
-                   $("#report_"+ id).remove();
-               }
-               $('#mng_messages').html(msg);
-               var dt = '';
-               var tchildren = 0;
-               var tcases = 0;
-               var trpts = 0;
-               $.each(response.data, function(key, val) {
-                    dt += '<tr><td></td><td>'+ key +'</td><td>';
-                    dt += val + '</td></tr>';
-                });
-               $('#mywork > tbody').html(dt);
-           },
-            error: function(){
-                $('#mng_messages').html("Error removing report")
-            }
-         });
-        $('#modal-details').modal('show');
-        ev.preventDefault();
-    });
-} );
+
+    apiCall('caseload', "GET")
+    .then(initial_data => {
+      console.log({ initial_data, table });
+      let indx = 0;
+      const row_data = initial_data.map(val => {
+        indx++
+        return {
+          "case_id": indx,
+          "case_serial": val.case_serial,
+          "risk_level": val.risk_level,
+          "perpetrator_status": val.perpetrator_status,
+          "case_status": val.case_status,
+          "case_reporter": val.case_reporter,
+          "case_remarks": val.case_remarks,
+          "ovc_cpims_id": val.ovc_cpims_id,
+          "ovc_first_name": val.ovc_first_name,
+          "ovc_other_names": val.ovc_other_names,
+          "ovc_sex": val.ovc_sex,
+          "siblings": val.case_id,
+          "sibling_date_linked": "Hello",
+          "sibling_date_delinked": htmlAction(val.ovc_cpims_id)
+        };
+      });
+
+      console.log({ row_data }); // Logging row_data for debugging
+
+      table.rows.add(row_data).draw();
+    })
+    .catch(error => {
+      console.error('Error fetching initial data:', error);
+    }); 
+
+  });
+
+
+    const apiCall = async (url, pMethod) => {
+      var settings = {
+        url: window.location.origin + '/api/mobile/' + url,
+        method: pMethod,
+        timeout: 0,
+        headers: {},
+      };
+      return $.ajax(settings).done(function (response) {
+        return response;
+      });
+    };
+
+    // Get the Button for view user
+    const htmlAction = (caseId) => {
+      return `<a
+                href="/api/mobile/crs/view/${caseId}/"
+                class="btn btn-sm btn-primary m-r-5"
+                >View Case details</a
+              >`
+    }
 </script>
 {% endblock %}
