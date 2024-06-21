@@ -88,7 +88,7 @@ class CRSSerializerMobile(serializers.ModelSerializer):
                   'case_landmark', 'hh_economic_status', 'family_status',
                   'mental_condition', 'physical_condition', 'other_condition',
                   'risk_level', 'referral', 'summon', 'case_narration',
-                  'account', 'case_params', 'longitude', 'latitude')
+                  'account', 'case_params', 'longitude', 'latitude','app_form_metadata')
 
 
 class CRSCategorySerializerMobile(serializers.ModelSerializer):
