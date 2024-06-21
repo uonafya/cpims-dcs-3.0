@@ -1,9 +1,11 @@
+import json
 import uuid
 from decimal import Decimal
 from datetime import datetime
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, generics, status
+from django.core.paginator import Paginator
 
 from rest_framework.views import APIView
 
@@ -95,13 +97,12 @@ def ovc_mobile_crs(request):
             queryset = OVCBasicCRSMobile.objects.filter(account=account_id,is_accepted=1).values()
             case_id = request.query_params.get('case_id')
             if case_id:
-                queryset = queryset.filter(case_id=case_id)
+                queryset = queryset.filter(case_id=case_id,account=account_id,is_accepted=1)
             response_list = []
             if queryset:
                 for  query in queryset:
-                    # print("here8990",query.objects.all())
                     cases = query
-                    print("cases...........",cases)
+                    print("cases...........",cases['app_form_metadata'])
                     
                     qs = OVCBasicCategoryMobile.objects.filter(case_id=case_id)
                     ps = OVCBasicPersonMobile.objects.filter(case_id=case_id)
@@ -112,6 +113,7 @@ def ovc_mobile_crs(request):
                     cases['perpetrators'] = []
                     cases['children'] = []
                     cases['reporters'] = []
+                    cases['app_form_metadata'] = json.loads(cases['app_form_metadata'].replace("'", "\""))
                     del cases['is_void']
                     for category in categories:
                         del category['category_id']
@@ -131,7 +133,18 @@ def ovc_mobile_crs(request):
                         if ptype == 'PTRD':
                             cases['reporters'].append(person)
                     response_list.append(cases)
-                return Response(response_list)
+                #paginate
+                paginator = Paginator(response_list, 50)
+                page_number = request.GET.get("page")
+                page_obj = paginator.get_page(page_number)
+                current_page = list(page_obj)
+                
+                return Response({
+                "results": current_page,
+                "page": page_obj.number,
+                "total_pages": paginator.num_pages
+                })
+                
             else:
                 return Response({'details': 'Case Does not Exist'})
         # Insert a new record for CRS
@@ -177,7 +190,8 @@ def ovc_mobile_crs(request):
                     'other_condition': request.data.get('other_condition'),
                     'case_date': request.data.get('case_date'),
                     'case_params': str(request.data), 'case_id': case_id,
-                    'account': account_id, "risk_level": risk_level
+                    'account': account_id, "risk_level": risk_level,
+                    'app_form_metadata':json.dumps(request.data.get('app_form_metadata'))
                     }
             if lon and lat:
                 data["longitude"] = round(Decimal(float(lon)), 7)
