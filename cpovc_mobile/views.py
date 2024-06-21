@@ -102,8 +102,7 @@ def ovc_mobile_crs(request):
             if queryset:
                 for  query in queryset:
                     cases = query
-                    print("cases...........",cases['app_form_metadata'])
-                    
+               
                     qs = OVCBasicCategoryMobile.objects.filter(case_id=case_id)
                     ps = OVCBasicPersonMobile.objects.filter(case_id=case_id)
                     categories = list(qs.values())
@@ -113,7 +112,12 @@ def ovc_mobile_crs(request):
                     cases['perpetrators'] = []
                     cases['children'] = []
                     cases['reporters'] = []
-                    cases['app_form_metadata'] = json.loads(cases['app_form_metadata'].replace("'", "\""))
+                    if cases['app_form_metadata']:
+                        cases['app_form_metadata'] = json.loads(cases['app_form_metadata'].replace("'", "\""))
+                    if cases['case_params']:
+                        case_params = cases['case_params'].replace("None", "null")
+                        case_params= case_params.replace("'", "\"")
+                        cases['case_params'] = json.loads(case_params)
                     del cases['is_void']
                     for category in categories:
                         del category['category_id']
@@ -189,7 +193,8 @@ def ovc_mobile_crs(request):
                     'physical_condition': physical_condition,
                     'other_condition': request.data.get('other_condition'),
                     'case_date': request.data.get('case_date'),
-                    'case_params': str(request.data), 'case_id': case_id,
+                    'case_params': json.dumps(request.data),
+                    'case_id': case_id,
                     'account': account_id, "risk_level": risk_level,
                     'app_form_metadata':json.dumps(request.data.get('app_form_metadata'))
                     }
@@ -251,7 +256,7 @@ def ovc_mobile_crs(request):
     
     except Exception as e:
         print('Error submitting API Case - %s' % str(e))
-        return Response({'details': 'Error saving Case details'})
+        return Response({'Error saving Case details: '+ str(e)})
 
 
 @api_view(['POST', 'PUT', 'PATCH', 'DELETE'])
