@@ -50,7 +50,7 @@ def save_person(case_id, person_type, req_data):
             print(person_type, serializer.errors)
     except Exception as e:
         print('Error saving data - %s' % str(e))
-        passfrom django.shortcuts import render, redirect
+
 from cpovc_forms.views import forms_registry
 
 from django.contrib.auth.decorators import login_required
