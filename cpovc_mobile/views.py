@@ -2,23 +2,24 @@ import json
 import uuid
 from decimal import Decimal
 from datetime import datetime
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from django.urls import reverse
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib import messages
-from rest_framework import viewsets, generics, status
-from django.core.paginator import Paginator
-
 from rest_framework.views import APIView
-
+from django.core.paginator import Paginator
+from rest_framework.response import Response
+from cpovc_forms.views import forms_registry
+from rest_framework.decorators import api_view
+from rest_framework import viewsets, generics, status
+from cpovc_main.functions import (get_dict, translate)
+from django.contrib.auth.decorators import login_required
 from cpovc_api.functions import dcs_dashboard, get_attached_orgs
-from cpovc_forms.models import OVCCaseRecord, OVCCaseGeo
-
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from cpovc_mobile.models import OVCBasicCRSMobile, OVCBasicCategoryMobile, OVCBasicPersonMobile
-from cpovc_mobile.serializers import CRSCategorySerializerMobile, CRSPersonserializerMobile, CRSSerializerMobile, CaseRecordSerializer, MobileUserSerializer
-from cpovc_registry.models import RegOrgUnit
-
+from cpovc_registry.models import (AppUser, RegPerson, RegPersonsSiblings, RegPersonsGuardians,RegOrgUnit )
+from cpovc_mobile.serializers import (CRSCategorySerializerMobile, CRSPersonserializerMobile, CRSSerializerMobile,
+                                      CaseRecordSerializer, MobileUserSerializer)
+from cpovc_forms.models import (OVCEconomicStatus, OVCFamilyStatus, OVCFriends, OVCHobbies,OVCMedical, OVCCaseCategory,
+                                OVCNeeds, OVCReferral, OVCMedicalSubconditions, OVCCaseSubCategory,OVCCaseLocation, OvcCasePersons,OVCCaseRecord, OVCCaseGeo)
 
 
 # functions
@@ -50,16 +51,6 @@ def save_person(case_id, person_type, req_data):
             print(person_type, serializer.errors)
     except Exception as e:
         print('Error saving data - %s' % str(e))
-
-from cpovc_forms.views import forms_registry
-
-from django.contrib.auth.decorators import login_required
-
-from cpovc_registry.models import (AppUser, RegPerson, RegPersonsSiblings, RegPersonsGuardians, )
-from cpovc_forms.models import (OVCEconomicStatus, OVCFamilyStatus, OVCFriends, OVCHobbies,OVCMedical, OVCCaseCategory,
-                                OVCNeeds, OVCReferral, OVCMedicalSubconditions, OVCCaseSubCategory,OVCCaseLocation, OvcCasePersons,)
-
-from cpovc_main.functions import (get_dict, translate)
 
 
 @api_view(["POST", "GET"])
