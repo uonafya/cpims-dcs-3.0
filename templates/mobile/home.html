@@ -125,7 +125,24 @@ crispy_forms_tags %} {% block style_code %}
 <script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
 
 <script>
+  const fetchSettingsbyField = async (fieldName) => {
+    try {
+      apiCall(`/api/v1/settings?field_name=${fieldName}`, 'GET')
+        .then((fresponse) => {
+          window.sessionStorage.setItem(fieldName, JSON.stringify(fresponse));
+          console.log(
+            'Mobile settings fetched successfully:',
+            'mobileSettings'
+          );
+          return fresponse;
+        })
+        .catch((error) => {
+          console.error('Error fetching Mobile settings:', error);
+        });
+    } catch (error) {}
+  };
   $(document).ready(function () {
+    fetchSettingsbyField('case_category_id');
     var table = $('#data-table').DataTable({
       columns: [
         { data: 'index' },
@@ -145,30 +162,59 @@ crispy_forms_tags %} {% block style_code %}
       ],
     });
 
-    apiCall('crs', 'GET')
+    function createUnorderedList(array) {
+      const ul = document.createElement('ul');
+      array.forEach((item) => {
+        const li = document.createElement('li');
+        li.innerText = item;
+        ul.appendChild(li);
+      });
+      return ul.innerHTML;
+    }
+
+    apiCall('/api/mobile/crs/', 'GET')
       .then((initial_data) => {
-        let initialData = initial_data['results']
-        let initialData_len = initialData.length
-        let caseParams = {}
+        let initialData = initial_data['results'];
+        let initialData_len = initialData.length;
+        let caseParams = {};
         console.log({ initialData, initialData_len }); // Logging row_data for debugging
         if (initialData_len > 0) {
           let indx = 0;
           const row_data = initialData.map((val) => {
-            let case_params_string = val.case_params
-
-            console.log({case_params_string, caseParams} )
-            childName = caseParams.child_first_name // + " " + caseParams.child_surname
+            let caseParams = val['case_params'];
+            childName =
+              caseParams.child_first_name + ' ' + caseParams.child_surname;
+            let caseDetails = caseParams['case_details'];
+            let casesHtml;
+            CaseCategorys = JSON.parse(
+              window.sessionStorage.getItem('case_category_id')
+            );
+            let casesdata = caseDetails.map((icase) => {
+              let filtered = CaseCategorys.filter((category) => {
+                return category['item_id'] === icase['category'];
+              })[0]['item_description'];
+              return filtered;
+            });
+            casesHtml = createUnorderedList(casesdata);
+            console.log({ casesHtml });
+            console.log({
+              caseParams,
+              childName,
+              caseDetails,
+              CaseCategorys,
+              casesHtml,
+            });
             indx++;
             return {
               index: indx,
               origin: val.case_reporter,
-              cunty: val.county,
-              constituency: val.constituency,
+              cunty: val.county_name,
+              constituency: val.constituency_name,
               case_reporter: val.case_reporter,
               telephone: val.reporter_telephone,
-              case_category: val.case_record_id,
+              case_category: casesHtml,
               child_name: childName,
-              child_sex: caseParams.child_sex == 'SMAL' ? "Male" : "Female",
+              child_sex: caseParams.child_sex == 'SMAL' ? 'Male' : 'Female',
               child_dob: caseParams.child_dob,
               case_date: val.case_date,
               timestamp: val.timestamp_created,
@@ -205,16 +251,21 @@ crispy_forms_tags %} {% block style_code %}
 
   const apiCall = async (url, pMethod) => {
     var settings = {
-      url: window.location.origin + '/api/mobile/' + url,
+      url: url,
       method: pMethod,
       timeout: 0,
       headers: {},
     };
     return $.ajax(settings).done(function (response) {
-      let responseData = response
-      {% comment %} debugger; {% endcomment %}
-      return responseData ? responseData : false;
+      window.sessionStorage.setItem(
+        'payload',
+        JSON.stringify(response['results'])
+      );
     });
+  };
+
+  const Clicked = (caseid) => {
+    window.sessionStorage.setItem('activecase', caseid);
   };
 
   // Get the Button for view user
@@ -222,6 +273,7 @@ crispy_forms_tags %} {% block style_code %}
     return `<a
                 href="/api/mobile/crs/view/${caseId}/"
                 class="btn btn-sm btn-primary m-r-5"
+                onclick="(Clicked('${caseId}'))"
                 >View Case details</a
               >`;
   };
