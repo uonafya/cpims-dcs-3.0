@@ -2,6 +2,7 @@ from django.db import models
 from rest_framework import serializers
 
 from cpovc_forms.models import OVCCaseRecord, OVCCaseCategory
+from cpovc_mobile.models import OVCBasicCRSMobile, OVCBasicCategoryMobile, OVCBasicPersonMobile
 from cpovc_registry.models import (
     RegPerson, RegPersonsGuardians, RegPersonsSiblings,
     RegPersonsOrgUnits)
@@ -72,6 +73,41 @@ class CaseRecordSerializer(serializers.ModelSerializer):
             is_void=False, case_id_id=obj.case_id)
         return categories.values(
             'case_category', 'date_of_event', 'place_of_event', 'case_nature')
+
+
+class CRSSerializerMobile(serializers.ModelSerializer):
+    """Case Serializer."""
+
+    class Meta:
+        model = OVCBasicCRSMobile
+        fields = ('case_id', 'case_serial', 'case_reporter',
+                  'reporter_telephone', 'reporter_county',
+                  'reporter_sub_county', 'reporter_ward',
+                  'reporter_village', 'case_date', 'perpetrator',
+                  'county', 'constituency', 'organization_unit',
+                  'case_landmark', 'hh_economic_status', 'family_status',
+                  'mental_condition', 'physical_condition', 'other_condition',
+                  'risk_level', 'referral', 'summon', 'case_narration',
+                  'account', 'case_params', 'longitude', 'latitude','app_form_metadata')
+
+
+class CRSCategorySerializerMobile(serializers.ModelSerializer):
+    class Meta:
+        model = OVCBasicCategoryMobile
+        fields = ('category_id', 'case_category', 'case_sub_category',
+                  'case_date_event', 'case_nature', 'case_place_of_event',
+                  'case')
+
+
+class CRSPersonserializerMobile(serializers.ModelSerializer):
+    class Meta:
+        model = OVCBasicPersonMobile
+        fields = ('person_id', 'relationship', 'person_type',
+                  'first_name', 'surname', 'other_names',
+                  'dob', 'sex', 'case')
+
+
+
 
 
 class MobileUserSerializer(serializers.ModelSerializer):
