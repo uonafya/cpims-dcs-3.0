@@ -46,16 +46,16 @@
 
 <h1 class="page-header btn-info p5 p-5"><strong> Case Record Sheet - Approval </strong> <small> <b>
 {% for data in init_data %}
-       {{ data.first_name }} 
+       {% comment %} {{ data.first_name }}  {% endcomment %}
 
-       {{ data.surname }} 
+       {% comment %} {{ data.surname }}  {% endcomment %}
          | 
-       {{ data.sex_id|gen_value:vals }} 
+       {% comment %} {{ data.sex_id|gen_value:vals }}  {% endcomment %}
          | {% if data.date_of_birth|gen_age == 0 %}
                             UNDER 1 YEAR
                         {% else %}
                             
-                       {{ data.date_of_birth|gen_age }} 
+                       {% comment %} {{ data.date_of_birth|gen_age }}  {% endcomment %}
                          YRS 
                         {% endif %}</b></small></h1>
 {% endfor %}
@@ -69,16 +69,16 @@
                         <button class="btn btn-sm btn-success m-b-10">Active</button>
                     {% else %}
                         <button class="btn btn-sm btn-danger m-b-10">
-                           {{ ovccr.case_status }} 
+                           {% comment %} {{ ovccr.case_status }}  {% endcomment %}
                         </button> 
                     {% endif %}
-                   <a href="{% url 'edit_case_record_sheet' id=result.form_id %}" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-pencil m-r-5"></i> Edit</a> 
+                   {% comment %} <a href="{% url 'edit_case_record_sheet' id=result.form_id %}" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-pencil m-r-5"></i> Edit</a> 
                     <a href="{% url 'cpims_document' doc_id='CRS' case_id=ovccr.case_id %}" class="btn btn-sm btn-danger m-b-10"><i class="fa fa-file-pdf-o m-r-5"></i> Export CRS to PDF</a> 
                     <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print Summary</a> 
-                    <a href="{% url 'case_events' id=result.form_id %}" class="btn  btn-sm btn-primary m-b-10">Follow-up &nbsp; &nbsp;<i class="fa fa-paw"></i></a>  
+                    <a href="{% url 'case_events' id=result.form_id %}" class="btn  btn-sm btn-primary m-b-10">Follow-up &nbsp; &nbsp;<i class="fa fa-paw"></i></a>   {% endcomment %}
                     </span>
                     SERIAL NO. 
-                   {{ ovccr.case_serial }} 
+                   {% comment %} {{ ovccr.case_serial }}  {% endcomment %}
 
                 </div>
                 <div class="invoice-header">
@@ -95,7 +95,7 @@
                                         
                                     </td>
                                     <td colspan="3">
-                                       {{ ovccr.case_reporter|gen_value:vals }} 
+                                       {% comment %} {{ ovccr.case_reporter|gen_value:vals }}  {% endcomment %}
                                     </td> 
                                 </tr>
                                 {% if ovccr.court_name %}
@@ -106,11 +106,11 @@
                                         
                                     </td>
                                     <td>
-                                       {{ ovccr.court_name }} 
+                                       {% comment %} {{ ovccr.court_name }}  {% endcomment %}
                                     </td> 
                                     <td><strong>Court / File Number</strong></td>
                                     <td>
-                                       {{ ovccr.court_number }} 
+                                       {% comment %} {{ ovccr.court_number }}  {% endcomment %}
                                     </td> 
                                 </tr>
                                 {% endif %}
@@ -122,11 +122,11 @@
                                         
                                     </td>
                                     <td>
-                                       {{ ovccr.police_station }} 
+                                       {% comment %} {{ ovccr.police_station }}  {% endcomment %}
                                     </td> 
                                     <td><strong>OB Number</strong></td>
                                     <td>
-                                       {{ ovccr.ob_number }} 
+                                       {% comment %} {{ ovccr.ob_number }}  {% endcomment %}
                                     </td> 
                                 </tr>
                                 {% endif %}
@@ -138,13 +138,13 @@
                                         
                                     </td>
                                     <td>
-                                       {{ ovccr.case_reporter_first_name }} 
+                                       {% comment %} {{ ovccr.case_reporter_first_name }}  {% endcomment %}
 
-                                       {{ ovccr.case_reporter_surname }} 
+                                       {% comment %} {{ ovccr.case_reporter_surname }}  {% endcomment %}
 
                                     	{% if ovccr.case_reporter_other_names %}
                                             
-                                       {{ ovccr.case_reporter_other_names }} 
+                                       {% comment %} {{ ovccr.case_reporter_other_names }}  {% endcomment %}
 
                                         {% endif %}
                                    </td>
@@ -160,11 +160,11 @@
                                         
                                     </td>
                                     <td width="25%">
-                                       {{ ovccr.case_reporter_contacts }} 
+                                       {% comment %} {{ ovccr.case_reporter_contacts }}  {% endcomment %}
                                     </td> 
                                     <td><strong>Date of Reporting</strong></td>
                                     <td>
-                                       {{ ovccr.date_case_opened }} 
+                                       {% comment %} {{ ovccr.date_case_opened }}  {% endcomment %}
                                     </td> 
                                 </tr>
                                 {% endif %}
@@ -180,11 +180,11 @@
                                         <strong>Sub County</strong><br />                                        
                                     </td>
                                     <td>
-                                       {{ ovcgeo.occurence_subcounty.area_id|gen_areaname }} 
+                                       {% comment %} {{ ovcgeo.occurence_subcounty.area_id|gen_areaname }}  {% endcomment %}
                                     </td>
                                     <td><strong>Ward</strong></td>
                                     <td>{% if ovcgeo.occurence_ward %}
-                                       {{ ovcgeo.occurence_ward|gen_areaname }} 
+                                       {% comment %} {{ ovcgeo.occurence_ward|gen_areaname }}  {% endcomment %}
                                         {% else %}N/A{% endif %}</td>
                                 </tr>
                                 <tr>
@@ -193,7 +193,7 @@
                                         <strong>Village/Estate</strong><br />                                        
                                     </td>
                                     <td>{% if ovcgeo.occurence_village %}
-                                       {{ ovcgeo.occurence_village }} 
+                                       {% comment %} {{ ovcgeo.occurence_village }}  {% endcomment %}
                                         {% else %}N/A{% endif %}</td>
                                     <td><strong>Landmark</strong></td>
                                     <td>N/A</td>
@@ -211,7 +211,7 @@
                                         
                                     </td>
                                     <td colspan="4">
-                                       {{ ovcgeo.report_subcounty.area_id|gen_areaname }} 
+                                       {% comment %} {{ ovcgeo.report_subcounty.area_id|gen_areaname }}  {% endcomment %}
                                     </td>
                                 </tr>
                                 <tr>
@@ -219,7 +219,7 @@
                                     <td><strong>Place of Reporting</strong></td>
                                     <td colspan="4">
                                         
-                                       {{ ovcgeo.report_orgunit }} 
+                                       {% comment %} {{ ovcgeo.report_orgunit }}  {% endcomment %}
 
                                     </td>
                                 </tr>
@@ -239,25 +239,25 @@
                         <tr>
                         	<td width="3%"></td>
                 			<td width="22%"><strong>Child Names</strong></td><td width="25%">
-                               {{ data.first_name }} 
+                               {% comment %} {{ data.first_name }}  {% endcomment %}
 
-                               {{ data.surname }} 
+                               {% comment %} {{ data.surname }}  {% endcomment %}
                             </td>
                 			<td><strong>Date of Birth</strong></td><td>
-                               {{ data.date_of_birth }} 
+                               {% comment %} {{ data.date_of_birth }}  {% endcomment %}
                             </td>
                 		</tr>
                 		<tr>
                 			<td></td>
                 			<td><strong>Sex</strong></td><td>
-                               {{ data.sex_id|gen_value:vals }} 
+                               {% comment %} {{ data.sex_id|gen_value:vals }}  {% endcomment %}
                             </td>
                 			<td><strong>Age</strong></td><td>
                 			{% if data.date_of_birth|gen_age == 0 %}
 						                UNDER 1 YEAR
 						            {% else %}
 						                
-                                   {{ data.date_of_birth|gen_age }} 
+                                   {% comment %} {{ data.date_of_birth|gen_age }}  {% endcomment %}
                                      YRS 
 						            {% endif %}
                 		    </td>
@@ -281,19 +281,19 @@
                     	{% for result in init_data.siblingpersons %}
                     	<tr>
 							<td>
-                               {{ forloop.counter }} 
+                               {% comment %} {{ forloop.counter }}  {% endcomment %}
                             </td>
 							<td>
-                               {{ result.id }} 
+                               {% comment %} {{ result.id }}  {% endcomment %}
                             </td>
 	                        <td>
-                               {{ result.first_name }} 
+                               {% comment %} {{ result.first_name }}  {% endcomment %}
                             </td>
 	                        <td>
-                               {{ result.surname }} 
+                               {% comment %} {{ result.surname }}  {% endcomment %}
                             </td>
 	                        <td>
-                               {{ result.sex_id|gen_value:vals }} 
+                               {% comment %} {{ result.sex_id|gen_value:vals }}  {% endcomment %}
                             </td>
 						</tr>
 						{% endfor %}
@@ -312,7 +312,7 @@
                                         <strong>House Economic Status</strong><br />                                        
                                     </td>
                                     <td>
-                                       {{ ovcd.household_economic_status|gen_value:vals }} 
+                                       {% comment %} {{ ovcd.household_economic_status|gen_value:vals }}  {% endcomment %}
                                     </td> 
                                     <td>
                                         <strong>Family Status</strong><br />                                        
@@ -320,7 +320,7 @@
                                     <td>
                                          {% for ovcf in ovcfam %}										
 										
-                                        {{ ovcf.family_status|gen_value:vals }} 
+                                        {% comment %} {{ ovcf.family_status|gen_value:vals }}  {% endcomment %}
                                          <br>
 									{% endfor %}
                                     </td>
@@ -334,13 +334,13 @@
                                         {% for ovcfrnd in ovcfrnds %}
 											{% if not ovcfrnd.friend_other_names == 'XXXX' %}
 												
-                                           {{ovcfrnd.friend_firstname}} 
+                                           {% comment %} {{ovcfrnd.friend_firstname}}  {% endcomment %}
 
-                                               {{ovcfrnd.friend_other_names}} 
+                                               {% comment %} {{ovcfrnd.friend_other_names}}  {% endcomment %}
                                                 ; &nbsp;
 											{% else %}
 												
-                                           {{ovcfrnd.friend_firstname}} 
+                                           {% comment %} {{ovcfrnd.friend_firstname}}  {% endcomment %}
                                             ; &nbsp;
 											{% endif %}
 										{% endfor %}
@@ -354,7 +354,7 @@
                                     <td colspan="3">
                                         {% for ovchob in ovchobs %}													
 											
-                                       {{ovchob.hobby}} 
+                                       {% comment %} {{ovchob.hobby}}  {% endcomment %}
                                         ; &nbsp;
 										{% endfor %}
                                     </td>
@@ -365,12 +365,12 @@
                                         <strong>Mental Condition</strong><br />                                        
                                     </td>
                                     <td>
-                                       {{ ovcmed.mental_condition|gen_value:vals }} 
+                                       {% comment %} {{ ovcmed.mental_condition|gen_value:vals }}  {% endcomment %}
                                     </td> 
                                     <td colspan="2">
                                         {% for ovcmentmed in ovcmentmeds %}													
 											
-                                       {{ovcmentmed.medical_subcondition|gen_value:vals}} 
+                                       {% comment %} {{ovcmentmed.medical_subcondition|gen_value:vals}}  {% endcomment %}
                                         ; &nbsp;
 										{% endfor %}
                                     </td>
@@ -381,12 +381,12 @@
                                         <strong>Physical Condition</strong><br />                                        
                                     </td>
                                     <td>
-                                       {{ ovcmed.physical_condition|gen_value:vals }} 
+                                       {% comment %} {{ ovcmed.physical_condition|gen_value:vals }}  {% endcomment %}
                                     </td>
                                     <td colspan="2">
                                         {% for ovcphymed in ovcphymeds %}													
 											
-                                       {{ovcphymed.medical_subcondition|gen_value:vals}} 
+                                       {% comment %} {{ovcphymed.medical_subcondition|gen_value:vals}}  {% endcomment %}
                                         ; &nbsp;
 										{% endfor %}
                                     </td>
@@ -397,12 +397,12 @@
                                         <strong>Other Conditions</strong><br />                                        
                                     </td>
                                     <td>
-                                       {{ ovcmed.other_condition|gen_value:vals }} 
+                                       {% comment %} {{ ovcmed.other_condition|gen_value:vals }}  {% endcomment %}
                                     </td>
                                     <td colspan="2">
                                         {% for ovcothermed in ovcothermeds %}												
 											
-                                       {{ovcothermed.medical_subcondition|gen_value:vals}} 
+                                       {% comment %} {{ovcothermed.medical_subcondition|gen_value:vals}}  {% endcomment %}
                                         ; &nbsp;
 										{% endfor %}
                                     </td>
@@ -426,7 +426,7 @@
                                         <strong>Case Serial</strong><br />                                        
                                     </td>
                                     <td width="20%">
-                                       {{ ovccr.case_serial }} 
+                                       {% comment %} {{ ovccr.case_serial }}  {% endcomment %}
                                     </td> 
                                     <td width="17%">
                                         <strong>Alleged Perpetrator / Offender Name(s)</strong><br />
@@ -435,28 +435,28 @@
                                     <td colspan="2">
                                         <i class="fa fa-caret-right"></i>
                                         
-                                       {{ ovccr.perpetrator_first_name }} 
+                                       {% comment %} {{ ovccr.perpetrator_first_name }}  {% endcomment %}
 
-                                       {{ ovccr.perpetrator_surname }} 
+                                       {% comment %} {{ ovccr.perpetrator_surname }}  {% endcomment %}
 
                                         {% if ovccr.perpetrator_other_names %} 
-                                       {{ ovccr.perpetrator_other_names }} 
+                                       {% comment %} {{ ovccr.perpetrator_other_names }}  {% endcomment %}
                                          {% endif %} 
                                         - 
-                                       {{ ovccr.perpetrator_relationship_type|gen_value:vals }} 
+                                       {% comment %} {{ ovccr.perpetrator_relationship_type|gen_value:vals }}  {% endcomment %}
                                         <br/> 
                                         {% for perpetrator in perpetrators %}
                                         <i class="fa fa-caret-right"></i>
                                         
-                                       {{ perpetrator.person_first_name }} 
+                                       {% comment %} {{ perpetrator.person_first_name }}  {% endcomment %}
 
-                                       {{ perpetrator.person_surname }} 
+                                       {% comment %} {{ perpetrator.person_surname }}  {% endcomment %}
 
                                         {% if perpetrator.person_other_names %} 
-                                       {{ perpetrator.person_other_names }} 
+                                       {% comment %} {{ perpetrator.person_other_names }}  {% endcomment %}
                                          {% endif %}
                                         - 
-                                       {{ perpetrator.person_relation|gen_value:vals }} 
+                                       {% comment %} {{ perpetrator.person_relation|gen_value:vals }}  {% endcomment %}
                                         <br/>
 
                                         {% endfor %}
@@ -481,19 +481,19 @@
 		                                	{% for case_grouping_id in case_grouping_id_list %}	
 			                                <tr>
 			                                	<td>
-                                                   {{ forloop.counter }} 
+                                                   {% comment %} {{ forloop.counter }}  {% endcomment %}
                                                 </td>
 			                                    <td>
 				                                	{% for item in case_grouping_id.list %}
 				                                		
-                                                   {{ item.case_category|gen_value2 }} 
+                                                   {% comment %} {{ item.case_category|gen_value2 }}  {% endcomment %}
                                                     <br>
 					                            	{% endfor %}
 					                            </td>
 			                                    <td>
 					                            	{% for item in case_grouping_id.list %}
 				                                		
-                                                   {{ item.case_subcategorys }} 
+                                                   {% comment %} {{ item.case_subcategorys }}  {% endcomment %}
 
 				                                		<br>
 					                            	{% endfor %}
@@ -501,14 +501,14 @@
 
 					                            <td>
 					                                
-                                                   {{ case_grouping_id.list|gen_date_of_event }} 
+                                                   {% comment %} {{ case_grouping_id.list|gen_date_of_event }}  {% endcomment %}
 
 					                            </td>
 
 					                            <td>
 				                                	{% for item in case_grouping_id.list %}
 				                                		
-                                                   {{ item.place_of_event|gen_value2 }} 
+                                                   {% comment %} {{ item.place_of_event|gen_value2 }}  {% endcomment %}
 
 				                                		<br>
 					                            	{% endfor %}
@@ -517,7 +517,7 @@
 					                            <td>
 				                                	{% for item in case_grouping_id.list %}
 				                                		
-                                                   {{ item.case_nature|gen_value2 }} 
+                                                   {% comment %} {{ item.case_nature|gen_value2 }}  {% endcomment %}
 
 				                                		<br>
 					                            	{% endfor %}
@@ -533,7 +533,7 @@
                                         
                                     </td>
                                     <td colspan="4">
-                                       {{ ovccr.risk_level|gen_value:vals }} 
+                                       {% comment %} {{ ovccr.risk_level|gen_value:vals }}  {% endcomment %}
                                     </td> 
                                 </tr>
                                 <tr>
@@ -546,7 +546,7 @@
 										{% for ovcneed in ovcneeds %}
 											{% if ovcneed.need_type == 'IMMEDIATE'%}											
 												<i class="fa fa-caret-right"></i> 
-                                               {{ ovcneed.need_description|gen_value:vals }} 
+                                               {% comment %} {{ ovcneed.need_description|gen_value:vals }}  {% endcomment %}
                                                 <br>
 											{% endif %}	
 										{% endfor %}	
@@ -559,7 +559,7 @@
 										{% for ovcneed in ovcneeds %}
 											{% if ovcneed.need_type == 'FUTURE'%}											
 												<i class="fa fa-caret-right"></i> 
-                                               {{ ovcneed.need_description|gen_value:vals }} 
+                                               {% comment %} {{ ovcneed.need_description|gen_value:vals }}  {% endcomment %}
                                                 <br>
 											{% endif %}	
 										{% endfor %}	
@@ -586,14 +586,14 @@
 			                                <tr id="id_inputElements">
 			                                	<td>
 			                                	
-                                                   {{ forloop.counter }} 
+                                                   {% comment %} {{ forloop.counter }}  {% endcomment %}
 
 			                                	</td>
 
 			                                	<td>
 			                                	{% for item in referral_grouping_id.list %}
 			                                		
-                                               {{ item.refferal_actor_type|gen_value2 }} 
+                                               {% comment %} {{ item.refferal_actor_type|gen_value2 }}  {% endcomment %}
                                                 <br>
 				                            	{% endfor %}
 				                            	</td>
@@ -601,7 +601,7 @@
 				                                <td>
 				                                {% for item in referral_grouping_id.list %}
 				                                	
-                                               {{  item.refferal_actor_specify }} 
+                                               {% comment %} {{  item.refferal_actor_specify }}  {% endcomment %}
 
 				                                {% endfor %}
 				                            	</td>
@@ -609,7 +609,7 @@
 				                            	<td>
 			                                	{% for item in referral_grouping_id.list %}
 			                                		
-                                               {{ item.refferal_to|gen_value2 }} 
+                                               {% comment %} {{ item.refferal_to|gen_value2 }}  {% endcomment %}
                                                 <br>
 				                            	{% endfor %}
 				                            	</td>
@@ -632,7 +632,7 @@
                             <td>
                             	{% if ovccr.date_of_summon %}
 								    
-                               {{ ovccr.date_of_summon }} 
+                               {% comment %} {{ ovccr.date_of_summon }}  {% endcomment %}
 
 								{% else %}
 			                         No Summons Issued
@@ -655,7 +655,7 @@
                             <td></td>
                             <td><strong>Case Remarks</strong></td>
                             <td colspan="4">
-                               {{ ovccr.case_remarks }} 
+                               {% comment %} {{ ovccr.case_remarks }}  {% endcomment %}
                             </td> 
                         </tr>
                         </tbody>
@@ -669,13 +669,13 @@
                 <div class="invoice-footer text-muted">
                     <p class="text-right">
                         <span class="m-r-10"> Case ID: <strong>
-                           {{ ovccr.case_id }} 
+                           {% comment %} {{ ovccr.case_id }}  {% endcomment %}
                         </strong>; Case Created by: <strong>
-                           {{ app_user.reg_person.first_name }} 
+                           {% comment %} {{ app_user.reg_person.first_name }}  {% endcomment %}
 
-                           {{ app_user.reg_person.surname }} 
+                           {% comment %} {{ app_user.reg_person.surname }}  {% endcomment %}
                         </strong>; Date and Time: <strong>
-                           {{ ovccr.timestamp_created }} 
+                           {% comment %} {{ ovccr.timestamp_created }}  {% endcomment %}
                         </strong></span> 
                     </p>
                     </div>

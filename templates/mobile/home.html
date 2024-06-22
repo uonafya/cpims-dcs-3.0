@@ -71,10 +71,8 @@ crispy_forms_tags %} {% block style_code %}
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-   
-          </tbody>
-           {% comment %} {% for case in cases %}
+          <tbody></tbody>
+          {% comment %} {% for case in cases %}
           <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ case.id }}</td>
@@ -109,7 +107,7 @@ crispy_forms_tags %} {% block style_code %}
               {% endif %}
             </td>
           </tr>
-          {% endfor %}  {% endcomment %}
+          {% endfor %} {% endcomment %}
         </table>
       </div>
       <!-- end panel body -->
@@ -127,81 +125,105 @@ crispy_forms_tags %} {% block style_code %}
 <script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
 
 <script>
-    $(document).ready(function () {
-      var table = $('#data-table').DataTable({
-        columns: [
-            {data: "case_id"},
-            {data: "case_serial"},
-            {data: "risk_level"},
-            {data: "perpetrator_status"},
-            {data: "case_status"},
-            {data: "case_reporter"},
-            {data: "case_remarks"},
-            {data: "ovc_cpims_id"},
-            {data: "ovc_first_name"},
-            {data: "ovc_other_names"},
-            {data: "ovc_sex"},
-            {data: "siblings"},
-            {data: "sibling_date_linked"},
-            {data: "sibling_date_delinked"}
-        ]
+  $(document).ready(function () {
+    var table = $('#data-table').DataTable({
+      columns: [
+        { data: 'index' },
+        { data: 'origin' },
+        { data: 'cunty' },
+        { data: 'constituency' },
+        { data: 'case_reporter' },
+        { data: 'telephone' },
+        { data: 'case_category' },
+        { data: 'child_name' },
+        { data: 'child_sex' },
+        { data: 'child_dob' },
+        { data: 'case_date' },
+        { data: 'timestamp' },
+        { data: 'status' },
+        { data: 'actions' },
+      ],
+    });
+
+    apiCall('crs', 'GET')
+      .then((initial_data) => {
+        let initialData = initial_data['results']
+        let initialData_len = initialData.length
+        let caseParams = {}
+        console.log({ initialData, initialData_len }); // Logging row_data for debugging
+        if (initialData_len > 0) {
+          let indx = 0;
+          const row_data = initialData.map((val) => {
+            let case_params_string = val.case_params
+
+            console.log({case_params_string, caseParams} )
+            childName = caseParams.child_first_name // + " " + caseParams.child_surname
+            indx++;
+            return {
+              index: indx,
+              origin: val.case_reporter,
+              cunty: val.county,
+              constituency: val.constituency,
+              case_reporter: val.case_reporter,
+              telephone: val.reporter_telephone,
+              case_category: val.case_record_id,
+              child_name: childName,
+              child_sex: caseParams.child_sex == 'SMAL' ? "Male" : "Female",
+              child_dob: caseParams.child_dob,
+              case_date: val.case_date,
+              timestamp: val.timestamp_created,
+              status: val.status,
+              actions: htmlAction(val.case_id),
+            };
+          });
+          table.rows.add(row_data).draw();
+        } else {
+          table.row
+            .add({
+              index: '',
+              origin: '',
+              cunty: '',
+              constituency: '',
+              case_reporter: '',
+              telephone: '',
+              case_category: 'No Data',
+              child_name: '',
+              child_sex: '',
+              child_dob: '',
+              case_date: '',
+              timestamp: '',
+              status: '',
+              actions: '',
+            })
+            .draw();
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching initial data:', error);
       });
-
-
-    apiCall('caseload', "GET")
-    .then(initial_data => {
-      console.log({ initial_data, table });
-      let indx = 0;
-      const row_data = initial_data.map(val => {
-        indx++
-        return {
-          "case_id": indx,
-          "case_serial": val.case_serial,
-          "risk_level": val.risk_level,
-          "perpetrator_status": val.perpetrator_status,
-          "case_status": val.case_status,
-          "case_reporter": val.case_reporter,
-          "case_remarks": val.case_remarks,
-          "ovc_cpims_id": val.ovc_cpims_id,
-          "ovc_first_name": val.ovc_first_name,
-          "ovc_other_names": val.ovc_other_names,
-          "ovc_sex": val.ovc_sex,
-          "siblings": val.case_id,
-          "sibling_date_linked": "Hello",
-          "sibling_date_delinked": htmlAction(val.case_id)
-        };
-      });
-
-      console.log({ row_data }); // Logging row_data for debugging
-
-      table.rows.add(row_data).draw();
-    })
-    .catch(error => {
-      console.error('Error fetching initial data:', error);
-    }); 
-
   });
 
-
-    const apiCall = async (url, pMethod) => {
-      var settings = {
-        url: window.location.origin + '/api/mobile/' + url,
-        method: pMethod,
-        timeout: 0,
-        headers: {},
-      };
-      return $.ajax(settings).done(function (response) {
-        return response;
-      });
+  const apiCall = async (url, pMethod) => {
+    var settings = {
+      url: window.location.origin + '/api/mobile/' + url,
+      method: pMethod,
+      timeout: 0,
+      headers: {},
     };
+    return $.ajax(settings).done(function (response) {
+      let responseData = response
+      {% comment %} debugger; {% endcomment %}
+      return responseData ? responseData : false;
+    });
+  };
 
-    // Get the Button for view user
-    const htmlAction = (caseId) => {
-      return `<a
+  // Get the Button for view user
+  const htmlAction = (caseId) => {
+    return `<a
                 href="/api/mobile/crs/view/${caseId}/"
                 class="btn btn-sm btn-primary m-r-5"
                 >View Case details</a
-              >`
-    }
+              >`;
+  };
 </script>
 {% endblock %}

@@ -106,13 +106,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cpims_gok',
-<<<<<<< HEAD
-        'USER': 'postgres',
-        'PASSWORD': 'test',
-=======
         'USER': 'cpimsdbuser',
         'PASSWORD': 'Xaen!ee8',
->>>>>>> mobile_approval
         'HOST': '127.0.0.1',
         'PORT': '5432', }
 }
@@ -242,8 +237,8 @@ PHOTO_URL = '/static'
 DOC_ROOT = os.path.join(BASE_DIR, 'static')
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'UPDATE_LAST_LOGIN': True,
 }
 
