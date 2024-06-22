@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from django.core.paginator import Paginator
 from rest_framework.response import Response
 from cpovc_forms.views import forms_registry
+from cpovc_main.models import SetupGeography
 from rest_framework.decorators import api_view
 from rest_framework import viewsets, generics, status
 from cpovc_main.functions import (get_dict, translate)
@@ -107,6 +108,7 @@ def ovc_mobile_crs(request):
             if queryset:
                 for  query in queryset:
                     cases = query
+                    
                
                     qs = OVCBasicCategoryMobile.objects.filter(case_id=case_id)
                     ps = OVCBasicPersonMobile.objects.filter(case_id=case_id)
@@ -117,6 +119,9 @@ def ovc_mobile_crs(request):
                     cases['perpetrators'] = []
                     cases['children'] = []
                     cases['reporters'] = []
+                    cases['county_name'] = SetupGeography.objects.filter(area_id=cases['county']).values_list('area_name', flat=True).first()
+                    cases['constituency_name'] = SetupGeography.objects.filter(area_id=cases['constituency']).values_list('area_name', flat=True).first()
+                    
                     if cases['app_form_metadata']:
                         cases['app_form_metadata'] = json.loads(cases['app_form_metadata'].replace("'", "\""))
                     if cases['case_params']:
