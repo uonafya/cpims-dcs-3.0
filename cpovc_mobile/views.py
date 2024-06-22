@@ -2,24 +2,30 @@ import json
 import uuid
 from decimal import Decimal
 from datetime import datetime
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from django.urls import reverse
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib import messages
+from rest_framework.views import APIView
+from django.core.paginator import Paginator
+from rest_framework.response import Response
+from cpovc_forms.views import forms_registry
+from cpovc_main.models import SetupGeography
+from rest_framework.decorators import api_view
 from rest_framework import viewsets, generics, status
+from cpovc_main.functions import (get_dict, translate)
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
 from rest_framework.views import APIView
 
 from cpovc_api.functions import dcs_dashboard, get_attached_orgs
-from cpovc_forms.models import OVCCaseRecord, OVCCaseGeo
-
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from cpovc_mobile.models import OVCBasicCRSMobile, OVCBasicCategoryMobile, OVCBasicPersonMobile
-from cpovc_mobile.serializers import CRSCategorySerializerMobile, CRSPersonserializerMobile, CRSSerializerMobile, CaseRecordSerializer, MobileUserSerializer
-from cpovc_registry.models import RegOrgUnit
-
+from cpovc_registry.models import (AppUser, RegPerson, RegPersonsSiblings, RegPersonsGuardians,RegOrgUnit )
+from cpovc_mobile.serializers import (CRSCategorySerializerMobile, CRSPersonserializerMobile, CRSSerializerMobile,
+                                      CaseRecordSerializer, MobileUserSerializer)
+from cpovc_forms.models import (OVCEconomicStatus, OVCFamilyStatus, OVCFriends, OVCHobbies,OVCMedical, OVCCaseCategory,
+                                OVCNeeds, OVCReferral, OVCMedicalSubconditions, OVCCaseSubCategory,OVCCaseLocation, OvcCasePersons,OVCCaseRecord, OVCCaseGeo)
 
 
 # functions
@@ -51,7 +57,6 @@ def save_person(case_id, person_type, req_data):
             print(person_type, serializer.errors)
     except Exception as e:
         print('Error saving data - %s' % str(e))
-        pass
 from cpovc_forms.views import forms_registry
 
 from django.contrib.auth.decorators import login_required
@@ -117,8 +122,8 @@ def ovc_mobile_crs(request):
             if queryset:
                 for  query in queryset:
                     cases = query
-                    print("cases...........",cases['app_form_metadata'])
                     
+               
                     qs = OVCBasicCategoryMobile.objects.filter(case_id=case_id)
                     ps = OVCBasicPersonMobile.objects.filter(case_id=case_id)
                     categories = list(qs.values())
@@ -128,7 +133,15 @@ def ovc_mobile_crs(request):
                     cases['perpetrators'] = []
                     cases['children'] = []
                     cases['reporters'] = []
-                    cases['app_form_metadata'] = json.loads(cases['app_form_metadata'].replace("'", "\""))
+                    cases['county_name'] = SetupGeography.objects.filter(area_id=cases['county']).values_list('area_name', flat=True).first()
+                    cases['constituency_name'] = SetupGeography.objects.filter(area_id=cases['constituency']).values_list('area_name', flat=True).first()
+                    
+                    if cases['app_form_metadata']:
+                        cases['app_form_metadata'] = json.loads(cases['app_form_metadata'].replace("'", "\""))
+                    if cases['case_params']:
+                        case_params = cases['case_params'].replace("None", "null")
+                        case_params= case_params.replace("'", "\"")
+                        cases['case_params'] = json.loads(case_params)
                     del cases['is_void']
                     for category in categories:
                         del category['category_id']
@@ -204,7 +217,8 @@ def ovc_mobile_crs(request):
                     'physical_condition': physical_condition,
                     'other_condition': request.data.get('other_condition'),
                     'case_date': request.data.get('case_date'),
-                    'case_params': str(request.data), 'case_id': case_id,
+                    'case_params': json.dumps(request.data),
+                    'case_id': case_id,
                     'account': account_id, "risk_level": risk_level,
                     'app_form_metadata':json.dumps(request.data.get('app_form_metadata'))
                     }
@@ -266,7 +280,7 @@ def ovc_mobile_crs(request):
     
     except Exception as e:
         print('Error submitting API Case - %s' % str(e))
-        return Response({'details': 'Error saving Case details'})
+        return Response({'Error saving Case details: '+ str(e)})
 
 
 @api_view(['POST', 'PUT', 'PATCH', 'DELETE'])
