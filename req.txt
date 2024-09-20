@@ -33,7 +33,7 @@ diff-match-patch==20200713
 distlib==0.3.6
 distro==1.7.0
 distro-info===1.1build1
-Django==4.0.4
+Django==3.2.25
 django-admin-sortable==2.2.4
 django-crispy-forms==1.14.0
 django-import-export==2.8.0
