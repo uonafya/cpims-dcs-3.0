@@ -160,6 +160,12 @@ crispy_forms_tags %} {% block style_code %}
         { data: 'status' },
         { data: 'actions' },
       ],
+      pageLength: 50,
+      lengthChange: false,
+      layout: {
+        bottomStart: 'pageLength',
+        topStart: null
+    }
     });
 
     function createUnorderedList(array) {
