@@ -591,9 +591,8 @@ def fetchIPRS(request):
         # test login
         if query_method=='login':
             logintest = response.service.Login(**params['login']['payload'])
-            print(dir(logintest))
             print(logintest)
-            pass
+            return logintest
         elif query_method != '':        
             # fetch data by  passed method
             useMethod=params[query_method] # pick params based on the method
@@ -601,9 +600,7 @@ def fetchIPRS(request):
             method = getattr(response.service, func)
             print((method))
             data_resp = method(**useMethod['payload'])
-            print("######################################################################")
-            print(data_resp)
-            print("######################################################################")
+            return data_resp
         
         
         
