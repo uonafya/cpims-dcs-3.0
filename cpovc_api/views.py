@@ -509,10 +509,10 @@ def fetchIPRS(request):
     
     print(f"searching by: {query_method} for: {query_param}")
     
-    iprs_url = "https://dev.cpims.net/IPRSServerwcf?wsdl"
+    iprs_url = "https://10.1.1.5/IPRSServerwcf?wsdl"
     
-    username = "boniface"
-    password = "mugwe"
+    username = "child"
+    password = "aJGDHAGjYm2"
 
     params = {
         "login": {
@@ -585,26 +585,26 @@ def fetchIPRS(request):
         # iprsInstance = Client(iprs_url, settings)   
         
         response = Client(iprs_url)
-        print(dir(response.service))
-        
         
         # test login
-        if query_method=='login':
-            logintest = response.service.Login(**params['login']['payload'])
-            print(logintest)
-            return logintest
-        elif query_method != '':        
+        # if query_method=='login':
+        #     logintest = response.service.Login(**params['login']['payload'])
+        #     print(logintest)
+        #     return logintest
+        # el
+        if query_method != '' and query_param != '':        
             # fetch data by  passed method
             useMethod=params[query_method] # pick params based on the method
             func = useMethod['method']
+            print(f" Func: {func} :  {useMethod}")
             method = getattr(response.service, func)
-            print((method))
+            print((dir(method)))
             data_resp = method(**useMethod['payload'])
-            return data_resp
-        
-        
-        
-        return Response({"status": 200, "message": "Success", "data": logintest})
+            print(data_resp)
+            return Response({"status": "success", "message": data_resp})
+        else: 
+            return Response({"status": "error", "message": "query params is empty"})   
+
     except Exception as e:
         print(f"Error Feching IPRS data: {e}")
-        return HttpResponse(json.dumps(useMethod),status=351, content_type="application/json")
+        return HttpResponse(json.dumps({"status": "Error", "message": "Error Fetching IPRS data`"}),status=351, content_type="application/json")
