@@ -1,0 +1,287 @@
+{% extends 'base.html' %} {% load static %} {% block page_title %} CPIMS Mobile
+Approval Workflow {% endblock %} {% load app_filters %} {% load
+crispy_forms_tags %} {% block style_code %}
+<link
+  href="{% static 'plugins/datatables/css/data-table.css' %}"
+  rel="stylesheet"
+/>
+{% endblock %} {% block primary %}
+<!-- begin breadcrumb -->
+<ol class="breadcrumb pull-right">
+  <li><a href="#">Home</a></li>
+  <li class="active">Approval</li>
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header">Mobile Aproval <small>Home</small></h1>
+<!-- end page-header -->
+<div
+  id="messages"
+  class="alert alert-danger fade in"
+  style="display: none"
+  tabindex="1"
+>
+  <span class="close" data-dismiss="alert">×</span>
+  <i class="fa fa-check fa-2x pull-left"></i>
+  <span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+<!-- begin row -->
+<div class="row">
+  <!-- begin col-12 -->
+  <div class="col-md-12">
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <a
+            href="#"
+            class="btn btn-xs btn-icon btn-circle btn-warning"
+            data-click="panel-collapse"
+            ><i class="fa fa-minus"></i
+          ></a>
+          <a
+            href="#"
+            class="btn btn-xs btn-icon btn-circle btn-danger"
+            data-click="panel-remove"
+            ><i class="fa fa-times"></i
+          ></a>
+        </div>
+        <h4 class="panel-title">Mobile Approval - Workflow</h4>
+      </div>
+      <!-- start panel body -->
+      <div class="panel-body">
+        <div class="row"></div>
+        <hr />
+        <table class="table" id="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Origin</th>
+              <th>County</th>
+              <th>Constituency</th>
+              <th>Case Reporter</th>
+              <th>Telephone</th>
+              <th>Case Category</th>
+              <th>Child Name</th>
+              <th>Child Sex</th>
+              <th>Child DOB</th>
+              <th>Case Date</th>
+              <th>TimeStamp</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          {% comment %} {% for case in cases %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ case.id }}</td>
+            <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
+            <td>{{ case.case }} {{ case.case_t }}</td>
+            <td>{{ case.case_date }}</td>
+            <td>{{ case.id }}</td>
+            <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
+            <td>{{ case.case }} {{ case.case_t }}</td>
+            <td>{{ case.case_date }}</td>
+            <td>{{ case.id }}</td>
+            <td>{{ case.first_name }} {{ case.surname|default:"------" }}</td>
+            <td>{{ case.case }} {{ case.case_t }}</td>
+            <td>{{ case.case_date }}</td>
+            <td>
+              {% if case.case_level == 2 %}
+              <a
+                href="{% url 'view_mobile_case_record_sheet' id=case.care_id %}"
+                class="btn btn-sm btn-primary m-r-5"
+                >View Care details</a
+              >
+              {% elif case.case_level == 1 %}
+              <a
+                href="{% url 'new_alt_care' case_id=case.case_id %}"
+                class="btn btn-sm btn-primary m-r-5"
+                >New Alternative Care</a
+              >
+              {% else %}
+              <a href="" class="btn btn-sm btn-danger m-r-5"
+                >New Case Record Sheet</a
+              >
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %} {% endcomment %}
+        </table>
+      </div>
+      <!-- end panel body -->
+    </div>
+    <!-- end panel -->
+  </div>
+  <!-- end col-12 -->
+</div>
+<!-- end row -->
+
+{% endblock %} {% block lazy_javascript_code %}
+<script src="{% static 'plugins/datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/moment.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/js/datetime-moment.js' %}"></script>
+
+<script>
+  const fetchSettingsbyField = async (fieldName) => {
+    try {
+      apiCall(`/api/v1/settings?field_name=${fieldName}`, 'GET')
+        .then((fresponse) => {
+          window.sessionStorage.setItem(fieldName, JSON.stringify(fresponse));
+          console.log(
+            'Mobile settings fetched successfully:',
+            'mobileSettings'
+          );
+          return fresponse;
+        })
+        .catch((error) => {
+          console.error('Error fetching Mobile settings:', error);
+        });
+    } catch (error) {}
+  };
+  $(document).ready(function () {
+    fetchSettingsbyField('case_category_id');
+    var table = $('#data-table').DataTable({
+      columns: [
+        { data: 'index' },
+        { data: 'origin' },
+        { data: 'cunty' },
+        { data: 'constituency' },
+        { data: 'case_reporter' },
+        { data: 'telephone' },
+        { data: 'case_category' },
+        { data: 'child_name' },
+        { data: 'child_sex' },
+        { data: 'child_dob' },
+        { data: 'case_date' },
+        { data: 'timestamp' },
+        { data: 'status' },
+        { data: 'actions' },
+      ],
+      pageLength: 50,
+      lengthChange: false,
+      layout: {
+        bottomStart: 'pageLength',
+        topStart: null
+    }
+    });
+
+    function createUnorderedList(array) {
+      const ul = document.createElement('ul');
+      array.forEach((item) => {
+        const li = document.createElement('li');
+        li.innerText = item;
+        ul.appendChild(li);
+      });
+      return ul.innerHTML;
+    }
+
+    apiCall('/api/mobile/crs/', 'GET')
+      .then((initial_data) => {
+        let initialData = initial_data['results'];
+        let initialData_len = initialData.length;
+        let caseParams = {};
+        console.log({ initialData, initialData_len }); // Logging row_data for debugging
+        if (initialData_len > 0) {
+          let indx = 0;
+          const row_data = initialData.map((val) => {
+            let caseParams = val['case_params'];
+            childName =
+              caseParams.child_first_name + ' ' + caseParams.child_surname;
+            let caseDetails = caseParams['case_details'];
+            let casesHtml;
+            CaseCategorys = JSON.parse(
+              window.sessionStorage.getItem('case_category_id')
+            );
+            let casesdata = caseDetails.map((icase) => {
+              let filtered = CaseCategorys.filter((category) => {
+                return category['item_id'] === icase['category'];
+              })[0]['item_description'];
+              return filtered;
+            });
+            casesHtml = createUnorderedList(casesdata);
+            console.log({ casesHtml });
+            console.log({
+              caseParams,
+              childName,
+              caseDetails,
+              CaseCategorys,
+              casesHtml,
+            });
+            indx++;
+            return {
+              index: indx,
+              origin: val.case_reporter,
+              cunty: val.county_name,
+              constituency: val.constituency_name,
+              case_reporter: val.case_reporter,
+              telephone: val.reporter_telephone,
+              case_category: casesHtml,
+              child_name: childName,
+              child_sex: caseParams.child_sex == 'SMAL' ? 'Male' : 'Female',
+              child_dob: caseParams.child_dob,
+              case_date: val.case_date,
+              timestamp: val.timestamp_created,
+              status: val.status,
+              actions: htmlAction(val.case_id),
+            };
+          });
+          table.rows.add(row_data).draw();
+        } else {
+          table.row
+            .add({
+              index: '',
+              origin: '',
+              cunty: '',
+              constituency: '',
+              case_reporter: '',
+              telephone: '',
+              case_category: 'No Data',
+              child_name: '',
+              child_sex: '',
+              child_dob: '',
+              case_date: '',
+              timestamp: '',
+              status: '',
+              actions: '',
+            })
+            .draw();
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching initial data:', error);
+      });
+  });
+
+  const apiCall = async (url, pMethod) => {
+    var settings = {
+      url: url,
+      method: pMethod,
+      timeout: 0,
+      headers: {},
+    };
+    return $.ajax(settings).done(function (response) {
+      window.sessionStorage.setItem(
+        'payload',
+        JSON.stringify(response['results'])
+      );
+    });
+  };
+
+  const Clicked = (caseid) => {
+    window.sessionStorage.setItem('activecase', caseid);
+  };
+
+  // Get the Button for view user
+  const htmlAction = (caseId) => {
+    return `<a
+                href="/api/mobile/crs/view/${caseId}/"
+                class="btn btn-sm btn-primary m-r-5"
+                onclick="(Clicked('${caseId}'))"
+                >View Case details</a
+              >`;
+  };
+</script>
+{% endblock %}

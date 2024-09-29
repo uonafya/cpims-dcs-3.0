@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'cpovc_help',
     'cpovc_ctip',
     'cpovc_afc',
+    'cpovc_mobile',
     'cpovc_stat_inst',
     'cpovc_institutions',
     'notifications',
@@ -104,7 +105,7 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims_live',
+        'NAME': 'cpims_gok',
         'USER': 'cpimsdbuser',
         'PASSWORD': 'Xaen!ee8',
         'HOST': '127.0.0.1',
@@ -236,8 +237,8 @@ PHOTO_URL = '/static'
 DOC_ROOT = os.path.join(BASE_DIR, 'static')
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'UPDATE_LAST_LOGIN': True,
 }
 

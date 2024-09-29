@@ -4,5 +4,9 @@ cpims/settings.py
 .history/*
 .pyc
 __pycache__
+__pycache__/*
 *.pyc
 migrations
+requirements.txt
+.gitignore
+**/migrations/*
