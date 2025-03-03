@@ -180,9 +180,9 @@ urlpatterns = [
     path('bursary/manage/',
          views.manage_bursary, name='manage_bursary'),
 
-    path('caseinfo/<uuid:case_id>/', views.case_info, name='case_info'),
+    path('case/<uuid:case_id>/', views.case_info, name='case_info'),
     path(
-        'caseinfo/<int:form_id>/<uuid:case_id>/',
+        'case/<int:form_id>/<uuid:case_id>/',
         views.case_info_form, name='case_info_form'),
 
     # OVC Care - CSI

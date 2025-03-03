@@ -1,3 +1,7 @@
+import segno
+# import barcode
+# from barcode import EAN13, Code128
+
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse
@@ -10,10 +14,6 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from weasyprint import HTML
 
-import barcode
-from barcode import EAN13, Code128
-import segno
-
 from .forms import (SIForm)
 
 from .functions import (
@@ -24,7 +24,8 @@ from .functions import (
 from cpovc_main.functions import get_dict
 
 from cpovc_forms.functions import get_person_ids
-from cpovc_registry.models import RegPerson, RegOrgUnit
+from cpovc_registry.models import (
+    RegPerson, RegOrgUnit, RegPersonsGuardians, RegPersonsGeo)
 
 from .models import SI_VacancyApp, SIEvents, SIMain
 
@@ -32,7 +33,7 @@ from cpovc_forms.models import (
     OVCCaseRecord, OVCPlacement, OVCCaseCategory, OVCCaseGeo)
 from cpovc_forms.forms import OVCSearchForm
 
-from .parameters import DASHES, FDEP, SI_FORMS, FPERM
+from .parameters import DASHES, FDEP, SI_FORMS, FPERM, INSTM
 
 from django.conf import settings
 DOC_ROOT = settings.DOC_ROOT
@@ -103,11 +104,18 @@ def SI_child_view(request, id):
         si_data = SIMain.objects.filter(
             person_id=id, case_status=None, is_void=False)
         case_id = None
+        case_sc_id = 0
         if si_data:
-            case_id = si_data.first().case_id
-            if case_id:
+            cidt = si_data.first()
+            if cidt:
+                case_id = cidt.case_id
                 cases = OVCCaseCategory.objects.filter(
                     person_id=id, case_id_id=case_id)
+                # CRS Geo
+                cgeos = OVCCaseGeo.objects.filter(
+                    person_id=id, case_id_id=case_id).first()
+                if cgeos:
+                    case_sc_id = cgeos.report_orgunit_id
         unit_type = None
         unit_name = 'Not placed'
         org_unit_id = 0
@@ -130,6 +138,8 @@ def SI_child_view(request, id):
             allow_edit = 0
         if request.user.is_superuser:
             user_level = 3
+            is_allowed = True
+        if user_level == 1 and ou_pri == case_sc_id:
             is_allowed = True
         # Events count
         forms = get_events(request, id, 1)
@@ -183,7 +193,8 @@ def si_forms(request, form_id, id):
             msg = 'SI Form (%s) details saved successfully' % form_name
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(url)
-        check_fields = ['sex_id', 'yesno_id']
+        check_fields = ['sex_id', 'yesno_id',
+                        'relationship_type_id', 'area_type_id']
         vals = get_dict(field_name=check_fields)
         case = CaseObj()
         person = RegPerson.objects.get(id=id, is_void=False)
@@ -215,6 +226,11 @@ def si_forms(request, form_id, id):
             if forms[f] > 0:
                 ffill.append(f)
         all_filled = set(fdeps).issubset(ffill)
+        inst_type = request.session.get('ou_type', 'XXXX')
+        print(inst_type)
+        A_IN = INSTM[form_id] if form_id in INSTM else []
+        if inst_type not in A_IN:
+            all_filled = True
         for fdep in fdeps:
             dep_forms.append(SI_FORMS[fdep])
         # Forms permissions
@@ -222,22 +238,32 @@ def si_forms(request, form_id, id):
         form_perms = FPERM[form_id] if form_id in FPERM else {}
         pss = form_perms[user_level] if user_level in form_perms else ['']
         ps = pss[0]
-        print('PS', ps)
+        print('PS', ps, 'AE', allow_edit)
         if 'C' in ps:
+            perms = True
+        # Override for super admin - Debugging and Testing was headache
+        if request.user.is_superuser:
+            ps = 'CRUD'
+            allow_edit = True
             perms = True
         orgs = RegOrgUnit.objects.filter(
             org_unit_type_id__in=org_types,
             is_void=False).order_by('org_unit_type_id')
+        caregivers = RegPersonsGuardians.objects.select_related().filter(
+            child_person_id=person_id, is_void=False, date_delinked=None)
+        person_geos = RegPersonsGeo.objects.select_related().filter(
+            person_id=person_id, is_void=False, date_delinked=None)
         tmpl = '%s.html' % form_id
         context = {'form': form, 'case': case, 'vals': vals,
                    'form_id': form_id, 'form_name': form_name,
                    'edit_form': 1, 'orgs': orgs, 'form_code': form_code,
                    'events': forms, 'user_level': user_level,
-                   'vacancy_status': 0, 'allow_edit': allow_edit}
+                   'vacancy_status': 0, 'allow_edit': allow_edit,
+                   'all_perms': ps, 'caregivers': caregivers,
+                   'person_geos': person_geos}
         if not all_filled or not perms:
             context['dep_forms'] = dep_forms
             context['dep_perms'] = perms
-            context['all_perms'] = ps
             return render(request, 'si/FMSI000R.html', context)
         return render(request, 'si/%s' % tmpl, context)
 
@@ -266,7 +292,7 @@ def si_forms_edit(request, form_id, id, ev_id):
             msg = 'SI Form (%s) details saved successfully' % form_name
             messages.add_message(request, messages.INFO, msg)
             return HttpResponseRedirect(url)
-        check_fields = ['sex_id']
+        check_fields = ['sex_id', 'relationship_type_id', 'area_type_id']
         vals = get_dict(field_name=check_fields)
         case = CaseObj()
         # Case main table
@@ -324,6 +350,11 @@ def si_forms_edit(request, form_id, id, ev_id):
             perms = 'CRUD'
         if record_user_id == user_id and user_level < 3:
             perms = 'CR'
+        # print('P', perms, 'AE', allow_edit)
+        caregivers = RegPersonsGuardians.objects.select_related().filter(
+            child_person_id=person_id, is_void=False, date_delinked=None)
+        person_geos = RegPersonsGeo.objects.select_related().filter(
+            person_id=person_id, is_void=False, date_delinked=None)
         tmpl = '%s.html' % form_id
         context = {'form': form, 'case': case, 'vals': vals,
                    'form_id': form_id, 'form_name': form_name,
@@ -331,7 +362,8 @@ def si_forms_edit(request, form_id, id, ev_id):
                    'form_code': form_code, 'all_answers': all_answers,
                    'user_level': user_level, 'orgs': orgs,
                    'vacancy_status': vac_status, 'idata': idata,
-                   'allow_edit': allow_edit, 'all_perms': perms}
+                   'allow_edit': allow_edit, 'all_perms': perms,
+                   'caregivers': caregivers, 'person_geos': person_geos}
         return render(request, 'si/%s' % tmpl, context)
 
     except Exception as e:
@@ -506,7 +538,8 @@ def SI_dash_view(request, id):
                 sis = ['TNRH', 'TNRR', 'TNRS', 'TNAP']
                 summaries = OVCPlacement.objects.filter(
                     is_void=False, is_active=True,
-                    residential_institution__org_unit_type_id__in=sis).values(
+                    residential_institution__org_unit_type_id__in=sis).extra(
+                    select={'name':'residential_institution__org_unit_type_id'}).values(
                     'residential_institution__org_unit_type_id').annotate(
                     dcount=Count('residential_institution__org_unit_type_id'))
         if did == 5:

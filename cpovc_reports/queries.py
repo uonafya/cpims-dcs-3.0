@@ -121,7 +121,7 @@ CASE ovc_placement.is_active WHEN 'TRUE' THEN 'Active' ELSE 'Discharged' END AS 
 from ovc_placement
 inner join reg_person as pp on person_id = pp.id
 left outer join ovc_case_record as cr on cr.case_id = ovc_placement.case_record_id
-left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id
+left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id and cc.is_void = False
 left outer join list_general c_cat on c_cat.item_id=cc.case_category and c_cat.field_name = 'case_category_id'
 left outer join ovc_discharge_followup as df on df.placement_id_id = ovc_placement.placement_id
 where ovc_placement.is_void = False and admission_date between '{start_date}' and '{end_date}'
@@ -164,6 +164,7 @@ WHEN  date_part('year', age(date_case_opened, reg_person.date_of_birth)) BETWEEN
 WHEN  date_part('year', age(date_case_opened, reg_person.date_of_birth)) BETWEEN 15 AND 17 THEN 'd.[15 - 17 yrs]'
 WHEN  date_part('year', age(date_case_opened, reg_person.date_of_birth)) = 18 THEN 'e.[18 yrs]'
 ELSE 'f.[18+ yrs]' END AS un_agerange,
+CASE exids.identifier WHEN exids.identifier THEN trb.item_description ELSE 'Not Provided' END AS ethnicity,
 CASE case_stage WHEN 2 THEN 'Closed' WHEN 1 THEN 'Active' ELSE 'Pending' END AS Case_status,
 case_status as case_state,
 CASE ccat.case_nature WHEN 'OOEV' THEN 'One Off' ELSE 'Chronic' END AS Case_Nature,
@@ -178,7 +179,7 @@ CASE cen.service_provided WHEN cen.service_provided THEN intv.item_description E
 TO_CHAR(ovc_case_record.timestamp_created :: DATE, 'dd-Mon-yyyy') as system_date,
 1 as ovccount
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 inner join ovc_medical as omed on omed.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
@@ -193,6 +194,8 @@ left outer join list_general cs_cat on cs_cat.item_id=cscat.sub_category_id
 left join ovc_case_events as cev on cev.case_id_id = case_id and cev.case_event_type_id = 'CLOSURE' and cev.is_void = false
 left join ovc_case_event_encounters as cen on cen.case_event_id_id=cev.case_event_id
 left outer join list_general intv on intv.item_id=cen.service_provided and intv.field_name = 'intervention_id'
+LEFT OUTER JOIN reg_persons_external_ids as exids on exids.person_id=reg_person.id and exids.identifier_type_id = 'ITRB'
+left outer join list_general trb on trb.item_id=exids.identifier and trb.field_name = 'tribe_category_id'
 where date_case_opened between '{start_date}' and '{end_date}' {other_params};
 '''
 
@@ -214,7 +217,7 @@ NULL as "Case Intervention", NULL as "Special Comments",
 TO_CHAR(reg_person.date_of_birth :: DATE, 'dd-Mon-yyyy') as "Date of Birth",
 1 as ovccount
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
 left outer join list_geo as scou_geo on scou_geo.area_id=cgeo.report_subcounty_id and scou_geo.area_id > 47
@@ -241,7 +244,7 @@ NULL as "Case Intervention",
 TO_CHAR(reg_person.date_of_birth :: DATE, 'dd-Mon-yyyy') as "Date of Birth",
 1 as ovccount
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
 left outer join list_geo as scou_geo on scou_geo.area_id=cgeo.report_subcounty_id and scou_geo.area_id > 47
@@ -270,7 +273,7 @@ NULL as "Case Intervention",
 TO_CHAR(reg_person.date_of_birth :: DATE, 'dd-Mon-yyyy') as "Date of Birth",
 1 as ovccount
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id  and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
 left outer join list_geo as scou_geo on scou_geo.area_id=cgeo.report_subcounty_id and scou_geo.area_id > 47
@@ -1241,7 +1244,7 @@ case_status as "Case State",
 TO_CHAR(ovc_case_record.timestamp_created :: DATE, 'dd-Mon-yyyy') as "System Date",
 1 as "OVCCount"
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
 left outer join reg_org_unit on reg_org_unit.id=cgeo.report_orgunit_id
@@ -1270,7 +1273,7 @@ from ovc_case_event_encounters as cee
 inner join ovc_case_events ce on ce.case_event_id = cee.case_event_id_id
 inner join ovc_case_record ocr on ce.case_id_id = ocr.case_id
 inner join reg_person as pp on ocr.person_id = pp.id
-inner join ovc_case_category as ccat on case_id = ocr.case_id
+inner join ovc_case_category as ccat on case_id = ocr.case_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = ocr.case_id
 left outer join list_general c_cat on c_cat.item_id=ccat.case_category and c_cat.field_name = 'case_category_id'
 where ce.date_of_event between '{start_date}' and '{end_date}' {other_params}
@@ -1300,7 +1303,7 @@ CASE ovc_placement.is_active WHEN 'TRUE' THEN 'Active' ELSE 'Discharged' END AS 
 from ovc_placement
 inner join reg_person as pp on person_id = pp.id
 left outer join ovc_case_record as cr on cr.case_id = ovc_placement.case_record_id
-left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id
+left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id and cc.is_void = False
 left outer join list_general c_cat on c_cat.item_id=cc.case_category and c_cat.field_name = 'case_category_id'
 left outer join list_general a_type on a_type.item_id=ovc_placement.admission_type and a_type.field_name = 'admission_type_id'
 left outer join ovc_discharge_followup as df on df.placement_id_id = ovc_placement.placement_id
@@ -1330,7 +1333,7 @@ NULL as "Case Intervention",
 TO_CHAR(reg_person.date_of_birth :: DATE, 'dd-Mon-yyyy') as "Date of Birth",
 1 as ovccount
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
 left outer join list_geo as scou_geo on scou_geo.area_id=cgeo.report_subcounty_id and scou_geo.area_id > 47
@@ -1413,7 +1416,7 @@ CASE cen.service_provided WHEN cen.service_provided THEN intv.item_description E
 TO_CHAR(ovc_case_record.timestamp_created :: DATE, 'dd-Mon-yyyy') as system_date,
 1 as ovccount
 from ovc_case_record
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 inner join ovc_medical as omed on omed.case_id_id = case_id
 left outer join reg_person on ovc_case_record.person_id=reg_person.id
@@ -1449,7 +1452,7 @@ ELSE 'e.[18+ yrs]' END AS AgeRange,
 NULL as "Case Intervention",
 1 as ovccount
 from ovc_case_record as ocr
-inner join ovc_case_category as ccat on ocr.case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on ocr.case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = ocr.case_id
 inner join ovc_ctip_main as tip_main on tip_main.case_id = ocr.case_id
 left outer join reg_person on ocr.person_id=reg_person.id
@@ -1484,7 +1487,7 @@ CASE cen.service_provided WHEN cen.service_provided THEN intv.item_description E
 TO_CHAR(ocr.timestamp_created :: DATE, 'dd-Mon-yyyy') as system_date,
 1 as ovccount
 from ovc_case_record ocr
-inner join ovc_case_category as ccat on case_id = ccat.case_id_id
+inner join ovc_case_category as ccat on case_id = ccat.case_id_id and ccat.is_void = False
 inner join ovc_case_geo as cgeo on cgeo.case_id_id = case_id
 inner join ovc_medical as omed on omed.case_id_id = case_id
 left outer join reg_person rp on ocr.person_id=rp.id
@@ -1527,7 +1530,7 @@ ELSE 'Closed' END AS Status,
 from ovc_afc_main
 inner join reg_person as pp on person_id = pp.id
 left outer join ovc_case_record as cr on cr.case_id = ovc_afc_main.case_id
-left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id
+left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id and ccat.is_void = False
 left outer join list_general c_cat on c_cat.item_id=cc.case_category and c_cat.field_name = 'case_category_id'
 left outer join list_general c_type on c_type.item_id=ovc_afc_main.care_type and c_type.field_name = 'alternative_family_care_type_id'
 where ovc_afc_main.is_void = False and case_date between '{start_date}' and '{end_date}'
@@ -1595,7 +1598,7 @@ ELSE 'Closed' END AS Status,
 from ovc_si_registration
 inner join reg_person as pp on person_id = pp.id
 left outer join ovc_case_record as cr on cr.case_id = ovc_si_registration.case_id
-left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id
+left outer join ovc_case_category as cc on cc.case_id_id = cr.case_id and cc.is_void = False
 left outer join list_general c_cat on c_cat.item_id=cc.case_category and c_cat.field_name = 'case_category_id'
 left outer join list_general c_type on c_type.item_id=ovc_si_registration.org_type and c_type.field_name = 'alternative_family_care_type_id'
 where ovc_si_registration.is_void = False and case_date between '{start_date}' and '{end_date}'
@@ -1662,3 +1665,4 @@ QUERIES['si_education'] = QUERIES['si_forms'] % ('FMSI029F')
 QUERIES['si_vocation'] = QUERIES['si_forms'] % ('FMSI30F')
 QUERIES['si_child_assesment'] = QUERIES['si_forms'] % ('FMSI031F')
 QUERIES['si_youngp_caregiver_case_review'] = QUERIES['si_forms'] % ('FMSI032F')
+

@@ -41,7 +41,8 @@ from cpovc_main.country import (COUNTRIES)
 from cpovc_registry.models import (
     RegOrgUnit, RegOrgUnitContact, RegOrgUnitGeography, RegPerson,
     RegPersonsOrgUnits, AppUser, RegPersonsSiblings,
-    RegPersonsTypes, RegPersonsGuardians, RegPersonsGeo, RegPersonsExternalIds)
+    RegPersonsTypes, RegPersonsGuardians, RegPersonsGeo,
+    RegPersonsExternalIds, RegOrgUnitsService)
 from cpovc_main.models import (SetupList, SetupGeography, SchoolList)
 from cpovc_auth.models import CPOVCUserRoleGeoOrg
 from cpovc_auth.decorators import is_allowed_groups
@@ -240,7 +241,7 @@ def userorgunits_lookup(request):
                         jsonOrgUnitsResults.append(
                             {'id': regorgunit.id,
                              'org_unit_name': str(regorgunit.org_unit_name)})
-            if types == 3 or types == 31:
+            if types == 3:
                 # This will be used for Residential Placements
                 ou_types = ['TNRH', 'TNRC', 'TNAP', 'TNRR', 'TNRB', 'TNRS']
                 orgunits = []
@@ -255,8 +256,6 @@ def userorgunits_lookup(request):
                     for regpersongeo in regpersonsgeo:
                         area_ids.append(regpersongeo.area_id)
                 print('AREAS', area_ids, appuser.reg_person.id)
-                if types == 31:
-                    area_ids = []
 
                 if area_ids:
                     # print 'Non-national users ..'
@@ -277,6 +276,15 @@ def userorgunits_lookup(request):
                         jsonOrgUnitsResults.append(
                             {'id': regorgunit.id,
                              'org_unit_name': str(regorgunit.org_unit_name)})
+                    if not regorgunits:
+                        # if blank check in services charter if OU provides residential care
+                        regservices = RegOrgUnitsService.objects.filter(
+                            org_unit_id__in=orgunits, service_id='SCRC',
+                            is_void=False)
+                        for regservice in regservices:
+                            jsonOrgUnitsResults.append(
+                                {'id': regservice.org_unit_id,
+                                 'org_unit_name': str(regservice.org_unit.org_unit_name)})
                 else:
                     # print 'National users (DCS) ..'
                     regorgunits = RegOrgUnit.objects.filter(
@@ -287,6 +295,16 @@ def userorgunits_lookup(request):
                         jsonOrgUnitsResults.append(
                             {'id': regorgunit.id,
                              'org_unit_name': str(regorgunit.org_unit_name)})
+
+                    if not regorgunits:
+                        # if blank check in services charter if OU provides residential care
+                        regservices = RegOrgUnitsService.objects.filter(
+                            org_unit_id__in=orgunits, service_id='SCRC',
+                            is_void=False)
+                        for regservice in regservices:
+                            jsonOrgUnitsResults.append(
+                                {'id': regservice.org_unit_id,
+                                 'org_unit_name': str(regservice.org_unit.org_unit_name)})
             if types == 4:
                 # This will be used for Adoption Societies
                 # org_unit_types = ['TNSA']
@@ -600,7 +618,7 @@ def forms_registry(request):
                 creators = []
                 rs_sets = []
                 for person in person_ids:
-                    print('PERS', person, case_ids)
+                    print('PERS', person, request.user.get_username())
                     ovc_caserecords = ovccaserecords_queryset.filter(
                         case_id__in=case_ids, is_void=False, person=person)
                     if ovc_caserecords:
@@ -1769,17 +1787,13 @@ def edit_case_record_sheet(request, id):
 
             # CTiP - Get other geos
             report_in_country = 'AYES'
-            occurence_country, occurence_city = '', ''
-            occurence_location, occurence_sublocation = '', ''
+            occurence_country = ''
+            occurence_city = ''
             try:
                 other_geos = OVCCaseLocation.objects.get(case_id=id)
                 occurence_country = other_geos.report_country_code
                 occurence_city = other_geos.report_city
-                # Addition of locations and sub_locations
-                if other_geos.report_location:
-                    occurence_location = other_geos.report_location.area_id
-                if other_geos.report_sublocation:
-                    occurence_sublocation = other_geos.report_sublocation.area_id
+                print('Diaspora', occurence_country, occurence_city)
                 if occurence_country and occurence_country != 'KE':
                     report_in_country = 'ANNO'
             except Exception as e:
@@ -1966,8 +1980,6 @@ def edit_case_record_sheet(request, id):
                 'report_orgunit': report_orgunit,
                 'occurence_county': occurence_county,
                 'occurence_subcounty': occurence_subcounty,
-                'occurence_location': occurence_location,
-                'occurence_sublocation': occurence_sublocation,
                 'occurence_ward': occurence_ward,
                 'occurence_village': occurence_village,
                 # Tab 2
@@ -2000,7 +2012,7 @@ def edit_case_record_sheet(request, id):
                 'date_of_summon': date_of_summon,
                 'summon_issued': summon_issued
 
-            }, sub_county_id = occurence_subcounty, location_id = occurence_location)
+            })
 
             return render(request, 'forms/edit_case_record_sheet.html',
                           {
@@ -2043,7 +2055,6 @@ def view_case_record_sheet(request, id):
         ovccr = OVCCaseRecord.objects.get(case_id=id, is_void=False)
         person_id = int(ovccr.person_id)
         # init_data = RegPerson.objects.filter(pk=person_id)
-        appuser = AppUser.objects.filter(pk=ovccr.created_by).first()
         f = {'form_id': id}
 
         # Get Siblings
@@ -2100,7 +2111,6 @@ def view_case_record_sheet(request, id):
         ovcrefa = OVCReferral.objects.filter(case_id=id, is_void=False)
         perpetrators = OvcCasePersons.objects.filter(
             case_id=id, person_type='PERP')
-        ovclocs = OVCCaseLocation.objects.filter(case_id=id, is_void=False)
 
         # Retrieve Medical Subconditions
         medical_id = ovcmed.medical_id
@@ -2191,16 +2201,13 @@ def view_case_record_sheet(request, id):
                        'perpetrators': perpetrators,
                        'ovcfam': ovcfam,
                        'resultsets': resultsets,
-                       'resultsets2': resultsets2,
-                       'ovclocs': ovclocs.first(),
-                       'app_user': appuser
+                       'resultsets2': resultsets2
                        })
     except Exception as e:
         msg = 'An error occured trying to view OVCCaseRecord - %s' % (str(e))
         messages.add_message(request, messages.ERROR, msg)
     redirect_url = reverse(forms_registry)
     return HttpResponseRedirect(redirect_url)
-
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -4657,7 +4664,6 @@ def placement_followup(request, id):
         return HttpResponseRedirect(reverse(forms_registry))
     else:
         pass
-
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -9242,9 +9248,6 @@ def case_info_form(request, form_id, case_id):
         tids[4] = "Missing Children"
         tids[5] = "Alternative Care"
         tids[6] = "Institution Placements"
-        # Listing
-        ct_ids, ci_ids = [], []
-        mcs = ['']
         # Trafficking cases
         tr_case = False
         #  End trafficking
@@ -9254,16 +9257,9 @@ def case_info_form(request, form_id, case_id):
         case_date = case.date_case_opened
         case_categories = OVCCaseCategory.objects.filter(case_id_id=case_id)
         for ccat in case_categories:
-            ct_ids.append(ccat.pk)
             if ccat.case_category in CATS:
                 tr_case = True
-        case_subcats = OVCCaseSubCategory.objects.filter(
-            case_category_id__in=ct_ids)
-        # Forms - Trafficking
-        if tr_case:
-            ci_ids.append(3)
-        # Forms missing children
-        ci_ids.append(4)
+        # Forms
         fid = int(form_id)
         fname = tids[fid] if fid in tids else tids[0]
         if request.method == 'POST':
@@ -9337,8 +9333,7 @@ def case_info_form(request, form_id, case_id):
              'case_uid': case_uid, 'case_id': str(case_id),
              'tr_case': tr_case, 'tr_form': tr_form,
              'form_name': fname, 'photos': photos,
-             'photo_pp': photo_pp, 'photo_fs': photo_fs,
-             'sub_cats': case_subcats, 'cids': ci_ids})
+             'photo_pp': photo_pp, 'photo_fs': photo_fs})
     except Exception as e:
         raise e
     else:

@@ -88,14 +88,12 @@
                                     <tr class="highlight">
                                         <td class="field">Child Names</td><td>{{ case.person.first_name }} {{ case.person.surname }} {% if case.person.other_names %}{{ case.person.other_names }}{% endif %}</td>
                                         <td class="field">Sex</td><td>{{ case.person.sex_id|gen_value:vals }}</td>
-                                    </tr>
-                                    <tr class="highlight">                                        
-                                        <td class="field">DOB</td><td>{% if case.person.date_of_birth %}{{ case.person.date_of_birth }}{% else %}Not Provided{% endif %}</td>
-                                        <td class="field"></td><td></td>
+                                        <td class="field">DOB</td><td>{{ case.person.date_of_birth }}</td>
                                     </tr>
                                     <tr class="highlight">
                                         <td class="field">Case Date</td><td>{{ case.date_case_opened }}</td>
                                         <td class="field">Case Reporter</td><td>{{ case.case_reporter|gen_value:vals }}</td>
+                                        <td></td><td></td>
                                     </tr>
                                     <tr class="highlight">
                                         <td class="field">Case Category</td>
@@ -105,11 +103,7 @@
                                             {% endfor %}
                                         </td>
                                         <td class="field">Sub Category</td>
-                                        <td>
-                                            {% for cat in sub_cats %}
-                                                {{ cat.case_category.case_category|gen_value:vals }} - {{ cat.sub_category_id|gen_value:vals }}
-                                            {% endfor %}
-                                        </td>
+                                        <td></td><td></td>
                                     </tr>
                                     {% if tr_case %}
                                     <tr class="highlight">

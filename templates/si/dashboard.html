@@ -96,7 +96,7 @@
                                 <th>#</th>
                                 <th>Institution</th>
                                 <th align="right">Count</th>
-                                <th>Action</th>
+                                <th width="10%">Action</th>
                             </tr>
                         </thead>
                         {% else %}
@@ -106,7 +106,7 @@
                                 <th>Institution</th>
                                 <th>CPIMS ID</th>
                                 <th>Name</th>
-                                <th>Action</th>
+                                <th width="10%">Action</th>
                             </tr>
                         </thead>
                         {% endif %}
@@ -118,13 +118,13 @@
                                 <td>{{ forloop.counter }}</td>
                                 <td>
                                     {{ summary.residential_institution__org_unit_type_id|gen_value:vals }}
-                                    {{ summary.residential_institution__org_unit_name }}
                                 </td>
                                 <td>{{ summary.dcount }}</td>
                                 <td>
                                     {% if summary.residential_institution__org_unit_type_id %}
                                     <a href="{% url 'si_dash_view' id=5 %}?si={{ summary.residential_institution__org_unit_type_id }}" class="btn btn-sm btn-primary"> <i class="fa fa-folder-open-o"></i> View </a>
                                     {% endif %}
+                                    <a href="#" class="btn  btn-sm btn-primary m-r-5">View Details</a>
                                 </td>
                             </tr>
                             {% endfor %}

@@ -14,7 +14,8 @@ from .models import (
     RegOrgUnitContact, RegOrgUnit, RegOrgUnitExternalID, RegOrgUnitGeography,
     RegPersonsOrgUnits, RegPersonsExternalIds, RegPerson, RegPersonsGeo,
     RegPersonsTypes, RegPersonsSiblings, RegPersonsAuditTrail,
-    RegOrgUnitsAuditTrail, OVCHouseHold, PersonsMaster, RegPersonsOtherGeo)
+    RegOrgUnitsAuditTrail, OVCHouseHold, PersonsMaster, RegPersonsOtherGeo,
+    RegOrgUnitsService)
 
 from cpovc_ovc.models import OVCRegistration, OVCHHMembers, OVCEligibility
 
@@ -199,7 +200,7 @@ def dashboard(request):
         dash['child_regs'] = []
         dash['ovc_regs'] = []
         dash['case_regs'] = []
-        dash['case_cats'] = 0
+        dash['case_cats'] = []
         # Institution Population
         dash['inst_pop'] = {'B': 0, 'G': 0}
         return dash
@@ -1344,7 +1345,8 @@ def get_geo_list(geo_lists, geo_filter, add_select=False, user_filter=[]):
                         area_detail[area_id] = area_name
             result = area_detail.items()
     except Exception as e:
-        raise e
+        # raise e
+        return ()
     else:
         return result
 
@@ -1482,9 +1484,10 @@ def save_geo_location(area_ids, org_unit, existing_ids=[]):
     try:
         date_linked = datetime.now().strftime("%Y-%m-%d")
         # Delink those unselected by user
-        area_ids = map(int, area_ids)
-        delink_list = [x for x in existing_ids if x not in area_ids]
-        for i, area_id in enumerate(area_ids):
+        # area_ids = map(int, area_ids)
+        area_aids = [int(x) for x in existing_ids]
+        delink_list = [x for x in existing_ids if x not in area_aids]
+        for i, area_id in enumerate(area_aids):
             if area_id not in delink_list:
                 geo, created = RegOrgUnitGeography.objects.update_or_create(
                     area_id=area_id, org_unit_id=org_unit,
@@ -2381,3 +2384,55 @@ def save_other_geos(person_id, country_code, city, location=None):
         return None, None
     else:
         return geo, created
+
+
+def save_ou_services(request, org_id):
+    """Method to save services and welfare programs."""
+    try:
+        print('charter', request.POST)
+        services_list = request.POST.getlist('service_OUSC')
+        # Get all not deleted services first
+        services_rlist = list(RegOrgUnitsService.objects.filter(
+            org_unit_id=org_id, is_void=False).values_list(
+                'service_id', flat=True))
+        for service_id in services_list:
+            category_id = 'OUSC'
+            sub_category_id = 'OUSC'
+            service, created = RegOrgUnitsService.objects.update_or_create(
+                org_unit_id=org_id,
+                defaults={'category_id': category_id,
+                          'sub_category_id': sub_category_id,
+                          'service_id': service_id, 'is_void': False})
+            if service_id in services_rlist:
+                services_rlist.remove(service_id)
+        # Delete old ones excluding the just updated / created
+        if services_rlist:
+            rservices = RegOrgUnitsService.objects.filter(
+                org_unit_id=org_id, is_void=False,
+                service_id__in=services_rlist).update(is_void=True)
+    except Exception as e:
+        print('Error updating OU services - %s' % (str(e)))
+    else:
+        pass
+
+
+def get_ou_services(request, org_id):
+    """Method to get services and welfare programs."""
+    try:
+        service_dict = {}
+        services = RegOrgUnitsService.objects.filter(
+            org_unit_id=org_id, is_void=False)
+        for service in services:
+            category_id = service.category_id
+            service_id = service.service_id
+            service_label = 'service_%s' % (category_id)
+            if service_label not in service_dict:
+                service_dict[service_label] = [service_id]
+            else:
+                service_dict[service_label].append(service_id)
+
+    except Exception as e:
+        print('Error getting OU services - %s' % (str(e)))
+        return {}
+    else:
+        return service_dict

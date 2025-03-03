@@ -13,6 +13,7 @@ F_TYPE_CHOICES = (("FMSL", "Select"), ("FMRD", "Radio"), ("FMCB", "Checkbox"),
 F_SET_CHOICES = ((1, "Text"), (2, "Number"), (3, "Date"),)
 
 
+
 class SchoolList(models.Model):
     """List of Schools model."""
 
@@ -87,7 +88,7 @@ class SetupLocation(models.Model):
     area_name = models.CharField(max_length=100)
     area_type_id = models.CharField(max_length=50)
     area_code = models.CharField(max_length=10, null=True)
-    parent_area_id = models.IntegerField(null=True, blank=True)
+    parent_area_id = models.IntegerField(null=True)
     is_void = models.BooleanField(default=False)
 
     class Meta:
@@ -102,7 +103,7 @@ class SetupList(models.Model):
 
     item_id = models.CharField(max_length=4)
     item_description = models.CharField(max_length=255)
-    item_description_short = models.CharField(max_length=100, null=True)
+    item_description_short = models.CharField(max_length=26, null=True)
     item_category = models.CharField(max_length=255, null=True, blank=True)
     item_sub_category = models.CharField(max_length=255, null=True, blank=True)
     the_order = models.IntegerField(null=True)
@@ -121,20 +122,20 @@ class SetupList(models.Model):
 class Forms(models.Model):
     """Forms model."""
 
-    form_guid = models.CharField(max_length=10)
-    form_title = models.CharField(max_length=255, null=True, blank=True)
-    form_type_id = models.CharField(max_length=4, null=True, blank=True)
-    form_subject_id = models.IntegerField(null=True, blank=True)
-    form_area_id = models.IntegerField(null=True, blank=True)
+    form_guid = models.CharField(max_length=64)
+    form_title = models.CharField(max_length=255, null=True)
+    form_type_id = models.CharField(max_length=4, null=True)
+    form_subject_id = models.IntegerField(null=True, blank=False)
+    form_area_id = models.IntegerField(null=True)
     date_began = models.DateField(null=True)
-    date_ended = models.DateField(null=True, blank=True)
+    date_ended = models.DateField(null=True)
     date_filled_paper = models.DateField(null=True)
-    person_id_filled_paper = models.IntegerField(null=True, blank=True)
-    org_unit_id_filled_paper = models.IntegerField(null=True, blank=True)
+    person_id_filled_paper = models.IntegerField(null=True)
+    org_unit_id_filled_paper = models.IntegerField(null=True)
     capture_site_id = models.IntegerField(null=True, blank=True)
     timestamp_created = models.DateTimeField(null=True)
     user_id_created = models.CharField(max_length=9, null=True)
-    timestamp_updated = models.DateTimeField(null=True, blank=True)
+    timestamp_updated = models.DateTimeField(null=True)
     user_id_updated = models.CharField(max_length=9, null=True)
     is_void = models.BooleanField(default=False)
 
@@ -149,38 +150,24 @@ class Forms(models.Model):
         """To be returned by admin actions."""
         return self.form_guid
 
-
+'''
 class ListQuestions(models.Model):
     """List of questions used by forms."""
 
     question_text = models.CharField(max_length=255, null=True, blank=True)
     question_code = models.CharField(max_length=50)
     form_type_id = models.CharField(max_length=4, null=True, blank=True)
-    answer_type_id = models.CharField(
-        max_length=4, choices=F_TYPE_CHOICES, null=True, blank=True)
-    answer_field_id = models.CharField(max_length=60, null=True, blank=True)
-    answer_set_id = models.IntegerField(
-        db_index=True, null=True, choices=F_SET_CHOICES)
-    form = models.ForeignKey(Forms, on_delete=models.CASCADE, null=True)
-    question_required = models.BooleanField(default=True)
+    answer_type_id = models.CharField(max_length=4, null=True, blank=True)
+    answer_set_id = models.IntegerField(db_index=True, null=True)
     the_order = models.IntegerField(db_index=True, null=True)
     timestamp_created = models.DateTimeField(auto_now=True, null=True)
     timestamp_updated = models.DateTimeField(auto_now=True, null=True)
     is_void = models.BooleanField(default=False)
-    # For App forms, scalability and re-use
-    db_field_name = models.CharField(max_length=60, null=True, blank=True)
-    question_number = models.CharField(max_length=10, null=True, blank=True)
 
     class Meta:
         """Override some params."""
 
         db_table = 'list_questions'
-        verbose_name = 'Generic Question'
-        verbose_name_plural = 'Generic Questions'
-
-    def __str__(self):
-        """To be returned by admin actions."""
-        return '%s:%s' % (self.form, self.question_code)
 
 
 class ListAnswers(models.Model):
@@ -231,15 +218,96 @@ class ListAnswers(models.Model):
         """Override some params."""
 
         db_table = 'list_answers'
+'''
 
+class ListQuestions(models.Model):
+    """List of questions used by forms."""
+
+    question_text = models.CharField(max_length=255, null=True, blank=True)
+    question_code = models.CharField(max_length=50)
+    form_type_id = models.CharField(max_length=4, null=True, blank=True)
+    answer_type_id = models.CharField(
+        max_length=4, choices=F_TYPE_CHOICES, null=True, blank=True)
+    answer_field_id = models.CharField(max_length=60, null=True, blank=True)
+    answer_set_id = models.IntegerField(
+        db_index=True, null=True, choices=F_SET_CHOICES)
+    form = models.ForeignKey(Forms, on_delete=models.CASCADE, null=True)
+    question_required = models.BooleanField(default=True)
+    the_order = models.IntegerField(db_index=True, null=True)
+    timestamp_created = models.DateTimeField(auto_now=True, null=True)
+    timestamp_updated = models.DateTimeField(auto_now=True, null=True)
+    is_void = models.BooleanField(default=False)
+    # For App forms, scalability and re-use
+    db_field_name = models.CharField(max_length=60, null=True, blank=True)
+    question_number = models.CharField(max_length=10, null=True, blank=True)
+
+    class Meta:
+        """Override some params."""
+
+        db_table = 'list_questions'
+        verbose_name = 'Generic Question'
+        verbose_name_plural = 'Generic Questions'
+
+    def __str__(self):
+        """To be returned by admin actions."""
+        return '%s:%s' % (self.form, self.question_code)
+
+
+class ListAnswers(models.Model):
+    """List of all answers used by questions in forms."""
+
+    answer_set_id = models.IntegerField(db_index=True, null=True)
+    answer_code = models.CharField(db_index=True, max_length=8,
+                                   null=True, blank=True)
+    answer = models.CharField(max_length=255, null=True, blank=True)
+    the_order = models.IntegerField(db_index=True, null=True)
+    timestamp_updated = models.DateTimeField(auto_now=True, null=True)
+    is_void = models.BooleanField(default=False)
+
+    def make_code(self):
+        """Inline call method."""
+        tst = self.answer
+        tid = str(self.id)
+        tcode = ''
+        for t in tst.split():
+            tcode += t[0]
+        tf = tcode[:3] if len(tcode) > 3 else tcode
+        tf = tst[:3] if len(tcode) == 1 else tf
+        tff = '%s%s' % (tf, tid.zfill(6 - len(tf)))
+        answer_code = tff.upper()
+        self.answer_code = answer_code
+        super(ListAnswers, self).save()
+
+    def save(self, *args, **kwargs):
+        # This is to save the answer code.
+        if self.pk is None and not self.answer_code:
+            self.answer_code = self.answer_code
+        elif not self.answer_code:
+            tst = self.answer
+            tid = str(self.id)
+            tcode = ''
+            for t in tst.split():
+                tcode += t[0]
+            tf = tcode[:3] if len(tcode) > 3 else tcode
+            tf = tst[:3] if len(tcode) == 1 else tf
+            tff = '%s%s' % (tf, tid.zfill(6 - len(tf)))
+            answer_code = tff.upper()
+            self.answer_code = answer_code
+
+        # Call the original save method
+        super(ListAnswers, self).save(*args, **kwargs)
+
+    class Meta:
+        """Override some params."""
+
+        db_table = 'list_answers'
 
 class FormGenAnswers(models.Model):
     """Link to questions and answers for the forms."""
 
     form = models.ForeignKey(Forms, on_delete=models.CASCADE)
     question = models.ForeignKey(ListQuestions, on_delete=models.CASCADE)
-    answer = models.ForeignKey(
-        ListAnswers, on_delete=models.CASCADE, null=True)
+    answer = models.ForeignKey(ListAnswers, on_delete=models.CASCADE, null=True)
 
     class Meta:
         """Override some params."""
@@ -512,8 +580,7 @@ class ListReports(models.Model):
 class ListReportsParameters(models.Model):
     """Reports parameters."""
 
-    report = models.ForeignKey(
-        ListReports, on_delete=models.CASCADE, null=True)
+    report = models.ForeignKey(ListReports, on_delete=models.CASCADE, null=True)
     parameter = models.CharField(max_length=50, null=True, blank=True)
     filter = models.CharField(max_length=50, null=True, blank=True)
     initially_visible = models.BooleanField(default=False)

@@ -2069,12 +2069,11 @@ def get_variables(request):
             case_name = case_category.item_description
             categories[case_id] = case_name
         my_county = [county] if report_region == 2 else []
-        print('heloooooooooooooooooooo', report_region)
         if report_region == 1 or report_region == 4:
             sub_county_ids = []
         if int(report_region) == 6:
             sub_county_ids = get_region_counties(region)
-            print('My region yyyyyyyyy', region, my_county, sub_county_ids)
+            print('My region yyyyyyyyy', region, my_county)
         sub_counties = get_sub_county_info(
             sub_county_ids, icounty=my_county)
         variables = {'sub_county_id': [], 'sub_county': []}
@@ -2815,7 +2814,7 @@ def write_csv(data, file_name, params):
         csv_file = '%s/%s.csv' % (MEDIA_ROOT, file_name)
         # columns = data[0]
         # del data[0] delete row zero when using pandas
-        with open(csv_file, 'w') as csvfile:
+        with open(csv_file, 'w', encoding='utf-8') as csvfile:
             csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"',
                                    quoting=csv.QUOTE_MINIMAL)
             csvwriter.writerows(data)

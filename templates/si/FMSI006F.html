@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" id="new-form-a" action="." data-parsley-validate="true">
+                <form class="form-horizontal" method="POST" id="new-form-6F" action="." data-parsley-validate="true">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="{{ form_id }}">
                     <input type="hidden" name="case_id" value="{{ case.case_id }}">
@@ -933,6 +933,9 @@
 <script>
 
 $(document).ready(function() {
+    {% if allow_edit == 0 and 'U' not in all_perms %}
+    $("#new-form-6F :input").prop("disabled", true);
+    {% endif %}
     $('#event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });
     $('.other_date').datepicker({ format: 'dd-M-yyyy' });
 
@@ -968,7 +971,7 @@ $(document).ready(function() {
                   'qf7A111', 'qf7A112', 'qf7A113', 'qf7A114', 'qf7A115', 'qf7A116', 'qf7A117'];
         var es = ['qf7A121', 'qf7A122', 'qf7A123', 'qf7A124', 'qf7A125', 'qf7A126', 'qf7A127'];
 
-        $("#new-form-a input[type=radio]:checked").each(function(event) {
+        $("#new-form-6F input[type=radio]:checked").each(function(event) {
             if(this.value == "AYES" && this.checked == true){
                 console.log('Yes option '+ this.name + ' >> ' +this.value)
                  bmarks = 1;

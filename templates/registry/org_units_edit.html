@@ -41,7 +41,7 @@
                 <h4 class="panel-title">Organization Unit details</h4>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal form-bordered" action="." method="POST" data-parsley-validate="true" name="form-wizard" id="edit_org_unit">
+                <form class="form-horizontal" action="." method="POST" data-parsley-validate="true" name="form-wizard" id="edit_org_unit">
                 <input type='radio' class="edit_org" name='edit_org' value="1" checked="checked" id="edit_org_1"> Update Organization Unit registration details
 		        <div class="separator"><p></p></div>
 		        <div id="edit_part">
@@ -58,6 +58,10 @@
 							<li>
 							    Location
 							    <small>Where located and/or providing services</small>
+							</li>
+							<li>
+							    Services &amp; Programs
+							    <small>Services / Welfare programs details</small>
 							</li>
 							<li>
 							    Contact
@@ -178,6 +182,63 @@
 						<!-- begin wizard step-4 -->
 					    <div class="wizard-step-4">
 						    <fieldset>
+								<legend class="pull-left width-full">Services and Programs</legend>
+                                <!-- begin row -->
+                                <div class="row">
+                                	<div class="col-md-12">
+	                                	<h4>Current Services</h4>
+	                                	<hr>
+	                                </div>
+                                	<div class="form-group">
+	                                    <label class="col-md-3 control-label">Services</label>
+	                                    <div class="col-md-9">
+	                                        <div class="checkbox">
+	                                            {{ form.service_OUSC }}
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                	<h4> Welfare Programmes</h4>
+	                                	<hr>
+	                                </div>
+	                                <div class="form-group">
+	                                    <label class="col-md-3 control-label">1. Survival rights</label>
+	                                    <div class="col-md-5">
+	                                    	a. Education<br>
+	                                    	b. Leisure, recreation and play<br>
+	                                        c. Access to Information<br>                                                                          
+	                                    </div>
+	                                </div>
+
+	                                <div class="form-group">
+	                                    <label class="col-md-3 control-label">2. Development rights</label>
+	                                    <div class="col-md-5">
+	                                    a. Education<br>
+	                                    b. Leisure, recreation and play<br>
+	                                    c. Access to Information<br>
+	                                    d. Conscience and religion<br>                                                                         
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <label class="col-md-3 control-label">3. Protection rights</label>
+	                                    <div class="col-md-5">                                                                               
+	                                    </div>
+	                                </div>
+
+	                                <div class="form-group">
+	                                    <label class="col-md-3 control-label">4. Participation rights</label>
+	                                    <div class="col-md-5">                                                                               
+	                                    </div>
+	                                </div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+						<!-- end wizard step-4 -->
+						<!-- begin wizard step-5 -->
+					    <div class="wizard-step-5">
+						    <fieldset>
 								<legend class="pull-left width-full">Contacts</legend>
                                 <!-- begin row -->
                                 <div class="row">
@@ -186,7 +247,7 @@
                                 <!-- end row -->
                             </fieldset>
                         </div>
-						<!-- end wizard step-4 -->
+						<!-- end wizard step-5 -->
 					</div>
 					</div><!-- end view part -->
 		            <!-- end panel -->
@@ -569,3 +630,4 @@
 		displayVals("ward");
 	</script>
 {% endblock %}
+

@@ -147,20 +147,21 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <td colspan="2"><h4> Parents Particulars</h4></td>
+                                                    <td colspan="2"><h4> Parents / Caregiver Particulars</h4></td>
                                                 </tr>
+                                                {% for cg in caregivers %}
                                                 <tr>
-                                                    <td class="field" width="30%">Father's Names</td><td></td>
+                                                    <td class="field" width="30%">{{ cg.relationship|gen_value:vals }}'s Names</td><td>{{ cg.guardian_person.first_name }} {{ cg.guardian_person.surname }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="field">Mother's Names</td><td></td>
-                                                </tr>
+                                                {% endfor %}
                                                 <tr>
                                                     <td colspan="2"><h4> Home Particulars</h4></td>
                                                 </tr>
+                                                {% for pg in person_geos %}
                                                 <tr>
-                                                    <td class="field">County</td><td>From CRS</td>
+                                                    <td class="field">{{ pg.area.area_type_id|gen_value:vals }}</td><td>{{ pg.area.area_name }}</td>
                                                 </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>                                         
                                     </div>
@@ -272,8 +273,9 @@
                             <tr> 
                                 <th>#</th>                                 
                                 <th>Event Date</th>                
-                                <th>Officer</th> 
-                                <th width="25%">Actions</th>
+                                <th>Officer</th>
+                                <th>Datetime Created</th>
+                                <th width="30%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -282,8 +284,8 @@
                             <tr id="si_row-{{ vacancy.pk }}"> 
                                 <td>{{ forloop.counter }}</td>                                 
                                 <td>{{ vacancy.event_date }}</td>
-                                <td>N/A</td>
-
+                                <td>{{ vacancy.created_by.reg_person.first_name }} {{ vacancy.created_by.reg_person.surname }}</td>
+                                <td>{{ vacancy.timestamp_created }}</td>
                                 <td>
                                     <a href="{% url 'si_form_edit' form_id=form_id id=case.person.id ev_id=vacancy.pk|stringformat:'s' %}">
                                         <button type="button" class="btn btn-primary"> <i class="fa fa-pencil"></i> View / Edit Details </button>
@@ -404,7 +406,7 @@ function deleteEvent(form_id, event_id) {
 }
 
 $(document).ready(function() {
-    {% if allow_edit == 0 or 'U' not in all_perms %}
+    {% if allow_edit == 0 and 'U' not in all_perms %}
     $("#new-form-5F :input").prop("disabled", true);
     {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });

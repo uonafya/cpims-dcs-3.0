@@ -1,0 +1,1586 @@
+[
+    {
+        "pk": 3,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 2,
+            "answer_code": "HEG01",
+            "answer": "Children have at least three balanced meals per day",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 4,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 2,
+            "answer_code": "HEG02",
+            "answer": "Children have access to medical services as needed",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 5,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 2,
+            "answer_code": "HEG03",
+            "answer": "Children are fully immunized",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 6,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 2,
+            "answer_code": "HEG04",
+            "answer": "Children live in clean and friendly environment",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 7,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 2,
+            "answer_code": "HEG05",
+            "answer": "Child develop normally in physical, cognitive and milestones",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 8,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG01",
+            "answer": "Lack of health facility within the institution",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 9,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG02",
+            "answer": "Inadequate child friendly information on drug and substance abuse",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 10,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG03",
+            "answer": "Inadequate meals",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 11,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG04",
+            "answer": "Lack of balanced diet",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 12,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG05",
+            "answer": "Lack of special diet for chronically ill and children with disability",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 13,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG06",
+            "answer": "Financial incapacity for medical services",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 14,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG07",
+            "answer": "Lack of health supplies in health facilities",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 15,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG08",
+            "answer": "Accessibility to disability friendly /inclusive services low uptake of immunization",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 16,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 3,
+            "answer_code": "HESG09",
+            "answer": "Inadequate clean water",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 17,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA01",
+            "answer": "Capacity building for caregiver",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 18,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA02",
+            "answer": "Empowering families to afford three balanced meals per day",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 19,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA03",
+            "answer": "Linkage to service providers for families in need of food suppliers",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 20,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA04",
+            "answer": "Provision of special diet for chronically ill and children with disability",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 21,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA05",
+            "answer": "Development of IGAS to economically empower families",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 22,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA06",
+            "answer": "Capacity build community health workers to offer basic health interventions in hard to reach areas",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 23,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA07",
+            "answer": "Awareness creation on registration with NCPWD and other disability friendly services",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 24,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA08",
+            "answer": "Empowering families to afford clean water",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 25,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA09",
+            "answer": "Psychosocial support provision to children",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 26,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA10",
+            "answer": "Capacity building families/community group on waste management",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 27,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA11",
+            "answer": "Deworming services.",
+            "the_order": 11,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 28,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 4,
+            "answer_code": "HEA12",
+            "answer": "Training on sanitation such as hand washing and putty training",
+            "the_order": 12,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 29,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 5,
+            "answer_code": "PRG01",
+            "answer": "The child is protected from all forms of violence and abuse",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 30,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 5,
+            "answer_code": "PRG02",
+            "answer": "Reduced stigma in families and communities",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 31,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 5,
+            "answer_code": "PRG03",
+            "answer": "Child and caregiver have basic statutory documents. (i,e Birth certificate, notification, death certificate and baptism card)",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 32,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 5,
+            "answer_code": "PRG04",
+            "answer": "Children are provided with Legal protection services",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 33,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG01",
+            "answer": "Exploitation, - sexual abuse, physical abuse, emotional abuse",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 34,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG02",
+            "answer": "Child labour,- gender based violence(GBV)",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 35,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG03",
+            "answer": "Special need",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 36,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG04",
+            "answer": "FGM",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 37,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG05",
+            "answer": "Harmful cultural practices",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 38,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG06",
+            "answer": "Child truancy and delinquency",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 39,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG07",
+            "answer": "Terminal illness (HIV/AIDS, cancer)",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 40,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG08",
+            "answer": "Child offender, - street children",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 41,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG09",
+            "answer": "Lack of basic statutory documents",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 42,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG10",
+            "answer": "Inaccessibility of institution providing documents.",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 43,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 6,
+            "answer_code": "PRSG11",
+            "answer": "Prolonged period of court cases",
+            "the_order": 11,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 44,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA01",
+            "answer": "Child right clubs",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 45,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA02",
+            "answer": "Child participation",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 46,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA03",
+            "answer": "Awareness creation for children, caregiver and the community on children\u2019s rights",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 47,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA04",
+            "answer": "Restorative justice mechanism",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 48,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA05",
+            "answer": "Providing disability friendly & inclusion services such as barrier free building",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 49,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA06",
+            "answer": "Positive forms of discipline",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 50,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA07",
+            "answer": "Awareness rising on advocacy for inclusive families/communities",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 51,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA08",
+            "answer": "Awareness riding on importance of statutory documents",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 52,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA09",
+            "answer": "Create awareness on the importance of basic statutory documents",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 53,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA10",
+            "answer": "Assist the child to acquire birth registration document",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 54,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 7,
+            "answer_code": "PRA11",
+            "answer": "Link the child to legal service providers such as NLAS",
+            "the_order": 11,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 55,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 8,
+            "answer_code": "PWG01",
+            "answer": "Children & families access social protection services",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 56,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 8,
+            "answer_code": "PWG02",
+            "answer": "All children and young persons are living in inclusive families and communities",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 57,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 8,
+            "answer_code": "PWG03",
+            "answer": "Children are able to build inner strength, personal skills, and Health social relationships",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 58,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 8,
+            "answer_code": "PWG04",
+            "answer": "To promote children participation in community activities",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 59,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG01",
+            "answer": "Child faces community stigma from the community",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 60,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG02",
+            "answer": "Community activities not disability friendly",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 61,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG03",
+            "answer": "Child not aware of their rights",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 62,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG04",
+            "answer": "Community not providing safe places for play & leisure",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 63,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG05",
+            "answer": "Caregiver not able to provide basic needs due to poverty",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 64,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG06",
+            "answer": "Family not able to access support services when needed",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 65,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG07",
+            "answer": "Freedom of expression",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 66,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG08",
+            "answer": "The caregiver family is dysfunctional",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 67,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 9,
+            "answer_code": "PWSG09",
+            "answer": "Children lack relevant identification documents",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 68,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA01",
+            "answer": "Counselling",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 69,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA02",
+            "answer": "Prioritize child friendly schools and community programmes",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 70,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA03",
+            "answer": "Provide child friendly services for the child with special needs",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 71,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA04",
+            "answer": "Linkage to social protection services",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 72,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA05",
+            "answer": "Referral to stakeholders for household for economic strengthening",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 73,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA06",
+            "answer": "Provide asset support",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 74,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA07",
+            "answer": "Capacity build on business skills, financial literacy",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 75,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA08",
+            "answer": "Provide livelihood skills/support",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 76,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA09",
+            "answer": "Awareness and availability of support services",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 77,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA10",
+            "answer": "Sensitization of the family and community",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 78,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA11",
+            "answer": "Positive parenting",
+            "the_order": 11,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 79,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA12",
+            "answer": "Child/parent communication skills",
+            "the_order": 12,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 80,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 10,
+            "answer_code": "PWA13",
+            "answer": "Mentorship and life skills training",
+            "the_order": 13,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 81,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 11,
+            "answer_code": "ESG01",
+            "answer": "Increase young person\u2019s ability to meet basic needs",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 82,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 12,
+            "answer_code": "ESSG01",
+            "answer": "Inadequate source of income",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 83,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 12,
+            "answer_code": "ESSG02",
+            "answer": "Inadequate financial literacy (planning, budgeting, savings & responsible spending)",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 84,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 12,
+            "answer_code": "ESSG03",
+            "answer": "Inability to meet emergency expenses (drought, food)",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 85,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 12,
+            "answer_code": "ESSG04",
+            "answer": "lack of basic technical skill",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 86,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 12,
+            "answer_code": "ESSG05",
+            "answer": "lack of sustainable means o livelihoods",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 87,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA01",
+            "answer": "IGA",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 88,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA02",
+            "answer": "Enroll to savings groups",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 89,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA03",
+            "answer": "Linkage to social security safety nets (cash transfers)",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 90,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA04",
+            "answer": "Financial training",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 91,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA05",
+            "answer": "Joining savings and credit societies/organizations",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 92,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA06",
+            "answer": "Linkage to medical cover scheme (NHIF)",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 93,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA07",
+            "answer": "Link to organization supporting asset growth",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 94,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA08",
+            "answer": "Link caregiver for business support startup kit/business boost",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 95,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA09",
+            "answer": "Linkage to technical training",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 96,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA10",
+            "answer": "Refer for agri-business skills",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 97,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA11",
+            "answer": "Referral to vocational training/apprenticeships",
+            "the_order": 11,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 98,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA12",
+            "answer": "Linkage to entrepreneurship training",
+            "the_order": 12,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 99,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 13,
+            "answer_code": "ESA13",
+            "answer": "Linkage to internship and job opportunities",
+            "the_order": 13,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 100,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 14,
+            "answer_code": "CRAG01",
+            "answer": "Relationship Formation",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 101,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 14,
+            "answer_code": "CRAG02",
+            "answer": "Reconciliation",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 102,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 14,
+            "answer_code": "CRAG03",
+            "answer": "Maintain family relationship.",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 103,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 14,
+            "answer_code": "CRAG04",
+            "answer": "Missing children",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 104,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 15,
+            "answer_code": "CRASG01",
+            "answer": "Poor family, caregiver and parental relationship",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 105,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 15,
+            "answer_code": "CRASG02",
+            "answer": "Poor bond between the child/caregiver/parent",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 106,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 15,
+            "answer_code": "CRASG03",
+            "answer": "Failed family relationship",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 107,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 15,
+            "answer_code": "CRASG04",
+            "answer": "The child is not involved in decision making on matters involving them",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 108,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 15,
+            "answer_code": "CRASG05",
+            "answer": "The child is unable to confide and seek comfort with the caregiver.",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 109,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 15,
+            "answer_code": "CRASG06",
+            "answer": "Limited information on missing children",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 110,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA01",
+            "answer": "Hold talks with children to get more information to inform decision",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 111,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA02",
+            "answer": "Hold open and parent days",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 112,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA03",
+            "answer": "Carry out family visit",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 113,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA04",
+            "answer": "Hold sport days within the institution",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 114,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA05",
+            "answer": "Hold inter-institutional competition",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 115,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA06",
+            "answer": "Have exchange programs",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 116,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA07",
+            "answer": "Positive parenting",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 117,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA08",
+            "answer": "Positive discipline",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 118,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA09",
+            "answer": "Effective role modelling",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 119,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA10",
+            "answer": "Arbitration and mediation",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 120,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA11",
+            "answer": "Sensitize caregiver/child/mentor on importance of spending quality time together.",
+            "the_order": 11,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 121,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA12",
+            "answer": "Tracing and reintegration.",
+            "the_order": 12,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 122,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA13",
+            "answer": "Leave of absence",
+            "the_order": 13,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 123,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA14",
+            "answer": "Family group counselling",
+            "the_order": 14,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 124,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 16,
+            "answer_code": "CRAA15",
+            "answer": "Family group discussions",
+            "the_order": 15,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 125,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 17,
+            "answer_code": "EDG01",
+            "answer": "All school going children enrolled in school/education program",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 126,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 17,
+            "answer_code": "EDG02",
+            "answer": "All school going children/young person progressing and transitioning appropriately",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 127,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 17,
+            "answer_code": "EDG03",
+            "answer": "All school going children/young person with disability are enrolled and regularly attend a disability friendly learning institution.",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 128,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 17,
+            "answer_code": "EDG04",
+            "answer": "All children undergoing vocational training transitioning appropriately",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 129,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG01",
+            "answer": "Lack scholastic materials (school bags, stationary, uniform)",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 130,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG02",
+            "answer": "Lack of school levies",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 131,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG03",
+            "answer": "Child dropped out of school",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 132,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG04",
+            "answer": "Child does not want to go to school",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 133,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG05",
+            "answer": "Lack of dignity packs",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 134,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG06",
+            "answer": "Education institution lacks disability friendly services",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 135,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 18,
+            "answer_code": "EDSG07",
+            "answer": "Limited data on Vocational training tests undertaken",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 136,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA01",
+            "answer": "Provide scholastic material",
+            "the_order": 1,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 137,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA02",
+            "answer": "Pay school fees",
+            "the_order": 2,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 138,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA03",
+            "answer": "Enforce back school policy",
+            "the_order": 3,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 139,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA04",
+            "answer": "Monitor child to regularly attend school",
+            "the_order": 4,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 140,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA05",
+            "answer": "Pay school levies/provision of bursary",
+            "the_order": 5,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 141,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA06",
+            "answer": "School provide bins for disposing sanitary pads",
+            "the_order": 6,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 142,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA07",
+            "answer": "Provide dignity packs",
+            "the_order": 7,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 143,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA08",
+            "answer": "Caregiver and child sensitized on the importance of education",
+            "the_order": 8,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 144,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA09",
+            "answer": "Referral to for disability friendly services",
+            "the_order": 9,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 145,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA10",
+            "answer": "Complete referral for disability friendly services",
+            "the_order": 10,
+            "is_void": false
+        }
+    },
+    {
+        "pk": 146,
+        "model": "cpovc_main.ListAnswers",
+        "fields": {
+            "answer_set_id": 19,
+            "answer_code": "EDA11",
+            "answer": "Link the child to vocational skills training.",
+            "the_order": 11,
+            "is_void": false
+        }
+    }
+]

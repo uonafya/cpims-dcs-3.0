@@ -502,7 +502,7 @@ def order_by_relevence(wrapped_function):
             field_values = filter(None, field_values)
             field_string = " ".join(field_values)
             # access the field names dynamically.
-            diff_distance = jellyfish.jaro_distance(
+            diff_distance = jellyfish.jaro_similarity(
                 str(field_string.upper()),
                 str(search_string.upper())
             )

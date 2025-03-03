@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-
+import environ
 from pathlib import Path
+
+from .jazzmin import JAZZMIN_SETTINGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,14 +26,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f1&qcqi&cfbt)yfz0hco)^4qlenw7(kd1j#i18jpkta(oj8)if'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+SITE_ID = 1
+
+# ALLOWED_HOSTS = ['childprotection.go.ke', 'www.childprotection.go.ke']
+ALLOWED_HOSTS = ['*']
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
+cpims_db_host = env('CPIMS_HOST')
+cpims_db_pass = env('CPIMS_PASSWORD')
+cpims_db_instance = env('CPIMS_DB')
+cpims_db_port = env('CPIMS_PORT')
+cpims_db_user = env('CPIMS_DBUSER')
+
+DEBUG = env('CPIMS_DEBUG')
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,13 +68,12 @@ INSTALLED_APPS = [
     'cpovc_help',
     'cpovc_ctip',
     'cpovc_afc',
-    'cpovc_api',
-    'cpovc_missing_child',
+    'cpovc_stat_inst',
     'notifications',
     'crispy_forms',
+    'crispy_bootstrap3',
     'rest_framework',
     'rest_framework.authtoken',
-    'cpovc_stat_inst',
 ]
 
 MIDDLEWARE = [
@@ -97,30 +113,29 @@ WSGI_APPLICATION = 'cpims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cpims_gok',
-        'USER': 'cpimsdbuser',
-        'PASSWORD': 'Xaen!ee8',
-        'HOST': '127.0.0.1',
-        'PORT': '5432', }
+        'NAME': cpims_db_instance,
+        'USER': cpims_db_user,
+        'PASSWORD': cpims_db_pass,
+        'HOST': cpims_db_host,
+        'PORT': cpims_db_port,
+        }
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-PWD_VALIDATOR = 'django.contrib.auth.password_validation.'
-
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': PWD_VALIDATOR + 'UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': PWD_VALIDATOR + 'MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': PWD_VALIDATOR + 'CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': PWD_VALIDATOR + 'NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -136,6 +151,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -216,18 +233,18 @@ CSRF_FAILURE_VIEW = 'cpims.views.csrf_failure'
 
 LOGIN_URL = '/login'
 
-# Ministry, State Dept and Directorate/Dept Details
+# Ministry Details
 DCS = {}
 DCS['MINISTRY'] = 'MINISTRY OF LABOUR AND SOCIAL PROTECTION'
-DCS['STATE_DEPT'] = 'STATE DEPARTMENT FOR SOCIAL PROTECTION '
-DCS['STATE_DEPT'] += 'AND SENIOR CITIZENS AFFAIRS'
-DCS['NAME'] = "DIRECTORATE OF CHILDREN'S SERVICES"
+DCS['STATE_DEPT'] = 'STATE DEPARTMENT FOR SOCIAL SECURITY AND PROTECTION'
+DCS['NAME'] = 'DIRECTORATE OF CHILDREN SERVICES'
 
 MEDIA_PHOTOS = os.path.join(BASE_DIR, 'photos')
 
-STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "photos",
-                    BASE_DIR / "reports", ]
+STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "photos", ]
 
 # Do not include forward slash at the end
 PHOTO_URL = '/static'
 DOC_ROOT = os.path.join(BASE_DIR, 'static')
+
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS

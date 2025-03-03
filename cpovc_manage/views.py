@@ -622,15 +622,10 @@ def se_data(request):
             persons = persons.filter(org_unit_id__in=ous)
         users = AppUser.objects.all()
         for user in users:
-            last_login = 'Never'
-            llog = user.last_login
-            if llog:
-                last_login = llog.strftime("%d-%b-%Y, %H:%M:%S")
-            is_active = 'Yes' if user.is_active else 'No'
             users_pids[user.reg_person_id] = {'id': user.id,
                                               'uname': user.username,
-                                              'last_login': last_login,
-                                              'active': is_active}
+                                              'last_login': user.last_login,
+                                              'active': user.is_active}
         user_ids = users.values_list('reg_person_id')
         persons = persons.filter(person_id__in=user_ids)
         for person in persons:

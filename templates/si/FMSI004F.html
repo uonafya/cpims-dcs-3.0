@@ -478,7 +478,7 @@ function getForm(form_id, person_id){
 }
 
 $(document).ready(function() {
-    {% if allow_edit == 0 %}
+    {% if allow_edit == 0 and 'U' not in all_perms %}
     $("#new-form-4F :input").prop("disabled", true);
     {% endif %}
     $('#event_date, .event_date').datepicker({ endDate: '0y', format: 'dd-M-yyyy' });

@@ -241,24 +241,23 @@ def save_form(request, form_id, person_id, edit_id=1):
                           'created_by': user_id})
             # update institute type on Main Table
             si_reg_id = si_obj.pk
+            placement_id = obj.pk
             org_unit_id = int(inst_name)
             org_unit = RegOrgUnit.objects.get(id=org_unit_id)
             org_type = org_unit.org_unit_type_id
             SIMain.objects.filter(
                 person_id=person_id, pk=si_reg_id).update(
                 org_unit_id=org_unit_id, org_type=org_type,
-                case_id=crs_id, placement_id=si_reg_id)
-        # Handle discharge
-        if form_id == 'FMSI021F':
+                case_id=crs_id, placement_id=placement_id)
+        # Handle Discharge in case of Release or Escape
+        if form_id == 'FMSI021F' or form_id == 'FMSI019F':
             print('Process exit', request.POST)
-            placement_id = si_obj.placement_id
-            if placement_id:
-                print('Proceed to Discharge')
-                pl = OVCPlacement.objects.get(pk=placement_id)
-                pl.date_of_approved = todate
-                pl.is_active = False
-                ev.save(update_fields=['is_active'])
-
+            if si_obj.placement:
+                placement_id = si_obj.placement.pk
+                if placement_id:
+                    pl = OVCPlacement.objects.get(pk=placement_id)
+                    pl.is_active = False
+                    pl.save(update_fields=['is_active'])
     except Exception as e:
         raise e
     else:
@@ -286,17 +285,15 @@ def get_event_data(form_id, event_id):
         idata = {}
         vacancy_id = None
         if form_id in ['FMSI001F']:
-            datas = SI_VacancyApp.objects.get(event=event_id)
-            event_id = datas.event_id
-            vacancy_id = datas.pk
-            print('ev id', event_id, vacancy_id)
-        '''
-        if form_id in ['FMSI033RG']:
             datas = SI_VacancyApp.objects.get(pk=event_id)
             event_id = datas.event_id
             vacancy_id = datas.pk
             print('ev id', event_id, vacancy_id)
-        '''
+        if form_id in ['FMSI033R']:
+            datas = SI_VacancyApp.objects.get(pk=event_id)
+            event_id = datas.event_id
+            vacancy_id = datas.pk
+            print('ev id', event_id, vacancy_id)
         event = SIEvents.objects.get(pk=event_id)
         ev_date = event.event_date
         event_date = ev_date.strftime('%d-%b-%Y')

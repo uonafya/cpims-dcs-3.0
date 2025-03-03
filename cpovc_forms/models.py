@@ -380,7 +380,6 @@ class OVCPlacement(models.Model):
     committing_court = models.CharField(max_length=100, null=True)
     placement_notes = models.TextField(max_length=1000, null=True, blank=True)
     ob_number = models.CharField(null=True, max_length=20, blank=True)
-    ob_police_station = models.CharField(null=True, max_length=200, blank=True)
     placement_type = models.CharField(
         max_length=10, default='Normal', blank=True)  # Emergency/Normal
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
@@ -1164,7 +1163,28 @@ class OVCCaseLocation(models.Model):
     def __unicode__(self):
         """To be returned by admin actions."""
         return '%s' % (str(self.case))
+'''
 
+class OVCCaseLocation(models.Model):
+    id = models.UUIDField(default=uuid.uuid1, primary_key=True, editable=False)
+    case = models.ForeignKey(OVCCaseRecord, on_delete=models.CASCADE)
+    report_location = models.ForeignKey(
+        SetupLocation, related_name='location', on_delete=models.CASCADE)
+    report_location = models.ForeignKey(
+        SetupLocation, related_name='sub_location', on_delete=models.CASCADE)
+    timestamp_created = models.DateTimeField(default=timezone.now)
+    person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
+    is_void = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'ovc_case_location'
+        verbose_name = 'Case Area Location'
+        verbose_name_plural = 'Case Area Locations'
+
+    def __unicode__(self):
+        """To be returned by admin actions."""
+        return '%s' % (str(self.case))
+'''
 
 class OVCCaseLoadView(models.Model):
     cpims_id = models.IntegerField()

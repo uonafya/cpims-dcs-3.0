@@ -52,8 +52,6 @@ urlpatterns = [
     path('help/', include(help_urls)),
     path('forms/ctip/', include(ctip_urls)),
     path('forms/altcare/', include(ac_urls)),
-    # SI Module
-    path('forms/si/', include(si_urls)),
     path('notifications/', include(noti_urls, namespace='notifications')),
     re_path(r'^dashboard/(?P<did>[A-Z{2}]+)/$',
             registry_views.dashboard, name='dashboard'),
@@ -64,6 +62,8 @@ urlpatterns = [
     path('logout/', cpovc_auth.views.log_out, name='logout'),
     path('d/', dash_views.ovc_dashboard, name='ovc_dashboard'),
     re_path(r'^api/v2/', include(dashboard_api_urls)),
+    # SI Module
+    path('institutions/si/', include(si_urls)),
     re_path(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
                                                    content_type='text/plain'))]
 

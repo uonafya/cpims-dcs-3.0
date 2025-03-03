@@ -24,7 +24,8 @@ from .functions import (
     get_list_types, geos_from_aids, person_duplicate, copy_locations,
     unit_duplicate, get_temp, save_household, get_household, get_index_child,
     check_duplicate, get_orgs_child, get_dashboard_items, get_dashboards,
-    person_api_data, update_profile, get_admin_regs, save_other_geos)
+    person_api_data, update_profile, get_admin_regs, save_other_geos,
+    save_ou_services, get_ou_services)
 from cpovc_auth.models import AppUser
 from cpovc_registry.models import (
     RegOrgUnit, RegOrgUnitContact, RegPerson, RegPersonsOrgUnits,
@@ -259,6 +260,8 @@ def register_edit(request, org_id):
                     for (form_id, form_value) in cform.extra_contacts():
                         if form_value:
                             save_contacts(form_id, form_value, org_id)
+                # Save Services and welfare programmes
+                save_ou_services(request, org_id)
             elif edit_type == 2:
                 # This is a close with date provided
                 close_date = request.POST.get('close_date')
@@ -294,10 +297,12 @@ def register_edit(request, org_id):
         # f.has_changed()
         date_op, date_closed = None, None
         if units.date_operational:
-            the_date = convert_date(units.date_operational, '%Y-%m-%d')
+            # the_date = convert_date(units.date_operational, '%Y-%m-%d')
+            the_date = units.date_operational
             date_op = the_date.strftime('%d-%b-%Y')
         if units.date_closed:
-            close_date = convert_date(units.date_closed, '%Y-%m-%d')
+            # close_date = convert_date(units.date_closed, '%Y-%m-%d')
+            close_date = units.date_closed
             date_closed = close_date.strftime('%d-%b-%Y')
         unit_type = units.org_unit_type_id
         parent_unit = units.parent_org_unit_id
@@ -324,6 +329,10 @@ def register_edit(request, org_id):
                 'ward': area_list, 'close_date': date_closed,
                 'parent_org_unit': parent_unit, 'county': county_list,
                 'org_unit_category': org_cat, 'handle_ovc': handle_ovc}
+        services_data = get_ou_services(request, org_id)
+        if services_data:
+            for sdt in services_data:
+                data[sdt] = services_data[sdt]
         data_dict = merge_two_dicts(external, data)
         form = FormRegistryNew(request.user, data_dict)
         # Get contact details
@@ -1541,9 +1550,6 @@ def registry_look(request):
             if action == 6:
                 county = request.POST.get('county')
                 datas, extras = [county], []
-            if action == 8:
-                location = request.POST.get('location')
-                datas, extras = [location], []
             su = request.user.is_superuser
             # Check if in National person
             if filters and not su:
@@ -1554,7 +1560,7 @@ def registry_look(request):
                     filters = False
             filter_id = request.user if filters and not su else False
             print('lookup', results, datas, extras, filter_id)
-            results = get_geo_selected(results, datas, extras, filter_id, action)
+            results = get_geo_selected(results, datas, extras, filter_id)
             res_extras = list(map(str, extras))
             if res_extras:
                 selects = ','.join(res_extras)

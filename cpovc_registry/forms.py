@@ -48,6 +48,9 @@ reg_type = get_list('identifier_type_id', 'Select registration type',
 
 org_units = get_org_units()
 
+# CCI transition
+service_list = (('SCRC', 'Residential care'),)
+
 
 class RadioCustomRenderer(RadioSelect):
     """Custom radio button renderer class."""
@@ -805,6 +808,14 @@ class FormRegistryNew(forms.Form):
                    'data-parsley-notfuturedate': "dd-M-yy",
                    'id': 'editdate',
                    'readonly': 'readonly'}))
+
+    # CCI Transitions
+    service_OUSC = forms.MultipleChoiceField(
+        choices=service_list,
+        label=_('Select service'),
+        required=True,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={'data-parsley-errors-container': '#error_service_OUSC'}))
 
 
 class FormContact(forms.Form):

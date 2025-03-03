@@ -89,3 +89,4 @@ class FormsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Forms, FormsAdmin)
+

@@ -574,7 +574,6 @@ class Photo(models.Model):
     person = models.ForeignKey(RegPerson, on_delete=models.CASCADE)
     photo_passport = models.FileField(upload_to='photos/')
     photo_fullsize = models.FileField(upload_to='photos/', null=True)
-    has_consent = models.BooleanField(default=False)
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     timestamp_created = models.DateTimeField(default=timezone.now)
     timestamp_updated = models.DateTimeField(default=timezone.now)
@@ -591,3 +590,24 @@ class Photo(models.Model):
         db_table = 'reg_person_photo'
         verbose_name = 'Person Photo'
         verbose_name_plural = 'Person Photos'
+
+
+class RegOrgUnitsService(models.Model):
+    """Model for Organisational units Services."""
+
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
+    org_unit = models.ForeignKey(RegOrgUnit, on_delete=models.CASCADE)
+    category_id = models.CharField(max_length=4, db_index=True)
+    sub_category_id = models.CharField(max_length=6, db_index=True)
+    service_id = models.CharField(max_length=6)
+    timestamp_created = models.DateTimeField(auto_now_add=True)
+    timestamp_updated = models.DateTimeField(auto_now=True)
+    is_void = models.BooleanField(default=False)
+
+    class Meta:
+        """Override table details."""
+
+        db_table = 'reg_org_units_service'
+        verbose_name = 'Org Units Service'
+        verbose_name_plural = 'Org Units Services'

@@ -439,3 +439,4 @@ def check_registry(ovc_id, ou_ids):
         raise e
     else:
         return is_member
+
